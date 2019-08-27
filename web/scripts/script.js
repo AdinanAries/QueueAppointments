@@ -82,7 +82,7 @@ function toggleEnableFinalApntmntBtn(){
 	if(formsTimeValue === " "){
 		ConfirmAppointmentStatusTxt.innerHTML = "Choose appointment time";
 		ConfirmAppointmentStatusTxt.style.backgroundColor = "red";
-	}
+	} 
 	
 	if(formsDateValue === ""){
 		ConfirmAppointmentStatusTxt.innerHTML = "Choose appointment date";
