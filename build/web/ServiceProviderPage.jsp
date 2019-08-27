@@ -1,0 +1,6554 @@
+<%-- 
+    Document   : Queue
+    Created on : Feb 10, 2019, 8:05:36 PM
+    Author     : aries
+--%>
+<%@page import="javax.websocket.Session"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.util.Base64"%>
+<%@page import="java.io.File"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.sql.Blob"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.arieslab.queue.queue_model.*"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.arieslab.queue.queue_model.UserAccount"%>
+<%@page import="com.arieslab.queue.queue_model.ProviderInfo"%>
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>                         
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Queue</title>
+        <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    
+    </head>
+   
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    
+    <%
+        
+        /*
+        Calendar cal = Calendar.getInstance(); 
+        SimpleDateFormat calSdf = new SimpleDateFormat("MMMMMMMMMMMMM dd, yyyy");
+        String calDate = calSdf.format(cal.getTime());
+        JOptionPane.showMessageDialog(null, calDate);
+        cal.add(Calendar.MONTH, 12); //12 for yearly subscriptions, 6 for half yearly subscriptions and 1 for monthly subscriptions
+        String calMDate = calSdf.format(cal.getTime());
+        JOptionPane.showMessageDialog(null, calMDate);
+        */
+        
+        String Url ="jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
+        String Driver ="com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        String user ="sa";
+        String password ="Password@2014";
+        
+        int d = 0;
+        
+        Date ThisDate = new Date();//default date constructor returns current date 
+        String CurrentTime = ThisDate.toString().substring(11,16);
+        
+        ProviderInfo ThisProvider = new ProviderInfo(); //Default Constructor
+        
+        //resetting TimeOpen fields
+        ThisProvider.TimeOpen.SundayStart = "";
+        ThisProvider.TimeOpen.SundayClose = "";
+        ThisProvider.TimeOpen.MondayStart = "";
+        ThisProvider.TimeOpen.MondayClose = "";
+        ThisProvider.TimeOpen.TuesdayStart = "";
+        ThisProvider.TimeOpen.TuesdayClose = "";
+        ThisProvider.TimeOpen.WednessdayStart = "";
+        ThisProvider.TimeOpen.WednessdayClose = "";
+        ThisProvider.TimeOpen.ThursdayStart = "";
+        ThisProvider.TimeOpen.ThursdayClose = "";
+        ThisProvider.TimeOpen.FridayStart = "";
+        ThisProvider.TimeOpen.FridayClose = "";
+        ThisProvider.TimeOpen.SaturdayStart = "";
+        ThisProvider.TimeOpen.SaturdayClose = "";
+        
+        String FullName = "";
+        String ProvFirstName = "";
+        String ProvMiddleName = "";
+        String ProvLastName = "";
+        String Email = "";
+        String PhoneNumber = "";
+        String Company = "";
+        String ServiceType = "";
+        String Address = "";
+        String base64Image = "";
+        String base64Cover = "";
+        int Ratings = 0;
+        String FirstNameAndCompany = "";
+        ServicesAndPrices Services = new ServicesAndPrices();
+        
+        
+        int UserID = 0;
+        ProviderPhotos.ProviderID = 0;
+        
+        int JustLogged = 0;
+        int UserIndex = -1;
+        String NewUserName = "";
+        String UserNameFrmList = "";
+        
+        try{
+            UserIndex = Integer.parseInt(request.getAttribute("UserIndex").toString());
+            JustLogged = 1;
+        }catch(Exception e){}
+        
+        try{
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+        }catch(Exception e){}
+        
+        try{
+            NewUserName = request.getParameter("User");
+        }catch(Exception e){}
+        
+        try{
+            NewUserName = request.getAttribute("UserName").toString();
+        }catch(Exception e){}
+        
+        try{
+         
+            String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+
+            if(tempAccountType.equals("BusinessAccount")){
+                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+                ProviderPhotos.ProviderID = UserID;
+                UserNameFrmList = UserAccount.LoggedInUsers.get(UserIndex).getName();
+            }
+
+            //incase of array flush
+            if(!NewUserName.equals(UserNameFrmList)){
+                response.sendRedirect("LogInPage.jsp");
+            }
+
+            /*if(tempAccountType.equals("CustomerAccount")){
+                request.setAttribute("UserIndex", UserIndex);
+                request.getRequestDispatcher("ProviderCustomerPage.jsp").forward(request, response);
+            }*/
+
+            if(UserID == 0)
+                response.sendRedirect("LogInPage.jsp");
+
+        }catch(Exception e){
+            response.sendRedirect("LogInPage.jsp");
+        }
+        
+        String SessionID = request.getRequestedSessionId();
+        String DatabaseSession = "";
+        //JOptionPane.showMessageDialog(null, SessionID);
+        
+        //getting session data from database
+        try{
+            Class.forName(Driver);
+            Connection SessionConn = DriverManager.getConnection(Url, user, password);
+            String SessionString = "Select * from QueueObjects.UserSessions where UserIndex = ?";
+            PreparedStatement SessionPst = SessionConn.prepareStatement(SessionString);
+            SessionPst.setInt(1, UserIndex);
+            ResultSet SessionRec = SessionPst.executeQuery();
+            
+            while(SessionRec.next()){
+                
+                DatabaseSession = SessionRec.getString("SessionNo").trim();
+            }
+            
+        }catch(Exception e){}
+        
+        //JOptionPane.showMessageDialog(null, DatabaseSession);
+        if(!SessionID.equals(DatabaseSession)){
+            
+            try{
+                Class.forName(Driver);
+                Connection DltSesConn = DriverManager.getConnection(Url, user, password);
+                String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
+                PreparedStatement DltSesPst = DltSesConn.prepareStatement(DltSesString);
+                DltSesPst.setInt(1, UserIndex);
+                DltSesPst.executeUpdate();
+            }
+            catch(Exception e){}
+            
+            response.sendRedirect("LogInPage.jsp");
+        }
+        
+        if(JustLogged == 1){
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+        }
+      
+        try{
+            
+            
+            Class.forName(Driver);
+            Connection conn = DriverManager.getConnection(Url, user, password);
+            String Query = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID=?";
+            PreparedStatement pst = conn.prepareStatement(Query);
+            pst.setInt(1,UserID);
+            ResultSet provider = pst.executeQuery();
+            
+            while(provider.next()){
+                
+                ThisProvider = new ProviderInfo(provider.getInt("Provider_ID"), provider.getString("First_Name"), provider.getString("Middle_Name")
+                                ,provider.getString("Last_Name"),provider.getDate("Date_Of_Birth"),provider.getString("Phone_Number")
+                                , provider.getString("Company"), provider.getInt("Ratings"), provider.getString("Service_Type"), provider.getString("First_Name") + " - " + provider.getString("Company"), provider.getBlob("Profile_Pic"), provider.getString("Email"));
+                
+                FullName = ThisProvider.getFirstName() + " " + ThisProvider.getMiddleName() + " " + ThisProvider.getLastName() ;
+                Email = ThisProvider.getEmail();
+                PhoneNumber = ThisProvider.getPhoneNumber();
+                Ratings = ThisProvider.getRatings();
+                Company = ThisProvider.getCompany();
+                                        
+                            
+
+                            try{    
+                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                Blob profilepic = ThisProvider.getProfilePicture(); 
+                                InputStream inputStream = profilepic.getBinaryStream();
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                byte[] buffer = new byte[4096];
+                                int bytesRead = -1;
+
+                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                    outputStream.write(buffer, 0, bytesRead);
+                                }
+
+                                byte[] imageBytes = outputStream.toByteArray();
+
+                                base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                            }
+                            catch(Exception e){
+
+                            }
+                ServiceType = ThisProvider.getServiceType();
+                FirstNameAndCompany = ThisProvider.getNameAndCompany();
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        String HouseNumber = "";
+        String StreetName = "";
+        String Town = "";
+        String City = "";
+        String Country = "";
+        String ZipCode = "";
+        
+        
+        try{
+            Class.forName(Driver);
+            Connection conn = DriverManager.getConnection(Url, user, password);
+            String Query = "Select * from QueueObjects.ProvidersAddress where ProviderID=?";
+            PreparedStatement pst = conn.prepareStatement(Query);
+            pst.setInt(1,UserID);
+            ResultSet address = pst.executeQuery();
+            
+            while(address.next()){
+                HouseNumber = address.getString("House_Number");
+                StreetName = address.getString("Street_Name").trim();
+                Town = address.getString("Town").trim();
+                City = address.getString("City").trim();
+                Country = address.getString("Country").trim();
+                ZipCode = address.getString("Zipcode");
+                
+                Address = HouseNumber + " " + StreetName + ", " + Town + ", " + City + ", " + Country + " " + ZipCode;
+                
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        
+        try{
+            Class.forName(Driver);
+            Connection conn = DriverManager.getConnection(Url, user, password);
+            String Select = "Select * from QueueServiceProviders.ServicesAndPrices where ProviderID=?";
+            PreparedStatement pst = conn.prepareStatement(Select);
+            pst.setInt(1,UserID);
+            ResultSet services = pst.executeQuery();
+            
+            while(services.next()){
+                Services.setServicesAndPrices(services.getString("ServiceName"), services.getString("Price"));
+                Services.setDescription(services.getString("ServiceDescription"));
+                Services.setDuration(services.getInt("ServiceDuration"));
+                Services.setID(services.getInt("ServiceID"));
+                
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        try{
+            Class.forName(Driver);
+            Connection timeConn = DriverManager.getConnection(Url, user, password);
+            String timeQuery = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
+            PreparedStatement timePst = timeConn.prepareStatement(timeQuery);
+            timePst.setInt(1,UserID);
+            ResultSet timeRows = timePst.executeQuery();
+            
+            while(timeRows.next()){
+                
+                ThisProvider.TimeOpen.MondayStart = timeRows.getString("MondayStart").substring(0,5);
+                
+                int Hour = Integer.parseInt(ThisProvider.TimeOpen.MondayStart.substring(0,2));
+                String Minute = ThisProvider.TimeOpen.MondayStart.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.MondayStart = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.MondayStart = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.MondayStart += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.MondayStart += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.MondayClose = timeRows.getString("MondayClose").substring(0,5);
+                 
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.MondayClose.substring(0,2));
+                Minute = ThisProvider.TimeOpen.MondayClose.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.MondayClose = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.MondayClose = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.MondayClose += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.MondayClose += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.TuesdayStart = timeRows.getString("TuesdayStart").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.TuesdayStart.substring(0,2));
+                Minute = ThisProvider.TimeOpen.TuesdayStart.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.TuesdayStart = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.TuesdayStart = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.TuesdayStart += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.TuesdayStart += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.TuesdayClose = timeRows.getString("TuesdayClose").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.TuesdayClose.substring(0,2));
+                Minute = ThisProvider.TimeOpen.TuesdayClose.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.TuesdayClose = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.TuesdayClose = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.TuesdayClose += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.TuesdayClose += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.WednessdayStart = timeRows.getString("WednessdayStart").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.WednessdayStart.substring(0,2));
+                Minute = ThisProvider.TimeOpen.WednessdayStart.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.WednessdayStart = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.WednessdayStart = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.WednessdayStart += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.WednessdayStart += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.WednessdayClose = timeRows.getString("WednessdayClose").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.WednessdayClose.substring(0,2));
+                Minute = ThisProvider.TimeOpen.WednessdayClose.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.WednessdayClose = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.WednessdayClose = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.WednessdayClose += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.WednessdayClose += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.ThursdayStart = timeRows.getString("ThursdayStart").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.ThursdayStart.substring(0,2));
+                Minute = ThisProvider.TimeOpen.ThursdayStart.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.ThursdayStart = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.ThursdayStart = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.ThursdayStart += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.ThursdayStart += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.ThursdayClose = timeRows.getString("ThursdayClose").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.ThursdayClose.substring(0,2));
+                Minute = ThisProvider.TimeOpen.ThursdayClose.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.ThursdayClose = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.ThursdayClose = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.ThursdayClose += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.ThursdayClose += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.FridayStart = timeRows.getString("FridayStart").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.FridayStart.substring(0,2));
+                Minute = ThisProvider.TimeOpen.FridayStart.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.FridayStart = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.FridayStart = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.FridayStart += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.FridayStart += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.FridayClose = timeRows.getString("FridayClose").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.FridayClose.substring(0,2));
+                Minute = ThisProvider.TimeOpen.FridayClose.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.FridayClose = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.FridayClose = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.FridayClose += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.FridayClose += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.SaturdayStart = timeRows.getString("SaturdayStart").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.SaturdayStart.substring(0,2));
+                Minute = ThisProvider.TimeOpen.SaturdayStart.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.SaturdayStart = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.SaturdayStart = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.SaturdayStart += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.SaturdayStart += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.SaturdayClose = timeRows.getString("SaturdayClose").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.SaturdayClose.substring(0,2));
+                Minute = ThisProvider.TimeOpen.SaturdayClose.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.SaturdayClose = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.SaturdayClose = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.SaturdayClose += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.SaturdayClose += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.SundayStart = timeRows.getString("SundayStart").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.SundayStart.substring(0,2));
+                Minute = ThisProvider.TimeOpen.SundayStart.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.SundayStart = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.SundayStart = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.SundayStart += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.SundayStart += " am";
+                    
+                }
+                
+                ThisProvider.TimeOpen.SundayClose = timeRows.getString("SundayClose").substring(0,5);
+                
+                Hour = Integer.parseInt(ThisProvider.TimeOpen.SundayClose.substring(0,2));
+                Minute = ThisProvider.TimeOpen.SundayClose.substring(2,5);
+                
+                if(Hour > 12){
+                    
+                    Hour -= 12;
+                    ThisProvider.TimeOpen.SundayClose = Hour + Minute + " pm";
+                
+                }
+                else if(Hour == 00){
+                    
+                    ThisProvider.TimeOpen.SundayClose = "12"+ Minute + " am";
+                    
+                }
+                else if(Hour == 12){
+                    
+                    ThisProvider.TimeOpen.SundayClose += " pm";
+                    
+                }
+                else{
+                    
+                    ThisProvider.TimeOpen.SundayClose += " am";
+                    
+                }
+                
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    
+    %>
+    
+    <%
+        boolean isFirstIntervalsSet = false;
+        int IntervalsValue = 30;
+        
+        try{
+            
+            Class.forName(Driver);
+            Connection intervalsConn = DriverManager.getConnection(Url, user, password);
+            String intervalsString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'SpotsIntervals%'";
+            PreparedStatement intervalsPst = intervalsConn.prepareStatement(intervalsString);
+            
+            intervalsPst.setInt(1, UserID);
+            
+            ResultSet intervalsRec = intervalsPst.executeQuery();
+            
+            while(intervalsRec.next()){
+                isFirstIntervalsSet = true;
+                IntervalsValue = Integer.parseInt(intervalsRec.getString("CurrentValue").trim());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        if(isFirstIntervalsSet == false){
+            try{
+                Class.forName(Driver);
+                Connection intervalsConn = DriverManager.getConnection(Url, user, password);
+                 String intervalsString = "Insert into QueueServiceProviders.Settings (If_providerID, Settings, CurrentValue) values (?,'SpotsIntervals',?)";
+                 PreparedStatement intervalsPst = intervalsConn.prepareStatement(intervalsString);
+                 intervalsPst.setInt(1, UserID);
+                 intervalsPst.setString(2, "30");
+                 
+                 intervalsPst.executeUpdate();
+            
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+       
+    %>
+    
+                    <%
+                        //getting coverdata
+                        
+                        try{
+                            
+                            Class.forName(Driver);
+                            Connection coverConn = DriverManager.getConnection(Url, user, password);
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
+                            PreparedStatement coverPst = coverConn.prepareStatement(coverString);
+                            coverPst.setInt(1,UserID);
+                            ResultSet cover = coverPst.executeQuery();
+                            
+                            while(cover.next()){
+                                
+                                 try{    
+                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                Blob profilepic = cover.getBlob("CoverPhoto"); 
+                                InputStream inputStream = profilepic.getBinaryStream();
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                byte[] buffer = new byte[4096];
+                                int bytesRead = -1;
+
+                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                    outputStream.write(buffer, 0, bytesRead);
+                                }
+
+                                byte[] imageBytes = outputStream.toByteArray();
+
+                                base64Cover = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                            }
+                            catch(Exception e){
+
+                            }
+                                
+                            }
+                            
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    %>
+                    
+                    <%
+                       //getting galleryphotos
+                       
+                       ArrayList<String> Base64GalleryPhotos = new ArrayList<>();
+                       
+                        try{
+                            
+                            Class.forName(Driver);
+                            Connection coverConn = DriverManager.getConnection(Url, user, password);
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
+                            PreparedStatement coverPst = coverConn.prepareStatement(coverString);
+                            coverPst.setInt(1,UserID);
+                            ResultSet cover = coverPst.executeQuery();
+                            
+                            while(cover.next()){
+                                
+                                 try{    
+                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                Blob profilepic = cover.getBlob("GalaryPhoto"); 
+                                InputStream inputStream = profilepic.getBinaryStream();
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                byte[] buffer = new byte[4096];
+                                int bytesRead = -1;
+
+                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                    outputStream.write(buffer, 0, bytesRead);
+                                }
+
+                                byte[] imageBytes = outputStream.toByteArray();
+
+                                Base64GalleryPhotos.add(Base64.getEncoder().encodeToString(imageBytes));
+
+
+                            }
+                            catch(Exception e){
+
+                            }
+                                
+                            }
+                            
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        
+                        String firstPic = "";
+                        String secondPic = "";
+                        String thirdPic = "";
+                        String fourthPic = "";
+                        String fithPic = "";
+                        String sixthPic = "";
+                        String seventhPic = "";
+                        
+                        try{
+                            
+                            firstPic = Base64GalleryPhotos.get(0);
+                            seventhPic = Base64GalleryPhotos.get((Base64GalleryPhotos.size()-1));
+                            secondPic = Base64GalleryPhotos.get(1);
+                            thirdPic = Base64GalleryPhotos.get(2);  
+                            fourthPic = Base64GalleryPhotos.get(3);
+                            fithPic = Base64GalleryPhotos.get(4);
+                            sixthPic = Base64GalleryPhotos.get(5);
+                            
+                        }catch(Exception e){}
+                        
+                    %>
+                    
+    <%
+        //getting booked appointments here
+        ArrayList <BookedAppointmentList> AppointmentList = new ArrayList<>();
+        ArrayList<BookedAppointmentList> FutureAppointmentList = new ArrayList<>();
+        
+        //Getting Future Appointments
+        try{
+            
+            Date currentDate = new Date();
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String StrinCurrentdate = currentDateFormat.format(currentDate);
+            String CurrentTimeForAppointment = currentDate.toString().substring(11,16);
+            
+            Class.forName(Driver);
+            Connection appointmentConn = DriverManager.getConnection(Url, user, password);
+            String appointment = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate > ? order by AppointmentDate asc";
+            PreparedStatement appointmentPst = appointmentConn.prepareStatement(appointment);
+            
+            appointmentPst.setInt(1,UserID);
+            appointmentPst.setString(2, StrinCurrentdate);
+            ResultSet rows = appointmentPst.executeQuery();
+            
+            BookedAppointmentList ListItem;
+            
+            while(rows.next()){
+                
+                String Reason = rows.getString("OrderedServices").trim();
+                if(Reason.equals("Blocked Time")){
+                    
+                    continue;
+                    
+                }
+                
+                String CustomerID = rows.getString("CustomerID");
+                String customerFirstName = "";
+                String customerMiddleName = "";
+                String customerLastName = "";
+                String customerFullName = "";
+                String customerEmail = "";
+                String customerPhone = "";
+                Blob customerPic = null;
+                
+                try{
+                    Class.forName(Driver);
+                    Connection customerConn = DriverManager.getConnection(Url, user, password);
+                    String customerSelect = "Select First_Name, Middle_Name, Last_Name, Phone_Number, Email, Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                    PreparedStatement customerPst = customerConn.prepareStatement(customerSelect);
+                    customerPst.setString(1, CustomerID);
+                    ResultSet customerInfo = customerPst.executeQuery();
+                    
+                    while(customerInfo.next()){
+                        
+                        customerFirstName = customerInfo.getString("First_Name").trim();
+                        customerMiddleName = customerInfo.getString("Middle_Name").trim();
+                        customerLastName = customerInfo.getString("Last_Name").trim();
+                        customerFullName = customerFirstName + " " + customerMiddleName + " " + customerLastName;
+                        customerEmail = customerInfo.getString("Email").trim();
+                        customerPhone = customerInfo.getString("Phone_Number").trim();
+                        customerPic = customerInfo.getBlob("Profile_Pic");
+                        
+                    }
+                    
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                String AppointmentTime = rows.getString("AppointmentTime").substring(0,5);
+              
+                int AppointmentID = rows.getInt("AppointmentID");
+                int ProviderID = UserID;
+                
+                Date AppointmentDate = rows.getDate("AppointmentDate");
+                
+                ListItem = new BookedAppointmentList(AppointmentID, ProviderID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
+                ListItem.setAppointmentReason(Reason);
+                
+                FutureAppointmentList.add(ListItem);
+                
+                
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        //Getting Today's Appointments
+        try{
+            
+            Date currentDate = new Date();
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String StrinCurrentdate = currentDateFormat.format(currentDate);
+            String CurrentTimeForAppointment = currentDate.toString().substring(11,16);
+            
+            Class.forName(Driver);
+            Connection appointmentConn = DriverManager.getConnection(Url, user, password);
+            String appointment = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ? and AppointmentTime >= ? order by AppointmentTime asc";
+            PreparedStatement appointmentPst = appointmentConn.prepareStatement(appointment);
+            
+            appointmentPst.setInt(1,UserID);
+            appointmentPst.setString(2, StrinCurrentdate);
+            appointmentPst.setString(3, CurrentTimeForAppointment);
+            ResultSet rows = appointmentPst.executeQuery();
+            
+            BookedAppointmentList ListItem;
+            
+            while(rows.next()){
+               
+                String Reason = rows.getString("OrderedServices").trim();
+                if(Reason.equals("Blocked Time")){
+                    
+                    continue;
+                    
+                }
+                
+                String CustomerID = rows.getString("CustomerID");
+                String customerFirstName = "";
+                String customerMiddleName = "";
+                String customerLastName = "";
+                String customerFullName = "";
+                String customerEmail = "";
+                String customerPhone = "";
+                Blob customerPic = null;
+                
+                
+                try{
+                    Class.forName(Driver);
+                    Connection customerConn = DriverManager.getConnection(Url, user, password);
+                    String customerSelect = "Select First_Name, Middle_Name, Last_Name, Phone_Number, Email, Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                    PreparedStatement customerPst = customerConn.prepareStatement(customerSelect);
+                    customerPst.setString(1, CustomerID);
+                    ResultSet customerInfo = customerPst.executeQuery();
+                    
+                    
+                    while(customerInfo.next()){
+                        
+                        customerFirstName = customerInfo.getString("First_Name").trim();
+                        customerMiddleName = customerInfo.getString("Middle_Name").trim();
+                        customerLastName = customerInfo.getString("Last_Name").trim();
+                        customerFullName = customerFirstName + " " + customerMiddleName + " " + customerLastName;
+                        customerEmail = customerInfo.getString("Email").trim();
+                        customerPhone = customerInfo.getString("Phone_Number").trim();
+                        customerPic = customerInfo.getBlob("Profile_Pic");
+                        
+                    }
+                    
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                String AppointmentTime = rows.getString("AppointmentTime").substring(0,5);
+              
+                int AppointmentID = rows.getInt("AppointmentID");
+                int ProviderID = UserID;
+                
+                Date AppointmentDate = rows.getDate("AppointmentDate");
+                
+                ListItem = new BookedAppointmentList(AppointmentID, ProviderID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
+                ListItem.setAppointmentReason(Reason);
+                AppointmentList.add(ListItem);
+                
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+         //Getting AppointmentHistory
+         
+         ArrayList<BookedAppointmentList> AppointmentHistory = new ArrayList<>();
+         
+        try{
+            
+            Date currentDate = new Date();
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String StrinCurrentdate = currentDateFormat.format(currentDate);
+            String CurrentTimeForAppointment = currentDate.toString().substring(11,16);
+            
+            Class.forName(Driver);
+            Connection historyConn = DriverManager.getConnection(Url, user, password);
+            String appointmentHistoryQuery = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate < ? or (ProviderID = ? and AppointmentDate = ? and AppointmentTime < ?) order by AppointmentDate desc";
+            PreparedStatement appointmentHistoryPst = historyConn.prepareStatement(appointmentHistoryQuery);
+            appointmentHistoryPst.setInt(1,UserID);
+            appointmentHistoryPst.setString(2, StrinCurrentdate);
+            appointmentHistoryPst.setInt(3,UserID);
+            appointmentHistoryPst.setString(4, StrinCurrentdate);
+            appointmentHistoryPst.setString(5, CurrentTimeForAppointment);
+            ResultSet historyRecords = appointmentHistoryPst.executeQuery();
+            
+            BookedAppointmentList eachHistoryRecord;
+            
+            while(historyRecords.next()){
+                
+                String Reason = historyRecords.getString("OrderedServices").trim();
+                if(Reason.equals("Blocked Time")){
+                    
+                    continue;
+                    
+                }
+                
+                String CustomerID = historyRecords.getString("CustomerID");
+                String customerFirstName = "";
+                String customerMiddleName = "";
+                String customerLastName = "";
+                String customerFullName = "";
+                String customerEmail = "";
+                String customerPhone = "";
+                Blob customerPic = null;
+                
+                try{
+                    Class.forName(Driver);
+                    Connection customerConn = DriverManager.getConnection(Url, user, password);
+                    String customerSelect = "Select First_Name, Middle_Name, Last_Name, Phone_Number, Email, Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                    PreparedStatement customerPst = customerConn.prepareStatement(customerSelect);
+                    customerPst.setString(1, CustomerID);
+                    ResultSet customerInfo = customerPst.executeQuery();
+                    
+                    while(customerInfo.next()){
+                        
+                        customerFirstName = customerInfo.getString("First_Name").trim();
+                        customerMiddleName = customerInfo.getString("Middle_Name").trim();
+                        customerLastName = customerInfo.getString("Last_Name").trim();
+                        customerFullName = customerFirstName + " " + customerMiddleName + " " + customerLastName;
+                        customerEmail = customerInfo.getString("Email").trim();
+                        customerPhone = customerInfo.getString("Phone_Number").trim();
+                        customerPic = customerInfo.getBlob("Profile_Pic");
+                        
+                    }
+                    
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                String AppointmentTime = historyRecords.getString("AppointmentTime").substring(0,5);
+              
+                int AppointmentID = historyRecords.getInt("AppointmentID");
+                int ProviderID = UserID;
+                int CustID = Integer.parseInt(CustomerID);
+                
+                Date AppointmentDate = historyRecords.getDate("AppointmentDate");
+                
+                eachHistoryRecord = new BookedAppointmentList(AppointmentID, CustID , customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
+                eachHistoryRecord.setAppointmentReason(Reason);
+                AppointmentHistory.add(eachHistoryRecord);
+                
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+       
+    %>
+    
+              
+        <%
+            //getting first reviews
+            ArrayList<ReviewsDataModel> ReviewsList = new ArrayList<>();
+        
+        try{
+            Class.forName(Driver);
+            Connection ReviewsConn = DriverManager.getConnection(Url, user, password);
+            String ReviewString = "Select * from QueueServiceProviders.ProviderCustomersReview where ProviderID = ?";
+            PreparedStatement ReviewPst = ReviewsConn.prepareStatement(ReviewString);
+            ReviewPst.setInt(1, UserID);
+            
+            ResultSet ReviewRec = ReviewPst.executeQuery();
+            
+            ReviewsDataModel eachReview;
+            
+            while(ReviewRec.next()){
+                ReviewsList.clear();
+                eachReview = new ReviewsDataModel();
+                
+                eachReview.UserID = ReviewRec.getInt("CustomerID");
+                eachReview.ReviewID = ReviewRec.getInt("ReviewID");
+                eachReview.Rating = ReviewRec.getInt("CustomerRating");
+                eachReview.ReviewMessage = ReviewRec.getString("ReviewMessage").trim();
+                eachReview.ReviewDate = ReviewRec.getDate("ReviewDate");
+                
+                ReviewsList.add(eachReview);
+                
+            }
+            
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    %>
+   
+    <%
+        //getting Clientslist Data
+        ArrayList<ProviderCustomerData> ClientsList = new ArrayList<>(); 
+        
+        try{
+            
+            Class.forName(Driver);
+            Connection ClientsConn = DriverManager.getConnection(Url, user, password);
+            String ClientsString = "select * from QueueServiceProviders.ClientsList where ProvID = ?";
+            PreparedStatement ClientsPST = ClientsConn.prepareStatement(ClientsString);
+            ClientsPST.setInt(1, UserID);
+            
+            ResultSet ClientsRec = ClientsPST.executeQuery();
+            
+            ProviderCustomerData eachClient;
+            
+            while(ClientsRec.next()){
+                
+                int CustomerID = ClientsRec.getInt("CustomerID");
+                
+                String CustFirstName = "";
+                String CustMiddleName = "";
+                String CustLastName = "";
+                String CustTel = "";
+                String CustEmail = "";
+                Blob CustProPic = null;
+                
+                try{
+                    Class.forName(Driver);
+                    Connection CustomerConn = DriverManager.getConnection(Url, user, password);
+                    String CustomerString = "select * from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                    PreparedStatement CustomerPst = CustomerConn.prepareStatement(CustomerString);
+                    CustomerPst.setInt(1,CustomerID);
+                    
+                    ResultSet CustRec = CustomerPst.executeQuery();
+                    
+                    while(CustRec.next()){
+                        
+                        CustFirstName = CustRec.getString("First_Name");
+                        CustMiddleName = CustRec.getString("Middle_Name");
+                        CustLastName = CustRec.getString("Last_Name");
+                        CustTel = CustRec.getString("Phone_Number");
+                        CustEmail = CustRec.getString("Email");
+                        CustProPic = CustRec.getBlob("Profile_Pic");
+                        
+                    }
+                    
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                eachClient = new ProviderCustomerData(CustomerID, CustFirstName, CustMiddleName, CustLastName, CustProPic, CustTel, null, CustEmail);
+                ClientsList.add(eachClient);
+                
+            }
+          
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    %>
+    
+    <%
+        //getting Closed Days
+        ArrayList<Integer> ClosedDayID = new ArrayList<>();
+        ArrayList<String> ClosedDate = new ArrayList<>();
+        try{
+            
+            Class.forName(Driver);
+            Connection ClosedDaysConn = DriverManager.getConnection(Url, user, password);
+            String ClosedDaysString = "Select * from QueueServiceProviders.ClosedDays where ProviderID = ?";
+            PreparedStatement ClosedDaysPst = ClosedDaysConn.prepareStatement(ClosedDaysString);
+            ClosedDaysPst.setInt(1, UserID);
+            
+            ResultSet ClosedDaysRec = ClosedDaysPst.executeQuery();
+            
+            while(ClosedDaysRec.next()){
+                ClosedDayID.add(ClosedDaysRec.getInt("closedID"));
+                ClosedDate.add(ClosedDaysRec.getString("DateToClose"));
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    %>
+    
+    <%
+        //Getting Cancellation policy settings
+        boolean isSettingExisting = false;
+        String isSettingAllowed = "No";
+        String TimeElapseValue = "0 mins";
+        String ChargePercentValue = "0%";
+        
+        try{
+            Class.forName(Driver);
+            Connection CnclConn = DriverManager.getConnection(Url, user, password);
+            String CnclString = "Select * from  QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyTimeElapse%'";
+            PreparedStatement CnclPst = CnclConn.prepareStatement(CnclString);
+            CnclPst.setInt(1, UserID);
+            ResultSet PlcyRec = CnclPst.executeQuery();
+            
+            while(PlcyRec.next()){
+                isSettingExisting = true;
+                
+                if(!PlcyRec.getString("CurrentValue").trim().equals("0")){
+                    isSettingAllowed = "Yes";
+                    int tempValue = Integer.parseInt(PlcyRec.getString("CurrentValue").trim() );
+                    TimeElapseValue = tempValue + " mins";
+                    
+                    try{
+                        Class.forName(Driver);
+                        Connection CnclConnChrg = DriverManager.getConnection(Url, user, password);
+                        String CnclStringChrg = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyChargeCost%'";
+                        PreparedStatement CnclPstChrg = CnclConnChrg.prepareStatement(CnclStringChrg);
+                        CnclPstChrg.setInt(1, UserID);
+                        
+                        ResultSet ChrgPolicyRec = CnclPstChrg.executeQuery();
+                        
+                        while(ChrgPolicyRec.next()){
+                            
+                            int tempPercentValue = Integer.parseInt(ChrgPolicyRec.getString("CurrentValue").trim());
+                            
+                            ChargePercentValue = tempPercentValue + "%";
+                        }
+                        
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        if(isSettingExisting == false){
+            
+            try{
+                Class.forName(Driver);
+                Connection CnclConn = DriverManager.getConnection(Url, user, password);
+                String CnclString = "Insert into QueueServiceProviders.Settings (If_providerID, Settings, CurrentValue) values (?,?,?)";
+                PreparedStatement CnclPst = CnclConn.prepareStatement(CnclString);
+                CnclPst.setInt(1, UserID);
+                CnclPst.setString(2, "CnclPlcyTimeElapse");
+                CnclPst.setString(3, "0");
+                
+                CnclPst.executeUpdate();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            
+            try{
+                Class.forName(Driver);
+                Connection CnclConn = DriverManager.getConnection(Url, user, password);
+                String CnclString = "Insert into QueueServiceProviders.Settings (If_providerID, Settings, CurrentValue) values (?,?,?)";
+                PreparedStatement CnclPst = CnclConn.prepareStatement(CnclString);
+                CnclPst.setInt(1, UserID);
+                CnclPst.setString(2, "CnclPlcyChargeCost");
+                CnclPst.setString(3, "0");
+                
+                CnclPst.executeUpdate();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    %>
+    
+    <%
+        String BusinessName = "";
+        String BusinessEmail = "";
+        String BusinessTel = "";
+        String BusinessType = "";
+        
+        try{
+            Class.forName(Driver);
+            Connection bizInfoConn = DriverManager.getConnection(Url, user, password);
+            String bizInfoString = "Select * from QueueServiceProviders.BusinessInfo where Provider_ID = ?";
+            PreparedStatement bizInfoPst = bizInfoConn.prepareStatement(bizInfoString);
+            bizInfoPst.setInt(1, UserID);
+            
+            ResultSet bizInfoRec = bizInfoPst.executeQuery();
+            
+            while(bizInfoRec.next()){
+                BusinessName = bizInfoRec.getString("Business_Name").trim();
+                BusinessEmail = bizInfoRec.getString("Business_Email").trim();
+                BusinessTel = bizInfoRec.getString("Business_Tel").trim();
+                BusinessType = bizInfoRec.getString("Business_Type").trim();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    %>
+    <body>
+        
+        <div id="container">
+            
+            <div id="miniNavPov" style="">
+                <center>
+                    <script>
+                        function showDropDown(){
+                            $("#DropDown").slideDown("fast");
+                            //document.getElementById("DropDown").style.display = "block";
+                        }
+                        
+                        function hideDropDown(){
+                            $("#DropDown").slideUp("fast");
+                            //document.getElementById("DropDown").style.display = "none";
+                        }
+                        
+                        function hideDropDownBtnclick(){
+                            if(document.getElementById("DropDown").style.display === "block"){
+                                $("#DropDown").slideUp("fast");
+                            }else{
+                                $("#DropDown").slideDown("fast");
+                                document.getElementById("DropDown").style.display = "block";
+                            }
+                        }
+                    </script>
+                    <p id="DropDownBtn" onclick='hideDropDownBtnclick();' style="position: absolute; text-align: center; width: 34px; background-color: pink; border: 1px solid black; border-radius: 4px;">
+                        <img src="icons/icons8-menu-25.png" width="25" height="25" alt="icons8-menu-25"/>
+                    </p>
+                    <p onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide Spots</p>
+                    <!--ul id="miniNavIcons" style="float: left;">
+                        <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
+                        </li>
+                    </ul>
+                    <form name="miniDivSearch" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                            <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
+                                   placeholder="Search provider" name="SearchFld" type="text"  value="" size="30" />
+                            <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
+                                   type="submit" value="Search" />
+                    </form-->
+                </center>
+                
+                <nav id="DropDown">
+                
+                <ul>
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third</li>
+                    <li>fourth</li>
+                </ul>
+                <form action = "LogoutController" name="LogoutForm" method="POST">
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <center><input style='padding: 2px; background-color: red; width: 90%;' type="submit" value="Logout" class="button" /></center>
+                </form>
+            </nav>
+                
+            </div>
+            
+            
+            <div class="providerHeader" id="ProviderHeader" onclick="hideDropDown();" style="">
+                <cetnter><p> </p></cetnter>
+                <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
+                <!--center><h2 style="color: #000099;">Line Your Customers Now!</h2></center-->
+            </div>
+            <div id="content"  onclick="hideDropDown();">
+            <div id="nav">
+                <h4><a href="https://adinanaries.wixsite.com/arieslab" style ="color: blanchedalmond">AriesLab.com</a></h4>
+                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center>
+               
+            </div>
+            <div id="main">
+                <%
+                    if(base64Image != ""){
+                %>
+                <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                 <img id="photoStatus" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>" width="40" height="40"/>
+                    </div></center>
+                <%
+                    }
+                %>
+                   
+                <center><p id="LoginNameDisplay" style="color: white; background-color: green; margin-bottom: 20px; padding-left: 15px; max-width: 300px">Logged in as <%=FirstNameAndCompany%> </p></center>
+               
+                <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                
+                          
+                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px;">
+                                        
+                                    <%
+                                        Date currentDate = new Date();//default date constructor returns current date 
+                                        String JSCurrentTime = currentDate.toString().substring(11,16); //forJavaScript;
+                                        String DayOfWeek = currentDate.toString().substring(0,3);
+                                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd"); //formatting date to a string value of month day, year
+                                        String stringDate = formattedDate.format(currentDate); //calling format function to format date object
+                                        SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        String QueryDate = QuerySdf.format(currentDate);
+                                        
+                                        ArrayList<String> AllAvailableTimeList = new ArrayList<>();
+                                        ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
+                                        ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
+                                        ArrayList<String> AllUnavailableFormattedTimeList = new ArrayList<>();
+                                        ArrayList<String> AllThisProviderBlockedTime = new ArrayList<>();
+                                        ArrayList<String> AllThisProviderBlockedFormattedTakenTime = new ArrayList<>();
+                                        ArrayList<String> BlockedAppointmentIDs = new ArrayList<>();
+                                        
+                                        String DailyStartTime = "";
+                                        String DailyClosingTime = "";
+                                        String FormattedStartTime = "";
+                                        String FormattedClosingTime = "";
+                                        int startHour = 0;
+                                        int startMinute = 0;
+                                        int closeHour = 0;
+                                        int closeMinute = 0;
+                                        
+                                        int TotalAvailableList = 0;
+                                        int TotalUnavailableList = 0;
+                                        int TotalThisCustomerTakenList = 0;
+                                    %>
+                                      
+                                    <%
+                                        //getting the closed days data
+                                        ArrayList<String> ClosedDates = new ArrayList<>();
+                                        ArrayList<Integer> ClosedIDs = new ArrayList<>();
+                                        boolean isTodayClosed = false;
+                                        
+                                       
+                                        
+                                        Date DateForClosedCompare = new Date();
+                                        SimpleDateFormat DateForCompareSdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                                        String StringDateForCompare = DateForCompareSdf2.format(DateForClosedCompare);
+                                        
+                                        
+                                        try{
+                                            
+                                            Class.forName(Driver);
+                                            Connection CloseddConn = DriverManager.getConnection(Url, user, password);
+                                            String CloseddString = "select * from QueueServiceProviders.ClosedDays where ProviderID = ?";
+                                            PreparedStatement CloseddPst = CloseddConn.prepareStatement(CloseddString);
+                                            CloseddPst.setInt(1, UserID);
+                                            
+                                            ResultSet ClosedRec = CloseddPst.executeQuery();
+                                            
+                                            while(ClosedRec.next()){
+                                                
+                                                ClosedDates.add(ClosedRec.getString("DateToClose").trim());
+                                                ClosedIDs.add(ClosedRec.getInt("closedID"));
+                                                
+                                                if(StringDateForCompare.equals(ClosedRec.getString("DateToClose").trim())){
+                                                    isTodayClosed = true;
+                                                }
+                                                
+                                            }
+                                            
+                                        }catch(Exception e){
+                                            e.printStackTrace();
+                                        }
+                                    %>
+                                   
+                                    <%
+                                        
+                                        String MonDailyStartTime = "";
+                                        String MonDailyClosingTime = "";
+                                        String TueDailyStartTime = "";
+                                        String TueDailyClosingTime = "";
+                                        String WedDailyStartTime = "";
+                                        String WedDailyClosingTime = "";
+                                        String ThursDailyStartTime = "";
+                                        String ThursDailyClosingTime = "";
+                                        String FriDailyStartTime = "";
+                                        String FriDailyClosingTime = "";
+                                        String SatDailyStartTime = "";
+                                        String SatDailyClosingTime = "";
+                                        String SunDailyStartTime = "";
+                                        String SunDailyClosingTime = "";
+                                        
+                                        //getting starting and closing hours for eah day
+                                        try{
+                                            
+                                            Class.forName(Driver);
+                                            Connection hoursConn = DriverManager.getConnection(Url, user, password);
+                                            String hourString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
+                                            
+                                            PreparedStatement hourPst = hoursConn.prepareStatement(hourString);
+                                            hourPst.setInt(1, UserID);
+                                            ResultSet hourRow = hourPst.executeQuery();
+                                            
+                                            while(hourRow.next()){
+                                                
+                                                
+                                                MonDailyStartTime = hourRow.getString("MondayStart");
+                                                MonDailyClosingTime = hourRow.getString("MondayClose");
+                                                
+                                                TueDailyStartTime = hourRow.getString("TuesdayStart");
+                                                TueDailyClosingTime = hourRow.getString("TuesdayClose");
+                                                
+                                                WedDailyStartTime = hourRow.getString("WednessdayStart");
+                                                WedDailyClosingTime = hourRow.getString("WednessdayClose");
+                                               
+                                                ThursDailyStartTime = hourRow.getString("ThursdayStart");
+                                                ThursDailyClosingTime = hourRow.getString("ThursdayClose");
+                                               
+                                                FriDailyStartTime = hourRow.getString("FridayStart");
+                                                FriDailyClosingTime = hourRow.getString("FridayClose");
+                                                
+                                                SatDailyStartTime = hourRow.getString("SaturdayStart");
+                                                SatDailyClosingTime = hourRow.getString("SaturdayClose");
+                                                
+                                                SunDailyStartTime = hourRow.getString("SundayStart");
+                                                SunDailyClosingTime = hourRow.getString("SundayClose");
+                                                
+                                                
+                                            }
+                                            
+                                        }catch(Exception e){
+                                            e.printStackTrace();
+                                        }
+                                        
+                                        try{
+                                                if(DayOfWeek.equalsIgnoreCase("Mon")){
+                                                    DailyStartTime = MonDailyStartTime.substring(0,5);
+                                                    DailyClosingTime = MonDailyClosingTime.substring(0,5);
+                                                }
+                                                if(DayOfWeek.equalsIgnoreCase("Tue")){
+                                                    DailyStartTime = TueDailyStartTime.substring(0,5);
+                                                    DailyClosingTime = TueDailyClosingTime.substring(0,5);
+                                                }
+                                                if(DayOfWeek.equalsIgnoreCase("Wed")){
+                                                    
+                                                    DailyStartTime = WedDailyStartTime.substring(0,5);
+                                                    DailyClosingTime = WedDailyClosingTime.substring(0,5);
+                                                }
+                                                if(DayOfWeek.equalsIgnoreCase("Thu")){
+                                                    DailyStartTime = ThursDailyStartTime.substring(0,5);
+                                                    DailyClosingTime = ThursDailyClosingTime.substring(0,5);
+                                                }
+                                                if(DayOfWeek.equalsIgnoreCase("Fri")){
+                                                    DailyStartTime = FriDailyStartTime.substring(0,5);
+                                                    DailyClosingTime = FriDailyClosingTime.substring(0,5);
+                                                }
+                                                if(DayOfWeek.equalsIgnoreCase("Sat")){
+                                                    DailyStartTime = SatDailyStartTime.substring(0,5);
+                                                    DailyClosingTime = SatDailyClosingTime.substring(0,5);
+                                                }
+                                                if(DayOfWeek.equalsIgnoreCase("Sun")){
+                                                    DailyStartTime = SunDailyStartTime.substring(0,5);
+                                                    DailyClosingTime = SunDailyClosingTime.substring(0,5);
+                                                }
+                                                
+                                                
+                                                if(DailyStartTime == "")
+                                                    DailyStartTime = "01:00";
+                                                if(DailyClosingTime == "")
+                                                    DailyClosingTime = "23:00";
+                                                
+                                                
+                                                startHour = Integer.parseInt(DailyStartTime.substring(0,2));
+                                                startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
+                                                        
+                                                        //formatting the time for user convenience
+                                                        if( startHour > 12)
+                                                        {
+                                                             int TempHour = startHour - 12;
+                                                             FormattedStartTime = Integer.toString(TempHour) + ":" +  DailyStartTime.substring(3,5) + " pm";
+                                                        }
+                                                        else if(startHour == 0){
+                                                            FormattedStartTime = "12" + ":" + DailyStartTime.substring(3,5) + " am";
+                                                        }
+                                                        else if(startHour == 12){
+                                                            FormattedStartTime = DailyStartTime + " pm";
+                                                        }
+                                                        else{
+                                                            FormattedStartTime = DailyStartTime +" am";
+                                                        }
+                                               
+                                                closeHour = Integer.parseInt(DailyClosingTime.substring(0,2));
+                                                closeMinute = Integer.parseInt(DailyClosingTime.substring(3,5));
+                                                        
+                                                        //formatting the time for user convenience
+                                                        if( closeHour > 12)
+                                                        {
+                                                             int TempHour = closeHour - 12;
+                                                             FormattedClosingTime = Integer.toString(TempHour) + ":" +  DailyClosingTime.substring(3,5) + " pm";
+                                                        }
+                                                        else if(closeHour == 0){
+                                                            FormattedClosingTime = "12" + ":" + DailyClosingTime.substring(3,5) + " am";
+                                                        }
+                                                        else if(closeHour == 12){
+                                                            FormattedClosingTime = DailyClosingTime + " pm";
+                                                        }
+                                                        else{
+                                                            FormattedClosingTime = DailyClosingTime +" am";
+                                                        }
+                                                        
+                                                        if(closeHour == 0)
+                                                            closeHour = 23;
+                                            }
+                                            catch(Exception e){}
+                                        
+                                        
+                                    %>
+                                    
+                                    <%
+                                        
+                                        if(DailyStartTime == "")
+                                            DailyStartTime = "01:00";
+                                        if(DailyClosingTime == "")
+                                            DailyClosingTime = "23:00";
+                                                
+                                        CurrentTime = DailyStartTime;
+                                        int CurrentHour = Integer.parseInt(DailyStartTime.substring(0,2));
+                                        int CurrentMinute = Integer.parseInt(DailyStartTime.substring(3,5));
+                                        
+                                        
+                                        //do all this for status led
+                                        String StatusLedCurrentTime = currentDate.toString().substring(11,16);
+                                        int StatusLedCurrentHour = Integer.parseInt(StatusLedCurrentTime.substring(0,2));
+                                        int StatusLedCurrentMinute = Integer.parseInt(StatusLedCurrentTime.substring(3,5));
+                                        
+                                        int CurrentHourForStatusLed = StatusLedCurrentHour;
+                                        int CurrentMinuteForStatusLed = StatusLedCurrentMinute;
+                                        
+                                        if(DailyStartTime != ""){
+                                            
+                                            if(CurrentHour < startHour){
+                                            
+                                                CurrentHour = startHour;
+                                                CurrentMinute = startMinute;
+                                                
+                                            }
+                                        
+                                        }
+                                        
+                                        String NextAvailableTime = "" ;
+                                        String NextAvailableFormattedTime = "";
+                                        
+                                        int y = 0;
+                                        int isFirstAppointmentFound = 0;
+                                        int bookedTimeFlag = 0;
+                                        int myAppointmentTimeFlag = 0;
+                                        
+                                        int NextThirtyMinutes = CurrentMinute + 30;
+                                        
+                                        //use this if there is no appointment for the next hour
+                                        int ActualThirtyMinutesAfter = CurrentMinute + 30;
+                                        
+                                        int NextHour = CurrentHour;
+                                        
+                                        //use this if there is no appointment for the next hour
+                                        int Hourfor30Mins = CurrentHour;
+                                        
+                                        if(NextThirtyMinutes >= 60){
+                                            
+                                            ++NextHour;
+                                            
+                                            if(DailyClosingTime != ""){
+                                                
+                                                if(NextHour > closeHour && closeHour != 0){
+
+                                                    NextHour = closeHour - 1;
+
+                                                }
+                                                else if(closeHour == 0)
+                                                    NextHour = 23;
+                                                    
+                                            }else if(NextHour > 23){
+                                                NextHour = 23;
+                                            }
+                                            
+                                            
+                                            
+                                            if(NextThirtyMinutes > 60)
+                                                NextThirtyMinutes -= 60;
+                                            
+                                            else if(NextThirtyMinutes == 60)
+                                                NextThirtyMinutes = 0;
+                                        }
+                                        
+                                        //use this if there is no appointment for the next hour
+                                        if(ActualThirtyMinutesAfter >= 60){
+                                            
+                                            ++Hourfor30Mins;
+                                            
+                                            if(Hourfor30Mins > 23)
+                                                Hourfor30Mins = 23;
+                                            
+                                            if(ActualThirtyMinutesAfter > 60)
+                                                ActualThirtyMinutesAfter -= 60;
+                                            
+                                            else if(ActualThirtyMinutesAfter == 60)
+                                                ActualThirtyMinutesAfter = 0;
+                                        }
+                                        
+                                        String p = Integer.toString(NextThirtyMinutes);
+                                        String h = Integer.toString(ActualThirtyMinutesAfter);
+                                        
+                                        if(p.length() < 2)
+                                            p = "0" + p;
+                                        
+                                        if(h.length() < 2)
+                                            h = "0" + h;
+                                        
+                                        String TimeAfter30Mins = NextHour + ":" + p;
+                                        String TimeWith30Mins = Hourfor30Mins + ":" + h;
+                                        NextAvailableTime = NextHour + ":" + p;
+                                        //JOptionPane.showMessageDialog(null, CurrentTime);
+                                        //JOptionPane.showMessageDialog(null, NextAvailableTime);
+                                        int Next30MinsAppointmentFlag = 0;
+                                        
+                                        /*
+                                        try{
+                                            
+                                            Class.forName(Driver);
+                                            Connection ThirtyMinsConn = DriverManager.getConnection(Url, user, password);
+                                            String ThirtyMinsString = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ? and (AppointmentTime between ? and ?)";
+                                            
+                                            PreparedStatement ThirtyPst = ThirtyMinsConn.prepareStatement(ThirtyMinsString);
+                                            ThirtyPst.setInt(1, UserID);
+                                            ThirtyPst.setString(2, QueryDate);
+                                            ThirtyPst.setString(3, CurrentTime);
+                                            ThirtyPst.setString(4, TimeAfter30Mins);
+                                            
+                                            ResultSet ThirtyMinsRow = ThirtyPst.executeQuery();
+                                            
+                                            while(ThirtyMinsRow.next()){
+                                                
+                                                Next30MinsAppointmentFlag = 1;
+                                                isFirstAppointmentFound = 1;
+                                                
+                                                String TempTime = ThirtyMinsRow.getString("AppointmentTime");
+                                                
+                                                CurrentHour = Integer.parseInt(TempTime.substring(0,2));
+                                                CurrentMinute = Integer.parseInt(TempTime.substring(3,5));
+                                                CurrentTime = CurrentHour + ":" + CurrentMinute;
+                                                
+                                                //getting the next 30 minute time from the current time;
+                                                int TempMinute = CurrentMinute + 30;
+                                        
+                                                int TempHour = CurrentHour;
+
+                                                if(TempMinute >= 60){
+
+                                                    ++TempHour;
+
+                                                    if(TempHour > 23)
+                                                        TempHour = 23;
+
+                                                    if(TempMinute > 60)
+                                                        TempMinute -= 60;
+
+                                                    else if(TempMinute == 60)
+                                                        TempMinute = 0;
+                                                }
+                                                
+                                                String StringTempMinute = Integer.toString(TempMinute);
+                                                
+                                                if(StringTempMinute.length() < 2)
+                                                    StringTempMinute = "0" + StringTempMinute;
+                                                
+                                                NextAvailableTime = TempHour + ":" + StringTempMinute;
+                                                
+                                                break;
+                                                
+                                            }
+                                            if(Next30MinsAppointmentFlag == 0){
+                                                
+                                                if(TimeWith30Mins.length() == 4)
+                                                    TimeWith30Mins = "0" + TimeWith30Mins;
+                                                
+                                                CurrentHour = Integer.parseInt(TimeWith30Mins.substring(0,2));
+                                                CurrentMinute = Integer.parseInt(TimeWith30Mins.substring(3,5));
+                                                String thisMinute = Integer.toString(CurrentMinute);
+                                                        
+                                                if(thisMinute.length() < 2){
+                                                    thisMinute = "0" + thisMinute;
+                                                }
+                                                
+                                                NextAvailableTime = CurrentHour + ":" + CurrentMinute;
+                                                 
+                                            }
+                                            
+                                        }catch(Exception e){
+                                            e.printStackTrace();
+                                        }
+                                    */
+                                        
+                                        //this part of the algorithm changed
+                                        int twoHours = CurrentHour + 23;
+                                        
+                                        if(DailyClosingTime != ""){
+                                            
+                                            if(twoHours > closeHour && closeHour != 0){
+
+                                                    twoHours = closeHour - 1;
+
+                                                }
+                                            else if(closeHour == 0)
+                                                twoHours = 23;
+                                            
+                                        }else if(twoHours > 23){
+                                                twoHours = 23;
+                                            }
+                                        
+                                        if(isTodayClosed == true){
+                                                
+                                                DailyStartTime = "00:00";
+                                                DailyClosingTime = "00:00";
+                                                
+                                            }
+                                        
+                                    %>
+                                    
+                                     <%
+                                    if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
+                                    %>
+                                                 
+                                    <p style="color: tomato;">Your not open on <%=DayOfWeek%>...</p>
+                                    
+                                    <%
+                                        }else  if(FormattedStartTime != "" || FormattedClosingTime != "" && !(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00"))){
+                                    %>
+                                    
+                                        <p><span>
+                                            
+                                        <%
+                                            if((startHour > CurrentHourForStatusLed || closeHour < CurrentHourForStatusLed) && closeHour != 0){
+                                        %>
+                                        
+                                        <img src="icons/icons8-new-moon-20.png" width="10" height="10" alt="icons8-new-moon-20"/>
+
+                                        
+                                        <%
+                                            }else{
+                                        %>
+                                        
+                                        <img src="icons/icons8-new-moon-20 (1).png" width="10" height="10" alt="icons8-new-moon-20 (1)"/>
+
+                                        
+                                        <%
+                                            }
+                                        %>
+                                            
+                                        </span>Hours: <span style="color: tomato"><%=FormattedStartTime%></span> -
+                                        <span style="color: tomato"><%=FormattedClosingTime%></span>,
+                                        <span style="color: tomato"><%=DayOfWeek%>, <%=stringDate%></span>.</p>
+                                        
+                                    <%
+                                        }
+                                    %>
+                                    
+                                        <!--p>Next Appointment: <%=NextAvailableTime%></p-->
+                                    
+                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px;'>Today's Queue</p></center>
+                                    
+                                    <center><div class="scrolldiv" style="width: 95%; max-width: 600px; overflow-x: auto;">
+                                    
+                                    <table style="width:100%; max-width: 600px;">
+                                        <tbody>
+                                            <tr>
+                                                
+                                            <%
+                                                int HowManyColums = 0;
+                                                int BookedSpots = 0;
+                                                boolean isLineAvailable = false;
+                                                
+                                                for(int x = CurrentHour; x < twoHours;){
+                                                    
+                                                    if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00"))
+                                                        break;
+                                                  
+                                                    for(y = CurrentMinute; y <= 60;){
+                                                        
+                                            %>
+                                            
+                                            <%
+                                                String AppointmentID = "";
+                                                 
+                                                try{
+                                                    
+                                                    Class.forName(Driver);
+                                                    Connection LineDivConn = DriverManager.getConnection(Url, user, password);
+                                                    String LineDivString = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ? and (AppointmentTime between ? and ?)";
+                                                    
+                                                    PreparedStatement LineDivPst = LineDivConn.prepareStatement(LineDivString);
+                                                    LineDivPst.setInt(1, UserID);
+                                                    LineDivPst.setString(2, QueryDate);
+                                                    LineDivPst.setString(3, CurrentTime);
+                                                    LineDivPst.setString(4, NextAvailableTime);
+                                                    
+                                                    ResultSet LineDivRow = LineDivPst.executeQuery();
+                                                    
+                                                    while(LineDivRow.next()){
+                                                        
+                                                        bookedTimeFlag = 1;
+                                                        
+                                                        String Reason = LineDivRow.getString("OrderedServices").trim();
+                                                        
+                                                        
+                                                        if(Reason.equals("Blocked Time")){
+                                                            
+                                                            bookedTimeFlag = 2;
+                                                            AppointmentID = LineDivRow.getString("AppointmentID");
+                                                            BlockedAppointmentIDs.add(AppointmentID);
+                                                            
+                                                        }
+                                                        
+                                                        CurrentTime = LineDivRow.getString("AppointmentTime");
+                                                        
+                                                        
+                                                        int k = Integer.parseInt(CurrentTime.substring(0,2));
+                                                        int l = Integer.parseInt(CurrentTime.substring(3,5));
+                                                        
+                                                        x = Integer.parseInt(CurrentTime.substring(0,2));
+                                                        y = Integer.parseInt(CurrentTime.substring(3,5));
+                                                        
+                                                        ++l;
+                                                        CurrentTime = k + ":" + l;
+                                                        
+                                                        break;
+                                                      
+                                                        
+                                                    }
+                                                }
+                                                catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+                                            %>
+                                            
+                                            <%
+                                                        
+                                                    
+                                                        String thisMinute = Integer.toString(y);
+                                                        
+                                                        if(thisMinute.length() < 2){
+                                                            thisMinute = "0" + thisMinute;
+                                                        }
+                                                        
+                                                        NextAvailableTime = x + ":" + thisMinute;
+                                                        
+                                                        //formatting the time for user convenience
+                                                        if( x > 12)
+                                                        {
+                                                             int TempHour = x - 12;
+                                                             NextAvailableFormattedTime = Integer.toString(TempHour) + ":" +  thisMinute + "pm";
+                                                        }
+                                                        else if(x == 0){
+                                                            NextAvailableFormattedTime = "12" + ":" + thisMinute + "am";
+                                                        }
+                                                        else if(x == 12){
+                                                            NextAvailableFormattedTime = NextAvailableTime + "pm";
+                                                        }
+                                                        else{
+                                                            NextAvailableFormattedTime = NextAvailableTime +"am";
+                                                        }
+                                                     
+                                            %>
+                                            
+                                            <% 
+                                                
+                                                if(bookedTimeFlag == 1){
+                                                    
+                                                    HowManyColums++;
+                                                    isLineAvailable = true;
+                                                    
+                                                    TotalUnavailableList++;
+                                                    AllUnavailableTimeList.add(NextAvailableTime);
+                                                    AllUnavailableFormattedTimeList.add(NextAvailableFormattedTime);
+                                                    int t = d + 1;
+                                            %>
+                                            
+                                            <td onclick="showLineTakenMessage(<%=t%><%=TotalUnavailableList%>)">
+                                                <p style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
+                                                <img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
+                                            </td>
+                                                
+                                            <%  
+                                                    
+                                                }
+                                            
+                                            %>
+                                            
+                                                <!--td>8:00am<img src="icons/icons8-standing-man-filled-50 (1).png" width="50" height="50" alt="icons8-standing-man-filled-50 (1)"/>
+                                                </td-->
+                                                
+                                            <% 
+                                                if(bookedTimeFlag == 0){
+                                                    
+                                                    HowManyColums++;
+                                                    isLineAvailable = true;
+                                                    
+                                                    TotalAvailableList++;
+                                                    AllAvailableTimeList.add(NextAvailableTime);
+                                                    AllAvailableFormattedTimeList.add(NextAvailableFormattedTime);
+                                                    int t = d + 1;
+                                            %>
+                                                
+                                                 <td onclick="ShowQueueLinDivBookAppointment(<%=t%><%=TotalAvailableList%>)">
+                                                     <p style="font-size: 12px; font-weight: bold; color: blue;"><%=NextAvailableFormattedTime%></p>
+                                                     <img src="icons/icons8-standing-man-filled-50 (1).png" width="50" height="50" alt="icons8-standing-man-filled-50 (1)"/>
+                                                </td>
+                                                
+                                            <% 
+                                                  }
+
+                                            %>
+                                                
+                                            <%
+                                            if(bookedTimeFlag == 2){
+                                                
+                                                HowManyColums++;
+                                                isLineAvailable = true;
+                                                
+                                                TotalThisCustomerTakenList++;
+                                                AllThisProviderBlockedTime.add(NextAvailableTime);
+                                                AllThisProviderBlockedFormattedTakenTime.add(NextAvailableFormattedTime);
+                                                
+                                                int t = d + 1;
+                                                
+                                            %>
+                                            
+                                                <td onclick="showYourPositionMessage(<%=t%><%=TotalThisCustomerTakenList%>)">
+                                                    <p style="font-size: 12px; font-weight: bold; color: green;"><%=NextAvailableFormattedTime%></p>
+                                                    <img src="icons/icons8-standing-man-filled-50 (2).png" width="50" height="50" alt="icons8-standing-man-filled-50 (2)"/>
+                                                </td>
+                                                
+                                            <%  }
+                                            
+                                                bookedTimeFlag = 0;
+                                            
+                                            %>
+                                                <!--td>9:30am<img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
+                                                </td-->
+                                            <% 
+                                                        
+                                                        y += IntervalsValue;
+                                                        
+                                                        if(y >= 60){
+                                                             
+                                                            x++;
+                                                            
+                                                            if(y > 60)
+                                                                y -= 60;
+                                                            else if(y == 60)
+                                                                y = 0;
+                                                             
+                                                            if(x > twoHours){
+                                                               //breaking out of this inner loop  
+                                                               //incidentally the condition of outer loop becomes false
+                                                               //thereby exiting as well
+                                                               break;
+                                                            }
+                                                        }
+                                                        
+                                                        thisMinute = Integer.toString(y);
+                                                        
+                                                        if(thisMinute.length() < 2){
+                                                            thisMinute = "0" + thisMinute;
+                                                        }
+                                                        
+                                                        NextAvailableTime = x + ":" + thisMinute;
+                                                        
+                                                        /*formatting the time for user convenience
+                                                        if( x > 12)
+                                                        {
+                                                             int TempHour = x - 12;
+                                                             NextAvailableFormattedTime = Integer.toString(TempHour) + ":" +  thisMinute + "pm";
+                                                        }
+                                                        else if(x == 0){
+                                                            NextAvailableFormattedTime = "12" + ":" + thisMinute + "am";
+                                                        }
+                                                        else if(x == 12){
+                                                            NextAvailableFormattedTime = NextAvailableTime + "pm";
+                                                        }
+                                                        else{
+                                                            NextAvailableFormattedTime = NextAvailableTime +"am";
+                                                        }*/
+                                                    
+                                                        //CurrentMinute = y;
+                                                        
+                                                        //if(HowManyColums >= 5)
+                                                            //break;
+                                                  
+                                                    }
+                                                      
+                                                    //if(HowManyColums >= 5)
+                                                        //break;
+                                                }
+                                            %>
+                                            
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    </div></center>
+                                        
+                                     <%
+                                         Date thisDate = new Date();
+                                         String thisTime = thisDate.toString().substring(11,16);
+                                        
+                                        for(int z = 0; z < AllThisProviderBlockedFormattedTakenTime.size(); z++){
+                                            
+                                            String NextThisAvailableTimeForDisplay = AllThisProviderBlockedFormattedTakenTime.get(z);
+                                            String NextThisProviderBlockedTime = AllThisProviderBlockedTime.get(z);
+                                            String AppointmentID = BlockedAppointmentIDs.get(z);
+                                            
+                                            int t = d + 1;
+                                            int q = z + 1;
+                                            
+                                    %>     
+                                            
+                                    
+                                    <form name="ReleaseSpot" style='background-color: green; display: none; margin-bottom: 5px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotController" method="POST">
+                                        
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        
+                                   <p style="color: white; text-align: center;" id="">You blocked <%=NextThisAvailableTimeForDisplay%></p>
+                                        
+                                    <%
+                                        if(thisTime.length() == 4)
+                                            thisTime = "0" + thisTime;
+                                        if(NextThisProviderBlockedTime.length() == 4)
+                                            NextThisProviderBlockedTime = "0" + NextThisProviderBlockedTime;
+                                        
+                                        int TempThisHour = Integer.parseInt(thisTime.substring(0,2));
+                                        int TempThisMinute = Integer.parseInt(thisTime.substring(3,5));
+                                        int AppointmentHour = Integer.parseInt(NextThisProviderBlockedTime.substring(0,2));
+                                        int AppointmentMinute = Integer.parseInt(NextThisProviderBlockedTime.substring(3,5));
+                                        
+                                        if(TempThisHour > AppointmentHour){}
+                                        
+                                        else if(TempThisHour == AppointmentHour){
+                                            
+                                            if(TempThisMinute <= AppointmentMinute){
+                                        
+                                    
+                                    %>
+                                        
+                                        <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
+                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                    
+                                    <%      }
+                                        }else if(TempThisHour < AppointmentHour) {
+                                    %>
+                                    
+                                        <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
+                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                    
+                                    <%}%>
+                                    
+                                    </form>
+                                    
+                                    <%}%>
+                                    
+                                    <%
+                                        
+                                        for(int z = 0; z < AllUnavailableTimeList.size(); z++){
+                                            
+                                            String NextUnavailableTimeForMessage = AllUnavailableFormattedTimeList.get(z);
+                                            
+                                            int t = d + 1;
+                                            int q = z + 1;
+                                            
+                                    %>
+                                   
+                                    <%}%>
+                                    
+                                    <%
+                                        if(!isLineAvailable){
+                                    %>
+                                    
+                                    <p style="background-color: red; color: white; text-align: center;">There is no line currently available for this service provider</p>
+                                    
+                                    <%}%>
+                                    
+                                    <%
+                                        
+                                        for(int z = 0; z < AllAvailableTimeList.size(); z++){
+                                            
+                                            String NextAvailableTimeForForm = AllAvailableTimeList.get(z);
+                                            String NextAvailableTimeForFormDisplay = AllAvailableFormattedTimeList.get(z);
+                                            
+                                            int t = d + 1;
+                                            int q = z + 1;
+                                            
+                                    %>
+                                    
+                                    <form style="display: none;" id="bookAppointmentFromLineDiv<%=t%><%=q%>" name="bookAppointmentFromLineDiv" action="BlockSpotController" method="POST">
+                                        <input type="hidden" name="CustomerID" value="1" />
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="ProviderID" value="<%=UserID%>" />
+                                        <input type="hidden" name="formsOrderedServices" value="Blocked Time" />
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="formsDateValue" value="<%=QueryDate%>" />
+                                        <input type="hidden" name="formsTimeValue" value="<%=NextAvailableTimeForForm%>" />
+                                        <input type="hidden" name="TotalPrice" value="00.00" />
+                                        <input type="hidden" name="payment" value="None" />
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        
+                                        <%
+                                        if(thisTime.length() == 4)
+                                            thisTime = "0" + thisTime;
+                                        if(NextAvailableTimeForForm.length() == 4)
+                                            NextAvailableTimeForForm = "0" + NextAvailableTimeForForm;
+                                        
+                                        int TempThisHour = Integer.parseInt(thisTime.substring(0,2));
+                                        int TempThisMinute = Integer.parseInt(thisTime.substring(3,5));
+                                        int AppointmentHour = Integer.parseInt(NextAvailableTimeForForm.substring(0,2));
+                                        int AppointmentMinute = Integer.parseInt(NextAvailableTimeForForm.substring(3,5));
+                                        
+                                        if(TempThisHour > AppointmentHour){}
+                                        
+                                        else if(TempThisHour == AppointmentHour){
+                                            
+                                            if(TempThisMinute <= AppointmentMinute){
+                                        
+                                    
+                                    %>
+                                    
+                                        
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                       
+                                    <%      }
+                                        }else if(TempThisHour < AppointmentHour) {
+                                    %>
+                                    
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                    
+                                    <%}%>
+                                    
+                                    </form>
+                                        
+                                    <%}%>
+                                    
+                                        <center><p style="padding-bottom: 10px;">Summary: <span style="color: blue;"><%=HowManyColums%> spots,</span> <span style="color: red;"> <%=TotalUnavailableList%> booked,</span> <span style="color: green;"> <%=TotalThisCustomerTakenList%> blocked</span></p></center>
+                                    
+                                        <p style=""><span style="color: blue; border: 1px solid blue;"><img src="icons/icons8-standing-man-filled-50 (1).png" width="30" height="25" alt="icons8-standing-man-filled-50 (1)"/>
+                                        Not Taken </span> <span style="color: red; border: 1px solid red;"><img src="icons/icons8-standing-man-filled-50.png" width="30" height="25" alt="icons8-standing-man-filled-50"/>
+                                        Taken </span> <span style="color: green; border: 1px solid green; padding-right: 3px;"><img src="icons/icons8-standing-man-filled-50 (2).png" width="30" height="25" alt="icons8-standing-man-filled-50 (2)"/>
+                                        Blocked Spot </span> </p>
+                                    
+                                        <form style=" margin-top: 5px; border-top: 1px solid darkgray;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
+                                            <p style="text-align: center; color: #000099; margin: 5px; font-weight: bolder;">Change Your Spots Intervals</p>
+                                            <p style="text-align: center;">Set intervals time below</p>
+                                            <p style="color: red;"><select style="border: 0; text-align: right; background-color: #eeeeee; color: black;" name="SpotsIntervals">
+                                                    <option><%=IntervalsValue%></option>
+                                                    <option>15</option>
+                                                    <option>30</option>
+                                                    <option>45</option>
+                                                    <option>60</option>
+                                                </select> Minutes</p>
+                                            
+                                            <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                            <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                            <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                            <input style="border: darkgray 1px solid; background-color: #eeeeee; padding: 5px;" type="submit" value="Change" name="SetSpotsIntervalBtn" />
+                                        </form>
+                                    </div></center>
+                <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                
+                <p style='text-align: center;'>Recent Customer Review</p>
+                
+    <%
+                                    for(int x = 0; x < ReviewsList.size(); x++){
+
+                                        String ReviewMessage = "";
+
+                                        SimpleDateFormat ReviewSDF = new SimpleDateFormat("MMM dd, yyyy");
+                                        String ReviewStringDate = ReviewSDF.format(ReviewsList.get(x).ReviewDate);
+
+                                        try{
+
+                                            ReviewMessage = ReviewsList.get(x).ReviewMessage;
+
+                                        }catch(Exception e){}
+
+                                        int CustomerRating = ReviewsList.get(x).Rating;
+                                        int CustomerID = ReviewsList.get(x).UserID;
+                                        String CustomerFullName = "";
+                                        String Base64Image = "";
+
+                                        try{
+
+                                            Class.forName(Driver);
+                                            Connection ReviewCustConn = DriverManager.getConnection(Url, user, password);
+                                            String CustString = "Select * from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                                            PreparedStatement CustInfoPst = ReviewCustConn.prepareStatement(CustString);
+                                            CustInfoPst.setInt(1, CustomerID);
+
+                                            ResultSet CustRec = CustInfoPst.executeQuery();
+
+                                            while(CustRec.next()){
+
+                                                String FirstName = CustRec.getString("First_Name").trim();
+                                                String MiddleName = CustRec.getString("Middle_Name").trim();
+                                                String LastName = CustRec.getString("Last_Name").trim();
+
+                                                CustomerFullName = FirstName + " " + MiddleName + " " + LastName;
+
+
+                                                try{    
+                                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                                    Blob profilepic = CustRec.getBlob("Profile_Pic"); 
+                                                    InputStream inputStream = profilepic.getBinaryStream();
+                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                    byte[] buffer = new byte[4096];
+                                                    int bytesRead = -1;
+
+                                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                        outputStream.write(buffer, 0, bytesRead);
+                                                    }
+
+                                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                                     Base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                }
+                                                catch(Exception e){}
+
+
+                                            }
+
+                                        }catch(Exception e){
+                                            e.printStackTrace();
+                                        }
+
+                        %>
+
+                                         <center><div style='background-color: black; padding: 1px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 5px; width: 98%; max-width: 600px; margin-left: 0;'>
+
+                                            <%
+                                                if(Base64Image == ""){
+                                            %> 
+
+                                            <center><img style="border-radius: 5px; float: left; width: 15%;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
+
+                                                </center>
+
+                                            <%
+                                                }else{
+                                            %>
+                                                    <img style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+
+                                            <%
+                                                }
+                                            %>
+                            <center><div style='float: right; width: 84%;'>                 
+                            <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
+
+                            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: blue; font-size: 20px;">
+
+
+                                                        <%
+                                                            if(CustomerRating == 5){
+
+                                                        %> 
+                                                        ★★★★★
+                                                        <%
+                                                             }else if(CustomerRating == 4){
+                                                        %>
+                                                        ★★★★☆
+                                                        <%
+                                                             }else if(CustomerRating == 3){
+                                                        %>
+                                                        ★★★☆☆
+                                                        <%
+                                                             }else if(CustomerRating == 2){
+                                                        %>
+                                                        ★★☆☆☆
+                                                        <%
+                                                             }else if(CustomerRating == 1){
+                                                        %>
+                                                        ★☆☆☆☆
+                                                        <%}%>
+                                                        </span>
+                            </p>
+
+                            <%
+                                if(!ReviewMessage.equals("")){
+                            %>
+                            <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
+
+                            <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
+                            <%}%>
+                            </div></center>
+
+                            <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
+
+                        </div></center>
+
+                        <%}%>
+                        
+                        <%
+                            if(ReviewsList.size() == 0){
+                        %>
+
+                        <center><p style="color: white; background-color: red; text-align: center; margin: 10px; max-width: 600px;">You don't have any customer reviews</p></center>
+                        
+                        <%}%>
+                
+                <div style=" display: block;" id="appointmentsDiv">
+                <center><div style=" width: 100%; max-width: 650px;">
+                             
+                                    
+                                        <table cellspacing="0" style="width: 100%; border-bottom: 1px solid #000099;">
+                                            <tbody>
+                                                <tr>
+                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; border-radius: 4px; border-top: 1px solid black; cursor: pointer; width: 50%;">
+                                                        Current Line
+                                                    </td>
+                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
+                                                        History
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                
+                    </div></center>
+                    
+                    <div class="scrolldiv" style=" height: 400px; overflow-y: auto;">
+                        
+                        <script>
+                                    
+                                                        var currentDate = new Date();
+                                                        var currentTime = '<%=JSCurrentTime%>';
+                                                        
+                                                        var currentHour = currentTime.substring(0,2);
+                                                        var currentMinute = currentTime.substring(3,5);
+
+                                                         var currentMonth = currentDate.getMonth();
+                                                                 currentMonth += 1;
+                                                                 currentMonth += "";
+
+                                                                 if(currentMonth.length < 2)
+                                                                         currentMonth = "0" + currentMonth;
+
+                                                         var currentDay = currentDate.getDate() + "";
+
+                                                                 if(currentDay.length < 2)
+                                                                         currentDay = "0" + currentDay;
+
+                                                         var currentYear = currentDate.getFullYear();
+
+                                                         currentDate = currentMonth + "/" + currentDay + "/" + currentYear;
+                                                         
+                                    </script>
+                    
+                    <div id="CurrentProvAppointmentsDiv">
+                <cetnter><h4 style="margin: 5px;">Next Client</h4></cetnter>
+                <center><table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
+                        <tbody>
+                            
+    <%
+                      for(int w = 0; w < AppointmentList.size(); w++){
+                      
+                          String WString = Integer.toString(w);
+                          int AppointmentID = AppointmentList.get(w).getAppointmentID();
+                          
+                          //note all providerinfo here is customer instead but this is an error from DataStructure inconsistency
+                          String Name = AppointmentList.get(w).getProviderName();
+                          String Tel = AppointmentList.get(w).getProviderTel();
+                          String email = AppointmentList.get(w).getProviderEmail();
+                          String Time = AppointmentList.get(w).getTimeOfAppointment();
+                          String AppointmentReason = AppointmentList.get(w).getReason().trim();
+                          String Base64CustPic = "";
+                          
+                          try{    
+                            //put this in a try catch block for incase getProfilePicture returns nothing
+                            Blob profilepic = AppointmentList.get(w).getDisplayPic(); 
+                            InputStream inputStream = profilepic.getBinaryStream();
+                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                            byte[] buffer = new byte[4096];
+                            int bytesRead = -1;
+
+                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                outputStream.write(buffer, 0, bytesRead);
+                            }
+
+                            byte[] imageBytes = outputStream.toByteArray();
+
+                             Base64CustPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                        }
+                        catch(Exception e){}
+
+                          
+
+                            String TimeToUse = "";
+                            int Hours = Integer.parseInt(Time.substring(0,2));
+                            String Minutes = Time.substring(2,5);
+
+                            if( Hours > 12)
+                            {
+                                int TempHour = Hours - 12;
+                                TimeToUse = Integer.toString(TempHour) + Minutes + "pm";
+                            }
+                            else if(Hours == 0){
+                                TimeToUse = "12" + Minutes + "am";
+                            }
+                            else if(Hours == 12){
+                                TimeToUse = Time + "pm";
+                            }
+                            else{
+                                TimeToUse = Time +"am";
+                            }
+                
+                          
+                          Date date = AppointmentList.get(w).getDateOfAppointment();
+                          
+                          SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");
+                          String DateOfAppointment = sdf.format(date);
+                          
+    %>
+                        <tr id="ApptRow<%=WString%>">
+                            <td style = "padding: 5px; background-color: white; margin: 5px; border: 0; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgray;">
+                <%
+                    if(Base64CustPic != ""){
+                %>
+                <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                 <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                    </div></center>
+                <%
+                    }
+                %>
+                   
+                        <center><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                <span style="color: red;"><%=Name%></span> at <span id="ApptTimeSpan<%=WString%>" style="color: red;"><%=TimeToUse%></span></p></center>
+                                <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
+                                    <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
+                                    <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
+                              
+                                <center>
+                                    <form id="changeBookedAppointmetForm<%=WString%>" style=" display: none;" id="changeBookedAppointmetForm<%=WString%>" class="changeBookedAppointmentForm" name="changeAppointment">
+                                        <p style ="margin-top: 10px;">Reschedule This Customer</p>
+                                        <input id="datepicker<%=WString%>" style="background-color: white;" type="text" name="AppointmentDate" value="<%=date%>"/>
+                                        <input id="timeFld<%=WString%>" style="background-color: white;" type="hidden" name="ApointmentTime" value="<%=Time%>"/>
+                                        <input id="timePicker<%=WString%>" style="background-color: white;" type="text" name="ApointmentTimePicker" value="<%=Time%>"/>
+                                        <p id="timePickerStatus<%=WString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
+                                        <p id="datePickerStatus<%=WString%>" style="background-color: red; color: white; text-align: center;"></p>
+                                        <input id="ChangeAppointmentID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
+                                        <input id="changeAppointmentBtn<%=WString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
+                                        <script>
+                                               
+                                               $(document).ready(function() {                        
+                                                    $('#changeAppointmentBtn<%=WString%>').click(function(event) {  
+                                                        
+                                                        var AppointmentID = document.getElementById("ChangeAppointmentID<%=WString%>").value;
+                                                        var AppointmentTime = document.getElementById("timeFld<%=WString%>").value;
+                                                        var AppointmentDate = document.getElementById("datepicker<%=WString%>").value;
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "ProvidersUpdateAppointment",  
+                                                        data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("changeBookedAppointmetForm<%=WString%>").style.display = "none";
+                                                          
+                                                          $.ajax({
+                                                              type: "POST",
+                                                              url: "GetUpdateSpotInfo",
+                                                              data: "AppointmentID="+AppointmentID,
+                                                              success: function(result){
+                                                                  //alert(result);
+                                                                  var AppointmentData = JSON.parse(result);
+                                                                  document.getElementById("ApptTimeSpan<%=WString%>").innerHTML = AppointmentData.AppointmentTime;
+                                                                  //document.getElementById("ApptDateSpan").innerHTML = AppointmentData.AppointmentDate;
+                                                              }
+                                                          });
+                                                          
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                                        <script>
+                                               
+                                                    $('#timePicker<%=WString%>').timepicker({
+                                                         timeFormat: 'h:mm p',
+                                                         interval: 15,
+                                                         minTime: '00',
+                                                         maxTime: '11:59pm',
+                                                         defaultTime: '00',
+                                                         startTime: '00',
+                                                         dynamic: false,
+                                                         dropdown: true,
+                                                         scrollbar: true
+                                                     });
+
+                                                     function CheckCurrentTimeChooser(){
+                                                         
+                                                         var tempTime = document.getElementById("timePicker<%=WString%>").value;
+                                                         var tempDate = document.getElementById("datepicker<%=WString%>").value;
+
+                                                         if(tempTime.length === 7)
+                                                              tempTime = "0" + tempTime;
+
+                                                          var tempHour = "";
+                                                          var tempMinute = tempTime.substring(2,5);
+                                                         
+                                                         if(tempTime.substring(6,8) === 'AM' && tempTime.substring(0,2) !== '12'){
+                                                             document.getElementById("timeFld<%=WString%>").value = tempTime.substring(0,5);
+                                                         }
+                                                         else if(tempTime.substring(6,8) === 'AM' && tempTime.substring(0,2) === '12'){
+                                                             document.getElementById("timeFld<%=WString%>").value = "00" + tempMinute;
+                                                         }
+                                                         else{
+
+
+                                                             tempHour = parseInt(tempTime.substring(0,2),10) + 12;
+                                                             if(tempHour === 24)
+                                                                 tempHour = 12;
+                                                             
+                                                             document.getElementById("timeFld<%=WString%>").value = tempHour + tempMinute;
+                                                             
+                                                         }
+                                                         
+                                                        if( currentDate === tempDate ){
+                                                             
+                                                            if( (parseInt(document.getElementById("timeFld<%=WString%>").value.substring(0,2), 10)) < (parseInt(currentHour, 10)) ){
+                                                                document.getElementById("timeFld<%=WString%>").value = currentTime;
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").disabled = true;
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkgrey";
+                                                                document.getElementById("timePickerStatus<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                            }
+                                                            else if( (parseInt(document.getElementById("timeFld<%=WString%>").value.substring(0,2), 10)) === (parseInt(currentHour, 10)) &&
+                                                                     (parseInt(document.getElementById("timeFld<%=WString%>").value.substring(3,5), 10)) < (parseInt(currentMinute, 10)) ){
+                                                                        document.getElementById("timeFld<%=WString%>").value = currentTime;
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").disabled = true;
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkgrey";
+                                                                        document.getElementById("timePickerStatus<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                            }else{
+
+                                                                document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").disabled = false;
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "pink";
+
+                                                            }
+                                                        
+                                                        }else{
+                                                            
+                                                            document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").disabled = false;
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "pink";
+                                                            
+                                                        }
+
+                                                     }
+
+                                                     setInterval(CheckCurrentTimeChooser,1);
+                                                     
+                                                 </script>
+                                        
+                                        <script>
+                                                
+                                                            $( 
+                                                                    function(){
+                                                                            $( "#datepicker<%=WString%>" ).datepicker();
+                                                                    } 
+                                                             );
+                                                            
+                                                        //---------------------------------------------
+                                                         //var datepicker = document.getElementById("datepicker<%=WString%>");
+                                                         //var datePickerStatus = document.getElementById("datePickerStatus<%=WString%>");
+
+                                                         
+                                                         document.getElementById("datePickerStatus<%=WString%>").innerHTML = "";
+
+
+                                                         function checkDateUpdateValue(){
+
+                                                                 if((new Date(document.getElementById("datepicker<%=WString%>").value)) < (new Date())){
+
+                                                                                 if(document.getElementById("datepicker<%=WString%>").value === currentDate){
+
+                                                                                         if(document.getElementById("datePickerStatus<%=WString%>").innerHTML === ""){
+                                                                                                 document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Today's Date: " + currentDate;
+                                                                                                 document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "green";
+                                                                                         }
+
+                                                                                 }
+                                                                                 else{
+                                                                                         document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Only today's date or future date allowed";
+                                                                                         document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "red";
+                                                                                         document.getElementById("datepicker<%=WString%>").value = currentDate;
+                                                                                 }
+                                                                 }
+                                                                 else{
+
+                                                                         document.getElementById("datePickerStatus<%=WString%>").innerHTML = "";
+                                                                         //datePickerStatus.innerHTML = "Chosen Date: " + datepicker.value;
+                                                                         //datePickerStatus.style.backgroundColor = "green";
+                                                                 }
+
+                                                         }
+
+                                                         setInterval(checkDateUpdateValue, 1);                                        
+                                                             
+                                            </script>
+                                        
+                                    </form>
+                                </center>
+                                    
+                                    <form id="addFavProvForm<%=WString%>">
+                                    </form>
+                                
+                                <center><form style=" display: none;" id="deleteAppointmentForm<%=WString%>" class="deleteAppointmentForm" name="confirmDeleteAppointment">
+                                    <p style="color: red; margin-top: 10px;">Are you sure you want to remove this customer</p>
+                                    <p><input style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" id="DeleteApptBtn<%=WString%>" name="<%=WString%>deleteAppointment" type="button" value="Yes" />
+                                    <span onclick = "hideDelete(<%=WString%>)" style="background-color: blue; border: 1px solid black; color: white; padding: 3px; cursor: pointer;"> NO</span></p>
+                                    <input id="DeleteApptID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
+                                    
+                                    <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#DeleteApptBtn<%=WString%>').click(function(event) {  
+                                                        
+                                                        var AppointmentID = document.getElementById("DeleteApptID<%=WString%>").value;
+                                                        
+                                                        
+                                                        //alert("AppointmentID "+AppointmentID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "providerDeleteAppointment",  
+                                                        data: "AppointmentID="+AppointmentID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("ApptRow<%=WString%>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                            </script>
+                                    
+                                    </form></center>
+                                
+                                <p style="text-align: right; padding-right: 20px;">
+                                    <a style="margin-right: 5px; cursor: pointer;" ><img onclick = "toggleChangeAppointment(<%=WString%>)" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/></a> 
+                                    <a><img style="cursor: pointer;" onclick = "toggleHideDelete(<%=WString%>)" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/></a></p>
+                            </td>
+                        </tr>
+                        
+                        <%} //end of for loop
+                            
+                            if(AppointmentList.size() == 0){
+                        
+                        %>
+                        
+                        <center><p style="color: white; background-color: red; margin-bottom: 30px; margin-top: 30px; max-width: 600px;">No Current Line</p></center>
+                        <%} //end of if block%>
+                    </tbody>
+                    </table></center>
+                
+                <center><h4 style="margin: 10px; border-top: 1px solid darkblue; max-width: 500px;">Future Line</h4></center>
+                <center><table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
+                        <tbody>
+                            
+    <%
+                      for(int w = 0; w < FutureAppointmentList.size(); w++){
+                      
+                          String WString = Integer.toString(w);
+                          int AppointmentID = FutureAppointmentList.get(w).getAppointmentID();
+                          
+                          //note all providerinfo here is customer instead but this is an error from DataStructure inconsistency
+                          String Name = FutureAppointmentList.get(w).getProviderName();
+                          String Tel = FutureAppointmentList.get(w).getProviderTel();
+                          String email = FutureAppointmentList.get(w).getProviderEmail();
+                          String Time = FutureAppointmentList.get(w).getTimeOfAppointment();
+                          String AppointmentReason = FutureAppointmentList.get(w).getReason();
+                          String Base64CustPic = "";
+                          
+                        try{    
+                            //put this in a try catch block for incase getProfilePicture returns nothing
+                            Blob profilepic = FutureAppointmentList.get(w).getDisplayPic(); 
+                            InputStream inputStream = profilepic.getBinaryStream();
+                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                            byte[] buffer = new byte[4096];
+                            int bytesRead = -1;
+
+                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                outputStream.write(buffer, 0, bytesRead);
+                            }
+
+                            byte[] imageBytes = outputStream.toByteArray();
+
+                             Base64CustPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                        }
+                        catch(Exception e){}
+                          
+                          
+                            String TimeToUse = "";
+                            int Hours = Integer.parseInt(Time.substring(0,2));
+                            String Minutes = Time.substring(2,5);
+
+                            if( Hours > 12)
+                            {
+                                int TempHour = Hours - 12;
+                                TimeToUse = Integer.toString(TempHour) + Minutes + "pm";
+                            }
+                            else if(Hours == 0){
+                                TimeToUse = "12" + Minutes + "am";
+                            }
+                            else if(Hours == 12){
+                                TimeToUse = Time + "pm";
+                            }
+                            else{
+                                TimeToUse = Time +"am";
+                            }
+                
+                          
+                          Date date = FutureAppointmentList.get(w).getDateOfAppointment();
+                          
+                          SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");
+                          String DateOfAppointment = sdf.format(date);
+                          
+    %>
+                        <tr id="futureApptRow<%=WString%>">
+                            <td style = "padding: 5px; background-color: white; margin: 5px; border: 0; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgray;">
+                        <%
+                            if(Base64CustPic != ""){
+                        %>
+                        <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                         <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                            </div></center>
+                        <%
+                            }
+                        %>
+                            <center><p>Date: <span id="FutureDateSpan<%=WString%>" style="color: red;"><%=DateOfAppointment%></span>
+                            <center><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                <span style="color: red;"><%=Name%></span> at <span id="FutureTimeSpan<%=WString%>" style="color: red;"><%=TimeToUse%></span></p></center>
+                                <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
+                                    <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
+                                    <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
+                              
+                                <center>
+                                    <form style=" display: none;" id="changeFutureAppointmetForm<%=WString%>" class="changeBookedAppointmentForm" name="changeAppointment">
+                                        <p style ="margin-top: 10px;">Reschedule This Customer</p>
+                                        <input id="datepickerFuture<%=WString%>" style="background-color: white;" type="text" name="AppointmentDate" value="<%=date%>"/>
+                                        <input id="timeFldFuture<%=WString%>" style="background-color: white;" type="hidden" name="ApointmentTime" value="<%=Time%>"/>
+                                        <input id="timePickerFuture<%=WString%>" style="background-color: white;" type="text" name="ApointmentTimePicker" value="<%=Time%>"/>
+                                        <p id="timePickerStatusFuture<%=WString%>" style="background-color: red; margin-bottom: 3px; color: white; text-align: center;"></p>
+                                        <p id="datePickerStatusFuture<%=WString%>" style="background-color: red; color: white; text-align: center;"></p>
+                                        <input id="ChangeFutureAppointmentID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
+                                        <input id="changeAppointmentBtnFuture<%=WString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
+                                        <script>
+                                               
+                                               $(document).ready(function() {                        
+                                                    $('#changeAppointmentBtnFuture<%=WString%>').click(function(event) {  
+                                                        
+                                                        var AppointmentID = document.getElementById("ChangeFutureAppointmentID<%=WString%>").value;
+                                                        var AppointmentTime = document.getElementById("timeFldFuture<%=WString%>").value;
+                                                        var AppointmentDate = document.getElementById("datepickerFuture<%=WString%>").value;
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "ProvidersUpdateAppointment",  
+                                                        data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("changeFutureAppointmetForm<%=WString%>").style.display = "none";
+                                                          $.ajax({
+                                                              type: "POST",
+                                                              url: "GetUpdateSpotInfo",
+                                                              data: "AppointmentID="+AppointmentID,
+                                                              success: function(result){
+                                                                  //alert(result);
+                                                                  var AppointmentData = JSON.parse(result);
+                                                                  document.getElementById("FutureTimeSpan<%=WString%>").innerHTML = AppointmentData.AppointmentTime;
+                                                                  document.getElementById("FutureDateSpan<%=WString%>").innerHTML = AppointmentData.AppointmentDate;
+                                                              }
+                                                          });
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                                        <script>
+                                               
+                                               $('#timePickerFuture<%=WString%>').timepicker({
+                                                    timeFormat: 'h:mm p',
+                                                    interval: 15,
+                                                    minTime: '00',
+                                                    maxTime: '11:59pm',
+                                                    defaultTime: '00',
+                                                    startTime: '00',
+                                                    dynamic: false,
+                                                    dropdown: true,
+                                                    scrollbar: true
+                                                });
+                                                
+                                                function CheckTimeChooser(){
+                                                    
+                                                    var tempTime = document.getElementById("timePickerFuture<%=WString%>").value;
+                                                    var tempDate = document.getElementById("datepickerFuture<%=WString%>").value;
+                                                    
+                                                    
+                                                    if(tempTime.length === 7)
+                                                         tempTime = "0" + tempTime;
+                                                     
+                                                     var tempHour = "";
+                                                     var tempMinute = tempTime.substring(2,5);
+                                                    
+                                                    if(tempTime.substring(6,8) === 'AM' && tempTime.substring(0,2) !== '12'){
+                                                        document.getElementById("timeFldFuture<%=WString%>").value = tempTime.substring(0,5);
+                                                    }
+                                                    else if(tempTime.substring(6,8) === 'AM' && tempTime.substring(0,2) === '12'){
+                                                        document.getElementById("timeFldFuture<%=WString%>").value = "00" + tempMinute;
+                                                    }
+                                                    else{
+                                                        
+                                                        
+                                                        tempHour = parseInt(tempTime.substring(0,2),10) + 12;
+                                                        if(tempHour === 24)
+                                                            tempHour = 12;
+                                                        
+                                                        
+                                                        document.getElementById("timeFldFuture<%=WString%>").value = tempHour + tempMinute;
+                                                       
+                                                    }
+                                                    
+                                                    if( currentDate === tempDate ){
+                                                        
+                                                            if( (parseInt(document.getElementById("timeFldFuture<%=WString%>").value.substring(0,2), 10)) < (parseInt(currentHour, 10)) ){
+                                                                document.getElementById("timeFldFuture<%=WString%>").value = currentTime;
+                                                                document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = true;
+                                                            document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "darkgrey";
+                                                                document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                            }
+                                                            else if( (parseInt(document.getElementById("timeFldFuture<%=WString%>").value.substring(0,2), 10)) === (parseInt(currentHour, 10)) &&
+                                                                     (parseInt(document.getElementById("timeFldFuture<%=WString%>").value.substring(3,5), 10)) < (parseInt(currentMinute, 10)) ){
+                                                                        document.getElementById("timeFldFuture<%=WString%>").value = currentTime;
+                                                                        document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = true;
+                                                            document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "darkgrey";
+                                                                        document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                            }else{
+                                                                document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "";
+                                                                document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = false;
+                                                                document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "pink";
+                                                            }
+                                                    }   
+                                                    else{
+                                                            
+                                                            document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "";
+                                                            document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = false;
+                                                            document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "pink";
+                                                            
+                                                        }
+                                                    
+                                                    
+                                                }
+                                                
+                                                setInterval(CheckTimeChooser,1);
+                                               
+                                            </script>
+                                        
+                                        <script>
+                                                
+                                                            $( 
+                                                                    function(){
+                                                                            $( "#datepickerFuture<%=WString%>" ).datepicker();
+                                                                    } 
+                                                             );
+                                                            
+                                                        //---------------------------------------------
+                                                        // var datepicker = document.getElementById("datepicker<%=WString%>");
+                                                         //var datePickerStatus = document.getElementById("datePickerStatus<%=WString%>");
+
+                                                         
+                                                         document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "";
+
+
+                                                         function checkDateUpdateValueFuture(){
+
+                                                                 if((new Date(document.getElementById("datepickerFuture<%=WString%>").value)) < (new Date())){
+
+                                                                                 if(document.getElementById("datepickerFuture<%=WString%>").value === currentDate){
+
+                                                                                         if(document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML === ""){
+                                                                                                 document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "Today's Date: " + currentDate;
+                                                                                                 document.getElementById("datePickerStatusFuture<%=WString%>").style.backgroundColor = "green";
+                                                                                         }
+
+                                                                                 }
+                                                                                 else{
+                                                                                         document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "Only today's date or future date allowed";
+                                                                                         document.getElementById("datePickerStatusFuture<%=WString%>").style.backgroundColor = "red";
+                                                                                         document.getElementById("datepickerFuture<%=WString%>").value = currentDate;
+                                                                                 }
+                                                                 }
+                                                                 else{
+
+                                                                         document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "";
+                                                                         //datePickerStatus.innerHTML = "Chosen Date: " + datepicker.value;
+                                                                         //datePickerStatus.style.backgroundColor = "green";
+                                                                 }
+
+                                                         }
+
+                                                         setInterval(checkDateUpdateValueFuture, 1);                                        
+                                                             
+                                            </script>
+                                        
+                                    </form>
+                                </center>
+                                    
+                                    <form id="addFutureFavProvForm<%=WString%>"></form>
+                                
+                                <center><form style=" display: none;" id="deleteFutureAppointmentForm<%=WString%>" class="deleteAppointmentForm" name="confirmDeleteAppointment" >
+                                    <p style="color: red; margin-top: 10px;">Are you sure you want to remove this customer</p>
+                                    <p><input style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" id="DeleteFutureApptBtn<%=WString%>" name="<%=WString%>deleteAppointment" type="button" value="Yes" />
+                                    <span onclick = "hideFutureDelete(<%=WString%>)" style="background-color: blue; border: 1px solid black; color: white; padding: 3px; cursor: pointer;"> NO</span></p>
+                                    <input id="DeleteFutureApptID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
+                                    
+                                    <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#DeleteFutureApptBtn<%=WString%>').click(function(event) {  
+                                                        
+                                                        var AppointmentID = document.getElementById("DeleteFutureApptID<%=WString%>").value;
+                                                        
+                                                        
+                                                        //alert("AppointmentID "+AppointmentID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "providerDeleteAppointment",  
+                                                        data: "AppointmentID="+AppointmentID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("futureApptRow<%=WString%>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                    </script>
+                                    
+                                </form></center>
+                                
+                                <p style="text-align: right; padding-right: 20px;">
+                                    <a style="margin-right: 5px; cursor: pointer;" ><img onclick = "toggleChangeFutureAppointment(<%=WString%>)" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/></a> 
+                                    <a><img style="cursor: pointer;" onclick = "toggleFutureHideDelete(<%=WString%>)" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/></a></p>
+                            </td>
+                        </tr>
+                        
+                        <%} //end of for loop
+                            
+                            if(FutureAppointmentList.size() == 0){
+                        
+                        %>
+                        
+                        <center><p style="color: white; background-color: red; margin-bottom: 30px; margin-top: 30px; max-width: 600px;">No Future Line Spots</p></center>
+                        <%} //end of if block%>
+                    </tbody>
+                    </table></center>
+                
+                    
+                    </div>
+                
+                <div id="ProviderAppointmentHistoryDiv" style= "display: none;">
+                <center><h4 style="margin: 5px;">Your History</h4></center>
+                
+                <center><table id="ProviderAppointmentHistory" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
+                        <tbody>
+                            
+    <%
+                      for(int w = 0; w < AppointmentHistory.size(); w++){
+                      
+                          String WString = Integer.toString(w);
+                          int AppointmentID = AppointmentHistory.get(w).getAppointmentID();
+                          int CustomerID = AppointmentHistory.get(w).getProviderID();
+                          //note all providerinfo here is customer instead but this is an error from DataStructure inconsistency
+                          String Name = AppointmentHistory.get(w).getProviderName();
+                          String Tel = AppointmentHistory.get(w).getProviderTel();
+                          String email = AppointmentHistory.get(w).getProviderEmail();
+                          String Time = AppointmentHistory.get(w).getTimeOfAppointment();
+                          String AppointmentReason = AppointmentHistory.get(w).getReason();
+                          String Base64CustPic = "";
+                          
+                            
+                        try{    
+                            //put this in a try catch block for incase getProfilePicture returns nothing
+                            Blob profilepic = AppointmentHistory.get(w).getDisplayPic(); 
+                            InputStream inputStream = profilepic.getBinaryStream();
+                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                            byte[] buffer = new byte[4096];
+                            int bytesRead = -1;
+
+                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                outputStream.write(buffer, 0, bytesRead);
+                            }
+
+                            byte[] imageBytes = outputStream.toByteArray();
+
+                             Base64CustPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                        }
+                        catch(Exception e){}
+
+
+                            String TimeToUse = "";
+                            int Hours = Integer.parseInt(Time.substring(0,2));
+                            String Minutes = Time.substring(2,5);
+
+                            if( Hours > 12)
+                            {
+                                int TempHour = Hours - 12;
+                                TimeToUse = Integer.toString(TempHour) + Minutes + "pm";
+                            }
+                            else if(Hours == 0){
+                                TimeToUse = "12" + Minutes + "am";
+                            }
+                            else if(Hours == 12){
+                                TimeToUse = Time + "pm";
+                            }
+                            else{
+                                TimeToUse = Time +"am";
+                            }
+                
+                          
+                          Date date = AppointmentHistory.get(w).getDateOfAppointment();
+                          
+                          SimpleDateFormat sdf = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");
+                          String DateOfAppointment = sdf.format(date);
+                          
+    %>
+                        <tr id="HistoryApptRow<%=WString%>">
+                            <td style = "padding: 5px; background-color: white; margin: 5px; border: 0; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgray;">
+                        <%
+                            if(Base64CustPic != ""){
+                        %>
+                             <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                            <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                            </div></center>
+                        <%
+                            }
+                        %>
+                        <center><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                <span style="color: red;"><%=Name%></span></p></center>
+                                <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
+                                    <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
+                                <center><p>on <span style="color: red;"><%=DateOfAppointment%></span>, at <span style="color: red;"><%=TimeToUse%></span></p></center>
+                                <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
+                                
+                                <form name="BlockThisCustomer" >
+                                    <input id="CustIDforBlockCustomer<%=w%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
+                                    <input id="PIDforBlockCustomer<%=w%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
+                                    <center><input id="BlockCustBtn<%=w%>" style="background-color: white; border: 1px solid darkgrey; padding: 5px;" type="button" value="Block This Person" /></center>
+                                    
+                                    <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#BlockCustBtn<%=w%>').click(function(event) {  
+                                                        
+                                                        var CustomerID = document.getElementById("CustIDforBlockCustomer<%=w%>").value;
+                                                        var ProviderID = document.getElementById("PIDforBlockCustomer<%=w%>").value;
+                                                        
+                                                        //alert("CustomerID: "+CustomerID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "BlockCustController",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          
+                                                          if(result === "notInList"){
+                                                          $.ajax({
+                                                              type: "POST",
+                                                              url: "GetBlockedClientAjax",
+                                                              data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
+                                                              success: function(result){
+                                                                  //alert(result);
+                                                                  
+                                                                  var blockedPer = JSON.parse(result);
+                                                                  var BlockedID = blockedPer.ID;
+                                                                  var Name = blockedPer.Name;
+                                                                  var Email = blockedPer.Email;
+                                                                  var Mobile = blockedPer.Tel;
+                                                                  var ProfilePic = blockedPer.Propic;
+                                                                  var UserIndex = <%=UserIndex%>
+                                                                  
+                                                                  //alert(Name);
+                                                                  //alert(Email);
+                                                                  //alert(Mobile);
+                                                                  //alert(ProfilePic);
+                                                                  //alert(BlockedID);
+                                                                  
+                                                                  if(document.getElementById("NoBlockedClientStatus"))
+                                                                      document.getElementById("NoBlockedClientStatus").style.display = "none";
+                                                                  
+                                                                  var BlockedPeopleDiv = document.getElementById("BlockedPeopleDiv");
+                                                                  var div = document.createElement('div');
+                                                                  
+                                                                  div.innerHTML = '<div style="background-color: #6699ff; padding: 5px;  margin-bottom: 5px;">' +
+                                                                                    '<center><img style="border-radius: 5px; float: left; border-radius: 100%; background-color: black;" src="data:image/jpg;base64,'+ProfilePic+'" height="50" width="50" /></center>' +
+                                                                                    '<div style="float: right; width: 83%;">' +
+                                                                                        '<p style="text-align: left; font-weight: bolder;">'+Name+'</p>' +
+                                                                                        '<p style="text-align: left;">'+Mobile+'</p>' +
+                                                                                        '<p style="text-align: left;">'+Email+'</p>' +
+                                                                                    '</div>' +
+                                                                                    '<p style="clear: both;"></p>' +
+                                                                                  
+                                                                                  '<form name="UnblockPerson" action="UnblockCust" method="POST">' +
+                                                                                     '<input id="BlockedID" type="hidden" name="BlockedID" value="'+BlockedID+'" />' +
+                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                                     '<input id="UnblockCleintBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Unblock This Person" name="Unblock" />' +
+                                                                                     '</form>' +
+                                                                                     '</div>' ;
+                                                                          
+                                                                  BlockedPeopleDiv.appendChild(div);
+                                                              }
+                                                          });
+                                                        }
+                                                       }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                                    
+                                </form>
+                                
+                                    <center>
+                                    <form id="ratingAndReviewForm<%=WString%>" class="changeBookedAppointmentForm" name="changeAppointment" action="ProvidersUpdateAppointment" method="POST">
+                                    </form>
+                                </center>
+                                    
+                                    <form style=" display: none;" id="addFavProvFormFromRecent<%=WString%>">
+                                    </form>
+                                    
+                                    <center><form id="AddClientForm<%=WString%>" style="display: none" name="AddClient">
+                                        <input id="PIDAddClient<%=WString%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
+                                        <input id="CustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
+                                        <input id="addClientBtn<%=WString%>" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Add this client to contacts list " name="addfavclient" />
+                                    
+                                        <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#addClientBtn<%=WString%>').click(function(event) {  
+                                                        
+                                                        var CustomerID = document.getElementById("CustIDAddClient<%=WString%>").value;
+                                                        var ProviderID = document.getElementById("PIDAddClient<%=WString%>").value;
+                                                        
+                                                        
+                                                        //alert("CustomerID: "+CustomerID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "AddClientsListController",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("AddClientForm<%=WString%>").style.display = "none";
+                                                          
+                                                          if(result === "notInList"){
+                                                              
+                                                              $.ajax({
+                                                                  type: "POST",
+                                                                  url: "getLastAddedClientAjax",
+                                                                  data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
+                                                                  success: function(result){
+                                                                      //alert(result);
+                                                                      var Customer = JSON.parse(result);
+                                                                      var CustName = Customer.Name;
+                                                                      var CustEmail = Customer.Email;
+                                                                      var CustMobile = Customer.Mobile;
+                                                                      var CustPic = Customer.ProfilePic;
+                                                                      var UserIndex = <%=UserIndex%>;
+                                                                      
+                                                                      if(document.getElementById("EmptyStatus"))
+                                                                          document.getElementById("EmptyStatus").style.display = "none";
+                                                                      var Div = document.createElement('div');
+                                                                      var Clients = document.getElementById("ProviderClientsDiv");
+                                                                      
+                                                                      Div.innerHTML = '<div style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">' +
+                                                                                      '<center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
+                                                                                            '<div style="float: right; width: 83%;">' +
+                                                                                                    '<p style="font-weight: bolder;">'+CustName+'</p>' +
+                                                                                                    '<p>'+CustMobile+'</p>' +
+                                                                                                    '<p>'+CustEmail+'</p>' +
+                                                                                                '</div>' +
+                                                                                       ' <p style="clear: both;"></p>' +
+                                                                                       '<form name="DeleteThisClient" action="DeleteClient" method="POST">' +
+                                                                                            '<input id="PIDDltClnt" type="hidden" name="ProviderID" value="'+ProviderID+'" />' +
+                                                                                            '<input id="ClientIDDltClnt" type="hidden" name="EachClientID" value="'+CustomerID+'"/>' +
+                                                                                            '<input name="UserIndex" type="hidden" value="'+UserIndex+'" />' +
+                                                                                            '<input id="DeleteClientBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Delete this client" />'+
+                                                                                        '</form>';
+                                    
+                                                                      
+                                                                      Clients.appendChild(Div); 
+                                                                  }
+                                                              });
+                                                          }
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                                        
+                                    </form></center>
+                                        
+                                <center><form  style=" display: none;" id="deleteAppointmentHistoryForm<%=WString%>" class="deleteAppointmentForm" name="confirmDeleteAppointment" >
+                                    <p style="color: red; margin-top: 10px;">Are you sure you want to delete this history</p>
+                                    <p><input style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" id="DeleteHistoryApptBtn<%=WString%>" name="<%=WString%>deleteAppointment" type="button" value="Yes" />
+                                    <span onclick = "hideDeleteHistory(<%=WString%>)" style="background-color: blue; border: 1px solid black; color: white; padding: 3px; cursor: pointer;"> NO</span></p>
+                                    <input id="DeleteHistoryApptID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
+                                    
+                                    <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#DeleteHistoryApptBtn<%=WString%>').click(function(event) {  
+                                                        
+                                                        var AppointmentID = document.getElementById("DeleteHistoryApptID<%=WString%>").value;
+                                                        
+                                                        
+                                                        //alert("AppointmentID "+AppointmentID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "providerDeleteAppointment",  
+                                                        data: "AppointmentID="+AppointmentID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("HistoryApptRow<%=WString%>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                    </script>
+                                    
+                                    </form></center>
+                                
+                                <p style="text-align: right; padding-right: 20px; margin-top: 10px;"> 
+                                    <a><img style="margin-right: 7px; cursor: pointer;" onclick="togglehideAddClientForm(<%=WString%>)" src="icons/icons8-user-account-20.png" width="20" height="20" alt="icons8-user-account-20"/>
+                                    </a>
+                                    <a><img style="cursor: pointer;" onclick = "toggleHideDeleteHistory(<%=WString%>)" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/></a>
+                                </p>
+                            </td>
+                        </tr>
+                        
+                        <%} //end of for loop
+                            
+                            if(AppointmentHistory.size() == 0){
+                        
+                        %>
+                        
+                        <center><p style="color: white; background-color: red; margin-bottom: 30px; margin-top: 30px; max-width: 600px;">You have no history</p></center>
+                        <%} //end of if block%>
+                    </tbody>
+                    </table></center>
+                
+                </div>
+                    </div>
+            </div>
+                     
+                    <center><table style="width: 100%; border: 1px solid black; max-width: 600px;">
+                        <tbody>
+                            <tr>
+                                <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; border: 1px solid black; width: 33.3%; background-color: pink; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
+                                    <p style="text-align: center;">Make Reservation</p>
+                                </td>
+                                <td onclick="toggleShowBlockFutureSpotsForm();" style="cursor: pointer; border: 1px solid black; width: 33.3%; background-color: pink; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
+                                    <p style="text-align: center;">View Future Spots</p>
+                                </td>
+                                <td onclick="toggleShowCloseFutureDysForm();" style="cursor: pointer; border: 1px solid black; background-color: pink; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
+                                    <p style="text-align: center;">Close Future Days</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                        </table></center>
+                    
+                            <center><div>
+                                    <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="BlockFutureSpots.jsp">
+                                        <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to block future spots</p>
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                    </form>
+                                </div></center>
+                    
+                    <center><div id="CloseFutureDaysForm" style="display: none;">
+                        <form style="width: 100%; max-width: 600px;" >
+                            <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date when to close</p>
+                            <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Ddatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                            <input id="provIDforClosedDate" type="hidden" name="ProviderID" value="<%=UserID%>" />
+                            <input id="CloseDayBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Close this day" name="BlockDay" />
+                            <script>
+                                             
+                                $(document).ready(function() {                        
+                                    $('#CloseDayBtn').click(function(event) {  
+                                                        
+                                        var ProviderID = document.getElementById("provIDforClosedDate").value;
+                                        var CloseDate = document.getElementById("Ddatepicker").value;
+                                        var UserIndex = <%=UserIndex%>;
+                                                       
+                                        //alert("CloseDate:  "+CloseDate);
+                                                        
+                                        $.ajax({  
+                                        type: "POST",  
+                                        url: "CloseDayController",  
+                                        data: "ProviderID="+ProviderID+"&GetDate="+CloseDate,  
+                                        success: function(result){
+                                            
+                                            if(result === "notInList"){
+                                                $.ajax({  
+                                                type: "POST",  
+                                                url: "AjaxGetClosedDays",  
+                                                data: "ProviderID="+ProviderID,  
+                                                success: function(result){  
+                                                        //alert(result);
+                                                        var NewClosedDates = JSON.parse(result);  
+                                                        
+                                                        var ClosedID = NewClosedDates.ClosedID;
+                                                        var CDate = NewClosedDates.ClosedDate;
+                                                        
+                                                        //alert(ClosedID);
+                                                        //alert(CDate);
+                                                        
+                                                        if(document.getElementById("NoClosedDayStatus"))
+                                                            document.getElementById("NoClosedDayStatus").style.display = "none";
+                                                        var NewClosedDaysDiv = document.getElementById("NewClosedDays");
+                                                        const div = document.createElement('div');
+
+                                                        //div.className = 'row';
+
+                                                        div.innerHTML = 
+                                                            '<form id="eachClosedDate'+ClosedID+'" style="margin-bottom: 5px; max-width: 300px; padding: 5px; background-color: white; border-right: 1px solid darkgray; border-bottom: 1px solid darkgray;" name="OpenClosedDay" action="OpenDate" method="POST">'+
+                                                                '<p style="">'+CDate+'</p>'+
+                                                                '<input id="closedID'+ClosedID+'" type="hidden" name="ClosedID" value="'+ClosedID+'" />'+
+                                                                '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                '<input id="openDayBtn'+ClosedID+'" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Open this day" />' +
+                                                            '</form>';
+                                                        
+
+                                                        NewClosedDaysDiv.appendChild(div);
+                                                        
+                                                    }                
+                                                });
+                                            }
+                                          }                
+                                        });
+                                                        
+                                        });
+                                });
+                            </script>
+                        </form>
+                            
+                            <div id="NewClosedDays" class="scrolldiv" style="max-height: 170px; overflow-y: auto; width: 100%; max-width: 500px;">
+                            <p style="color: darkblue; margin: 5px;">Days Closed</p>
+                            
+                        <%
+                            
+                            for(int ij = 0; ij < ClosedDayID.size(); ij++){
+                                
+                            
+                                String eachClosedDate = ClosedDate.get(ij);
+                                int ClosedID = ClosedDayID.get(ij);
+                                
+                                SimpleDateFormat eachDateSdf = new SimpleDateFormat("yyyy-MM-dd");
+                                String whatDay = "";
+                                Date eachDate = null;
+                                try{
+                                    eachDate = eachDateSdf.parse(eachClosedDate);
+                                    whatDay = eachDate.toString().substring(0,3);
+                                }catch(Exception e){}
+                                
+                                eachDateSdf = new SimpleDateFormat("MMMMMMMMMMMMMMMMM dd, yyyy");
+                                eachClosedDate = eachDateSdf.format(eachDate);
+                            
+                        %>
+                        
+                            <form id="eachClosedDate<%=ij%>" style="margin-bottom: 5px; max-width: 300px; padding: 5px; background-color: white; border-right: 1px solid darkgray; border-bottom: 1px solid darkgray;" name="OpenClosedDay">
+                                <p style=""><%=whatDay%>, <%=eachClosedDate%></p>
+                                <input id="closedID<%=ij%>" type="hidden" name="ClosedID" value="<%=ClosedID%>" />
+                                <input id="openDayBtn<%=ij%>" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Open this day" />
+                                <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#openDayBtn<%=ij%>').click(function(event) {  
+                                                        
+                                                        var ClosedID = document.getElementById("closedID<%=ij%>").value;
+                                                        
+                                                        //alert("ClosedID: "+ClosedID);
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "OpenClosedDateController",  
+                                                        data: "ClosedID="+ClosedID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("eachClosedDate<%=ij%>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                            </form>
+                            <div ></div>
+                             
+                        <%}
+                            if(ClosedDayID.size() == 0){
+                        %>
+                                <p id="NoClosedDayStatus" style="background-color: red; color: white;">No specific days are closed</p>
+                        <%}%>
+                        
+                        </div>
+                    </div></center>
+                        
+                        <center><div id="MakeReservationForm" style="display: none; width: 100%; max-width: 500px;">
+                                <form style="" name="makeReservationForm">
+                                    <p style="text-align: center; color: #000099; margin-top: 5px; margin-bottom: 10px;">Add reservation details below</p>
+                                    <P style="color: white;">Choose Client Below</p>
+                                    
+                                    <div class="scrolldiv" style="max-height: 200px; width:310px; overflow-y: auto; border-bottom: 1px solid darkblue; margin-bottom: 10px; border-top: 1px solid darkblue;">
+                                        
+                                        <ul style="list-style-type: none;">
+                                            
+                                            <%
+                                                String CustomerFullName = "";
+                                                for(int cl = 0; cl <  ClientsList.size(); cl++){
+                                                
+                                                    int ClientID = ClientsList.get(cl).getUserID();
+                                                    String FirstName = ClientsList.get(cl).getFirstName();
+                                                    String MiddleName = ClientsList.get(cl).getMiddleName().trim();
+                                                    String LastName = ClientsList.get(cl).getLastName().trim();
+                                                    CustomerFullName = FirstName + " " + MiddleName + " " + LastName;
+                                                            String Base64CustPic = "";
+                                        
+                                                    try{    
+                                                        //put this in a try catch block for incase getProfilePicture returns nothing
+                                                        Blob profilepic = ClientsList.get(cl).getProfilePic(); 
+                                                        InputStream inputStream = profilepic.getBinaryStream();
+                                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                        byte[] buffer = new byte[4096];
+                                                        int bytesRead = -1;
+
+                                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                            outputStream.write(buffer, 0, bytesRead);
+                                                        }
+
+                                                        byte[] imageBytes = outputStream.toByteArray();
+
+                                                         Base64CustPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                    }
+                                                    catch(Exception e){}
+        
+                                            %>
+                                            <li style="background-color: white; margin-bottom: 5px; max-width: 300px; padding: 5px; border-radius: 10px;">
+                                                
+                                                <input class="reserveCustID" id="eachClientID<%=cl%>" style=" float: left; background-color: white;" type="radio" name="CustomerID" value="<%=ClientID%>" />
+                                                
+                                                <label style="" for="eachClientID<%=cl%>">
+                                                <%
+                                                    if(Base64CustPic == ""){
+                                                %> 
+
+                                                <center><img style="border-radius: 5px; float: right; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
+
+                                                    </center>
+
+                                                <%
+                                                    }else{
+                                                %>
+                                                <center><img style="border-radius: 5px; float: right; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
+
+                                                <%
+                                                    }
+                                                %>
+                                                <span><%=CustomerFullName%></span></label>
+                                                <p style="clear: both;"></p>
+                                                
+                                            </li>
+                                    <script>  
+                                        
+                                        function checkMkReservationBtn(){
+                                            
+                                            var Rdatepicker = document.getElementById("Rdatepicker");
+                                            var RtimePicker = document.getElementById("RtimePicker");
+                                            var MkReservationBtn = document.getElementById("MkReservationBtn");
+                                            var EachChecked = 0;
+                                            var eachClientID = null;
+                                        
+                                            for(var i = 0; i <= <%=cl%>; i++){
+                                                
+                                                eachClientID = document.getElementById(("eachClientID"+i));
+                                                
+                                                if(eachClientID.checked === true)
+                                                    EachChecked = 1;
+                                                
+                                            }
+                                            
+                                        
+                                        if(Rdatepicker.value === "" || RtimePicker.value === "" || EachChecked === 0){
+                                            
+                                            MkReservationBtn.style.backgroundColor = "darkgrey";
+                                            MkReservationBtn.disabled = true;
+                                            
+                                        }else{
+                                            
+                                            MkReservationBtn.style.backgroundColor = "pink";
+                                            MkReservationBtn.disabled = false;
+                                         
+                                        }
+ 
+                                    }
+                                    
+                                    setInterval(checkMkReservationBtn,1);
+                                    
+                                    </script>
+                                    
+                                    <%}
+                                        if(ClientsList.size() == 0){
+                                    %>
+                                    
+                                    <p style="background-color: red; color: white;">You don't have any clients in your clients list. Move up to history spots to add your customers to your clients list</p>
+                                    <script>
+                                        document.getElementById("MkReservationBtn").style.backgroundColor = "darkgrey";
+                                        document.getElementById("MkReservationBtn").disabled = true;
+                                        
+                                    </script>
+                                        
+                                    <%}%>
+                                    </ul>
+                                    </div>
+                                            
+                                    <p>Service: <select id="reserveService" name="formsOrderedServices">
+                                            <%
+                                                for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
+                                                    
+                                                String ServiceName = Services.getService(svc).trim();
+                                                String ServicePrice = Services.getPrice(svc);
+                                                String ServiceDetails = "$" + ServicePrice + "-" + ServiceName; 
+                                            %>
+                                            <option><%=ServiceDetails%></option>
+                                            <%}%>
+                                        </select></p>
+                                    
+                                    <p>Date: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/></p>
+                                    <p>Time: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/></p>
+                                    <br/>
+                                    <input id="reservePID" name="ProviderID" type="hidden" value="<%=UserID%>"/>
+                                    <input id="MkReservationBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" />
+                                </form>
+                                    
+                                    <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#MkReservationBtn').click(function(event) {  
+                                                        
+                                                        var reserveDate = document.getElementById("Rdatepicker").value;
+                                                        var reserveTime = document.getElementById("RtimePicker").value;
+                                                        var ProviderID = document.getElementById("reservePID").value;
+                                                        var Services =  document.getElementById("reserveService");
+                                                        var Reason = Services.options[Services.selectedIndex].text;
+                                                        var CustomerID = $("input[name=CustomerID]:checked").val();
+                                                        
+                                                        /*alert("Date: "+reserveDate);
+                                                        alert("Time: "+reserveTime);
+                                                        alert("ProviderID: "+ProviderID);
+                                                        alert("Reason: "+Reason);
+                                                        alert("CustomerID: "+CustomerID);*/
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "MakeReservationController",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&formsDateValue="+reserveDate+"&formsTimeValue="+reserveTime+"&formsOrderedServices="+Reason,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          //document.getElementById("MakeReservationForm").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                                    
+                        </div></center>
+                    
+                                    <script>
+                                        document.getElementById("MkReservationBtn").style.backgroundColor = "darkgrey";
+                                        document.getElementById("MkReservationBtn").disabled = true;
+                                    </script>
+                    <script>
+                        $( 
+                            function(){
+                                $( "#Fdatepicker" ).datepicker({
+                                    minDate: 0
+                                });
+                            } 
+                        );
+                            
+    
+                        $(    function(){
+                                $( "#Ddatepicker" ).datepicker({
+                                    minDate: 0
+                                });
+                            }
+                        );
+                
+                        $(    function(){
+                                $( "#Rdatepicker" ).datepicker({
+                                    minDate: 0
+                                });
+                            }
+                        );
+                
+                        $('#RtimePicker').timepicker({
+                            timeFormat: 'h:mm p',
+                            interval: 15,
+                            minTime: '00',
+                            maxTime: '11:59pm',
+                            defaultTime: '00',
+                            startTime: '00',
+                            dynamic: false,
+                            dropdown: true,
+                            scrollbar: true
+                        });
+                        
+                                    function checkFdatePicker(){
+                                        
+                                        var Fdatepicker = document.getElementById("Fdatepicker");
+                                        var GenerateSpotsBtn = document.getElementById("GenerateSpotsBtn");
+                                        
+                                        if(Fdatepicker.value === ""){
+                                            GenerateSpotsBtn.style.backgroundColor = "darkgrey";
+                                            GenerateSpotsBtn.disabled = true;
+                                        }
+                                        else{
+                                            GenerateSpotsBtn.style.backgroundColor = "pink";
+                                            GenerateSpotsBtn.disabled = false;
+                                            
+                                        }
+                                            
+                                        
+                                    }
+                                    
+                                    setInterval(checkFdatePicker,1);
+                                    
+                                    
+                             function checkDdatePicker(){
+                                        
+                                        var Ddatepicker = document.getElementById("Ddatepicker");
+                                        var CloseDayBtn = document.getElementById("CloseDayBtn");
+                                        
+                                        if(Ddatepicker.value === ""){
+                                            CloseDayBtn.style.backgroundColor = "darkgrey";
+                                            CloseDayBtn.disabled = true;
+                                        }
+                                        else{
+                                            CloseDayBtn.style.backgroundColor = "pink";
+                                            CloseDayBtn.disabled = false;
+                                            
+                                        }
+                                            
+                                        
+                                    }
+                                    
+                                    setInterval(checkDdatePicker,1);
+                                    
+                    </script>
+                    
+            </div>
+            </div>
+                   
+        
+         
+        <div onclick="hideDropDown();" id="newbusiness" style="padding-top: 15px;">
+            
+            <center><div id="Providerprofile" style="border-bottom: 10px solid cornflowerblue;  width: 100%; max-width: 700px;">
+                 
+                <h4 style="color: black; margin-bottom: 10px;">Your Business Profile</h4>
+                
+                <table id="ProviderprofileTable" style="border-spacing: 0; width: 100%; max-width: 600px;">
+                    
+                    <tbody>
+                        <tr>
+                            <td><center>
+                                
+                                <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
+                                    
+                            <%
+                                if(base64Image == ""){
+                            %> 
+                            
+                            <center><img style="border: #ccccff solid 5px;" src="icons/icons8-user-filled-100.png" width="150" height="150" alt="icons8-user-filled-100"/>
+
+                                </center>
+                                    
+                            <%
+                                }else{
+                            %>
+                                    <img style="border: #ccccff solid 5px;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                    
+                            <%
+                                }
+                            %>
+                                </div></a>
+                                
+                            </center>
+                            
+                                <div class="proinfo" style="padding-top:5px; margin-top:5px; padding-bottom: 5px; margin-bottom:5px;">
+                            
+                                    <center><p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; margin-bottom: 10px; padding-top: 75px;"><%=FullName%></p></center>
+                                    <center><table style="border-spacing: 0;">
+                                        
+                                            <tr><td><p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                                    <span id="CompanyDetail"><%=Company%></span></p></td></tr>
+                                            <tr><td><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
+                                                        <span id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
+                                            <tr><td><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                                        <span id="EmailDetail"><%=Email%></span></p></td></tr>
+                                        <tr><td><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                <span id="AddressDetail"><%=Address%></span></p></td></tr>
+                                        <tr><td>Your Ratings: 
+                                       
+                                        <%
+                                            if(Ratings ==5){
+                                        
+                                        %> 
+                                        ★★★★★
+                                        <%
+                                             }else if(Ratings == 4){
+                                        %>
+                                        ★★★★☆
+                                        <%
+                                             }else if(Ratings == 3){
+                                        %>
+                                        ★★★☆☆
+                                        <%
+                                             }else if(Ratings == 2){
+                                        %>
+                                        ★★☆☆☆
+                                        <%
+                                             }else if(Ratings == 1){
+                                        %>
+                                        ★☆☆☆☆
+                                        <%}%>
+                                        
+                                    </td></tr>
+                                    
+                                        </table></center>
+                                    
+                                </div>
+                                        
+                                        <center><p onclick="toggleShowEditPerInfoDiv();" style="cursor: pointer; background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 5px;">Edit Your Personal Information</p></center>
+                                        
+                                        <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px;">
+                                                <form name="UpdatePsnalInfor">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="text-align: left;">First Name: </td>
+                                                            <td><input id="ProvFNameFld" placeholder="First name here" type="text" name="FirstNameFld" value="<%=ThisProvider.getFirstName()%>" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;">Middle Name: </td>
+                                                            <td><input id="ProvMNameFld" placeholder="Middle name here" type="text" name="MiddleNameFld" value="<%=ThisProvider.getMiddleName()%>" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;">Last Name: </td>
+                                                            <td><input id="ProvLNameFld" placeholder="Last name here" type="text" name="LastNameFld" value="<%=ThisProvider.getLastName()%>" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;">Mobile Number: </td>
+                                                            <td><input onclick="checkMiddlePhoneNumberEdit();"  onkeydown="checkMiddlePhoneNumberEdit();"id="ProvPhnNumberFld" placeholder="Phone number here" type="text" name="MobileNumberFld" value="<%=PhoneNumber%>"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;">Email: </td>
+                                                            <td><input id="ProvEmailFld" placeholder="Email here" type="text" name="EmailFld" value="<%=Email%>"/></td>
+                                                        </tr>                                        
+                                                </tbody>
+                                                </table>
+                                                        <script>
+                                                        var ProvPhnNumberFld = document.getElementById("ProvPhnNumberFld");
+
+                                                        function numberFuncPhoneNumberEdit(){
+
+                                                            var number = parseInt((ProvPhnNumberFld.value.substring(ProvPhnNumberFld.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                ProvPhnNumberFld.value = ProvPhnNumberFld.value.substring(0, (ProvPhnNumberFld.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncPhoneNumberEdit, 1);
+
+                                                        function checkMiddlePhoneNumberEdit(){
+
+                                                            for(var i = 0; i < ProvPhnNumberFld.value.length; i++){
+
+                                                                var middleString = ProvPhnNumberFld.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    ProvPhnNumberFld.value = ProvPhnNumberFld.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                                       
+                                                <input id="ProvIDforPerDetails" type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                                <input id="UpdateProvPerBtn" style="padding: 5px; border: 1px solid black; border-radius: 4px; background-color: pink;" type="button" value="Update" name="UpdatePerInfoBtn" />
+                                                        
+                                            </form>
+                                                
+                                                <script>
+                                                    $(document).ready(function(){
+                                                        $("#UpdateProvPerBtn").click(function(event){
+                                                            
+                                                            var FirstName = document.getElementById("ProvFNameFld").value;
+                                                            var MiddleName = document.getElementById("ProvMNameFld").value;
+                                                            var LastName = document.getElementById("ProvLNameFld").value;
+                                                            var PerEmail = document.getElementById("ProvEmailFld").value;
+                                                            var PerTel = document.getElementById("ProvPhnNumberFld").value;
+                                                            var ProviderID = document.getElementById("ProvIDforPerDetails").value;
+                                                                
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "UpdateProvPerInfoController",
+                                                                data: "ProviderID="+ProviderID+"&FirstNameFld="+FirstName+"&MiddleNameFld="+MiddleName+"&LastNameFld="+LastName+"&EmailFld="+PerEmail+"&MobileNumberFld="+PerTel,
+                                                                success: function(result){
+                                                                    
+                                                                   $.ajax({
+                                                                        type: "POST",
+                                                                        url: "GetProvPerInfo",
+                                                                        data: "ProviderID="+ProviderID,
+                                                                        success: function(result){
+                                                                            //alert(result);
+                                                                            
+                                                                            var PerInfo = JSON.parse(result);
+                                                                            
+                                                                            document.getElementById("ProvFNameFld").value = PerInfo.FirstName;
+                                                                            document.getElementById("ProvMNameFld").value = PerInfo.MiddleName;
+                                                                            document.getElementById("ProvLNameFld").value = PerInfo.LastName;
+                                                                            document.getElementById("ProvEmailFld").value = PerInfo.Email;
+                                                                            document.getElementById("ProvPhnNumberFld").value = PerInfo.Mobile;
+                                                                            
+                                                                            var FullName = PerInfo.FirstName + " " + PerInfo.MiddleName + " " + PerInfo.LastName;
+                                                                            var Company = PerInfo.Company;
+                                                                            
+                                                                            document.getElementById("FullNameDetail").innerHTML = FullName;
+                                                                            document.getElementById("EmailDetail").innerHTML = PerInfo.Email;
+                                                                            document.getElementById("PhoneDetail").innerHTML = PerInfo.Mobile;
+                                                                            document.getElementById("LoginNameDisplay").innerHTML = "Logged in as " +PerInfo.FirstName+ " - " + Company;
+                                                                            
+                                                                        }
+                                                                    });
+                                                                    
+                                                                }
+                                                                
+
+                                                            });
+                                                           
+                                                        });
+                                                    });
+                                                    
+                                                </script>
+                                                
+                                                <script>
+                                                    
+                                                    var ProvFNameFld = document.getElementById("ProvFNameFld");
+                                                    var ProvMNameFld = document.getElementById("ProvMNameFld");
+                                                    var ProvLNameFld = document.getElementById("ProvLNameFld");
+                                                    var ProvPhnNumberFld = document.getElementById("ProvPhnNumberFld");
+                                                    var ProvEmailFld = document.getElementById("ProvEmailFld");
+                                                    var UpdateProvPerBtn = document.getElementById("UpdateProvPerBtn");
+                                                    
+                                                    function CheckUpdateProvPerBtn(){
+                                                        
+                                                        if(ProvFNameFld.value === "" || ProvMNameFld.value === "" || ProvLNameFld.value === ""
+                                                                || ProvPhnNumberFld.value === "" || ProvEmailFld.value === ""){
+                                                            UpdateProvPerBtn.style.backgroundColor = "darkgrey";
+                                                            UpdateProvPerBtn.disabled = true;
+                                                        }else{
+                                                            UpdateProvPerBtn.style.backgroundColor = "pink";
+                                                            UpdateProvPerBtn.disabled = false;
+                                                        }
+                                                            
+                                                        
+                                                    }
+                                                    setInterval(CheckUpdateProvPerBtn,1);
+                                                    
+                                                </script>
+                                        </div></center>
+                                        
+                                        <%
+                                            if(firstPic != ""){
+                                        %>
+                                        
+                                        <center><div style="margin-bottom: 15px; background: #eeeeee; padding: 3px; padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey; max-width: 450px;">
+                                        
+                                            <p style="text-align: center; color: tomato; padding-bottom: 5px;">Photo Gallery</p>
+                                            
+                                        <%
+                                            if(seventhPic != ""){
+                                        %>
+                                            
+                                            <center><img src="data:image/jpg;base64,<%=seventhPic%>" width="100%" height="300" style="max-width: 350px; margin-bottom: 0;  border-radius: 5px;"/></center>
+                                         
+                                        <%}%>
+                                            <center><table style=" width: 100%; max-width: 350px; margin-top: 0;">
+                                               
+                                                <tbody>
+                                                <tr>
+                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=firstPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
+                                                        
+                                                    </td>
+                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=secondPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
+                                                        
+                                                    </td>
+                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=thirdPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=fourthPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
+                                                        
+                                                    </td>
+                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=fithPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
+                                                        
+                                                    </td>
+                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=sixthPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px; padding-top: 0;">
+                                                        <div style="background-color: black; opacity: 0.7; width: 96%; height: 96%; cursor: pointer; margin-left: 2px;">
+                                                            <a href="PhotoPreview.jsp?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>"><p style="color: white; text-align: center; padding-top: 20px;"><img src="icons/icons8-photo-gallery-20 (1).png" width="20" height="20" alt="icons8-photo-gallery-20 (1)"/>
+                                                            </p>
+                                                            <p style="color: white; text-align: center;">View Photos</p></a>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table></center>
+                                        </div></center>
+                                                    
+                                        <%} else{%>
+                                        
+                                        <a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>"><p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; border: 1px solid #000099; color: #000099; cursor: pointer; text-align: center;">Create Photo Gallery</p></a>
+                                        
+                                        <%}%>
+                                      
+                                        <table cellspacing="0" style="width: 100%;">
+                                            <tbody>
+                                                <tr>
+                                                    <td onclick="activateServicesTab()" id="Services" style="padding: 5px; border-radius: 4px; border-top: 1px solid black; cursor: pointer;">
+                                                        Services
+                                                    </td>
+                                                    <td onclick="activateHourOpenTab()()" id="HoursOpen" style="padding: 5px; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
+                                                        Settings
+                                                    </td>
+                                                    <td onclick="activateClientsTab()" id="Clients" style="padding: 5px; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
+                                                        Clients
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                <div class="scrolldiv" style=" height: 400px; overflow-y: auto;">
+                                        
+                                <div id="ServiceListDiv">
+                                <div id="serviceslist">
+                                    
+                                     <center><p style="color: tomato; margin: 5px;">Services</p></center>
+                                     
+                                     <div>
+                                         
+                                     <center><table style="width: 100%; max-width: 600px;">
+                                     <tbody>
+                                             
+                                <%
+                                    
+                                     if(Services.getNumberOfServices() != 0){   
+                                         
+                                         for(int i = 0; i < Services.getNumberOfServices(); i++){
+                                             
+                                         String IString = Integer.toString(i);
+                                           
+                                         int ServiceID = Services.getID(i);
+                                         String ServicePrice = Services.getPrice(i);
+                                         String ServiceName = Services.getService(i).trim();
+                                         int ServiceDuration = Services.getDuration(i);
+                                         String ServiceDescription = Services.getDescription(i).trim();
+                                         
+                                         String PriceFld = "Price" + Integer.toString(i);
+                                         String NameFld = "Name" + Integer.toString(i);
+                                         String DurationFld = "Dur" + Integer.toString(i);
+                                         String DescriptionFld = "Desc" + Integer.toString(i);
+                                         
+                                     
+                                %>
+                                     
+                                         <tr id="ServiceRow<%=i%>">
+                                             <td style="background-color: white; margin-bottom: 10px; margin-top: 10px; padding: 5px; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray;">
+                                                 
+                                                 <p style="color: black; margin-bottom: 5px;"><span id="ServiceNameDetail<%=i%>" style="color: blue;"><%=ServiceName%></span><span id="ServPrcDur<%=i%>"> - $<%=ServicePrice%> - <%=ServiceDuration%> mins.</span><span style="float: right;">
+                                                         <img style="cursor: pointer;" onclick = "toggleHideEditService(<%=IString%>)" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/></span>
+                                                 </p>
+                                                 <p id="SvcDescDetail<%=i%>" style="color: darkgray;"><%=ServiceDescription%></p>
+                                                 
+                                                <center><form style=" display: none; border-top: 1px solid darkgray; margin-top: 5px; width: 100%; max-width: 600px;" id="changeServiceForm<%=IString%>" class="changeServiceForm" name="EditService">
+                                                 
+                                                        <p style="color: red; margin: 5px;">Change this service</p>
+                                                        
+                                                 <center><p style="text-align: left; max-width: 500px;">Service Name: <input id="EditServiceName<%=i%>" style="background-color: white;" type="text" name="SerivceNameFld" value="<%=ServiceName%>" /></p></center>
+                                                 
+                                                 <center><p style="text-align: left; max-width: 500px;">Price:
+                                                         $<input id="EditPriceDD<%=i%>" onclick="checkMiddlenumberFuncEditPriceDD();" onkeydown="checkMiddlenumberFuncEditPriceDD();" type="text" style="width: 35px; border: 0; background-color: white; text-align: right; margin-right: 0; margin-left: 0;" placeholder="00" name="ServicePriceFldDD" value="" />.<input id="EditPriceCC<%=i%>" onclick="checkMiddleEditPriceCC();" onkeydown="checkMiddleEditPriceCC();" type="text" style="text-align: left; margin-left: 0; width: 35px; border:0; background-color: white;" placeholder="00" name="ServicePriceFldCC" value="" />
+                                                         </p></center>
+                                                 <center><p style="text-align: left; max-width: 500px;">Duration: <select id="DurationFldHH<%=i%>" name="DurationFldHH">
+                                                     <option>0</option>
+                                                     <option>1</option>
+                                                     <option>2</option>
+                                                     <option>3</option>
+                                                     <option>4</option>
+                                                     <option>5</option>
+                                                 </select> hour(s) -
+                                                 <select id="DurationFldMM<%=i%>" name="DurationFldMM">
+                                                     <option>15</option>
+                                                     <option>20</option>
+                                                     <option>25</option>
+                                                     <option>30</option>
+                                                     <option>35</option>
+                                                     <option>40</option>
+                                                     <option>45</option>
+                                                     <option>50</option>
+                                                     <option>55</option>
+                                                     <option>0</option>
+                                                 </select> minute(s)</p></center>
+                                                 
+                                                 <!--center><input style="background-color: white; margin: 5px;" type="text" name="" value="<=ServiceDuration%>" /-->
+                                                 <center>
+                                                     <p style="text-align: left; max-width: 500px;"><textarea id="ServiceNotes<%=i%>" name="DescriptionFld" rows="4" cols="40"><%=ServiceDescription%>
+                                                     </textarea>
+                                                     </p></center>
+                                                     
+                                                     <script>
+                                                        
+
+                                                        function numberFuncEditPriceDD(){
+                                                            
+                                                            var EditPriceDD = document.getElementById("EditPriceDD<%=i%>");
+
+                                                            var number = parseInt((EditPriceDD.value.substring(EditPriceDD.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                EditPriceDD.value = EditPriceDD.value.substring(0, (EditPriceDD.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncEditPriceDD, 1);
+
+                                                        function checkMiddlenumberFuncEditPriceDD(){
+                                                            
+                                                            var EditPriceDD = document.getElementById("EditPriceDD<%=i%>");
+
+                                                            for(var i = 0; i < EditPriceDD.value.length; i++){
+
+                                                                var middleString = EditPriceDD.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    EditPriceDD.value = EditPriceDD.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                                    
+                                                    <script>
+                                                        
+
+                                                        function numberFuncEditPriceCC(){
+                                                            
+                                                            var EditPriceCC = document.getElementById("EditPriceCC<%=i%>");
+
+                                                            var number = parseInt((EditPriceCC.value.substring(EditPriceCC.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                EditPriceCC.value = EditPriceCC.value.substring(0, (EditPriceCC.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncEditPriceCC, 1);
+
+                                                        function checkMiddleEditPriceCC(){
+                                                            
+                                                            var EditPriceCC = document.getElementById("EditPriceCC<%=i%>");
+
+                                                            for(var i = 0; i < EditPriceCC.value.length; i++){
+
+                                                                var middleString = EditPriceCC.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    EditPriceCC.value = EditPriceCC.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                                     
+                                                 <input id="ServiceID<%=i%>" type="hidden" name="ServiceID" value="<%=ServiceID%>" />
+                                                 <p style="text-align: center;"><input id="EditServiceBtn<%=i%>" style="background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px;" type="button" value="change" name="<%=IString%>editService" /></p>
+                                                 
+                                               <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#EditServiceBtn<%=i%>').click(function(event) {  
+                                                        
+                                                        var ServiceName = document.getElementById("EditServiceName<%=i%>").value;
+                                                        var PriceDD = document.getElementById("EditPriceDD<%=i%>").value;
+                                                        var PriceCC = document.getElementById("EditPriceCC<%=i%>").value;
+                                                        var DurationHHFld = document.getElementById("DurationFldHH<%=i%>");
+                                                        var DurationMMFld = document.getElementById("DurationFldMM<%=i%>");
+                                                        var DurationHH = DurationHHFld.options[DurationHHFld.selectedIndex].text;
+                                                        var DurationMM = DurationMMFld.options[DurationMMFld.selectedIndex].text;
+                                                        var ServiceNotes = document.getElementById("ServiceNotes<%=i%>").innerHTML;
+                                                        var ServiceID = document.getElementById("ServiceID<%=i%>").value;
+                                                        
+                                                        /*alert("ServiceName: "+ServiceName);
+                                                        alert("PriceDollar: "+PriceDD);
+                                                        alert("PriceCents: "+PriceCC);
+                                                        alert("DurationHH: "+DurationHH);
+                                                        alert("DurationMM: "+DurationMM);
+                                                        alert("ServiceNotes: "+ServiceNotes);
+                                                        alert("ServiceID: "+ServiceID);*/
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "ChangeServiceController",  
+                                                        data: "SerivceNameFld="+ServiceName+"&ServicePriceFldDD="+PriceDD+"&ServicePriceFldCC="+PriceCC+"&DurationFldHH="+DurationHH+"&DurationFldMM="+DurationMM+"&DescriptionFld="+ServiceNotes+"&ServiceID="+ServiceID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("changeServiceForm<%=IString%>").style.display = "none";
+                                                          
+                                                          $.ajax({
+                                                              type: "POST",
+                                                              url: "GetEachServiceDetails",
+                                                              data: "ServiceID="+ServiceID,
+                                                              success: function(result){
+                                                                  
+                                                                  var ServiceDetails = JSON.parse(result);
+                                                                  
+                                                                  var ServiceName = ServiceDetails.Name;
+                                                                  var ServiceDuration = ServiceDetails.Duration;
+                                                                  var ServicePrice = ServiceDetails.Price;
+                                                                  ServicePrice = parseFloat(ServicePrice).toFixed(2);
+                                                                  var ServiceDescription = ServiceDetails.Description;
+                                                                  
+                                                                  /*alert(ServiceName);
+                                                                  alert(ServiceDuration);
+                                                                  alert(ServicePrice);
+                                                                  alert(ServiceDescription);*/
+                                                                  
+                                                                  document.getElementById("ServiceNameDetail<%=i%>").innerHTML = ServiceName;
+                                                                  document.getElementById("ServPrcDur<%=i%>").innerHTML = " - $" + ServicePrice + " - " + ServiceDuration + " mins";
+                                                                  document.getElementById("SvcDescDetail<%=i%>").innerHTML = ServiceDescription;
+                                                                  
+                                                                  //alert(result);
+                                                                  
+                                                              }
+                                                              
+                                                          });
+                                                          
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                                                 
+                                                </form></center>
+                                     
+                                                <script>
+
+                                                    function checkEditserviceBtn(){
+
+                                                        if(document.getElementById("EditServiceName<%=i%>").value === ""){
+                                                            document.getElementById("EditServiceBtn<%=i%>").style.backgroundColor = "darkgrey";
+                                                            document.getElementById("EditServiceBtn<%=i%>").disabled = true;
+                                                        }else{
+                                                            document.getElementById("EditServiceBtn<%=i%>").style.backgroundColor = "pink";
+                                                            document.getElementById("EditServiceBtn<%=i%>").disabled = false;
+                                                        }
+
+                                                    }
+
+                                                    setInterval(checkEditserviceBtn, 1);
+                                                </script>
+                                     
+                                                <form name="DeleteServiceForm" >
+                                                    <input id="SVCIDforDelete<%=i%>" type="hidden" name="ServiceID" value="<%=ServiceID%>" />
+                                                    <input id="deleteSVRBtn<%=i%>" style="color: darkblue; font-weight: bolder; border: 1px solid darkgrey; background-color: white; padding: 5px;" type="button" value="Delete this service" name="DeleteSVCBtn" />
+                                                
+                                            <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#deleteSVRBtn<%=i%>').click(function(event) {  
+                                                        
+                                                        var ServiceID = document.getElementById("SVCIDforDelete<%=i%>").value;
+                                                        
+                                                        
+                                                        //alert("AppointmentID "+AppointmentID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "DeleteServiceController",  
+                                                        data: "ServiceID="+ServiceID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("ServiceRow<%=i%>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                        </script>
+                                                
+                                                </form>
+                                             </td>
+                                         </tr>
+                                         
+                                <%       } // end of for loop
+                                    }//and of if block
+                                    else{
+
+                                %>
+                                
+                                <p id='noServStatus1'>Your Customers cannot book appointment with you if you don't have any service(s) in your services list</p>
+                                <p id='noServStatus2'>Click add service sign below to add new service</p>
+                                
+                                
+                                
+                                <% 
+                                        try{
+
+                                            Class.forName(Driver);
+                                            Connection AddSVCConn = DriverManager.getConnection(Url, user, password);
+                                            String AddSVCString = "Insert into QueueServiceProviders.ServicesAndPrices"
+                                                    + " (ProviderID, ServiceName, Price, ServiceDescription, ServiceDuration) values (?,?,?,?,?)";
+                                            PreparedStatement AddSVCPst = AddSVCConn.prepareStatement(AddSVCString);
+                                            AddSVCPst.setInt(1, UserID);
+                                            AddSVCPst.setString(2, "Business' Regular Service");
+                                            AddSVCPst.setString(3, "00.00");
+                                            AddSVCPst.setString(4, "This service is provided as default. Service provider may delete this service in their own convinience.");
+                                            AddSVCPst.setInt(5, 30);
+                                            
+                                            AddSVCPst.executeUpdate();
+
+                                        }catch(Exception e){
+                                            e.printStackTrace();
+                                        }
+                                    } 
+             //end of else block%>
+                                     
+                                        </tbody>
+                                     </table></center>
+                                     
+                                     <center><P><img style="cursor: pointer;" onclick = "toggleHideAddServiceDiv()" src="icons/icons8-add-new-40.png" width="40" height="40" alt="icons8-add-new-40"/>
+                                     </P></center>
+                                     
+                                     <center><div style=" display: none; margin-bottom: 5px;" id="addServiceDiv">
+                                             
+                                     <form name="addServices" style="padding-top: 5px; margin-left: 5px;">
+                                         
+                                         <p style="color: tomato; padding: 5px;">Add new service</p>
+                                         
+                                                 <center><p style="text-align: left; max-width: 500px;">Service Name: <input id="AddServiceName" style="background-color: white;" type="text" name="SerivceNameFld" value="" /></p></center>
+                                                 
+                                                 <center><p style="text-align: left; max-width: 500px;">Price:
+                                                         $<input onclick="checkMiddlenumberFuncNewPriceDD();" onkeydown="checkMiddlenumberFuncNewPriceDD();" id="NewPriceDD" type="text" style="width: 35px; border: 0; background-color: white; text-align: right; margin-right: 0; margin-left: 0;" placeholder="00" name="ServicePriceFldDD" value="" />.<input onclick="checkMiddlenumberFunctionNewPriceCC();" onkeydown="checkMiddlenumberFunctionNewPriceCC();" id="NewPriceCC" type="text" style="text-align: left; margin-left: 0; width: 35px; border:0; background-color: white;" placeholder="00" name="ServicePriceFldCC" value="" />
+                                                         </p></center>
+                                                 <center><p style="text-align: left; max-width: 500px;">Duration: <select id="DurationFldHHAddSVC" name="DurationFldHH">
+                                                     <option>0</option>
+                                                     <option>1</option>
+                                                     <option>2</option>
+                                                     <option>3</option>
+                                                     <option>4</option>
+                                                     <option>5</option>
+                                                 </select> hour(s) -
+                                                 <select id="DurationFldMMAddSVC" name="DurationFldMM">
+                                                     <option>15</option>
+                                                     <option>20</option>
+                                                     <option>25</option>
+                                                     <option>30</option>
+                                                     <option>35</option>
+                                                     <option>40</option>
+                                                     <option>45</option>
+                                                     <option>50</option>
+                                                     <option>55</option>
+                                                     <option>0</option>
+                                                 </select> minute(s)</p></center>
+                                                 
+                                                 <!--center><input style="background-color: white; margin: 5px;" type="text" name="" value="<=ServiceDuration%>" /-->
+                                                 
+                                                 <script>
+                                                        var NewPriceDD = document.getElementById("NewPriceDD");
+
+                                                        function numberFuncNewPriceDD(){
+
+                                                            var number = parseInt((NewPriceDD.value.substring(NewPriceDD.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                NewPriceDD.value = NewPriceDD.value.substring(0, (NewPriceDD.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncNewPriceDD, 1);
+
+                                                        function checkMiddlenumberFuncNewPriceDD(){
+
+                                                            for(var i = 0; i < NewPriceDD.value.length; i++){
+
+                                                                var middleString = NewPriceDD.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    NewPriceDD.value = NewPriceDD.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                                    
+                                                    <script>
+                                                        var NewPriceCC = document.getElementById("NewPriceCC");
+
+                                                        function numberFuncNewPriceCC(){
+
+                                                            var number = parseInt((NewPriceCC.value.substring(NewPriceCC.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                NewPriceCC.value = NewPriceCC.value.substring(0, (NewPriceCC.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncNewPriceCC, 1);
+
+                                                        function checkMiddlenumberFunctionNewPriceCC(){
+
+                                                            for(var i = 0; i < NewPriceCC.value.length; i++){
+
+                                                                var middleString = NewPriceCC.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    NewPriceCC.value = NewPriceCC.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                                 
+                                                 <center>
+                                                     <p style="text-align: left; max-width: 500px;"><textarea id="ServiceDescForAdd" onfocus="if(this.innerHTML === 'Add service description here')this.innerHTML = '';" name="DescriptionFld" rows="4" cols="40">Add service description here</textarea>
+                                                     </p></center>
+                                                 <input id="AddSVCPID" type="hidden" name="ProviderID" value="<%=UserID%>" />
+                                         <center><input style="background-color: pink; border-radius: 4px; color: black;" id ="addServiceBtn" type="button" value="Add Service" name="addNewService" />
+                                         </center>
+                                         
+                                         <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#addServiceBtn').click(function(event) {  
+                                                        
+                                                        var ServiceName = document.getElementById("AddServiceName").value;
+                                                        var PriceDD = document.getElementById("NewPriceDD").value;
+                                                        var PriceCC = document.getElementById("NewPriceCC").value;
+                                                        var DurationHHFld = document.getElementById("DurationFldHHAddSVC");
+                                                        var DurationMMFld = document.getElementById("DurationFldMMAddSVC");
+                                                        var DurationHH = DurationHHFld.options[DurationHHFld.selectedIndex].text;
+                                                        var DurationMM = DurationMMFld.options[DurationMMFld.selectedIndex].text;
+                                                        var ServiceNotes = document.getElementById("ServiceDescForAdd").value;
+                                                        var ProviderID = document.getElementById("AddSVCPID").value;
+                                                        
+                                                        /*alert("ServiceName: "+ServiceName);
+                                                        alert("PriceDollar: "+PriceDD);
+                                                        alert("PriceCents: "+PriceCC);
+                                                        alert("DurationHH: "+DurationHH);
+                                                        alert("DurationMM: "+DurationMM);
+                                                        alert("ServiceNotes: "+ServiceNotes);
+                                                        alert("ProviderID: "+ProviderID);*/
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "AddServicesController",  
+                                                        data: "SerivceNameFld="+ServiceName+"&ServicePriceFldDD="+PriceDD+"&ServicePriceFldCC="+PriceCC+"&DurationFldHH="+DurationHH+"&DurationFldMM="+DurationMM+"&DescriptionFld="+ServiceNotes+"&ProviderID="+ProviderID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("addServiceDiv").style.display = "none";
+                                                          document.getElementById("AddServiceName").value = "";
+                                                          document.getElementById("NewPriceDD").value = "";
+                                                          document.getElementById("NewPriceCC").value = "";
+                                                          document.getElementById("ServiceDescForAdd").innerHTML = "";
+                                                          
+                                                          
+                                                          $.ajax({
+                                                              type: "POST",
+                                                              url: "GetLastServiceAjax",
+                                                              data: "SerivceNameFld="+ServiceName+"&ServicePriceFldDD="+PriceDD+"&ServicePriceFldCC="+PriceCC+"&DurationFldHH="+DurationHH+"&DurationFldMM="+DurationMM+"&DescriptionFld="+ServiceNotes+"&ProviderID="+ProviderID,
+                                                              success: function(result){
+                                                                  //alert(result);
+                                                                  
+                                                                  var ServiceDetails = JSON.parse(result);
+                                                                  
+                                                                  var ServiceID = ServiceDetails.ID;
+                                                                  var name = ServiceDetails.Name;
+                                                                  var price = parseFloat(ServiceDetails.Price).toFixed(2);
+                                                                  var duration = ServiceDetails.Dur;
+                                                                  var description = ServiceDetails.Desc;
+                                                                  var UserIndex = <%=UserIndex%>;
+                                                                  
+                                                                  var NewServDiv = document.getElementById("newServDiv");
+                                                                  NewServDiv.style.display = "block";
+                                                                  
+                                                                  var aService = document.createElement('div');
+                                                                  
+                                                                  aService.innerHTML = '<div style="background-color: white; padding: 5px; text-align: left; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgrey;">'+
+                                                                          '<p><span style="color: blue;">'+name+'</span> - $'+price+' - '+duration+' mins</p>'+
+                                                                          '<p>Description: <span style="color: darkgrey;">'+description+'</span></p>'+
+                                                                          '<form method="POST" action="DeleteNewService">'+
+                                                                              '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />'+
+                                                                              '<input type="hidden" name="ServiceID" value="'+ServiceID+'" />'+
+                                                                              '<input type="submit" style="color: darkblue; font-weight: bolder; border: 1px solid darkgrey; padding: 5px; background-color: white;" value="Delete this service" />'+
+                                                                           '</form>'+
+                                                                          '</div>';
+                                                                  
+                                                                  NewServDiv.appendChild(aService);
+                                                              }
+                                                          });
+                                                          
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
+                                     </form>
+                                         
+                                         <script>
+                                             
+                                             function checkAddserviceBtn(){
+                                                 
+                                                 if(document.getElementById("AddServiceName").value === ""){
+                                                     document.getElementById("addServiceBtn").style.backgroundColor = "darkgrey";
+                                                     document.getElementById("addServiceBtn").disabled = true;
+                                                 }else{
+                                                     document.getElementById("addServiceBtn").style.backgroundColor = "pink";
+                                                     document.getElementById("addServiceBtn").disabled = false;
+                                                 }
+                                                 
+                                             }
+                                             
+                                             setInterval(checkAddserviceBtn, 1);
+                                         </script>
+                                     </div></center>
+                                                                  
+                                     <div id='newServDiv' style='display:none;'>
+                                        <p style='color: #000099; margin-bottom: 5px; text-align: center;'>Recent Added Service(s)</p>
+                                     </div>
+                                         
+                                     </div>
+                                    
+                                </div> 
+                                </div>
+                                         
+                                <div id="hoursOpenDiv" style="display: none;">
+                                    
+                                <div id="serviceslist">
+                                    
+                                    <%
+                                        if(ThisProvider.TimeOpen.SundayStart.equals("") || ThisProvider.TimeOpen.SundayClose.equals("") ||
+                                                ThisProvider.TimeOpen.MondayStart.equals("") || ThisProvider.TimeOpen.MondayClose.equals("") ||
+                                                ThisProvider.TimeOpen.TuesdayStart.equals("") || ThisProvider.TimeOpen.TuesdayClose.equals("") ||
+                                                ThisProvider.TimeOpen.WednessdayStart.equals("") || ThisProvider.TimeOpen.WednessdayClose.equals("") ||
+                                                ThisProvider.TimeOpen.ThursdayStart.equals("") || ThisProvider.TimeOpen.ThursdayClose.equals("") ||
+                                                ThisProvider.TimeOpen.FridayStart.equals("") ||ThisProvider.TimeOpen.FridayClose.equals("") ||
+                                                ThisProvider.TimeOpen.SaturdayStart.equals("") ||ThisProvider.TimeOpen.SaturdayClose.equals("")){
+                                            
+                                            boolean isUserHoursSet = false;
+                                            
+                                            try{
+                                                Class.forName(Driver);
+                                                Connection HoursConn = DriverManager.getConnection(Url, user, password);
+                                                String HoursString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
+                                                PreparedStatement HoursPst = HoursConn.prepareStatement(HoursString);
+                                                HoursPst.setInt(1, UserID);
+                                                    
+                                                ResultSet ProviderHoursRec = HoursPst.executeQuery();
+                                                
+                                                while (ProviderHoursRec.next()){
+                                                    isUserHoursSet = true;
+                                                }
+                                            
+                                            }catch(Exception e){
+                                                e.printStackTrace();
+                                            }
+                                            
+                                            if(isUserHoursSet == false){
+                                                
+                                                try{
+                                                    Class.forName(Driver);
+                                                    Connection HoursConn = DriverManager.getConnection(Url, user, password);
+                                                    String HoursString = "Insert into QueueServiceProviders.ServiceHours (ProviderID) values(?)";
+                                                    PreparedStatement HoursPst = HoursConn.prepareStatement(HoursString);
+                                                    HoursPst.setInt(1, UserID);
+                                                    
+                                                    HoursPst.executeUpdate();
+                                                }catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    %>
+                                    
+                                    <p style="color: tomato; margin: 5px; text-align: center;">Hours Open and Other Settings</p>
+                                    <table style="width: 100%;">
+                                        <tbody>
+                                            <tr>
+                                                <td id="ShowHourBtn" onclick="toggleshowHoursOpen();" style="background-color: plum; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer; width: 50%;">Hours Open</td>
+                                                <td id="showOtherSettingsBtn" onclick="toggleshowOtherSettings();" style="background-color: pink; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer;">Other Settings</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                <div class="scrolldiv" style="height: 330px; overflow-y: auto;">
+                                    
+                                    <div id="ShowHoursOpenDiv">
+                                    <!--center><div style="background-color: #6699ff; width: 100%; max-width: 400px; text-align: left;">
+                                            
+                                    <%
+                                        if(ThisProvider.TimeOpen.SundayStart.equals("12:00 am") && ThisProvider.TimeOpen.SundayClose.equals("12:00 am")){
+                                    %>  
+                                        
+                                    <p style="padding: 5px;">Sunday: <span style="color: white;">Closed</span><p>
+                                        
+                                    <%  }else{
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Sunday: <span style="color: white;"><%=ThisProvider.TimeOpen.SundayStart%></span> <span style="color: white;"><%=ThisProvider.TimeOpen.SundayClose%></span></p>
+                                   
+                                    <%
+                                        }
+                                          if(ThisProvider.TimeOpen.MondayStart.equals("12:00 am") && ThisProvider.TimeOpen.MondayClose.equals("12:00 am")){
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Monday: <span style="color: white;">Closed</span><p>
+                                    
+                                    <%  }else{
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Monday: <span style="color: white;"><%=ThisProvider.TimeOpen.MondayStart%></span> - <span style="color: white;"><%=ThisProvider.TimeOpen.MondayClose%></span></p>
+                                   
+                                    <%
+                                        }
+                                          if(ThisProvider.TimeOpen.TuesdayStart.equals("12:00 am") && ThisProvider.TimeOpen.TuesdayClose.equals("12:00 am")){
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Tuesday: <span style="color: white;">Closed</span><p>
+                                    
+                                    <%  }else{
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Tuesday: <span style="color: white;"><%=ThisProvider.TimeOpen.TuesdayStart%></span> - <span style="color: white;"><%=ThisProvider.TimeOpen.TuesdayClose%></span></p>
+                                    
+                                    <%
+                                        }
+                                          if(ThisProvider.TimeOpen.WednessdayStart.equals("12:00 am") && ThisProvider.TimeOpen.WednessdayClose.equals("12:00 am")){
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Wednesday: <span style="color: white;">Closed</span><p>
+                                    
+                                    <%  }else{
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Wednesday: <span style="color: white;"><%=ThisProvider.TimeOpen.WednessdayStart%></span> - <span style="color: white;"><%=ThisProvider.TimeOpen.WednessdayClose%></span></p>
+                                    
+                                    <%
+                                        }
+                                          if(ThisProvider.TimeOpen.ThursdayStart.equals("12:00 am") && ThisProvider.TimeOpen.ThursdayClose.equals("12:00 am")){
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Thursday: <span style="color: white;">Closed</span><p>
+                                    
+                                    <%  }else{
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Thursday: <span style="color: white;"><%=ThisProvider.TimeOpen.ThursdayStart%></span> - <span style="color: white;"><%=ThisProvider.TimeOpen.ThursdayClose%></span></p>
+                                    
+                                    <%
+                                        }
+                                          if(ThisProvider.TimeOpen.FridayStart.equals("12:00 am") && ThisProvider.TimeOpen.FridayClose.equals("12:00 am")){
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Friday: <span style="color: white;">Closed</span><p>
+                                    
+                                    <%  }else{
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Friday: <span style="color: white;"><%=ThisProvider.TimeOpen.FridayStart%></span> - <span style="color: white;"><%=ThisProvider.TimeOpen.FridayClose%></span></p>
+                                    
+                                    <%
+                                        }
+                                          if(ThisProvider.TimeOpen.SaturdayStart.equals("12:00 am") && ThisProvider.TimeOpen.SaturdayClose.equals("12:00 am")){
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Saturday: <span style="color: white;">Closed</span><p>
+                                    
+                                    <%  }else{
+                                    %>
+                                    
+                                    <p style="padding: 5px;">Saturday: <span style="color: white;"><%=ThisProvider.TimeOpen.SaturdayStart%></span> - <span style="color: white;"><%=ThisProvider.TimeOpen.SaturdayClose%></span></p>
+                                    
+                                    <%}%>
+                                    
+                                    </div></center-->
+                                    
+                                    <div style="width: 100%;">
+                                    <form name="HoursOpen" action="SetProviderHoursController" method="POST">
+                                    
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Sunday:</span>
+                                        <input id="SundayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayStart" value="<%=ThisProvider.TimeOpen.SundayStart%>" readonly/> -
+                                        <input id="SundayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayClose" value="<%=ThisProvider.TimeOpen.SundayClose%>" readonly/>
+                                        <input id="SundayChck" type="checkbox" name="SundayChck" value="12:00 am" />
+                                        <label for="SundayChck">Closed</label></p>
+                                        
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Monday:</span>
+                                        <input id="MondayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="MondayStart" value="<%=ThisProvider.TimeOpen.MondayStart%>" readonly/> -
+                                        <input id="MondayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="MondayClose" value="<%=ThisProvider.TimeOpen.MondayClose%>" readonly/>
+                                        <input id="MondayChck" type="checkbox" name="MondayChck" value="12:00 am" />
+                                        <label for="MondayChck">Closed</label></p>
+                                        
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Tuesday:</span>
+                                        <input id="TuesdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayStart" value="<%=ThisProvider.TimeOpen.TuesdayStart%>" readonly/> -
+                                        <input id="TuesdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayClose" value="<%=ThisProvider.TimeOpen.TuesdayClose%>" readonly/>
+                                        <input id="TuesdayChck" type="checkbox" name="TuesdayChck" value="12:00 am" />
+                                        <label for="TuesdayChck">Closed</label></p>
+                                        
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Wednesday:</span>
+                                        <input id="WednesdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="WednesdayStart" value="<%=ThisProvider.TimeOpen.WednessdayStart%>" readonly/> -
+                                        <input id="WednesdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="WednesdayClose" value="<%=ThisProvider.TimeOpen.WednessdayClose%>" readonly/>
+                                        <input id="WednesdayChck" type="checkbox" name="WednesdayChck" value="12:00 am" />
+                                        <label for="WednesdayChck">Closed</label></p>
+                                        
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Thursday:</span>
+                                        <input id="ThursdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayStart" value="<%=ThisProvider.TimeOpen.ThursdayStart%>" readonly/> -
+                                        <input id="ThursdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayClose" value="<%=ThisProvider.TimeOpen.ThursdayClose%>" readonly/>
+                                        <input id="ThursdayChck" type="checkbox" name="ThursdayChck" value="12:00 am" />
+                                        <label for="ThursdayChck">Closed</label></p>
+                                        
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Friday:</span>
+                                        <input id="FridayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="FridayStart" value="<%=ThisProvider.TimeOpen.FridayStart%>" readonly/> -
+                                        <input id="FridayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="FridayClose" value="<%=ThisProvider.TimeOpen.FridayClose%>" readonly/>
+                                        <input id="FridayChck" type="checkbox" name="FridayChck" value="12:00 am" />
+                                        <label for="FridayChck">Closed</label></p>
+                                        
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Saturday:</span>
+                                        <input id="SaturdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayStart" value="<%=ThisProvider.TimeOpen.SaturdayStart%>" readonly/> -
+                                        <input id="SaturdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayClose" value="<%=ThisProvider.TimeOpen.SaturdayClose%>" readonly/>
+                                        <input id="SaturdayChck" type="checkbox" name="SaturdayChck" value="12:00 am" />
+                                        <label for="SaturdayChck">Closed</label></p>
+                                        
+                                        <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                        <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
+                                        <center><input id="UpdateHoursBtn" style="border: 1px solid black; background-color: pink; padding: 5px; border-radius: 4px;" type="submit" value="Update Your Hours" name="UpdateHoursBtn" /></center>
+                                        
+                                    </form>
+                                    </div>
+                                    </div>
+                                    
+                                    <script>
+                                        
+                                        var SundayStart = document.getElementById("SundayStart");
+                                        var SundayClose = document.getElementById("SundayClose");
+                                        var SundayChck = document.getElementById("SundayChck");
+                                        var MondayStart = document.getElementById("MondayStart");
+                                        var MondayClose = document.getElementById("MondayClose");
+                                        var MondayChck = document.getElementById("MondayChck");
+                                        var TuesdayStart = document.getElementById("TuesdayStart");
+                                        var TuesdayClose = document.getElementById("TuesdayClose");
+                                        var TuesdayChck = document.getElementById("TuesdayChck");
+                                        var WednesdayStart = document.getElementById("WednesdayStart");
+                                        var WednesdayClose = document.getElementById("WednesdayClose");
+                                        var WednesdayChck = document.getElementById("WednesdayChck");
+                                        var ThursdayStart = document.getElementById("ThursdayStart");
+                                        var ThursdayClose = document.getElementById("ThursdayClose");
+                                        var ThursdayChck = document.getElementById("ThursdayChck");
+                                        var FridayStart = document.getElementById("FridayStart");
+                                        var FridayClose = document.getElementById("FridayClose");
+                                        var FridayChck = document.getElementById("FridayChck");
+                                        var SaturdayStart = document.getElementById("SaturdayStart");
+                                        var SaturdayClose = document.getElementById("SaturdayClose");
+                                        var SaturdayChck = document.getElementById("SaturdayChck");
+                                        var UpdateHoursBtn = document.getElementById("UpdateHoursBtn");
+                                        
+                                        function toggleShowHoursUpdateBtn(){
+                                            if(SundayStart.value === "" || SundayClose.value === "" || MondayStart.value === "" || MondayClose.value === ""
+                                                    || TuesdayStart.value === "" || TuesdayClose.value === "" || WednesdayStart.value === "" 
+                                                    || WednesdayClose.value === "" || ThursdayStart.value === "" || ThursdayClose.value === "" 
+                                                    || FridayStart.value === "" || FridayClose.vlaue === "" || FridayClose === ""
+                                                    || SaturdayStart.value === "" || SaturdayClose === ""){
+                                                
+                                                UpdateHoursBtn.style.display = "none";
+                                            }else{
+                                                UpdateHoursBtn.style.display = "block";
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(toggleShowHoursUpdateBtn,1);
+                                        
+                                        function checkSunClosedChck(){
+                                            
+                                            if((SundayStart.value === "12:00 am" && SundayClose.value === "12:00 am") || SundayChck.checked === true){
+                                                SundayStart.disabled = true;
+                                                SundayClose.disabled = true;
+                                                SundayChck.checked = true;
+                                                //if the text fields are disabled they will return null
+                                                SundayStart.value = "Closed";
+                                                SundayClose.value = "Closed";
+                                            }
+                                            else if(SundayChck.checked === false){
+                                                SundayStart.disabled = false;
+                                                SundayClose.disabled = false;
+                                                
+                                                if(SundayStart.value === "Closed" && SundayClose.value === "Closed"){
+                                                    SundayStart.value = "9:00 am";
+                                                    SundayClose.value = "5:00 pm";
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(checkSunClosedChck,1);
+                                        
+                                        function checkMonClosedChck(){
+                                            
+                                            if((MondayStart.value === "12:00 am" && MondayClose.value === "12:00 am") || MondayChck.checked === true){
+                                                MondayStart.disabled = true;
+                                                MondayClose.disabled = true;
+                                                MondayChck.checked = true;
+                                                MondayStart.value = "Closed";
+                                                MondayClose.value = "Closed";
+                                            }
+                                            else if(MondayChck.checked === false){
+                                                MondayStart.disabled = false;
+                                                MondayClose.disabled = false;
+                                                
+                                                if(MondayStart.value === "Closed" && MondayClose.value === "Closed"){
+                                                    MondayStart.value = "9:00 am";
+                                                    MondayClose.value = "5:00 pm";
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(checkMonClosedChck,1);
+                                        
+                                        function checkTuesClosedChck(){
+                                            
+                                            if((TuesdayStart.value === "12:00 am" && TuesdayClose.value === "12:00 am") || TuesdayChck.checked === true){
+                                                TuesdayStart.disabled = true;
+                                                TuesdayClose.disabled = true;
+                                                TuesdayChck.checked = true;
+                                                TuesdayStart.value = "Closed";
+                                                TuesdayClose.value = "Closed";
+                                            }
+                                            else if(TuesdayChck.checked === false){
+                                                TuesdayStart.disabled = false;
+                                                TuesdayClose.disabled = false;
+                                                
+                                                if(TuesdayStart.value === "Closed" && TuesdayClose.value === "Closed"){
+                                                    TuesdayStart.value = "9:00 am";
+                                                    TuesdayClose.value = "5:00 pm";
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(checkTuesClosedChck,1);
+                                        
+                                        function checkWedClosedChck(){
+                                            
+                                            if((WednesdayStart.value === "12:00 am" && WednesdayClose.value === "12:00 am") || WednesdayChck.checked === true){
+                                                WednesdayStart.disabled = true;
+                                                WednesdayClose.disabled = true;
+                                                WednesdayChck.checked = true;
+                                                WednesdayStart.value = "Closed";
+                                                WednesdayClose.value = "Closed";
+                                            }
+                                            else if(WednesdayChck.checked === false){
+                                                WednesdayStart.disabled = false;
+                                                WednesdayClose.disabled = false;
+                                                
+                                                if(WednesdayStart.value === "Closed" && WednesdayClose.value === "Closed"){
+                                                    WednesdayStart.value = "9:00 am";
+                                                    WednesdayClose.value = "5:00 pm";
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(checkWedClosedChck,1);
+                                        
+                                        function checkThursClosedChck(){
+                                            
+                                            if((ThursdayStart.value === "12:00 am" && ThursdayClose.value === "12:00 am") || ThursdayChck.checked === true){
+                                                ThursdayStart.disabled = true;
+                                                ThursdayClose.disabled = true;
+                                                ThursdayChck.checked = true;
+                                                ThursdayStart.value = "Closed";
+                                                ThursdayClose.value = "Closed";
+                                            }
+                                            else if(ThursdayChck.checked === false){
+                                                    ThursdayStart.disabled = false;
+                                                    ThursdayClose.disabled = false;
+                                                
+                                                if(ThursdayStart.value === "Closed" && ThursdayClose.value === "Closed"){
+                                                    ThursdayStart.value = "9:00 am";
+                                                    ThursdayClose.value = "5:00 pm";
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(checkThursClosedChck,1);
+                                        
+                                        function checkFriClosedChck(){
+                                            
+                                            if((FridayStart.value === "12:00 am" && FridayClose.value === "12:00 am") || FridayChck.checked === true){
+                                                FridayStart.disabled = true;
+                                                FridayClose.disabled = true;
+                                                FridayChck.checked = true;
+                                                FridayStart.value = "Closed";
+                                                FridayClose.value = "Closed";
+                                            }
+                                            else if(FridayChck.checked === false){
+                                                FridayStart.disabled = false;
+                                                FridayClose.disabled = false;
+                                                
+                                                if(FridayStart.value === "Closed" && FridayClose.value === "Closed"){
+                                                    FridayStart.value = "9:00 am";
+                                                    FridayClose.value = "5:00 pm";
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(checkFriClosedChck,1);
+                                        
+                                        function checkSatClosedChck(){
+                                            
+                                            if((SaturdayStart.value === "12:00 am" && SaturdayClose.value === "12:00 am") || SaturdayChck.checked === true){
+                                                SaturdayStart.disabled = true;
+                                                SaturdayClose.disabled = true;
+                                                SaturdayChck.checked = true;
+                                                SaturdayStart.value = "Closed";
+                                                SaturdayClose.value = "Closed";
+                                            }
+                                            else if(SaturdayChck.checked === false){
+                                                SaturdayStart.disabled = false;
+                                                SaturdayClose.disabled = false;
+                                                
+                                                if(SaturdayStart.value === "Closed" && SaturdayClose.value === "Closed"){
+                                                    SaturdayStart.value = "9:00 am";
+                                                    SaturdayClose.value = "5:00 pm";
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        setInterval(checkSatClosedChck,1);
+                                            
+                                    </script>
+                                        
+                                    <script>
+                                            $('#MondayStart').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '00',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '00',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#MondayClose').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '01:00am',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '5:00pm',
+                                                startTime: '01:00am',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#TuesdayStart').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '00',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '00',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#TuesdayClose').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '01:00am',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '01:00am',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#WednesdayStart').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 1,
+                                                minTime: '00',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '00',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#WednesdayClose').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '01:00am',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '01:00am',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#ThursdayStart').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '00',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '00',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#ThursdayClose').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '01:00am',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '01:00am',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#FridayStart').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '00',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '00',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#FridayClose').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '01:00am',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '01:00am',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#SaturdayStart').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '00',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '00',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#SaturdayClose').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '01:00am',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '01:00am',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#SundayStart').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '00',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '00',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                            $('#SundayClose').timepicker({
+                                                timeFormat: 'h:mm p',
+                                                interval: 15,
+                                                minTime: '01:00am',
+                                                maxTime: '11:59pm',
+                                                //defaultTime: '00',
+                                                startTime: '01:00am',
+                                                dynamic: false,
+                                                dropdown: true,
+                                                scrollbar: false
+                                            });
+                                        
+                                    </script>
+                                    
+                                    
+                                    
+                                    <div id="ShowOtherSettingsDiv" style="display: none;">
+                                    
+                                    <div style="background-color: white; padding: 5px; margin: 5px; border: 1px solid black;">
+                                    
+                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Cancellation Policy
+                                            <span style="float: right;"><input style="background-color: white;" id="CnclPlcyChck" type="radio" name="CancellationPolicyChck" value="ON" />
+                                            <label for="CnclPlcyChck">ON</label>
+                                            <input style="background-color: white;" id="CnclPlcyChckOFF" type="radio" name="CancellationPolicyChck" value="OFF" />
+                                            <label for="CnclPlcyChckOFF">OFF</label></span></p></center>
+                                            <p style="clear: both;"></p>
+                                            
+                                        <input id="EnabledCnclPlcy" type="hidden" name="CancelationPolicyEnabled" value="<%=isSettingAllowed%>" />
+                                    
+                                   <div style="background-color: #6699ff;">
+                                   <div id="CnclPlcyInfo" style="display: none; padding: 5px;">       
+                                    <p>Cancellation Elapse: <span id="TimeSpan" style="color: #eeeeee;">at <%=TimeElapseValue%> to spot due time</span></p>
+                                    <p>Charge: <span id="PercentSpan" style="color: #eeeeee;"><%=ChargePercentValue%> of service cost</span></p>
+                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: #6699ff; width: 200px; border: 1px solid black; margin: 5px;">Change Cancellation Policy</p></center>
+                                    <center><p  id="bizBankforCancelStatus" style="color: white; background-color: red; text-align: center;"></p></center>
+                                   </div>
+                                   
+                                    <form id="CnclPlcyForm" style="border-top: 1px solid black; display: none; margin-top: 10px; padding: 5px;" name="CancelationPolicyForm">
+                                        
+                                        <input id="PIDforCnclPlcy" type="hidden" name="ProviderID" value="<%=UserID%>">
+                                        <!--Settings names used to identify these settings everywhere in this app-->
+                                        <input id="timeElapse" type="hidden" name="TimeElapse" value="CnclPlcyTimeElapse"/>
+                                        <input id="ChargeCost" type="hidden" name="ChargeCost" value="CnclPlcyChargeCost"/>
+                                        
+                                        <p style="text-align: center; margin-bottom: 10px; color: white;">Change Cancellation Policy</p>
+                                        
+                                        <center><p id="percentPar" style="text-align: left; max-width: 500px;">Charge Percentage: <select id="ChargePercent" name="ChargePercent">
+                                                    <option>100%</option>
+                                                    <option>75%</option>
+                                                    <option>50%</option>
+                                                    <option>25%</option>
+                                                    <option>10%</option>
+                                                </select></p></center>
+                                        
+                                        <center><p id="timePar" style="text-align: left; max-width: 500px;">Elapse Time: <select id="HHforCancellation" name="DurationFldHH">
+                                                     <option>0</option>
+                                                     <option>1</option>
+                                                     <option>2</option>
+                                                     <option>3</option>
+                                                     <option>4</option>
+                                                     <option>5</option>
+                                                 </select> hour(s) -
+                                                 <select id="MMforCancellation" name="DurationFldMM">
+                                                     <option>15</option>
+                                                     <option>20</option>
+                                                     <option>25</option>
+                                                     <option>30</option>
+                                                     <option>35</option>
+                                                     <option>40</option>
+                                                     <option>45</option>
+                                                     <option>50</option>
+                                                     <option>55</option>
+                                                     <option>0</option>
+                                                 </select> minute(s)</p></center>
+                                        
+                                        <p style="color: white; text-align: center; margin: 5px;">Add Your Business Bank Card</p>
+                                        <p style="text-align: center;">add bank account where to receive online payments from customers</p>
+
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align: left;">Card Number: </td>
+                                                    <td><input  id="CnclPlcyBizCardNumber" onclick="checkMiddlenumberCnclPlcyBizCardNumber();" onkeydown="checkMiddlenumberCnclPlcyBizCardNumber();" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Card Name: </td>
+                                                    <td><input id="CnclPlcyCardName" style="background-color: #6699ff" type="text" name="CardNameForSubscription" value="" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Routing Number: </td>
+                                                    <td><input id="CnclPlcyRoutingNumber" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Sec. Code: </td>
+                                                    <td><input id="CnclPlcySecCode" style="background-color: #6699ff" type="text" name="CardCodeForSubscription" value="" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Exp. Date: </td>
+                                                    <td><input id="CnclPlcyExpDate" style="background-color: #6699ff" type="text" name="CardExpForSubscription" value="" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table> 
+                                        
+                                        <script>
+                                                    var CnclPlcyExpDate = document.getElementById("CnclPlcyExpDate");
+                                                         
+                                                         setInterval(function(){
+                                                             
+                                                            if(CnclPlcyExpDate.value !== ""){
+                                                                
+                                                               if(CnclPlcyExpDate.value.length === 2){
+                                                                   
+                                                                   CnclPlcyExpDate.value = CnclPlcyExpDate.value.substring(0,2) + "/" + CnclPlcyExpDate.value.substring(2);
+                                                                  
+                                                                   if(CnclPlcyExpDate.value === "///" || CnclPlcyExpDate.value.substring(1,3) === "//" || CnclPlcyExpDate.value.substring(0,1) === "/"){
+                                                                       CnclPlcyExpDate.value = "";
+                                                                   }
+                                                                   
+                                                               }
+                                                               //checking if month is greater than 12
+                                                               var month = parseInt((CnclPlcyExpDate.value.substring(0,2)), 10);
+                                                               var month1 = parseInt((CnclPlcyExpDate.value.substring(0,1)), 10);
+                                                               var month2 = parseInt((CnclPlcyExpDate.value.substring(1,2)), 10);
+                                                               var year = parseInt((CnclPlcyExpDate.value.substring(3,5)), 10);
+                                                               var year1 = parseInt((CnclPlcyExpDate.value.substring(3,4)), 10);
+                                                               var year2 = parseInt((CnclPlcyExpDate.value.substring(4,5)), 10);
+                                                               
+                                                               if(month !== null){
+                                                                    if(month > 12){
+                                                                        CnclPlcyExpDate.value = "12" + CnclPlcyExpDate.value.substring(2,5);
+                                                                    }
+                                                                }
+                                                                //checking if entered date is more than 5 characters
+                                                               if(CnclPlcyExpDate.value.length > 5){
+                                                                   CnclPlcyExpDate.value = CnclPlcyExpDate.value.substring(0,5);
+                                                               }
+                                                               //checking is what's entered is is not a number 
+                                                               if(isNaN(month1))
+                                                                   CnclPlcyExpDate.value = "";
+                                                               if(isNaN(month2))
+                                                                   CnclPlcyExpDate.value = CnclPlcyExpDate.value.substring(0,1) + "";
+                                                               if(isNaN(year1))
+                                                                   CnclPlcyExpDate.value = CnclPlcyExpDate.value.substring(0,3) + "";
+                                                               if(isNaN(year2))
+                                                                   CnclPlcyExpDate.value = CnclPlcyExpDate.value.substring(0,4) + "";
+                                                              
+                                                            }
+                                                         },1);
+                                                </script>
+                                        
+                                            <script>
+                                                        var CnclPlcyBizCardNumber = document.getElementById("CnclPlcyBizCardNumber");
+
+                                                        function numberFuncCnclPlcyBizCardNumber(){
+
+                                                            var number = parseInt((CnclPlcyBizCardNumber.value.substring(CnclPlcyBizCardNumber.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                CnclPlcyBizCardNumber.value = CnclPlcyBizCardNumber.value.substring(0, (CnclPlcyBizCardNumber.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncCnclPlcyBizCardNumber, 1);
+
+                                                        function checkMiddlenumberCnclPlcyBizCardNumber(){
+
+                                                            for(var i = 0; i < CnclPlcyBizCardNumber.value.length; i++){
+
+                                                                var middleString = CnclPlcyBizCardNumber.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    CnclPlcyBizCardNumber.value = CnclPlcyBizCardNumber.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                                    <p id="validateCnclPlcyCardBtn" style="cursor: pointer; color: black; background-color: pink; width: 270px; padding: 5px; border: 1px solid black; text-align: center;">Validate this card</p>
+                                        
+                                        <p style="text-align: left; color: white; background-color: red; border: 1px solid black; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation and No-Show Policy</label>
+                                            </p>
+                                        <center><input id="submitCnclPlcyBtn" style="padding: 5px; border: 1px solid black; border-radius: 4px; background-color: pink;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
+                                    </form>
+                                   </div>
+                                        
+                                        <script>
+                                            
+                                            var isCardAdded = false;
+                                            
+                                            setInterval(function(){
+                                                    var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
+                                                    var CPcName = document.getElementById("CnclPlcyCardName").value;
+                                                    var CPcRNumber = document.getElementById("CnclPlcyRoutingNumber").value;
+                                                    var CPSecCode = document.getElementById("CnclPlcySecCode").value;
+                                                    var CPcDate = document.getElementById("CnclPlcyExpDate").value;
+                                                    
+                                                    
+                                                    if(CPcNumber === "" || CPcName === "" || CPSecCode === "" || CPcDate === "" || CPcRNumber === ""){
+                                                        document.getElementById("validateCnclPlcyCardBtn").innerHTML = "unconpleted form";
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.color = "white";
+                                                        document.getElementById("validateCnclPlcyCardBtn").disabled = true;
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "red";
+                                                    }else{
+                                                        document.getElementById("validateCnclPlcyCardBtn").innerHTML = "Validate this card";
+                                                        document.getElementById("validateCnclPlcyCardBtn").disabled = false;
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.color = "black";
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "pink";
+                                                    }
+                                            }, 1);
+                                            
+                                            //this is where to verify my card
+                                            $(document).ready(function(){
+                                                
+                                                $("#validateCnclPlcyCardBtn").click(function(event){
+                                                    alert("clicked");
+                                                    /*$.ajax({
+                                                        type: "POST",
+                                                        url: "",
+                                                        data: "",
+                                                        success: function(result){
+                                                            //if(result === "success"){
+                                                                document.getElementById("bizBankforCancelStatus").innerHTML = "Customer payments are recieved on" + CPcNumber.substring() + "*********" + CPcNumber.substring();
+                                                                isCardAdded = true;
+                                                             }
+                                                            //else
+                                                                document.getelementById("bizBankforCancelStatus").innerHTML = "Your business bank card isn't valid. You cannot recieve payments on this card";
+                                                        }
+                                                    });*/
+                                                });
+                                                
+                                            });
+                                            
+                                            $(document).ready(function() {                        
+                                                    $('#submitCnclPlcyBtn').click(function(event) {  
+                                                        
+                                                        var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
+                                                        var CPcName = document.getElementById("CnclPlcyCardName").value;
+                                                        var CPcRNumber = document.getElementById("CnclPlcyRoutingNumber").value;
+                                                        var CPSecCode = document.getElementById("CnclPlcySecCode").value;
+                                                        var CPcDate = document.getElementById("CnclPlcyExpDate").value;
+
+                                                        var ProviderID = document.getElementById("PIDforCnclPlcy").value;
+                                                        var DHH = document.getElementById("HHforCancellation");
+                                                        var DurationHH = DHH.options[DHH.selectedIndex].text;
+                                                        var DMM = document.getElementById("MMforCancellation");
+                                                        var DurationMM = DMM.options[DMM.selectedIndex].text;
+                                                        var ChargeCost = document.getElementById("ChargeCost").value;
+                                                        var timeElapse = document.getElementById("timeElapse").value;
+                                                        var PercentOption = document.getElementById("ChargePercent");
+                                                        var ChargePercent = PercentOption.options[PercentOption.selectedIndex].text;
+                                                        
+                                                        if(ChargePercent.length === 3)
+                                                            ChargePercent = "0" + ChargePercent;
+
+                                                        ChargePercent = ChargePercent.substring(0,3);
+                                                        var RMVCNCLOption = document.getElementById("RmvCnclPlcy");
+                                                        
+                                                        var RemoveCancellation = "OFF";
+                                                        if(RMVCNCLOption.checked === true){
+                                                            RemoveCancellation = "ON";
+                                                        }
+                                                        
+                                                        /*alert("ProviderID: " +ProviderID);
+                                                        alert("DurationHH: " +DurationHH);
+                                                        alert("DurationMM: " +DurationMM);
+                                                        alert("ChargeCost: " +ChargeCost);
+                                                        alert("TimeElapse: " +timeElapse);
+                                                        alert("ChargePercent: " +ChargePercent);
+                                                        alert("RemoveCancellation: " +RemoveCancellation);*/
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "CancellationPolicyController",  
+                                                        data: "ProviderID="+ProviderID+"&DurationFldHH="+DurationHH+"&ChargeCost="+ChargeCost+"&DurationFldMM="+DurationMM+"&TimeElapse="+timeElapse+"&ChargePercent="+ChargePercent+"&RMVCnclPlcy="+RemoveCancellation,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("CnclPlcyForm").style.display = "none";
+                                                          
+                                                          var Hour = 0;
+                                                          if(parseInt(DurationHH, 10) === 1)
+                                                              Hour = 60;
+                                                          if(parseInt(DurationHH, 10) === 2)
+                                                              Hour = 120;
+                                                          if(parseInt(DurationHH, 10) === 3)
+                                                              Hour = 180;
+                                                          if(parseInt(DurationHH, 10) === 4)
+                                                              Hour = 240;
+                                                          if(parseInt(DurationHH, 10) === 5)
+                                                              Hour = 300;
+                                                          
+                                                          if(document.getElementById("RmvCnclPlcy").checked === true){
+                                                              
+                                                             document.getElementById("PercentSpan").innerHTML = 0 + "% of service cost";
+                                                             document.getElementById("TimeSpan").innerHTML = "at " + 0 + " mins to spot due time";
+                                                             document.getElementById("CnclPlcyChckOFF").checked = true;
+                                                             document.getElementById("CnclPlcyChck").checked = false;
+                                                             //if(isCardAdded === true)
+                                                             document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
+                                                              
+                                                          }else{
+                                                          
+                                                             document.getElementById("PercentSpan").innerHTML = parseInt(ChargePercent, 10) + "% of service cost";
+                                                             document.getElementById("TimeSpan").innerHTML = "at " + (parseInt(Hour, 10) + parseInt(DurationMM, 10))+ " mins to spot due time";
+                                                             //if(isCardAdded === true)
+                                                             document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
+                                                          }
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                        </script>
+                                        
+                                   <script>
+                                       
+                                       var CnclPlcyChck = document.getElementById("CnclPlcyChck");
+                                       var CnclPlcyInfo = document.getElementById("CnclPlcyInfo");
+                                       var CnclPlcyForm = document.getElementById("CnclPlcyForm");
+                                       var RmvCnclPlcy = document.getElementById("RmvCnclPlcy");
+                                       var EnabledCnclPlcy = document.getElementById("EnabledCnclPlcy");
+                                       var timePar = document.getElementById("timePar");
+                                       var percentPar = document.getElementById("percentPar");
+                                       var CnclPlcyChckOFF = document.getElementById("CnclPlcyChckOFF");
+                                       
+                                       CnclPlcyChckOFF.disabled = true;
+                                       
+                                       function checkPlcForm(){
+                                           
+                                            if(RmvCnclPlcy.checked === true){
+                                                
+                                                timePar.style.display = "none";
+                                                percentPar.style.display = "none";
+                                            }
+                                            else{
+                                                
+                                                timePar.style.display = "block";
+                                                percentPar.style.display = "block";
+                                                
+                                            }
+                                        }
+                                        
+                                        setInterval(checkPlcForm, 1);
+                                       
+                                       if(EnabledCnclPlcy.value === "Yes")
+                                           CnclPlcyChck.checked = true;
+                                       else
+                                           CnclPlcyChckOFF.checked = true;
+                                       
+                                       function showPolicyForm(){
+                                           $("#CnclPlcyForm").slideDown("fast");
+                                           //CnclPlcyForm.style.display = "block";
+                                       }
+                                       
+                                       function CheckCancellationPlcy(){
+                                           
+                                            if(CnclPlcyChck.checked === true){
+                                                $("#CnclPlcyInfo").slideDown("fast");
+
+                                            }else{
+                                               $("#CnclPlcyForm").slideUp("fast");
+                                               $("#CnclPlcyInfo").slideUp("fast");
+                                            }
+                                        
+                                       }
+                                       
+                                       setInterval(CheckCancellationPlcy, 1);
+                                       
+                                   </script>
+                                    
+                                    <center><p onclick="toggleShowSubscriptionDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Manage Your Subscription</p></center>
+                                    
+                                    <div id="SubscriptionDiv" style="text-align: center; background-color: #6699ff; padding: 5px; display: none;">
+                                        
+                                    <form action="ProviderSubscriptionLoggedIn.jsp" method="POST">
+                                    <p style="text-align: center; color: white; margin-bottom: 10px;">Your Queue Subscription</p>
+                                    <input type="hidden" name="SubscStatusValue" value="" />
+                                    <p style="background-color: red; color: white; text-align: center; margin: 5px;">You have not subscribed</p>
+                                    <p style="text-align: left;">Subscription Plan: <select name="SubscPlan">
+                                            <%
+                                                int number = 0;
+                                                try{
+                                                    
+                                                    Class.forName(Driver);
+                                                    Connection SConn = DriverManager.getConnection(Url, user, password);
+                                                    String SQuery = "select * from QueueObjects.SubcriptionsInfo";
+                                                    PreparedStatement SPst = SConn.prepareStatement(SQuery);
+                                                    ResultSet SRec = SPst.executeQuery();
+                                                    
+                                                    while(SRec.next()){
+                                                        
+                                                        number++;
+                                                        
+                                                        DecimalFormat df = new DecimalFormat("#.##");
+                                                        String Cost = df.format(Double.parseDouble(SRec.getString("Cost").trim()));
+                                                        
+                                                        String Subscription = SRec.getString("_Type").trim() + "($" + Cost + ")";
+                                                        
+                                            %>
+                                            
+                                                        <option value="<%=Cost%>"><%=Subscription%></option>
+                                                        
+                                            <%      }
+                                                }catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+                                            %>
+                                        </select></p>
+                                        
+                                    <p style="text-align: center; color: white;">Payment Information</p>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left;">Card Number: </td>
+                                                <td><input onclick="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" onkeydown="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" id="SubscriptionPayCardNumber" style="background-color: #6699ff" type="text" name="CardNumber" value="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Holder's Name: </td>
+                                                <td><input style="background-color: #6699ff" type="text" name="CardName" value="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Sec. Code: </td>
+                                                <td><input style="background-color: #6699ff" type="text" name="CardSecCode" value="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Exp. Date: </td>
+                                                <td><input id="cardDateSPC" style="background-color: #6699ff" type="text" name="CardExpDate" value="" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+                                    
+                                    <script>
+                                                    var ExpDateSPCFld = document.getElementById("cardDateSPC");
+                                                         
+                                                         setInterval(function(){
+                                                             
+                                                            if(ExpDateSPCFld.value !== ""){
+                                                                
+                                                               if(ExpDateSPCFld.value.length === 2){
+                                                                   
+                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,2) + "/" + ExpDateSPCFld.value.substring(2);
+                                                                  
+                                                                   if(ExpDateSPCFld.value === "///" || ExpDateSPCFld.value.substring(1,3) === "//" || ExpDateSPCFld.value.substring(0,1) === "/"){
+                                                                       ExpDateSPCFld.value = "";
+                                                                   }
+                                                                   
+                                                               }
+                                                               //checking if month is greater than 12
+                                                               var month = parseInt((ExpDateSPCFld.value.substring(0,2)), 10);
+                                                               var month1 = parseInt((ExpDateSPCFld.value.substring(0,1)), 10);
+                                                               var month2 = parseInt((ExpDateSPCFld.value.substring(1,2)), 10);
+                                                               var year = parseInt((ExpDateSPCFld.value.substring(3,5)), 10);
+                                                               var year1 = parseInt((ExpDateSPCFld.value.substring(3,4)), 10);
+                                                               var year2 = parseInt((ExpDateSPCFld.value.substring(4,5)), 10);
+                                                               
+                                                               if(month !== null){
+                                                                    if(month > 12){
+                                                                        ExpDateSPCFld.value = "12" + ExpDateSPCFld.value.substring(2,5);
+                                                                    }
+                                                                }
+                                                                //checking if entered date is more than 5 characters
+                                                               if(ExpDateSPCFld.value.length > 5){
+                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,5);
+                                                               }
+                                                               //checking is what's entered is is not a number 
+                                                               if(isNaN(month1))
+                                                                   ExpDateSPCFld.value = "";
+                                                               if(isNaN(month2))
+                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,1) + "";
+                                                               if(isNaN(year1))
+                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,3) + "";
+                                                               if(isNaN(year2))
+                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,4) + "";
+                                                              
+                                                            }
+                                                         },1);
+                                                </script>
+                                    
+                                                    <script>
+                                                        var SubscriptionPayCardNumber = document.getElementById("SubscriptionPayCardNumber");
+
+                                                        function numberFuncSubscriptionPayCardNumber(){
+
+                                                            var number = parseInt((SubscriptionPayCardNumber.value.substring(SubscriptionPayCardNumber.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                SubscriptionPayCardNumber.value = SubscriptionPayCardNumber.value.substring(0, (SubscriptionPayCardNumber.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncSubscriptionPayCardNumber, 1);
+
+                                                        function checkMiddlenumbernumberFuncSubscriptionPayCardNumber(){
+
+                                                            for(var i = 0; i < SubscriptionPayCardNumber.value.length; i++){
+
+                                                                var middleString = SubscriptionPayCardNumber.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    SubscriptionPayCardNumber.value = SubscriptionPayCardNumber.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                    
+                                                    <p onclick="toggleShowBizBankCard();"  style="text-align: center; border: 1px solid darkblue; padding: 5px; margin: 5px; cursor: pointer">Show Business Bank Info. (<span style="font-weight: bolder;">Optional</span>)</p>
+                                    
+                                    <div id="BizBankCard" style="display: none;">
+                                    <p style="color: white; text-align: center; margin: 5px;">Your Business Bank Card</p>
+                                    <p>your bank account where to receive online payments from customers</p>
+                                    
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align: left;">Card Number: </td>
+                                                <td><input placeholder="not added" onclick="checkMiddlenumberFuncSubscriptionBizCardNumber()" onkeydown="checkMiddlenumberFuncSubscriptionBizCardNumber();" id="SubscriptionBizCardNumber" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Card Name: </td>
+                                                <td><input placeholder="not added" style="background-color: #6699ff" type="text" name="CardNameForSubscription" value="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Routing Number: </td>
+                                                <td><input placeholder="not added" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Sec. Code: </td>
+                                                <td><input placeholder="not added" style="background-color: #6699ff" type="text" name="CardCodeForSubscription" value="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Exp. Date: </td>
+                                                <td><input id="cardDateSBB" placeholder="not added" style="background-color: #6699ff" type="text" name="CardExpForSubscription" value="" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table> <script>
+                                                    var ExpDateSBBFld = document.getElementById("cardDateSBB");
+                                                         
+                                                         setInterval(function(){
+                                                             
+                                                            if(ExpDateSBBFld.value !== ""){
+                                                                
+                                                               if(ExpDateSBBFld.value.length === 2){
+                                                                   
+                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,2) + "/" + ExpDateSBBFld.value.substring(2);
+                                                                  
+                                                                   if(ExpDateSBBFld.value === "///" || ExpDateSBBFld.value.substring(1,3) === "//" || ExpDateSBBFld.value.substring(0,1) === "/"){
+                                                                       ExpDateSBBFld.value = "";
+                                                                   }
+                                                                   
+                                                               }
+                                                               //checking if month is greater than 12
+                                                               var month = parseInt((ExpDateSBBFld.value.substring(0,2)), 10);
+                                                               var month1 = parseInt((ExpDateSBBFld.value.substring(0,1)), 10);
+                                                               var month2 = parseInt((ExpDateSBBFld.value.substring(1,2)), 10);
+                                                               var year = parseInt((ExpDateSBBFld.value.substring(3,5)), 10);
+                                                               var year1 = parseInt((ExpDateSBBFld.value.substring(3,4)), 10);
+                                                               var year2 = parseInt((ExpDateSBBFld.value.substring(4,5)), 10);
+                                                               
+                                                               if(month !== null){
+                                                                    if(month > 12){
+                                                                        ExpDateSBBFld.value = "12" + ExpDateSBBFld.value.substring(2,5);
+                                                                    }
+                                                                }
+                                                                //checking if entered date is more than 5 characters
+                                                               if(ExpDateSBBFld.value.length > 5){
+                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,5);
+                                                               }
+                                                               //checking is what's entered is is not a number 
+                                                               if(isNaN(month1))
+                                                                   ExpDateSBBFld.value = "";
+                                                               if(isNaN(month2))
+                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,1) + "";
+                                                               if(isNaN(year1))
+                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,3) + "";
+                                                               if(isNaN(year2))
+                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,4) + "";
+                                                              
+                                                            }
+                                                         },1);
+                                                </script>
+                                    
+                                    
+                                    
+                                    <script>
+                                                        var SubscriptionBizCardNumber = document.getElementById("SubscriptionBizCardNumber");
+
+                                                        function numberFuncSubscriptionBizCardNumber(){
+
+                                                            var number = parseInt((SubscriptionBizCardNumber.value.substring(SubscriptionBizCardNumber.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                SubscriptionBizCardNumber.value = SubscriptionBizCardNumber.value.substring(0, (SubscriptionBizCardNumber.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberFuncSubscriptionBizCardNumber, 1);
+
+                                                        function checkMiddlenumberFuncSubscriptionBizCardNumber(){
+
+                                                            for(var i = 0; i < SubscriptionBizCardNumber.value.length; i++){
+
+                                                                var middleString = SubscriptionBizCardNumber.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    SubscriptionBizCardNumber.value = SubscriptionBizCardNumber.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                    
+                                    </div>
+                                    
+                                    <p style="background-color: peachpuff; border: 1px solid black; text-align: left;"><input id="autoPay" type="checkbox" name="AutoPay" value="ON" />
+                                        <label style="color: black;" for="autoPay">Allow Automatic Payment</label></p>
+                                    
+                                    <input id="ChngSubscBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Update" />
+                                    
+                                    </form>
+                                        
+                                        
+                                    </div>
+                                    <script>
+                                        var SubscriptionDiv = document.getElementById("SubscriptionDiv");
+                                        
+                                        function toggleShowSubscriptionDiv(){
+                                            
+                                            if(SubscriptionDiv.style.display === "none")
+                                                $("#SubscriptionDiv").slideDown("fast");
+                                                //SubscriptionDiv.style.display = "block";
+                                            else
+                                                $("#SubscriptionDiv").slideUp("fast");
+                                                //SubscriptionDiv.style.display = "none";
+                                                
+                                        }
+                                        
+                                        var BizBankCard = document.getElementById("BizBankCard");
+                                        
+                                        function toggleShowBizBankCard(){
+                                            
+                                            if(BizBankCard.style.display === "none")
+                                                $("#BizBankCard").slideDown("fast");
+                                                //BizBankCard.style.display = "block";
+                                            else
+                                                $("#BizBankCard").slideUp("fast");
+                                                //BizBankCard.style.display = "none";
+                                            
+                                        }
+                                        
+                                    </script>
+                                    
+                                    <center><p onclick="toggleShowEditBizInfoDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Edit Your Business Info</p></center>
+                                    
+                                    <div id="EditBizInfoDiv" style="text-align: center; background-color: #6699ff; display: none">
+                                        <form name="UpdateBizInfoForm">
+                                        <p style="color: white;">Your Business Information</p>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align: left;">Business Name: </td>
+                                                    <td><input id="ProvBNameFld" style="background-color: #6699ff;" type="text" name="BusinessNameFld" value="<%=BusinessName%>" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Business Email: </td>
+                                                    <td><input id="ProvBEmailFld" style="background-color: #6699ff;" type="text" name="BusinessEmailFld" value="<%=BusinessEmail%>" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Business Tel. Number: </td>
+                                                    <td><input id="ProvBTelFld" style="background-color: #6699ff;" type="text" name="BusinessTelephoneNumberFld" value="<%=BusinessTel%>" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: left;">Business Type: </td>
+                                                    <td><select id="businessType" name="BusinessType">
+                                            <option><%=BusinessType%></option>
+                                            <option>Barber Shop</option>
+                                            <option>Beauty Salon</option>
+                                            <option>Day Spa</option>
+                                            <option>Dentist</option>
+                                            <option>Dietician</option>
+                                            <option>Eyebrows and Eyelashes</option>
+                                            <option>Hair Removal</option>
+                                            <option>Hair Salon</option>
+                                            <option>Holistic Medicine</option>
+                                            <option>Home Services</option>
+                                            <option>Makeup Artist</option>
+                                            <option>Massage</option>
+                                            <option>Medical Aesthetician</option>
+                                            <option>Medical Center</option>
+                                            <option>Nail Salon</option>
+                                            <option>Personal Trainer</option>
+                                            <option>Pet Services</option>
+                                            <option>Physical Therapy</option>
+                                            <option>Piercing</option>
+                                            <option>Podiatry</option>
+                                            <option>Tattoo Shop</option>
+                                            <option>Other</option>
+                                        </select></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p style="color: white;">Your Business Location (Address)</p>
+                                        <p style="margin: 5px; text-align: center;">Providing accurate address information<br/>will help customers locate your business</p>
+                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="50" style="background-color: #6699ff; border: 1px solid black;"/></p>
+                                        
+                                        <p> House<input id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="<%=HouseNumber%>" size="4" style="background-color: #6699ff;"/>
+                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="<%=StreetName%>" size="24" style="background-color: #6699ff;"/></p>
+                                        <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="<%=Town%>" size="43" style="background-color: #6699ff;"/></p>
+                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="<%=City%>" size="22" style="background-color: #6699ff;"/>
+                                        Zip Code:<input id="ZCode" type="text" name="ZCode" placeholder='123...' value="<%=ZipCode%>" size="4" style="background-color: #6699ff;"/></p>
+                                        <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="<%=Country%>" size="40" style="background-color: #6699ff;"/></p>
+                                        
+                                        <input id="ProvIDforUpdateBiz" type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                        <input id="UpdateProvBizBtn" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="button" value="Update" name="updateBizInfoBtn" />
+                                        </form>
+                                        
+                                        <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#UpdateProvBizBtn').click(function(event) {  
+                                                        
+                                                        
+                                                        var ProviderID = document.getElementById("ProvIDforUpdateBiz").value;
+                                                        
+                                                        //address information
+                                                        var HouseNumber = document.getElementById("HouseNumber").value;
+                                                        var Street = document.getElementById("Street").value;
+                                                        var Town = document.getElementById("Town").value;
+                                                        var City = document.getElementById("City").value;
+                                                        var Country = document.getElementById("Country").value;
+                                                        var ZCode = document.getElementById("ZCode").value;
+                                                        
+                                                        //business information
+                                                        var BusinessName = document.getElementById("ProvBNameFld").value;
+                                                        var BusinessEmail = document.getElementById("ProvBEmailFld").value;
+                                                        var BusinessTel = document.getElementById("ProvBTelFld").value;
+                                                        var BizTypeObj = document.getElementById("businessType");
+                                                        var BizType = BizTypeObj.options[BizTypeObj.selectedIndex].text;
+                                                        
+                                                        
+                                                        /*alert("HouseNumber: " + HouseNumber);
+                                                        alert("Town: " + Town);
+                                                        alert("City: " + City);
+                                                        alert("Country: " + Country);
+                                                        alert("ZCode: " + ZCode);
+                                                        alert("Street: " + Street);
+                                                        alert("BusinessName: " + BusinessName);
+                                                        alert("BusinessEmail: " + BusinessEmail);
+                                                        alert("Business Type: " + BizType);
+                                                        alert("Business Telephone: " + BusinessTel);
+                                                        alert("ProviderID: "+ProviderID);*/
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "UpdateProvBizInfoController",  
+                                                        data: "HouseNumber="+HouseNumber+"&ProviderID="+ProviderID+"&Street="+Street+"&Town="+Town+"&City="+City+"&Country="+Country+"&ZCode="+ZCode+"&BusinessEmailFld="+BusinessEmail+"&BusinessTelephoneNumberFld="+BusinessTel+"&BusinessType="+BizType+"&BusinessNameFld="+BusinessName,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("EditBizInfoDiv").style.display = "none";
+                                                          $.ajax({  
+                                                            type: "POST",  
+                                                            url: "getProviderBizInforAjax",  
+                                                            data: "ProviderID="+ProviderID,  
+                                                            success: function(result){  
+                                                              //alert(result);
+                                                              
+                                                              var BusinessInfo = JSON.parse(result);
+                                                              //alert(BusinessInfo.BusinessName);
+                                                              //alert(BusinessInfo.BusinessEmail);
+                                                              //alert(BusinessInfo.BusinessTel);
+                                                              //alert(BusinessInfo.BusinessType);
+                                                              //alert(BusinessInfo.Address.HouseNumber);
+                                                              //alert(BusinessInfo.Address.Street);
+                                                              //alert(BusinessInfo.Address.Town);
+                                                              //alert(BusinessInfo.Address.City);
+                                                              //alert(BusinessInfo.Address.Country);
+                                                              //alert(BusinessInfo.Address.ZipCode);
+                                                              
+                                                              document.getElementById("HouseNumber").value = BusinessInfo.Address.HouseNumber;
+                                                              document.getElementById("Street").value = BusinessInfo.Address.Street;
+                                                              document.getElementById("Town").value = BusinessInfo.Address.Town;
+                                                              document.getElementById("City").value = BusinessInfo.Address.City;
+                                                              document.getElementById("Country").value = BusinessInfo.Address.Country;
+                                                              document.getElementById("ZCode").value = BusinessInfo.Address.ZipCode;
+                                                              
+                                                              var Address = BusinessInfo.Address.HouseNumber + " " + BusinessInfo.Address.Street + ", " + BusinessInfo.Address.Town + ", "
+                                                                      + BusinessInfo.Address.City + ", " + BusinessInfo.Address.Country + " " + BusinessInfo.Address.ZipCode;
+                                                              var FirstName = BusinessInfo.ProvName;
+                                                              
+                                                              document.getElementById("CompanyDetail").innerHTML = BusinessInfo.BusinessName;
+                                                              document.getElementById("AddressDetail").innerHTML = Address;
+                                                        
+                                                              document.getElementById("ProvBNameFld").value = BusinessInfo.BusinessName;
+                                                              document.getElementById("ProvBEmailFld").value = BusinessInfo.BusinessEmail;
+                                                              document.getElementById("ProvBTelFld").value = BusinessInfo.BusinessTel;
+                                                              BizTypeObj.options[BizTypeObj.selectedIndex].text = BusinessInfo.BusinessType;
+                                                              document.getElementById("LoginNameDisplay").innerHTML = " Logged in as " +FirstName+ " - " + BusinessInfo.BusinessName;
+                                                          
+                                                          
+                                                            }                
+                                                         });
+                                                          
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                        </script>
+                                        
+                                        <script>
+                                                    
+                                                    var ProvBNameFld = document.getElementById("ProvBNameFld");
+                                                    var ProvBEmailFld = document.getElementById("ProvBEmailFld");
+                                                    var ProvBTelFld = document.getElementById("ProvBTelFld");
+                                                    var HouseNumber = document.getElementById("HouseNumber");
+                                                    var Street = document.getElementById("Street");
+                                                    var Town = document.getElementById("Town");
+                                                    var City = document.getElementById("City");
+                                                    var ZCode = document.getElementById("ZCode");
+                                                    var Country = document.getElementById("Country");
+                                                    var UpdateProvBizBtn = document.getElementById("UpdateProvBizBtn");
+                                                    
+                                                    function CheckUpdateProvBizBtn(){
+                                                        
+                                                        if(ProvBNameFld.value === "" || ProvBEmailFld.value === "" || ProvBTelFld.value === ""
+                                                                || HouseNumber.value === "" || Street.value === "" || Town.value === "" 
+                                                                || City.value === "" || ZCode.value === "" || Country.value === "" ){
+                                                            
+                                                            UpdateProvBizBtn.style.backgroundColor = "darkgrey";
+                                                            UpdateProvBizBtn.disabled = true;
+                                                        }else{
+                                                            UpdateProvBizBtn.style.backgroundColor = "pink";
+                                                            UpdateProvBizBtn.disabled = false;
+                                                        }
+                                                            
+                                                        
+                                                    }
+                                                    setInterval(CheckUpdateProvBizBtn,1);
+                                                    
+                                                </script>
+                                        
+                                    </div>
+                                    
+                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Your Queue Stats.</p></center>
+                                    <center><p onclick="showUpdateLoginDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Edit Your Login Info.</p></center>
+                                    
+                                    <div id="UpdateLoginDiv" style="text-align: center; background-color: #6699ff; display: none;">
+                                        
+                                        <p style="color: white; margin: 5px;">Your Login Information</p>
+                                        
+                                        <%
+                                            String UserName = "";
+                                            String Password = "";
+                                            
+                                            try{
+                                                
+                                                Class.forName(Driver);
+                                                Connection UsrAcntConn = DriverManager.getConnection(Url, user, password);
+                                                String UsrAcntString = "select * from QueueServiceProviders.UserAccount where Provider_ID = ?";
+                                                PreparedStatement UsrAcntPst = UsrAcntConn.prepareStatement(UsrAcntString);
+                                                UsrAcntPst.setInt(1, UserID);
+                                                
+                                                ResultSet UsrAcntRec = UsrAcntPst.executeQuery();
+                                                
+                                                while(UsrAcntRec.next()){
+                                                    
+                                                    UserName = UsrAcntRec.getString("UserName").trim();
+                                                }
+                                                
+                                            }catch(Exception e){
+                                                e.printStackTrace();
+                                            }
+                                            
+                                        %>
+                                        
+                                        <form name="UpdateLoginInfo" >
+                                            
+                                            <center><table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="text-align: left;">Username: </td>
+                                                                <td><input id="UsrNamefld" style="background-color: #6699ff;" type="text" name="UserNameFld" value="<%=UserName%>" /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <input id="oldPassfld" type="hidden" name="oldpass" value=""/>
+                                                                <td style="text-align: left;">Old Password: </td>
+                                                                <td><input id="compareOldPassfld" id="" style="background-color: #6699ff;" type="password" name="OldPasswordFld" value="" /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: left;">New Password: </td>
+                                                                <td><input id="newPassfld" style="background-color: #6699ff;" type="password" name="NewPasswordFld" value="" /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: left;">Confirm Password: </td>
+                                                                <td><input id="compareNewPassfld" style="background-color: #6699ff;" type="password" name="ConfirmPasswordFld" value="" /></td>
+                                                            </tr>
+                                                        </tbody>
+                                                </table></center>
+                                                <p style="color: white;" id="UpdatePassStatus"></p>    
+                                                <p id="WrongPassStatus" style="background-color: red; color: white; display: none;">Your current password is wrong </p>
+                                               <input id="ProviderIDforUpdateLogin" type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                               <input id="UserIndexforUpdateLogin" type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                               <input id="updateUsrAcntBtn" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="button" value="Update" />
+                                        </form>
+                                    </div>
+                                    <script>
+                                                        $(document).ready(function(){
+                                                            $("#updateUsrAcntBtn").click(function(event){
+                                                                
+                                                                var ProviderID = document.getElementById("ProviderIDforUpdateLogin").value;
+                                                                var UserIndex = document.getElementById("UserIndexforUpdateLogin").value;
+                                                                var UserName = document.getElementById("UsrNamefld").value;
+                                                                var NewPassword = document.getElementById("newPassfld").value;
+                                                                var oldPassword = document.getElementById("compareOldPassfld").value;
+                                                                
+                                                                /*alert(ProviderID);
+                                                                alert(UserName);
+                                                                alert(NewPassword);
+                                                                alert(oldPassword);
+                                                                alert(UserIndex);*/
+                                                                
+                                                                $.ajax({
+                                                                    method: "POST",
+                                                                    url: "updateProvLoginInfo",
+                                                                    data: "ProviderID="+ProviderID+"&UserIndex="+UserIndex+"&UserNameFld="+UserName+"&NewPasswordFld="+NewPassword+"&OldPasswordFld="+oldPassword,
+                                                                    success: function(result){
+                                                                        
+                                                                        //alert(result);
+                                                                        
+                                                                        if(result === "fail"){
+                                                                            
+                                                                            document.getElementById("WrongPassStatus").style.display = "block";
+                                                                            document.getElementById("compareOldPassfld").value = "";
+                                                                            document.getElementById("compareOldPassfld").style.backgroundColor = "red";
+                                                                            
+                                                                            //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
+                                                                            //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
+                                                                            //document.getElementById("LoginFormBtn").disabled = true;
+                                                                            //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
+                                                                        }
+                                                                        if(result === "success"){
+                                                                            document.getElementById("newPassfld").value = "";
+                                                                            document.getElementById("compareOldPassfld").value = "";
+                                                                            document.getElementById("compareOldPassfld").style.backgroundColor = "#6699ff";
+                                                                            document.getElementById("compareNewPassfld").value = "";
+                                                                            document.getElementById("WrongPassStatus").style.display = "none";
+                                                                            
+                                                                            //getUserAccountNameController
+                                                                            $.ajax({
+                                                                                method: "POST",
+                                                                                url: "getProvUserAccountName",
+                                                                                data: "ProviderID="+ProviderID,
+                                                                                
+                                                                                success: function(result){
+
+                                                                                    document.getElementById("UsrNamefld").value = result;
+
+
+                                                                                }
+
+                                                                            });
+                                                                        }
+                                                                    }
+                                                                    
+                                                                });
+                                                                
+                                                            });
+                                                        });
+                                                    </script>
+                                               
+                                    <script>
+                                        
+                                        var UsrNamefld = document.getElementById("UsrNamefld");
+                                        var oldPassfld = document.getElementById("oldPassfld");
+                                        var compareOldPassfld = document.getElementById("compareOldPassfld");
+                                        var newPassfld = document.getElementById("newPassfld");
+                                        var compareNewPassfld = document.getElementById("compareNewPassfld");
+                                        var updateUsrAcntBtn = document.getElementById("updateUsrAcntBtn");
+                                        var UpdatePassStatus = document.getElementById("UpdatePassStatus");
+                                        
+                                        function CheckUpdateUsrAcntBtn(){
+                                            
+                                            if(UsrNamefld.value === "" || compareOldPassfld.value === "" || newPassfld.value === "" || compareNewPassfld.value === ""){
+                                                UpdatePassStatus.style.backgroundColor = "green";
+                                                UpdatePassStatus.innerHTML = "Uncompleted Form";
+                                                updateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                updateUsrAcntBtn.disabled = true;
+                                            }else if(newPassfld.value.length < 8){ //.length is a property not a function (like .length();)
+                                                   UpdatePassStatus.style.backgroundColor = "red";
+                                                   UpdatePassStatus.innerHTML = "Password Too Short";
+                                                   updateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                   updateUsrAcntBtn.disabled = true;
+                                               }
+                                               else if(newPassfld.value !== compareNewPassfld.value){
+                                                   UpdatePassStatus.style.backgroundColor = "red";
+                                                   UpdatePassStatus.innerHTML = "New Passwords Don't Match";
+                                                   updateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                   updateUsrAcntBtn.disabled = true;
+                                               }else{
+
+                                                   UpdatePassStatus.style.backgroundColor = "green";
+                                                   UpdatePassStatus.innerHTML = "OK";
+                                                   updateUsrAcntBtn.style.backgroundColor = "pink";
+                                                   updateUsrAcntBtn.disabled = false;
+                                               }
+                                               
+                                            
+                                        }
+                                        
+                                        setInterval(CheckUpdateUsrAcntBtn, 1);
+                                        
+                                        var UpdateLoginDiv = document.getElementById("UpdateLoginDiv");
+                                        
+                                        function showUpdateLoginDiv(){
+                                            
+                                            if(UpdateLoginDiv.style.display === "none"){
+                                                //UpdateLoginDiv.style.display = "block";
+                                                $("#UpdateLoginDiv").slideDown("fast");
+                                                $(".scrolldiv").animate({ scrollTop: $(document).height() }, "slow");
+                                            }
+                                            else
+                                                $("#UpdateLoginDiv").slideUp("fast");
+                                                //UpdateLoginDiv.style.display = "none";
+                                        }
+                                        
+                                    </script>
+                                    
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                 
+                                <div id="clientsListDiv" style="display: none;">
+                                <div id="serviceslist">
+                                    
+                                    <center><p style="color: tomato; margin: 5px;">Your Clients and Blocked People</p></center>
+                                    
+                                    <table style="width: 100%;">
+                                        <tbody>
+                                            <tr>
+                                                <td id="ShowClientsBtn" onclick="toggleshowClients();" style="background-color: plum; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer; width: 50%;">Your Clients</td>
+                                                <td id="ShowBlockedPeopleBtn" onclick="toggleshowBlockedPeople();" style="background-color: pink; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer;">Blocked People</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                <div class="scrolldiv" style="height: 330px; overflow-y: auto;">
+                                    
+                                <div id="ProviderClientsDiv">
+                                    
+                                <%
+                                    for(int c = 0; c < ClientsList.size(); c++){
+                                        
+                                        int ClientID = ClientsList.get(c).getUserID();
+                                        String ClientFirstName = ClientsList.get(c).getFirstName().trim();
+                                        String ClientMiddleName = ClientsList.get(c).getMiddleName().trim();
+                                        String ClientLastName = ClientsList.get(c).getLastName().trim();
+                                        String ClientFullName = ClientFirstName + " " + ClientMiddleName + " " + ClientLastName;
+                                        String ClientEmail = ClientsList.get(c).getEmail();
+                                        String ClientTel = ClientsList.get(c).getPhoneNumber();
+                                        String Base64CustPic = "";
+                                        
+                                try{    
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob profilepic = ClientsList.get(c).getProfilePic(); 
+                                    InputStream inputStream = profilepic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
+
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                     Base64CustPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                }
+                                catch(Exception e){}
+                                        
+                                %>
+                                
+                                <div id="EachClientRow<%=c%>" style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">
+                                    
+                            <%
+                                if(Base64CustPic == ""){
+                            %> 
+                            
+                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
+
+                                </center>
+                                    
+                            <%
+                                }else{
+                            %>
+                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
+                                    
+                            <%
+                                }
+                            %>
+                                    <div style="float: right; width: 83%;">
+                                        <p style="font-weight: bolder;"><%=ClientFullName%></p>
+                                        <p><%=ClientTel%></p>
+                                        <p><%=ClientEmail%></p>
+                                    </div>
+                                    
+                                    <p style="clear: both;"></p>
+                                    <!--center><form style="" name="MakeReservation" action="notYet">
+                                        <input style="padding: 5px; background-color: pink; border: solid black 1px; border-radius: 4px;" type="submit" value="Make Reservation" name="MakeReservation" />
+                                    </form></center-->
+                                    
+                                    <form name="DeleteThisClient">
+                                        <input id="PIDDltClnt<%=c%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
+                                        <input id="ClientIDDltClnt<%=c%>" type="hidden" name="EachClientID" value="<%=ClientID%>"/>
+                                        <input id="DeleteClientBtn<%=c%>" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="button" value="Delete this client" />
+                                    
+                                        <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#DeleteClientBtn<%=c%>').click(function(event) {  
+                                                        
+                                                        var eachClientID = document.getElementById("ClientIDDltClnt<%=c%>").value;
+                                                        var ProviderID = document.getElementById("PIDDltClnt<%=c%>").value;
+                                                        
+                                                        
+                                                        //alert("AppointmentID "+AppointmentID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "DeleteClientController",  
+                                                        data: "EachClientID="+eachClientID+"&ProviderID="+ProviderID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("EachClientRow<%=c%>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                        </script>
+                                        
+                                    </form>
+                                </div>
+                            <%}
+                                if(ClientsList.size() == 0){
+                            %>
+                            
+                            <p id="EmptyStatus" style="background-color: red; text-align: center; color: white; margin-top: 30px">Your clients list is empty</p>
+                            
+                            <%}%>
+                            </div>
+                            <div id="BlockedPeopleDiv" style="display: none;">
+                                
+                                <%
+                                    boolean isBlockedEmpty = true;
+                                    
+                                    int eachBlocked = 0;
+                                    
+                                     try{
+                                        Class.forName(Driver);
+                                        Connection BlckCustConn = DriverManager.getConnection(Url, user, password);
+                                        String BlckCustString = "Select * from QueueServiceProviders.BlockedCustomers where ProviderId = ?";
+                                        PreparedStatement BlckCustPst = BlckCustConn.prepareStatement(BlckCustString);
+                                        BlckCustPst.setInt(1, UserID);
+
+                                        ResultSet BlckCustRec = BlckCustPst.executeQuery();
+
+                                        while(BlckCustRec.next()){
+                                            
+                                            isBlockedEmpty = false;
+                                            eachBlocked++;
+                                            
+                                            String CustFullName = "";
+                                            String CustEmail = "";
+                                            String CustMobile = "";
+                                            String Base64CustPic = "";
+                                            
+                                            int CustomerID = BlckCustRec.getInt("CustomerID");
+                                            int BlockedID = BlckCustRec.getInt("BlockedID");
+                                            
+                                            try{
+                                                Class.forName(Driver);
+                                                Connection CustConn = DriverManager.getConnection(Url, user, password);
+                                                String CustStrig = "Select * from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                                                PreparedStatement CustPst = CustConn.prepareStatement(CustStrig);
+                                                CustPst.setInt(1, CustomerID);
+                                                
+                                                ResultSet CustRec = CustPst.executeQuery();
+                                                
+                                                while(CustRec.next()){
+                                                    
+                                                    String firstName = CustRec.getString("First_Name").trim();
+                                                    String middleName = CustRec.getString("Middle_Name").trim();
+                                                    String lastName = CustRec.getString("Last_Name").trim();
+                                                    CustFullName = firstName + " " + middleName + " " + lastName;
+                                                    CustEmail = CustRec.getString("Email").trim();
+                                                    CustMobile = CustRec.getString("Phone_Number").trim();
+                                                    
+                                                    try{    
+                                                        //put this in a try catch block for incase getProfilePicture returns nothing
+                                                        Blob profilepic = CustRec.getBlob("Profile_Pic"); 
+                                                        InputStream inputStream = profilepic.getBinaryStream();
+                                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                        byte[] buffer = new byte[4096];
+                                                        int bytesRead = -1;
+
+                                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                            outputStream.write(buffer, 0, bytesRead);
+                                                        }
+
+                                                        byte[] imageBytes = outputStream.toByteArray();
+
+                                                         Base64CustPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                    }
+                                                    catch(Exception e){}
+                                                    
+                                                }
+                                            }catch(Exception e){
+                                                e.printStackTrace();
+                                            }
+                                %>
+                                
+                                <div id="ClientsRow<%=eachBlocked%>" style="background-color: #6699ff; padding: 5px;  margin-bottom: 5px;">
+                                            
+                            <%
+                                if(Base64CustPic == ""){
+                            %> 
+                            
+                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
+
+                                </center>
+                                    
+                            <%
+                                }else{
+                            %>
+                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
+                                    
+                            <%
+                                }
+                            %>
+                                    <div style="float: right; width: 83%;">
+                                        <p style="font-weight: bolder;"><%=CustFullName%></p>
+                                        <p><%=CustMobile%></p>
+                                        <p><%=CustEmail%></p>
+                                    </div>
+                                    
+                                    <p style="clear: both;"></p>
+                                    
+                                    <form name="UnblockPerson" >
+                                        <input id="BlockedID<%=eachBlocked%>" type="hidden" name="BlockedID" value="<%=BlockedID%>" />
+                                        <input id="UnblockCleintBtn<%=eachBlocked%>" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="button" value="Unblock This Person" name="Unblock" />
+                                        <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#UnblockCleintBtn<%=eachBlocked%>').click(function(event) {  
+                                                        
+                                                        var BlockedID = document.getElementById("BlockedID<%=eachBlocked%>").value;
+                                                        
+                                                        
+                                                        //alert("AppointmentID "+AppointmentID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "UnblockCustomerController",  
+                                                        data: "BlockedID="+BlockedID,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          document.getElementById("ClientsRow<%=eachBlocked%>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                        </script>
+                                    </form>
+                                </div>
+                                        
+                                <%
+                                        }
+                                    }
+                                    catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    if(isBlockedEmpty){
+                                %>
+                                
+                                <p id="NoBlockedClientStatus" style="color: white; background-color: red; text-align: center; margin-top: 30px;">You haven't blocked any person</p>
+                                
+                                <%}%>
+                            </div>
+                            <div>
+                                </div>
+                                </div>
+                                </div>
+                                 </td> 
+                        </tr>
+                    </tbody>
+                    </table>
+                                     
+                </div></center>
+                
+                <form action = "LogoutController" name="LogoutForm" method="POST">
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <center><input type="submit" value="Logout" class="button" /></center>
+                </form>
+                
+                </div>
+                        
+                                    
+       
+        <div id="footer">
+            <p>AriesLab &copy;2019</p>
+        </div>
+                                     
+    </div>
+                                     
+    </body>
+    
+    <script src="scripts/script.js"></script>
+    <script src="scripts/checkAppointmentDateUpdate.js"></script>
+    <script src="scripts/QueueLineDivBehavior.js"></script>
+    <script src="scripts/CollectAddressInfo.js"></script>
+    
+</html>

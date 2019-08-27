@@ -1,0 +1,95 @@
+		    *{
+                padding: 0;
+                margin: 0;
+            }
+            a{
+                text-decoration: none;
+                color: white;
+            }
+            h1,h2,h3{
+                margin: 0;
+            }
+            body{ }
+            #additional{
+                background-color: #eeeeee;
+                clear: both;
+                width: 100%;
+                padding-top: 15px;
+                /*padding-left: 26%;*/
+            }
+            #container{
+                background-color: #eeeeee;
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 234px;
+                
+            }
+            #header{
+                background-image: url("actualheader.jpg");
+                background-size: cover;
+                border-color: activeborder;
+                border-width: 1px;
+                border-style: solid;
+                position: fixed;
+				box-shadow: 2px 2px 5px darkgray;
+                width: 100%;
+            }
+            #content{
+                background-color: #eeeeee;
+                padding: 5px;
+                border: 1px solid burlywood;
+                clear: both;
+            }
+            #nav{
+                background-color: #eeeeee;
+                width: auto;
+                text-align: center;
+                margin-left: 0;
+                /*position: fixed;*/
+                height: 100%;
+            }
+            #nav ul{
+                list-style-type: none;
+                padding: 0;
+            }
+            #nav ul li{
+                margin: 3px;
+                border: 1px solid black;
+                background-color: white;
+                padding: 0;
+            }
+            #nav ul li:hover{
+                border: 1px solid black;
+                background-color: #6699ff;
+                color: #000099;
+            }
+            #nav ul a li{
+                color: black;
+            }
+            nav ul a li.active{
+            }
+			#nav ul #queuenav:hover{
+			background-color: pink;
+			}
+            #main{
+                background-color: white;
+                text-align: center;
+                margin-bottom: 5px;
+                padding-bottom: 15px;
+                width: 73%;
+                float: right;
+            }
+            #main p{
+                margin: auto;
+            }
+            #footer{
+                background-color: aquamarine;
+                clear: both;
+                padding-right: 5px;
+                text-align: right;
+            }
+            #allnavs{
+                float: left;
+                width: 27%;
+            }
