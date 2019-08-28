@@ -1,0 +1,17 @@
+[33mcommit 8973664fb6bfeb2fc44d94bdc666c3267fc8095b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Mohammed Adinan <adinanaries@outlook.com>
+Date:   Wed Aug 28 13:54:38 2019 -0400
+
+    Added a Permanent Nav that stays at the top for various navigations
+
+[33mcommit 552db63f9117209d0cd62b7d244d5aed3e79a4ee[m
+Author: Mohammed Adinan <adinanaries@outlook.com>
+Date:   Tue Aug 27 01:15:10 2019 -0400
+
+    typo error fixed in script file
+
+[33mcommit 97cf6c25c7262d02c3fff1be5cf3e14f7d45ef8b[m
+Author: Mohammed Adinan <adinanaries@outlook.com>
+Date:   Mon Aug 26 22:04:09 2019 -0400
+
+    Queue's first commit
