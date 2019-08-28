@@ -1,718 +1,747 @@
-		*{
-            padding: 0;
-            margin: 0;
-			/*font-family: "Helvetica";*/
-        }
-        body{
-            background-color: #2c3539;
-			overflow-x: hidden;
-        }
-        a{
-            text-decoration: none;
-        }
-		small{
-			font-family: Helvetica;
-			font-size: 13px;
-		}
-		.EacFavsDiv{
-			
-		}
-        h1,h2,h3{
-            margin: 0;
-        }
-		#DropDown{
-			z-index: 110;
-			margin-top: 2px;
-			position: fixed;
-			margin-left: 30px;
-			background-color: pink;
-			width: 150px;
-			border: 1px solid black;
-			display: none;
-			box-shadow: 4px 4px 10px #334d81;
-		}
-		#DropDown ul li{
-			list-style-type: none;
-			padding: 5px;
-			
-		}
-		#DropDown ul li:hover{
-			background-color: darkgrey;
-		}
-		#miniNav{
-			/*background-color: pink;*/
-			width: 100%;
-			z-index: 100;
-			position: fixed;
-			box-shadow: 4px 4px 10px #334d81;
-			padding: 1px;
-			padding-bottom: 0;
-			opacity: 0.95;
-		}
-		#miniNavPov{
-			/*background-color: pink;*/
-			width: 100%;
-			z-index: 110;
-			position: fixed;
-			box-shadow: 4px 4px 10px #334d81;
-			padding: 1px;
-			padding-bottom: 0;
-			opacity: 0.95;
-		}
-		#miniNav #miniNavIcons li{
-			display: inline-block;
-			text-decoration: none;
-			list-style-type: none;
-			border-radius: 100%;
-			background-color: #6699ff;
-			border: 1px solid black;
-			padding: 1px;
-			padding-top: 4px;
-			width: 30px;
-			height: 30px;
-			cursor: pointer;
-		}
-		#CustomerprofileTable{
-			text-align: left;
-			width: 90%;
-			margin: auto;
-		}
-		#ProviderprofileTable{
-			text-align: left;
-			width: 90%;
-			margin: auto;
-		}
-		input{
-			background-color:  #ccccff;
-			color: black;
-			margin: 5px;
-			border:0;
-			border-bottom:1px solid black;
-			text-align: center;
-		}
-		select{
-			background-color: brown;
-			border:1px solid black;
-			color: white;
-			margin-bottom: 10px;
-			border-bottom: 1px solid black;
-			border-radius: 3px;
-		}
-		.button{
-			border: 1px solid black;
-			background-color: pink;
-			padding: 10px;
-			padding-left: 20px;
-			padding-right: 20px;
-			color: black;
-			border-radius: 3px;
-		}
-		.button:hover{
-			background-color: red;
-		}
-        #header{
-            /*border-bottom: solid 3px black;*/
-            padding-top: 10px;
-			padding-bottom: 10px;
-            background-color: #ccccff;
-			position: relative;
-			/*box-shadow: 4px 4px 10px #334d81;
+* {
+  padding: 0;
+  margin: 0;
+  /*font-family: "Helvetica";*/
+}
+body {
+  background-color: #2c3539;
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+}
+small {
+  font-family: Helvetica;
+  font-size: 13px;
+}
+.EacFavsDiv {
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+#DropDown {
+  z-index: 110;
+  margin-top: 2px;
+  position: fixed;
+  margin-left: 30px;
+  background-color: pink;
+  width: 150px;
+  border: 1px solid black;
+  display: none;
+  box-shadow: 4px 4px 10px #334d81;
+}
+#DropDown ul li {
+  list-style-type: none;
+  padding: 5px;
+}
+#DropDown ul li:hover {
+  background-color: darkgrey;
+}
+#miniNav {
+  /*background-color: pink;*/
+  width: 100%;
+  z-index: 100;
+  position: fixed;
+  box-shadow: 4px 4px 10px #334d81;
+  padding: 1px;
+  padding-bottom: 0;
+  opacity: 0.95;
+}
+#miniNavPov {
+  /*background-color: pink;*/
+  width: 100%;
+  z-index: 110;
+  position: fixed;
+  box-shadow: 4px 4px 10px #334d81;
+  padding: 1px;
+  padding-bottom: 0;
+  opacity: 0.95;
+}
+#miniNav #miniNavIcons li {
+  display: inline-block;
+  text-decoration: none;
+  list-style-type: none;
+  border-radius: 100%;
+  background-color: #6699ff;
+  border: 1px solid black;
+  padding: 1px;
+  padding-top: 4px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+#CustomerprofileTable {
+  text-align: left;
+  width: 90%;
+  margin: auto;
+}
+#ProviderprofileTable {
+  text-align: left;
+  width: 90%;
+  margin: auto;
+}
+input {
+  background-color: #ccccff;
+  color: black;
+  margin: 5px;
+  border: 0;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+select {
+  background-color: brown;
+  border: 1px solid black;
+  color: white;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+  border-radius: 3px;
+}
+.button {
+  border: 1px solid black;
+  background-color: pink;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: black;
+  border-radius: 3px;
+}
+.button:hover {
+  background-color: red;
+}
+#header {
+  /*border-bottom: solid 3px black;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #ccccff;
+  position: relative;
+  /*box-shadow: 4px 4px 10px #334d81;
 			margin-bottom: 1px;*/
-        }
-		#ProviderHeader{
-			/*border-bottom: solid 3px black;*/
-            padding-top: 40px;
-			padding-bottom: 10px;
-            background-color: #ccccff;
-			position: relative;
-			/*box-shadow: 4px 4px 10px #334d81;
+}
+#ProviderHeader {
+  /*border-bottom: solid 3px black;*/
+  padding-top: 40px;
+  padding-bottom: 10px;
+  background-color: #ccccff;
+  position: relative;
+  /*box-shadow: 4px 4px 10px #334d81;
 			margin-bottom: 1px;*/
-		}
-		#header img{
-			width: 180px;
-			height: 60px;
-		}
-		#ProviderHeader img{
-			width: 180px;
-			height: 60px;
-		}
-        #container{
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #main h2{
-            color: darkblue;
-        }
-        #nav{
-            background-color: cornflowerblue;
-            /*width: 200px;*/
-            /*border: solid black 1px;*/
-            text-align: center;
-			padding-bottom: 10px;
-			padding-top: 5px;
-            /*float: left;*/
-        }
-		#UpdateUserAccountForm{
-			display: none;
-		}
-		#SendFeedBackForm{
-			display: none;
-		}
-        #nav a{
-            text-decoration: none;
-			
-        }
-		#providerlist{
-			width: 100%;
-			margin-left: auto;
-			margin-right: auto;
-			
-		}
-		#serviceslist ul{
-			list-style-type: none;
-		}
-		#serviceslist ul li{
-			color: darkblue;
-		}
-		#serviceslist{
-			border-top: solid 1px darkgrey;
-		}
-		.searchfld{
-			background-color: cornflowerblue;
-			border: 0;
-			color: darkblue;
-			text-align: left;
-			height: 44px;
-			font-size: 15px;
-			margin-right: 0;
-			margin: 1px;
-			border-right: 1px solid black;
-			border-radius: 0;
-			min-width: 230px;
-		}
-		
-		.searchbtn{
-			border: 0;
-			background-color: pink;
-			margin: 1px;
-			margin-left: 0;
-			padding-left: 10px;
-			padding-right: 10px;
-			height: 44px;
-			font-size: 15px;
-			/*border-radius: 4px;*/
-		}
-		.searchbtn:hover{
-			background-color: red;
-		}
-		
-        #main{
-            background-color: #6699ff;
-            width: auto;
-            text-align: center;
-            /*min-height: 700px;*/
-			/*padding-top: 15px;*/
-			padding-bottom: 15px;
-			margin-bottom: 0;
-        }
-        #newbusiness{
-            background-color: #ccccff;
-            text-align: center;
-            clear: both;
-            padding: 5px;
-			margin-top: 0;
-			/*border-top: black solid 2px;
+}
+#header img {
+  width: 180px;
+  height: 60px;
+}
+#ProviderHeader img {
+  width: 180px;
+  height: 60px;
+}
+#container {
+  margin-left: auto;
+  margin-right: auto;
+}
+#main h2 {
+  color: darkblue;
+}
+#nav {
+  background-color: cornflowerblue;
+  /*width: 200px;*/
+  /*border: solid black 1px;*/
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 5px;
+  /*float: left;*/
+}
+#UpdateUserAccountForm {
+  display: none;
+}
+#SendFeedBackForm {
+  display: none;
+}
+#nav a {
+  text-decoration: none;
+}
+#providerlist {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#serviceslist ul {
+  list-style-type: none;
+}
+#serviceslist ul li {
+  color: darkblue;
+}
+#serviceslist {
+  border-top: solid 1px darkgrey;
+}
+.searchfld {
+  background-color: cornflowerblue;
+  border: 0;
+  color: darkblue;
+  text-align: left;
+  height: 44px;
+  font-size: 15px;
+  margin-right: 0;
+  margin: 1px;
+  border-right: 1px solid black;
+  border-radius: 0;
+  min-width: 230px;
+}
+
+.searchbtn {
+  border: 0;
+  background-color: pink;
+  margin: 1px;
+  margin-left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 44px;
+  font-size: 15px;
+  /*border-radius: 4px;*/
+}
+.searchbtn:hover {
+  background-color: red;
+}
+
+#main {
+  background-color: #6699ff;
+  width: auto;
+  text-align: center;
+  /*min-height: 700px;*/
+  /*padding-top: 15px;*/
+  padding-bottom: 15px;
+  margin-bottom: 0;
+}
+#newbusiness {
+  background-color: #ccccff;
+  text-align: center;
+  clear: both;
+  padding: 5px;
+  margin-top: 0;
+  /*border-top: black solid 2px;
 			box-shadow: 4px -4px 10px #334d81;
             position: fixed;*/
-            /*height: 100%;*/
-        }
-		#logindetails{
-			margin-left: auto;
-			margin-right: auto;
-		}
-		#businessdetails{
-			margin-left: auto;
-			margin-right: auto;
-		}
-		#providerdetails{
-			width: 100%;
-			max-width: 600px;
-		}
-		#providerdetails tbody tr td{
-			/*background-color: #eeeeee;*/
-			background-color: white;
-			padding: 2px;
-			border-radius: 4px;
-			box-shadow: 4px 4px 10px #334d81;
-			width: auto;
-		}
-		#ProInfoTable tbody tr td{
-			border-radius:0;
-			box-shadow: 0 0 0;
-			border: 0;
-		}
-	    #hoursTable tbody tr td{
-			border-radius:0;
-			box-shadow: 0 0 0;
-			border: 0;
-		}
-		#eachprov{
-			background-color: #eeeeee;
-			color: balck;
-			border: 1px darkgrey solid;
-			padding: 5px;
-			border-radius: 4px;
-		}
-		#eachprov:hover{
-			box-shadow: 2px 2px 2px darkgrey;
-		}
-		#providerdetails p{
-			text-align: left;
-			margin: 5px;
-			color:black;
-		}
-		.FavDiv{
-			display: none;
-		}
-		.AppHistoryDiv{
-			display: none;
-		}
-		.propic{
-			background-color: #d8d8d8;
-			background-image: url("view-wallpaper-7.jpg");
-			background-size: cover;
-			margin-bottom: 2px;
-			padding: 0;
-			padding-top: 200px;
-			height: 80px;
-		}
-		.propic img{
-			/*border: 5px solid #eeeeee;*/
-			border: white solid 5px;
-			background-color: #7e7e7e;
-			border-radius: 100%;
-			padding: 0;
-		}
-		.proinfo{
-			padding-top: 80px;
-			padding-left: 0;
-		}
-		
-		@media only screen and (max-width: 1000px){
-			.scrolldiv::-webkit-scrollbar{
-				display: none;
-			}
-			.scrolldiv{
-				overflow: -moz-scrollbars-none;
-				-ms-overflow-style: none;
-			}
-		}
-		
-        #footer{
-            clear: both;
-            background-color:#ff3333;
-            text-align: right;
-            padding-right: 3px;
-            
-        }
-        #footer p{
-            margin: 0;
-        }
-        #providericons td{
-            /*background-color: pink;*/
-			box-shadow: 4px 4px 10px #334d81;
-            /*border: solid #334d81 1px;*/
-			border-radius: 10px;
-            padding: 10px;
-        }
-        #providericons td:hover{
-            background-color: pink;
-            transition: all 0.3s ease-in;
-        }
-		#providericons td a{
-			color: black;
-		}
-		#ProviderAppointmentList td{
-			border: 1px solid black;
-			padding-left: 5px;
-			padding-right: 5px;
-		}
-		#QueuLineDiv{
-			border-top: 1px solid darkgrey;
-			border-bottom: 1px solid darkgrey;
-			background-color: #eeeeee;
-			padding-top: 5px;
-			margin-bottom: 7px;
-			
-		}
-		#QueuLineDiv table tbody tr td{
-			box-shadow: 0 0 0;
-			background-color: #eeeeee;
-			width: 5px;
-			margin: 0px;
-			cursor: pointer;
-			padding: 2px;
-			border-bottom: 1px solid darkgrey;
-			border-top: 1px solid darkgrey;
-			
-		}
-		.servicesList{
-			background-color: #eeeeee;
-			border-bottom: 1px solid darkgrey;
-			margin-bottom: 10px;
-		}
-		#QueuLineDiv table tbody tr td:hover{
-			background-color: darkgrey;
-			border: 1px black solid;
-		}
-		#reviewsheet{
-			background-color: white;
-			padding: 10px;
-			margin: 5px;
-		}
-		#ShowBizForm:hover{
-			border-bottom: #6699ff 5px solid;
-		}
-		#ShowCustForm:hover{
-			border-bottom: #6699ff 5px solid;
-		}
-		.SearchObject{
-			border: black solid 1px;
-			border-radius: 4px;
-			max-width: 330px;
-			text-align: right;
-			padding: 0;
-			margin-top: 5px;
-		}
-		
-		.SearchObject:hover{
-			box-shadow: 4px 4px 10px #334d81;
-		}
-		
-		.deleteFavProvider{
-			display: none;
-		}
-		.addFavProvForm{
-			display: none;
-		}
-		
-		#addServiceBtn{
-			border: 1px solid black;
-			padding: 4px;
-			background-color: grey;
-			color: white;
-		}
-		
-		#addServiceBtn:hover{
-			box-shadow: 2px 2px 2px purple;
-		}
-		
-		#addServiceDiv{
-			display: none;
-			margin-top: 10px;
-			background-color: white;
-			max-width: 400px;
-			border-bottom: 1px solid darkgray;
-			border-right: 1px solid darkgray;
-		}
-		
-		
-		#customizeAppointmentTime{
-			display: none;
-		}
-		
-		.ratingAndReviewaForm{
-			display: none;
-		}
-		
-		.changeServiceForm{
-			display: none;
-		}
-		
-		.deleteAppointmentForm{
-			display: none;
-		}
-		
-		.changeBookedAppointmentForm{
-			display: none;
-		}
-		
-		.deleteAppointmentHistoryForm{
-			display: none;
-		}
-		
-		#businessForm{
-			display: none;
-		}
-		#customerForm{
-			display: none;
-		}
-		
-		#accountTypeOptions{
-			
-			/*border: 1px solid black;*/
-			width: 300px;
-			box-shadow: #334d81 4px 4px 10px;
-			padding: 5px;
-			border-radius: 5px;
-	
-		}
-		
-		#CreditDebitCardDetails{
-			display: none;
-		}
-		
-		#CreditDebitCardDetails td{
-			border-radius: 0;
-		}
-		
-	#SettingsDiv ul li{
-		text-decoration: none;
-		list-style-type: none;
-		border: 1px solid white;
-		padding: 5px;
-		margin: 5px;
-	}
-		
+  /*height: 100%;*/
+}
+#logindetails {
+  margin-left: auto;
+  margin-right: auto;
+}
+#businessdetails {
+  margin-left: auto;
+  margin-right: auto;
+}
+#providerdetails {
+  width: 100%;
+  max-width: 600px;
+}
+#providerdetails tbody tr td {
+  /*background-color: #eeeeee;*/
+  background-color: white;
+  padding: 2px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 10px #334d81;
+  width: auto;
+}
+#ProInfoTable tbody tr td {
+  border-radius: 0;
+  box-shadow: 0 0 0;
+  border: 0;
+}
+#hoursTable tbody tr td {
+  border-radius: 0;
+  box-shadow: 0 0 0;
+  border: 0;
+}
+#eachprov {
+  background-color: #eeeeee;
+  color: balck;
+  border: 1px darkgrey solid;
+  padding: 5px;
+  border-radius: 4px;
+}
+#eachprov:hover {
+  box-shadow: 2px 2px 2px darkgrey;
+}
+#providerdetails p {
+  text-align: left;
+  margin: 5px;
+  color: black;
+}
+.FavDiv {
+  display: none;
+}
+.AppHistoryDiv {
+  display: none;
+}
+.propic {
+  background-color: #d8d8d8;
+  background-image: url("view-wallpaper-7.jpg");
+  background-size: cover;
+  margin-bottom: 2px;
+  padding: 0;
+  padding-top: 200px;
+  height: 80px;
+}
+.propic img {
+  /*border: 5px solid #eeeeee;*/
+  border: white solid 5px;
+  background-color: #7e7e7e;
+  border-radius: 100%;
+  padding: 0;
+}
+.proinfo {
+  padding-top: 80px;
+  padding-left: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  .scrolldiv::-webkit-scrollbar {
+    display: none;
+  }
+  .scrolldiv {
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+  }
+}
+
+#footer {
+  clear: both;
+  background-color: #ff3333;
+  text-align: right;
+  padding-right: 3px;
+}
+#footer p {
+  margin: 0;
+}
+#providericons td {
+  /*background-color: pink;*/
+  box-shadow: 4px 4px 10px #334d81;
+  /*border: solid #334d81 1px;*/
+  border-radius: 10px;
+  padding: 10px;
+}
+#providericons td:hover {
+  background-color: pink;
+  transition: all 0.3s ease-in;
+}
+#providericons td a {
+  color: black;
+}
+#ProviderAppointmentList td {
+  border: 1px solid black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+#QueuLineDiv {
+  border-top: 1px solid darkgrey;
+  border-bottom: 1px solid darkgrey;
+  background-color: #eeeeee;
+  padding-top: 5px;
+  margin-bottom: 7px;
+}
+#QueuLineDiv table tbody tr td {
+  box-shadow: 0 0 0;
+  background-color: #eeeeee;
+  width: 5px;
+  margin: 0px;
+  cursor: pointer;
+  padding: 2px;
+  border-bottom: 1px solid darkgrey;
+  border-top: 1px solid darkgrey;
+}
+.servicesList {
+  background-color: #eeeeee;
+  border-bottom: 1px solid darkgrey;
+  margin-bottom: 10px;
+}
+#QueuLineDiv table tbody tr td:hover {
+  background-color: darkgrey;
+  border: 1px black solid;
+}
+#reviewsheet {
+  background-color: white;
+  padding: 10px;
+  margin: 5px;
+}
+#ShowBizForm:hover {
+  border-bottom: #6699ff 5px solid;
+}
+#ShowCustForm:hover {
+  border-bottom: #6699ff 5px solid;
+}
+.SearchObject {
+  border: black solid 1px;
+  border-radius: 4px;
+  max-width: 330px;
+  text-align: right;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.SearchObject:hover {
+  box-shadow: 4px 4px 10px #334d81;
+}
+
+.deleteFavProvider {
+  display: none;
+}
+.addFavProvForm {
+  display: none;
+}
+
+#addServiceBtn {
+  border: 1px solid black;
+  padding: 4px;
+  background-color: grey;
+  color: white;
+}
+
+#addServiceBtn:hover {
+  box-shadow: 2px 2px 2px purple;
+}
+
+#addServiceDiv {
+  display: none;
+  margin-top: 10px;
+  background-color: white;
+  max-width: 400px;
+  border-bottom: 1px solid darkgray;
+  border-right: 1px solid darkgray;
+}
+
+#customizeAppointmentTime {
+  display: none;
+}
+
+.ratingAndReviewaForm {
+  display: none;
+}
+
+.changeServiceForm {
+  display: none;
+}
+
+.deleteAppointmentForm {
+  display: none;
+}
+
+.changeBookedAppointmentForm {
+  display: none;
+}
+
+.deleteAppointmentHistoryForm {
+  display: none;
+}
+
+#businessForm {
+  display: none;
+}
+#customerForm {
+  display: none;
+}
+
+#accountTypeOptions {
+  /*border: 1px solid black;*/
+  width: 300px;
+  box-shadow: #334d81 4px 4px 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#CreditDebitCardDetails {
+  display: none;
+}
+
+#CreditDebitCardDetails td {
+  border-radius: 0;
+}
+
+#SettingsDiv ul li {
+  text-decoration: none;
+  list-style-type: none;
+  border: 1px solid white;
+  padding: 5px;
+  margin: 5px;
+}
+
 /*------------------------------------------------------------------*/
 
 .rate {
-	display: inline-block;
-	-webkit-transform:rotate(180deg);
-    -moz-transform:rotate(180deg);
-    -o-transform:rotate(180deg); 
-	transform: rotate(180deg);
-    float: left;
-    height: 46px;
-    padding: 0;
-	margin: 0;
+  display: inline-block;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  float: left;
+  height: 46px;
+  padding: 0;
+  margin: 0;
 }
 
 .rate:not(:checked) > input {
-    position:absolute;
-	cursor:pointer;
-	opacity: 0;
-	transform: scale(3);
-	z-index: 100;
-    /*top:-9999px;*/
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(3);
+  z-index: 100;
+  /*top:-9999px;*/
 }
 
 .rate:not(:checked) > label {
-    /*float:right;*/
-	display: inline-block;
-	-webkit-transform:rotate(180deg);
-    -moz-transform:rotate(180deg);
-    -o-transform:rotate(180deg); 
-	transform: rotate(180deg);
-    width:1em;
-	z-index: 90;
-    /*overflow:hidden;*/
-    /*white-space:nowrap;*/
-    /*cursor:pointer;*/
-    font-size:30px;
-    color:#ccc;
+  /*float:right;*/
+  display: inline-block;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  width: 1em;
+  z-index: 90;
+  /*overflow:hidden;*/
+  /*white-space:nowrap;*/
+  /*cursor:pointer;*/
+  font-size: 30px;
+  color: #ccc;
 }
 
 .rate:not(:checked) > label:before {
-    /*content: '★ ';*/
+  /*content: '★ ';*/
 }
 .rate > input:checked ~ label {
-    color: #ffc700;    
+  color: #ffc700;
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-    /*color: #deb217;  */
+  /*color: #deb217;  */
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-    /*color: #c59b08;*/
+  /*color: #c59b08;*/
 }
 
 /*------------------Tool tip settings---------------*/
-			
-			.tooltip {
-			  position: relative;
-			  display: inline-block;
-			  /*border-bottom: 1px dotted black;  If you want dots under the hoverable text */
-			}
 
-			.tooltip .tooltiptext {
-			  visibility: hidden;
-			  width: 58px;
-			  padding: 0;
-			  background-color: white;
-			  color: black;
-			  border: 1px solid black;
-			  text-align: center;
-			  box-shadow: 4px 4px 10px #334d81;;
-			  /* Position the tooltip text - see examples below! */
-			  position: absolute;
-			  z-index: 1;
-			}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /*border-bottom: 1px dotted black;  If you want dots under the hoverable text */
+}
 
-			/* Show the tooltip text when you mouse over the tooltip container */
-			.tooltip:hover .tooltiptext {
-			  visibility: visible;
-			}
-			#logindetailsSignUP{
-				display: none;
-			}
-			.providerHeader{
-				padding-top: 40px;
-			}
-			#ExtraproviderIcons{
-				display: none;
-			}
-			#SearchDivNB{
-				display: none;
-			}
-			#ProInfoDiv{
-				display: none;
-			}
-			
-			@media only screen and (min-width: 1000px){
-				#addBizTxt{
-					padding-top: 20px;
-				}
-				.scrolldiv{
-					max-width: 600px;
-					overflow-y: auto;
-					margin: auto;
-				}
-				#ProvPhotoScrollDiv{
-					max-width: 100%;
-					scrollbar-base-color: darkgrey;
-					scrollbar-face-color: #d8d8d8;
-					scrollbar-3dlight-color: grey;
-					scrollbar-highlight-color: gray;
-					scrollbar-track-color: darkgrey;
-					scrollbar-arrow-color: #d8d8d8;
-					scrollbar-shadow-color: grey;
-					scrollbar-dark-shadow-color: grey;
-				}
-				#newbusiness{
-					width: 33.2%;
-					position: fixed;
-					background: none;
-					margin-top: 70px;
-					height: 590px;
-					overflow-y: auto;
-					border-bottom: 1px solid black;
-					scrollbar-track-color: #ccccff;
-				}
-				#content{
-					width: 66%;
-					float: right;
-					overflow-y: auto;
-					padding-top: 0;
-					height: 690px;
-					scrollbar-track-color: #6699ff;
-				}
-				#main{
-					min-height: 586px;
-				}
-				.Main{
-					height: 400px;
-				}
-				#custProPicDisplay{
-					position: relative;
-				}
-				#SearchDivNB{
-					display: block;
-				}
-				#header{
-					position: fixed;
-					border-bottom: 1px solid black;
-					padding: 0;
-					width: 34%;
-				}
-				#ProviderHeader{
-					position: fixed;
-					border-bottom: 1px solid black;
-					padding: 0;
-					width: 34%;
-				}
-				html body{
-					margin: auto;
-					background-color: #ccccff;
-					scrollbar-base-color: darkgrey;
-					scrollbar-face-color: #3D6999;
-					scrollbar-3dlight-color: #254386;
-					scrollbar-highlight-color: darkgray;
-					scrollbar-track-color: cornflowerblue;
-					scrollbar-arrow-color: #3D6999;
-					scrollbar-shadow-color: grey;
-					scrollbar-dark-shadow-color: grey;
-				}
-				#QueuLineDiv{
-					scrollbar-base-color: darkgrey;
-					scrollbar-face-color: #d8d8d8;
-					scrollbar-3dlight-color: grey;
-					scrollbar-highlight-color: gray;
-					scrollbar-track-color: darkgrey;
-					scrollbar-arrow-color: #d8d8d8;
-					scrollbar-shadow-color: grey;
-					scrollbar-dark-shadow-color: grey;
-				}
-				#logindetailsSignUP{
-					display: block;
-				}
-				#logindetails{
-					height: 100%;
-				}
-				#ExtraproviderIcons{
-					display: block;
-				}
-				#miniNavPov{
-					display: none;
-				}
-				.providerHeader{
-					padding: 0;
-				}
-				#photoStatus{
-					display: none;
-				}
-				
-				/* width */
-				::-webkit-scrollbar {
-				  width: 10px;
-				  height: 10px;
-				  opacity: 0.3
-				}
-				::-webkit-scrollbar:hover{
-					opacity: 1.0;
-				}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 58px;
+  padding: 0;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  text-align: center;
+  box-shadow: 4px 4px 10px #334d81;
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
 
-				/* Track */
-				::-webkit-scrollbar-track {
-				  background: none; 
-				  border: 1px solid darkgray;
-				  border-radius: 10px;
-				}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+#logindetailsSignUP {
+  display: none;
+}
+.providerHeader {
+  padding-top: 40px;
+}
+#ExtraproviderIcons {
+  display: none;
+}
+#SearchDivNB {
+  display: none;
+}
+#ProInfoDiv {
+  display: none;
+}
 
-				/* Handle */
-				::-webkit-scrollbar-thumb {
-				  background: #3D6999; 
-				  border-radius: 10px;
-				  border: 1px solid #254386;
-				}
+#Extras {
+  display: none;
+  float: right;
+  min-height: 400px;
+  width: 21%;
+}
+#PermanentDiv {
+  display: none;
+}
+@media only screen and (min-width: 1000px) {
+  #addBizTxt {
+    padding-top: 20px;
+  }
+  .scrolldiv {
+    max-width: 600px;
+    overflow-y: auto;
+    margin: auto;
+  }
+  #ProvPhotoScrollDiv {
+    max-width: 100%;
+    scrollbar-base-color: darkgrey;
+    scrollbar-face-color: #d8d8d8;
+    scrollbar-3dlight-color: grey;
+    scrollbar-highlight-color: gray;
+    scrollbar-track-color: darkgrey;
+    scrollbar-arrow-color: #d8d8d8;
+    scrollbar-shadow-color: grey;
+    scrollbar-dark-shadow-color: grey;
+  }
+  #newbusiness {
+    width: 33.2%;
+    position: fixed;
+    background: none;
+    margin-top: 70px;
+    height: 590px;
+    overflow-y: auto;
+    border-bottom: 1px solid black;
+    scrollbar-track-color: #ccccff;
+  }
+  #ExtrasTab {
+    background-color: white;
+    width: 100%;
+  }
+  #ExtrasTab tr td {
+    margin: 0;
+    padding: 5px;
+  }
+  #Extras {
+    padding: 1%;
+    padding-top: 59px;
+    display: block;
+    float: right;
+    height: 615px;
+    width: 19%;
+    background: none;
+  }
+  #PermanentDiv {
+    display: block;
+    box-shadow: #2c3539 3px 3px 4px;
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    background-color: #000099;
+    z-index: 110;
+  }
+  #container {
+    padding-top: 40px;
+  }
+  #content {
+    width: 45%;
+    margin-left: 0;
+    float: right;
+    overflow-y: auto;
+    padding-top: 0;
+    height: 690px;
+    scrollbar-track-color: #6699ff;
+  }
+  #main {
+    min-height: 586px;
+  }
+  .Main {
+    height: 400px;
+  }
+  #custProPicDisplay {
+    position: relative;
+  }
+  #SearchDivNB {
+    display: block;
+  }
+  #header {
+    position: fixed;
+    border-bottom: 1px solid black;
+    padding: 0;
+    width: 34%;
+  }
+  #ProviderHeader {
+    position: fixed;
+    border-bottom: 1px solid black;
+    padding: 0;
+    width: 34%;
+  }
+  html body {
+    margin: auto;
+    background-color: #ccccff;
+    scrollbar-base-color: darkgrey;
+    scrollbar-face-color: #3d6999;
+    scrollbar-3dlight-color: #254386;
+    scrollbar-highlight-color: darkgray;
+    scrollbar-track-color: cornflowerblue;
+    scrollbar-arrow-color: #3d6999;
+    scrollbar-shadow-color: grey;
+    scrollbar-dark-shadow-color: grey;
+  }
+  #QueuLineDiv {
+    scrollbar-base-color: darkgrey;
+    scrollbar-face-color: #d8d8d8;
+    scrollbar-3dlight-color: grey;
+    scrollbar-highlight-color: gray;
+    scrollbar-track-color: darkgrey;
+    scrollbar-arrow-color: #d8d8d8;
+    scrollbar-shadow-color: grey;
+    scrollbar-dark-shadow-color: grey;
+  }
+  #logindetailsSignUP {
+    display: block;
+  }
+  #logindetails {
+    height: 100%;
+  }
+  #ExtraproviderIcons {
+    display: block;
+  }
+  #miniNavPov {
+    display: none;
+  }
+  .providerHeader {
+    padding: 0;
+  }
+  #photoStatus {
+    display: none;
+  }
 
-				/* Handle on hover */
-				::-webkit-scrollbar-thumb:hover {
-				}
-				
-				#alreadyAccountStatus{
-					display: none;
-				}
-				#ShowProInfo{
-					display: none;
-				}
-				#ProInfoDiv{
-					display: block;
-				}
-				
-			}
-			
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    opacity: 0.3;
+  }
+  ::-webkit-scrollbar:hover {
+    opacity: 1;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: none;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #3d6999;
+    border-radius: 10px;
+    border: 1px solid #254386;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+  }
+
+  #alreadyAccountStatus {
+    display: none;
+  }
+  #ShowProInfo {
+    display: none;
+  }
+  #ProInfoDiv {
+    display: block;
+  }
+}

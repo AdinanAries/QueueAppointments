@@ -107,8 +107,10 @@
         
     <body>
         
+        <div id="PermanentDiv" style=""></div>
+        
         <div id="container">
-              
+            
             <div id="miniNav" style="display: none;">
                 <center>
                     <ul id="miniNavIcons" style="float: left;">
@@ -130,6 +132,38 @@
             <cetnter><p> </p></cetnter>
             <center><a href="PageController" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
         </div>
+            
+            <div id="Extras">
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                This is row one
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                This is row two
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                This is row three
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                This is row four
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                This is row five
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
         <div id="content">
           
