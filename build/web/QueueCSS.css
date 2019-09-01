@@ -599,7 +599,7 @@ select {
     position: fixed;
     background: none;
     margin-top: 70px;
-    height: 590px;
+    height: 560px;
     overflow-y: auto;
     border-bottom: 1px solid black;
     scrollbar-track-color: #ccccff;
@@ -614,7 +614,7 @@ select {
   }
   #Extras {
     padding: 1%;
-    padding-top: 59px;
+    padding-top: 15px;
     display: block;
     float: right;
     height: 615px;
@@ -629,6 +629,24 @@ select {
     height: 40px;
     background-color: #000099;
     z-index: 110;
+  }
+  #PermanentDiv ul {
+    float: right;
+    margin: auto;
+    margin-top: 5px;
+    margin-right: 50px;
+  }
+  #PermanentDiv ul li {
+    display: inline-block;
+    border: 2px solid white;
+    padding: 2px;
+    color: white;
+    background-color: darkgrey;
+    /*background-color: #334d81;*/
+    margin-left: 10px;
+    min-width: 100px;
+    border-radius: 4px;
+    text-align: center;
   }
   #container {
     padding-top: 40px;
@@ -650,6 +668,7 @@ select {
   }
   #custProPicDisplay {
     position: relative;
+    display: none;
   }
   #SearchDivNB {
     display: block;

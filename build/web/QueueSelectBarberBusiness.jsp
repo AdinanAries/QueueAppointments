@@ -107,7 +107,23 @@
         
     <body>
         
-        <div id="PermanentDiv" style=""></div>
+        <div id="PermanentDiv" style="">
+            
+            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                    tech.arieslab@outlook.com | 
+                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                    (1) 732-799-9546
+                </p>
+            </div>
+        
+            <ul>
+                <li style='cursor: pointer;'>One</li>
+                <li style='cursor: pointer;'>Two</li>
+                <li style='cursor: pointer;'>Three</li>
+            </ul>
+        
+        </div>
         
         <div id="container">
             

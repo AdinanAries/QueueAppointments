@@ -1340,9 +1340,48 @@
     %>
     <body>
         
+        <div id="PermanentDiv" style="">
+            
+            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                    tech.arieslab@outlook.com | 
+                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                    (1) 732-799-9546
+                </p>
+            </div>
+            
+            <div style="float: right; width: 50px;">
+                <%
+                    if(base64Image != ""){
+                %>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                        <img id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30"/>
+                    </div></center>
+                <%
+                    }else{
+                %>
+                
+                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                                <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                            </div></center>
+                
+                <%}%>
+            </div>
+            
+            <ul>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                    Notifications<sup style='color: red;'> 0</sup></li>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                    Calender</li>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                    Account</li>
+            </ul>
+        
+        </div>
+        
         <div id="container">
             
-            <div id="miniNavPov" style="">
+            <div id="miniNavPov" style="height: 35px; padding-top: 5px; padding-right: 2px;">
                 <center>
                     <script>
                         function showDropDown(){
@@ -1364,10 +1403,14 @@
                             }
                         }
                     </script>
+                    
                     <p id="DropDownBtn" onclick='hideDropDownBtnclick();' style="position: absolute; text-align: center; width: 34px; background-color: pink; border: 1px solid black; border-radius: 4px;">
                         <img src="icons/icons8-menu-25.png" width="25" height="25" alt="icons8-menu-25"/>
                     </p>
-                    <p onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide Spots</p>
+                    
+                    <p style='width: 235px; float: right; margin-top: 5px; margin-right: 0;'><span onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 75px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide spots</span>
+                          <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Update your clients</span></p>
+                    <p style='clear: both;'></p>
                     <!--ul id="miniNavIcons" style="float: left;">
                         <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
                         </li>
@@ -1383,10 +1426,12 @@
                 <nav id="DropDown">
                 
                 <ul>
-                    <li>first</li>
-                    <li>second</li>
-                    <li>third</li>
-                    <li>fourth</li>
+                    <li style='cursor: pointer;'><img src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                        Notifications<sup style='color: red;'> 0</sup></li>
+                    <li style='cursor: pointer;'><img src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                        Calender</li>
+                    <li style='cursor: pointer;'><img src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                        Add Admins</li>
                 </ul>
                 <form action = "LogoutController" name="LogoutForm" method="POST">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
@@ -1402,6 +1447,48 @@
                 <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
                 <!--center><h2 style="color: #000099;">Line Your Customers Now!</h2></center-->
             </div>
+                    
+            <div id="Extras">
+                
+                <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 20px;">Update your clients on whats new</p>
+                
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                <textarea name="TellCustomersMsgBx" style="width: 100%;" rows="3">What should your clients know about?
+                                </textarea>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='margin-bottom: 4px;'>Add photo to this message</p>
+                                <div id="MsgPhotoDisplay"></div>
+                                <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
+                                <input style="width: 95%;" type="file" name="MsgformPhoto" />
+                                
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p>When to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsDateFld" value="Today" size="21"/></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Time to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsTimeFld" value="Now" size="22" /></p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <center><input style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
             <div id="content"  onclick="hideDropDown();">
             <div id="nav">
                 <h4><a href="https://adinanaries.wixsite.com/arieslab" style ="color: blanchedalmond">AriesLab.com</a></h4>
