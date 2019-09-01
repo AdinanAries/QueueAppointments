@@ -46,6 +46,7 @@
         String ServiceType = "";
         
         int UserID = 0;
+        String Base64Pic = "";
         
         String NewUserName = request.getParameter("User");
         
@@ -75,6 +76,42 @@
         String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
         String User = "sa"; //datebase user account
         String Password = "Password@2014";
+        
+        try{
+            
+            Class.forName(Driver);
+            Connection PicConn = DriverManager.getConnection(url, User, Password);
+            String PicQuery = "Select Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+            PreparedStatement PicPst = PicConn.prepareStatement(PicQuery);
+            PicPst.setInt(1, UserID);
+            
+            ResultSet PicRec = PicPst.executeQuery();
+            
+            while(PicRec.next()){
+                
+                try{    
+                    //put this in a try catch block for incase getProfilePicture returns nothing
+                    Blob profilepic = PicRec.getBlob("Profile_Pic"); 
+                    InputStream inputStream = profilepic.getBinaryStream();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = -1;
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+
+                    byte[] imageBytes = outputStream.toByteArray();
+
+                     Base64Pic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                }
+                catch(Exception e){}
+                
+            }
+            
+        }catch(Exception e){e.printStackTrace();}
         
         String City = request.getParameter("city4Search");
         String Town = request.getParameter("town4Search");
@@ -191,7 +228,46 @@
         %>
         
     <body>
+        <div id="PermanentDiv" style="">
+            
+            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                    tech.arieslab@outlook.com | 
+                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                    (1) 732-799-9546
+                </p>
+            </div>
+            
+            <div style="float: right; width: 50px;">
+                <%
+                    if(Base64Pic != ""){
+                %>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                        <img id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
+                    </div></center>
+                <%
+                    }else{
+                %>
+                
+                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                                <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                            </div></center>
+                
+                <%}%>
+            </div>
+            
+            <ul>
+                <a  href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                    <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                    Home</li></a>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                    Calender</li>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                    Account</li>
+            </ul>
         
+        </div>
+            
         <div id="container">
             
             <div id="miniNav" style="display: none;">
@@ -220,6 +296,52 @@
             
         </div>
             
+            <div id="Extras">
+            
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                <div id="ProvMsgBxOne">
+                                    <p style='margin-bottom: 4px;'><span style='color: #ff3333;'>Message From:</span> Queue (as template)</p>
+                                    <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>This is a template for news updates your providers post to keep you informed.
+                                   This part of the template contains the actual message text...</p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
+                                <p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                    provider@emailhost.com</p>
+                                <p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                    1234567890</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <P><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                    Business Name</P>
+                                <p><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                    123 Street/Ave, Town, City, 2323</p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
         <div id="content">
             
             <div id="nav">
@@ -1355,13 +1477,13 @@
             <div id="ExtraproviderIcons" style="padding-top: 10px;">
              
                 <div id="SearchDivNB">
-                <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 500px;">
+                <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 480px;">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <p style="color: #000099;">Find services near you</p>
                     <p>City: <input style="width: 400px; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p>Town: <input style="background-color: #6699ff;" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 60px; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 490px;" value="Search" /></p>
+                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 450px;" value="Search" /></p>
                     </form></center>
                 </div>
                 

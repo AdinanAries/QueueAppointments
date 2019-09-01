@@ -256,6 +256,22 @@
         <servlet-name>BlkSptUpdateAppointment</servlet-name>
         <servlet-class>BlkSptUpdateAppointment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetApptForExtra</servlet-name>
+        <servlet-class>GetApptForExtra</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEvent</servlet-name>
+        <servlet-class>AddEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateEvent</servlet-name>
+        <servlet-class>UpdateEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCustEvntAjax</servlet-name>
+        <servlet-class>GetCustEvntAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -511,6 +527,22 @@
     <servlet-mapping>
         <servlet-name>BlkSptUpdateAppointment</servlet-name>
         <url-pattern>/BlkSptUpdateAppointment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetApptForExtra</servlet-name>
+        <url-pattern>/GetApptForExtra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEvent</servlet-name>
+        <url-pattern>/AddEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEvent</servlet-name>
+        <url-pattern>/UpdateEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCustEvntAjax</servlet-name>
+        <url-pattern>/GetCustEvntAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

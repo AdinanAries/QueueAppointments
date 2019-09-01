@@ -57,6 +57,24 @@
     
     <body>
         
+        <div id="PermanentDiv" style="">
+            
+            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                    tech.arieslab@outlook.com | 
+                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                    (1) 732-799-9546
+                </p>
+            </div>
+        
+            <ul>
+                <li style='cursor: pointer;'>One</li>
+                <li style='cursor: pointer;'>Two</li>
+                <li style='cursor: pointer;'>Three</li>
+            </ul>
+        
+        </div>
+        
         <div id="container">
             
         <div id="header">
@@ -66,6 +84,52 @@
             <center><h3 style="color: #000099;">Find Your Spot Now!</h3></center>
             
         </div>
+            
+            <div id="Extras">
+            
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from service providers</p></center>
+            
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                <div id="ProvMsgBxOne">
+                                    <p style='margin-bottom: 4px;'><span style='color: #ff3333;'>Message From:</span> Queue (as template)</p>
+                                    <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>This is a template for news updates from service providers to keep you informed.
+                                   This part of the template contains the actual message text...</p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
+                                <p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                    provider@emailhost.com</p>
+                                <p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                    1234567890</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <P><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                    Business Name</P>
+                                <p><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                    123 Street/Ave, Town, City, 2323</p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
         <div id="content">
             
