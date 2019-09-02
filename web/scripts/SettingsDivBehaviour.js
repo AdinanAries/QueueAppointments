@@ -148,6 +148,62 @@ if (document.getElementById("ExtraLoginFormBtn")) {
   setInterval(checkExtraLogInFormFieldsStatus, 1);
 }
 
+function checkExtraLogInFormFieldsStatus2() {
+  var changeUserAccountStatus = document.getElementById(
+    "ExtrachangeUserAccountStatus2"
+  );
+  var LoginFormBtn = document.getElementById("ExtraLoginFormBtn2");
+  var NewPasswordFld = document.getElementById("ExtraNewPasswordFld2");
+  var CurrentPasswordFld = document.getElementById("ExtraCurrentPasswordFld2");
+  var ConfirmPasswordFld = document.getElementById("ExtraConfirmPasswordFld2");
+  var UpdateLoginNameFld = document.getElementById("ExtraUpdateLoginNameFld2");
+  var ThisPass = document.getElementById("ExtraThisPass2");
+
+  LoginFormBtn.disabled = true;
+  LoginFormBtn.style.backgroundColor = "darkgrey";
+
+  if (
+    NewPasswordFld.value === "" ||
+    CurrentPasswordFld.value === "" ||
+    ConfirmPasswordFld.value === "" ||
+    UpdateLoginNameFld.value === ""
+  ) {
+    changeUserAccountStatus.innerHTML = "Uncompleted Form";
+    changeUserAccountStatus.style.backgroundColor = "green";
+    LoginFormBtn.disabled = true;
+    LoginFormBtn.style.backgroundColor = "darkgrey";
+  } else if (
+    /*else if (ThisPass.value === "WrongPass"){
+			
+			changeUserAccountStatus.innerHTML = "Enter your old password correctly";
+			changeUserAccountStatus.style.backgroundColor = "red";
+			//LoginFormBtn.disabled = true;
+			//LoginFormBtn.style.backgroundColor = "darkgrey";
+			
+		}*/
+    NewPasswordFld.value !== ConfirmPasswordFld.value ||
+    (NewPasswordFld.value === "" && ConfirmPasswordFld.value === "")
+  ) {
+    changeUserAccountStatus.innerHTML = "New Passwords don't match";
+    changeUserAccountStatus.style.backgroundColor = "red";
+    LoginFormBtn.disabled = true;
+    LoginFormBtn.style.backgroundColor = "darkgrey";
+  } else if (NewPasswordFld.value.length < 8) {
+    changeUserAccountStatus.innerHTML = "New password too short";
+    changeUserAccountStatus.style.backgroundColor = "red";
+    LoginFormBtn.disabled = true;
+    LoginFormBtn.style.backgroundColor = "darkgrey";
+  } else {
+    changeUserAccountStatus.innerHTML = "OK";
+    changeUserAccountStatus.style.backgroundColor = "green";
+    LoginFormBtn.disabled = false;
+    LoginFormBtn.style.backgroundColor = "pink";
+  }
+}
+if (document.getElementById("ExtraLoginFormBtn2")) {
+  setInterval(checkExtraLogInFormFieldsStatus2, 1);
+}
+
 function PaymentsFormCheckInputs() {
   var PaymentsUpdateBtn = document.getElementById("PaymentsUpdateBtn");
   var CardNumberFld = document.getElementById("CardNumberFld");

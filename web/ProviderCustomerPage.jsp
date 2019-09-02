@@ -620,6 +620,18 @@
         
         <div id="PermanentDiv" style="">
             
+            <img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
+            <script>
+                function showExtraDropDown(){
+                    if(document.getElementById("ExtraDropDown").style.display === "none")
+                        document.getElementById("ExtraDropDown").style.display = "block";
+                    else
+                        document.getElementById("ExtraDropDown").style.display = "none";
+                }
+                
+            </script>
+            
+            
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                     tech.arieslab@outlook.com | 
@@ -627,16 +639,7 @@
                     (1) 732-799-9546
                 </p>
             </div>
-            <div name="ExtraDivSearch" style='padding-left: 20px; width: 650px; float: left;'>
-                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                    <input style="margin-right: 0; background-color: pink; height: 30px; border: 1px solid red; border-radius: 4px; font-weight: bolder;"
-                            placeholder="Search service provider" name="SearchFld" type="text"  value="" size="78" />
-                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <input type='hidden' name='User' value='<%=NewUserName%>' />
-                    <input style="font-weight: bolder; margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 7px; font-size: 15px; width: 100px;" 
-                            type="submit" value="Search" />
-                </form>
-            </div>
+            
             <div style="float: right; width: 50px;">
                 <%
                     if(Base64Pic != ""){
@@ -655,6 +658,7 @@
                 <%}%>
             </div>
             
+            
             <ul>
                 <li onclick="showCustExtraNotification();" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                     Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup></li>
@@ -663,9 +667,46 @@
                 <li onclick='showCustExtraUsrAcnt();' id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li>
             </ul>
-        
+                
+            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
+                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                            type="submit" value="Search" />
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type='hidden' name='User' value='<%=NewUserName%>' />
+                </form>
+            </div>
+                <p style='clear: both;'></p>
         </div>
-        
+                
+        <div id='ExtraDropDwnDiv'>  
+            <table id='ExtraDropDown' style='display: none; z-index: 120; background-color: white; margin-top: 40px; position: fixed;  box-shadow: 4px 4px 4px #2c3539;'>
+                <tbody>
+                    <tr>
+                        <td onclick="showCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                            <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
+                            News
+                        </td>
+                    </tr>
+                    <tr>
+                        <td onclick="showCustExtraNotification2();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                            Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td onclick='showCustExtraCal2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                            Calender</td>
+                    </tr>
+                    <tr>
+                        <td onclick='showCustExtraUsrAcnt2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                            Account</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+                        
         <div id="container">
             
             <div id="miniNav" style="display: none;">
@@ -687,7 +728,7 @@
             
         <div id="header">
             
-            <cetnter><p> </p></cetnter>
+            <center><p> </p></center>
             <center><img src="QueueLogo.png" style="margin-top: 5px;" /></center>
             
         </div>
@@ -1453,6 +1494,625 @@
         </div>
                 
             <div id="newbusiness" style="padding-top: 0;">
+                
+                <!----------------------------------------------------------------------------------------------------------------->
+        <div id='Extras2Container'>
+            <div id="Extras2" style="display: none; height: 580px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 100; background-color: #ccccff;">
+            
+            <div id='News2' style='display: none;'>
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                <div id="ProvMsgBxOne" style=''>
+                                    <p style='margin-bottom: 4px; padding-bottom: 5px;'><span style='color: #ff3333;'>Message From:</span> Queue (as template)</p>
+                                    <center><img src="view-wallpaper-7.jpg" width="265" height="200" alt="view-wallpaper-7"/></center>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style='height: 180px;  border: 1px solid #d8d8d8; padding: 3px; overflow-y: auto;'>
+                                    <p style='text-align: justify;'>This is a template for news updates your providers post to keep you informed.
+                                       This part of the template contains the actual message text...</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
+                                <p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                    provider@emailhost.com</p>
+                                <p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                    1234567890</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <P><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                    Business Name</P>
+                                <p><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                    123 Street/Ave, Town, City, 2323</p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id='Calender2' style='display: none; margin-top: 5px;'>
+                <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
+            
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                <div id="DateChooserDiv2" style=''>
+                                    <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
+                                    <!--% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%-->
+                                    <p style='text-align: center;'><input id="CalDatePicker2" style='cursor: pointer; width: 90%; 
+                                                                          font-weight: bolder; border: 1px solid white; background-color: #eeeeee; padding: 5px;' type="button" name="CalDateVal" 
+                                                                          value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
+                                    <script>
+                                    $(function() {
+                                        $("#CalDatePicker2").datepicker();
+                                      });
+                                    </script>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
+                                
+                                <input type="hidden" id="CalApptUserID2" value="<%=UserID%>" />
+                                
+                                <div id='CalApptListDiv2' style='height: 100px; overflow-y: auto;'>
+                                    
+                                    <%
+                                        int count2 = 1;
+                                        
+                                        for(int aptNum = 0; aptNum < AppointmentListExtra.size(); aptNum++ ){
+                                            
+                                            
+                                            
+                                            int AptID = AppointmentListExtra.get(aptNum).getAppointmentID();
+                                            String ProvName = AppointmentListExtra.get(aptNum).getProviderName();
+                                            String ProvComp = AppointmentListExtra.get(aptNum).getProviderCompany();
+                                            if(ProvComp.length() > 13)
+                                                ProvComp = ProvComp.substring(0, 12) + "...";
+                                            String AptTime = AppointmentListExtra.get(aptNum).getTimeOfAppointment();
+                                            if(AptTime.length() > 5)
+                                                AptTime = AptTime.substring(0,5);
+                                    %>
+                                    
+                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count2%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: #334d81;"><%=ProvComp%></span> at <span style="color: #334d81;"><%=AptTime%></span></p>
+                                    
+                                    <%
+                                            count2++;
+                                        }
+                                    %>
+                                    
+                                    <script>
+                                        var updtCounter2 = 0;
+                                        
+                                        $(document).ready(function(){
+                                            
+                                            $("#CalDatePicker2").change(function(event){
+                                                
+                                                var date = document.getElementById("CalDatePicker2").value;
+                                                var CustomerID = document.getElementById("CalApptUserID2").value;
+                                                //alert(CustomerID);
+                                                //alert(date);
+                                                
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "GetApptForExtra",
+                                                    data: "Date="+date+"&CustomerID="+CustomerID,
+                                                    success: function(result){
+                                                        
+                                                        //alert(result);
+                                                        
+                                                        var ApptData = JSON.parse(result);
+                                                        
+                                                        var aDiv = document.createElement('div');
+                                                        
+                                                        for(i in ApptData.Data){
+                                                            
+                                                            var number = parseInt(i, 10) + 1;
+                                                            
+                                                            var name = ApptData.Data[i].ProvName;
+                                                            var comp = ApptData.Data[i].ProvComp;
+                                                            if(comp.length > 13)
+                                                                comp = comp.substring(0,12) + "...";
+                                                            
+                                                            var time = ApptData.Data[i].ApptTime;
+                                                            
+                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: #334d81;">'+comp+'</span> at <span style="color: #334d81;">'+time+'<span></p>';
+                                                            
+                                                        }
+                                                        
+                                                        document.getElementById("CalApptListDiv2").innerHTML = aDiv.innerHTML;
+                                                        
+                                                    }
+                                                    
+                                                });
+                                                
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "GetCustEvntAjax",
+                                                    data: "Date="+date+"&CustomerID="+CustomerID,
+                                                    success: function(result){
+                                                        //alert(result);
+                                                        
+                                                        var EvntsData = JSON.parse(result);
+                                                        
+                                                        var bDiv = document.createElement('div');
+                                                        
+                                                        for(i in EvntsData.Data){
+                                                            
+                                                            
+                                                            var ID = EvntsData.Data[i].EvntID;
+                                                            var Date = EvntsData.Data[i].EvntDate;
+                                                            var Time = EvntsData.Data[i].EvntTime;
+                                                            var Title = EvntsData.Data[i].EvntTtle;
+                                                            var Desc = EvntsData.Data[i].EvntDesc;
+                                                            
+                                                            
+                                                            updtCounter2 = parseInt(updtCounter2, 10) + 1;
+                                                            
+                                                            bDiv.innerHTML += '<div id="Cupdt2'+updtCounter2+'" ' +
+                                                                    'onclick=\'updateEvent("'+ID+'", "'+Title+'","'+Desc+'", "'+Date+'","' +Time+'", "Cupdt2'+updtCounter2+'");\' ' +
+                                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
+
+                                                                    '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: #334d81;">'+Date+'</span> - <span style="color: #334d81;">'+Time+'</span></p>'+
+                                                                    '<P style="color: #334d81;">'+Desc+'</p>'+
+                                                                '</div>';
+                                                            
+                                                        }
+                                                        
+                                                        document.getElementById("EventsListDiv2").innerHTML = bDiv.innerHTML;
+                                                        
+                                                    }
+                                                    
+                                                });
+                                            });
+                                            
+                                        });
+                                    </script>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
+                                <div id='EventsListDiv2' style='height: 150px; overflow-y: auto;'>
+                                    <%
+                                        try{
+                                            
+                                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                             String SDate = sdf.format(new Date());
+                                            
+                                            Class.forName(Driver);
+                                            Connection EventsConn = DriverManager.getConnection(Url, user, password);
+                                            String EventsQuery = "Select * from ProviderCustomers.CalenderEvents where CustID = ? and EventDate = ?";
+                                            PreparedStatement EventsPst = EventsConn.prepareStatement(EventsQuery);
+                                            EventsPst.setInt(1, UserID);
+                                            EventsPst.setString(2, SDate);
+                                            
+                                            ResultSet EventsRec = EventsPst.executeQuery();
+                                            
+                                            int counter = 0;
+                                            
+                                            while(EventsRec.next()){
+                                                counter++;
+                                                String EventID = EventsRec.getString("EvntID").trim();
+                                                String EventTitle = EventsRec.getString("EventTitle").trim();
+                                                EventTitle = EventTitle.replace("\"", "");
+                                                EventTitle = EventTitle.replace("'", "");
+                                                EventTitle = EventTitle.replaceAll("\\s", " ");
+                                                String EventDesc = EventsRec.getString("EventDesc").trim();
+                                                EventDesc = EventDesc.replace("\"", "");
+                                                EventDesc = EventDesc.replace("'", "");
+                                                EventDesc = EventDesc.replaceAll("\\s", " ");
+                                                String EventDate = EventsRec.getString("EventDate").trim();
+                                                String EventTime = EventsRec.getString("EventTime").trim();
+                                                if(EventTime.length() > 5)
+                                                EventTime = EventTime.substring(0,5);
+                                            
+                                    %>
+                                    
+                                                <div id="PgLdupdt2<%=counter%>"
+                                                    onclick='updateEvent("<%=EventID%>", "<%=EventTitle%>", "<%=EventDesc%>", "<%=EventDate%>", "<%=EventTime%>", "PgLdupdt2<%=counter%>");' 
+                                                    style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">
+                                                    
+                                                    <p><span style="font-weight: bolder; color: white;"><%=EventTitle%></span> - <span style="color: #334d81;"><%=EventDate%></span> - <span style="color: #334d81;"><%=EventTime%></span></p>
+                                                    <P style="color: #334d81;"><%=EventDesc%></p>
+                                                </div>
+                                    
+                                    <%
+                                            
+                                            }
+                                            
+                                        }catch(Exception e){}
+                                    %>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
+                                <div>
+                                    <p>Title: <input id="AddEvntTtle2" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea id="AddEvntDesc2" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
+                                        </textarea></p>
+                                    <p>Date: <input id='EvntDatePicker2' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
+                                    <script>
+                                    $(function() {
+                                        $("#EvntDatePicker2").datepicker({
+                                            minDate: 0
+                                        });
+                                      });
+                                    </script>
+                                    <p>Time: <input id="AddEvntTime2" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <input type="hidden" id="EvntIDFld2" value=""/>
+                                <center><input id="CalSaveEvntBtn2" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn2" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate2();" id="CalUpdateEvntBtn2" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Change' /></center>
+                            </td>
+                        </tr>
+                        
+                        <!--script>
+                            $(document).ready({
+                                $()
+                            });
+                        </script-->
+                        
+                        <script>
+                            var updateCounter2 = 0;
+                            
+                            function updateEvent(pEvntID, pEvntTtle, pEvntDesc, pEvntDate, pEvntTime, element){
+                                
+                                document.getElementById(element).style.display = "none";
+                                document.getElementById("CalSaveEvntBtn2").style.display = "none";
+                                document.getElementById("CalUpdateEvntBtn2").style.display = "block";
+                                document.getElementById("CalDltEvntBtn2").style.display = "block";
+                                
+                                document.getElementById("AddEvntTtle2").value = pEvntTtle.toString();
+                                document.getElementById("AddEvntDesc2").value = pEvntDesc.toString();
+                                document.getElementById("EvntDatePicker2").value = pEvntDate.toString();
+                                document.getElementById("AddEvntTime2").value = pEvntTime.toString();
+                                document.getElementById("EvntIDFld2").value = pEvntID.toString();
+                            }  
+                            
+                            function SendEvntUpdate2(){
+                                
+                                var EvntTtle = document.getElementById("AddEvntTtle2").value;
+                                EvntTtle = EvntTtle.replace("\"","");
+                                var EvntDesc = document.getElementById("AddEvntDesc2").value;
+                                EvntDesc = EvntDesc.replace("\"","");
+                                var EvntDate = document.getElementById("EvntDatePicker2").value;
+                                var EvntTime = document.getElementById("AddEvntTime2").value;
+                                var EvntId = document.getElementById("EvntIDFld2").value;
+                                
+                                var CalDate = document.getElementById("CalDatePicker2").value;
+                                    
+                                    //alert(CalDate);
+                                    
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "UpdateEvent",
+                                        data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
+                                        success: function(result){
+                                            
+                                            //alert(result);
+                                            
+                                            var Evnt = JSON.parse(result);
+                                            
+                                            //alert(Evnt.EvntID);
+                                            //alert(Evnt.JQDate);
+                                            
+                                            
+                                            if(Evnt.JQDate === EvntDate){
+                                                updateCounter2 = parseInt(updateCounter2, 10) + 1;
+                                                document.getElementById("EventsListDiv2").innerHTML += '<div id="updt2'+updateCounter2+'" ' +
+                                                    'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt2'+updateCounter2+'");\' ' +
+                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
+                                                    
+                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: #334d81;">'+EvntDate+'</span> - <span style="color: #334d81;">'+EvntTime+'</span></p>'+
+                                                    '<P style="color: #334d81;">'+EvntDesc+'</p>'+
+                                                '</div>';
+                                        
+                                            }
+                                        }
+                                    });
+                                    
+                                    document.getElementById("CalUpdateEvntBtn2").style.display = "none";
+                                    document.getElementById("CalDltEvntBtn2").style.display = "none";
+                                    document.getElementById("CalSaveEvntBtn2").style.display = "block";
+                                    document.getElementById("AddEvntTtle2").value = "";
+                                    document.getElementById("AddEvntDesc2").value = "";
+                                    document.getElementById("EvntDatePicker2").value = "";
+                                    document.getElementById("AddEvntTime2").value = "";
+                                    document.getElementById("EvntIDFld2").value = "";
+                                
+                            }
+                        </script>
+                        
+                        <script>
+                            
+                            $(document).ready(function(){
+                                
+                                $("#CalSaveEvntBtn2").click(function(event){
+                                    
+                                    var EvntTtle = document.getElementById("AddEvntTtle2").value;
+                                    EvntTtle = EvntTtle.replace("\"","");
+                                    var EvntDesc = document.getElementById("AddEvntDesc2").value;
+                                    EvntDesc = EvntDesc.replace("\"","");
+                                    var EvntDate = document.getElementById("EvntDatePicker2").value;
+                                    var EvntTime = document.getElementById("AddEvntTime2").value;
+                                    //alert(EvntTime);
+                                    
+                                    var CalDate = document.getElementById("CalDatePicker2").value;
+                                    //alert(CalDate);
+                                    
+                                    var CustID = document.getElementById("CalApptUserID2").value;
+                                    
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "AddEvent",
+                                        data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&CustomerID="+CustID,
+                                        success: function(result){
+                                            
+                                            //alert(result);
+                                            
+                                            var Evnt = JSON.parse(result);
+                                            
+                                            //alert(Evnt.EvntID);
+                                            //alert(Evnt.JQDate);
+                                            
+                                            
+                                            if(Evnt.JQDate === EvntDate){
+                                                updateCounter2 = parseInt(updateCounter2, 10) + 1;
+                                                document.getElementById("EventsListDiv2").innerHTML += '<div id="updt2'+updateCounter2+'" ' +
+                                                    'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt2'+updateCounter2+'");\' ' +
+                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
+                                                    
+                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: #334d81;">'+EvntDate+'</span> - <span style="color: #334d81;">'+EvntTime+'</span></p>'+
+                                                    '<P style="color: #334d81;">'+EvntDesc+'</p>'+
+                                                '</div>';
+                                        //alert('onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle+'","'+EvntDesc+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' );
+                                        
+                                            }
+                                        }
+                                    });
+                                    
+                                    document.getElementById("AddEvntTtle2").value = "";
+                                    document.getElementById("AddEvntDesc2").value = "";
+                                    document.getElementById("EvntDatePicker2").value = "";
+                                    document.getElementById("AddEvntTime2").value = "";
+                                    document.getElementById("EvntIDFld2").value = "";
+                                    
+                                });
+                            });
+                        </script>
+                    </tbody>
+                </table>
+            </div>
+                             
+        <div id='ExtrasUserAccountDiv2' style='display: none;'>
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
+            
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
+                                <p>First Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="ExtrasFeedbackDiv2">
+                                    <p style='margin-bottom: 5px; color: #ff3333;'>Send Feedback</p>
+                                    <form id="ExtrasFeedBackForm2" style="width: 95%;" >
+                                            <center><div id='ExtLastReviewMessageDiv2' style='display: none; background-color: white; width: 100%;'>
+                                                <p id='ExtLasReviewMessageP2' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
+                                                <p id="ExtFeedBackDate2" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
+                                                </div></center>
+                                            <center><table>
+                                                <tbody>
+                                                <tr>
+                                                    <td><textarea id="ExtFeedBackTxtFld2" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" style='width: 270px;'>Compose Feedback Message Here...
+                                                        </textarea></td>
+                                                </tr>
+                                                </tbody>
+                                                </table></center>
+                                                
+                                                <input id='ExtFeedBackUserID2' type="hidden" name="CustomerID" value="<%=UserID%>" />
+                                                <center><input id="ExtSendFeedBackBtn2" style="width: 100%; border: 1px solid black; background-color: pink;" type="button" value="Send" /></center>
+                                            
+                                        </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Update Your Login</p>
+                                <P>User Name: <input id="ExtraUpdateLoginNameFld2" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
+                                <P><input id="ExtraCurrentPasswordFld2" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P><input id="ExtraNewPasswordFld2" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P><input id="ExtraConfirmPasswordFld2" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtraLoginFormBtn2" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p id="ExtraWrongPassStatus2" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
+                                <p id='ExtrachangeUserAccountStatus2' style='text-align: center; color: white;'></p>
+                            </td>
+                            <input type='hidden' id='ExtraThisPass2' value='' />
+                            <input type="hidden" id="ExtraUserIDforLoginUpdate2" value="<%=UserID%>" />
+                            <input type="hidden" id="ExtraUserIndexforLoginUpdate2" value="<%=UserIndex%>" />
+                            <script>
+                                $(document).ready(function(){
+                                    $("#ExtraLoginFormBtn2").click(function(event){
+                                                                
+                                        var CustomerID = document.getElementById("ExtraUserIDforLoginUpdate2").value;
+                                        var UserIndex = document.getElementById("ExtraUserIndexforLoginUpdate2").value;
+                                        var UserName = document.getElementById("ExtraUpdateLoginNameFld2").value;
+                                        var NewPassword = document.getElementById("ExtraNewPasswordFld2").value;
+                                        var oldPassword = document.getElementById("ExtraCurrentPasswordFld2").value;
+                                                                
+                                        $.ajax({
+                                            method: "POST",
+                                            url: "updateLoginController",
+                                            data: "CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&userName="+UserName+"&newPassword="+NewPassword+"&currentPassword="+oldPassword,
+                                            success: function(result){
+                                                                        
+                                                //alert(result);
+                                                                        
+                                                if(result === "fail"){
+                                                                            
+                                                    document.getElementById("ExtraWrongPassStatus2").style.display = "block";
+                                                    document.getElementById("ExtraCurrentPasswordFld2").value = "";
+                                                    document.getElementById("ExtraCurrentPasswordFld2").style.backgroundColor = "red";
+                                                    document.getElementById("ExtraCurrentPasswordFld2").style.color = "white";
+
+                                                    //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
+                                                    //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
+                                                    //document.getElementById("LoginFormBtn").disabled = true;
+                                                    //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
+                                                }
+                                                if(result === "success"){
+                                                    document.getElementById("ExtraNewPasswordFld2").value = "";
+                                                    document.getElementById("ExtraCurrentPasswordFld2").value = "";
+                                                    document.getElementById("ExtraCurrentPasswordFld2").style.backgroundColor = "#eeeeee";
+                                                    document.getElementById("ExtraCurrentPasswordFld2").style.color = "cadetblue";
+                                                    document.getElementById("ExtraConfirmPasswordFld2").value = "";
+                                                    document.getElementById("ExtraWrongPassStatus2").style.display = "none";
+                                                                            
+                                                    //getUserAccountNameController
+                                                    $.ajax({
+                                                        method: "POST",
+                                                        url: "getUserAccountNameController",
+                                                        data: "CustomerID="+CustomerID,
+                                                                                
+                                                        success: function(result){
+
+                                                            document.getElementById("ExtraUpdateLoginNameFld2").value = result;
+
+
+                                                        }
+
+                                                    });
+                                                }
+                                            }
+                                                                    
+                                        });
+                                                                
+                                    });
+                                });
+                            </script>
+                                                    
+                        </tr>
+                        <tr>
+                            <td>
+                                <form action = "LogoutController" name="LogoutForm" method="POST"> 
+                                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" /></center>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                                
+            <div id='ExtrasNotificationDiv2' style='display: none;'>
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
+            
+                <table  id="ExtrasTab" cellspacing="0">
+                    <tbody>
+                        
+                    <%
+                       boolean isTrWhite2 = false;
+                        for(int notify = 0 ; notify < notiCounter; notify++){
+                    
+                        if(!isTrWhite2){
+                            
+                            if(notify > 7)
+                                break;
+                    %>
+                    
+                        <tr style="background-color: #eeeeee">
+                            <td>
+                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                            </td>
+                        </tr>
+                        
+                    <%
+                                isTrWhite2 = true;
+                            }else{
+                            
+                                if(notify > 7)
+                                    break;
+                    %>
+                    
+                        <tr>
+                            <td>
+                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                            </td>
+                        </tr>
+                        
+                    <%      
+                                isTrWhite2 = false;
+                            }
+                        }
+                    %>
+                        <!--tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>third notification here</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>fourth notification here</p>
+                            </td>
+                        </tr-->
+                        
+                    <%
+                            if(notiCounter > 7){
+                    %>
+                    
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
+                            </td>
+                        </tr>
+                        
+                    <%
+                        }
+                    %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+        
+                <!------------------------------------------------------------------------------------------------------------------>
             
             <center><h4 style="margin-top: 1px; margin-bottom: 5px; color: #000099">Your Account</h4></center>
             

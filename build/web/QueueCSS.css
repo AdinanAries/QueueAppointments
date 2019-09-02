@@ -574,7 +574,31 @@ select {
 #PermanentDiv {
   display: none;
 }
+#Extras2Container {
+  display: none;
+}
+
+@media only screen and (max-width: 1400px) {
+  /*.SearchObject {
+    display: block;
+  }*/
+  #PermanentDiv ul {
+    display: none;
+  }
+  #ExtraDrpDwnBtn {
+    display: block;
+  }
+}
+#ExtraDropDwnDiv {
+  display: none;
+}
 @media only screen and (min-width: 1000px) {
+  #ExtraDropDwnDiv {
+    display: block;
+  }
+  #Extras2Container {
+    display: block;
+  }
   .SearchObject {
     display: none;
   }
@@ -598,7 +622,7 @@ select {
     scrollbar-dark-shadow-color: grey;
   }
   #newbusiness {
-    width: 33.2%;
+    width: 33%;
     position: fixed;
     background: none;
     margin-top: 70px;
@@ -618,7 +642,6 @@ select {
   #Extras {
     padding: 1%;
     padding-top: 15px;
-    display: block;
     float: right;
     height: 615px;
     width: 19%;
@@ -637,7 +660,7 @@ select {
     float: right;
     margin: auto;
     margin-top: 5px;
-    margin-right: 50px;
+    margin-right: 20px;
   }
   #PermanentDiv ul li {
     display: inline-block;
@@ -655,7 +678,7 @@ select {
     padding-top: 40px;
   }
   #content {
-    width: 45%;
+    width: 66%;
     margin-left: 0;
     float: right;
     overflow-y: auto;
@@ -664,7 +687,7 @@ select {
     scrollbar-track-color: #6699ff;
   }
   #main {
-    min-height: 586px;
+    min-height: 660px;
   }
   .Main {
     height: 400px;
@@ -698,7 +721,7 @@ select {
     scrollbar-track-color: cornflowerblue;
     scrollbar-arrow-color: #3d6999;
     scrollbar-shadow-color: grey;
-    scrollbar-dark-shadow-color: grey;
+    /*scrollbar-dark-shadow-color: grey;*/
   }
   #QueuLineDiv {
     scrollbar-base-color: darkgrey;
@@ -765,5 +788,31 @@ select {
   }
   #ProInfoDiv {
     display: block;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  #Extras {
+    display: block;
+  }
+  #ExtraDropDwnDiv {
+    display: none;
+  }
+  #ExtraDropDown {
+    display: none;
+  }
+  #Extras2Container {
+    display: none;
+  }
+  #newbusiness {
+    width: 33.2%;
+  }
+  #content {
+    width: 45%;
+  }
+  #PermanentDiv ul {
+    display: block;
+  }
+  #ExtraDrpDwnBtn {
+    display: none;
   }
 }

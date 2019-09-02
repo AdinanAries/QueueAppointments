@@ -821,6 +821,95 @@ function showCustExtraNotification() {
   }
 }
 
+function showCustExtraUsrAcnt2() {
+  document.getElementById("News2").style.display = "none";
+  document.getElementById("Calender2").style.display = "none";
+  document.getElementById("ExtrasNotificationDiv2").style.display = "none";
+
+  //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
+  //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
+
+  if (
+    document.getElementById("ExtrasUserAccountDiv2").style.display === "none"
+  ) {
+    //document.getElementById("PermDivUserBtn").style.backgroundColor = "blue";
+    $("#Extras2").slideDown("fast");
+    $("#ExtrasUserAccountDiv2").slideDown("fast");
+  } else {
+    //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
+    $("#ExtrasUserAccountDiv2").slideUp("fast");
+    $("#Extras2").slideUp("fast");
+    //document.getElementById("News2").style.display = "block";
+  }
+}
+
+function showCustExtraCal2() {
+  document.getElementById("News2").style.display = "none";
+  document.getElementById("ExtrasUserAccountDiv2").style.display = "none";
+  document.getElementById("ExtrasNotificationDiv2").style.display = "none";
+
+  //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
+  //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
+
+  if (document.getElementById("Calender2").style.display === "none") {
+    //document.getElementById("PermDivCalBtn").style.backgroundColor = "blue";
+    $("#Extras2").slideDown("fast");
+    $("#Calender2").slideDown("fast");
+    //document.getElementById("Extras2").style.display = "block";
+  } else {
+    //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
+    $("#Calender2").slideUp("fast");
+    $("#Extras2").slideUp("fast");
+    //document.getElementById("Extras2").style.display = "none";
+    //document.getElementById("News2").style.display = "block";
+  }
+}
+
+function showCustExtraNotification2() {
+  document.getElementById("News2").style.display = "none";
+  document.getElementById("ExtrasUserAccountDiv2").style.display = "none";
+  document.getElementById("Calender2").style.display = "none";
+
+  //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
+  //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
+
+  if (
+    document.getElementById("ExtrasNotificationDiv2").style.display === "none"
+  ) {
+    //document.getElementById("Extras2").style.display = "block";
+    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "blue";
+    $("#Extras2").slideDown("fast");
+    $("#ExtrasNotificationDiv2").slideDown("fast");
+  } else {
+    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
+    $("#ExtrasNotificationDiv2").slideUp("fast");
+    $("#Extras2").slideUp("fast");
+    //document.getElementById("Extras2").style.display = "none";
+    //document.getElementById("News2").style.display = "block";
+  }
+}
+
+function showCustExtraNews() {
+  document.getElementById("ExtrasNotificationDiv2").style.display = "none";
+  document.getElementById("ExtrasUserAccountDiv2").style.display = "none";
+  document.getElementById("Calender2").style.display = "none";
+
+  //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
+  //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
+
+  if (document.getElementById("News2").style.display === "none") {
+    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "blue";
+    $("#Extras2").slideDown("fast");
+    $("#News2").slideDown("fast");
+    //document.getElementById("Extras2").style.display = "block";
+  } else {
+    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
+    $("#News2").slideUp("fast");
+    $("#Extras2").slideUp("fast");
+    //document.getElementById("Extras2").style.display = "none";
+    //document.getElementById("News2").style.display = "block";
+  }
+}
 //Everything that needs internet always at bottom
 
 $(function() {

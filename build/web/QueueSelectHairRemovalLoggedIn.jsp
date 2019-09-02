@@ -177,16 +177,7 @@
                     (1) 732-799-9546
                 </p>
             </div>
-            <div name="ExtraDivSearch" style='padding-left: 20px; width: 650px; float: left;'>
-                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                    <input style="margin-right: 0; background-color: pink; height: 30px; border: 1px solid red; border-radius: 4px; font-weight: bolder;"
-                            placeholder="Search service provider" name="SearchFld" type="text"  value="" size="78" />
-                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <input type='hidden' name='User' value='<%=NewUserName%>' />
-                    <input style="font-weight: bolder; margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 7px; font-size: 15px; width: 100px;" 
-                            type="submit" value="Search" />
-                </form>
-            </div>
+            
             <div style="float: right; width: 50px;">
                 <%
                     if(Base64Pic != ""){
@@ -214,7 +205,17 @@
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li>
             </ul>
-        
+            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
+                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                            type="submit" value="Search" />
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type='hidden' name='User' value='<%=NewUserName%>' />
+                </form>
+            </div>
+                <p style='clear: both;'></p>
         </div>
         
         <div id="container">
@@ -1303,15 +1304,15 @@
             <div id="ExtraproviderIcons" style="padding-top: 10px;">
              
                 <div id="SearchDivNB">
-                <center><form action="ByAddressAndTypeSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 480px;">
+                <center><form action="ByAddressAndTypeSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="ServiceType" value="Hair Removal" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 400px; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff;" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 60px; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 450px;" value="Search" /></p>
+                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p>Town: <input style="background-color: #6699ff; width: 40%;" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 
