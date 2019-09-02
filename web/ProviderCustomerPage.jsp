@@ -627,7 +627,16 @@
                     (1) 732-799-9546
                 </p>
             </div>
-            
+            <div name="ExtraDivSearch" style='padding-left: 20px; width: 650px; float: left;'>
+                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                    <input style="margin-right: 0; background-color: pink; height: 30px; border: 1px solid red; border-radius: 4px; font-weight: bolder;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" size="78" />
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type='hidden' name='User' value='<%=NewUserName%>' />
+                    <input style="font-weight: bolder; margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 7px; font-size: 15px; width: 100px;" 
+                            type="submit" value="Search" />
+                </form>
+            </div>
             <div style="float: right; width: 50px;">
                 <%
                     if(Base64Pic != ""){
@@ -669,6 +678,7 @@
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
                                    placeholder="Search provider" name="SearchFld" type="text"  value="" size="30" />
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                            <input type='hidden' name='User' value='<%=NewUserName%>' />
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
                                    type="submit" value="Search" />
                     </form>
@@ -899,7 +909,13 @@
                                                 counter++;
                                                 String EventID = EventsRec.getString("EvntID").trim();
                                                 String EventTitle = EventsRec.getString("EventTitle").trim();
+                                                EventTitle = EventTitle.replace("\"", "");
+                                                EventTitle = EventTitle.replace("'", "");
+                                                EventTitle = EventTitle.replaceAll("\\s", " ");
                                                 String EventDesc = EventsRec.getString("EventDesc").trim();
+                                                EventDesc = EventDesc.replace("\"", "");
+                                                EventDesc = EventDesc.replace("'", "");
+                                                EventDesc = EventDesc.replaceAll("\\s", " ");
                                                 String EventDate = EventsRec.getString("EventDate").trim();
                                                 String EventTime = EventsRec.getString("EventTime").trim();
                                                 if(EventTime.length() > 5)
@@ -1302,7 +1318,7 @@
                 
                 <h4><a href="" style=" color: black;"></a></h4>
                 
-                <center><div class =" SearchObject">
+                <center><div class ="SearchObject">
                         
                     <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                         <input type="hidden" name="User" value="<%=NewUserName%>" />

@@ -575,6 +575,9 @@ select {
   display: none;
 }
 @media only screen and (min-width: 1000px) {
+  .SearchObject {
+    display: none;
+  }
   #addBizTxt {
     padding-top: 20px;
   }

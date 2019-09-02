@@ -66,11 +66,21 @@
                     (1) 732-799-9546
                 </p>
             </div>
+            
+            <div style="float: right; width: 50px;">
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                        <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                    </div></center>
+            </div>
         
             <ul>
-                <li style='cursor: pointer;'>One</li>
-                <li style='cursor: pointer;'>Two</li>
-                <li style='cursor: pointer;'>Three</li>
+                <a  href="Queue.jsp">
+                    <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                    Home</li></a>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                    Calender</li>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                    Account</li>
             </ul>
         
         </div>

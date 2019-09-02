@@ -169,7 +169,16 @@
     <body>
         
         <div id="PermanentDiv" style="">
-            
+            <div name="ExtraDivSearch" style='padding-left: 20px; width: 650px; float: left;'>
+                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                    <input style="margin-right: 0; background-color: pink; height: 30px; border: 1px solid red; border-radius: 4px; font-weight: bolder;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" size="78" />
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type='hidden' name='User' value='<%=NewUserName%>' />
+                    <input style="font-weight: bolder; margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 7px; font-size: 15px; width: 100px;" 
+                            type="submit" value="Search" />
+                </form>
+            </div>
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                     tech.arieslab@outlook.com | 
