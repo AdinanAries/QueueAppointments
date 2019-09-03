@@ -707,7 +707,7 @@
             </table>
         </div>
                         
-        <div id="container">
+        <div onclick='hideExtraDropDown();' id="container">
             
             <div id="miniNav" style="display: none;">
                 <center>
@@ -1493,11 +1493,11 @@
                 
         </div>
                 
-            <div id="newbusiness" style="padding-top: 0;">
+        <div onclick='hideExtraDropDown();' id="newbusiness" style="padding-top: 0;">
                 
                 <!----------------------------------------------------------------------------------------------------------------->
         <div id='Extras2Container'>
-            <div id="Extras2" style="display: none; height: 580px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 100; background-color: #ccccff;">
+            <div id="Extras2" style="display: none; height: 565px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 110; background-color: #ccccff; text-align: left;">
             
             <div id='News2' style='display: none;'>
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
@@ -1913,7 +1913,7 @@
             </div>
                              
         <div id='ExtrasUserAccountDiv2' style='display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Account Settings</p></center>
             
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>

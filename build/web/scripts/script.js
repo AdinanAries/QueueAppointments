@@ -910,6 +910,11 @@ function showCustExtraNews() {
     //document.getElementById("News2").style.display = "block";
   }
 }
+
+function hideExtraDropDown() {
+  document.getElementById("ExtraDropDown").style.display = "none";
+}
+
 //Everything that needs internet always at bottom
 
 $(function() {
