@@ -1637,7 +1637,7 @@
                     
         <div id="newbusiness">
             
-            <div id="ExtraproviderIcons" style="padding-top: 10px;">
+            <div id="ExtraproviderIcons" style="padding-top: 10px;"> 
              
                 <div id="SearchDivNB">
                 <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
