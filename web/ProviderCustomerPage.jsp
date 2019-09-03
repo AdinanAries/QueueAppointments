@@ -1377,6 +1377,78 @@
                         Find services at location below</p>
                     <p>City: <input style="width: 400px; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p>Town: <input style="background-color: #6699ff;" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 60px; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
+                    <div style='width: 490px; overflow-x: auto; color: white; background-color: #3d6999;'>
+                        <table style='width: 2500px;'>
+                            <tbody>
+                                <tr>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                        <p><input name='Barber' id='barberFlt' type="checkbox" value="ON" /><label for='barberFlt'>Barber Shop</label></p>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='Beauty' id='BeautyFlt' type="checkbox" value="ON" /><label for='BeautyFlt'>Beauty Salon</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='DaySpa' id='DaySpaFlt' type="checkbox" value="ON" /><label for='DaySpaFlt'>Day Spa</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='Dentist' id='DentistFlt' type="checkbox" value="ON" /><label for='DentistFlt'>Dentist</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='Dietician' id='DietFlt' type="checkbox" value="ON" /><label for='DietFlt'>Dietician</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='EyeBrows' id='EyebrowsFlt' type="checkbox" value="ON" /><label for='EyebrowsFlt'>Eyebrows and Eyelashes</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='HairRemoval' id='HairRmvFlt' type="checkbox" value="ON" /><label for='HairRmvFlt'>Hair Removal</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='HairSalon' id='HairSlnFlt' type="checkbox" value="ON" /><label for='HairSlnFlt'>Hair Salon</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='HolisticMedicine' id='HolMedFlt' type="checkbox" value="ON" /><label for='HolMedFlt'>Holistic Medicine</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='HomeService' id='HomeSvFlt' type="checkbox" value="ON" /><label for='HomeSvFlt'>Home Services</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='MakeUpArtist' id='MkUpArtistFlt' type="checkbox" value="ON" /><label for='MkUpArtistFlt'>Makeup Artist</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='Massage' id='MassageFlt' type="checkbox" value="ON" /><label for='MassageFlt'>Massage</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='Aethetician' id='MedEsthFlt' type="checkbox" value="ON" /><label for='MedEsthFlt'>Medical Aesthetician</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='MedCenter' id='MedCntrFlt' type="checkbox" value="ON" /><label for='MedCntrFlt'>Medical Center</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='NailSalon' id='NailSlnFlt' type="checkbox" value="ON" /><label for='NailSlnFlt'>Nail Salon</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='PersonalTrainer' id='PsnlTrnFlt' type="checkbox" value="ON" /><label for='PsnlTrnFlt'>Personal Trainer</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='PetServices' id='PetSvcFlt' type="checkbox" value="ON" /><label for='PetSvcFlt'>Pet Services</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='PhysicalTherapy' id='PhThpyFlt' type="checkbox" value="ON" /><label for='PhThpyFlt'>Physical Therapy</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='Piercing' id='PiercingFlt' type="checkbox" value="ON" /><label for='PiercingFlt'>Piercing</label>
+                                    </td>
+                                    <td style='border-right: 1px solid darkblue;'>
+                                    <input name='Podiatry' id='PodiatryFlt' type="checkbox" value="ON" /><label for='PodiatryFlt'>Podiatry</label>
+                                    </td>
+                                    <td>
+                                    <input name='TattooShop' id='TtShFlt' type="checkbox" value="ON" /><label for='TtShFlt'>Tattoo Shop</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 490px;" value="Search" /></p>
                     </form></center>
                 </div>
@@ -1498,7 +1570,11 @@
                 <!----------------------------------------------------------------------------------------------------------------->
         <div id='Extras2Container'>
             <div id="Extras2" style="display: none; height: 565px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 110; background-color: #ccccff; text-align: left;">
-            
+                
+                <p onclick='document.getElementById("Extras2").style.display = "none";' style='width: 50px; float: right; margin-right: 5px; margin-top:5px;
+                   border-radius: 5px;  color: white; cursor: pointer; border: 1px solid white; text-align: center; background-color: red;'>hide
+                </p>
+                
             <div id='News2' style='display: none;'>
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             

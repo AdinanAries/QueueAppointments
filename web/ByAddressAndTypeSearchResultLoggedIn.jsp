@@ -113,9 +113,9 @@
             
         }catch(Exception e){e.printStackTrace();}
         
-        String City = request.getParameter("city4Search");
-        String Town = request.getParameter("town4Search");
-        String ZipCode = request.getParameter("zcode4Search");
+        String City = request.getParameter("city4Search").trim();
+        String Town = request.getParameter("town4Search").trim();
+        String ZipCode = request.getParameter("zcode4Search").trim();
         
         String BizType = request.getParameter("ServiceType");
         
@@ -124,7 +124,7 @@
         try{
             Class.forName(Driver);
             Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City = '"+City+"' and Town = '"+Town+"' and Zipcode = '"+ZipCode+"'";
+            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'";
             
             PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
             
