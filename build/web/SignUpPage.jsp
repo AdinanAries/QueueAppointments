@@ -65,6 +65,38 @@
     
     <body>
         
+        <div id="PermanentDiv" style="">
+            
+            <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+                        <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                            Home</p></a>
+            
+            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                    tech.arieslab@outlook.com | 
+                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                    (1) 732-799-9546
+                </p>
+            </div>
+            
+            <div style="float: right; width: 50px;">
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                        <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                    </div></center>
+            </div>
+        
+            <ul>
+                <a  href="Queue.jsp">
+                    <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                    Home</li></a>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                    Calender</li>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                    Account</li>
+            </ul>
+        
+        </div>
+        
         <div id="container">
             
         <div id="header">
@@ -90,7 +122,7 @@
                 
                 <center><div id ="logindetails" style="padding-top: 10px;">
                         
-                <center><h2 style="margin-bottom: 20px;">Sign-Up Here</h2></center>
+                <center><h2 style="margin-bottom: 20px;">Sign-up Here</h2></center>
                 
                 <center><div id="accountTypeOptions">
                 <center><h3 style="color: white; margin-bottom: 10px; ">Choose account type</h3></center>
@@ -512,11 +544,14 @@
                 
         <div id="newbusiness" style=" height: 75%;">
             
-        <center><div id ="logindetailsSignUP" style="padding-top: 100px;">
+        <center><div id ="logindetailsSignUP" style="padding-top: 70px;">
+                <center><h1 style='color: darkblue; margin-bottom: 40px;'>Already have an account</h1></center>
+                
                 <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
+                
                 <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
                   
-                <center><h2 style="margin-bottom: 20px;">Login Here</h2></center>
+                <center><h2 style="margin-bottom: 20px;">Login here</h2></center>
                 
                 <form name="login" action="LoginControllerMain" method="POST"><table border="0"> 
                         

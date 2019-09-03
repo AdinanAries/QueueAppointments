@@ -168,6 +168,10 @@
         
         <div id="PermanentDiv" style="">
             
+            <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+                        <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                            Home</p></a>
+            
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                     tech.arieslab@outlook.com | 
@@ -175,14 +179,7 @@
                     (1) 732-799-9546
                 </p>
             </div>
-            <div name="ExtraDivSearch" style='padding-left: 20px; width: 650px; float: left;'>
-                <form action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                    <input style="margin-right: 0; background-color: pink; height: 30px; border: 1px solid red; border-radius: 4px; font-weight: bolder;"
-                            placeholder="Search service provider" name="SearchFld" type="text"  value="" size="78" />
-                    <input style="font-weight: bolder; margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 7px; font-size: 15px; width: 100px;" 
-                            type="submit" value="Search" />
-                </form>
-            </div>
+            
             <div style="float: right; width: 50px;">
                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
                         <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
@@ -198,6 +195,16 @@
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li>
             </ul>
+            
+            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+                <form action="QueueSelectBusinessSearchResult.jsp" method="POST">
+                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
+                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                            type="submit" value="Search" />
+                </form>
+            </div>
+                <p style='clear: both;'></p>
         
         </div>
 

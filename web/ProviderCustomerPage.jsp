@@ -828,7 +828,7 @@
                                                 AptTime = AptTime.substring(0,5);
                                     %>
                                     
-                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: #334d81;"><%=ProvComp%></span> at <span style="color: #334d81;"><%=AptTime%></span></p>
+                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: darkblue; font-weight: bolder;"><%=ProvComp%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
                                     
                                     <%
                                             count++;
@@ -870,7 +870,7 @@
                                                             
                                                             var time = ApptData.Data[i].ApptTime;
                                                             
-                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: #334d81;">'+comp+'</span> at <span style="color: #334d81;">'+time+'<span></p>';
+                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: darkblue; font-weight: bolder;">'+comp+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
                                                             
                                                         }
                                                         
@@ -907,7 +907,7 @@
                                                                     'onclick=\'updateEvent("'+ID+'", "'+Title+'","'+Desc+'", "'+Date+'","' +Time+'", "Cupdt'+updtCounter+'");\' ' +
                                                                     'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
 
-                                                                    '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: #334d81;">'+Date+'</span> - <span style="color: #334d81;">'+Time+'</span></p>'+
+                                                                    '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Date+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Time+'</span></p>'+
                                                                     '<P style="color: #334d81;">'+Desc+'</p>'+
                                                                 '</div>';
                                                             
@@ -968,7 +968,7 @@
                                                     onclick='updateEvent("<%=EventID%>", "<%=EventTitle%>", "<%=EventDesc%>", "<%=EventDate%>", "<%=EventTime%>", "PgLdupdt<%=counter%>");' 
                                                     style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">
                                                     
-                                                    <p><span style="font-weight: bolder; color: white;"><%=EventTitle%></span> - <span style="color: #334d81;"><%=EventDate%></span> - <span style="color: #334d81;"><%=EventTime%></span></p>
+                                                    <p><span style="font-weight: bolder; color: white;"><%=EventTitle%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventDate%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventTime%></span></p>
                                                     <P style="color: #334d81;"><%=EventDesc%></p>
                                                 </div>
                                     
@@ -1067,7 +1067,7 @@
                                                     'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' +
                                                     'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
                                                     
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: #334d81;">'+EvntDate+'</span> - <span style="color: #334d81;">'+EvntTime+'</span></p>'+
+                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
                                                     '<P style="color: #334d81;">'+EvntDesc+'</p>'+
                                                 '</div>';
                                         
@@ -1126,7 +1126,7 @@
                                                     'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' +
                                                     'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
                                                     
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: #334d81;">'+EvntDate+'</span> - <span style="color: #334d81;">'+EvntTime+'</span></p>'+
+                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
                                                     '<P style="color: #334d81;">'+EvntDesc+'</p>'+
                                                 '</div>';
                                         //alert('onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle+'","'+EvntDesc+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' );
@@ -1668,7 +1668,7 @@
                                                 AptTime = AptTime.substring(0,5);
                                     %>
                                     
-                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count2%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: #334d81;"><%=ProvComp%></span> at <span style="color: #334d81;"><%=AptTime%></span></p>
+                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count2%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: darkblue; font-weight: bolder;"><%=ProvComp%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
                                     
                                     <%
                                             count2++;
@@ -1710,7 +1710,7 @@
                                                             
                                                             var time = ApptData.Data[i].ApptTime;
                                                             
-                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: #334d81;">'+comp+'</span> at <span style="color: #334d81;">'+time+'<span></p>';
+                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: darkblue; font-weight: bolder;">'+comp+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
                                                             
                                                         }
                                                         
@@ -1747,7 +1747,7 @@
                                                                     'onclick=\'updateEvent("'+ID+'", "'+Title+'","'+Desc+'", "'+Date+'","' +Time+'", "Cupdt2'+updtCounter2+'");\' ' +
                                                                     'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
 
-                                                                    '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: #334d81;">'+Date+'</span> - <span style="color: #334d81;">'+Time+'</span></p>'+
+                                                                    '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Date+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Time+'</span></p>'+
                                                                     '<P style="color: #334d81;">'+Desc+'</p>'+
                                                                 '</div>';
                                                             
@@ -1805,10 +1805,10 @@
                                     %>
                                     
                                                 <div id="PgLdupdt2<%=counter%>"
-                                                    onclick='updateEvent("<%=EventID%>", "<%=EventTitle%>", "<%=EventDesc%>", "<%=EventDate%>", "<%=EventTime%>", "PgLdupdt2<%=counter%>");' 
+                                                    onclick='updateEvent2("<%=EventID%>", "<%=EventTitle%>", "<%=EventDesc%>", "<%=EventDate%>", "<%=EventTime%>", "PgLdupdt2<%=counter%>");' 
                                                     style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">
                                                     
-                                                    <p><span style="font-weight: bolder; color: white;"><%=EventTitle%></span> - <span style="color: #334d81;"><%=EventDate%></span> - <span style="color: #334d81;"><%=EventTime%></span></p>
+                                                    <p><span style="font-weight: bolder; color: white;"><%=EventTitle%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventDate%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventTime%></span></p>
                                                     <P style="color: #334d81;"><%=EventDesc%></p>
                                                 </div>
                                     
@@ -1859,7 +1859,7 @@
                         <script>
                             var updateCounter2 = 0;
                             
-                            function updateEvent(pEvntID, pEvntTtle, pEvntDesc, pEvntDate, pEvntTime, element){
+                            function updateEvent2(pEvntID, pEvntTtle, pEvntDesc, pEvntDate, pEvntTime, element){
                                 
                                 document.getElementById(element).style.display = "none";
                                 document.getElementById("CalSaveEvntBtn2").style.display = "none";
@@ -1904,10 +1904,10 @@
                                             if(Evnt.JQDate === EvntDate){
                                                 updateCounter2 = parseInt(updateCounter2, 10) + 1;
                                                 document.getElementById("EventsListDiv2").innerHTML += '<div id="updt2'+updateCounter2+'" ' +
-                                                    'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt2'+updateCounter2+'");\' ' +
+                                                    'onclick=\'updateEvent2("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt2'+updateCounter2+'");\' ' +
                                                     'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
                                                     
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: #334d81;">'+EvntDate+'</span> - <span style="color: #334d81;">'+EvntTime+'</span></p>'+
+                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
                                                     '<P style="color: #334d81;">'+EvntDesc+'</p>'+
                                                 '</div>';
                                         
@@ -1963,10 +1963,10 @@
                                             if(Evnt.JQDate === EvntDate){
                                                 updateCounter2 = parseInt(updateCounter2, 10) + 1;
                                                 document.getElementById("EventsListDiv2").innerHTML += '<div id="updt2'+updateCounter2+'" ' +
-                                                    'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt2'+updateCounter2+'");\' ' +
+                                                    'onclick=\'updateEvent2("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt2'+updateCounter2+'");\' ' +
                                                     'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
                                                     
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: #334d81;">'+EvntDate+'</span> - <span style="color: #334d81;">'+EvntTime+'</span></p>'+
+                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
                                                     '<P style="color: #334d81;">'+EvntDesc+'</p>'+
                                                 '</div>';
                                         //alert('onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle+'","'+EvntDesc+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' );
