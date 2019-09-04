@@ -593,6 +593,9 @@ select {
   display: none;
 }
 @media only screen and (min-width: 1000px) {
+  #PhoneNotiBar {
+    display: none;
+  }
   #ExtraDropDwnDiv {
     display: block;
   }

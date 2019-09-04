@@ -753,7 +753,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,UserID);
                             ResultSet cover = coverPst.executeQuery();
@@ -761,27 +761,30 @@
                             while(cover.next()){
                                 
                                  try{    
-                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                Blob profilepic = cover.getBlob("CoverPhoto"); 
-                                InputStream inputStream = profilepic.getBinaryStream();
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[4096];
-                                int bytesRead = -1;
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob profilepic = cover.getBlob("CoverPhoto"); 
+                                    InputStream inputStream = profilepic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
 
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                    base64Cover = Base64.getEncoder().encodeToString(imageBytes);
+
+
                                 }
+                                catch(Exception e){
 
-                                byte[] imageBytes = outputStream.toByteArray();
-
-                                base64Cover = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                            }
-                            catch(Exception e){
-
-                            }
+                                }
                                 
+                                if(!base64Cover.equals(""))
+                                    break;
+                                 
                             }
                             
                         }catch(Exception e){
@@ -798,7 +801,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
+                            String coverString = "Select top 7 * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID Desc";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,UserID);
                             ResultSet cover = coverPst.executeQuery();
@@ -843,13 +846,13 @@
                         
                         try{
                             
-                            firstPic = Base64GalleryPhotos.get(0);
-                            seventhPic = Base64GalleryPhotos.get((Base64GalleryPhotos.size()-1));
-                            secondPic = Base64GalleryPhotos.get(1);
-                            thirdPic = Base64GalleryPhotos.get(2);  
-                            fourthPic = Base64GalleryPhotos.get(3);
-                            fithPic = Base64GalleryPhotos.get(4);
-                            sixthPic = Base64GalleryPhotos.get(5);
+                            firstPic = Base64GalleryPhotos.get(1);
+                            seventhPic = Base64GalleryPhotos.get(0);
+                            secondPic = Base64GalleryPhotos.get(2);
+                            thirdPic = Base64GalleryPhotos.get(3);  
+                            fourthPic = Base64GalleryPhotos.get(4);
+                            fithPic = Base64GalleryPhotos.get(5);
+                            sixthPic = Base64GalleryPhotos.get(6);
                             
                         }catch(Exception e){}
                         
@@ -871,7 +874,7 @@
             
             Class.forName(Driver);
             Connection appointmentConn = DriverManager.getConnection(Url, user, password);
-            String appointment = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate > ? order by AppointmentDate asc";
+            String appointment = "Select top 10 * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate > ? order by AppointmentDate asc";
             PreparedStatement appointmentPst = appointmentConn.prepareStatement(appointment);
             
             appointmentPst.setInt(1,UserID);
@@ -1117,7 +1120,7 @@
             
             Class.forName(Driver);
             Connection historyConn = DriverManager.getConnection(Url, user, password);
-            String appointmentHistoryQuery = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate < ? or (ProviderID = ? and AppointmentDate = ? and AppointmentTime < ?) order by AppointmentDate desc";
+            String appointmentHistoryQuery = "Select top 10 * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate < ? or (ProviderID = ? and AppointmentDate = ? and AppointmentTime < ?) order by AppointmentDate desc";
             PreparedStatement appointmentHistoryPst = historyConn.prepareStatement(appointmentHistoryQuery);
             appointmentHistoryPst.setInt(1,UserID);
             appointmentHistoryPst.setString(2, StrinCurrentdate);
@@ -1236,7 +1239,7 @@
             
             Class.forName(Driver);
             Connection ClientsConn = DriverManager.getConnection(Url, user, password);
-            String ClientsString = "select * from QueueServiceProviders.ClientsList where ProvID = ?";
+            String ClientsString = "select top 10 * from QueueServiceProviders.ClientsList where ProvID = ? order by ClientID desc";
             PreparedStatement ClientsPST = ClientsConn.prepareStatement(ClientsString);
             ClientsPST.setInt(1, UserID);
             
@@ -4634,6 +4637,11 @@
          
         <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px;">
             
+            <!------------------------------------------------------------------------------------------------------------------------------------------->
+            
+            <!------------------------------------------------------------------------------------------------------------------>
+        
+            
             <center><div id="Providerprofile" style="border-bottom: 10px solid cornflowerblue;  width: 100%; max-width: 700px;">
                  
                 <h4 style="color: black; margin-bottom: 10px;">Your Business Profile</h4>
@@ -7184,7 +7192,7 @@
                                      try{
                                         Class.forName(Driver);
                                         Connection BlckCustConn = DriverManager.getConnection(Url, user, password);
-                                        String BlckCustString = "Select * from QueueServiceProviders.BlockedCustomers where ProviderId = ?";
+                                        String BlckCustString = "Select top 10 * from QueueServiceProviders.BlockedCustomers where ProviderId = ? order by BlockedID desc";
                                         PreparedStatement BlckCustPst = BlckCustConn.prepareStatement(BlckCustString);
                                         BlckCustPst.setInt(1, UserID);
 

@@ -272,6 +272,14 @@
         <servlet-name>GetCustEvntAjax</servlet-name>
         <servlet-class>GetCustEvntAjax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DltEvntAjax</servlet-name>
+        <servlet-class>DltEvntAjax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updtPerInfoExtraAjax</servlet-name>
+        <servlet-class>updtPerInfoExtraAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -543,6 +551,14 @@
     <servlet-mapping>
         <servlet-name>GetCustEvntAjax</servlet-name>
         <url-pattern>/GetCustEvntAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DltEvntAjax</servlet-name>
+        <url-pattern>/DltEvntAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updtPerInfoExtraAjax</servlet-name>
+        <url-pattern>/updtPerInfoExtraAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

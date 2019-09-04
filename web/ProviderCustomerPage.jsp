@@ -468,7 +468,7 @@
             
             Class.forName(Driver);
             Connection conn = DriverManager.getConnection(Url, user, password);
-            String Select = "Select * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate > ?  order by AppointmentDate asc";
+            String Select = "Select top 5 * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate > ?  order by AppointmentDate asc";
             PreparedStatement pst = conn.prepareStatement(Select);
             pst.setInt(1,UserID);
             pst.setString(2, StringCurrentdate);
@@ -544,7 +544,7 @@
             
             Class.forName(Driver);
             Connection historyConn = DriverManager.getConnection(Url, user, password);
-            String appointmentHistoryQuery = "Select * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate < ? or (CustomerID = ? and AppointmentDate = ? and AppointmentTime < ?) order by AppointmentDate desc";
+            String appointmentHistoryQuery = "Select top 5 * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate < ? or (CustomerID = ? and AppointmentDate = ? and AppointmentTime < ?) order by AppointmentDate desc";
             PreparedStatement appointmentHistoryPst = historyConn.prepareStatement(appointmentHistoryQuery);
             appointmentHistoryPst.setInt(1,UserID);
             appointmentHistoryPst.setString(2, StrinCurrentdate);
@@ -1010,11 +1010,33 @@
                             </td>
                         </tr>
                         
-                        <!--script>
-                            $(document).ready({
-                                $()
+                        <script>
+                            $(document).ready(function(){
+                                
+                                $("#CalDltEvntBtn").click(function(event){
+                                    var EventID = document.getElementById("EvntIDFld").value;
+                                    
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "DltEvntAjax",
+                                        data: "EventID="+EventID,
+                                        success: function(result){
+                                            if(result === "success")
+                                                alert(result);
+                                                document.getElementById("CalUpdateEvntBtn").style.display = "none";
+                                                document.getElementById("CalDltEvntBtn").style.display = "none";
+                                                document.getElementById("CalSaveEvntBtn").style.display = "block";
+                                                document.getElementById("AddEvntTtle").value = "";
+                                                document.getElementById("AddEvntDesc").value = "";
+                                                document.getElementById("EvntDatePicker").value = "";
+                                                document.getElementById("AddEvntTime").value = "";
+                                                document.getElementById("EvntIDFld").value = "";
+                                        }
+                                        
+                                    });
+                                });
                             });
-                        </script-->
+                        </script>
                         
                         <script>
                             var updateCounter = 0;
@@ -1155,14 +1177,50 @@
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
+                                <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
-                                <p>First Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p>First Name: <input id='fNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle Name: <input id='mNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last Name: <input id='lNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input id='EmailExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id='UpdtPerInfExtraBtn' style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
                             </td>
+                            
+                            <script>
+                                $(document).ready(function(){
+                                    $("#UpdtPerInfExtraBtn").click(function(){
+                                        
+                                        var FirstName = document.getElementById("fNameExtraFld").value;
+                                        var MiddleName = document.getElementById("mNameExtraFld").value;
+                                        var LastName = document.getElementById("lNameExtraFld").value;
+                                        var Email = document.getElementById("EmailExtraFld").value;
+                                        var Phone = document.getElementById("PhoneExtraFld").value;
+                                        var CustomerID = document.getElementById("ExtraUpdPerUserID").value;
+                                        
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "updtPerInfoExtraAjax",
+                                            data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
+                                            success: function(result){
+                                                if(result === "success"){
+                                                    //alert(result);
+                                                    var FullName = FirstName + " " + MiddleName + " " + LastName;
+                                                    document.getElementById("FullNameDetail").innerHTML = FullName;
+                                                    document.getElementById("PhoneNumberDetail").innerHTML = Phone;
+                                                    document.getElementById("EmailDetail").innerHTML = Email;
+                                                    document.getElementById("NameForLoginStatus").innerHTML = FirstName;
+                                                                            
+                                                }
+                                                
+                                            }
+                                        });
+                                        
+                                    });
+                                });
+                                
+                            </script>
+                            
                         </tr>
                         <tr>
                             <td>
@@ -1184,7 +1242,37 @@
                                                 
                                                 <input id='ExtFeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <center><input id="ExtSendFeedBackBtn" style="width: 100%; border: 1px solid black; background-color: pink;" type="button" value="Send" /></center>
-                                            
+                                                <script>
+                                                    $(document).ready(function() {                        
+                                                         $('#ExtSendFeedBackBtn').click(function(event) {  
+
+                                                             var feedback = document.getElementById("ExtFeedBackTxtFld").value;
+                                                             var CustomerID = document.getElementById("ExtFeedBackUserID").value;
+
+                                                             $.ajax({  
+                                                             type: "POST",  
+                                                             url: "SendProvCustFeedBackController",  
+                                                             data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
+                                                             success: function(result){  
+                                                               document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
+                                                               document.getElementById("ExtLastReviewMessageDiv").style.display = "block";
+                                                               document.getElementById("ExtLasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
+
+                                                               $.ajax({  
+                                                             type: "POST",  
+                                                             url: "getCustFeedbackDate",  
+                                                             data: "CustomerID="+CustomerID,  
+                                                             success: function(result){  
+                                                                 //alert(result);
+                                                                 document.getElementById("ExtFeedBackDate").innerHTML = result +" ";
+                                                             }                
+                                                           });
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
                                         </form>
                                 </div>
                             </td>
@@ -1369,16 +1457,16 @@
                         
                 </div></center>
                         
-                <div id="SearchDivNB" style="margin-top: 5px;">
-                <center><form style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px; border-radius: 5px; width: 500px;" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
+                <div id="LocSearchDiv" style="margin-top: 5px;">
+                <center><form style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px; border-radius: 5px; width: 95%;" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 400px; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff;" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 60px; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div style='width: 490px; overflow-x: auto; color: white; background-color: #3d6999;'>
+                    <div style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -1449,7 +1537,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 490px;" value="Search" /></p>
+                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                     
@@ -1744,7 +1832,7 @@
                                                             updtCounter2 = parseInt(updtCounter2, 10) + 1;
                                                             
                                                             bDiv.innerHTML += '<div id="Cupdt2'+updtCounter2+'" ' +
-                                                                    'onclick=\'updateEvent("'+ID+'", "'+Title+'","'+Desc+'", "'+Date+'","' +Time+'", "Cupdt2'+updtCounter2+'");\' ' +
+                                                                    'onclick=\'updateEvent2("'+ID+'", "'+Title+'","'+Desc+'", "'+Date+'","' +Time+'", "Cupdt2'+updtCounter2+'");\' ' +
                                                                     'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
 
                                                                     '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Date+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Time+'</span></p>'+
@@ -1850,11 +1938,33 @@
                             </td>
                         </tr>
                         
-                        <!--script>
-                            $(document).ready({
-                                $()
+                        <script>
+                            $(document).ready(function(){
+                                
+                                $("#CalDltEvntBtn2").click(function(event){
+                                    var EventID = document.getElementById("EvntIDFld2").value;
+                                    
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "DltEvntAjax",
+                                        data: "EventID="+EventID,
+                                        success: function(result){
+                                            if(result === "success")
+                                                //alert(result);
+                                                document.getElementById("CalUpdateEvntBtn2").style.display = "none";
+                                                document.getElementById("CalDltEvntBtn2").style.display = "none";
+                                                document.getElementById("CalSaveEvntBtn2").style.display = "block";
+                                                document.getElementById("AddEvntTtle2").value = "";
+                                                document.getElementById("AddEvntDesc2").value = "";
+                                                document.getElementById("EvntDatePicker2").value = "";
+                                                document.getElementById("AddEvntTime2").value = "";
+                                                document.getElementById("EvntIDFld2").value = "";
+                                        }
+                                        
+                                    });
+                                });
                             });
-                        </script-->
+                        </script>
                         
                         <script>
                             var updateCounter2 = 0;
@@ -1995,14 +2105,49 @@
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
+                                <input type='hidden' id='ExtraUpdPerUserID2' value='<%=UserID%>' />
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
-                                <p>First Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p>First Name: <input id='fNameExtraFld2' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle Name: <input id='mNameExtraFld2' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last Name: <input id='lNameExtraFld2' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input id='EmailExtraFld2' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input id='PhoneExtraFld2' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id='UpdtPerInfExtraBtn2' style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
                             </td>
+                            
+                            <script>
+                                $(document).ready(function(){
+                                    $("#UpdtPerInfExtraBtn2").click(function(){
+                                        
+                                        var FirstName = document.getElementById("fNameExtraFld2").value;
+                                        var MiddleName = document.getElementById("mNameExtraFld2").value;
+                                        var LastName = document.getElementById("lNameExtraFld2").value;
+                                        var Email = document.getElementById("EmailExtraFld2").value;
+                                        var Phone = document.getElementById("PhoneExtraFld2").value;
+                                        var CustomerID = document.getElementById("ExtraUpdPerUserID2").value;
+                                        
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "updtPerInfoExtraAjax",
+                                            data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
+                                            success: function(result){
+                                                if(result === "success"){
+                                                    //alert(result);
+                                                    var FullName = FirstName + " " + MiddleName + " " + LastName;
+                                                    document.getElementById("FullNameDetail").innerHTML = FullName;
+                                                    document.getElementById("PhoneNumberDetail").innerHTML = Phone;
+                                                    document.getElementById("EmailDetail").innerHTML = Email;
+                                                    document.getElementById("NameForLoginStatus").innerHTML = FirstName;
+                                                                            
+                                                }
+                                                
+                                            }
+                                        });
+                                        
+                                    });
+                                });
+                                
+                            </script>
                         </tr>
                         <tr>
                             <td>
@@ -2024,7 +2169,37 @@
                                                 
                                                 <input id='ExtFeedBackUserID2' type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <center><input id="ExtSendFeedBackBtn2" style="width: 100%; border: 1px solid black; background-color: pink;" type="button" value="Send" /></center>
-                                            
+                                            <script>
+                                                    $(document).ready(function() {                        
+                                                         $('#ExtSendFeedBackBtn2').click(function(event) {  
+
+                                                             var feedback = document.getElementById("ExtFeedBackTxtFld2").value;
+                                                             var CustomerID = document.getElementById("ExtFeedBackUserID2").value;
+
+                                                             $.ajax({  
+                                                             type: "POST",  
+                                                             url: "SendProvCustFeedBackController",  
+                                                             data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
+                                                             success: function(result){  
+                                                               document.getElementById("ExtFeedBackTxtFld2").innerHTML = "Add your message here...";
+                                                               document.getElementById("ExtLastReviewMessageDiv2").style.display = "block";
+                                                               document.getElementById("ExtLasReviewMessageP2").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
+
+                                                               $.ajax({  
+                                                             type: "POST",  
+                                                             url: "getCustFeedbackDate",  
+                                                             data: "CustomerID="+CustomerID,  
+                                                             success: function(result){  
+                                                                 //alert(result);
+                                                                 document.getElementById("ExtFeedBackDate2").innerHTML = result +" ";
+                                                             }                
+                                                           });
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
                                         </form>
                                 </div>
                             </td>
@@ -2206,7 +2381,14 @@
                                <!-- <div class="propic">
                                     <img src="" width="100" height="100"/>
                                 </div> -->
-                               
+                               <div onclick="" id='PhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
+                                    News | 
+                                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                                    Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup> | 
+                                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                                    Calender
+                                </div>
                                <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px; margin-bottom: 5px;">Show Your Profile Details</p></center>
                                
                                <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 5px; margin-top: 0; margin-bottom: 10px; background-color: cornflowerblue; border-right: darkblue 1px solid; border-bottom: darkblue 1px solid; padding-top: 10px;">
@@ -2537,7 +2719,7 @@
                                                $(document).ready(function() {                        
                                                     $('#SendFeedBackBtn').click(function(event) {  
                                                         
-                                                        var feedback = document.getElementById("FeedBackTxtFld").innerHTML;
+                                                        var feedback = document.getElementById("FeedBackTxtFld").value;
                                                         var CustomerID = document.getElementById("FeedBackUserID").value;
                                                         
                                                         $.ajax({  
@@ -4203,7 +4385,7 @@
                                     
                                     Class.forName(Driver);
                                     Connection favConn = DriverManager.getConnection(Url, user, password);
-                                    String favString = "Select * from ProviderCustomers.FavoriteProviders where CustomerId =?";
+                                    String favString = "Select top 5 * from ProviderCustomers.FavoriteProviders where CustomerId =? order by FavoritesId desc";
                                     
                                     PreparedStatement favPst = favConn.prepareStatement(favString);
                                     favPst.setInt(1,UserID);
@@ -4343,7 +4525,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =? order by PicID desc";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,FavProvID);
                             ResultSet cover = coverPst.executeQuery();
@@ -4351,27 +4533,29 @@
                             while(cover.next()){
                                 
                                  try{    
-                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                Blob profilepic = cover.getBlob("CoverPhoto"); 
-                                InputStream inputStream = profilepic.getBinaryStream();
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[4096];
-                                int bytesRead = -1;
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob profilepic = cover.getBlob("CoverPhoto"); 
+                                    InputStream inputStream = profilepic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
 
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                    base64Cover = Base64.getEncoder().encodeToString(imageBytes);
+
                                 }
+                                catch(Exception e){
 
-                                byte[] imageBytes = outputStream.toByteArray();
-
-                                base64Cover = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                            }
-                            catch(Exception e){
-
-                            }
+                                }
                                 
+                                 if(!base64Cover.equals(""))
+                                     break;
+                                 
                             }
                             
                         }catch(Exception e){
