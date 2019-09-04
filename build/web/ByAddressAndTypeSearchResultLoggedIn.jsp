@@ -42,7 +42,7 @@
         
     </head>
     
-    <% 
+    <%
         String ServiceType = "";
         
         int UserID = 0;
@@ -114,8 +114,14 @@
         }catch(Exception e){e.printStackTrace();}
         
         String City = request.getParameter("city4Search").trim();
+        if(City.equals(""))
+            City = "none";
         String Town = request.getParameter("town4Search").trim();
+        if(Town.equals(""))
+            Town = "none";
         String ZipCode = request.getParameter("zcode4Search").trim();
+        if(ZipCode.equals(""))
+            ZipCode = "none";
         
         String BizType = request.getParameter("ServiceType");
         
@@ -390,9 +396,11 @@
                 <center><table id="providerdetails" style="border-spacing: 12px;">
                         
                     <%
+                      
                         
                         //providersList has global therefore scope can be accessed anywhere within file
-                        for(int i = 0; i < providersList.size(); i++){ 
+                        for(int i = 0; i < providersList.size(); i++){
+                            
                         String fullName = providersList.get(i).getFirstName() + " " + providersList.get(i).getMiddleName() + " " + providersList.get(i).getLastName();
                         String Company = providersList.get(i).getCompany();
                         String Email = providersList.get(i).getEmail();
@@ -1480,7 +1488,15 @@
                             </tr>
                             </tbody>
                             
-                            <%}//end of for loop%>
+                        <%  
+                                    //if(i > 3)
+                                        break;
+                                }
+                                //end of for loop
+
+                            
+
+                        %>
                             
                             </table></center>
                             

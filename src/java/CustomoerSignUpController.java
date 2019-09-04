@@ -61,7 +61,7 @@ public class CustomoerSignUpController extends HttpServlet {
                 
                 istel = 1;
                 isExistingAccount = true;
-                JOptionPane.showMessageDialog(null, UserIndex);
+                //JOptionPane.showMessageDialog(null, UserIndex);
                 ExistingProviderAccountsModel.SignupUserList.get(UserIndex).addAccountToList(checkTelRow.getInt("Customer_ID"));
                 //JOptionPane.showMessageDialog(null, "An account associated with this mobile number already exists");
             }

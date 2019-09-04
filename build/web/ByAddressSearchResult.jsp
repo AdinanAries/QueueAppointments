@@ -220,6 +220,31 @@
         String Town = request.getParameter("town4Search").trim();
         String ZipCode = request.getParameter("zcode4Search").trim();
         
+        if(City.equals("")){
+            if(isTypeChck)
+                City = "";
+            else
+                City = "none";
+        }
+        
+        if(Town.equals("")){
+            if(isTypeChck)
+                Town = "";
+            else
+                Town = "none";
+        }
+        
+        if(ZipCode.equals("")){
+            if(isTypeChck)
+                ZipCode = "";
+            else
+                ZipCode = "none";
+        }
+        
+        /*JOptionPane.showMessageDialog(null, City);
+        JOptionPane.showMessageDialog(null, Town);
+        JOptionPane.showMessageDialog(null, ZipCode);*/
+        
         ArrayList<Integer> ProviderIDList = new ArrayList<>();
         
         try{
