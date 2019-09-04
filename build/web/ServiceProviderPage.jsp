@@ -857,7 +857,7 @@
                     
     <%
         //getting booked appointments here
-        ArrayList <BookedAppointmentList> AppointmentList = new ArrayList<>();
+        ArrayList<BookedAppointmentList> AppointmentList = new ArrayList<>();
         ArrayList<BookedAppointmentList> FutureAppointmentList = new ArrayList<>();
         ArrayList<BookedAppointmentList> AppointmentListExtra = new ArrayList<>();
         
@@ -1017,6 +1017,86 @@
                 ListItem = new BookedAppointmentList(AppointmentID, ProviderID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
                 ListItem.setAppointmentReason(Reason);
                 AppointmentList.add(ListItem);
+                
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        //Getting Today's Appointments for Extras
+        try{
+            
+            Date currentDate = new Date();
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String StrinCurrentdate = currentDateFormat.format(currentDate);
+            
+            Class.forName(Driver);
+            Connection appointmentConn = DriverManager.getConnection(Url, user, password);
+            String appointment = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ?";
+            PreparedStatement appointmentPst = appointmentConn.prepareStatement(appointment);
+            
+            appointmentPst.setInt(1,UserID);
+            appointmentPst.setString(2, StrinCurrentdate);
+            ResultSet rows = appointmentPst.executeQuery();
+            
+            BookedAppointmentList ListItem;
+            
+            while(rows.next()){
+               
+                String Reason = rows.getString("OrderedServices").trim();
+                if(Reason.equals("Blocked Time")){
+                    
+                    continue;
+                    
+                }
+                
+                String CustomerID = rows.getString("CustomerID");
+                String customerFirstName = "";
+                String customerMiddleName = "";
+                String customerLastName = "";
+                String customerFullName = "";
+                String customerEmail = "";
+                String customerPhone = "";
+                Blob customerPic = null;
+                
+                
+                try{
+                    Class.forName(Driver);
+                    Connection customerConn = DriverManager.getConnection(Url, user, password);
+                    String customerSelect = "Select First_Name, Middle_Name, Last_Name, Phone_Number, Email, Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                    PreparedStatement customerPst = customerConn.prepareStatement(customerSelect);
+                    customerPst.setString(1, CustomerID);
+                    ResultSet customerInfo = customerPst.executeQuery();
+                    
+                    
+                    while(customerInfo.next()){
+                        
+                        customerFirstName = customerInfo.getString("First_Name").trim();
+                        customerMiddleName = customerInfo.getString("Middle_Name").trim();
+                        customerLastName = customerInfo.getString("Last_Name").trim();
+                        customerFullName = customerFirstName + " " + customerMiddleName + " " + customerLastName;
+                        customerEmail = customerInfo.getString("Email").trim();
+                        customerPhone = customerInfo.getString("Phone_Number").trim();
+                        customerPic = customerInfo.getBlob("Profile_Pic");
+                        
+                    }
+                    
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                String AppointmentTime = rows.getString("AppointmentTime").substring(0,5);
+              
+                int AppointmentID = rows.getInt("AppointmentID");
+                int ProviderID = UserID;
+                
+                Date AppointmentDate = rows.getDate("AppointmentDate");
+                
+                ListItem = new BookedAppointmentList(AppointmentID, ProviderID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
+                ListItem.setAppointmentReason(Reason);
+                AppointmentListExtra.add(ListItem);
                 
             }
         }
@@ -1345,6 +1425,18 @@
         
         <div id="PermanentDiv" style="">
             
+            <img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
+            <script>
+                function showExtraDropDown(){
+                    if(document.getElementById("ExtraDropDown").style.display === "none")
+                        document.getElementById("ExtraDropDown").style.display = "block";
+                    else
+                        document.getElementById("ExtraDropDown").style.display = "none";
+                }
+                
+            </script>
+            
+            
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                     tech.arieslab@outlook.com | 
@@ -1373,7 +1465,7 @@
             
             <ul>
                 <li id='PermDivNotiBtn' onclick='showCustExtraNotification();' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                    Notifications<sup style='color: red;'> 0</sup></li>
+                    Notifications<sup style='color: red;'> <%=notiCounter%></sup></li>
                 <li id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
                 <li id='PermDivUserBtn' onclick='showCustExtraUsrAcnt();' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
@@ -1382,7 +1474,33 @@
         
         </div>
         
-        <div id="container">
+         <div id='ExtraDropDwnDiv'>  
+            <table id='ExtraDropDown' style='display: none; z-index: 120; background-color: white; margin-top: 40px; position: fixed;  box-shadow: 4px 4px 4px #2c3539;'>
+                <tbody>
+                    <tr>
+                        <td onclick="showCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                            <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
+                            News
+                        </td>
+                    </tr>
+                    <tr>
+                        <td onclick="showCustExtraNotification2();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                            Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td onclick='showCustExtraCal2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                            Calender</td>
+                    </tr>
+                    <tr>
+                        <td onclick='showCustExtraUsrAcnt2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                            Account</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+                
+        <div onclick='hideExtraDropDown();' id="container">
             
             <div id="miniNavPov" style="height: 35px; padding-top: 5px; padding-right: 2px;">
                 <center>
@@ -1466,7 +1584,8 @@
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <textarea name="TellCustomersMsgBx" style="width: 100%;" rows="3">What should your clients know about?
+                                <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add/Repost News</p>
+                                <textarea name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
                                 </textarea>
                                 
                             </td>
@@ -1475,7 +1594,7 @@
                             <td>
                                 <p style='margin-bottom: 4px;'>Add photo to this message</p>
                                 <div id="MsgPhotoDisplay"></div>
-                                <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
+                                
                                 <input style="width: 95%;" type="file" name="MsgformPhoto" />
                                 
                             </td>
@@ -1493,6 +1612,15 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <center><input style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
+                            </td>
+                        </tr>
+                        <tr style="">
+                            <td>
+                                <div style='height: 290px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
+                                <p style='color: red; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
+                                <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
+                                <p style='border-top: 1px solid darkgrey;'>Message content to be displayed in this section</p>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -1538,15 +1666,15 @@
                                             
                                             int AptID = AppointmentListExtra.get(aptNum).getAppointmentID();
                                             String ProvName = AppointmentListExtra.get(aptNum).getProviderName();
-                                            String ProvComp = AppointmentListExtra.get(aptNum).getProviderCompany();
-                                            if(ProvComp.length() > 13)
-                                                ProvComp = ProvComp.substring(0, 12) + "...";
+                                            String ApptReason = AppointmentListExtra.get(aptNum).getReason().trim();
+                                            //if(ApptReason.length() > 13)
+                                                //ApptReason = ApptReason.substring(0, 12) + "...";
                                             String AptTime = AppointmentListExtra.get(aptNum).getTimeOfAppointment();
                                             if(AptTime.length() > 5)
                                                 AptTime = AptTime.substring(0,5);
                                     %>
                                     
-                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: darkblue; font-weight: bolder;"><%=ProvComp%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
+                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span>: <span style="color: darkblue; font-weight: bolder;"><%=ApptReason%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
                                     
                                     <%
                                             count++;
@@ -4497,9 +4625,14 @@
             </div>
             </div>
                    
-        
+            <script>
+                function hideAllDropDowns(){
+                    hideExtraDropDown();
+                    hideDropDown();
+                }
+            </script>
          
-        <div onclick="hideDropDown();" id="newbusiness" style="padding-top: 15px;">
+        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px;">
             
             <center><div id="Providerprofile" style="border-bottom: 10px solid cornflowerblue;  width: 100%; max-width: 700px;">
                  
