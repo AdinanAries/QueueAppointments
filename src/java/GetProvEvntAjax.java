@@ -12,19 +12,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
-public class GetCustEvntAjax extends HttpServlet {
+public class GetProvEvntAjax extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
             String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
             String user = "sa";
             String password = "Password@2014";
 
             String SDate = request.getParameter("Date");
-            String CustomerID = request.getParameter("CustomerID");
+            String ProviderID = request.getParameter("ProviderID");
             
             String EvntID = "";
             String EvntDate = "";
@@ -45,9 +44,9 @@ public class GetCustEvntAjax extends HttpServlet {
                 
                 Class.forName(Driver);
                 Connection DtConn = DriverManager.getConnection(url, user, password);
-                String DateQuery = "Select * from ProviderCustomers.CalenderEvents where CustID = ? and EventDate = ?";
+                String DateQuery = "Select * from QueueServiceProviders.CalenderEvents where ProvID = ? and EventDate = ?";
                 PreparedStatement DtPst = DtConn.prepareStatement(DateQuery);
-                DtPst.setString(1, CustomerID);
+                DtPst.setString(1, ProviderID);
                 DtPst.setString(2, SDate);
                 
                 ResultSet DtRec = DtPst.executeQuery();
@@ -91,9 +90,10 @@ public class GetCustEvntAjax extends HttpServlet {
             }catch(Exception e){
                 e.printStackTrace();
             }
+        
     }
 
-
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

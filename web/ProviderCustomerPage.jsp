@@ -803,15 +803,24 @@
                                       });
                                     </script>
                                 </div>
+                                    
+                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                                </div>
+                                    
                             </td>
                         </tr>
-                        <tr>
-                            <td>
+                        <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
+                            
+                            <td style=''>
+                                
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv' style='height: 100px; overflow-y: auto;'>
+                                <div id='CalApptListDiv' style='height: 290px; overflow-y: auto;'>
                                     
                                     <%
                                         int count = 1;
@@ -927,10 +936,12 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
+                        <tr id='EventsTr' style="background-color: #eeeeee;">
+                            <td style=''>
+                                
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
-                                <div id='EventsListDiv' style='height: 150px; overflow-y: auto;'>
+                                
+                                <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
                                     <%
                                         try{
                                             
@@ -1006,9 +1017,9 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
-                                <center><input id="CalSaveEvntBtn" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Change' /></center>
+                                <input id="CalSaveEvntBtn" style='float: left; border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
+                                <input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Change' />
                             </td>
                         </tr>
                         
@@ -1731,15 +1742,24 @@
                                       });
                                     </script>
                                 </div>
+                                    
+                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
+                                    <div onclick="showEventsTr2();" id='EventsTrBtn2' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr2();" id='AppointmentsTrBtn2' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                                </div>
+                                    
                             </td>
                         </tr>
-                        <tr>
-                            <td>
+                        <tr id='AppointmentsTr2' style='display: none; background-color: #eeeeee;'>
+                            
+                            <td style=''>
+                                
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID2" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv2' style='height: 100px; overflow-y: auto;'>
+                                <div id='CalApptListDiv2' style='height: 290px; overflow-y: auto;'>
                                     
                                     <%
                                         int count2 = 1;
@@ -1855,10 +1875,13 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
+                        <tr id='EventsTr2' style="background-color: #eeeeee;">
+                            
+                            <td style=''>
+                                
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
-                                <div id='EventsListDiv2' style='height: 150px; overflow-y: auto;'>
+                                
+                                <div id='EventsListDiv2' style='height: 290px; overflow-y: auto;'>
                                     <%
                                         try{
                                             
@@ -1935,8 +1958,8 @@
                             <td>
                                 <input type="hidden" id="EvntIDFld2" value=""/>
                                 <center><input id="CalSaveEvntBtn2" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn2" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate2();" id="CalUpdateEvntBtn2" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Change' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn2" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate2();" id="CalUpdateEvntBtn2" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Change' /></center>
                             </td>
                         </tr>
                         
@@ -2391,6 +2414,7 @@
                                     <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                                     Calender
                                 </div></a>
+                                    
                                <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px; margin-bottom: 5px;">Show Your Profile Details</p></center>
                                
                                <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 5px; margin-top: 0; margin-bottom: 10px; background-color: cornflowerblue; border-right: darkblue 1px solid; border-bottom: darkblue 1px solid; padding-top: 10px;">

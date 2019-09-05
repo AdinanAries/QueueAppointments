@@ -913,6 +913,34 @@ function showCustExtraNews() {
 
 //----------------------------------------------
 
+function showAppointmentsTr() {
+  document.getElementById("AppointmentsTrBtn").style.backgroundColor =
+    "#eeeeee";
+  document.getElementById("EventsTrBtn").style.backgroundColor = "#ccc";
+  document.getElementById("EventsTr").style.display = "none";
+  document.getElementById("AppointmentsTr").style.display = "block";
+}
+function showEventsTr() {
+  document.getElementById("EventsTrBtn").style.backgroundColor = "#eeeeee";
+  document.getElementById("AppointmentsTrBtn").style.backgroundColor = "#ccc";
+  document.getElementById("AppointmentsTr").style.display = "none";
+  document.getElementById("EventsTr").style.display = "block";
+}
+
+function showAppointmentsTr2() {
+  document.getElementById("AppointmentsTrBtn2").style.backgroundColor =
+    "#eeeeee";
+  document.getElementById("EventsTrBtn2").style.backgroundColor = "#ccc";
+  document.getElementById("EventsTr2").style.display = "none";
+  document.getElementById("AppointmentsTr2").style.display = "block";
+}
+function showEventsTr2() {
+  document.getElementById("EventsTrBtn2").style.backgroundColor = "#eeeeee";
+  document.getElementById("AppointmentsTrBtn2").style.backgroundColor = "#ccc";
+  document.getElementById("AppointmentsTr2").style.display = "none";
+  document.getElementById("EventsTr2").style.display = "block";
+}
+
 function showPCustExtraUsrAcnt() {
   document.getElementById("PhoneNews").style.display = "none";
   document.getElementById("PhoneCalender").style.display = "none";

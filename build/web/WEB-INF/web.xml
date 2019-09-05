@@ -280,6 +280,26 @@
         <servlet-name>updtPerInfoExtraAjax</servlet-name>
         <servlet-class>updtPerInfoExtraAjax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddEventProv</servlet-name>
+        <servlet-class>AddEventProv</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetProvEvntAjax</servlet-name>
+        <servlet-class>GetProvEvntAjax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetProvApptForExtra</servlet-name>
+        <servlet-class>GetProvApptForExtra</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProvEvent</servlet-name>
+        <servlet-class>UpdateProvEvent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DltProvEvntAjax</servlet-name>
+        <servlet-class>DltProvEvntAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -560,9 +580,35 @@
         <servlet-name>updtPerInfoExtraAjax</servlet-name>
         <url-pattern>/updtPerInfoExtraAjax</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEventProv</servlet-name>
+        <url-pattern>/AddEventProv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetProvEvntAjax</servlet-name>
+        <url-pattern>/GetProvEvntAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetProvApptForExtra</servlet-name>
+        <url-pattern>/GetProvApptForExtra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProvEvent</servlet-name>
+        <url-pattern>/UpdateProvEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DltProvEvntAjax</servlet-name>
+        <url-pattern>/DltProvEvntAjax</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <servlet-name>jsp</servlet-name>
+    <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+    <init-param>
+        <param-name>mappedfile</param-name>
+        <param-value>false</param-value>
+    </init-param>
 </web-app>

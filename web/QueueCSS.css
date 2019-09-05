@@ -797,6 +797,9 @@ select {
   }
 }
 @media only screen and (min-width: 1400px) {
+  #ProvPhoneNotiBar {
+    display: none;
+  }
   #Extras {
     display: block;
   }

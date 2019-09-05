@@ -67,7 +67,7 @@
         try{
             String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
 
-            if(tempAccountType.equals("CustomerAccount")){
+            if(tempAccountType.equals("BusinessAccount")){
                 UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
                 NameFromList = UserAccount.LoggedInUsers.get(UserIndex).getName();
             }
@@ -97,8 +97,6 @@
         String User = "sa";
         String Password = "Password@2014";
         
-        ProviderCustomerData eachCustomer = null;
-        
         String FirstName = "";
         String MiddleName = "";
         String LastName = "";
@@ -113,15 +111,12 @@
             
             Class.forName(Driver);
             Connection conn = DriverManager.getConnection(url, User, Password);
-            String Query = "Select * from ProviderCustomers.CustomerInfo where Customer_ID=?";
+            String Query = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
             PreparedStatement pst = conn.prepareStatement(Query);
             pst.setInt(1,UserID);
             ResultSet userData = pst.executeQuery();
             
             while(userData.next()){
-                
-                eachCustomer = new ProviderCustomerData(userData.getInt("Customer_ID"), userData.getString("First_Name"), userData.getString("Middle_Name"), 
-                        userData.getString("Last_Name"), userData.getBlob("Profile_Pic"), userData.getString("Phone_Number"), userData.getDate("Date_Of_Birth"), userData.getString("Email"));
                 
                 FirstName = userData.getString("First_Name");
                 MiddleName = userData.getString("Middle_Name");
@@ -146,7 +141,7 @@
             
             Class.forName(Driver);
             Connection conn = DriverManager.getConnection(url, User, Password);
-            String Select = "Select * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate = ?";
+            String Select = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ?";
             PreparedStatement pst = conn.prepareStatement(Select);
             pst.setInt(1, UserID);
             pst.setString(2, StringCurrentdate);
@@ -163,32 +158,30 @@
                     
                 }
                 
-                int ProviderID = Appointments.getInt("ProviderID");
+                int CustomerID = Appointments.getInt("CustomerID");
                 AppointmentDateValue = Appointments.getString("AppointmentDate");
                 
-                String ProviderName = "";
-                String ProviderCompany = "";
-                String ProviderEmail = "";
-                String ProviderTel = "";
-                Blob ProviderDisplayPic = null;
+                String CustomerName = "";
+                String CustomerEmail = "";
+                String CustomerTel = "";
+                Blob CustDisplayPic = null;
                 
                 try{
                     
                     Class.forName(Driver);
                     Connection providerConn = DriverManager.getConnection(url, User, Password);
-                    String providerQuery = "Select First_Name, Company, Phone_Number, Email, Profile_Pic  from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                    String providerQuery = "Select *  from ProviderCustomers.CustomerInfo where Customer_ID = ?";
                     PreparedStatement providerPst = providerConn.prepareStatement(providerQuery);
-                    providerPst.setInt(1, ProviderID);
+                    providerPst.setInt(1, CustomerID);
                     
                     ResultSet providerRecord = providerPst.executeQuery();
                     
                     while(providerRecord.next()){
                         
-                        ProviderName = providerRecord.getString("First_Name");
-                        ProviderCompany = providerRecord.getString("Company");
-                        ProviderTel = providerRecord.getString("Phone_Number");
-                        ProviderEmail = providerRecord.getString("Email");
-                        ProviderDisplayPic = providerRecord.getBlob("Profile_Pic");
+                        CustomerName = providerRecord.getString("First_Name");
+                        CustomerTel = providerRecord.getString("Phone_Number");
+                        CustomerEmail = providerRecord.getString("Email");
+                        CustDisplayPic = providerRecord.getBlob("Profile_Pic");
                     }
                 }
                 catch(Exception e){
@@ -199,7 +192,7 @@
                 Date AppointmentDate = Appointments.getDate("AppointmentDate");
                 String AppointmentTime = Appointments.getString("AppointmentTime");
                 
-                eachAppointmentItem = new BookedAppointmentList(AppointmentID, ProviderID, ProviderName, ProviderCompany, ProviderTel, ProviderEmail, AppointmentDate, AppointmentTime, ProviderDisplayPic);
+                eachAppointmentItem = new BookedAppointmentList(AppointmentID, CustomerID, CustomerName, null, CustomerTel, CustomerEmail, AppointmentDate, AppointmentTime, CustDisplayPic);
                 eachAppointmentItem.setAppointmentReason(Reason);
                 AppointmentListExtra.add(eachAppointmentItem);
                 
@@ -216,7 +209,7 @@
         
     <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
         <ul>
-            <a href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
+            <a href='ServiceProviderPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
                 
                 </li></a>
             <li onclick="showPCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
@@ -303,22 +296,15 @@
                                       });
                                     </script>
                                 </div>
-                                    
-                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
-                                    <p style='clear: both;'></p>
-                                </div>
-                                    
                             </td>
                         </tr>
-                        <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
+                        <tr>
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv' style='height: 290px; overflow-y: auto;'>
+                                <div id='CalApptListDiv' style='height: 100px; overflow-y: auto;'>
                                     
                                     <%
                                         int count = 1;
@@ -329,15 +315,15 @@
                                             
                                             int AptID = AppointmentListExtra.get(aptNum).getAppointmentID();
                                             String ProvName = AppointmentListExtra.get(aptNum).getProviderName();
-                                            String ProvComp = AppointmentListExtra.get(aptNum).getProviderCompany();
-                                            if(ProvComp.length() > 13)
-                                                ProvComp = ProvComp.substring(0, 12) + "...";
+                                            String Reason = AppointmentListExtra.get(aptNum).getReason();
+                                            //if(ProvComp.length() > 13)
+                                                //ProvComp = ProvComp.substring(0, 12) + "...";
                                             String AptTime = AppointmentListExtra.get(aptNum).getTimeOfAppointment();
                                             if(AptTime.length() > 5)
                                                 AptTime = AptTime.substring(0,5);
                                     %>
                                     
-                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: darkblue; font-weight: bolder;"><%=ProvComp%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
+                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span>: <span style="color: darkblue; font-weight: bolder;"><%=Reason%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
                                     
                                     <%
                                             count++;
@@ -434,13 +420,10 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr id='EventsTr' style="background-color: #eeeeee;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
-                                
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
-                                
-                                <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
-                                    
+                                <div id='EventsListDiv' style='height: 150px; overflow-y: auto;'>
                                     <%
                                         try{
                                             
@@ -449,7 +432,7 @@
                                             
                                             Class.forName(Driver);
                                             Connection EventsConn = DriverManager.getConnection(url, User, Password);
-                                            String EventsQuery = "Select * from ProviderCustomers.CalenderEvents where CustID = ? and EventDate = ?";
+                                            String EventsQuery = "Select * from QueueServiceProviders.CalenderEvents where ProvID = ? and EventDate = ?";
                                             PreparedStatement EventsPst = EventsConn.prepareStatement(EventsQuery);
                                             EventsPst.setInt(1, UserID);
                                             EventsPst.setString(2, SDate);
@@ -517,8 +500,8 @@
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
                                 <center><input id="CalSaveEvntBtn" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Change' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Change' /></center>
                             </td>
                         </tr>
                         

@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -12,25 +11,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
-public class GetCustEvntAjax extends HttpServlet {
+public class GetProvApptForExtra extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        
+        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
             String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
             String user = "sa";
             String password = "Password@2014";
 
             String SDate = request.getParameter("Date");
-            String CustomerID = request.getParameter("CustomerID");
+            String ProviderID = request.getParameter("ProviderID");
             
-            String EvntID = "";
-            String EvntDate = "";
-            String EvntTime = "";
-            String EvntTtle = "";
-            String EvntDesc = "";
+            String Service = "";
+            String CustName = "";
+            String ApptTime = "";
             
             String JSONArray = "{\"Data\":[";
             
@@ -45,9 +42,9 @@ public class GetCustEvntAjax extends HttpServlet {
                 
                 Class.forName(Driver);
                 Connection DtConn = DriverManager.getConnection(url, user, password);
-                String DateQuery = "Select * from ProviderCustomers.CalenderEvents where CustID = ? and EventDate = ?";
+                String DateQuery = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ?";
                 PreparedStatement DtPst = DtConn.prepareStatement(DateQuery);
-                DtPst.setString(1, CustomerID);
+                DtPst.setString(1, ProviderID);
                 DtPst.setString(2, SDate);
                 
                 ResultSet DtRec = DtPst.executeQuery();
@@ -60,23 +57,32 @@ public class GetCustEvntAjax extends HttpServlet {
                     if(!firstCount)
                         JSONArray += ",";
                     
-                    EvntID = DtRec.getString("EvntID").trim();
-                    EvntTtle = DtRec.getString("EventTitle").trim();
-                    EvntTtle = EvntTtle.replace("\"", "");
-                    EvntTtle = EvntTtle.replace("'", "");
-                    EvntTtle = EvntTtle.replaceAll("( )+", " ");
-                    //JOptionPane.showMessageDialog(null, EvntTtle);
-                    EvntDesc = DtRec.getString("EventDesc").trim();
-                    EvntDesc = EvntDesc.replace("\"", "");
-                    EvntDesc = EvntDesc.replace("'", "");
-                    EvntDesc = EvntDesc.replaceAll("( )+", " ");
-                    //JOptionPane.showMessageDialog(null, EvntDesc);
-                    EvntDate = DtRec.getString("EventDate").trim();
-                    EvntTime = DtRec.getString("EventTime").trim();
-                    if(EvntTime.length() > 5)
-                        EvntTime = EvntTime.substring(0,5);
+                    ApptTime = DtRec.getString("AppointmentTime").trim();
+                    Service = DtRec.getString("OrderedServices").trim();
                     
-                    String EachJSON = "{\"EvntID\":\""+EvntID+"\",\"EvntTtle\":\""+EvntTtle+"\", \"EvntTime\":\""+EvntTime+"\", \"EvntDate\":\""+EvntDate+"\", \"EvntDesc\":\""+EvntDesc+"\"}";
+                    if(ApptTime.length() > 5)
+                        ApptTime = ApptTime.substring(0,5);
+                    
+                    String CustID = DtRec.getString("CustomerID");
+                    
+                    try{
+                        Class.forName(Driver);
+                        Connection provConn = DriverManager.getConnection(url, user, password);
+                        String provString = "Select * from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                        PreparedStatement provPst = provConn.prepareStatement(provString);
+                        provPst.setString(1, CustID);
+                        
+                        ResultSet provRec = provPst.executeQuery();
+                        
+                        while(provRec.next()){
+                            CustName = provRec.getString("First_Name").trim();
+                        }
+                        
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    
+                    String EachJSON = "{\"Service\":\""+Service+"\",\"CustName\":\""+CustName+"\", \"ApptTime\":\""+ApptTime+"\"}";
                     JSONArray += EachJSON;
                     
                     firstCount = false;
@@ -86,13 +92,14 @@ public class GetCustEvntAjax extends HttpServlet {
                 JSONArray += "]}";
                 
                 response.getWriter().print(JSONArray);
-                   //JOptionPane.showMessageDialog(null, JSONArray);
+                
+                //JOptionPane.showMessageDialog(null, JSONArray);
                 
             }catch(Exception e){
                 e.printStackTrace();
             }
+        
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

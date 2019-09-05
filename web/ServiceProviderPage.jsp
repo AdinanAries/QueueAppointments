@@ -1428,7 +1428,7 @@
         
         <div id="PermanentDiv" style="">
             
-            <img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
+            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/-->
             <script>
                 function showExtraDropDown(){
                     if(document.getElementById("ExtraDropDown").style.display === "none")
@@ -1692,14 +1692,14 @@
                                             $("#CalDatePicker").change(function(event){
                                                 
                                                 var date = document.getElementById("CalDatePicker").value;
-                                                var CustomerID = document.getElementById("CalApptUserID").value;
-                                                //alert(CustomerID);
+                                                var ProviderID = document.getElementById("CalApptUserID").value;
+                                                //alert(ProviderID);
                                                 //alert(date);
                                                 
                                                 $.ajax({
                                                     type: "POST",
-                                                    url: "GetApptForExtra",
-                                                    data: "Date="+date+"&CustomerID="+CustomerID,
+                                                    url: "GetProvApptForExtra",
+                                                    data: "Date="+date+"&ProviderID="+ProviderID,
                                                     success: function(result){
                                                         
                                                         //alert(result);
@@ -1712,14 +1712,14 @@
                                                             
                                                             var number = parseInt(i, 10) + 1;
                                                             
-                                                            var name = ApptData.Data[i].ProvName;
-                                                            var comp = ApptData.Data[i].ProvComp;
-                                                            if(comp.length > 13)
-                                                                comp = comp.substring(0,12) + "...";
+                                                            var name = ApptData.Data[i].CustName;
+                                                            var service = ApptData.Data[i].Service;
+                                                            //if(comp.length > 13)
+                                                                //comp = comp.substring(0,12) + "...";
                                                             
                                                             var time = ApptData.Data[i].ApptTime;
                                                             
-                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: darkblue; font-weight: bolder;">'+comp+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
+                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span>: <span style="color: darkblue; font-weight: bolder;">'+service+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
                                                             
                                                         }
                                                         
@@ -1731,8 +1731,8 @@
                                                 
                                                 $.ajax({
                                                     type: "POST",
-                                                    url: "GetCustEvntAjax",
-                                                    data: "Date="+date+"&CustomerID="+CustomerID,
+                                                    url: "GetProvEvntAjax",
+                                                    data: "Date="+date+"&ProviderID="+ProviderID,
                                                     success: function(result){
                                                         //alert(result);
                                                         
@@ -1786,7 +1786,7 @@
                                             
                                             Class.forName(Driver);
                                             Connection EventsConn = DriverManager.getConnection(Url, user, password);
-                                            String EventsQuery = "Select * from ProviderCustomers.CalenderEvents where CustID = ? and EventDate = ?";
+                                            String EventsQuery = "Select * from QueueServiceProviders.CalenderEvents where ProvID = ? and EventDate = ?";
                                             PreparedStatement EventsPst = EventsConn.prepareStatement(EventsQuery);
                                             EventsPst.setInt(1, UserID);
                                             EventsPst.setString(2, SDate);
@@ -1859,12 +1859,33 @@
                             </td>
                         </tr>
                         
-                        <!--script>
-                            $(document).ready({
-                                $()
+                        <script>
+                            $(document).ready(function(){
+                                
+                                $("#CalDltEvntBtn").click(function(event){
+                                    var EventID = document.getElementById("EvntIDFld").value;
+                                    
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "DltProvEvntAjax",
+                                        data: "EventID="+EventID,
+                                        success: function(result){
+                                            if(result === "success")
+                                                alert(result);
+                                                document.getElementById("CalUpdateEvntBtn").style.display = "none";
+                                                document.getElementById("CalDltEvntBtn").style.display = "none";
+                                                document.getElementById("CalSaveEvntBtn").style.display = "block";
+                                                document.getElementById("AddEvntTtle").value = "";
+                                                document.getElementById("AddEvntDesc").value = "";
+                                                document.getElementById("EvntDatePicker").value = "";
+                                                document.getElementById("AddEvntTime").value = "";
+                                                document.getElementById("EvntIDFld").value = "";
+                                        }
+                                        
+                                    });
+                                });
                             });
-                        </script-->
-                        
+                        </script>
                         <script>
                             var updateCounter = 0;
                             
@@ -1898,7 +1919,7 @@
                                     
                                     $.ajax({
                                         type: "POST",
-                                        url: "UpdateEvent",
+                                        url: "UpdateProvEvent",
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
@@ -1953,12 +1974,12 @@
                                     var CalDate = document.getElementById("CalDatePicker").value;
                                     //alert(CalDate);
                                     
-                                    var CustID = document.getElementById("CalApptUserID").value;
+                                    var ProvID = document.getElementById("CalApptUserID").value;
                                     
                                     $.ajax({
                                         type: "POST",
-                                        url: "AddEvent",
-                                        data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&CustomerID="+CustID,
+                                        url: "AddEventProv",
+                                        data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&ProviderID="+ProvID,
                                         success: function(result){
                                             
                                             //alert(result);
@@ -4645,7 +4666,14 @@
             <center><div id="Providerprofile" style="border-bottom: 10px solid cornflowerblue;  width: 100%; max-width: 700px;">
                  
                 <h4 style="color: black; margin-bottom: 10px;">Your Business Profile</h4>
-                
+                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='ProvPhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
+                                    News | 
+                                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                                    Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup> | 
+                                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                                    Calender
+                                </div></a>
                 <table id="ProviderprofileTable" style="border-spacing: 0; width: 100%; max-width: 600px;">
                     
                     <tbody>
