@@ -24,12 +24,12 @@ public class SetUserAddress extends HttpServlet {
            String password = "Password@2014";
            
            String CustomerID = request.getParameter("CustomerID");
-           String HouseNumber = request.getParameter("houseNumberFld");
-           String StreetName = request.getParameter("streetAddressFld");
-           String Town = request.getParameter("townFld");
-           String City = request.getParameter("cityFld");
-           String Country = request.getParameter("countryFld");
-           String ZipCode = request.getParameter("zipCodeFld");
+           String HouseNumber = request.getParameter("houseNumberFld").trim().replaceAll("( )+", " ");
+           String StreetName = request.getParameter("streetAddressFld").trim().replaceAll("( )+", " ");
+           String Town = request.getParameter("townFld").trim().replaceAll("( )+", " ");
+           String City = request.getParameter("cityFld").trim().replaceAll("( )+", " ");
+           String Country = request.getParameter("countryFld").trim().replaceAll("( )+", " ");
+           String ZipCode = request.getParameter("zipCodeFld").trim().replaceAll("( )+", " ");
            
            String UserIndex = request.getParameter("UserIndex");
            String NewUserName = request.getParameter("User");

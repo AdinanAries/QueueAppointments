@@ -33,17 +33,17 @@ public class ProviderSignUpController extends HttpServlet {
         int UserIndex = 0;
         ExistingProviderAccountsModel.SignupUserList.add(aUser);*/
         
-        String fName = request.getParameter("firstProvName");
-        String mName = request.getParameter("middleProvName");
-        String lName = request.getParameter("lastProvName");
-        String email = request.getParameter("provEmail");
-        String phoneNumber = request.getParameter("provPhoneNumber");
+        String fName = request.getParameter("firstProvName").trim().replaceAll("( )+", " ");
+        String mName = request.getParameter("middleProvName").trim().replaceAll("( )+", " ");
+        String lName = request.getParameter("lastProvName").trim().replaceAll("( )+", " ");
+        String email = request.getParameter("provEmail").trim().replaceAll("( )+", " ");
+        String phoneNumber = request.getParameter("provPhoneNumber").trim().replaceAll("( )+", " ");
         
-        String businessName = request.getParameter("businessName");
-        String businessLocation = request.getParameter("businessLocation");
-        String businessEmail = request.getParameter("businessEmail");
-        String businessTel = request.getParameter("businessTel");
-        String businessType = request.getParameter("businessType");
+        String businessName = request.getParameter("businessName").trim().replaceAll("( )+", " ");
+        String businessLocation = request.getParameter("businessLocation").trim().replaceAll("( )+", " ");
+        String businessEmail = request.getParameter("businessEmail").trim().replaceAll("( )+", " ");
+        String businessTel = request.getParameter("businessTel").trim().replaceAll("( )+", " ");
+        String businessType = request.getParameter("businessType").trim().replaceAll("( )+", " ");
         
         if(businessType.equalsIgnoreCase("Other"))
             businessType = request.getParameter("otherBusinessType");
@@ -123,12 +123,12 @@ public class ProviderSignUpController extends HttpServlet {
         //getting address request parameters
         try{
             
-            House_Number = request.getParameter("HouseNumber");
-            Street_Name = request.getParameter("Street");
-            Town = request.getParameter("Town");
-            City = request.getParameter("City");
-            Country = request.getParameter("Country");
-            Zipcode = request.getParameter("ZCode");
+            House_Number = request.getParameter("HouseNumber").trim().replaceAll("( )+", " ");
+            Street_Name = request.getParameter("Street").trim().replaceAll("( )+", " ");
+            Town = request.getParameter("Town").trim().replaceAll("( )+", " ");
+            City = request.getParameter("City").trim().replaceAll("( )+", " ");
+            Country = request.getParameter("Country").trim().replaceAll("( )+", " ");
+            Zipcode = request.getParameter("ZCode").trim().replaceAll("( )+", " ");
             
         }catch(Exception e){}
         

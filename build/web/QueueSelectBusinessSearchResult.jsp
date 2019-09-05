@@ -57,6 +57,12 @@
         
         //getting search parameters for search query
         String Search = request.getParameter("SearchFld");
+        
+        Search = Search.trim().replaceAll("( )+", " ");
+        
+        if(Search.equals("") || Search.equals(" "))
+            Search = "none";
+        
         String Tel = Search;
         
         String firstName = "";

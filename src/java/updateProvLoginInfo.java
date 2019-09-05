@@ -23,7 +23,7 @@ public class updateProvLoginInfo extends HttpServlet {
         String password = "Password@2014";
         
         String CurrentPassword = request.getParameter("OldPasswordFld");
-        String UserName = request.getParameter("UserNameFld");
+        String UserName = request.getParameter("UserNameFld").trim().replaceAll("( )+", " ");
         String Password = request.getParameter("NewPasswordFld");
         String ProviderID = request.getParameter("ProviderID");
         String UserIndex = request.getParameter("UserIndex");

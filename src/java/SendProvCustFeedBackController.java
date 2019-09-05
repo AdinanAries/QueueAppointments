@@ -26,7 +26,7 @@ public class SendProvCustFeedBackController extends HttpServlet {
         SimpleDateFormat currentDateSdf = new SimpleDateFormat("yyyy-MM-dd");
         String StringDate = currentDateSdf.format(currentDate);
         
-        String FeedBackMessage = request.getParameter("FeedBackMessage");
+        String FeedBackMessage = request.getParameter("FeedBackMessage").trim().replaceAll("( )+", " ");
         String CustomerID = request.getParameter("CustomerID");
         
         try{

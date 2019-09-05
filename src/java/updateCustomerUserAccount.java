@@ -25,19 +25,19 @@ public class updateCustomerUserAccount extends HttpServlet {
         
         String CustomerID = request.getParameter("CustomerID");
         
-        String FirstName = request.getParameter("firstNameFld");
-        String MiddleName = request.getParameter("middleNameFld");
-        String LastName = request.getParameter("lastNameFld");
-        String PhoneNumber = request.getParameter("phoneNumberFld");
-        String Email = request.getParameter("emailFld");
+        String FirstName = request.getParameter("firstNameFld").trim().replaceAll("( )+", " ");
+        String MiddleName = request.getParameter("middleNameFld").trim().replaceAll("( )+", " ");
+        String LastName = request.getParameter("lastNameFld").trim().replaceAll("( )+", " ");
+        String PhoneNumber = request.getParameter("phoneNumberFld").trim().replaceAll("( )+", " ");
+        String Email = request.getParameter("emailFld").trim().replaceAll("( )+", " ");
         String UserIndex = request.getParameter("UserIndex");
         
-        String HouseNumber = request.getParameter("houseNumberFld");
-        String StreetName = request.getParameter("streetAddressFld");
-        String Town = request.getParameter("townFld");
-        String City = request.getParameter("cityFld");
-        String Country = request.getParameter("countryFld");
-        String ZipCode = request.getParameter("zipCodeFld");
+        String HouseNumber = request.getParameter("houseNumberFld").trim().replaceAll("( )+", " ");
+        String StreetName = request.getParameter("streetAddressFld").trim().replaceAll("( )+", " ");
+        String Town = request.getParameter("townFld").trim().replaceAll("( )+", " ");
+        String City = request.getParameter("cityFld").trim().replaceAll("( )+", " ");
+        String Country = request.getParameter("countryFld").trim().replaceAll("( )+", " ");
+        String ZipCode = request.getParameter("zipCodeFld").trim().replaceAll("( )+", " ");
         
         try{
             

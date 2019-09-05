@@ -27,8 +27,8 @@ public class UpdateEvent extends HttpServlet {
         String password = "Password@2014";
         
         String EvntID = request.getParameter("EventID");
-        String Title = request.getParameter("Title");
-        String Desc = request.getParameter("Desc");
+        String Title = request.getParameter("Title").trim().replaceAll("( )+", " ");
+        String Desc = request.getParameter("Desc").trim().replaceAll("( )+", " ");
         String Time = request.getParameter("Time");
         String Date = request.getParameter("Date");
         String CalDate = request.getParameter("CalDate");

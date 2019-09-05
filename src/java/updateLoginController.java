@@ -21,7 +21,7 @@ public class updateLoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String UserName = request.getParameter("userName");
+        String UserName = request.getParameter("userName").trim().replaceAll("( )+", " ");
         //String CurrentPassword = request.getParameter("");
         String NewPassword = request.getParameter("newPassword");
         String CustomerID = request.getParameter("CustomerID");

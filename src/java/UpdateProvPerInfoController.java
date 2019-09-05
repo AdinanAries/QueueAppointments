@@ -24,11 +24,11 @@ public class UpdateProvPerInfoController extends HttpServlet {
         String password = "Password@2014";
         
         String ProviderID = request.getParameter("ProviderID");
-        String FirstName = request.getParameter("FirstNameFld");
-        String MiddleName = request.getParameter("MiddleNameFld");
-        String LastName = request.getParameter("LastNameFld");
-        String MobileNumber = request.getParameter("MobileNumberFld");
-        String Email = request.getParameter("EmailFld");
+        String FirstName = request.getParameter("FirstNameFld").trim().replace("( )+", " ");
+        String MiddleName = request.getParameter("MiddleNameFld").trim().replace("( )+", " ");
+        String LastName = request.getParameter("LastNameFld").trim().replace("( )+", " ");
+        String MobileNumber = request.getParameter("MobileNumberFld").trim().replace("( )+", " ");
+        String Email = request.getParameter("EmailFld").trim().replace("( )+", " ");
         
         try{
             Class.forName(Driver);

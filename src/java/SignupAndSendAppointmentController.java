@@ -28,14 +28,14 @@ public class SignupAndSendAppointmentController extends HttpServlet {
         
         int yourIndex = 0;
        
-        String FirstName = request.getParameter("firstName");
-        String MiddleName = request.getParameter("middleName");
-        String LastName = request.getParameter("lastName");
-        String Phone_Number = request.getParameter("telNumber");
-        String Email = request.getParameter("email");
+        String FirstName = request.getParameter("firstName").trim().replaceAll("( )+", " ");
+        String MiddleName = request.getParameter("middleName").trim().replaceAll("( )+", " ");
+        String LastName = request.getParameter("lastName").trim().replaceAll("( )+", " ");
+        String Phone_Number = request.getParameter("telNumber").trim().replaceAll("( )+", " ");
+        String Email = request.getParameter("email").trim().replaceAll("( )+", " ");
         
-        String UserName = request.getParameter("username");
-        String Password = request.getParameter("password");
+        String UserName = request.getParameter("username").trim().replaceAll("( )+", " ");
+        String Password = request.getParameter("password").trim().replaceAll("( )+", " ");
         
         String ProviderID = request.getParameter("ProviderID");
         String CustomerID = "";

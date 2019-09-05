@@ -25,12 +25,12 @@ public class AddServicesController extends HttpServlet {
         
         int ExistsFlag = 0;
         
-        String ServiceName = request.getParameter("SerivceNameFld");
+        String ServiceName = request.getParameter("SerivceNameFld").trim().replaceAll("( )+", " ");
         String PriceDollar = request.getParameter("ServicePriceFldDD");
         String PriceCent = request.getParameter("ServicePriceFldCC");
         String DurationHH = request.getParameter("DurationFldHH");
         String DurationMM = request.getParameter("DurationFldMM");
-        String ServiceDesc = request.getParameter("DescriptionFld");
+        String ServiceDesc = request.getParameter("DescriptionFld").trim().replaceAll("( )+", " ");
         String ProviderID = request.getParameter("ProviderID");
         
         String ServicePrice = PriceDollar + "." + PriceCent;

@@ -27,7 +27,7 @@ public class SendCustomerReviewController extends HttpServlet {
         String CustomerID = request.getParameter("CustomerID");
         String ProviderID = request.getParameter("ProviderID");
         String Ratings = request.getParameter("rate");
-        String Review = request.getParameter("Review");
+        String Review = request.getParameter("Review").trim().replaceAll("( )+", " ");
         
         String ReviewID = "";
         

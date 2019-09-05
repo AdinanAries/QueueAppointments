@@ -33,7 +33,7 @@
     <head>       
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Queue</title>
+        <title>Queue  | Customer</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">

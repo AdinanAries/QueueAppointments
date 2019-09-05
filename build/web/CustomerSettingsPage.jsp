@@ -4,6 +4,7 @@
     Author     : aries
 --%>
 
+<%@page import="java.sql.Blob"%>
 <%@page import="com.arieslab.queue.queue_model.ProviderCustomerData"%>
 <%@page import="com.arieslab.queue.queue_model.BookedAppointmentList"%>
 <%@page import="javax.swing.JOptionPane"%>
@@ -24,13 +25,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Available Future Spots</title>
+        <title>Queue | Settings</title>
         
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
+        
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+        
     </head>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
     <%
         
@@ -94,6 +106,9 @@
         String PhoneNumber = "";
         String thisUserName = "";
         
+        String AppointmentDateValue = "";
+        
+        
         try{
             
             Class.forName(Driver);
@@ -120,29 +135,103 @@
         }
 
         ArrayList<BookedAppointmentList> AppointmentListExtra = new ArrayList<>();
+        
+        //Getting Appointments for Extra Div
+        try{
+            
+            Date currentDate = new Date();
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String StringCurrentdate = currentDateFormat.format(currentDate);
+            String CurrentTimeForAppointment = currentDate.toString().substring(11,16);
+            
+            Class.forName(Driver);
+            Connection conn = DriverManager.getConnection(url, User, Password);
+            String Select = "Select * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate = ?";
+            PreparedStatement pst = conn.prepareStatement(Select);
+            pst.setInt(1, UserID);
+            pst.setString(2, StringCurrentdate);
+            ResultSet Appointments = pst.executeQuery();
+            
+            BookedAppointmentList eachAppointmentItem;
+            
+            while(Appointments.next()){
+                
+                String Reason = Appointments.getString("OrderedServices").trim();
+                if(Reason.equals("Blocked Time")){
+                    
+                    continue;
+                    
+                }
+                
+                int ProviderID = Appointments.getInt("ProviderID");
+                AppointmentDateValue = Appointments.getString("AppointmentDate");
+                
+                String ProviderName = "";
+                String ProviderCompany = "";
+                String ProviderEmail = "";
+                String ProviderTel = "";
+                Blob ProviderDisplayPic = null;
+                
+                try{
+                    
+                    Class.forName(Driver);
+                    Connection providerConn = DriverManager.getConnection(url, User, Password);
+                    String providerQuery = "Select First_Name, Company, Phone_Number, Email, Profile_Pic  from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                    PreparedStatement providerPst = providerConn.prepareStatement(providerQuery);
+                    providerPst.setInt(1, ProviderID);
+                    
+                    ResultSet providerRecord = providerPst.executeQuery();
+                    
+                    while(providerRecord.next()){
+                        
+                        ProviderName = providerRecord.getString("First_Name");
+                        ProviderCompany = providerRecord.getString("Company");
+                        ProviderTel = providerRecord.getString("Phone_Number");
+                        ProviderEmail = providerRecord.getString("Email");
+                        ProviderDisplayPic = providerRecord.getBlob("Profile_Pic");
+                    }
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                int AppointmentID = Appointments.getInt("AppointmentID");
+                Date AppointmentDate = Appointments.getDate("AppointmentDate");
+                String AppointmentTime = Appointments.getString("AppointmentTime");
+                
+                eachAppointmentItem = new BookedAppointmentList(AppointmentID, ProviderID, ProviderName, ProviderCompany, ProviderTel, ProviderEmail, AppointmentDate, AppointmentTime, ProviderDisplayPic);
+                eachAppointmentItem.setAppointmentReason(Reason);
+                AppointmentListExtra.add(eachAppointmentItem);
+                
+            }
+            
+            
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     %>
     
     <body style="background-color: #ccccff;">
-    <center><div id='PhoneSettingsPgNav' style='background-color: #ccccff; padding: 5px;'>
+        
+    <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
         <ul>
-            <li onclick="showPCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
-                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
-                News
-            </li>
-            <li onclick="showPCustExtraNotification();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
-            </li>
-        </ul>
-        <ul>
-            <li onclick='showPCustExtraCal();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                Calender
-            </li>
-            <li onclick='showPCustExtraUsrAcnt();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
-                Account
-            </li>
-            <a href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
-                Home
+            <a href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
+                
                 </li></a>
+            <li onclick="showPCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
+                
+            </li>
+            <li onclick="showPCustExtraNotification();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><p><img style='background-color: white; margin-right: 0;' src="icons/icons8-notification-50.png" width="28" height="25" alt="icons8-notification-50"/>
+                 <span style='color: red; background-color: white; padding: 2px; border-radius: 100%; margin-left: 0;'><%=notiCounter%></span></p>
+            </li>
+            <li onclick='showPCustExtraCal();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="28" height="25" alt="icons8-calendar-50"/>
+                
+            </li>
+            <li onclick='showPCustExtraUsrAcnt();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="28" height="25" alt="icons8-user-50 (1)"/>
+                
+            </li>
         </ul>
         </div></center>
         
@@ -151,7 +240,7 @@
             <div id='PhoneNews' style='width: 100%;' >
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             
-                <table  id="PhoneExtrasTab" style='width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
@@ -198,7 +287,7 @@
             <div id='PhoneCalender' style='display: none; margin-top: 5px; width: 100%;'>
                 <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
             
-                <table  id="PhoneExtrasTab" style='width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
@@ -220,9 +309,9 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
-                                <input type="hidden" id="PhoneCalApptUserID" value="<%=UserID%>" />
+                                <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
-                                <div id='PhoneCalApptListDiv' style='height: 100px; overflow-y: auto;'>
+                                <div id='CalApptListDiv' style='height: 100px; overflow-y: auto;'>
                                     
                                     <%
                                         int count = 1;
@@ -341,7 +430,7 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
-                                <div id='PhoneEventsListDiv' style='height: 150px; overflow-y: auto;'>
+                                <div id='EventsListDiv' style='height: 150px; overflow-y: auto;'>
                                     <%
                                         try{
                                             
@@ -365,11 +454,11 @@
                                                 String EventTitle = EventsRec.getString("EventTitle").trim();
                                                 EventTitle = EventTitle.replace("\"", "");
                                                 EventTitle = EventTitle.replace("'", "");
-                                                EventTitle = EventTitle.replaceAll("\\s", " ");
+                                                EventTitle = EventTitle.replaceAll("( )+", " ");
                                                 String EventDesc = EventsRec.getString("EventDesc").trim();
                                                 EventDesc = EventDesc.replace("\"", "");
                                                 EventDesc = EventDesc.replace("'", "");
-                                                EventDesc = EventDesc.replaceAll("\\s", " ");
+                                                EventDesc = EventDesc.replaceAll("( )+", " ");
                                                 String EventDate = EventsRec.getString("EventDate").trim();
                                                 String EventTime = EventsRec.getString("EventTime").trim();
                                                 if(EventTime.length() > 5)
@@ -399,10 +488,10 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Title: <input id="PhoneAddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea id="PhoneAddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
+                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
                                         </textarea></p>
-                                    <p>Date: <input id='PhoneEvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
+                                    <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -410,7 +499,7 @@
                                         });
                                       });
                                     </script>
-                                    <p>Time: <input id="PhoneAddEvntTime" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
+                                    <p>Time: <input id="AddEvntTime" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
                                 </div>
                             </td>
                         </tr>
@@ -435,7 +524,7 @@
                                         data: "EventID="+EventID,
                                         success: function(result){
                                             if(result === "success")
-                                                alert(result);
+                                                //alert(result);
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn").style.display = "block";
@@ -586,10 +675,11 @@
         <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
             
-                <table  id="PhoneExtrasTab" style='width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
+                                <p id='UpdateStatusMsg' style='color: white; background-color: green; text-align: center;'></p>
                                 <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
                                 <p>First Name: <input id='fNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
@@ -618,11 +708,10 @@
                                             success: function(result){
                                                 if(result === "success"){
                                                     //alert(result);
-                                                    var FullName = FirstName + " " + MiddleName + " " + LastName;
-                                                    document.getElementById("FullNameDetail").innerHTML = FullName;
-                                                    document.getElementById("PhoneNumberDetail").innerHTML = Phone;
-                                                    document.getElementById("EmailDetail").innerHTML = Email;
-                                                    document.getElementById("NameForLoginStatus").innerHTML = FirstName;
+                                                    
+                                                    document.getElementById("UpdateStatusMsg").innerHTML = "Personal information updated"
+                                                    //var FullName = FirstName + " " + MiddleName + " " + LastName;
+                                                    
                                                                             
                                                 }
                                                 
@@ -741,6 +830,7 @@
                                                     document.getElementById("ExtraCurrentPasswordFld").style.color = "cadetblue";
                                                     document.getElementById("ExtraConfirmPasswordFld").value = "";
                                                     document.getElementById("ExtraWrongPassStatus").style.display = "none";
+                                                    document.getElementById("UpdateStatusMsg").innerHTML = "Login information updated"
                                                                             
                                                     //getUserAccountNameController
                                                     $.ajax({
@@ -781,7 +871,7 @@
             <div id='PhoneExtrasNotificationDiv' style='width: 100%; display: none;'>
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
             
-                <table  id="ExtrasTab" style='width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         
                     <%

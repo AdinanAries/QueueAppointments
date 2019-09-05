@@ -31,11 +31,11 @@ public class CustomoerSignUpController extends HttpServlet {
         String user = "sa";
         String password = "Password@2014";
         
-        String fName = request.getParameter("firstName");
-        String mName = request.getParameter("middleName");
-        String lName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String phoneNumber = request.getParameter("phoneNumber");
+        String fName = request.getParameter("firstName").trim().replaceAll("( )+", " ");
+        String mName = request.getParameter("middleName").trim().replaceAll("( )+", " ");
+        String lName = request.getParameter("lastName").trim().replaceAll("( )+", " ");
+        String email = request.getParameter("email").trim().replaceAll("( )+", " ");
+        String phoneNumber = request.getParameter("phoneNumber").trim().replaceAll("( )+", " ");
         String userName = request.getParameter("userName");
         String Password = request.getParameter("firstPassword");
         

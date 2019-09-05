@@ -20,11 +20,11 @@ public class updtPerInfoExtraAjax extends HttpServlet {
         String user = "sa";
         String password = "Password@2014";
         
-        String FirstName = request.getParameter("FirstName");
-        String MiddleName = request.getParameter("MiddleName");
-        String LastName = request.getParameter("LastName");
-        String Email = request.getParameter("Email");
-        String Phone = request.getParameter("Phone");
+        String FirstName = request.getParameter("FirstName").trim().replaceAll("( )+", " ");
+        String MiddleName = request.getParameter("MiddleName").trim().replaceAll("( )+", " ");
+        String LastName = request.getParameter("LastName").trim().replaceAll("( )+", " ");
+        String Email = request.getParameter("Email").trim().replaceAll("( )+", " ");
+        String Phone = request.getParameter("Phone").trim().replaceAll("( )+", " ");
         String CustID = request.getParameter("CustomerID");
         
         try{

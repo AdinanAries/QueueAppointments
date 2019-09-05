@@ -23,18 +23,18 @@ public class UpdateProvBizInfoController extends HttpServlet {
         String password = "Password@2014";
         
         String ProviderID = request.getParameter("ProviderID");
-        String BusinessName = request.getParameter("BusinessNameFld");
-        String BusinessEmail = request.getParameter("BusinessEmailFld");
-        String BusinessTel = request.getParameter("BusinessTelephoneNumberFld");
-        String BusinessType = request.getParameter("BusinessType");
+        String BusinessName = request.getParameter("BusinessNameFld").trim().replaceAll("( )+", " ");
+        String BusinessEmail = request.getParameter("BusinessEmailFld").trim().replaceAll("( )+", " ");
+        String BusinessTel = request.getParameter("BusinessTelephoneNumberFld").trim().replaceAll("( )+", " ");
+        String BusinessType = request.getParameter("BusinessType").trim().replaceAll("( )+", " ");
         
         //getting AddressInfo
-        String HouseNumber = request.getParameter("HouseNumber");
-        String Street = request.getParameter("Street");
-        String Town = request.getParameter("Town");
-        String City = request.getParameter("City");
-        String Country = request.getParameter("Country");
-        String ZipCode = request.getParameter("ZCode");
+        String HouseNumber = request.getParameter("HouseNumber").trim().replaceAll("( )+", " ");
+        String Street = request.getParameter("Street").trim().replaceAll("( )+", " ");
+        String Town = request.getParameter("Town").trim().replaceAll("( )+", " ");
+        String City = request.getParameter("City").trim().replaceAll("( )+", " ");
+        String Country = request.getParameter("Country").trim().replaceAll("( )+", " ");
+        String ZipCode = request.getParameter("ZCode").trim().replaceAll("( )+", " ");
         
         /*JOptionPane.showMessageDialog(null, ProviderID);
         JOptionPane.showMessageDialog(null, BusinessName);
