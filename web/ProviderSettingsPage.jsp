@@ -231,46 +231,49 @@
     <center><div id="PhoneExtras">
             
             <div id='PhoneNews' style='width: 100%;' >
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
-            
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+            <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 20px;">Update your clients on whats new</p>
+                
+                <table id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <div id="ProvMsgBxOne" style=''>
-                                    <p style='margin-bottom: 4px; padding-bottom: 5px;'><span style='color: #ff3333;'>Message From:</span> Queue (as template)</p>
-                                    <center><img src="view-wallpaper-7.jpg" width="265" height="200" alt="view-wallpaper-7"/></center>
-                                </div>
+                                <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add/Repost News</p>
+                                <textarea name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
+                                </textarea>
+                                
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div style='height: 180px;  border: 1px solid #d8d8d8; padding: 3px; overflow-y: auto;'>
-                                    <p style='text-align: justify;'>This is a template for news updates your providers post to keep you informed.
-                                       This part of the template contains the actual message text...</p>
-                                </div>
+                                <p style='margin-bottom: 4px;'>Add photo to this message</p>
+                                <div id="MsgPhotoDisplay"></div>
+                                
+                                <input style="width: 95%;" type="file" name="MsgformPhoto" />
+                                
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
-                                <p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    provider@emailhost.com</p>
-                                <p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    1234567890</p>
+                                <p>When to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsDateFld" value="Today" size="21"/></p>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <P><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    Business Name</P>
-                                <p><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    123 Street/Ave, Town, City, 2323</p>
+                                <p>Time to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsTimeFld" value="Now" size="22" /></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
+                                <center><input style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
+                            </td>
+                        </tr>
+                        <tr style="">
+                            <td>
+                                <div style='height: 290px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
+                                <p style='color: red; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
+                                <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
+                                <p style='border-top: 1px solid darkgrey;'>Message content to be displayed in this section</p>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

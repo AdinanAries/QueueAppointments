@@ -779,6 +779,7 @@ function showCustExtraUsrAcnt() {
   } else {
     document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
     $("#ExtrasUserAccountDiv").slideUp("fast");
+    $("#News").slideDown("fast");
     document.getElementById("News").style.display = "block";
   }
 }
@@ -797,6 +798,7 @@ function showCustExtraCal() {
   } else {
     document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
     $("#Calender").slideUp("fast");
+    $("#News").slideDown("fast");
     document.getElementById("News").style.display = "block";
   }
 }
@@ -817,6 +819,7 @@ function showCustExtraNotification() {
   } else {
     document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
     $("#ExtrasNotificationDiv").slideUp("fast");
+    $("#News").slideDown("fast");
     document.getElementById("News").style.display = "block";
   }
 }
