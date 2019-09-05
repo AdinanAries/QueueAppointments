@@ -577,6 +577,9 @@ select {
 #Extras2Container {
   display: none;
 }
+#PhoneSettingsPgNav ul li {
+  display: inline-block;
+}
 
 @media only screen and (max-width: 1400px) {
   /*.SearchObject {

@@ -185,6 +185,8 @@
         
         String AppointmentDateValue = "";
         
+        ProviderCustomerData eachCustomer = null;
+        
         //ArrayList to store all appointments list (made global for global access)
         ArrayList<BookedAppointmentList> AppointmentList = new ArrayList<>();
         ArrayList<BookedAppointmentList> AppointmentHistory = new ArrayList<>();
@@ -202,7 +204,7 @@
             
             while(userData.next()){
                 
-                ProviderCustomerData.eachCustomer = new ProviderCustomerData(userData.getInt("Customer_ID"), userData.getString("First_Name"), userData.getString("Middle_Name"), 
+                eachCustomer = new ProviderCustomerData(userData.getInt("Customer_ID"), userData.getString("First_Name"), userData.getString("Middle_Name"), 
                         userData.getString("Last_Name"), userData.getBlob("Profile_Pic"), userData.getString("Phone_Number"), userData.getDate("Date_Of_Birth"), userData.getString("Email"));
             }
         }
@@ -249,7 +251,7 @@
             
             while(addressRecord.next()){
                 
-                thisUserAddress = ProviderCustomerData.eachCustomer.getAddress(
+                thisUserAddress = eachCustomer.getAddress(
                         addressRecord.getInt("House_Number"), addressRecord.getString("Street_Name"), addressRecord.getString("Town"),
                         addressRecord.getString("City"), addressRecord.getString("Country"), addressRecord.getInt("Zipcode"));
                 
@@ -267,28 +269,28 @@
             String Email = "";
         
         try{
-            FirstName = ProviderCustomerData.eachCustomer.getFirstName();
-            MiddleName = ProviderCustomerData.eachCustomer.getMiddleName();
-            LastName = ProviderCustomerData.eachCustomer.getLastName();
-            FullName = ProviderCustomerData.eachCustomer.getFirstName() + " " + ProviderCustomerData.eachCustomer.getMiddleName() + " " +ProviderCustomerData.eachCustomer.getLastName();
-            PhoneNumber = ProviderCustomerData.eachCustomer.getPhoneNumber();
-            Email = ProviderCustomerData.eachCustomer.getEmail();
+            FirstName = eachCustomer.getFirstName();
+            MiddleName = eachCustomer.getMiddleName();
+            LastName = eachCustomer.getLastName();
+            FullName = eachCustomer.getFirstName() + " " + eachCustomer.getMiddleName() + " " + eachCustomer.getLastName();
+            PhoneNumber = eachCustomer.getPhoneNumber();
+            Email = eachCustomer.getEmail();
         }catch(Exception e){}
         
         try{
             
-            H_Number = ProviderCustomerData.eachCustomer.CustomerAddress.getHouseNumber();
-            Street = ProviderCustomerData.eachCustomer.CustomerAddress.getStreet().trim();
-            Town = ProviderCustomerData.eachCustomer.CustomerAddress.getTown().trim();
-            City = ProviderCustomerData.eachCustomer.CustomerAddress.getCity().trim();
-            Country = ProviderCustomerData.eachCustomer.CustomerAddress.getCountry().trim();
-            ZipCode = ProviderCustomerData.eachCustomer.CustomerAddress.getZipcode();
+            H_Number = eachCustomer.CustomerAddress.getHouseNumber();
+            Street = eachCustomer.CustomerAddress.getStreet().trim();
+            Town = eachCustomer.CustomerAddress.getTown().trim();
+            City = eachCustomer.CustomerAddress.getCity().trim();
+            Country = eachCustomer.CustomerAddress.getCountry().trim();
+            ZipCode = eachCustomer.CustomerAddress.getZipcode();
         
         }catch(Exception e){}
         
         try{    
             //put this in a try catch block for incase getProfilePicture returns nothing
-            Blob profilepic = ProviderCustomerData.eachCustomer.getProfilePic(); 
+            Blob profilepic = eachCustomer.getProfilePic(); 
             InputStream inputStream = profilepic.getBinaryStream();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[4096];
@@ -2381,14 +2383,14 @@
                                <!-- <div class="propic">
                                     <img src="" width="100" height="100"/>
                                 </div> -->
-                               <div onclick="" id='PhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                               <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='PhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
                                     <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
                                     News | 
                                     <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                                     Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup> | 
                                     <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                                     Calender
-                                </div>
+                                </div></a>
                                <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px; margin-bottom: 5px;">Show Your Profile Details</p></center>
                                
                                <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 5px; margin-top: 0; margin-bottom: 10px; background-color: cornflowerblue; border-right: darkblue 1px solid; border-bottom: darkblue 1px solid; padding-top: 10px;">

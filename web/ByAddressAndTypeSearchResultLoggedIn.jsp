@@ -483,7 +483,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(url, User, Password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =? order by PicID desc";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,ID);
                             ResultSet cover = coverPst.executeQuery();
@@ -512,9 +512,8 @@
 
                                 }
                                 
-                                if(!base64Cover.equals(""))
+                                 if(!base64Cover.equals(""))
                                     break;
-                                 
                             }
                             
                         }catch(Exception e){

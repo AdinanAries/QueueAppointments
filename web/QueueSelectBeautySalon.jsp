@@ -300,27 +300,30 @@
                             while(cover.next()){
                                 
                                  try{    
-                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                Blob profilepic = cover.getBlob("CoverPhoto"); 
-                                InputStream inputStream = profilepic.getBinaryStream();
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[4096];
-                                int bytesRead = -1;
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob profilepic = cover.getBlob("CoverPhoto"); 
+                                    InputStream inputStream = profilepic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
 
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                    base64Cover = Base64.getEncoder().encodeToString(imageBytes);
+
+
                                 }
+                                catch(Exception e){
 
-                                byte[] imageBytes = outputStream.toByteArray();
+                                }
+                                 
+                                if(!base64Cover.equals(""))
+                                    break;
 
-                                base64Cover = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                            }
-                            catch(Exception e){
-
-                            }
-                                
                             }
                             
                         }catch(Exception e){

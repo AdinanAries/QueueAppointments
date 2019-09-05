@@ -911,6 +911,59 @@ function showCustExtraNews() {
   }
 }
 
+//----------------------------------------------
+
+function showPCustExtraUsrAcnt() {
+  document.getElementById("PhoneNews").style.display = "none";
+  document.getElementById("PhoneCalender").style.display = "none";
+  document.getElementById("PhoneExtrasNotificationDiv").style.display = "none";
+
+  if (
+    document.getElementById("PhoneExtrasUserAccountDiv").style.display ===
+    "none"
+  ) {
+    $("#PhoneExtrasUserAccountDiv").slideDown("fast");
+  }
+}
+
+function showPCustExtraCal() {
+  document.getElementById("PhoneNews").style.display = "none";
+  document.getElementById("PhoneExtrasUserAccountDiv").style.display = "none";
+  document.getElementById("PhoneExtrasNotificationDiv").style.display = "none";
+
+  if (document.getElementById("PhoneCalender").style.display === "none") {
+    $("#PhoneExtras").slideDown("fast");
+    $("#PhoneCalender").slideDown("fast");
+  }
+}
+
+function showPCustExtraNotification() {
+  document.getElementById("PhoneNews").style.display = "none";
+  document.getElementById("PhoneExtrasUserAccountDiv").style.display = "none";
+  document.getElementById("PhoneCalender").style.display = "none";
+
+  if (
+    document.getElementById("PhoneExtrasNotificationDiv").style.display ===
+    "none"
+  ) {
+    $("#PhoneExtras").slideDown("fast");
+    $("#PhoneExtrasNotificationDiv").slideDown("fast");
+  }
+}
+
+function showPCustExtraNews() {
+  document.getElementById("PhoneExtrasNotificationDiv").style.display = "none";
+  document.getElementById("PhoneExtrasUserAccountDiv").style.display = "none";
+  document.getElementById("PhoneCalender").style.display = "none";
+
+  if (document.getElementById("PhoneNews").style.display === "none") {
+    $("#PhoneExtras").slideDown("fast");
+    $("#PhoneNews").slideDown("fast");
+  }
+}
+
+//-------------------------------------------
+
 function hideExtraDropDown() {
   document.getElementById("ExtraDropDown").style.display = "none";
 }
