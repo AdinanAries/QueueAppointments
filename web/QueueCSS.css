@@ -596,6 +596,9 @@ select {
   display: none;
 }
 @media only screen and (min-width: 1000px) {
+  #ReservationAndFutureSpots {
+    height: 450px;
+  }
   #PhoneNotiBar {
     display: none;
   }

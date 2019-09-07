@@ -66,7 +66,7 @@
         ResendAppointmentData.ServicesCost = "";
         ResendAppointmentData.CreditCardNumber = "";
         
-        int notiCounter = 17;
+        int notiCounter = 0;
 
         //connection arguments
         String Url ="jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
@@ -260,6 +260,52 @@
         }catch(Exception e){
             e.printStackTrace();
         }
+    //------------------------------------------------------------------------------------------------------------------------------------------    
+        //Getting Notifications data
+        ArrayList<String> Notifications = new ArrayList<>();
+        String NotiIDs = "{\"Data\" : [ ";
+        
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Class.forName(Driver);
+            Connection NotiConn = DriverManager.getConnection(Url, user, password);
+            String NotiQuery = "Select Noti_Type, What, Noti_Status, ID from ProviderCustomers.Notifications where (CustID = ? and Noti_Type not like 'Today%')"
+                    + "or (CustID = ? and Noti_Date = ? and Noti_Type like 'Today%') order by ID desc";
+            PreparedStatement NotiPst = NotiConn.prepareStatement(NotiQuery);
+            NotiPst.setInt(1, UserID);
+            NotiPst.setInt(2, UserID);
+            NotiPst.setString(3, sdf.format(new Date()));
+            
+            ResultSet NotiRec = NotiPst.executeQuery();
+            boolean isFirst = true;
+            
+            while(NotiRec.next()){
+                
+                if(isFirst == false)
+                    NotiIDs += ", ";
+                
+                if(NotiRec.getString("Noti_Status") == null){
+                    notiCounter++;
+                    NotiIDs += "{ \"ID\":\"" +(NotiRec.getInt("ID")) + "\" }";
+                    Notifications.add("<span style='color: red; font-weight: bolder;'>"+NotiRec.getString("Noti_Type")+"</span>: "+NotiRec.getString("What")+"<sub style='color: red;'> - new</sub>");
+                }else{
+                    NotiIDs += "{ \"ID\":\"" +(NotiRec.getInt("ID")) + "\" }";
+                    Notifications.add("<span style='color: blue; font-weight: bolder;'>"+NotiRec.getString("Noti_Type")+"</span>: "+NotiRec.getString("What")+"<sub style='color: blue;'> - seen</sub>");
+                }
+                
+                isFirst = false;
+                if(Notifications.size() > 10)
+                    break;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        NotiIDs += " ] }";
+        //JOptionPane.showMessageDialog(null, NotiIDs);
+       
+     //----------------------------------------------------------------------------------------------------------------------   
         
         String FirstName = "";
             String MiddleName = "";
@@ -470,7 +516,7 @@
             
             Class.forName(Driver);
             Connection conn = DriverManager.getConnection(Url, user, password);
-            String Select = "Select top 5 * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate > ?  order by AppointmentDate asc";
+            String Select = "Select * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate > ?  order by AppointmentDate asc";
             PreparedStatement pst = conn.prepareStatement(Select);
             pst.setInt(1,UserID);
             pst.setString(2, StringCurrentdate);
@@ -527,6 +573,9 @@
                 eachAppointmentItem.setAppointmentReason(Reason);
                 FutureAppointmentList.add(eachAppointmentItem);
                 
+                if(FutureAppointmentList.size() > 5)
+                    break;
+                
             }
             
             
@@ -546,7 +595,7 @@
             
             Class.forName(Driver);
             Connection historyConn = DriverManager.getConnection(Url, user, password);
-            String appointmentHistoryQuery = "Select top 5 * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate < ? or (CustomerID = ? and AppointmentDate = ? and AppointmentTime < ?) order by AppointmentDate desc";
+            String appointmentHistoryQuery = "Select * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate < ? or (CustomerID = ? and AppointmentDate = ? and AppointmentTime < ?) order by AppointmentDate desc";
             PreparedStatement appointmentHistoryPst = historyConn.prepareStatement(appointmentHistoryQuery);
             appointmentHistoryPst.setInt(1,UserID);
             appointmentHistoryPst.setString(2, StrinCurrentdate);
@@ -606,6 +655,9 @@
                 eachHistoryRecord = new BookedAppointmentList(AppointmentID, ProviderID ,ProviderName, ProviderCompany, ProviderTel, ProviderEmail, AppointmentDate, AppointmentTime, ProviderDisplayPic);
                 eachHistoryRecord.setAppointmentReason(Reason);
                 AppointmentHistory.add(eachHistoryRecord);
+                
+                if(AppointmentHistory.size() > 5)
+                    break;
             
             }
         }
@@ -662,13 +714,39 @@
             
             
             <ul>
+                <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
+                </textarea>
                 <li onclick="showCustExtraNotification();" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                    Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup></li>
+                    Notifications<sup id="notiCounterSup" style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup></li>
                 <li onclick='showCustExtraCal();' id='PermDivCalBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
                 <li onclick='showCustExtraUsrAcnt();' id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li>
             </ul>
+                
+                <script>
+                    $(document).ready(function(){
+                        $("#PermDivNotiBtn").click(function(event){
+                            
+                            var NotiIDs = document.getElementById("NotiIDInput").value;
+                            var NotiJSON = JSON.parse(NotiIDs);
+                            
+                            for(i in NotiJSON.Data){
+                                //alert(NotiJSON.Data[i].ID);
+                                var ID = NotiJSON.Data[i].ID;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "SetNotificationAsSeen",
+                                    data: "ID="+ID,
+                                    success: function(result){
+                                        document.getElementById("notiCounterSup").innerHTML = " 0 ";
+                                    }
+                                });
+                            }
+                            
+                        });
+                    });
+                </script>
                 
             <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
                 <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
@@ -693,8 +771,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td onclick="showCustExtraNotification2();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                            Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
+                        <td onclick="showCustExtraNotification2();" id='PermDivNotiBtn2' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                            Notifications<sup id='notiCounterSup2' style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
                         </td>
                     </tr>
                     <tr>
@@ -707,6 +785,31 @@
                     </tr>
                 </tbody>
             </table>
+                        
+            <script>
+                    $(document).ready(function(){
+                        $("#PermDivNotiBtn2").click(function(event){
+                            
+                            var NotiIDs = document.getElementById("NotiIDInput").value;
+                            var NotiJSON = JSON.parse(NotiIDs);
+                            
+                            for(i in NotiJSON.Data){
+                                //alert(NotiJSON.Data[i].ID);
+                                var ID = NotiJSON.Data[i].ID;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "SetNotificationAsSeen",
+                                    data: "ID="+ID,
+                                    success: function(result){
+                                        document.getElementById("notiCounterSup2").innerHTML = " 0 ";
+                                    }
+                                });
+                            }
+                            
+                        });
+                    });
+                </script>
+                        
         </div>
                         
         <div onclick='hideExtraDropDown();' id="container">
@@ -965,11 +1068,13 @@
                                                 String EventTitle = EventsRec.getString("EventTitle").trim();
                                                 EventTitle = EventTitle.replace("\"", "");
                                                 EventTitle = EventTitle.replace("'", "");
-                                                EventTitle = EventTitle.replaceAll("\\s", " ");
+                                                EventTitle = EventTitle.replaceAll("\\s+", " ");
+                                                EventTitle = EventTitle.replaceAll("( )+", " ");
                                                 String EventDesc = EventsRec.getString("EventDesc").trim();
                                                 EventDesc = EventDesc.replace("\"", "");
                                                 EventDesc = EventDesc.replace("'", "");
-                                                EventDesc = EventDesc.replaceAll("\\s", " ");
+                                                EventDesc = EventDesc.replaceAll("\\s+", " ");
+                                                EventDesc = EventDesc.replaceAll("( )+", " ");
                                                 String EventDate = EventsRec.getString("EventDate").trim();
                                                 String EventTime = EventsRec.getString("EventTime").trim();
                                                 if(EventTime.length() > 5)
@@ -1381,6 +1486,7 @@
             <div id='ExtrasNotificationDiv' style='display: none;'>
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
             
+            <div style=' height: 630px; overflow-y: auto;'>
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>
                         
@@ -1388,36 +1494,33 @@
                         
                         boolean isTrWhite = false;
                         
-                        for(int notify = 0 ; notify < notiCounter; notify++){
+                        for(int notify = 0 ; notify < Notifications.size(); notify++){
                     
                         if(!isTrWhite){
                             
-                            if(notify > 7)
-                                break;
                     %>
                     
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                                <p style='padding: 0; margin: 0; text-align: left; padding: 3px; color: darkblue; font-family: helvetica;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
                     <%
                                 isTrWhite = true;
+                                
                             }else{
-                            
-                                if(notify > 7)
-                                    break;
                     %>
                     
                         <tr>
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                                <p style='padding: 0; margin: 0; text-align: left; padding: 3px; color: darkblue; font-family: helvetica;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
                     <%      
                                 isTrWhite = false;
+                                
                             }
                         }
                     %>
@@ -1430,23 +1533,18 @@
                             <td>
                                 <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>fourth notification here</p>
                             </td>
-                        </tr-->
-                        
-                    <%
-                            if(notiCounter > 7){
-                    %>
-                    
+                        </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
                             </td>
-                        </tr>
-                        
-                    <%
-                        }
-                    %>
+                        </tr-->
                     </tbody>
                 </table>
+                        
+                <p style='text-align: center; color: green; padding: 5px; cursor: pointer;'>more...</p>
+            </div>
+                    
             </div>
         </div>
             
@@ -1479,7 +1577,7 @@
                     <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
+                    <div class='scrolldiv' style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -1905,11 +2003,13 @@
                                                 String EventTitle = EventsRec.getString("EventTitle").trim();
                                                 EventTitle = EventTitle.replace("\"", "");
                                                 EventTitle = EventTitle.replace("'", "");
-                                                EventTitle = EventTitle.replaceAll("\\s", " ");
+                                                EventTitle = EventTitle.replaceAll("\\s+", " ");
+                                                EventTitle = EventTitle.replaceAll("( )+", " ");
                                                 String EventDesc = EventsRec.getString("EventDesc").trim();
                                                 EventDesc = EventDesc.replace("\"", "");
                                                 EventDesc = EventDesc.replace("'", "");
-                                                EventDesc = EventDesc.replaceAll("\\s", " ");
+                                                EventDesc = EventDesc.replaceAll("\\s+", " ");
+                                                EventDesc = EventDesc.replaceAll("( )+", " ");
                                                 String EventDate = EventsRec.getString("EventDate").trim();
                                                 String EventTime = EventsRec.getString("EventTime").trim();
                                                 if(EventTime.length() > 5)
@@ -2325,31 +2425,28 @@
                         
                     <%
                        boolean isTrWhite2 = false;
-                        for(int notify = 0 ; notify < notiCounter; notify++){
+                        for(int notify = 0 ; notify < Notifications.size(); notify++){
                     
                         if(!isTrWhite2){
                             
-                            if(notify > 7)
-                                break;
                     %>
                     
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                                <p style='text-align: left; border: 1px solid #d8d8d8; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
                     <%
                                 isTrWhite2 = true;
+                                
                             }else{
                             
-                                if(notify > 7)
-                                    break;
                     %>
                     
                         <tr>
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                                <p style='text-align: left; border: 1px solid #d8d8d8; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
@@ -4104,14 +4201,21 @@
                                             }
                                         %>
                                         
-                                        <P>You were on<span style = "color: blue;"> <%= ProviderName%>'s</span><span> line.</p>
+                                        <form action="EachSelectedProviderLoggedIn.jsp" method="POST">
+                                            <input type='hidden' name='UserID' value='<%=ProviderID%>'/>
+                                            <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                            <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        
+                                        <P>You were on<span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderName%>'s"</span><span> line.</p>
                                         <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                            <span style = "color: blue;"><%= ProviderCompany%></span></span></p>
+                                            <span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderCompany%>"</span></span></p>
                                         <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                             <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
                                         <p>on <span style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span style = "color: red;"> <%= TimeToUse%></span></P>
                                         <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
                                         <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>"><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
+                                        
+                                        </form>
                                         
                                         <form style=" display: none;" id="deleteAppointmentHistoryForm<%=JString%>" class="deleteAppointmentHistoryForm" name="confirmDeleteAppointmentHistory">
                                             <p style="color: red; margin-top: 10px;">Are you sure you want to delete this history</p>

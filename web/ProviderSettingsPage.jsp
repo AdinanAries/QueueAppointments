@@ -299,15 +299,22 @@
                                       });
                                     </script>
                                 </div>
+                                    
+                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                                </div>
+                                    
                             </td>
                         </tr>
-                        <tr>
+                        <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv' style='height: 100px; overflow-y: auto;'>
+                                <div id='CalApptListDiv' style='height: 290px; overflow-y: auto;'>
                                     
                                     <%
                                         int count = 1;
@@ -423,10 +430,12 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr style="background-color: #eeeeee;">
+                        <tr id='EventsTr' style="background-color: #eeeeee;">
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
-                                <div id='EventsListDiv' style='height: 150px; overflow-y: auto;'>
+                                
+                                <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
+                                    
                                     <%
                                         try{
                                             
@@ -450,10 +459,12 @@
                                                 String EventTitle = EventsRec.getString("EventTitle").trim();
                                                 EventTitle = EventTitle.replace("\"", "");
                                                 EventTitle = EventTitle.replace("'", "");
+                                                EventTitle = EventTitle.replaceAll("\\s+", " ");
                                                 EventTitle = EventTitle.replaceAll("( )+", " ");
                                                 String EventDesc = EventsRec.getString("EventDesc").trim();
                                                 EventDesc = EventDesc.replace("\"", "");
                                                 EventDesc = EventDesc.replace("'", "");
+                                                EventDesc = EventDesc.replaceAll("\\s+", " ");
                                                 EventDesc = EventDesc.replaceAll("( )+", " ");
                                                 String EventDate = EventsRec.getString("EventDate").trim();
                                                 String EventTime = EventsRec.getString("EventTime").trim();

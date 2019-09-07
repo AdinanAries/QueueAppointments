@@ -90,7 +90,7 @@
         }
         
         
-        int notiCounter = 17;
+        int notiCounter = 0;
         
         String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
@@ -210,12 +210,64 @@
         catch(Exception e){
             e.printStackTrace();
         }
+        
+        
+    //------------------------------------------------------------------------------------------------------------------------------------------    
+        //Getting Notifications data
+        ArrayList<String> Notifications = new ArrayList<>();
+        String NotiIDs = "{\"Data\" : [ ";
+        
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Class.forName(Driver);
+            Connection NotiConn = DriverManager.getConnection(url, User, Password);
+            String NotiQuery = "Select Noti_Type, What, Noti_Status, ID from ProviderCustomers.Notifications where (CustID = ? and Noti_Type not like 'Today%')"
+                    + "or (CustID = ? and Noti_Date = ? and Noti_Type like 'Today%') order by ID desc";
+            PreparedStatement NotiPst = NotiConn.prepareStatement(NotiQuery);
+            NotiPst.setInt(1, UserID);
+            NotiPst.setInt(2, UserID);
+            NotiPst.setString(3, sdf.format(new Date()));
+            
+            ResultSet NotiRec = NotiPst.executeQuery();
+            boolean isFirst = true;
+            
+            while(NotiRec.next()){
+                
+                if(isFirst == false)
+                    NotiIDs += ", ";
+                
+                if(NotiRec.getString("Noti_Status") == null){
+                    notiCounter++;
+                    NotiIDs += "{ \"ID\":\"" +(NotiRec.getInt("ID")) + "\" }";
+                    Notifications.add("<span style='color: red; font-weight: bolder;'>"+NotiRec.getString("Noti_Type")+"</span>: "+NotiRec.getString("What")+"<sub style='color: red;'> - new</sub>");
+                }else{
+                    NotiIDs += "{ \"ID\":\"" +(NotiRec.getInt("ID")) + "\" }";
+                    Notifications.add("<span style='color: blue; font-weight: bolder;'>"+NotiRec.getString("Noti_Type")+"</span>: "+NotiRec.getString("What")+"<sub style='color: blue;'> - seen</sub>");
+                }
+                
+                isFirst = false;
+                if(Notifications.size() > 10)
+                    break;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        NotiIDs += " ] }";
+        //JOptionPane.showMessageDialog(null, NotiIDs);
+       
+     //----------------------------------------------------------------------------------------------------------------------   
     %>
     
     <body style="background-color: #ccccff;">
         
     <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
         <ul>
+            
+            <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
+            </textarea>
+            
             <a href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
                 
                 </li></a>
@@ -223,8 +275,8 @@
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 
             </li>
-            <li onclick="showPCustExtraNotification();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><p><img style='background-color: white; margin-right: 0;' src="icons/icons8-notification-50.png" width="28" height="25" alt="icons8-notification-50"/>
-                 <span style='color: red; background-color: white; padding: 2px; border-radius: 100%; margin-left: 0;'><%=notiCounter%></span></p>
+            <li onclick="showPCustExtraNotification();" id='PhPermDivNotiBtn' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><p><img style='background-color: white; margin-right: 0;' src="icons/icons8-notification-50.png" width="28" height="25" alt="icons8-notification-50"/>
+                 <span id='notiCounterSup' style='color: red; background-color: white; padding: 2px; margin-left: 0;'><%=notiCounter%></span></p>
             </li>
             <li onclick='showPCustExtraCal();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="28" height="25" alt="icons8-calendar-50"/>
                 
@@ -233,6 +285,31 @@
                 
             </li>
         </ul>
+            
+            <script>
+                    $(document).ready(function(){
+                        $("#PhPermDivNotiBtn").click(function(event){
+                            
+                            var NotiIDs = document.getElementById("NotiIDInput").value;
+                            var NotiJSON = JSON.parse(NotiIDs);
+                            
+                            for(i in NotiJSON.Data){
+                                //alert(NotiJSON.Data[i].ID);
+                                var ID = NotiJSON.Data[i].ID;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "SetNotificationAsSeen",
+                                    data: "ID="+ID,
+                                    success: function(result){
+                                        document.getElementById("notiCounterSup").innerHTML = " 0 ";
+                                    }
+                                });
+                            }
+                            
+                        });
+                    });
+                </script>
+            
         </div></center>
         
     <center><div id="PhoneExtras">
@@ -397,7 +474,7 @@
                                                         //alert(result);
                                                         
                                                         var EvntsData = JSON.parse(result);
-                                                        
+                                                        //alert(EvntsData);
                                                         var bDiv = document.createElement('div');
                                                         
                                                         for(i in EvntsData.Data){
@@ -464,10 +541,12 @@
                                                 String EventTitle = EventsRec.getString("EventTitle").trim();
                                                 EventTitle = EventTitle.replace("\"", "");
                                                 EventTitle = EventTitle.replace("'", "");
+                                                EventTitle = EventTitle.replaceAll("\\s+", " ");
                                                 EventTitle = EventTitle.replaceAll("( )+", " ");
                                                 String EventDesc = EventsRec.getString("EventDesc").trim();
                                                 EventDesc = EventDesc.replace("\"", "");
                                                 EventDesc = EventDesc.replace("'", "");
+                                                EventDesc = EventDesc.replaceAll("\\s+", " ");
                                                 EventDesc = EventDesc.replaceAll("( )+", " ");
                                                 String EventDate = EventsRec.getString("EventDate").trim();
                                                 String EventTime = EventsRec.getString("EventTime").trim();
@@ -888,31 +967,29 @@
                         
                         boolean isTrWhite = false;
                         
-                        for(int notify = 0 ; notify < notiCounter; notify++){
+                        for(int notify = 0 ; notify < Notifications.size(); notify++){
                     
                         if(!isTrWhite){
                             
-                            if(notify > 7)
-                                break;
                     %>
                     
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                                <p style='text-align: left; border: 1px solid #d8d8d8; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
                     <%
                                 isTrWhite = true;
+                                
                             }else{
                             
-                                if(notify > 7)
-                                    break;
+                                
                     %>
                     
                         <tr>
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>notify. <%=notify%> notification here</p>
+                                <p style='text-align: left; border: 1px solid #d8d8d8; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
@@ -930,21 +1007,14 @@
                             <td>
                                 <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>fourth notification here</p>
                             </td>
-                        </tr-->
-                        
-                    <%
-                            if(notiCounter > 7){
-                    %>
+                        </tr>
                     
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
                             </td>
-                        </tr>
+                        </tr-->
                         
-                    <%
-                        }
-                    %>
                     </tbody>
                 </table>
             </div>

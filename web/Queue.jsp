@@ -4,6 +4,8 @@
     Author     : aries
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="javax.swing.JOptionPane"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.arieslab.queue.queue_model.*"%>
 <%@page import="java.util.*"%>
@@ -36,6 +38,14 @@
         ResendAppointmentData.ServicesCost = "";
         ResendAppointmentData.CreditCardNumber = "";
         
+        /*Date NotiDate = new Date();
+        String NotiSDate = NotiDate.toString();
+        SimpleDateFormat NotiDformat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = NotiDformat.format(NotiDate);
+        String time = NotiSDate.substring(11,16);
+        JOptionPane.showMessageDialog(null, NotiDate);
+        JOptionPane.showMessageDialog(null, time);
+        JOptionPane.showMessageDialog(null, date);*/
         
         String Message = "You are not logged in";
         
@@ -182,7 +192,7 @@
                     <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
+                    <div class='scrolldiv' style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>

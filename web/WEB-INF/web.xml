@@ -300,6 +300,10 @@
         <servlet-name>DltProvEvntAjax</servlet-name>
         <servlet-class>DltProvEvntAjax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetNotificationAsSeen</servlet-name>
+        <servlet-class>SetNotificationAsSeen</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -599,6 +603,10 @@
     <servlet-mapping>
         <servlet-name>DltProvEvntAjax</servlet-name>
         <url-pattern>/DltProvEvntAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetNotificationAsSeen</servlet-name>
+        <url-pattern>/SetNotificationAsSeen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -64,11 +64,13 @@ public class GetCustEvntAjax extends HttpServlet {
                     EvntTtle = DtRec.getString("EventTitle").trim();
                     EvntTtle = EvntTtle.replace("\"", "");
                     EvntTtle = EvntTtle.replace("'", "");
+                    EvntTtle = EvntTtle.replaceAll("\\s+", " ");
                     EvntTtle = EvntTtle.replaceAll("( )+", " ");
                     //JOptionPane.showMessageDialog(null, EvntTtle);
                     EvntDesc = DtRec.getString("EventDesc").trim();
                     EvntDesc = EvntDesc.replace("\"", "");
                     EvntDesc = EvntDesc.replace("'", "");
+                    EvntDesc = EvntDesc.replaceAll("\\s+", " ");
                     EvntDesc = EvntDesc.replaceAll("( )+", " ");
                     //JOptionPane.showMessageDialog(null, EvntDesc);
                     EvntDate = DtRec.getString("EventDate").trim();
