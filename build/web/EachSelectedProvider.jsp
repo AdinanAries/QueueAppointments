@@ -4,6 +4,7 @@
     Author     : aries
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.util.Base64"%>
@@ -299,6 +300,13 @@
                             String ProvEmail = "";
                             
                             String DateOfUpdate = newsRec.getString("DateOfUpdate").trim();
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date = sdf.parse(DateOfUpdate);
+                            String day = date.toString().substring(0,3);
+                            SimpleDateFormat sdf2 = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMM dd");
+                            DateOfUpdate = day + ", " + sdf2.format(date);
+                            
+                            
                             String Msg = newsRec.getString("Msg").trim();
                             String MsgPhoto = "";
                             
@@ -373,7 +381,7 @@
                         <tr style="background-color: #333333;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> (<%=DateOfUpdate%>)</p></p>
+                                    <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> - <%=DateOfUpdate%></p></p>
                                     
                                     <%if(MsgPhoto.equals("")){%>
                                     <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
