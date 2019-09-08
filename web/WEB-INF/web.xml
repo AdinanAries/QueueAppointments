@@ -304,6 +304,14 @@
         <servlet-name>SetNotificationAsSeen</servlet-name>
         <servlet-class>SetNotificationAsSeen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostProvNews</servlet-name>
+        <servlet-class>PostProvNews</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getLastProvNews</servlet-name>
+        <servlet-class>getLastProvNews</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -607,6 +615,14 @@
     <servlet-mapping>
         <servlet-name>SetNotificationAsSeen</servlet-name>
         <url-pattern>/SetNotificationAsSeen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostProvNews</servlet-name>
+        <url-pattern>/PostProvNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getLastProvNews</servlet-name>
+        <url-pattern>/getLastProvNews</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

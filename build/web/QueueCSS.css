@@ -581,6 +581,10 @@ select {
   display: inline-block;
 }
 
+#MakeReservationForm {
+  display: none;
+}
+
 @media only screen and (max-width: 1400px) {
   /*.SearchObject {
     display: block;
@@ -598,6 +602,9 @@ select {
 @media only screen and (min-width: 1000px) {
   #ReservationAndFutureSpots {
     height: 450px;
+  }
+  #MakeReservationForm {
+    display: block;
   }
   #PhoneNotiBar {
     display: none;

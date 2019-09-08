@@ -3548,16 +3548,16 @@
                                                                 url: "GetLastFavProv",
                                                                 data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
                                                                 success: function(result){
-                                                                    //alert(result);
                                                                     
                                                                     var favProv = JSON.parse(result);
                                                                     
-                                                                    var UserIndex = <%=UserIndex%>;
                                                                     var provName = favProv.Name;
                                                                     var provCoverPic = favProv.CoverPic;
                                                                     var provProPic = favProv.ProfilePic;
                                                                     var provRating = parseInt(favProv.Rating, 10);
-                                                                    //alert(provRating);
+                                                                    
+                                                                    var UserIndex = "<%=UserIndex%>";
+                                                                    var UserName = "<%=NewUserName%>";
                                                                     
                                                                     var ratingStars;
                                                                     if(provRating === 5){
@@ -3606,12 +3606,13 @@
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
-
+                                                                                    '<input type="hidden" name="User" value="'+UserName+'" />' +
                                                                                     '</form>' +
 
                                                                                     '<center><form name="bookFromFavoritesForm" action="EachSelectedProviderLoggedIn.jsp" method="POST">' +
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                                        '<input type="hidden" name="User" value="'+UserName+'" />' +
                                                                                         '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
@@ -3998,7 +3999,8 @@
                                                                     
                                                                     var favProv = JSON.parse(result);
                                                                     
-                                                                    var UserIndex = <%=UserIndex%>;
+                                                                    var UserIndex = "<%=UserIndex%>";
+                                                                    var UserName = "<%=NewUserName%>";
                                                                     var provName = favProv.Name;
                                                                     var provCoverPic = favProv.CoverPic;
                                                                     var provProPic = favProv.ProfilePic;
@@ -4052,12 +4054,14 @@
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                                    '<input type="hidden" name="User" value="'+UserName+'" />' +
 
                                                                                     '</form>' +
 
                                                                                     '<center><form name="bookFromFavoritesForm" action="EachSelectedProviderLoggedIn.jsp" method="POST">' +
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                                        '<input type="hidden" name="User" value="'+UserName+'" />' +
                                                                                         '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
@@ -4389,7 +4393,8 @@
                                                                     
                                                                     var favProv = JSON.parse(result);
                                                                     
-                                                                    var UserIndex = <%=UserIndex%>;
+                                                                    var UserName = "<%=NewUserName%>";
+                                                                    var UserIndex = "<%=UserIndex%>";
                                                                     var provName = favProv.Name;
                                                                     var provCoverPic = favProv.CoverPic;
                                                                     var provProPic = favProv.ProfilePic;
@@ -4443,12 +4448,14 @@
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                                    '<input type="hidden" name="User" value="'+UserName+'" />' +
 
                                                                                     '</form>' +
 
                                                                                     '<center><form name="bookFromFavoritesForm" action="EachSelectedProviderLoggedIn.jsp" method="POST">' +
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                                        '<input type="hidden" name="User" value="'+UserName+'" />' +
                                                                                         '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
@@ -4778,7 +4785,10 @@
                                         
                                     </div>
                                             
-                                    </div>       
+                                    </div>    
+                                        
+                                        <a href="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                            <p style="border: 1px solid darkblue; color: darkblue; text-align: center; padding: 5px; max-width: 300px;">View all your favorite providers</p></a>
                                 </div>
                                 
                                 <%      }

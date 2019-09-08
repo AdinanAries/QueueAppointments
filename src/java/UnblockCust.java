@@ -24,6 +24,7 @@ public class UnblockCust extends HttpServlet {
         
         String BlockedID = request.getParameter("BlockedID");
         String UserIndex = request.getParameter("UserIndex");
+        String NewUserName = request.getParameter("User");
         
         try{
             Class.forName(Driver);
@@ -34,7 +35,7 @@ public class UnblockCust extends HttpServlet {
             
             unblockPst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Person Unblocked Successfully");
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex);
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
             
         }catch(Exception e){
             e.printStackTrace();

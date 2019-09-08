@@ -23,6 +23,7 @@ public class OpenDate extends HttpServlet {
         
         String ClosedID = request.getParameter("ClosedID");
         String UserIndex = request.getParameter("UserIndex");
+        String NewUserName = request.getParameter("User");
         
         try{
             Class.forName(Driver);
@@ -33,7 +34,7 @@ public class OpenDate extends HttpServlet {
             
             OpenPst.executeUpdate();
             
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex);
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
             JOptionPane.showMessageDialog(null, "Closed Day Openned");
             
             

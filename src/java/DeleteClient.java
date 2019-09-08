@@ -26,6 +26,7 @@ public class DeleteClient extends HttpServlet {
         String clientID = request.getParameter("EachClientID");
         String providerID = request.getParameter("ProviderID");
         String UserIndex = request.getParameter("UserIndex");
+        String NewUserName = request.getParameter("User");
         
         
         try{
@@ -40,7 +41,7 @@ public class DeleteClient extends HttpServlet {
             
             DltClientPst.executeUpdate();
             
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex);
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
             JOptionPane.showMessageDialog(null, "Client Deleted Successfully!");
             
         }catch(Exception e){

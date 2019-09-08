@@ -27,6 +27,8 @@ public class UploadCoverPhotoControl extends HttpServlet {
         int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
         String NewUserName = request.getParameter("User");
         
+        String PhotoID = "";
+        
         String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
         String user = "sa";
@@ -37,6 +39,7 @@ public class UploadCoverPhotoControl extends HttpServlet {
         InputStream inputStream2 = null; // input stream of the upload file
         
         Part filePart2 = request.getPart("coverPic");
+        
         if (filePart2 != null) {
             // prints out some information for debugging
             System.out.println(filePart2.getName());
@@ -62,6 +65,8 @@ public class UploadCoverPhotoControl extends HttpServlet {
 
                 while(Rec.next()){
                     hasCoverPhoto = true;
+                    PhotoID = Rec.getString("PicID");
+                    break;
                 }
 
             }catch(Exception e){
@@ -75,7 +80,7 @@ public class UploadCoverPhotoControl extends HttpServlet {
 
                     Class.forName(Driver);
                     Connection UpdateConn = DriverManager.getConnection(url, user, password);
-                    String UpdateString = "Update QueueServiceProviders.CoverPhotos set CoverPhoto = ? where ProviderID = ?";
+                    String UpdateString = "Update QueueServiceProviders.CoverPhotos set CoverPhoto = ? where PicID = ?";
                     PreparedStatement UpdatePst = UpdateConn.prepareStatement(UpdateString);
 
                     if (inputStream2 != null) {
@@ -83,7 +88,7 @@ public class UploadCoverPhotoControl extends HttpServlet {
                         UpdatePst.setBlob(1, inputStream2);
                     }
 
-                    UpdatePst.setString(2, ProviderID);
+                    UpdatePst.setString(2, PhotoID);
 
                     int row = UpdatePst.executeUpdate();
 

@@ -753,7 +753,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID = ?";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,UserID);
                             ResultSet cover = coverPst.executeQuery();
@@ -801,7 +801,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select top 7 * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID Desc";
+                            String coverString = "Select top 7 * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,UserID);
                             ResultSet cover = coverPst.executeQuery();
@@ -929,11 +929,11 @@
                 String AppointmentTime = rows.getString("AppointmentTime").substring(0,5);
               
                 int AppointmentID = rows.getInt("AppointmentID");
-                int ProviderID = UserID;
+                int CustID = Integer.parseInt(CustomerID);
                 
                 Date AppointmentDate = rows.getDate("AppointmentDate");
                 
-                ListItem = new BookedAppointmentList(AppointmentID, ProviderID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
+                ListItem = new BookedAppointmentList(AppointmentID, CustID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
                 ListItem.setAppointmentReason(Reason);
                 
                 FutureAppointmentList.add(ListItem);
@@ -1013,11 +1013,11 @@
                 String AppointmentTime = rows.getString("AppointmentTime").substring(0,5);
               
                 int AppointmentID = rows.getInt("AppointmentID");
-                int ProviderID = UserID;
+                int CustID = Integer.parseInt(CustomerID);
                 
                 Date AppointmentDate = rows.getDate("AppointmentDate");
                 
-                ListItem = new BookedAppointmentList(AppointmentID, ProviderID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
+                ListItem = new BookedAppointmentList(AppointmentID, CustID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
                 ListItem.setAppointmentReason(Reason);
                 AppointmentList.add(ListItem);
                 
@@ -1093,11 +1093,11 @@
                 String AppointmentTime = rows.getString("AppointmentTime").substring(0,5);
               
                 int AppointmentID = rows.getInt("AppointmentID");
-                int ProviderID = UserID;
+                int CustID = Integer.parseInt(CustomerID);
                 
                 Date AppointmentDate = rows.getDate("AppointmentDate");
                 
-                ListItem = new BookedAppointmentList(AppointmentID, ProviderID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
+                ListItem = new BookedAppointmentList(AppointmentID, CustID, customerFullName, null, customerPhone, customerEmail, AppointmentDate, AppointmentTime, customerPic);
                 ListItem.setAppointmentReason(Reason);
                 AppointmentListExtra.add(ListItem);
                 
@@ -1583,12 +1583,13 @@
             
                 <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 20px;">Update your clients on whats new</p>
                 
+                <form method="POST" enctype="multipart/form-data">
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add/Repost News</p>
-                                <textarea name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
+                                <textarea id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
                                 </textarea>
                                 
                             </td>
@@ -1598,37 +1599,109 @@
                                 <p style='margin-bottom: 4px;'>Add photo to this message</p>
                                 <div id="MsgPhotoDisplay"></div>
                                 
-                                <input style="width: 95%;" type="file" name="MsgformPhoto" />
+                                <input id="NewsPhotoFld" style="width: 95%;" type="file" name="MsgformPhoto" />
                                 
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p>When to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsDateFld" value="Today" size="21"/></p>
+                                
+                                <p>Make news visible to: </p>
+                                    <input id="VPublicRd" type="radio" name="NewsVisibility" value="Public" checked="checked" /><label for="VPublicRd">Public</label>
+                                    <input id="VCustomersRd" type="radio" name="NewsVisibility" value="Customers" /><label  for="VCustomersRd">Only customers</label>
+                                
+                                <center><input id="SaveNewsBtn" style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <p>Time to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsTimeFld" value="Now" size="22" /></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <center><input style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
-                            </td>
-                        </tr>
+                        <%
+                            Date UpdDate = new Date();
+                            String UpdSDate = UpdDate.toString();
+                            SimpleDateFormat NotiDformat = new SimpleDateFormat("yyyy-MM-dd");
+                            String UpdMDate = NotiDformat.format(UpdDate);
+                            String UpdTime = UpdSDate.substring(11,16);
+                        %>
+                        <script>
+                            $(document).ready(function(){
+                                $("#SaveNewsBtn").click(function(event){
+                                    
+                                    var ProviderID = "<%=UserID%>";
+                                    var UpdDate = "<%=UpdMDate%>";
+                                    var UpdTime = "<%=UpdTime%>";
+                                    
+                                    var Message = document.getElementById("NewsMessageFld").value;
+                                    
+                                    var Visibility = "";
+                                    if(document.getElementById("VCustomersRd").checked === true){
+                                        Visibility = "Customer";
+                                    }else if(document.getElementById("VPublicRd").checked === true){
+                                        Visibility = "Public";
+                                    }else{
+                                        Visibility = "Public";
+                                    }
+                                    
+                                    var fileInput = document.getElementById("NewsPhotoFld");
+                                    
+                                    var file = fileInput.files[0];
+                                    
+                                    var formData = new FormData();
+                                    formData.append('Photo', file);
+                                    formData.append('Message', Message);
+                                    formData.append('NewsVisibility',Visibility);
+                                    formData.append('Date',UpdDate);
+                                    formData.append('Time',UpdTime);
+                                    formData.append('ProviderID',ProviderID);
+                                    
+                                    $.ajax({
+                                        data: formData,
+                                        url: 'PostProvNews',
+                                        type: 'POST',
+                                        processData: false,
+                                        contentType: false,
+                                        success:function (data)
+                                        {
+                                            $.ajax({
+                                                type:"POST",
+                                                data:"MessageID="+data,
+                                                url:"getLastProvNews",
+                                                success: function(result){
+                                                    
+                                                    var MessageData = JSON.parse(result);
+                                                    
+                                                    var MessagePic = MessageData.Photo;
+                                                    var MessageID = MessageData.ID;
+                                                    var Message = MessageData.Message;
+                                                    
+                                                    if(MessagePic !== ""){
+                                                        document.getElementById("defaultPic").setAttribute("src", "data:image/jpg;base64,"+MessagePic);
+                                                        document.getElementById("MessageP").innerHTML = Message;
+                                                        document.getElementById("RecentMessageID").value = MessageID;
+                                                    }
+                                                    
+                                                }
+                                            });
+                                        }
+                                    });
+                                    
+                                    
+                                });
+                            });
+                        </script>
+                        
                         <tr style="">
                             <td>
-                                <div style='height: 290px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
-                                <p style='color: red; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
-                                <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
-                                <p style='border-top: 1px solid darkgrey;'>Message content to be displayed in this section</p>
+                                <div style='height: 240px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
+                                    <div style="background-color: #333333; padding: 4px;">
+                                        <p style='color: white; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
+                                        <center><img id="defaultPic" src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    </div>
+                                <p id="MessageP" style='border-top: 1px solid darkgrey;'></p>
+                                <input id="RecentMessageID" type="hidden" value="" />
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
+                </form>
             </div>
             
             <div id='Calender' style='display: none; margin-top: 5px;'>
@@ -3322,6 +3395,7 @@
                       
                           String WString = Integer.toString(w);
                           int AppointmentID = AppointmentList.get(w).getAppointmentID();
+                          int CustomerID = AppointmentList.get(w).getProviderID();
                           
                           //note all providerinfo here is customer instead but this is an error from DataStructure inconsistency
                           String Name = AppointmentList.get(w).getProviderName();
@@ -3397,6 +3471,82 @@
                                     <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
                                     <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
                               
+                                    <center>
+                                        <input id="PIDCAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
+                                        <input id="CCustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
+                                        <input type="button" id="AddClientsFromCurBtn<%=WString%>" style="cursor: pointer; background: 0; text-align: center; border: #7e7e7e 1px solid; width: 300px; color: darkblue; margin-top: 5px; padding: 5px;"
+                                           value="Add <%=Name%> to your clients" />
+                                        <script>
+                                                
+                                            $(document).ready(function(){
+                                                $("#AddClientsFromCurBtn<%=WString%>").click(function(event){
+                                                    
+                                                    var CustomerID = document.getElementById("CCustIDAddClient<%=WString%>").value;
+                                                    var ProviderID = document.getElementById("PIDCAddClient<%=WString%>").value;
+                                                        
+                                                        
+                                                        //alert("CustomerID: "+CustomerID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "AddClientsListController",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID, 
+                                                        
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          
+                                                          if(result === "notInList"){
+                                                              
+                                                              $.ajax({
+                                                                  type: "POST",
+                                                                  url: "getLastAddedClientAjax",
+                                                                  data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
+                                                                  success: function(result){
+                                                                      //alert(result);
+                                                                      var Customer = JSON.parse(result);
+                                                                      var CustName = Customer.Name;
+                                                                      var CustEmail = Customer.Email;
+                                                                      var CustMobile = Customer.Mobile;
+                                                                      var CustPic = Customer.ProfilePic;
+                                                                      var UserIndex = "<%=UserIndex%>";
+                                                                      var UserName = "<%=NewUserName%>";
+                                                                      
+                                                                      if(document.getElementById("EmptyStatus"))
+                                                                          document.getElementById("EmptyStatus").style.display = "none";
+                                                                      
+                                                                      var Div = document.createElement('div');
+                                                                      var Clients = document.getElementById("ProviderClientsDiv");
+                                                                      
+                                                                      Div.innerHTML = '<div style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">' +
+                                                                                      '<center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
+                                                                                            '<div style="float: right; width: 83%;">' +
+                                                                                                    '<p style="font-weight: bolder;">'+CustName+'</p>' +
+                                                                                                    '<p>'+CustMobile+'</p>' +
+                                                                                                    '<p>'+CustEmail+'</p>' +
+                                                                                                '</div>' +
+                                                                                       ' <p style="clear: both;"></p>' +
+                                                                                       '<form name="DeleteThisClient" action="DeleteClient" method="POST">' +
+                                                                                            '<input id="PIDDltClnt" type="hidden" name="ProviderID" value="'+ProviderID+'" />' +
+                                                                                            '<input id="ClientIDDltClnt" type="hidden" name="EachClientID" value="'+CustomerID+'"/>' +
+                                                                                            '<input name="UserIndex" type="hidden" value="'+UserIndex+'" />' +
+                                                                                            '<input name="User" type="hidden" value="'+UserName+'" />' +
+                                                                                            '<input id="DeleteClientBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Delete this client" />'+
+                                                                                        '</form>';
+                                    
+                                                                      
+                                                                      Clients.appendChild(Div); 
+                                                                  }
+                                                              });
+                                                          }
+                                                        }                
+                                                      });
+                                                });
+                                            });
+                                        </script>
+                                    </center>
+                                    
                                 <center>
                                     <form id="changeBookedAppointmetForm<%=WString%>" style=" display: none;" id="changeBookedAppointmetForm<%=WString%>" class="changeBookedAppointmentForm" name="changeAppointment">
                                         <p style ="margin-top: 10px;">Reschedule This Customer</p>
@@ -3633,6 +3783,7 @@
                       
                           String WString = Integer.toString(w);
                           int AppointmentID = FutureAppointmentList.get(w).getAppointmentID();
+                          int CustomerID = FutureAppointmentList.get(w).getProviderID();
                           
                           //note all providerinfo here is customer instead but this is an error from DataStructure inconsistency
                           String Name = FutureAppointmentList.get(w).getProviderName();
@@ -3706,7 +3857,83 @@
                                 <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
                                     <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
                                     <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
-                              
+                                    
+                                    <center>
+                                        <input id="PIDFAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
+                                        <input id="FCustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
+                                        <input type="button" id="AddClientsFromFutBtn<%=WString%>" style="cursor: pointer; background: 0; text-align: center; border: #7e7e7e 1px solid; width: 300px; color: darkblue; margin-top: 5px; padding: 5px;"
+                                           value="Add <%=Name%> to your clients" />
+                                        <script>
+                                                
+                                            $(document).ready(function(){
+                                                $("#AddClientsFromFutBtn<%=WString%>").click(function(event){
+                                                    
+                                                    var CustomerID = document.getElementById("FCustIDAddClient<%=WString%>").value;
+                                                    var ProviderID = document.getElementById("PIDFAddClient<%=WString%>").value;
+                                                        
+                                                        
+                                                        //alert("CustomerID: "+CustomerID);
+                                                        //alert("ProviderID: "+ProviderID);
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "AddClientsListController",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID, 
+                                                        
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          
+                                                          if(result === "notInList"){
+                                                              
+                                                              $.ajax({
+                                                                  type: "POST",
+                                                                  url: "getLastAddedClientAjax",
+                                                                  data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
+                                                                  success: function(result){
+                                                                      //alert(result);
+                                                                      var Customer = JSON.parse(result);
+                                                                      var CustName = Customer.Name;
+                                                                      var CustEmail = Customer.Email;
+                                                                      var CustMobile = Customer.Mobile;
+                                                                      var CustPic = Customer.ProfilePic;
+                                                                      var UserIndex = "<%=UserIndex%>";
+                                                                      var UserName = "<%=NewUserName%>";
+                                                                      
+                                                                      if(document.getElementById("EmptyStatus"))
+                                                                          document.getElementById("EmptyStatus").style.display = "none";
+                                                                      
+                                                                      var Div = document.createElement('div');
+                                                                      var Clients = document.getElementById("ProviderClientsDiv");
+                                                                      
+                                                                      Div.innerHTML = '<div style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">' +
+                                                                                      '<center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
+                                                                                            '<div style="float: right; width: 83%;">' +
+                                                                                                    '<p style="font-weight: bolder;">'+CustName+'</p>' +
+                                                                                                    '<p>'+CustMobile+'</p>' +
+                                                                                                    '<p>'+CustEmail+'</p>' +
+                                                                                                '</div>' +
+                                                                                       ' <p style="clear: both;"></p>' +
+                                                                                       '<form name="DeleteThisClient" action="DeleteClient" method="POST">' +
+                                                                                            '<input id="PIDDltClnt" type="hidden" name="ProviderID" value="'+ProviderID+'" />' +
+                                                                                            '<input id="ClientIDDltClnt" type="hidden" name="EachClientID" value="'+CustomerID+'"/>' +
+                                                                                            '<input name="UserIndex" type="hidden" value="'+UserIndex+'" />' +
+                                                                                            '<input name="User" type="hidden" value="'+UserName+'" />' +
+                                                                                            '<input id="DeleteClientBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Delete this client" />'+
+                                                                                        '</form>';
+                                    
+                                                                      
+                                                                      Clients.appendChild(Div); 
+                                                                  }
+                                                              });
+                                                          }
+                                                        }                
+                                                      });
+                                                });
+                                            });
+                                        </script>
+                                    </center>
+                                    
                                 <center>
                                     <form style=" display: none;" id="changeFutureAppointmetForm<%=WString%>" class="changeBookedAppointmentForm" name="changeAppointment">
                                         <p style ="margin-top: 10px;">Reschedule This Customer</p>
@@ -4059,7 +4286,8 @@
                                                                   var Email = blockedPer.Email;
                                                                   var Mobile = blockedPer.Tel;
                                                                   var ProfilePic = blockedPer.Propic;
-                                                                  var UserIndex = <%=UserIndex%>
+                                                                  var UserIndex = "<%=UserIndex%>";
+                                                                  var UserName = "<%=NewUserName%>";
                                                                   
                                                                   //alert(Name);
                                                                   //alert(Email);
@@ -4085,6 +4313,7 @@
                                                                                   '<form name="UnblockPerson" action="UnblockCust" method="POST">' +
                                                                                      '<input id="BlockedID" type="hidden" name="BlockedID" value="'+BlockedID+'" />' +
                                                                                      '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                                     '<input name="User" type="hidden" value="'+UserName+'" />' +
                                                                                      '<input id="UnblockCleintBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Unblock This Person" name="Unblock" />' +
                                                                                      '</form>' +
                                                                                      '</div>' ;
@@ -4149,7 +4378,8 @@
                                                                       var CustEmail = Customer.Email;
                                                                       var CustMobile = Customer.Mobile;
                                                                       var CustPic = Customer.ProfilePic;
-                                                                      var UserIndex = <%=UserIndex%>;
+                                                                      var UserIndex = "<%=UserIndex%>";
+                                                                      var UserName = "<%=NewUserName%>";
                                                                       
                                                                       if(document.getElementById("EmptyStatus"))
                                                                           document.getElementById("EmptyStatus").style.display = "none";
@@ -4168,6 +4398,7 @@
                                                                                             '<input id="PIDDltClnt" type="hidden" name="ProviderID" value="'+ProviderID+'" />' +
                                                                                             '<input id="ClientIDDltClnt" type="hidden" name="EachClientID" value="'+CustomerID+'"/>' +
                                                                                             '<input name="UserIndex" type="hidden" value="'+UserIndex+'" />' +
+                                                                                            '<input name="User" type="hidden" value="'+UserName+'" />' +
                                                                                             '<input id="DeleteClientBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Delete this client" />'+
                                                                                         '</form>';
                                     
@@ -4283,7 +4514,8 @@
                                                         
                                         var ProviderID = document.getElementById("provIDforClosedDate").value;
                                         var CloseDate = document.getElementById("Ddatepicker").value;
-                                        var UserIndex = <%=UserIndex%>;
+                                        var UserIndex = "<%=UserIndex%>";
+                                        var UserName = "<%=NewUserName%>";
                                                        
                                         //alert("CloseDate:  "+CloseDate);
                                                         
@@ -4320,6 +4552,7 @@
                                                                 '<p style="">'+CDate+'</p>'+
                                                                 '<input id="closedID'+ClosedID+'" type="hidden" name="ClosedID" value="'+ClosedID+'" />'+
                                                                 '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
+                                                                '<input name="User" type="hidden" value="'+UserName+'" />' +
                                                                 '<input id="openDayBtn'+ClosedID+'" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Open this day" />' +
                                                             '</form>';
                                                         
@@ -4399,7 +4632,10 @@
                         </div>
                     </div></center>
                         
-                        <center><div id="MakeReservationForm" style="display: none; width: 100%; max-width: 500px;">
+                        <center><div id="MakeReservationForm" style="width: 100%; max-width: 500px;">
+                                
+                                <script>document.getElementById("MakeReservationForm").style.display = "block"</script>
+                                    
                                 <form style="" name="makeReservationForm">
                                     <p style="text-align: center; color: #000099; margin-top: 5px; margin-bottom: 10px;">Add reservation details below</p>
                                     <P style="color: white;">Choose Client Below</p>
@@ -5438,7 +5674,8 @@
                                                                   var price = parseFloat(ServiceDetails.Price).toFixed(2);
                                                                   var duration = ServiceDetails.Dur;
                                                                   var description = ServiceDetails.Desc;
-                                                                  var UserIndex = <%=UserIndex%>;
+                                                                  var UserIndex = "<%=UserIndex%>";
+                                                                  var UserName = "<%=NewUserName%>";
                                                                   
                                                                   var NewServDiv = document.getElementById("newServDiv");
                                                                   NewServDiv.style.display = "block";
@@ -5450,6 +5687,7 @@
                                                                           '<p>Description: <span style="color: darkgrey;">'+description+'</span></p>'+
                                                                           '<form method="POST" action="DeleteNewService">'+
                                                                               '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />'+
+                                                                              '<input name="User" type="hidden" value="'+UserName+'" />' +
                                                                               '<input type="hidden" name="ServiceID" value="'+ServiceID+'" />'+
                                                                               '<input type="submit" style="color: darkblue; font-weight: bolder; border: 1px solid darkgrey; padding: 5px; background-color: white;" value="Delete this service" />'+
                                                                            '</form>'+

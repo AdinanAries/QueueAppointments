@@ -87,6 +87,7 @@
 
             }
             catch(Exception e){}
+                
             }
             
         }catch(Exception e){
@@ -97,7 +98,7 @@
             
                     Class.forName(Driver);
                     Connection ProfilePicConn = DriverManager.getConnection(url, User, Password);
-                    String ProfilePicString = "select * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
+                    String ProfilePicString = "select * from QueueServiceProviders.CoverPhotos where ProviderID = ?";
                     PreparedStatement ProfilePicPst = ProfilePicConn.prepareStatement(ProfilePicString);
                     ProfilePicPst.setInt(1, ID);
                     ResultSet ProfilePicRec = ProfilePicPst.executeQuery();

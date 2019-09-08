@@ -41,6 +41,7 @@ public class RemoveLastFavProv extends HttpServlet {
            
            String FavProvID = request.getParameter("UserID");
            String UserIndex = request.getParameter("UserIndex");
+           String NewUserName = request.getParameter("User");
            
            try{
                
@@ -53,7 +54,7 @@ public class RemoveLastFavProv extends HttpServlet {
                
                delProvPst.executeUpdate();
                
-               response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex);
+               response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
                //JOptionPane.showMessageDialog(null, "Provider removed from your favorites");
                
                

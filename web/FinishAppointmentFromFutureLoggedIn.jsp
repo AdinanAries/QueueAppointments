@@ -58,42 +58,6 @@
         int UserID = 0;
         String Base64Pic = "";
         
-        try{
-            
-            Class.forName(Driver);
-            Connection PicConn = DriverManager.getConnection(url, User, Password);
-            String PicQuery = "Select Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
-            PreparedStatement PicPst = PicConn.prepareStatement(PicQuery);
-            PicPst.setInt(1, UserID);
-            
-            ResultSet PicRec = PicPst.executeQuery();
-            
-            while(PicRec.next()){
-                
-                try{    
-                    //put this in a try catch block for incase getProfilePicture returns nothing
-                    Blob profilepic = PicRec.getBlob("Profile_Pic"); 
-                    InputStream inputStream = profilepic.getBinaryStream();
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[4096];
-                    int bytesRead = -1;
-
-                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                        outputStream.write(buffer, 0, bytesRead);
-                    }
-
-                    byte[] imageBytes = outputStream.toByteArray();
-
-                     Base64Pic = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                }
-                catch(Exception e){}
-                
-            }
-            
-        }catch(Exception e){e.printStackTrace();}
-        
         String NewUserName = request.getParameter("User");
         
         int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
@@ -146,6 +110,42 @@
             
             response.sendRedirect("LogInPage.jsp");
         }
+        
+        try{
+            
+            Class.forName(Driver);
+            Connection PicConn = DriverManager.getConnection(url, User, Password);
+            String PicQuery = "Select Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+            PreparedStatement PicPst = PicConn.prepareStatement(PicQuery);
+            PicPst.setInt(1, UserID);
+            
+            ResultSet PicRec = PicPst.executeQuery();
+            
+            while(PicRec.next()){
+                
+                try{    
+                    //put this in a try catch block for incase getProfilePicture returns nothing
+                    Blob profilepic = PicRec.getBlob("Profile_Pic"); 
+                    InputStream inputStream = profilepic.getBinaryStream();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = -1;
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+
+                    byte[] imageBytes = outputStream.toByteArray();
+
+                     Base64Pic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                }
+                catch(Exception e){}
+                
+            }
+            
+        }catch(Exception e){e.printStackTrace();}
         
     %>
     
@@ -313,7 +313,6 @@
                 </p>
             </div>
             
-            </div>
             <div style="float: right; width: 50px;">
                 <%
                     if(Base64Pic != ""){

@@ -22,6 +22,7 @@ public class DeleteNewService extends HttpServlet {
         
         String ServiceID = request.getParameter("ServiceID");
         String UserIndex = request.getParameter("UserIndex");
+        String NewUserName = request.getParameter("User");
         
         try{
             Class.forName(Driver);
@@ -33,7 +34,7 @@ public class DeleteNewService extends HttpServlet {
             
             RMVSVCPst.executeUpdate();
             
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex);
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
             JOptionPane.showMessageDialog(null, "Service Deleted Successfully!");
             
         }catch(Exception e){
