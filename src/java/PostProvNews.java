@@ -132,7 +132,8 @@ public class PostProvNews extends HttpServlet {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-            }   
+            }
+            
                 response.getWriter().print(ID);
                 //JOptionPane.showMessageDialog(null, ID);
         

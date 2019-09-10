@@ -42,6 +42,15 @@
         
     </head>
     <% 
+        
+        int LastProvID = 0;
+        String NextGroupAppend = "";
+        try{
+            LastProvID = Integer.parseInt(request.getParameter("LastProvID").toString());
+            NextGroupAppend = " and Provider_ID > " + LastProvID;
+        }catch(Exception e){}
+        
+        
         boolean isTypeChck = false;
         String SVCTypeAppend = " and ( ";
         
@@ -300,7 +309,7 @@
         try{
             Class.forName(Driver);
             Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'";
+            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'";// + NextGroupAppend;
             
             PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
             
@@ -308,6 +317,7 @@
             
             while(AddressRec.next()){
                 ProviderIDList.add(AddressRec.getInt("ProviderID"));
+                
             }
             
         }catch(Exception e){
@@ -389,7 +399,11 @@
                 //deosn't save it any where else  other than in the ResultSet object within which its contained
             
                 try{
-
+                    
+                    //if(providersList.size() >= 5){
+                    //LastProvID = providersList.get(4).getID();
+                    //break;
+                    //}
                     ProviderInfo eachrecord; //intantiating data model class for providers' records
                     while(rows.next()){
                         eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
@@ -1934,8 +1948,7 @@
                             </table></center>
                             
                 </div></center>
-                
-                            
+                 
             </div>
                             
         </div>

@@ -312,6 +312,10 @@
         <servlet-name>getLastProvNews</servlet-name>
         <servlet-class>getLastProvNews</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DltProvNews</servlet-name>
+        <servlet-class>DltProvNews</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -623,6 +627,10 @@
     <servlet-mapping>
         <servlet-name>getLastProvNews</servlet-name>
         <url-pattern>/getLastProvNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DltProvNews</servlet-name>
+        <url-pattern>/DltProvNews</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

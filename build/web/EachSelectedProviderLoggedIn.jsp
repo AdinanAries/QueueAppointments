@@ -81,6 +81,7 @@
         int ProviderID;
         
         int UserID = 0;
+        String NewsProvName = "";
         String Base64Pic = "";
         
         String NewUserName = request.getParameter("User");
@@ -206,8 +207,8 @@
             
             ProviderID = Integer.parseInt(request.getParameter("UserID"));
             String ID = request.getParameter("UserID"); //value passed from hidden text field from previous page for currently selected service provider
-            ProcedureClass.ProviderID = 0; //always do this first to make sure CustomerID is reset;
-            ProcedureClass.ProviderID = Integer.parseInt(request.getParameter("UserID"));
+            //ProcedureClass.ProviderID = 0; //always do this first to make sure CustomerID is reset;
+            //ProcedureClass.ProviderID = Integer.parseInt(request.getParameter("UserID"));
             
             getUserDetails details = new getUserDetails();
             ArrayList <ProviderInfo> providersList = new ArrayList<>();
@@ -222,6 +223,7 @@
                                                     rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
                     
                     providersList.add(eachrecord);
+                    NewsProvName = rows.getString("First_Name");
                 }
             }
             catch(Exception e){
@@ -379,48 +381,289 @@
             
             <div id="Extras">
             
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from <%=NewsProvName%></p></center>
             
-                <table  id="ExtrasTab" cellspacing="0">
+                <div style="max-height: 600px; overflow-y: auto;">
+                    
+                    <%
+                        int newsItems = 0;
+                        String newsQuery = "";
+                        
+                       // while(newsItems < 10){
+                            
+                            try{
+                                Class.forName(Driver);
+                                Connection CustConn = DriverManager.getConnection(url, User, Password);
+                                String CustQuery = "select * from ProviderCustomers.ProvNewsForClients where CustID = ? and ProvID = ? order by ID desc";
+                                PreparedStatement CustPst = CustConn.prepareStatement(CustQuery);
+                                CustPst.setInt(1, UserID);
+                                CustPst.setString(2, ID);
+                                ResultSet CustRec = CustPst.executeQuery();
+                                
+                                while(CustRec.next()){
+                                    
+                                    String MessageID = CustRec.getString("MessageID").trim();
+                                    
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection newsConn = DriverManager.getConnection(url, User, Password);
+                                        newsQuery = "Select * from QueueServiceProviders.MessageUpdates where MsgID = ?";
+                                        PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
+                                        newsPst.setString(1, MessageID);
+                                        ResultSet newsRec = newsPst.executeQuery();
+
+                                        while(newsRec.next()){
+
+                                            newsItems++;
+                                            
+                                            String ProvID = newsRec.getString("ProvID");
+                                            String ProvFirstName = "";
+                                            String ProvCompany = "";
+                                            String ProvAddress = "";
+                                            String ProvTel = "";
+                                            String ProvEmail = "";
+
+                                            String Msg = newsRec.getString("Msg").trim();
+                                            String MsgPhoto = "";
+
+                                            try{    
+                                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                                    InputStream inputStream = Pic.getBinaryStream();
+                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                    byte[] buffer = new byte[4096];
+                                                    int bytesRead = -1;
+
+                                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                        outputStream.write(buffer, 0, bytesRead);
+                                                    }
+
+                                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                }
+                                                catch(Exception e){
+
+                                                }
+
+
+                                                try{
+                                                    Class.forName(Driver);
+                                                    Connection ProvConn = DriverManager.getConnection(url, User, Password);
+                                                    String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                                                    PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
+                                                    ProvPst.setString(1, ProvID);
+
+                                                    ResultSet ProvRec = ProvPst.executeQuery();
+
+                                                    while(ProvRec.next()){
+                                                        ProvFirstName = ProvRec.getString("First_Name").trim();
+                                                        ProvCompany = ProvRec.getString("Company").trim();
+                                                        ProvTel = ProvRec.getString("Phone_Number").trim();
+                                                        ProvEmail = ProvRec.getString("Email").trim();
+                                                    }
+
+                                                }catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+
+                                                try{
+                                                    Class.forName(Driver);
+                                                    Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
+                                                    String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
+                                                    PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
+                                                    ProvLocPst.setString(1, ProvID);
+
+                                                    ResultSet ProvLocRec = ProvLocPst.executeQuery();
+
+                                                    while(ProvLocRec.next()){
+                                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
+                                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
+                                                        String NTown = ProvLocRec.getString("Town").trim();
+                                                        String NCity = ProvLocRec.getString("City").trim();
+                                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
+
+                                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
+                                                    }
+                                                }catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+                    %>
+
+                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
+                        <tbody>
+                            <tr style="background-color: #333333;">
+                                <td>
+                                    <div id="ProvMsgBxOne">
+                                        <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> - <%=ProvCompany%></p></p>
+
+                                        <%if(MsgPhoto.equals("")){%>
+                                        <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                        <%} else{ %>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                        <%}%>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td>
+                                    <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <%  
+                                        if(newsItems > 10)
+                                            break;
+                                    }
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    //}
+                
+                    if(newsItems < 10){
+               
+                        try{
+                            Class.forName(Driver);
+                            Connection newsConn = DriverManager.getConnection(url, User, Password);
+                            String newsQuery2 = "Select * from QueueServiceProviders.MessageUpdates where ProvID = ? and VisibleTo like 'Public%' order by MsgID desc";
+                            PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
+                            newsPst.setString(1,ID);
+                            ResultSet newsRec = newsPst.executeQuery();
+
+                            while(newsRec.next()){
+
+                                newsItems++;
+
+                                String ProvID = newsRec.getString("ProvID");
+                                String ProvFirstName = "";
+                                String ProvCompany = "";
+                                String ProvAddress = "";
+                                String ProvTel = "";
+                                String ProvEmail = "";
+
+                                String Msg = newsRec.getString("Msg").trim();
+                                String MsgPhoto = "";
+
+                                try{    
+                                        //put this in a try catch block for incase getProfilePicture returns nothing
+                                        Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                        InputStream inputStream = Pic.getBinaryStream();
+                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                        byte[] buffer = new byte[4096];
+                                        int bytesRead = -1;
+
+                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                            outputStream.write(buffer, 0, bytesRead);
+                                        }
+
+                                        byte[] imageBytes = outputStream.toByteArray();
+
+                                        MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                    }
+                                    catch(Exception e){
+
+                                    }
+
+
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection ProvConn = DriverManager.getConnection(url, User, Password);
+                                        String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                                        PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
+                                        ProvPst.setString(1, ProvID);
+
+                                        ResultSet ProvRec = ProvPst.executeQuery();
+
+                                        while(ProvRec.next()){
+                                            ProvFirstName = ProvRec.getString("First_Name").trim();
+                                            ProvCompany = ProvRec.getString("Company").trim();
+                                            ProvTel = ProvRec.getString("Phone_Number").trim();
+                                            ProvEmail = ProvRec.getString("Email").trim();
+                                        }
+
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
+                                        String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
+                                        PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
+                                        ProvLocPst.setString(1, ProvID);
+
+                                        ResultSet ProvLocRec = ProvLocPst.executeQuery();
+
+                                        while(ProvLocRec.next()){
+                                            String NHouseNumber = ProvLocRec.getString("House_Number").trim();
+                                            String NStreet = ProvLocRec.getString("Street_Name").trim();
+                                            String NTown = ProvLocRec.getString("Town").trim();
+                                            String NCity = ProvLocRec.getString("City").trim();
+                                            String NZipCode = ProvLocRec.getString("Zipcode").trim();
+
+                                            ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
+                                        }
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                %>
+                
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                     <tbody>
-                        <tr style="background-color: #eeeeee">
+                        <tr style="background-color: #333333;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <p style='margin-bottom: 4px;'><span style='color: #ff3333;'>Message From:</span> Queue (as template)</p>
-                                    <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
+                                    <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> - <%=ProvCompany%></p></p>
+                                    
+                                    <%if(MsgPhoto.equals("")){%>
+                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <%} else{ %>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <%}%>
+                                    
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>This is a template for news updates your providers post to keep you informed.
-                                   This part of the template contains the actual message text...</p>
+                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
-                                <p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    provider@emailhost.com</p>
-                                <p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    1234567890</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <P><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    Business Name</P>
-                                <p><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    123 Street/Ave, Town, City, 2323</p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
+                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            <%
+                            if(newsItems > 10)
+                                break;
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+            
+                }
+            %>
+               </div>
             </div>
         
             

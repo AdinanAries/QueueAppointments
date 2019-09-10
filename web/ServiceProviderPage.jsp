@@ -1628,7 +1628,7 @@
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add/Repost News</p>
+                                <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
                                 <textarea id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
                                 </textarea>
                                 
@@ -1737,6 +1737,49 @@
                                     </div>
                                 <p id="MessageP" style='border-top: 1px solid darkgrey;'><%=lastNewsMsg%></p>
                                 <input id="RecentMessageID" type="hidden" value="<%=LastNewsID%>" />
+                                <img style="float: right;" id="DltRecentNewsBtn" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/>
+                                
+                                <script>
+                                    $(document).ready(function(){
+                                        $("#DltRecentNewsBtn").click(function(event){
+                                            
+                                            var MessageID = document.getElementById("RecentMessageID").value;
+                                            
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "DltProvNews",
+                                                data: "MessageID="+MessageID,
+                                                success: function(result){
+                                                    
+                                                    alert(result);
+                                                    
+                                                    $.ajax({
+                                                        type:"POST",
+                                                        data:"MessageID="+result,
+                                                        url:"getLastProvNews",
+                                                        success: function(result){
+
+                                                            var MessageData = JSON.parse(result);
+
+                                                            var MessagePic = MessageData.Photo;
+                                                            var MessageID = MessageData.ID;
+                                                            var Message = MessageData.Message;
+
+                                                            if(MessagePic !== ""){
+                                                                document.getElementById("defaultPic").setAttribute("src", "data:image/jpg;base64,"+MessagePic);
+
+                                                            }
+                                                            document.getElementById("MessageP").innerHTML = Message;
+                                                            document.getElementById("RecentMessageID").value = MessageID;
+                                                            document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                                        }
+                                                        
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
                                 </div>
                             </td>
                         </tr>

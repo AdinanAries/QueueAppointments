@@ -48,6 +48,10 @@ public class getLastProvNews extends HttpServlet {
                 
                 ID = NewsRec.getString("MsgID").trim();
                 Message = NewsRec.getString("Msg").trim();
+                Message = Message.replace("\"", "");
+                Message = Message.replace("'", "");
+                Message = Message.replaceAll("\\s+", " ");
+                Message = Message.replaceAll("( )+", " ");
                 
                 try{    
                     //put this in a try catch block for incase getProfilePicture returns nothing
