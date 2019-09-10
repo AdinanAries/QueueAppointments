@@ -1564,7 +1564,7 @@
             
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>
-                        <tr style="background-color: #eeeeee">
+                        <tr style="background-color: #eeeeee"> fNameExtraFld mNameExtraFld lNameExtraFld EmailExtraFld
                             <td>
                                 <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>

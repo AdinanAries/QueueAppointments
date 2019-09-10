@@ -228,6 +228,9 @@
                 PhoneNumber = ThisProvider.getPhoneNumber();
                 Ratings = ThisProvider.getRatings();
                 Company = ThisProvider.getCompany();
+                ProvFirstName = provider.getString("First_Name").trim();
+                ProvMiddleName = provider.getString("Middle_Name").trim();
+                ProvLastName = provider.getString("Last_Name").trim();
                                         
                             
 
@@ -791,6 +794,29 @@
                         }catch(Exception e){
                             e.printStackTrace();
                         }
+                        
+                        String UserName = "";
+                        String Password = "";
+                                            
+                        try{
+                                                
+                            Class.forName(Driver);
+                            Connection UsrAcntConn = DriverManager.getConnection(Url, user, password);
+                            String UsrAcntString = "select * from QueueServiceProviders.UserAccount where Provider_ID = ?";
+                            PreparedStatement UsrAcntPst = UsrAcntConn.prepareStatement(UsrAcntString);
+                            UsrAcntPst.setInt(1, UserID);
+                                                
+                            ResultSet UsrAcntRec = UsrAcntPst.executeQuery();
+                                                
+                            while(UsrAcntRec.next()){
+                                                    
+                                UserName = UsrAcntRec.getString("UserName").trim();
+                            }
+                                                
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                                       
                     %>
                     
                     <%
@@ -2190,13 +2216,126 @@
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
-                                <p>First Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=ProvFirstName%>" /></p>
-                                <p>Middle Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=ProvMiddleName%>" /></p>
-                                <p>Last Name: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=ProvLastName%>" /></p>
-                                <p>Email: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p>First Name: <input id="ExtProvFNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=ProvFirstName%>" /></p>
+                                <p>Middle Name: <input id="ExtProvMNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=ProvMiddleName%>" /></p>
+                                <p>Last Name: <input id="ExtProvLNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=ProvLastName%>" /></p>
+                                <p>Email: <input id="ExtProvEmailFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input onclick="checkExtMiddlePhoneNumberEdit();"  onkeydown="checkExtMiddlePhoneNumberEdit();"id="ExtProvPhnNumberFld"
+                                        style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id="ExtUpdateProvPerBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
                             </td>
+                            <script>
+                                                        var ExtProvPhnNumberFld = document.getElementById("ExtProvPhnNumberFld");
+
+                                                        function numberExtFuncPhoneNumberEdit(){
+
+                                                            var number = parseInt((ExtProvPhnNumberFld.value.substring(ExtProvPhnNumberFld.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                ExtProvPhnNumberFld.value = ExtProvPhnNumberFld.value.substring(0, (ExtProvPhnNumberFld.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberExtFuncPhoneNumberEdit, 1);
+
+                                                        function checkExtMiddlePhoneNumberEdit(){
+
+                                                            for(var i = 0; i < ExtProvPhnNumberFld.value.length; i++){
+
+                                                                var middleString = ExtProvPhnNumberFld.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    ExtProvPhnNumberFld.value = ExtProvPhnNumberFld.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
+                                                    
+                                                    <input id="ExtProvIDforPerDetails" type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                                   
+                                                <script>
+                                                    $(document).ready(function(){
+                                                        $("#ExtUpdateProvPerBtn").click(function(event){
+                                                            
+                                                            var FirstName = document.getElementById("ExtProvFNameFld").value;
+                                                            var MiddleName = document.getElementById("ExtProvMNameFld").value;
+                                                            var LastName = document.getElementById("ExtProvLNameFld").value;
+                                                            var PerEmail = document.getElementById("ExtProvEmailFld").value;
+                                                            var PerTel = document.getElementById("ExtProvPhnNumberFld").value;
+                                                            var ProviderID = document.getElementById("ExtProvIDforPerDetails").value;
+                                                                
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "UpdateProvPerInfoController",
+                                                                data: "ProviderID="+ProviderID+"&FirstNameFld="+FirstName+"&MiddleNameFld="+MiddleName+"&LastNameFld="+LastName+"&EmailFld="+PerEmail+"&MobileNumberFld="+PerTel,
+                                                                success: function(result){
+                                                                    
+                                                                   $.ajax({
+                                                                        type: "POST",
+                                                                        url: "GetProvPerInfo",
+                                                                        data: "ProviderID="+ProviderID,
+                                                                        success: function(result){
+                                                                            //alert(result);
+                                                                            
+                                                                            var PerInfo = JSON.parse(result);
+                                                                            
+                                                                            document.getElementById("ExtProvFNameFld").value = PerInfo.FirstName;
+                                                                            document.getElementById("ExtProvMNameFld").value = PerInfo.MiddleName;
+                                                                            document.getElementById("ExtProvLNameFld").value = PerInfo.LastName;
+                                                                            document.getElementById("ExtProvEmailFld").value = PerInfo.Email;
+                                                                            document.getElementById("ExtProvPhnNumberFld").value = PerInfo.Mobile;
+                                                                            
+                                                                            var FullName = PerInfo.FirstName + " " + PerInfo.MiddleName + " " + PerInfo.LastName;
+                                                                            var Company = PerInfo.Company;
+                                                                            
+                                                                            document.getElementById("FullNameDetail").innerHTML = FullName;
+                                                                            document.getElementById("EmailDetail").innerHTML = PerInfo.Email;
+                                                                            document.getElementById("PhoneDetail").innerHTML = PerInfo.Mobile;
+                                                                            document.getElementById("LoginNameDisplay").innerHTML = "Logged in as " +PerInfo.FirstName+ " - " + Company;
+                                                                            
+                                                                        }
+                                                                    });
+                                                                    
+                                                                }
+                                                                
+
+                                                            });
+                                                           
+                                                        });
+                                                    });
+                                                    
+                                                </script>
+                                                
+                                                <script>
+                                                    
+                                                    var ExtProvFNameFld = document.getElementById("ExtProvFNameFld");
+                                                    var ExtProvMNameFld = document.getElementById("ExtProvMNameFld");
+                                                    var ExtProvLNameFld = document.getElementById("ExtProvLNameFld");
+                                                    var ExtProvPhnNumberFld2 = document.getElementById("ExtProvPhnNumberFld");
+                                                    var ExtProvEmailFld = document.getElementById("ExtProvEmailFld");
+                                                    var ExtUpdateProvPerBtn = document.getElementById("ExtUpdateProvPerBtn");
+                                                    
+                                                    function CheckExtUpdateProvPerBtn(){
+                                                        
+                                                        if(ExtProvFNameFld.value === "" || ExtProvMNameFld.value === "" || ExtProvLNameFld.value === ""
+                                                                || ExtProvPhnNumberFld2.value === "" || ExtProvEmailFld.value === ""){
+                                                            ExtUpdateProvPerBtn.style.backgroundColor = "darkgrey";
+                                                            ExtUpdateProvPerBtn.disabled = true;
+                                                        }else{
+                                                            ExtUpdateProvPerBtn.style.backgroundColor = "pink";
+                                                            ExtUpdateProvPerBtn.disabled = false;
+                                                        }
+                                                            
+                                                        
+                                                    }
+                                                    setInterval(CheckExtUpdateProvPerBtn,1);
+                                                    
+                                                </script>
                         </tr>
                         <tr>
                             <td>
@@ -2226,76 +2365,122 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Update Your Login</p>
-                                <P>User Name: <input id="ExtraUpdateLoginNameFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value=''/></p>
-                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
-                                <P><input id="ExtraNewPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
-                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
-                                <center><input id="ExtraLoginFormBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
-                                <p id="ExtraWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
-                                <p id='ExtrachangeUserAccountStatus' style='text-align: center; color: white;'></p>
+                                <P>User Name: <input id="ExtUsrNamefld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=UserName%>'/></p>
+                                <P><input id="ExtcompareOldPassfld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P><input id="ExtnewPassfld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P><input id="ExtcompareNewPassfld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtupdateUsrAcntBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p id="ExtWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
+                                <p id='ExtUpdatePassStatus' style='text-align: center; color: white;'></p>
                             </td>
-                            <input type='hidden' id='ExtraThisPass' value='' />
-                            <input type="hidden" id="ExtraUserIDforLoginUpdate" value="<%=UserID%>" />
-                            <input type="hidden" id="ExtraUserIndexforLoginUpdate" value="<%=UserIndex%>" />
+                            <input type='hidden' id='ExtoldPassfld' value='' />
+                            <input type="hidden" id="ExtProviderIDforUpdateLogin" value="<%=UserID%>" />
+                            <input type="hidden" id="ExtUserIndexforUpdateLogin" value="<%=UserIndex%>" />
                             <script>
-                                $(document).ready(function(){
-                                    $("#ExtraLoginFormBtn").click(function(event){
+                                                        $(document).ready(function(){
+                                                            $("#ExtupdateUsrAcntBtn").click(function(event){
                                                                 
-                                        var CustomerID = document.getElementById("ExtraUserIDforLoginUpdate").value;
-                                        var UserIndex = document.getElementById("ExtraUserIndexforLoginUpdate").value;
-                                        var UserName = document.getElementById("ExtraUpdateLoginNameFld").value;
-                                        var NewPassword = document.getElementById("ExtraNewPasswordFld").value;
-                                        var oldPassword = document.getElementById("ExtraCurrentPasswordFld").value;
+                                                                var ProviderID = document.getElementById("ExtProviderIDforUpdateLogin").value;
+                                                                var UserIndex = document.getElementById("ExtUserIndexforUpdateLogin").value;
+                                                                var UserName = document.getElementById("ExtUsrNamefld").value;
+                                                                var NewPassword = document.getElementById("ExtnewPassfld").value;
+                                                                var oldPassword = document.getElementById("ExtcompareOldPassfld").value;
                                                                 
-                                        $.ajax({
-                                            method: "POST",
-                                            url: "updateLoginController",
-                                            data: "CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&userName="+UserName+"&newPassword="+NewPassword+"&currentPassword="+oldPassword,
-                                            success: function(result){
+                                                                /*alert(ProviderID);
+                                                                alert(UserName);
+                                                                alert(NewPassword);
+                                                                alert(oldPassword);
+                                                                alert(UserIndex);*/
+                                                                
+                                                                $.ajax({
+                                                                    method: "POST",
+                                                                    url: "updateProvLoginInfo",
+                                                                    data: "ProviderID="+ProviderID+"&UserIndex="+UserIndex+"&UserNameFld="+UserName+"&NewPasswordFld="+NewPassword+"&OldPasswordFld="+oldPassword,
+                                                                    success: function(result){
                                                                         
-                                                //alert(result);
+                                                                        //alert(result);
                                                                         
-                                                if(result === "fail"){
+                                                                        if(result === "fail"){
                                                                             
-                                                    document.getElementById("ExtraWrongPassStatus").style.display = "block";
-                                                    document.getElementById("ExtraCurrentPasswordFld").value = "";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.backgroundColor = "red";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.color = "white";
-
-                                                    //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
-                                                    //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
-                                                    //document.getElementById("LoginFormBtn").disabled = true;
-                                                    //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
-                                                }
-                                                if(result === "success"){
-                                                    document.getElementById("ExtraNewPasswordFld").value = "";
-                                                    document.getElementById("ExtraCurrentPasswordFld").value = "";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.backgroundColor = "#eeeeee";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.color = "cadetblue";
-                                                    document.getElementById("ExtraConfirmPasswordFld").value = "";
-                                                    document.getElementById("ExtraWrongPassStatus").style.display = "none";
+                                                                            document.getElementById("ExtWrongPassStatus").style.display = "block";
+                                                                            document.getElementById("ExtcompareOldPassfld").value = "";
+                                                                            document.getElementById("ExtcompareOldPassfld").style.backgroundColor = "red";
                                                                             
-                                                    //getUserAccountNameController
-                                                    $.ajax({
-                                                        method: "POST",
-                                                        url: "getUserAccountNameController",
-                                                        data: "CustomerID="+CustomerID,
+                                                                            //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
+                                                                            //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
+                                                                            //document.getElementById("LoginFormBtn").disabled = true;
+                                                                            //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
+                                                                        }
+                                                                        if(result === "success"){
+                                                                            document.getElementById("ExtnewPassfld").value = "";
+                                                                            document.getElementById("ExtcompareOldPassfld").value = "";
+                                                                            document.getElementById("ExtcompareOldPassfld").style.backgroundColor = "#eeeeee";
+                                                                            document.getElementById("ExtcompareNewPassfld").value = "";
+                                                                            document.getElementById("ExtWrongPassStatus").style.display = "none";
+                                                                            
+                                                                            //getUserAccountNameController
+                                                                            $.ajax({
+                                                                                method: "POST",
+                                                                                url: "getProvUserAccountName",
+                                                                                data: "ProviderID="+ProviderID,
                                                                                 
-                                                        success: function(result){
+                                                                                success: function(result){
 
-                                                            document.getElementById("ExtraUpdateLoginNameFld").value = result;
+                                                                                    document.getElementById("ExtUsrNamefld").value = result;
 
 
-                                                        }
+                                                                                }
 
-                                                    });
-                                                }
-                                            }
+                                                                            });
+                                                                        }
+                                                                    }
                                                                     
-                                        });
+                                                                });
                                                                 
-                                    });
-                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                               
+                                    <script>
+                                        
+                                        var ExtUsrNamefld = document.getElementById("ExtUsrNamefld");
+                                        var ExtoldPassfld = document.getElementById("ExtoldPassfld");
+                                        var ExtcompareOldPassfld = document.getElementById("ExtcompareOldPassfld");
+                                        var ExtnewPassfld = document.getElementById("ExtnewPassfld");
+                                        var ExtcompareNewPassfld = document.getElementById("ExtcompareNewPassfld");
+                                        var ExtupdateUsrAcntBtn = document.getElementById("ExtupdateUsrAcntBtn");
+                                        var ExtUpdatePassStatus = document.getElementById("ExtUpdatePassStatus");
+                                        
+                                        function CheckExtUpdateUsrAcntBtn(){
+                                            
+                                            if(ExtUsrNamefld.value === "" || ExtcompareOldPassfld.value === "" || ExtnewPassfld.value === "" || ExtcompareNewPassfld.value === ""){
+                                                ExtUpdatePassStatus.style.backgroundColor = "green";
+                                                ExtUpdatePassStatus.innerHTML = "Uncompleted Form";
+                                                ExtupdateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                ExtupdateUsrAcntBtn.disabled = true;
+                                            }else if(ExtnewPassfld.value.length < 8){ //.length is a property not a function (like .length();)
+                                                   ExtUpdatePassStatus.style.backgroundColor = "red";
+                                                   ExtUpdatePassStatus.innerHTML = "Password Too Short";
+                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                   ExtupdateUsrAcntBtn.disabled = true;
+                                               }
+                                               else if(ExtnewPassfld.value !== ExtcompareNewPassfld.value){
+                                                   ExtUpdatePassStatus.style.backgroundColor = "red";
+                                                   ExtUpdatePassStatus.innerHTML = "New Passwords Don't Match";
+                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                   ExtupdateUsrAcntBtn.disabled = true;
+                                               }else{
+
+                                                   ExtUpdatePassStatus.style.backgroundColor = "green";
+                                                   ExtUpdatePassStatus.innerHTML = "OK";
+                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "pink";
+                                                   ExtupdateUsrAcntBtn.disabled = false;
+                                               }
+                                               
+                                            
+                                        }
+                                        
+                                        setInterval(CheckExtUpdateUsrAcntBtn, 1);
                             </script>
                                                     
                         </tr>
@@ -4718,11 +4903,26 @@
                         
                         <center><div id="MakeReservationForm" style="width: 100%; max-width: 500px;">
                                 
-                                <script>document.getElementById("MakeReservationForm").style.display = "block"</script>
+                                <script>document.getElementById("MakeReservationForm").style.display = "block;"</script>
                                     
                                 <form style="" name="makeReservationForm">
-                                    <p style="text-align: center; color: #000099; margin-top: 5px; margin-bottom: 10px;">Add reservation details below</p>
-                                    <P style="color: white;">Choose Client Below</p>
+                                    <p style="text-align: center; color: #000099; margin-top: 5px; margin-bottom: 10px; font-weight: bolder;">Add reservation details below</p>
+                                    
+                                    <p>Date: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/></p>
+                                    <p>Time: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/></p>
+                                    <p>Service: <select id="reserveService" name="formsOrderedServices">
+                                            <%
+                                                for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
+                                                    
+                                                String ServiceName = Services.getService(svc).trim();
+                                                String ServicePrice = Services.getPrice(svc);
+                                                String ServiceDetails = "$" + ServicePrice + "-" + ServiceName; 
+                                            %>
+                                            <option><%=ServiceDetails%></option>
+                                            <%}%>
+                                        </select></p>
+                                    
+                                    <p style="color: white;">Choose client who to make reservation for</p>
                                     
                                     <div class="scrolldiv" style="max-height: 200px; width:310px; overflow-y: auto; border-bottom: 1px solid darkblue; margin-bottom: 10px; border-top: 1px solid darkblue;">
                                         
@@ -4837,21 +5037,7 @@
                                     <%}%>
                                     </ul>
                                     </div>
-                                            
-                                    <p>Service: <select id="reserveService" name="formsOrderedServices">
-                                            <%
-                                                for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
-                                                    
-                                                String ServiceName = Services.getService(svc).trim();
-                                                String ServicePrice = Services.getPrice(svc);
-                                                String ServiceDetails = "$" + ServicePrice + "-" + ServiceName; 
-                                            %>
-                                            <option><%=ServiceDetails%></option>
-                                            <%}%>
-                                        </select></p>
-                                    
-                                    <p>Date: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/></p>
-                                    <p>Time: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/></p>
+                                      
                                     <br/>
                                     <input id="reservePID" name="ProviderID" type="hidden" value="<%=UserID%>"/>
                                     <input id="MkReservationBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" />
@@ -7234,35 +7420,10 @@
                                         
                                         <p style="color: white; margin: 5px;">Your Login Information</p>
                                         
-                                        <%
-                                            String UserName = "";
-                                            String Password = "";
-                                            
-                                            try{
-                                                
-                                                Class.forName(Driver);
-                                                Connection UsrAcntConn = DriverManager.getConnection(Url, user, password);
-                                                String UsrAcntString = "select * from QueueServiceProviders.UserAccount where Provider_ID = ?";
-                                                PreparedStatement UsrAcntPst = UsrAcntConn.prepareStatement(UsrAcntString);
-                                                UsrAcntPst.setInt(1, UserID);
-                                                
-                                                ResultSet UsrAcntRec = UsrAcntPst.executeQuery();
-                                                
-                                                while(UsrAcntRec.next()){
-                                                    
-                                                    UserName = UsrAcntRec.getString("UserName").trim();
-                                                }
-                                                
-                                            }catch(Exception e){
-                                                e.printStackTrace();
-                                            }
-                                            
-                                        %>
-                                        
                                         <form name="UpdateLoginInfo" >
                                             
                                             <center><table>
-                                                        <tbody>
+                                                        <tbody> 
                                                             <tr>
                                                                 <td style="text-align: left;">Username: </td>
                                                                 <td><input id="UsrNamefld" style="background-color: #6699ff;" type="text" name="UserNameFld" value="<%=UserName%>" /></td>
