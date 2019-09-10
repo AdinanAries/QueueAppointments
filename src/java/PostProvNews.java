@@ -97,7 +97,42 @@ public class PostProvNews extends HttpServlet {
                     }catch(Exception e){
                         e.printStackTrace();
                     }
+                    
+            if(Visibility.equals("Customer")){
                 
+                try{
+                
+                    Class.forName(Driver);
+                    Connection ClientConn = DriverManager.getConnection(url, user, password);
+                    String ClientQuery = "select * from QueueServiceProviders.ClientsList where ProvID = ?";
+                    PreparedStatement ClientPst = ClientConn.prepareStatement(ClientQuery);
+                    ClientPst.setString(1, ProviderID);
+                    
+                    ResultSet ClientsRec = ClientPst.executeQuery();
+                    
+                    while(ClientsRec.next()){
+                        
+                        String CustID = ClientsRec.getString("CustomerID").trim();
+                        
+                        try{
+                            Class.forName(Driver);
+                            Connection CustConn = DriverManager.getConnection(url, user, password);
+                            String CustString = "insert into ProviderCustomers.ProvNewsForClients (MessageID, ProvID, CustID) values (?,?,?)";
+                            PreparedStatement CustPst = CustConn.prepareStatement(CustString);
+                            CustPst.setString(1, ID);
+                            CustPst.setString(2, ProviderID);
+                            CustPst.setString(3, CustID);
+                            
+                            CustPst.executeUpdate();
+                            
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }   
                 response.getWriter().print(ID);
                 //JOptionPane.showMessageDialog(null, ID);
         

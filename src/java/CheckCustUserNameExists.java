@@ -44,6 +44,26 @@ public class CheckCustUserNameExists extends HttpServlet {
             e.printStackTrace();
         }
         
+        try{
+            Class.forName(Driver);
+            Connection nameConn = DriverManager.getConnection(url, user, password);
+            String nameQuery = "Select * from QueueServiceProviders.UserAccount where UserName = ?";
+            PreparedStatement namePst = nameConn.prepareStatement(nameQuery);
+            namePst.setString(1, UserName);
+            
+            ResultSet nameRec = namePst.executeQuery();
+            
+            while(nameRec.next()){
+                String Name = nameRec.getString("UserName").trim();
+                
+                if(UserName.equals(Name))
+                    NameExists = "true";
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
         response.getWriter().print(NameExists);
         
     }

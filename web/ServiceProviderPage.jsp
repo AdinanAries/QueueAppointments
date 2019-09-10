@@ -72,6 +72,10 @@
         
         int notiCounter = 15;
         
+        String NewsPicSrc = "view-wallpaper-7.jpg";
+        String lastNewsMsg = "";
+        String LastNewsID = "";
+        
         int d = 0;
         
         Date ThisDate = new Date();//default date constructor returns current date 
@@ -227,27 +231,24 @@
                                         
                             
 
-                            try{    
-                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                Blob profilepic = ThisProvider.getProfilePicture(); 
-                                InputStream inputStream = profilepic.getBinaryStream();
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[4096];
-                                int bytesRead = -1;
+                try{    
+                    //put this in a try catch block for incase getProfilePicture returns nothing
+                    Blob profilepic = ThisProvider.getProfilePicture(); 
+                    InputStream inputStream = profilepic.getBinaryStream();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = -1;
 
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
-                                }
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
 
-                                byte[] imageBytes = outputStream.toByteArray();
+                    byte[] imageBytes = outputStream.toByteArray();
 
-                                base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
 
-                            }
-                            catch(Exception e){
-
-                            }
+                }catch(Exception e){}
                 ServiceType = ThisProvider.getServiceType();
                 FirstNameAndCompany = ThisProvider.getNameAndCompany();
             }
@@ -1423,6 +1424,45 @@
         }catch(Exception e){
             e.printStackTrace();
         }
+        
+        try{
+            Class.forName(Driver);
+            Connection lastNewsConn = DriverManager.getConnection(Url, user, password);
+            String lastNewsString = "Select * from QueueServiceProviders.MessageUpdates where ProvID = ? order by MsgID desc";
+            PreparedStatement lastNewsPst = lastNewsConn.prepareStatement(lastNewsString);
+            lastNewsPst.setInt(1, UserID);
+            
+            ResultSet lastNewsRec = lastNewsPst.executeQuery();
+            while(lastNewsRec.next()){
+                LastNewsID = lastNewsRec.getString("MsgID").trim();
+                lastNewsMsg = lastNewsRec.getString("Msg").trim();
+                
+                try{    
+                    //put this in a try catch block for incase getProfilePicture returns nothing
+                    Blob lastNPic = lastNewsRec.getBlob("MsgPhoto"); 
+                    InputStream inputStream = lastNPic.getBinaryStream();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = -1;
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+
+                    byte[] imageBytes = outputStream.toByteArray();
+
+                    String Pic = Base64.getEncoder().encodeToString(imageBytes);
+                    
+                    NewsPicSrc = "data:image/jpg;base64,"+Pic;
+
+                }catch(Exception e){}
+                
+                break;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     %>
     <body>
         
@@ -1608,7 +1648,7 @@
                                 
                                 <p>Make news visible to: </p>
                                     <input id="VPublicRd" type="radio" name="NewsVisibility" value="Public" checked="checked" /><label for="VPublicRd">Public</label>
-                                    <input id="VCustomersRd" type="radio" name="NewsVisibility" value="Customers" /><label  for="VCustomersRd">Only customers</label>
+                                    <input id="VCustomersRd" type="radio" name="NewsVisibility" value="Customer" /><label  for="VCustomersRd">Only customers</label>
                                 
                                 <center><input id="SaveNewsBtn" style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
                             </td>
@@ -1673,10 +1713,11 @@
                                                     
                                                     if(MessagePic !== ""){
                                                         document.getElementById("defaultPic").setAttribute("src", "data:image/jpg;base64,"+MessagePic);
-                                                        document.getElementById("MessageP").innerHTML = Message;
-                                                        document.getElementById("RecentMessageID").value = MessageID;
+                                                       
                                                     }
-                                                    
+                                                    document.getElementById("MessageP").innerHTML = Message;
+                                                    document.getElementById("RecentMessageID").value = MessageID;
+                                                    document.getElementById("NewsMessageFld").value = "What should your clients know about?";
                                                 }
                                             });
                                         }
@@ -1689,13 +1730,13 @@
                         
                         <tr style="">
                             <td>
-                                <div style='height: 240px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
+                                <div style='height: 360px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
                                     <div style="background-color: #333333; padding: 4px;">
                                         <p style='color: white; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
-                                        <center><img id="defaultPic" src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                        <center><img id="defaultPic" src="<%=NewsPicSrc%>" width="98%" alt="view-wallpaper-7"/></center>
                                     </div>
-                                <p id="MessageP" style='border-top: 1px solid darkgrey;'></p>
-                                <input id="RecentMessageID" type="hidden" value="" />
+                                <p id="MessageP" style='border-top: 1px solid darkgrey;'><%=lastNewsMsg%></p>
+                                <input id="RecentMessageID" type="hidden" value="<%=LastNewsID%>" />
                                 </div>
                             </td>
                         </tr>
