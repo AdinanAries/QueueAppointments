@@ -1092,7 +1092,7 @@
 
                                                              $.ajax({  
                                                              type: "POST",  
-                                                             url: "SendProvCustFeedBackController",  
+                                                             url: "SendProvFeedbackMsg",  
                                                              data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
                                                              success: function(result){  
                                                                document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
@@ -1100,11 +1100,11 @@
                                                                document.getElementById("ExtLasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
 
                                                                $.ajax({  
-                                                             type: "POST",  
-                                                             url: "getCustFeedbackDate",  
-                                                             data: "CustomerID="+CustomerID,  
-                                                             success: function(result){  
-                                                                 //alert(result);
+                                                                    type: "POST",  
+                                                                    url: "getProvFeedbackDate",  
+                                                                    data: "CustomerID="+CustomerID,  
+                                                                    success: function(result){  
+                                                                        //alert(result);
                                                                  document.getElementById("ExtFeedBackDate").innerHTML = result +" ";
                                                              }                
                                                            });

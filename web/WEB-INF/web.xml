@@ -324,6 +324,10 @@
         <servlet-name>SetProvNotificationAsSeen</servlet-name>
         <servlet-class>SetProvNotificationAsSeen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getProvFeedbackDate</servlet-name>
+        <servlet-class>getProvFeedbackDate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -647,6 +651,10 @@
     <servlet-mapping>
         <servlet-name>SetProvNotificationAsSeen</servlet-name>
         <url-pattern>/SetProvNotificationAsSeen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getProvFeedbackDate</servlet-name>
+        <url-pattern>/getProvFeedbackDate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
