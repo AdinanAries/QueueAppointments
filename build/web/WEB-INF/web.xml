@@ -316,6 +316,10 @@
         <servlet-name>DltProvNews</servlet-name>
         <servlet-class>DltProvNews</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendProvFeedbackMsg</servlet-name>
+        <servlet-class>SendProvFeedbackMsg</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -631,6 +635,10 @@
     <servlet-mapping>
         <servlet-name>DltProvNews</servlet-name>
         <url-pattern>/DltProvNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendProvFeedbackMsg</servlet-name>
+        <url-pattern>/SendProvFeedbackMsg</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

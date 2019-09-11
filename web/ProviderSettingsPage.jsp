@@ -4,6 +4,9 @@
     Author     : aries
 --%>
 
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="java.util.Base64"%>
 <%@page import="java.sql.Blob"%>
 <%@page import="com.arieslab.queue.queue_model.ProviderCustomerData"%>
 <%@page import="com.arieslab.queue.queue_model.BookedAppointmentList"%>
@@ -103,6 +106,7 @@
         String Email = "";
         String PhoneNumber = "";
         String thisUserName = "";
+        String UserName = "";
         
         String AppointmentDateValue = "";
         
@@ -203,6 +207,64 @@
         catch(Exception e){
             e.printStackTrace();
         }
+        
+        try{
+            Class.forName(Driver);
+            Connection UsrAccntConn = DriverManager.getConnection(url, User, Password);
+            String UsrAccntString = "select * from QueueServiceProviders.UserAccount where Provider_ID = ?";
+            PreparedStatement UsrAccntPst = UsrAccntConn.prepareStatement(UsrAccntString);
+            UsrAccntPst.setInt(1, UserID);
+            ResultSet UsrAccntRec = UsrAccntPst.executeQuery();
+            
+            while(UsrAccntRec.next()){
+                UserName = UsrAccntRec.getString("UserName").trim();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        String LastNewsID = "";
+        String lastNewsMsg = "";
+        String NewsPicSrc = "view-wallpaper-7.jpg";
+        
+        try{
+            Class.forName(Driver);
+            Connection lastNewsConn = DriverManager.getConnection(url, User, Password);
+            String lastNewsString = "Select * from QueueServiceProviders.MessageUpdates where ProvID = ? order by MsgID desc";
+            PreparedStatement lastNewsPst = lastNewsConn.prepareStatement(lastNewsString);
+            lastNewsPst.setInt(1, UserID);
+            
+            ResultSet lastNewsRec = lastNewsPst.executeQuery();
+            while(lastNewsRec.next()){
+                LastNewsID = lastNewsRec.getString("MsgID").trim();
+                lastNewsMsg = lastNewsRec.getString("Msg").trim();
+                
+                try{    
+                    //put this in a try catch block for incase getProfilePicture returns nothing
+                    Blob lastNPic = lastNewsRec.getBlob("MsgPhoto"); 
+                    InputStream inputStream = lastNPic.getBinaryStream();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = -1;
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+
+                    byte[] imageBytes = outputStream.toByteArray();
+
+                    String Pic = Base64.getEncoder().encodeToString(imageBytes);
+                    
+                    NewsPicSrc = "data:image/jpg;base64,"+Pic;
+
+                }catch(Exception e){}
+                
+                break;
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     %>
     
     <body style="background-color: #ccccff;">
@@ -231,14 +293,17 @@
     <center><div id="PhoneExtras">
             
             <div id='PhoneNews' style='width: 100%;' >
+             
+            <form method="POST" enctype="multipart/form-data">
+                
             <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 20px;">Update your clients on whats new</p>
                 
                 <table id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add/Repost News</p>
-                                <textarea name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
+                                <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
+                                <textarea id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
                                 </textarea>
                                 
                             </td>
@@ -248,38 +313,156 @@
                                 <p style='margin-bottom: 4px;'>Add photo to this message</p>
                                 <div id="MsgPhotoDisplay"></div>
                                 
-                                <input style="width: 95%;" type="file" name="MsgformPhoto" />
+                                <input id="NewsPhotoFld" style="width: 95%;" type="file" name="MsgformPhoto" />
                                 
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p>When to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsDateFld" value="Today" size="21"/></p>
+                                
+                                <p>Make news visible to: </p>
+                                    <input id="VPublicRd" type="radio" name="NewsVisibility" value="Public" checked="checked" /><label for="VPublicRd">Public</label>
+                                    <input id="VCustomersRd" type="radio" name="NewsVisibility" value="Customer" /><label  for="VCustomersRd">Only customers</label>
+                                
+                                <center><input id="SaveNewsBtn" style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <p>Time to update: <input style="border: black 1px solid; background-color: white;" type="text" name="SendNewsTimeFld" value="Now" size="22" /></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <center><input style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
-                            </td>
-                        </tr>
+                        <%
+                            Date UpdDate = new Date();
+                            String UpdSDate = UpdDate.toString();
+                            SimpleDateFormat NotiDformat = new SimpleDateFormat("yyyy-MM-dd");
+                            String UpdMDate = NotiDformat.format(UpdDate);
+                            String UpdTime = UpdSDate.substring(11,16);
+                        %>
+                        <script>
+                            $(document).ready(function(){
+                                $("#SaveNewsBtn").click(function(event){
+                                    
+                                    var ProviderID = "<%=UserID%>";
+                                    var UpdDate = "<%=UpdMDate%>";
+                                    var UpdTime = "<%=UpdTime%>";
+                                    
+                                    var Message = document.getElementById("NewsMessageFld").value;
+                                    
+                                    var Visibility = "";
+                                    if(document.getElementById("VCustomersRd").checked === true){
+                                        Visibility = "Customer";
+                                    }else if(document.getElementById("VPublicRd").checked === true){
+                                        Visibility = "Public";
+                                    }else{
+                                        Visibility = "Public";
+                                    }
+                                    
+                                    var fileInput = document.getElementById("NewsPhotoFld");
+                                    
+                                    var file = fileInput.files[0];
+                                    
+                                    var formData = new FormData();
+                                    formData.append('Photo', file);
+                                    formData.append('Message', Message);
+                                    formData.append('NewsVisibility',Visibility);
+                                    formData.append('Date',UpdDate);
+                                    formData.append('Time',UpdTime);
+                                    formData.append('ProviderID',ProviderID);
+                                    
+                                    $.ajax({
+                                        data: formData,
+                                        url: 'PostProvNews',
+                                        type: 'POST',
+                                        processData: false,
+                                        contentType: false,
+                                        success:function (data)
+                                        {
+                                            $.ajax({
+                                                type:"POST",
+                                                data:"MessageID="+data,
+                                                url:"getLastProvNews",
+                                                success: function(result){
+                                                    
+                                                    var MessageData = JSON.parse(result);
+                                                    
+                                                    var MessagePic = MessageData.Photo;
+                                                    var MessageID = MessageData.ID;
+                                                    var Message = MessageData.Message;
+                                                    
+                                                    if(MessagePic !== ""){
+                                                        document.getElementById("defaultPic").setAttribute("src", "data:image/jpg;base64,"+MessagePic);
+                                                       
+                                                    }
+                                                    document.getElementById("MessageP").innerHTML = Message;
+                                                    document.getElementById("RecentMessageID").value = MessageID;
+                                                    document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                                }
+                                            });
+                                        }
+                                    });
+                                    
+                                    
+                                });
+                            });
+                        </script>
+                        
                         <tr style="">
                             <td>
-                                <div style='height: 290px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
-                                <p style='color: red; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
-                                <center><img src="view-wallpaper-7.jpg" width="200" height="150" alt="view-wallpaper-7"/></center>
-                                <p style='border-top: 1px solid darkgrey;'>Message content to be displayed in this section</p>
+                                <div style='height: 700px; margin-bottom: 10px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
+                                    <div style="background-color: #333333; padding: 4px;">
+                                        <p style='color: white; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
+                                        <center><img id="defaultPic" src="<%=NewsPicSrc%>" width="98%" alt="view-wallpaper-7"/></center>
+                                    </div>
+                                <p id="MessageP" style='border-top: 1px solid darkgrey;'><%=lastNewsMsg%></p>
+                                <input id="RecentMessageID" type="hidden" value="<%=LastNewsID%>" />
+                                <img style="float: right;" id="DltRecentNewsBtn" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/>
+                                
+                                <script>
+                                    $(document).ready(function(){
+                                        $("#DltRecentNewsBtn").click(function(event){
+                                            
+                                            var MessageID = document.getElementById("RecentMessageID").value;
+                                            
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "DltProvNews",
+                                                data: "MessageID="+MessageID,
+                                                success: function(result){
+                                                    
+                                                    alert(result);
+                                                    
+                                                    $.ajax({
+                                                        type:"POST",
+                                                        data:"MessageID="+result,
+                                                        url:"getLastProvNews",
+                                                        success: function(result){
+
+                                                            var MessageData = JSON.parse(result);
+
+                                                            var MessagePic = MessageData.Photo;
+                                                            var MessageID = MessageData.ID;
+                                                            var Message = MessageData.Message;
+
+                                                            if(MessagePic !== ""){
+                                                                document.getElementById("defaultPic").setAttribute("src", "data:image/jpg;base64,"+MessagePic);
+
+                                                            }
+                                                            document.getElementById("MessageP").innerHTML = Message;
+                                                            document.getElementById("RecentMessageID").value = MessageID;
+                                                            document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                                        }
+                                                        
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </form>
             </div>
             
+                                
             <div id='PhoneCalender' style='display: none; margin-top: 5px; width: 100%;'>
                 <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
             
@@ -325,15 +508,15 @@
                                             
                                             int AptID = AppointmentListExtra.get(aptNum).getAppointmentID();
                                             String ProvName = AppointmentListExtra.get(aptNum).getProviderName();
-                                            String Reason = AppointmentListExtra.get(aptNum).getReason();
-                                            //if(ProvComp.length() > 13)
-                                                //ProvComp = ProvComp.substring(0, 12) + "...";
+                                            String ApptReason = AppointmentListExtra.get(aptNum).getReason().trim();
+                                            //if(ApptReason.length() > 13)
+                                                //ApptReason = ApptReason.substring(0, 12) + "...";
                                             String AptTime = AppointmentListExtra.get(aptNum).getTimeOfAppointment();
                                             if(AptTime.length() > 5)
                                                 AptTime = AptTime.substring(0,5);
                                     %>
                                     
-                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span>: <span style="color: darkblue; font-weight: bolder;"><%=Reason%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
+                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span>: <span style="color: darkblue; font-weight: bolder;"><%=ApptReason%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
                                     
                                     <%
                                             count++;
@@ -348,14 +531,14 @@
                                             $("#CalDatePicker").change(function(event){
                                                 
                                                 var date = document.getElementById("CalDatePicker").value;
-                                                var CustomerID = document.getElementById("CalApptUserID").value;
-                                                //alert(CustomerID);
+                                                var ProviderID = document.getElementById("CalApptUserID").value;
+                                                //alert(ProviderID);
                                                 //alert(date);
                                                 
                                                 $.ajax({
                                                     type: "POST",
-                                                    url: "GetApptForExtra",
-                                                    data: "Date="+date+"&CustomerID="+CustomerID,
+                                                    url: "GetProvApptForExtra",
+                                                    data: "Date="+date+"&ProviderID="+ProviderID,
                                                     success: function(result){
                                                         
                                                         //alert(result);
@@ -368,14 +551,14 @@
                                                             
                                                             var number = parseInt(i, 10) + 1;
                                                             
-                                                            var name = ApptData.Data[i].ProvName;
-                                                            var comp = ApptData.Data[i].ProvComp;
-                                                            if(comp.length > 13)
-                                                                comp = comp.substring(0,12) + "...";
+                                                            var name = ApptData.Data[i].CustName;
+                                                            var service = ApptData.Data[i].Service;
+                                                            //if(comp.length > 13)
+                                                                //comp = comp.substring(0,12) + "...";
                                                             
                                                             var time = ApptData.Data[i].ApptTime;
                                                             
-                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: darkblue; font-weight: bolder;">'+comp+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
+                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span>: <span style="color: darkblue; font-weight: bolder;">'+service+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
                                                             
                                                         }
                                                         
@@ -387,8 +570,8 @@
                                                 
                                                 $.ajax({
                                                     type: "POST",
-                                                    url: "GetCustEvntAjax",
-                                                    data: "Date="+date+"&CustomerID="+CustomerID,
+                                                    url: "GetProvEvntAjax",
+                                                    data: "Date="+date+"&ProviderID="+ProviderID,
                                                     success: function(result){
                                                         //alert(result);
                                                         
@@ -433,9 +616,7 @@
                         <tr id='EventsTr' style="background-color: #eeeeee;">
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
-                                
                                 <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
-                                    
                                     <%
                                         try{
                                             
@@ -459,13 +640,11 @@
                                                 String EventTitle = EventsRec.getString("EventTitle").trim();
                                                 EventTitle = EventTitle.replace("\"", "");
                                                 EventTitle = EventTitle.replace("'", "");
-                                                EventTitle = EventTitle.replaceAll("\\s+", " ");
-                                                EventTitle = EventTitle.replaceAll("( )+", " ");
+                                                EventTitle = EventTitle.replaceAll("\\s", " ");
                                                 String EventDesc = EventsRec.getString("EventDesc").trim();
                                                 EventDesc = EventDesc.replace("\"", "");
                                                 EventDesc = EventDesc.replace("'", "");
-                                                EventDesc = EventDesc.replaceAll("\\s+", " ");
-                                                EventDesc = EventDesc.replaceAll("( )+", " ");
+                                                EventDesc = EventDesc.replaceAll("\\s", " ");
                                                 String EventDate = EventsRec.getString("EventDate").trim();
                                                 String EventTime = EventsRec.getString("EventTime").trim();
                                                 if(EventTime.length() > 5)
@@ -514,8 +693,8 @@
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
                                 <center><input id="CalSaveEvntBtn" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 50%;' type='button' value='Change' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Change' /></center>
                             </td>
                         </tr>
                         
@@ -527,11 +706,11 @@
                                     
                                     $.ajax({
                                         type: "POST",
-                                        url: "DltEvntAjax",
+                                        url: "DltProvEvntAjax",
                                         data: "EventID="+EventID,
                                         success: function(result){
                                             if(result === "success")
-                                                //alert(result);
+                                                alert(result);
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn").style.display = "block";
@@ -546,7 +725,6 @@
                                 });
                             });
                         </script>
-                        
                         <script>
                             var updateCounter = 0;
                             
@@ -580,7 +758,7 @@
                                     
                                     $.ajax({
                                         type: "POST",
-                                        url: "UpdateEvent",
+                                        url: "UpdateProvEvent",
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
@@ -635,12 +813,12 @@
                                     var CalDate = document.getElementById("CalDatePicker").value;
                                     //alert(CalDate);
                                     
-                                    var CustID = document.getElementById("CalApptUserID").value;
+                                    var ProvID = document.getElementById("CalApptUserID").value;
                                     
                                     $.ajax({
                                         type: "POST",
-                                        url: "AddEvent",
-                                        data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&CustomerID="+CustID,
+                                        url: "AddEventProv",
+                                        data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&ProviderID="+ProvID,
                                         success: function(result){
                                             
                                             //alert(result);
@@ -686,50 +864,127 @@
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p id='UpdateStatusMsg' style='color: white; background-color: green; text-align: center;'></p>
-                                <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
-                                <p>First Name: <input id='fNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle Name: <input id='mNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last Name: <input id='lNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input id='EmailExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input id='UpdtPerInfExtraBtn' style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p>First Name: <input id="ExtProvFNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle Name: <input id="ExtProvMNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last Name: <input id="ExtProvLNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input id="ExtProvEmailFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input onclick="checkExtMiddlePhoneNumberEdit();"  onkeydown="checkExtMiddlePhoneNumberEdit();"id="ExtProvPhnNumberFld"
+                                        style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id="ExtUpdateProvPerBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
                             </td>
-                            
                             <script>
-                                $(document).ready(function(){
-                                    $("#UpdtPerInfExtraBtn").click(function(){
-                                        
-                                        var FirstName = document.getElementById("fNameExtraFld").value;
-                                        var MiddleName = document.getElementById("mNameExtraFld").value;
-                                        var LastName = document.getElementById("lNameExtraFld").value;
-                                        var Email = document.getElementById("EmailExtraFld").value;
-                                        var Phone = document.getElementById("PhoneExtraFld").value;
-                                        var CustomerID = document.getElementById("ExtraUpdPerUserID").value;
-                                        
-                                        $.ajax({
-                                            type: "POST",
-                                            url: "updtPerInfoExtraAjax",
-                                            data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
-                                            success: function(result){
-                                                if(result === "success"){
-                                                    //alert(result);
+                                                        var ExtProvPhnNumberFld = document.getElementById("ExtProvPhnNumberFld");
+
+                                                        function numberExtFuncPhoneNumberEdit(){
+
+                                                            var number = parseInt((ExtProvPhnNumberFld.value.substring(ExtProvPhnNumberFld.value.length - 1)), 10);
+
+                                                            if(isNaN(number)){
+                                                                ExtProvPhnNumberFld.value = ExtProvPhnNumberFld.value.substring(0, (ExtProvPhnNumberFld.value.length - 1));
+                                                            }
+
+                                                        }
+
+                                                        setInterval(numberExtFuncPhoneNumberEdit, 1);
+
+                                                        function checkExtMiddlePhoneNumberEdit(){
+
+                                                            for(var i = 0; i < ExtProvPhnNumberFld.value.length; i++){
+
+                                                                var middleString = ExtProvPhnNumberFld.value.substring(i, (i+1));
+                                                                //window.alert(middleString);
+                                                                var middleNumber = parseInt(middleString, 10);
+                                                                //window.alert(middleNumber);
+                                                                if(isNaN(middleNumber)){
+                                                                    ExtProvPhnNumberFld.value = ExtProvPhnNumberFld.value.substring(0, i);
+                                                                }
+                                                            }
+                                                        }
+
+                                                        //setInterval(checkMiddleNumber, 1000);
+                                                    </script>
                                                     
-                                                    document.getElementById("UpdateStatusMsg").innerHTML = "Personal information updated"
-                                                    //var FullName = FirstName + " " + MiddleName + " " + LastName;
-                                                    
+                                                    <input id="ExtProvIDforPerDetails" type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                                   
+                                                <script>
+                                                    $(document).ready(function(){
+                                                        $("#ExtUpdateProvPerBtn").click(function(event){
+                                                            
+                                                            var FirstName = document.getElementById("ExtProvFNameFld").value;
+                                                            var MiddleName = document.getElementById("ExtProvMNameFld").value;
+                                                            var LastName = document.getElementById("ExtProvLNameFld").value;
+                                                            var PerEmail = document.getElementById("ExtProvEmailFld").value;
+                                                            var PerTel = document.getElementById("ExtProvPhnNumberFld").value;
+                                                            var ProviderID = document.getElementById("ExtProvIDforPerDetails").value;
+                                                                
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "UpdateProvPerInfoController",
+                                                                data: "ProviderID="+ProviderID+"&FirstNameFld="+FirstName+"&MiddleNameFld="+MiddleName+"&LastNameFld="+LastName+"&EmailFld="+PerEmail+"&MobileNumberFld="+PerTel,
+                                                                success: function(result){
+                                                                    
+                                                                   $.ajax({
+                                                                        type: "POST",
+                                                                        url: "GetProvPerInfo",
+                                                                        data: "ProviderID="+ProviderID,
+                                                                        success: function(result){
+                                                                            //alert(result);
                                                                             
-                                                }
+                                                                            var PerInfo = JSON.parse(result);
+                                                                            
+                                                                            document.getElementById("ExtProvFNameFld").value = PerInfo.FirstName;
+                                                                            document.getElementById("ExtProvMNameFld").value = PerInfo.MiddleName;
+                                                                            document.getElementById("ExtProvLNameFld").value = PerInfo.LastName;
+                                                                            document.getElementById("ExtProvEmailFld").value = PerInfo.Email;
+                                                                            document.getElementById("ExtProvPhnNumberFld").value = PerInfo.Mobile;
+                                                                            
+                                                                            var FullName = PerInfo.FirstName + " " + PerInfo.MiddleName + " " + PerInfo.LastName;
+                                                                            var Company = PerInfo.Company;
+                                                                            
+                                                                            document.getElementById("FullNameDetail").innerHTML = FullName;
+                                                                            document.getElementById("EmailDetail").innerHTML = PerInfo.Email;
+                                                                            document.getElementById("PhoneDetail").innerHTML = PerInfo.Mobile;
+                                                                            document.getElementById("LoginNameDisplay").innerHTML = "Logged in as " +PerInfo.FirstName+ " - " + Company;
+                                                                            
+                                                                        }
+                                                                    });
+                                                                    
+                                                                }
+                                                                
+
+                                                            });
+                                                           
+                                                        });
+                                                    });
+                                                    
+                                                </script>
                                                 
-                                            }
-                                        });
-                                        
-                                    });
-                                });
-                                
-                            </script>
-                            
+                                                <script>
+                                                    
+                                                    var ExtProvFNameFld = document.getElementById("ExtProvFNameFld");
+                                                    var ExtProvMNameFld = document.getElementById("ExtProvMNameFld");
+                                                    var ExtProvLNameFld = document.getElementById("ExtProvLNameFld");
+                                                    var ExtProvPhnNumberFld2 = document.getElementById("ExtProvPhnNumberFld");
+                                                    var ExtProvEmailFld = document.getElementById("ExtProvEmailFld");
+                                                    var ExtUpdateProvPerBtn = document.getElementById("ExtUpdateProvPerBtn");
+                                                    
+                                                    function CheckExtUpdateProvPerBtn(){
+                                                        
+                                                        if(ExtProvFNameFld.value === "" || ExtProvMNameFld.value === "" || ExtProvLNameFld.value === ""
+                                                                || ExtProvPhnNumberFld2.value === "" || ExtProvEmailFld.value === ""){
+                                                            ExtUpdateProvPerBtn.style.backgroundColor = "darkgrey";
+                                                            ExtUpdateProvPerBtn.disabled = true;
+                                                        }else{
+                                                            ExtUpdateProvPerBtn.style.backgroundColor = "pink";
+                                                            ExtUpdateProvPerBtn.disabled = false;
+                                                        }
+                                                            
+                                                        
+                                                    }
+                                                    setInterval(CheckExtUpdateProvPerBtn,1);
+                                                    
+                                                </script>
                         </tr>
                         <tr>
                             <td>
@@ -789,77 +1044,122 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Update Your Login</p>
-                                <P>User Name: <input id="ExtraUpdateLoginNameFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
-                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
-                                <P><input id="ExtraNewPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
-                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
-                                <center><input id="ExtraLoginFormBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
-                                <p id="ExtraWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
-                                <p id='ExtrachangeUserAccountStatus' style='text-align: center; color: white;'></p>
+                                <P>User Name: <input id="ExtUsrNamefld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=UserName%>'/></p>
+                                <P><input id="ExtcompareOldPassfld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P><input id="ExtnewPassfld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P><input id="ExtcompareNewPassfld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtupdateUsrAcntBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p id="ExtWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
+                                <p id='ExtUpdatePassStatus' style='text-align: center; color: white;'></p>
                             </td>
-                            <input type='hidden' id='ExtraThisPass' value='' />
-                            <input type="hidden" id="ExtraUserIDforLoginUpdate" value="<%=UserID%>" />
-                            <input type="hidden" id="ExtraUserIndexforLoginUpdate" value="<%=UserIndex%>" />
+                            <input type='hidden' id='ExtoldPassfld' value='' />
+                            <input type="hidden" id="ExtProviderIDforUpdateLogin" value="<%=UserID%>" />
+                            <input type="hidden" id="ExtUserIndexforUpdateLogin" value="<%=UserIndex%>" />
                             <script>
-                                $(document).ready(function(){
-                                    $("#ExtraLoginFormBtn").click(function(event){
+                                                        $(document).ready(function(){
+                                                            $("#ExtupdateUsrAcntBtn").click(function(event){
                                                                 
-                                        var CustomerID = document.getElementById("ExtraUserIDforLoginUpdate").value;
-                                        var UserIndex = document.getElementById("ExtraUserIndexforLoginUpdate").value;
-                                        var UserName = document.getElementById("ExtraUpdateLoginNameFld").value;
-                                        var NewPassword = document.getElementById("ExtraNewPasswordFld").value;
-                                        var oldPassword = document.getElementById("ExtraCurrentPasswordFld").value;
+                                                                var ProviderID = document.getElementById("ExtProviderIDforUpdateLogin").value;
+                                                                var UserIndex = document.getElementById("ExtUserIndexforUpdateLogin").value;
+                                                                var UserName = document.getElementById("ExtUsrNamefld").value;
+                                                                var NewPassword = document.getElementById("ExtnewPassfld").value;
+                                                                var oldPassword = document.getElementById("ExtcompareOldPassfld").value;
                                                                 
-                                        $.ajax({
-                                            method: "POST",
-                                            url: "updateLoginController",
-                                            data: "CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&userName="+UserName+"&newPassword="+NewPassword+"&currentPassword="+oldPassword,
-                                            success: function(result){
+                                                                /*alert(ProviderID);
+                                                                alert(UserName);
+                                                                alert(NewPassword);
+                                                                alert(oldPassword);
+                                                                alert(UserIndex);*/
+                                                                
+                                                                $.ajax({
+                                                                    method: "POST",
+                                                                    url: "updateProvLoginInfo",
+                                                                    data: "ProviderID="+ProviderID+"&UserIndex="+UserIndex+"&UserNameFld="+UserName+"&NewPasswordFld="+NewPassword+"&OldPasswordFld="+oldPassword,
+                                                                    success: function(result){
                                                                         
-                                                //alert(result);
+                                                                        //alert(result);
                                                                         
-                                                if(result === "fail"){
+                                                                        if(result === "fail"){
                                                                             
-                                                    document.getElementById("ExtraWrongPassStatus").style.display = "block";
-                                                    document.getElementById("ExtraCurrentPasswordFld").value = "";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.backgroundColor = "red";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.color = "white";
-
-                                                    //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
-                                                    //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
-                                                    //document.getElementById("LoginFormBtn").disabled = true;
-                                                    //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
-                                                }
-                                                if(result === "success"){
-                                                    document.getElementById("ExtraNewPasswordFld").value = "";
-                                                    document.getElementById("ExtraCurrentPasswordFld").value = "";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.backgroundColor = "#eeeeee";
-                                                    document.getElementById("ExtraCurrentPasswordFld").style.color = "cadetblue";
-                                                    document.getElementById("ExtraConfirmPasswordFld").value = "";
-                                                    document.getElementById("ExtraWrongPassStatus").style.display = "none";
-                                                    document.getElementById("UpdateStatusMsg").innerHTML = "Login information updated"
+                                                                            document.getElementById("ExtWrongPassStatus").style.display = "block";
+                                                                            document.getElementById("ExtcompareOldPassfld").value = "";
+                                                                            document.getElementById("ExtcompareOldPassfld").style.backgroundColor = "red";
                                                                             
-                                                    //getUserAccountNameController
-                                                    $.ajax({
-                                                        method: "POST",
-                                                        url: "getUserAccountNameController",
-                                                        data: "CustomerID="+CustomerID,
+                                                                            //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
+                                                                            //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
+                                                                            //document.getElementById("LoginFormBtn").disabled = true;
+                                                                            //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
+                                                                        }
+                                                                        if(result === "success"){
+                                                                            document.getElementById("ExtnewPassfld").value = "";
+                                                                            document.getElementById("ExtcompareOldPassfld").value = "";
+                                                                            document.getElementById("ExtcompareOldPassfld").style.backgroundColor = "white";
+                                                                            document.getElementById("ExtcompareNewPassfld").value = "";
+                                                                            document.getElementById("ExtWrongPassStatus").style.display = "none";
+                                                                            
+                                                                            //getUserAccountNameController
+                                                                            $.ajax({
+                                                                                method: "POST",
+                                                                                url: "getProvUserAccountName",
+                                                                                data: "ProviderID="+ProviderID,
                                                                                 
-                                                        success: function(result){
+                                                                                success: function(result){
 
-                                                            document.getElementById("ExtraUpdateLoginNameFld").value = result;
+                                                                                    document.getElementById("ExtUsrNamefld").value = result;
 
 
-                                                        }
+                                                                                }
 
-                                                    });
-                                                }
-                                            }
+                                                                            });
+                                                                        }
+                                                                    }
                                                                     
-                                        });
+                                                                });
                                                                 
-                                    });
-                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                               
+                                    <script>
+                                        
+                                        var ExtUsrNamefld = document.getElementById("ExtUsrNamefld");
+                                        var ExtoldPassfld = document.getElementById("ExtoldPassfld");
+                                        var ExtcompareOldPassfld = document.getElementById("ExtcompareOldPassfld");
+                                        var ExtnewPassfld = document.getElementById("ExtnewPassfld");
+                                        var ExtcompareNewPassfld = document.getElementById("ExtcompareNewPassfld");
+                                        var ExtupdateUsrAcntBtn = document.getElementById("ExtupdateUsrAcntBtn");
+                                        var ExtUpdatePassStatus = document.getElementById("ExtUpdatePassStatus");
+                                        
+                                        function CheckExtUpdateUsrAcntBtn(){
+                                            
+                                            if(ExtUsrNamefld.value === "" || ExtcompareOldPassfld.value === "" || ExtnewPassfld.value === "" || ExtcompareNewPassfld.value === ""){
+                                                ExtUpdatePassStatus.style.backgroundColor = "green";
+                                                ExtUpdatePassStatus.innerHTML = "Uncompleted Form";
+                                                ExtupdateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                ExtupdateUsrAcntBtn.disabled = true;
+                                            }else if(ExtnewPassfld.value.length < 8){ //.length is a property not a function (like .length();)
+                                                   ExtUpdatePassStatus.style.backgroundColor = "red";
+                                                   ExtUpdatePassStatus.innerHTML = "Password Too Short";
+                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                   ExtupdateUsrAcntBtn.disabled = true;
+                                               }
+                                               else if(ExtnewPassfld.value !== ExtcompareNewPassfld.value){
+                                                   ExtUpdatePassStatus.style.backgroundColor = "red";
+                                                   ExtUpdatePassStatus.innerHTML = "New Passwords Don't Match";
+                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "darkgrey";
+                                                   ExtupdateUsrAcntBtn.disabled = true;
+                                               }else{
+
+                                                   ExtUpdatePassStatus.style.backgroundColor = "green";
+                                                   ExtUpdatePassStatus.innerHTML = "OK";
+                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "pink";
+                                                   ExtupdateUsrAcntBtn.disabled = false;
+                                               }
+                                               
+                                            
+                                        }
+                                        
+                                        setInterval(CheckExtUpdateUsrAcntBtn, 1);
                             </script>
                                                     
                         </tr>
