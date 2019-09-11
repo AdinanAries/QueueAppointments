@@ -273,11 +273,11 @@ function toggleShowBlockFutureSpotsForm() {
   var CloseFutureDaysForm = document.getElementById("CloseFutureDaysForm");
   var MakeReservationForm = document.getElementById("MakeReservationForm");
 
-  if (CloseFutureDaysForm.style.display === "block")
-    CloseFutureDaysForm.style.display = "none";
+  //if (CloseFutureDaysForm.style.display === "block")
+  CloseFutureDaysForm.style.display = "none";
 
-  if (MakeReservationForm.style.display === "block")
-    MakeReservationForm.style.display = "none";
+  //if (MakeReservationForm.style.display === "block")
+  MakeReservationForm.style.display = "none";
 
   if (BlockFutureSpotsForm.style.display === "none") {
     $("#BlockFutureSpotsForm").slideDown("fast");
@@ -290,11 +290,11 @@ function toggleShowCloseFutureDysForm() {
   var MakeReservationForm = document.getElementById("MakeReservationForm");
   var BlockFutureSpotsForm = document.getElementById("BlockFutureSpotsForm");
 
-  if (BlockFutureSpotsForm.style.display === "block")
-    BlockFutureSpotsForm.style.display = "none";
+  //if (BlockFutureSpotsForm.style.display === "block")
+  BlockFutureSpotsForm.style.display = "none";
 
-  if (MakeReservationForm.style.display === "block")
-    MakeReservationForm.style.display = "none";
+  //if (MakeReservationForm.style.display === "block")
+  MakeReservationForm.style.display = "none";
 
   if (CloseFutureDaysForm.style.display === "none") {
     $("#CloseFutureDaysForm").slideDown("fast");
@@ -307,11 +307,11 @@ function toggleShowMakeReservationForm() {
   var MakeReservationForm = document.getElementById("MakeReservationForm");
   var BlockFutureSpotsForm = document.getElementById("BlockFutureSpotsForm");
 
-  if (CloseFutureDaysForm.style.display === "block")
-    CloseFutureDaysForm.style.display = "none";
+  //if (CloseFutureDaysForm.style.display === "block")
+  CloseFutureDaysForm.style.display = "none";
 
-  if (BlockFutureSpotsForm.style.display === "block")
-    BlockFutureSpotsForm.style.display = "none";
+  //if (BlockFutureSpotsForm.style.display === "block")
+  BlockFutureSpotsForm.style.display = "none";
 
   if (MakeReservationForm.style.display === "none") {
     $("#MakeReservationForm").slideDown("fast");

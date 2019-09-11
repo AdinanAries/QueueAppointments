@@ -320,6 +320,10 @@
         <servlet-name>SendProvFeedbackMsg</servlet-name>
         <servlet-class>SendProvFeedbackMsg</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetProvNotificationAsSeen</servlet-name>
+        <servlet-class>SetProvNotificationAsSeen</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -639,6 +643,10 @@
     <servlet-mapping>
         <servlet-name>SendProvFeedbackMsg</servlet-name>
         <url-pattern>/SendProvFeedbackMsg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetProvNotificationAsSeen</servlet-name>
+        <url-pattern>/SetProvNotificationAsSeen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

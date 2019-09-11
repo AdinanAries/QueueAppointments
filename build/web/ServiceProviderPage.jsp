@@ -70,7 +70,7 @@
         String user ="sa";
         String password ="Password@2014";
         
-        int notiCounter = 15;
+        int notiCounter = 0;
         
         String NewsPicSrc = "view-wallpaper-7.jpg";
         String lastNewsMsg = "";
@@ -820,6 +820,36 @@
                     %>
                     
                     <%
+                        
+                        try{
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            
+                            Class.forName(Driver);
+                            Connection NotiConn = DriverManager.getConnection(Url, user, password);
+                            
+                            String Query = "Select Noti_Type, What, Noti_Status, ID from QueueServiceProviders.Notifications where (ProvID = ? and Noti_Type not like 'Today%')"
+                                    + "or (ProvID = ? and Noti_Date = ? and Noti_Type like 'Today%') order by ID desc";
+                            PreparedStatement pst = NotiConn.prepareStatement(Query);
+                            pst.setInt(1, UserID);
+                            pst.setInt(2, UserID);
+                            pst.setString(3, sdf.format(new Date()));
+                            ResultSet Rec = pst.executeQuery();
+                            
+                            while(Rec.next()){
+                                
+                                if(Rec.getString("Noti_Status") == null)
+                                    notiCounter++;
+                                
+                                if(notiCounter > 10)
+                                    break;
+                            }
+                                
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    %>
+                    
+                    <%
                        //getting galleryphotos
                        
                        ArrayList<String> Base64GalleryPhotos = new ArrayList<>();
@@ -1534,7 +1564,7 @@
             
             <ul>
                 <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                    Notifications<sup style='color: red;'> <%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
+                    Notifications<sup style='color: red; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
                 <li id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
                 <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
@@ -4848,7 +4878,7 @@
                                     <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
                                     News | 
                                     <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                                    Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup> | 
+                                    Notifications<sup style='color: red; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup> | 
                                     <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                                     Calender
                                 </div></a>

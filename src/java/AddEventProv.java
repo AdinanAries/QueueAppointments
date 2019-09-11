@@ -95,6 +95,35 @@ public class AddEventProv extends HttpServlet {
             e.printStackTrace();
         }
         
+        //-------------------------------------------------------------------------------------------
+                Date NotiDate = new Date();
+                String NotiSDate = NotiDate.toString();
+                SimpleDateFormat NotiDformat = new SimpleDateFormat("yyyy-MM-dd");
+                String date = NotiDformat.format(NotiDate);
+                String time = NotiSDate.substring(11,16);
+                
+                
+                
+                //nofitying Provider
+                try{
+                    Class.forName(Driver);
+                    Connection notiConn = DriverManager.getConnection(url, user, password);
+                    String notiString = "insert into QueueServiceProviders.Notifications (Noti_Type, ProvID, If_From_Prov, What, Noti_Date, Not_Time)"
+                            + "values (?,?,?,?,?,?)";
+                    PreparedStatement notiPst = notiConn.prepareStatement(notiString);
+                    notiPst.setString(1, "Today's Event");
+                    notiPst.setString(2, ProvID);
+                    notiPst.setString(3, ProvID);
+                    notiPst.setString(4, Title + " at " + Time + " - " + Desc);
+                    notiPst.setString(5, QueryDate);
+                    notiPst.setString(6, Time);
+                    notiPst.executeUpdate();
+                    
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+        
         response.getWriter().print("{\"JQDate\": \""+CalDate+"\", \"EvntID\": \""+EvntID+"\"}");
         
         
