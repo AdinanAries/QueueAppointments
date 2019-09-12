@@ -1628,8 +1628,12 @@
                         <img src="icons/icons8-menu-25.png" width="25" height="25" alt="icons8-menu-25"/>
                     </p>
                     
-                    <p style='width: 235px; float: right; margin-top: 5px; margin-right: 0;'><span onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 75px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide spots</span>
-                          <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Update your clients</span></p>
+                    <p style='width: 235px; float: right; margin-top: 5px; margin-right: 0;'>
+                        <span onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 75px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide spots</span>
+                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>  
+                            <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Update your clients</span></a>
+                    </p>
+                    
                     <p style='clear: both;'></p>
                     <!--ul id="miniNavIcons" style="float: left;">
                         <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
@@ -4533,7 +4537,7 @@
                             </script>
                         </form>
                             
-                            <div id="NewClosedDays" class="scrolldiv" style="max-height: 170px; overflow-y: auto; width: 100%; max-width: 500px;">
+                            <div id="NewClosedDays" class="scrolldiv" style="max-height: 300px; overflow-y: auto; width: 100%; max-width: 500px;">
                             <p style="color: darkblue; margin: 5px;">Days Closed</p>
                             
                         <%
@@ -4597,7 +4601,7 @@
                         
                         <center><div id="MakeReservationForm" style="width: 100%; max-width: 500px;">
                                 
-                                <script>document.getElementById("MakeReservationForm").style.display = "block;"</script>
+                                <script>document.getElementById("MakeReservationForm").style.display = "block";</script>
                                     
                                 <form style="" name="makeReservationForm">
                                     <p style="text-align: center; color: #000099; margin-top: 5px; margin-bottom: 10px; font-weight: bolder;">Add reservation details below</p>
@@ -4676,10 +4680,13 @@
                                                     }
                                                 %>
                                                 <span><%=CustomerFullName%></span></label>
+                                                
                                                 <p style="clear: both;"></p>
                                                 
                                             </li>
                                     <script>  
+                                        
+                                        var TotalClients = "<%=cl%>"; //JSP expression tags in javascript are pretty slow.
                                         
                                         function checkMkReservationBtn(){
                                             
@@ -4688,8 +4695,9 @@
                                             var MkReservationBtn = document.getElementById("MkReservationBtn");
                                             var EachChecked = 0;
                                             var eachClientID = null;
+                                            
                                         
-                                            for(var i = 0; i <= <%=cl%>; i++){
+                                            for(var i = 0; i <= TotalClients; i++){
                                                 
                                                 eachClientID = document.getElementById(("eachClientID"+i));
                                                 

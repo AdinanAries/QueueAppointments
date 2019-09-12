@@ -43,164 +43,158 @@
     </head>
     <% 
         
-        int LastProvID = 0;
-        String NextGroupAppend = "";
-        try{
-            LastProvID = Integer.parseInt(request.getParameter("LastProvID").toString());
-            NextGroupAppend = " and Provider_ID > " + LastProvID;
-        }catch(Exception e){}
-        
-        
         boolean isTypeChck = false;
         String SVCTypeAppend = " and ( ";
         
-        String Barber = request.getParameter("Barber");
-        if(Barber != null){
-            SVCTypeAppend += "Service_Type like '%Barber Shop%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Barber is: " + Barber);
-        
-        String Beauty = request.getParameter("Beauty");
-        if(Beauty != null){
-            SVCTypeAppend += "Service_Type like '%Beauty Salon%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Beauty is: " + Beauty);
-        
-        String DaySpa = request.getParameter("DaySpa");
-        if(DaySpa != null){
-            SVCTypeAppend += "Service_Type like '%Day Spa%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "DaySpa is: " + DaySpa);
-        
-        String Dentist = request.getParameter("Dentist");
-        if(Dentist != null){
-            SVCTypeAppend += "Service_Type like '%Dentist%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Dentist is: " + Dentist);
-        
-        String Dietician = request.getParameter("Dietician");
-        if(Dietician != null){
-            SVCTypeAppend += "Service_Type like '%Dietician%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Dietician is: " + Dietician);
-        
-        String EyeBrows = request.getParameter("EyeBrows");
-        if(EyeBrows != null){
-            SVCTypeAppend += "Service_Type like '%Eyebrows and Eyelashes%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "EyeBrows is: " + EyeBrows);
-        
-        String HairRemoval = request.getParameter("HairRemoval");
-        if(HairRemoval != null){
-            SVCTypeAppend += "Service_Type like '%Hair Removal%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "HairRemoval is: " + HairRemoval);
-        
-        String TattooShop = request.getParameter("TattooShop");
-        if(TattooShop != null){
-            SVCTypeAppend += "Service_Type like '%Tattoo Shop%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "TattooShop is: " + TattooShop);
-        
-        String Podiatry = request.getParameter("Podiatry");
-        if(Podiatry != null){
-            SVCTypeAppend += "Service_Type like '%Podiatry%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Podiatry is: " + Podiatry);
-        
-        String Piercing = request.getParameter("Piercing");
-        if(Piercing != null){
-            SVCTypeAppend += "Service_Type like '%Piercing%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Piercing is: " + Piercing);
-        
-        String PhysicalTherapy = request.getParameter("PhysicalTherapy");
-        if(PhysicalTherapy != null){
-            SVCTypeAppend += "Service_Type like '%Physical Therapy%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "PhysicalTherapy is: " + PhysicalTherapy);
-        
-        String PetServices = request.getParameter("PetServices");
-        if(PetServices != null){
-            SVCTypeAppend += "Service_Type like '%Pet Services%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "PetServices is: " + PetServices);
-        
-        String PersonalTrainer = request.getParameter("PersonalTrainer");
-        if(PersonalTrainer != null){
-            SVCTypeAppend += "Service_Type like '%Personal Trainer%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "PersonalTrainer is: " + PersonalTrainer);
-        
-        String NailSalon = request.getParameter("NailSalon");
-        if(NailSalon != null){
-            SVCTypeAppend += "Service_Type like '%Nail Salon%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "NailSalon is: " + NailSalon);
-                
-        String MedCenter = request.getParameter("MedCenter");
-        if(MedCenter != null){
-            SVCTypeAppend += "Service_Type like '%Medical Center%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "MedCenter is: " + MedCenter);
-        
-        String Aethetician = request.getParameter("Aethetician");
-        if(Aethetician != null){
-            SVCTypeAppend += "Service_Type like '%Medical Aesthetician%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Aethetician is: " + Aethetician);
-        
-        String Massage = request.getParameter("Massage");
-        if(Massage != null){
-            SVCTypeAppend += "Service_Type like '%Massage%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "Massage is: " + Massage);
-        
-        String MakeUpArtist = request.getParameter("MakeUpArtist");
-        if(MakeUpArtist != null){
-            SVCTypeAppend += "Service_Type like '%Makeup Artist%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "MakeUpArtist is: " + MakeUpArtist);
-        
-        String HomeService = request.getParameter("HomeService");
-        if(HomeService != null){
-            SVCTypeAppend += "Service_Type like '%Home Services%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "HomeService is: " + HomeService);
-        
-        String HolisticMedicine = request.getParameter("HolisticMedicine");
-        if(HolisticMedicine != null){
-            SVCTypeAppend += "Service_Type like '%Holistic Medicine%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "HolisticMedicine is: " + HolisticMedicine);
-        
-        String HairSalon = request.getParameter("HairSalon");
-        if(HairSalon != null){
-            SVCTypeAppend += "Service_Type like '%Hair Salon%' or ";
-            isTypeChck = true;
-        }
-        //JOptionPane.showMessageDialog(null, "HairSalon is: " + HairSalon);
-        
+       try{ 
+            String Barber = request.getParameter("Barber");
+            if(Barber != null){
+                SVCTypeAppend += "Service_Type like '%Barber Shop%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Barber is: " + Barber);
+
+            String Beauty = request.getParameter("Beauty");
+            if(Beauty != null){
+                SVCTypeAppend += "Service_Type like '%Beauty Salon%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Beauty is: " + Beauty);
+
+            String DaySpa = request.getParameter("DaySpa");
+            if(DaySpa != null){
+                SVCTypeAppend += "Service_Type like '%Day Spa%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "DaySpa is: " + DaySpa);
+
+            String Dentist = request.getParameter("Dentist");
+            if(Dentist != null){
+                SVCTypeAppend += "Service_Type like '%Dentist%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Dentist is: " + Dentist);
+
+            String Dietician = request.getParameter("Dietician");
+            if(Dietician != null){
+                SVCTypeAppend += "Service_Type like '%Dietician%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Dietician is: " + Dietician);
+
+            String EyeBrows = request.getParameter("EyeBrows");
+            if(EyeBrows != null){
+                SVCTypeAppend += "Service_Type like '%Eyebrows and Eyelashes%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "EyeBrows is: " + EyeBrows);
+
+            String HairRemoval = request.getParameter("HairRemoval");
+            if(HairRemoval != null){
+                SVCTypeAppend += "Service_Type like '%Hair Removal%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "HairRemoval is: " + HairRemoval);
+
+            String TattooShop = request.getParameter("TattooShop");
+            if(TattooShop != null){
+                SVCTypeAppend += "Service_Type like '%Tattoo Shop%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "TattooShop is: " + TattooShop);
+
+            String Podiatry = request.getParameter("Podiatry");
+            if(Podiatry != null){
+                SVCTypeAppend += "Service_Type like '%Podiatry%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Podiatry is: " + Podiatry);
+
+            String Piercing = request.getParameter("Piercing");
+            if(Piercing != null){
+                SVCTypeAppend += "Service_Type like '%Piercing%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Piercing is: " + Piercing);
+
+            String PhysicalTherapy = request.getParameter("PhysicalTherapy");
+            if(PhysicalTherapy != null){
+                SVCTypeAppend += "Service_Type like '%Physical Therapy%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "PhysicalTherapy is: " + PhysicalTherapy);
+
+            String PetServices = request.getParameter("PetServices");
+            if(PetServices != null){
+                SVCTypeAppend += "Service_Type like '%Pet Services%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "PetServices is: " + PetServices);
+
+            String PersonalTrainer = request.getParameter("PersonalTrainer");
+            if(PersonalTrainer != null){
+                SVCTypeAppend += "Service_Type like '%Personal Trainer%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "PersonalTrainer is: " + PersonalTrainer);
+
+            String NailSalon = request.getParameter("NailSalon");
+            if(NailSalon != null){
+                SVCTypeAppend += "Service_Type like '%Nail Salon%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "NailSalon is: " + NailSalon);
+
+            String MedCenter = request.getParameter("MedCenter");
+            if(MedCenter != null){
+                SVCTypeAppend += "Service_Type like '%Medical Center%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "MedCenter is: " + MedCenter);
+
+            String Aethetician = request.getParameter("Aethetician");
+            if(Aethetician != null){
+                SVCTypeAppend += "Service_Type like '%Medical Aesthetician%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Aethetician is: " + Aethetician);
+
+            String Massage = request.getParameter("Massage");
+            if(Massage != null){
+                SVCTypeAppend += "Service_Type like '%Massage%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "Massage is: " + Massage);
+
+            String MakeUpArtist = request.getParameter("MakeUpArtist");
+            if(MakeUpArtist != null){
+                SVCTypeAppend += "Service_Type like '%Makeup Artist%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "MakeUpArtist is: " + MakeUpArtist);
+
+            String HomeService = request.getParameter("HomeService");
+            if(HomeService != null){
+                SVCTypeAppend += "Service_Type like '%Home Services%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "HomeService is: " + HomeService);
+
+            String HolisticMedicine = request.getParameter("HolisticMedicine");
+            if(HolisticMedicine != null){
+                SVCTypeAppend += "Service_Type like '%Holistic Medicine%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "HolisticMedicine is: " + HolisticMedicine);
+
+            String HairSalon = request.getParameter("HairSalon");
+            if(HairSalon != null){
+                SVCTypeAppend += "Service_Type like '%Hair Salon%' or ";
+                isTypeChck = true;
+            }
+            //JOptionPane.showMessageDialog(null, "HairSalon is: " + HairSalon);
+       }catch(Exception e){}
+       
         SVCTypeAppend += "Service_Type = '')";
         
         if(isTypeChck == false){
@@ -283,25 +277,43 @@
         String Town = request.getParameter("town4Search").trim();
         String ZipCode = request.getParameter("zcode4Search").trim();
         
+        int LastProviderID = 0;
+        String ProvIDAppend = "";
+        
+        try{
+            LastProviderID = Integer.parseInt(request.getParameter("LastProviderID"));
+            ProvIDAppend = " and ProviderID > " +LastProviderID;
+        }catch(Exception e){}
+        
+        //JOptionPane.showMessageDialog(null, ProvIDAppend);
+        if(SVCTypeAppend.equals("")){
+            try{
+                SVCTypeAppend = request.getParameter("SVCTypeAppend");
+                SVCTypeAppend = SVCTypeAppend.replaceAll("4","%");
+                SVCTypeAppend = SVCTypeAppend.replaceAll("3","=");
+                SVCTypeAppend = SVCTypeAppend.replaceAll("2","'");
+                
+            }catch(Exception e){}
+        }
+        
+        //JOptionPane.showMessageDialog(null, SVCTypeAppend);
+        
+        if(SVCTypeAppend == null)
+            SVCTypeAppend = "";
+        
         if(City.equals("")){
             if(isTypeChck)
                 City = "";
-            else
-                City = "none";
         }
         
         if(Town.equals("")){
             if(isTypeChck)
                 Town = "";
-            else
-                Town = "none";
         }
         
         if(ZipCode.equals("")){
             if(isTypeChck)
                 ZipCode = "";
-            else
-                ZipCode = "none";
         }
         
         ArrayList<Integer> ProviderIDList = new ArrayList<>();
@@ -309,7 +321,7 @@
         try{
             Class.forName(Driver);
             Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'";// + NextGroupAppend;
+            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'" + ProvIDAppend;
             
             PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
             
@@ -409,12 +421,21 @@
                         eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
                                                         rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
                         providersList.add(eachrecord);
+                        
                     }
 
                 }
                 catch(Exception e){
                     e.printStackTrace();
                 }
+                
+                if(providersList.size() > 4){
+                    
+                    LastProviderID = providersList.get(providersList.size() - 1).getID();
+                    break;
+                    
+                }
+                
             }
             
         %>
@@ -1946,6 +1967,23 @@
                             <%}//end of for loop%>
                             
                             </table></center>
+                            
+                            <%
+                                 SVCTypeAppend = SVCTypeAppend.replaceAll("%","4");
+                                 SVCTypeAppend = SVCTypeAppend.replaceAll("=","3");
+                                 SVCTypeAppend = SVCTypeAppend.replaceAll("'","2");
+                                 //JOptionPane.showMessageDialog(null, SVCTypeAppend);
+                             %>
+                            <form method="POST"  action='ByAddressSearchResultLoggedIn.jsp'>
+                                <input type='hidden' name='city4Search' value='<%=City%>'/>
+                                <input type='hidden' name='town4Search' value='<%=Town%>'/>
+                                <input type='hidden' name='zcode4Search' value='<%=ZipCode%>'/>
+                                <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>
+                                <input type='hidden' name='SVCTypeAppend' value='<%=SVCTypeAppend%>'/>
+                                <input type='hidden' name='User' value='<%=NewUserName%>' />
+                                <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
+                                <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
+                            </form>
                             
                 </div></center>
                  

@@ -114,23 +114,30 @@
         }catch(Exception e){e.printStackTrace();}
         
         String City = request.getParameter("city4Search").trim();
-        if(City.equals(""))
-            City = "none";
+        
         String Town = request.getParameter("town4Search").trim();
-        if(Town.equals(""))
-            Town = "none";
+        
         String ZipCode = request.getParameter("zcode4Search").trim();
-        if(ZipCode.equals(""))
-            ZipCode = "none";
+        
         
         String BizType = request.getParameter("ServiceType");
+        
+        int LastProviderID = 0;
+        String ProvIDAppend = "";
+        
+        try{
+            LastProviderID = Integer.parseInt(request.getParameter("LastProviderID"));
+            ProvIDAppend = " and ProviderID > " + LastProviderID;
+        }catch(Exception e){}
+        
+        //JOptionPane.showMessageDialog(null, ProvIDAppend);
         
         ArrayList<Integer> ProviderIDList = new ArrayList<>();
         
         try{
             Class.forName(Driver);
             Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'";
+            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'" + ProvIDAppend;
             
             PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
             
@@ -225,11 +232,18 @@
                         eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
                                                         rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
                         providersList.add(eachrecord);
+                        
                     }
-
                 }
                 catch(Exception e){
                     e.printStackTrace();
+                }
+                
+                if(providersList.size() > 4){
+                    
+                    LastProviderID = providersList.get(providersList.size() - 1).getID();
+                    break;
+                    
                 }
             }
             
@@ -1765,7 +1779,7 @@
                             
                         <%  
                                     //if(i > 3)
-                                        break;
+                                        //break;
                                 }
                                 //end of for loop
 
@@ -1774,7 +1788,18 @@
                         %>
                             
                             </table></center>
-                            
+                        
+                            <form method="POST"  action='ByAddressAndTypeSearchResultLoggedIn.jsp'>
+                                <input type='hidden' name='city4Search' value='<%=City%>'/>
+                                <input type='hidden' name='town4Search' value='<%=Town%>'/>
+                                <input type='hidden' name='zcode4Search' value='<%=ZipCode%>'/>
+                                <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>
+                                <input type='hidden' name='ServiceType' value='<%=BizType%>'/>
+                                <input type='hidden' name='User' value='<%=NewUserName%>' />
+                                <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
+                                <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
+                            </form>
+                        
                 </div></center>
                 
                             

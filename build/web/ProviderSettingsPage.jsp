@@ -1088,12 +1088,12 @@
                                                          $('#ExtSendFeedBackBtn').click(function(event) {  
 
                                                              var feedback = document.getElementById("ExtFeedBackTxtFld").value;
-                                                             var CustomerID = document.getElementById("ExtFeedBackUserID").value;
+                                                             var ProviderID = document.getElementById("ExtFeedBackUserID").value;
 
                                                              $.ajax({  
                                                              type: "POST",  
                                                              url: "SendProvFeedbackMsg",  
-                                                             data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
+                                                             data: "FeedBackMessage="+feedback+"&ProviderID="+ProviderID,  
                                                              success: function(result){  
                                                                document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv").style.display = "block";
@@ -1102,7 +1102,7 @@
                                                                $.ajax({  
                                                                     type: "POST",  
                                                                     url: "getProvFeedbackDate",  
-                                                                    data: "CustomerID="+CustomerID,  
+                                                                    data: "CustomerID="+ProviderID,  
                                                                     success: function(result){  
                                                                         //alert(result);
                                                                  document.getElementById("ExtFeedBackDate").innerHTML = result +" ";

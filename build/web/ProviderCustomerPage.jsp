@@ -1813,7 +1813,7 @@
                     </tbody>
                 </table>
                         
-                <p style='text-align: center; color: green; padding: 5px; cursor: pointer;'>more...</p>
+                <!--p style='text-align: center; color: green; padding: 5px; cursor: pointer;'>more...</p-->
             </div>
                     
             </div>
@@ -2038,7 +2038,7 @@
         <div onclick='hideExtraDropDown();' id="newbusiness" style="padding-top: 0;">
                 
                 <!----------------------------------------------------------------------------------------------------------------->
-        <div id='Extras2Container'>
+        <div id='Extras2Container' style='z-index: 200;'>
             <div id="Extras2" style="display: none; height: 565px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 110; background-color: #ccccff; text-align: left;">
                 
                 <p onclick='document.getElementById("Extras2").style.display = "none";' style='width: 50px; float: right; margin-right: 5px; margin-top:5px;
@@ -3006,21 +3006,12 @@
                             <td>
                                 <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>fourth notification here</p>
                             </td>
-                        </tr-->
-                        
-                    <%
-                            if(notiCounter > 7){
-                    %>
-                    
+                        </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
                             </td>
-                        </tr>
-                        
-                    <%
-                        }
-                    %>
+                        </tr-->
                     </tbody>
                 </table>
             </div>
@@ -3555,22 +3546,22 @@
                                                     <div id="ContactUsDiv" style="margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;">
                                                         <p style="margin-bottom: 5px; ">Our contact information:</p>
                                                         <p style="color: black;"><img src="icons/icons8-phone-32.png" width="20" height="20" alt="icons8-phone-32"/>
-                                                           917-125-9955</p>
-                                                        <p style="color: black;"><img src="icons/icons8-fax-32.png" width="20" height="20" alt="icons8-fax-32"/>
-                                                            7345738232</p>
+                                                          +1 (732) 799-9546</p>
+                                                        <!--p style="color: black;"><img src="icons/icons8-fax-32.png" width="20" height="20" alt="icons8-fax-32"/>
+                                                            7345738232</p-->
                                                         <p style="color: black;"><img src="icons/icons8-secured-letter-32.png" width="20" height="20" alt="icons8-secured-letter-32"/>
-                                                            queuelinespots@gmail.com</p>
-                                                        <p style="color: black;"><img src="icons/icons8-facebook-32.png" width="20" height="20" alt="icons8-facebook-32"/>
-                                                            @Queuelinespots</p>
+                                                            tech.arieslab@outlook.com</p>
+                                                        <!--p style="color: black;"><img src="icons/icons8-facebook-32.png" width="20" height="20" alt="icons8-facebook-32"/>
+                                                            @Queue</p>
                                                         <p style="color: black;"><img src="icons/icons8-twitter-32.png" width="20" height="20" alt="icons8-twitter-32"/>
-                                                            @Queuelinespots</p>
+                                                            @Queue</p>
                                                         <p style="color: black"><img src="icons/icons8-snapchat-32.png" width="20" height="20" alt="icons8-snapchat-32"/>
-                                                            @Queuelinespots
+                                                            @Queue
                                                         </p>
                                                         <p style="color: black"><img src="icons/icons8-instagram-32.png" width="20" height="20" alt="icons8-instagram-32"/>
-                                                            @Queuelinespots</p>
+                                                            @Queue</p>
                                                         <p style="color: black;"><img src="icons/icons8-organization-32.png" width="20" height="20" alt="icons8-organization-32"/>
-                                                            1227 Grand Concourse, New York, 10344 USA</p>
+                                                            1227 Grand Concourse, New York, 10344 USA</p-->
                                                         
                                                     </div>
                                                 </li>

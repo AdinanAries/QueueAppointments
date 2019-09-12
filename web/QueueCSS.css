@@ -585,6 +585,10 @@ select {
   display: none;
 }
 
+#QShowNews2 {
+  display: none;
+}
+
 @media only screen and (max-width: 1400px) {
   /*.SearchObject {
     display: block;
@@ -600,6 +604,15 @@ select {
   display: none;
 }
 @media only screen and (min-width: 1000px) {
+  #QShowNews2 {
+    display: block;
+  }
+  #QShowNews22 {
+    display: none;
+  }
+  #NewClosedDays {
+    max-height: 300px;
+  }
   #ReservationAndFutureSpots {
     height: 450px;
   }
@@ -810,6 +823,9 @@ select {
   #ProvPhoneNotiBar {
     display: none;
   }
+  #QShowNews2 {
+    display: none;
+  }
   #Extras {
     display: block;
   }
@@ -824,6 +840,7 @@ select {
   }
   #newbusiness {
     width: 33.2%;
+    padding-top: 40px;
   }
   #content {
     width: 45%;

@@ -115,10 +115,16 @@
         
         String Search = request.getParameter("SearchFld");
         
+        int LastProviderID = 0;
+        String ProvIDAppend = "";
+        
+        try{
+            LastProviderID = Integer.parseInt(request.getParameter("LastProviderID"));
+            ProvIDAppend = " and Provider_ID > " + LastProviderID;
+        }catch(Exception e){}
+        
         Search = Search.trim().replaceAll("( )+", " ");
         
-        if(Search.equals("") || Search.equals(" "))
-            Search = "none";
         
         String Tel = Search;
         
@@ -159,14 +165,14 @@
            private String User = "sa"; //datebase user account
            private String Password = "Password@2014"; //database password
            
-           public ResultSet getRecords(String Search, String tel, String first, String middle, String last){
+           public ResultSet getRecords(String Search, String tel, String first, String middle, String last, String ProvIDAppend){
               
                try{
                    
                     Class.forName(Driver); //registering driver class
                     conn = DriverManager.getConnection(url,User,Password);
-                    String  select = "Select * from QueueServiceProviders.ProviderInfo where (First_Name = ? and Middle_Name = ? and Last_Name = ?) or (First_Name = ? or Middle_Name = ? or  Last_Name = ?) or Company like '%" + Search + "%' or Service_Type like '%" + Search + "%'"
-                            + " or ((First_Name =? and Middle_Name =?) or (First_Name =? and Last_Name =?))"; 
+                    String  select = "Select * from QueueServiceProviders.ProviderInfo where ((First_Name = ? and Middle_Name = ? and Last_Name = ?) or (First_Name = ? or Middle_Name = ? or  Last_Name = ?) or Company like '%" + Search + "%' or Service_Type like '%" + Search + "%'"
+                            + " or ((First_Name =? and Middle_Name =?) or (First_Name =? and Last_Name =?)))"  + ProvIDAppend; 
                     
                     PreparedStatement pst = conn.prepareStatement(select);
                     pst.setString(1, first);
@@ -198,7 +204,7 @@
             getUserDetails details = new getUserDetails();
             ArrayList <ProviderInfo> providersList = new ArrayList<>();
             
-            ResultSet rows = details.getRecords(Search, Tel, firstName, middleName, lastName); //this function only gets records
+            ResultSet rows = details.getRecords(Search, Tel, firstName, middleName, lastName, ProvIDAppend); //this function only gets records
             //deosn't save it any where else  other than in the ResultSet object within which its contained
             
             try{
@@ -208,6 +214,12 @@
                     eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
                                                     rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
                     providersList.add(eachrecord);
+                    
+                    if(providersList.size() > 4){
+                    
+                        LastProviderID = providersList.get(providersList.size() - 1).getID();
+                        break;
+                   }
                 }
                 
             }
@@ -1746,6 +1758,14 @@
                             <%}//end of for loop%>
                             
                             </table></center>
+                            
+                            <form method="POST"  action='QueueSelectBusinessSearchResultLoggedIn.jsp'>
+                                <input type='hidden' name='SearchFld' value='<%=Search%>'/>
+                                <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>
+                                <input type='hidden' name='User' value='<%=NewUserName%>' />
+                                <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
+                                <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
+                            </form>
                             
                 </div></center>
                 

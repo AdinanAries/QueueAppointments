@@ -1487,7 +1487,7 @@
                                     </div>
                                 </div-->
                                             <p style="text-align: center;"><input id="DeleteFavProvBtn<%=SString%>" style="background-color: red; color: white; text-align: center; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" 
-                                                                                  type="button" value="Delete <%=fullName%> from your favorites" /></p>
+                                                                                  type="button" value="Delete <%=providersList.get(i).getFirstName()%> from your favorites" /></p>
                                             <input id="ProvID<%=SString%>" type="hidden" name="UserID" value="<%=FavProvID%>" />
                                             <script>
                                                $(document).ready(function() {                        
