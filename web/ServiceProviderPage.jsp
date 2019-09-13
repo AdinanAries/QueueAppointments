@@ -1691,7 +1691,7 @@
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
-                                <textarea id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
+                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">
                                 </textarea>
                                 
                             </td>
@@ -1714,6 +1714,42 @@
                                 
                                 <center><input id="SaveNewsBtn" style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
                             </td>
+                            
+                            <script>
+                        
+                                document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                
+                                function checkEmptyNewTxt(){
+                                    if(document.getElementById("NewsMessageFld").value === "")
+                                        document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                }
+                                
+                                setInterval(function(){
+                                    
+                                    var SaveNewsBtn = document.getElementById("SaveNewsBtn");
+
+                                    var NewsMessageFld = document.getElementById("NewsMessageFld");
+                                    var VPublicRd = document.getElementById("VPublicRd");
+                                    var VCustomersRd = document.getElementById("VCustomersRd");
+
+                                    if((NewsMessageFld.value === "What should your clients know about?") || 
+                                            (VPublicRd.checked ===  false && VCustomersRd.checked === false) || (document.getElementById("NewsPhotoFld").value === "")){
+                                        if(SaveNewsBtn){
+                                            SaveNewsBtn.style.backgroundColor = "darkgrey";
+                                            SaveNewsBtn.disabled = true;
+                                        }
+                                    }else{
+                                        if(SaveNewsBtn){
+                                            SaveNewsBtn.style.backgroundColor = "pink";
+                                            SaveNewsBtn.disabled = false;
+                                        }
+                                    }
+
+
+                                }, 1);
+
+                        </script>
+                            
                         </tr>
                         <%
                             Date UpdDate = new Date();
@@ -2062,7 +2098,7 @@
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
                                     <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
+                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>
                                         </textarea></p>
                                     <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
@@ -2083,6 +2119,71 @@
                                 <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Delete' />
                                     <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Change' /></center>
                             </td>
+                            
+                            <script>
+                        
+                                document.getElementById("AddEvntDesc").value = "Add event description here...";
+
+                                function checkEmptyEvntDesc(){
+                                    if(document.getElementById("AddEvntDesc").value === "")
+                                        document.getElementById("AddEvntDesc").value = "Add event description here...";
+                                }
+
+                                setInterval(function(){
+                                    var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn");
+                                    var CalUpdateEvntBtn = document.getElementById("CalUpdateEvntBtn");
+                                    var CalDltEvntBtn = document.getElementById("CalDltEvntBtn");
+
+                                    var AddEvntTtle = document.getElementById("AddEvntTtle");
+                                    var AddEvntDesc = document.getElementById("AddEvntDesc");
+                                    var EvntDatePicker = document.getElementById("EvntDatePicker");
+                                    var AddEvntTime = document.getElementById("AddEvntTime");
+
+                                    if(AddEvntTtle.value === "" || AddEvntDesc.value === "Add event description here..." || EvntDatePicker.value === "" || AddEvntTime.value === ""){
+                                        if(CalSaveEvntBtn){
+                                            CalSaveEvntBtn.style.backgroundColor = "darkgrey";
+                                            CalSaveEvntBtn.disabled = true;
+                                        }
+                                        if(CalUpdateEvntBtn){
+                                            CalUpdateEvntBtn.style.backgroundColor = "darkgrey";
+                                            CalUpdateEvntBtn.disabled = true;
+                                        }
+                                        if(CalDltEvntBtn){
+                                            CalDltEvntBtn.style.backgroundColor = "darkgrey";
+                                            CalDltEvntBtn.disabled = true;
+                                        }
+                                    }else{
+                                        if(CalSaveEvntBtn){
+                                            CalSaveEvntBtn.style.backgroundColor = "pink";
+                                            CalSaveEvntBtn.disabled = false;
+                                        }
+                                        if(CalUpdateEvntBtn){
+                                            CalUpdateEvntBtn.style.backgroundColor = "pink";
+                                            CalUpdateEvntBtn.disabled = false;
+                                        }
+                                        if(CalDltEvntBtn){
+                                            CalDltEvntBtn.style.backgroundColor = "pink";
+                                            CalDltEvntBtn.disabled = false;
+                                        }
+                                    }
+
+
+                                }, 1);
+                                
+                                $('#AddEvntTime').timepicker({
+                                        timeFormat: 'HH:mm',
+                                        interval: 10,
+                                        minTime: '00',
+                                        maxTime: '23:59',
+                                        defaultTime: '12',
+                                        startTime: '00',
+                                        dynamic: false,
+                                        dropdown: true,
+                                        scrollbar: true
+                                    });
+
+                        </script>
+                            
                         </tr>
                         
                         <script>

@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -384,6 +385,53 @@ if(selectFlag != 2){
             
             int updateSuccess = updatePst.executeUpdate();
             
+            //-------------------------------------------------------------------------------------------
+                Date NotiDate = new Date();
+                String NotiSDate = NotiDate.toString();
+                SimpleDateFormat NotiDformat = new SimpleDateFormat("yyyy-MM-dd");
+                String date = NotiDformat.format(NotiDate);
+                String time = NotiSDate.substring(11,16);
+                
+                String CustName = "", CustTel = "";
+                
+                try{
+                    Class.forName(Driver);
+                    Connection CustConn = DriverManager.getConnection(url, user, password);
+                    String CustQuery = "select First_Name, Phone_Number from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                    PreparedStatement CustPst = CustConn.prepareStatement(CustQuery);
+                    CustPst.setString(1, CustomerID);
+                    
+                    ResultSet CustRec = CustPst.executeQuery();
+                    
+                    while(CustRec.next()){
+                        CustName = CustRec.getString("First_Name").trim();
+                        CustTel = CustRec.getString("Phone_Number").trim();
+                    }
+                    
+                
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                
+                //nofitying Provider
+                try{
+                    Class.forName(Driver);
+                    Connection notiConn = DriverManager.getConnection(url, user, password);
+                    String notiString = "insert into QueueServiceProviders.Notifications (Noti_Type, ProvID, If_From_Cust, What, Noti_Date, Not_Time)"
+                            + "values (?,?,?,?,?,?)";
+                    PreparedStatement notiPst = notiConn.prepareStatement(notiString);
+                    notiPst.setString(1, "Appointment");
+                    notiPst.setString(2, ProviderID);
+                    notiPst.setString(3, CustomerID);
+                    notiPst.setString(4,  CustName + " - " + CustTel + " - moved his spot to " + AppointmentTime + " on " + AppointmentDate);
+                    notiPst.setString(5, date);
+                    notiPst.setString(6, time);
+                    notiPst.executeUpdate();
+                    
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                
             //response.sendRedirect("ProviderCustomerPage.jsp");
             JOptionPane.showMessageDialog(null, "Spot moved successfully!");
             
