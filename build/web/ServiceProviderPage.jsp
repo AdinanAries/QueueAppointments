@@ -1624,14 +1624,16 @@
                         }
                     </script>
                     
-                    <p id="DropDownBtn" onclick='hideDropDownBtnclick();' style="position: absolute; text-align: center; width: 34px; background-color: pink; border: 1px solid black; border-radius: 4px;">
-                        <img src="icons/icons8-menu-25.png" width="25" height="25" alt="icons8-menu-25"/>
-                    </p>
+                    <div style="float: right; width: 45px; padding-right: 5px;">
+                        <img style="border-radius: 100%; border: 1px solid green;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
                     
-                    <p style='width: 235px; float: right; margin-top: 5px; margin-right: 0;'>
+                    </div>
+                    <!--onclick='hideDropDownBtnclick();'-->
+                    
+                    <p style='width: 225px; float: left; margin-top: 5px; margin-left: 0;'>
                         <span onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 75px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide spots</span>
                         <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>  
-                            <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Update your clients</span></a>
+                            <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Post an update</span></a>
                     </p>
                     
                     <p style='clear: both;'></p>
@@ -1647,7 +1649,7 @@
                     </form-->
                 </center>
                 
-                <nav id="DropDown">
+                <!--nav id="DropDown">
                 
                 <ul>
                     <li style='cursor: pointer;'><img src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
@@ -1658,15 +1660,15 @@
                         Add Admins</li>
                 </ul>
                 <form action = "LogoutController" name="LogoutForm" method="POST">
-                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type="hidden" name="UserIndex" value="<=UserIndex%>" />
                     <center><input style='padding: 2px; background-color: red; width: 90%;' type="submit" value="Logout" class="button" /></center>
                 </form>
-            </nav>
+            </nav-->
                 
             </div>
             
             
-            <div class="providerHeader" id="ProviderHeader" onclick="hideDropDown();" style="">
+            <div class="providerHeader" id="ProviderHeader" style=""> <!--onclick="hideDropDown();"-->
                 <cetnter><p> </p></cetnter>
                 <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
                 <!--center><h2 style="color: #000099;">Line Your Customers Now!</h2></center-->

@@ -394,7 +394,7 @@
                                 <p style='margin-bottom: 4px;'>Add photo to this message</p>
                                 <div id="MsgPhotoDisplay"></div>
                                 
-                                <input id="NewsPhotoFld" style="width: 95%;" type="file" name="MsgformPhoto" />
+                                <input style="background-color: white; border: 1px solid darkgray; width: 95%;" id="NewsPhotoFld" style="width: 95%;" type="file" name="MsgformPhoto" />
                                 
                             </td>
                         </tr>
@@ -425,7 +425,8 @@
                                     var VPublicRd = document.getElementById("VPublicRd");
                                     var VCustomersRd = document.getElementById("VCustomersRd");
 
-                                    if((NewsMessageFld.value === "What should your clients know about?") || (VPublicRd.checked ===  false && VCustomersRd.checked === false) || (document.getElementById("NewsPhotoFld").value === "")){
+                                    if((NewsMessageFld.value === "What should your clients know about?") || 
+                                            (VPublicRd.checked ===  false && VCustomersRd.checked === false) || (document.getElementById("NewsPhotoFld").value === "")){
                                         if(SaveNewsBtn){
                                             SaveNewsBtn.style.backgroundColor = "darkgrey";
                                             SaveNewsBtn.disabled = true;
