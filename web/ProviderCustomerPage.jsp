@@ -1389,6 +1389,71 @@
                                     <p>Time: <input id="AddEvntTime" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
                                 </div>
                             </td>
+                            
+                            <script>
+                        
+                                document.getElementById("AddEvntDesc").value = "Add event description here...";
+
+                                function checkEmptyEvntDesc(){
+                                    if(document.getElementById("AddEvntDesc").value === "")
+                                        document.getElementById("AddEvntDesc").value = "Add event description here...";
+                                }
+
+                                $('#AddEvntTime').timepicker({
+                                        timeFormat: 'HH:mm',
+                                        interval: 10,
+                                        minTime: '00',
+                                        maxTime: '23:59',
+                                        defaultTime: '12',
+                                        startTime: '00',
+                                        dynamic: false,
+                                        dropdown: true,
+                                        scrollbar: true
+                                    });
+
+                                setInterval(function(){
+                                    var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn");
+                                    var CalUpdateEvntBtn = document.getElementById("CalUpdateEvntBtn");
+                                    var CalDltEvntBtn = document.getElementById("CalDltEvntBtn");
+
+                                    var AddEvntTtle = document.getElementById("AddEvntTtle");
+                                    var AddEvntDesc = document.getElementById("AddEvntDesc");
+                                    var EvntDatePicker = document.getElementById("EvntDatePicker");
+                                    var AddEvntTime = document.getElementById("AddEvntTime");
+
+                                    if(AddEvntTtle.value === "" || AddEvntDesc.value === "Add event description here..." || EvntDatePicker.value === "" || AddEvntTime.value === ""){
+                                        if(CalSaveEvntBtn){
+                                            CalSaveEvntBtn.style.backgroundColor = "darkgrey";
+                                            CalSaveEvntBtn.disabled = true;
+                                        }
+                                        if(CalUpdateEvntBtn){
+                                            CalUpdateEvntBtn.style.backgroundColor = "darkgrey";
+                                            CalUpdateEvntBtn.disabled = true;
+                                        }
+                                        if(CalDltEvntBtn){
+                                            CalDltEvntBtn.style.backgroundColor = "darkgrey";
+                                            CalDltEvntBtn.disabled = true;
+                                        }
+                                    }else{
+                                        if(CalSaveEvntBtn){
+                                            CalSaveEvntBtn.style.backgroundColor = "pink";
+                                            CalSaveEvntBtn.disabled = false;
+                                        }
+                                        if(CalUpdateEvntBtn){
+                                            CalUpdateEvntBtn.style.backgroundColor = "pink";
+                                            CalUpdateEvntBtn.disabled = false;
+                                        }
+                                        if(CalDltEvntBtn){
+                                            CalDltEvntBtn.style.backgroundColor = "pink";
+                                            CalDltEvntBtn.disabled = false;
+                                        }
+                                    }
+
+
+                                }, 1);
+
+                        </script>
+                            
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
@@ -1575,6 +1640,31 @@
                                 <p>Phone: <input id='PhoneExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
                                 <center><input id='UpdtPerInfExtraBtn' style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
                             </td>
+                            
+                            <script>
+                                
+                                setInterval(function(){
+                                    
+                                    var fNameExtraFld = document.getElementById("fNameExtraFld");
+                                    var mNameExtraFld = document.getElementById("mNameExtraFld");
+                                    var lNameExtraFld = document.getElementById("lNameExtraFld");
+                                    var EmailExtraFld = document.getElementById("EmailExtraFld");
+                                    var PhoneExtraFld = document.getElementById("PhoneExtraFld");
+                                    var UpdtPerInfExtraBtn = document.getElementById("UpdtPerInfExtraBtn");
+                                    
+                                    if(fNameExtraFld.value === "" || mNameExtraFld.value === "" || lNameExtraFld.value === "" || 
+                                        EmailExtraFld.value === "" || PhoneExtraFld.value === "" ){
+                                    
+                                        UpdtPerInfExtraBtn.style.backgroundColor = "darkgrey";   
+                                        UpdtPerInfExtraBtn.disabled = true;
+                                    }else{
+                                        UpdtPerInfExtraBtn.style.backgroundColor = "pink";
+                                        UpdtPerInfExtraBtn.disabled = false;
+                                    }
+                                    
+                                }, 1);
+                                
+                            </script>
                             
                             <script>
                                 $(document).ready(function(){
@@ -2582,7 +2672,7 @@
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
                                     <p>Title: <input id="AddEvntTtle2" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea id="AddEvntDesc2" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
+                                    <p><textarea onfocusout="checkEmptyEvntDesc2();" id="AddEvntDesc2" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
                                         </textarea></p>
                                     <p>Date: <input id='EvntDatePicker2' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
@@ -2595,6 +2685,71 @@
                                     <p>Time: <input id="AddEvntTime2" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
                                 </div>
                             </td>
+                            
+                            <script>
+                        
+                            document.getElementById("AddEvntDesc2").value = "Add event description here...";
+
+                            function checkEmptyEvntDesc2(){
+                                if(document.getElementById("AddEvntDesc2").value === "")
+                                    document.getElementById("AddEvntDesc2").value = "Add event description here...";
+                            }
+
+                            $('#AddEvntTime2').timepicker({
+                                    timeFormat: 'HH:mm',
+                                    interval: 10,
+                                    minTime: '00',
+                                    maxTime: '23:59',
+                                    defaultTime: '12',
+                                    startTime: '00',
+                                    dynamic: false,
+                                    dropdown: true,
+                                    scrollbar: true
+                                });
+
+                            setInterval(function(){
+                                var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn2");
+                                var CalUpdateEvntBtn = document.getElementById("CalUpdateEvntBtn2");
+                                var CalDltEvntBtn = document.getElementById("CalDltEvntBtn2");
+
+                                var AddEvntTtle = document.getElementById("AddEvntTtle2");
+                                var AddEvntDesc = document.getElementById("AddEvntDesc2");
+                                var EvntDatePicker = document.getElementById("EvntDatePicker2");
+                                var AddEvntTime = document.getElementById("AddEvntTime2");
+
+                                if(AddEvntTtle.value === "" || AddEvntDesc.value === "Add event description here..." || EvntDatePicker.value === "" || AddEvntTime.value === ""){
+                                    if(CalSaveEvntBtn){
+                                        CalSaveEvntBtn.style.backgroundColor = "darkgrey";
+                                        CalSaveEvntBtn.disabled = true;
+                                    }
+                                    if(CalUpdateEvntBtn){
+                                        CalUpdateEvntBtn.style.backgroundColor = "darkgrey";
+                                        CalUpdateEvntBtn.disabled = true;
+                                    }
+                                    if(CalDltEvntBtn){
+                                        CalDltEvntBtn.style.backgroundColor = "darkgrey";
+                                        CalDltEvntBtn.disabled = true;
+                                    }
+                                }else{
+                                    if(CalSaveEvntBtn){
+                                        CalSaveEvntBtn.style.backgroundColor = "pink";
+                                        CalSaveEvntBtn.disabled = false;
+                                    }
+                                    if(CalUpdateEvntBtn){
+                                        CalUpdateEvntBtn.style.backgroundColor = "pink";
+                                        CalUpdateEvntBtn.disabled = false;
+                                    }
+                                    if(CalDltEvntBtn){
+                                        CalDltEvntBtn.style.backgroundColor = "pink";
+                                        CalDltEvntBtn.disabled = false;
+                                    }
+                                }
+
+
+                            }, 1);
+
+                        </script>
+                            
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
@@ -2781,6 +2936,31 @@
                                 <p>Phone: <input id='PhoneExtraFld2' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
                                 <center><input id='UpdtPerInfExtraBtn2' style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
                             </td>
+                            
+                            <script>
+                                
+                                setInterval(function(){
+                                    
+                                    var fNameExtraFld = document.getElementById("fNameExtraFld2");
+                                    var mNameExtraFld = document.getElementById("mNameExtraFld2");
+                                    var lNameExtraFld = document.getElementById("lNameExtraFld2");
+                                    var EmailExtraFld = document.getElementById("EmailExtraFld2");
+                                    var PhoneExtraFld = document.getElementById("PhoneExtraFld2");
+                                    var UpdtPerInfExtraBtn = document.getElementById("UpdtPerInfExtraBtn2");
+                                    
+                                    if(fNameExtraFld.value === "" || mNameExtraFld.value === "" || lNameExtraFld.value === "" || 
+                                        EmailExtraFld.value === "" || PhoneExtraFld.value === "" ){
+                                    
+                                        UpdtPerInfExtraBtn.style.backgroundColor = "darkgrey";   
+                                        UpdtPerInfExtraBtn.disabled = true;
+                                    }else{
+                                        UpdtPerInfExtraBtn.style.backgroundColor = "pink";
+                                        UpdtPerInfExtraBtn.disabled = false;
+                                    }
+                                    
+                                }, 1);
+                                
+                            </script>
                             
                             <script>
                                 $(document).ready(function(){
