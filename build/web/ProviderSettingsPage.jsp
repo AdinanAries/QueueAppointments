@@ -273,7 +273,7 @@
         
         String LastNewsID = "";
         String lastNewsMsg = "";
-        String NewsPicSrc = "view-wallpaper-7.jpg";
+        String NewsPicSrc = "";
         
         try{
             Class.forName(Driver);
@@ -312,6 +312,10 @@
 
         }catch(Exception e){
             e.printStackTrace();
+        }
+        
+        if(NewsPicSrc.equals("")){
+            NewsPicSrc = "view-wallpaper-7.jpg";
         }
     %>
     
@@ -380,7 +384,7 @@
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
-                                <textarea id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">What should your clients know about?
+                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">
                                 </textarea>
                                 
                             </td>
@@ -403,6 +407,41 @@
                                 
                                 <center><input id="SaveNewsBtn" style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
                             </td>
+                            
+                            <script>
+                        
+                                document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                
+                                function checkEmptyNewTxt(){
+                                    if(document.getElementById("NewsMessageFld").value === "")
+                                        document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                }
+                                
+                                setInterval(function(){
+                                    
+                                    var SaveNewsBtn = document.getElementById("SaveNewsBtn");
+
+                                    var NewsMessageFld = document.getElementById("NewsMessageFld");
+                                    var VPublicRd = document.getElementById("VPublicRd");
+                                    var VCustomersRd = document.getElementById("VCustomersRd");
+
+                                    if((NewsMessageFld.value === "What should your clients know about?") || (VPublicRd.checked ===  false && VCustomersRd.checked === false) || (document.getElementById("NewsPhotoFld").value === "")){
+                                        if(SaveNewsBtn){
+                                            SaveNewsBtn.style.backgroundColor = "darkgrey";
+                                            SaveNewsBtn.disabled = true;
+                                        }
+                                    }else{
+                                        if(SaveNewsBtn){
+                                            SaveNewsBtn.style.backgroundColor = "pink";
+                                            SaveNewsBtn.disabled = false;
+                                        }
+                                    }
+
+
+                                }, 1);
+
+                        </script>
+                            
                         </tr>
                         <%
                             Date UpdDate = new Date();
@@ -484,10 +523,14 @@
                                 <div style='height: 700px; margin-bottom: 10px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
                                     <div style="background-color: #333333; padding: 4px;">
                                         <p style='color: white; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
+                                        
                                         <center><img id="defaultPic" src="<%=NewsPicSrc%>" width="98%" alt="view-wallpaper-7"/></center>
+                                        
                                     </div>
                                 <p id="MessageP" style='border-top: 1px solid darkgrey;'><%=lastNewsMsg%></p>
+                                
                                 <input id="RecentMessageID" type="hidden" value="<%=LastNewsID%>" />
+                                
                                 <img style="float: right;" id="DltRecentNewsBtn" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/>
                                 
                                 <script>
@@ -502,7 +545,7 @@
                                                 data: "MessageID="+MessageID,
                                                 success: function(result){
                                                     
-                                                    alert(result);
+                                                    //alert(result);
                                                     
                                                     $.ajax({
                                                         type:"POST",
@@ -515,11 +558,11 @@
                                                             var MessagePic = MessageData.Photo;
                                                             var MessageID = MessageData.ID;
                                                             var Message = MessageData.Message;
-
+                                                            
                                                             if(MessagePic !== ""){
                                                                 document.getElementById("defaultPic").setAttribute("src", "data:image/jpg;base64,"+MessagePic);
-
                                                             }
+                                                            
                                                             document.getElementById("MessageP").innerHTML = Message;
                                                             document.getElementById("RecentMessageID").value = MessageID;
                                                             document.getElementById("NewsMessageFld").value = "What should your clients know about?";
