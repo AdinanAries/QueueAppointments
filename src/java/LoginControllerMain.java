@@ -11,10 +11,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.arieslab.queue.queue_model.UserAccount;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.swing.JOptionPane;
 
 public class LoginControllerMain extends HttpServlet {
 
+    int Flag = 0;
+          
+            //Database connection parameters
+           String Driver = "";
+           String url = "";
+           String user = "";
+           String password = "";
+    
+            @Override
+            public void init(ServletConfig config){
+                
+                config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+                config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+                config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+                config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+                
+                url = config.getInitParameter("databaseUrl");
+                Driver = config.getInitParameter("databaseDriver");
+                user = config.getInitParameter("user");
+                password = config.getInitParameter("password");
+                
+            }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,15 +54,6 @@ public class LoginControllerMain extends HttpServlet {
            //UserAccount.UserID = 0;
            //UserAccount.AccountType = "";
            //UserAccount.LoginStatusMessage = "";
-           
-           //checks for whether both queries were not executed in order to redirect to login page
-           int Flag = 0;
-           
-           //Database connection parameters
-           String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-           String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-           String user = "sa";
-           String password = "Password@2014";
            
         try{
             //first connection query attempt (to customers table)

@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,14 +17,23 @@ import javax.swing.JOptionPane;
 
 public class CloseDayController extends HttpServlet {
 
+    String Driver = "";
+    String url = "";
+    String user = "";
+    String password = "";
+        
+    @Override
+    public void init(ServletConfig config){
+                
+        url = config.getServletContext().getAttribute("DBUrl").toString(); 
+        Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        user = config.getServletContext().getAttribute("DBUser").toString();
+        password = config.getServletContext().getAttribute("DBPassword").toString();
+        
+    }
    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-        String user = "sa";
-        String password = "Password@2014";
         
         String DaysDate = request.getParameter("GetDate");
         String ProviderID = request.getParameter("ProviderID");

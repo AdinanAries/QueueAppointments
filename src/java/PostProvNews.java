@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -19,15 +20,25 @@ import javax.swing.JOptionPane;
 
 public class PostProvNews extends HttpServlet {
 
+    String Driver = "";
+    String url = "";
+    String user = "";
+    String password = "";
+        
+    @Override
+    public void init(ServletConfig config){
+                
+        url = config.getServletContext().getAttribute("DBUrl").toString(); 
+        Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        user = config.getServletContext().getAttribute("DBUser").toString();
+        password = config.getServletContext().getAttribute("DBPassword").toString();
+        
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         //request.getParameter('Photo');
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-        String user = "sa";
-        String password = "Password@2014";
         
         String Message = request.getParameter("Message");
         String Visibility = request.getParameter("NewsVisibility");

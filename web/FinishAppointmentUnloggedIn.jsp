@@ -276,7 +276,7 @@
             
             <div id="main">
                 
-                <cetnter><h4 style="padding: 5px; color: white; background-color: red; margin-bottom: 10px;"><%=Message%></h4></cetnter>
+                <cetnter><h4 style="padding: 10px; color: white; background-color: red; margin-bottom: 10px;"><%=Message%></h4></cetnter>
                 <h3 style="margin-top: 20px; margin-bottom: 5px;">Your Spot Details Provided Below</h3>
                 <p style="color: seashell;"><span><%=ProviderFullName%> from <%=ProviderCompany%></span></p>
                 <center><table border="0">

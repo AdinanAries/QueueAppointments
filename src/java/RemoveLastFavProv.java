@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +22,24 @@ import javax.swing.JOptionPane;
  */
 public class RemoveLastFavProv extends HttpServlet {
 
+    String Driver = "";
+    String url = "";
+    String user = "";
+    String password = "";
+        
+    @Override
+    public void init(ServletConfig config){
+                
+        url = config.getServletContext().getAttribute("DBUrl").toString(); 
+        Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        user = config.getServletContext().getAttribute("DBUser").toString();
+        password = config.getServletContext().getAttribute("DBPassword").toString();
+        
+    }
    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            doPost(request, response);
         
         }
     
@@ -31,14 +47,7 @@ public class RemoveLastFavProv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
         
-          //Database connection parameters
-           String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-           String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-           String user = "sa";
-           String password = "Password@2014";
-           
            String FavProvID = request.getParameter("UserID");
            String UserIndex = request.getParameter("UserIndex");
            String NewUserName = request.getParameter("User");

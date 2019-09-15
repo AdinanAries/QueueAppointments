@@ -383,6 +383,8 @@ if(selectFlag != 2){
             updatePst.setString(2, AppointmentTime);
             updatePst.setString(3, AppointmentID);
             
+            //JOptionPane.showMessageDialog(null,AppointmentDate);
+            
             int updateSuccess = updatePst.executeUpdate();
             
             //-------------------------------------------------------------------------------------------

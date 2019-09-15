@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,17 +16,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
 public class ProviderSignUpController extends HttpServlet {
+    
+    String Driver = "";
+    String URL = "";
+    String user = "";
+    String password = "";
+        
+    @Override
+    public void init(ServletConfig config){
+                
+        URL = config.getServletContext().getAttribute("DBUrl").toString(); 
+        Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        user = config.getServletContext().getAttribute("DBUser").toString();
+        password = config.getServletContext().getAttribute("DBPassword").toString();
+        
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         int UserID = 0;
-        
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String URL = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-        String user = "sa";
-        String password = "Password@2014";
         
         int UserIndex = ExistingProviderAccountsModel.getUserIndex();
         

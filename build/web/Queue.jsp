@@ -656,10 +656,10 @@
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 Show News Updates</p>
             
-            <p id='QShowNews22' 
+            <a href="NewsUpadtesPage.jsp"><p id='QShowNews22' 
                 style='background-color: #334d81; color: white; border: 2px solid white; padding: 5px; cursor: pointer;'>
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
-                Show News Updates</p>
+                Show News Updates</p></a>
             
             <center><p id='addBizTxt' style="font-size: 20px;  margin-bottom: 10px; color: #000099"><b>Add your business or create customer account below</b>
                 </p></center>

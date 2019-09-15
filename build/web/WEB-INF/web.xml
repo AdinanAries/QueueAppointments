@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
     <servlet>
         <servlet-name>LoginControllerMain</servlet-name>
         <servlet-class>LoginControllerMain</servlet-class>
+        <init-param>
+            <param-name>databaseUrl</param-name>
+            <param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value>
+        </init-param>
+        <init-param>
+            <param-name>databaseDriver</param-name>
+            <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>user</param-name>
+            <param-value>sa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>Password@2014</param-value>
+        </init-param>
     </servlet>
     <servlet>
         <servlet-name>PageController</servlet-name>
@@ -661,10 +678,30 @@
             30
         </session-timeout>
     </session-config>
-    <servlet-name>jsp</servlet-name>
-    <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-    <init-param>
+    <servlet>
+        <servlet-name>jsp</servlet-name>
+        <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+        <init-param>
+            <param-name>databaseUrl</param-name>
+            <param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value>
+        </init-param>
+        <init-param>
+            <param-name>databaseDriver</param-name>
+            <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>user</param-name>
+            <param-value>sa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>Password@2014</param-value>
+        </init-param>
+    </servlet>
+    
+    <!--init-param>
         <param-name>mappedfile</param-name>
         <param-value>false</param-value>
-    </init-param>
+    </init-param-->
+    
 </web-app>

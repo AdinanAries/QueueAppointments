@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,18 +31,28 @@ public class getProvFeedbackDate extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    String Driver = "";
+    String url = "";
+    String user = "";
+    String password = "";
+        
+    @Override
+    public void init(ServletConfig config){
+                
+        url = config.getServletContext().getAttribute("DBUrl").toString(); 
+        Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        user = config.getServletContext().getAttribute("DBUser").toString();
+        password = config.getServletContext().getAttribute("DBPassword").toString();
+        
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String CustomerID = request.getParameter("CustomerID");
         String FeedBackDate = "";
         
-        //Database connection parameters
-           String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-           String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-           String user = "sa";
-           String password = "Password@2014";
-           
            try{
                Class.forName(Driver);
                Connection dateConn = DriverManager.getConnection(url, user, password);

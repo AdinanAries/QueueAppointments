@@ -976,6 +976,8 @@
 
                                     </div></center>
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
+                
+                <center><div style="width: 100%; max-width: 600px;">
                             <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray; border-bottom: 1px solid darkgray;">
                                 <p id="showFutureSpotsBtn" style="text-align: center; cursor: pointer;">Find More Spots</p>
                                     
@@ -1024,7 +1026,7 @@
                             </div>
                                         
                             <a href="Queue.jsp"><p style="padding: 5px; background-color: pink; color: white; text-align:center; ">Go to your dashboard</p></a>
-    
+                    </div></center>
     </body>
     
     <script src="scripts/script.js"></script>
