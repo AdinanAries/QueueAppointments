@@ -47,10 +47,15 @@
         
         String base64Image = "";
         
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-        String User = "sa"; //datebase user account
-        String Password = "Password@2014"; //database password
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         int ID = UserID;
         
@@ -115,8 +120,21 @@
             <input type="hidden" name="User" value="<%=NewUserName%>" />
             <input type="hidden" name="ProviderID" value="<%=ID%>" />
             
-            <input style="width: 90%;" type="file" name="file" value="" /><br />
-            <input style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" />
+            <input id="GalPhotoFld" style="width: 90%; background-color: white; border: #d8d8d8 1px solid;" type="file" name="file" value="" /><br />
+            <input id="GalUploadBtn" style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" />
+        
+            <script>
+                setInterval(function(){
+
+                    if(document.getElementById("GalPhotoFld").value === ""){
+                        document.getElementById("GalUploadBtn").style.display = "none";
+                    }else{
+                        document.getElementById("GalUploadBtn").style.display = "block";
+                    }
+
+                },1);
+            </script>
+            
         </form>
         <p style="border-top: 1px solid darkgrey; margin-top: 10px;"></p>
         <a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>

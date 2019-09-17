@@ -61,10 +61,10 @@
                          int CustomerID = UserID;
                          String SpotsDate = request.getParameter("GetDate");
                          
-                        String Url ="jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-                        String Driver ="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-                        String user ="sa";
-                        String password ="Password@2014";
+                        String Url = config.getServletContext().getAttribute("DBUrl").toString();
+                        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+                        String user = config.getServletContext().getAttribute("DBUser").toString();
+                        String password = config.getServletContext().getAttribute("DBPassword").toString();
 
                         int IntervalsValue = 30;
         

@@ -6,6 +6,7 @@
 package com.arieslab.queue.queue_model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -21,7 +22,7 @@ public class UserAccount {
     public static int AllUsers = 0;
     
     //contains pool of all userID's for logged in users
-    public static ArrayList<UserAccount> LoggedInUsers = new ArrayList<>();
+    public static LinkedList<UserAccount> LoggedInUsers = new LinkedList<>();
     
     private static String LoginStatusMessage = "";
     

@@ -32,10 +32,16 @@
     </head>
     
     <%
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-        String User = "sa"; //datebase user account
-        String Password = "Password@2014"; //database password
+        
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         String Message = "";
         
@@ -46,7 +52,7 @@
             e.printStackTrace();
         }
         
-        try{
+        /*try{
         
         int UserID = 0;
         
@@ -64,7 +70,7 @@
         
         else if(UserID == 0)
             response.sendRedirect("LogInPage.jsp");
-        }catch(Exception e){}
+        }catch(Exception e){}*/
     %>
     
     <body>
@@ -283,7 +289,7 @@
                     
                 <center><h2 style="margin-bottom: 20px;">Login Here</h2></center>
                 
-                <form name="login" action="LoginControllerMain" method="POST"><table border="0"> 
+                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST"><table border="0"> 
                         
                             <tbody>
                                 <tr>
@@ -295,9 +301,78 @@
                             </tbody>
                         </table>
                     
-                        <input class="button" type="reset" value="Reset" name="resetbtn"/>
+                        <input class="button" type="reset" value="Reset" name="resetbtn" />
                         <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
                     </form>
+                
+                <center><div id="forgotPassDiv" style="display: none;">
+                    
+                    <p id="FGPassDivStatusTxt" style="margin-bottom: 15px; font-weight: bolder;">Enter your email below</p>
+                    
+                    <input id="forgotPassEmailFld" onmousemove="findAt();" type="email" value="" placeholder="enter you email address" size="45" style="background-color: #6699ff; margin: 10px;"/>
+                    <p><input id="forgotPassBtn" style="background-color: pink; border: 1px solid black; padding: 10px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization code" /><p>
+                    
+                        <script>
+                            
+                                var AtFound = false;
+                                var DotFound = false;
+
+                                function findAt(){
+                                    
+                                    var email = document.getElementById("forgotPassEmailFld").value;
+                                    
+                                    if(email.includes('@')){
+                                        AtFound = true;
+                                    }else{
+                                        AtFound = false;
+                                    }
+                                    if(email.includes('.')){
+                                        DotFound = true;
+                                    }else{
+                                        DotFound = false;
+                                    }
+                                }
+                            
+                            setInterval(function(){
+                                
+                                if(document.getElementById("forgotPassEmailFld").value === ""){
+                                    document.getElementById("forgotPassBtn").style.backgroundColor = "darkgrey";
+                                    document.getElementById("forgotPassBtn").disabled = true;
+                                    AtFound = false;
+                                    DotFound = false;
+                                }else{
+                                    if(AtFound && DotFound){
+                                        document.getElementById("forgotPassBtn").style.backgroundColor = "pink";
+                                        document.getElementById("forgotPassBtn").disabled = false;
+                                        document.getElementById("FGPassDivStatusTxt").innerHTML = "you may send verification code";
+                                    }else{
+                                        document.getElementById("FGPassDivStatusTxt").innerHTML = "this email must be associated to your queue account";
+                                        document.getElementById("forgotPassBtn").style.backgroundColor = "darkgrey";
+                                        document.getElementById("forgotPassBtn").disabled = true;
+                                    }
+                                    
+                                }
+                                
+                            },1);
+                            
+                            function showForgotPassDiv(){
+                                if(document.getElementById("forgotPassDiv").style.display === "none"){
+                                    document.getElementById("LoginForm").style.display = "none";
+                                    document.getElementById("forgotPassDiv").style.display = "block";
+                                    document.getElementById("toggleShowFGPassDivLnk").innerHTML = "Show Login";
+                                }else{
+                                    document.getElementById("LoginForm").style.display = "block";
+                                    document.getElementById("forgotPassDiv").style.display = "none";
+                                    document.getElementById("toggleShowFGPassDivLnk").innerHTML = "forgot my password";
+                                }
+                            }
+                            
+                        </script>
+                        
+                    </div></center>
+                
+                <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: green; cursor: pointer; margin: 10px; padding: 4px;">forgot my password</h5></center>
+                
                 <h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; background-color: blue; padding: 4px; border: 1px solid black;">I don't have a user account. Sign-up now!</a></h5>
                 </div></center>
                 <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>

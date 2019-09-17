@@ -37,10 +37,16 @@
     <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
     
     <%
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-        String User = "sa"; //datebase user account
-        String Password = "Password@2014"; //database password
+        
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        String Driver = config.getInitParameter("databaseDriver");
+        String url = config.getInitParameter("databaseUrl");
+        String User = config.getInitParameter("user");
+        String Password = config.getInitParameter("password");
         
         String fName = "";
         String lName = "";
@@ -365,7 +371,7 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="50" style="background-color: #6699ff;"/>
+                                    <td><p>User Name</p><input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="50" style="background-color: #6699ff;"/>
                                         <p id="CustUserNameStatus" style="color: white; background-color: red; text-align: center; max-width: 355px;"></p></td>
                                 </tr>
                                 <tr>
@@ -384,6 +390,11 @@
                     </form>
                                 
                     <script>
+                                    
+                        function setPasswordsZero(){
+                            document.getElementById("secondPassword").value = "";
+                            document.getElementById("firstPassword").value = "";
+                        }
                                     
                         function CustUserNameCheck(){
                             
@@ -641,7 +652,7 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="50" style="background-color: #6699ff;"/>
+                                    <td><p>User Name</p><input onkeyup="setProvPasswordsZero();" onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="50" style="background-color: #6699ff;"/>
                                         <p id="provUserNameStatus" style="background-color: red; color: white; text-align: center; max-width: 355px;"></p></td>
                                 </tr>
                                 <tr>
@@ -660,7 +671,12 @@
                     </form>
                                 
                     <script>
-                                    
+                        
+                        function setProvPasswordsZero(){
+                            document.getElementById("secondProvPassword").value = "";
+                            document.getElementById("firstProvPassword").value = "";
+                        }
+                        
                         function ProvUserNameCheck(){
                             
                             var userName = document.getElementById("provUserName").value;
@@ -675,6 +691,7 @@
                                         document.getElementById("provUserNameStatus").innerHTML = 'Username: <span style="color: blue;">"' + userName + '"</span> is not available. Choose a different Username';
                                         document.getElementById("provUserNameStatus").style.backgroundColor = "red";
                                         document.getElementById("provUserName").value = "";
+                                        
                                         
                                     }else if(result === "false" && document.getElementById("provUserName").value !== ""){
                                         

@@ -62,12 +62,15 @@
         //if(UserAccount.AccountType.equals("BusinessAccount"))
             //response.sendRedirect("ServiceProviderPage.jsp");
             
-
-
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-        String User = "sa"; //datebase user account
-        String Password = "Password@2014"; //database password
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+          
+        String url = config.getInitParameter("databaseUrl");
+        String Driver =  config.getInitParameter("databaseDriver");
+        String User = config.getInitParameter("user");
+        String Password = config.getInitParameter("password");
         
     %>
     

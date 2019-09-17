@@ -39,6 +39,14 @@
         
     </head>
     
+    <%
+        //connection arguments
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+    %>
+    
     <%!
         //should have put class declaration in model since its declared in multiple files
         //that way i could centralize its access to multiple files
@@ -46,10 +54,18 @@
        class getUserDetails{
            private Connection conn;
            private ResultSet records;
-           private String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-           private String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-           private String User = "sa";
-           private String Password = "Password@2014";
+           private String Driver;
+           private String url;
+           private String User;
+           private String Password;
+           
+           public void initializeDBParams(String driver, String url, String user, String password){
+               
+               this.Driver = driver;
+               this.url = url;
+               this.User = user;
+               this.Password = password;
+           }
            
            //getter accessor function for ResultSet records
            public ResultSet getRecords(String ID){ //get UserID from previous page (jsp) and invoke function with that as argument
@@ -109,13 +125,6 @@
             response.sendRedirect("LogInPage.jsp");
         
         */
-            
-            //Start of scriptlet
-           String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-           String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-           String User = "sa";
-           String Password = "Password@2014";
-           
            try{
             
             Class.forName(Driver);
@@ -211,6 +220,8 @@
             //ProcedureClass.ProviderID = Integer.parseInt(request.getParameter("UserID"));
             
             getUserDetails details = new getUserDetails();
+            details.initializeDBParams(Driver, url, User, Password);
+            
             ArrayList <ProviderInfo> providersList = new ArrayList<>();
             ResultSet rows = details.getRecords(ID); //getRecords method of getUserDetails class takes value as parameter and returns a ResultSet object
            
@@ -239,7 +250,7 @@
         try{
             Class.forName(Driver);
             Connection ReviewsConn = DriverManager.getConnection(url, User, Password);
-            String ReviewString = "Select * from QueueServiceProviders.ProviderCustomersReview where ProviderID = ?";
+            String ReviewString = "Select * from QueueServiceProviders.ProviderCustomersReview where ProviderID = ? order by ReviewID desc";
             PreparedStatement ReviewPst = ReviewsConn.prepareStatement(ReviewString);
             ReviewPst.setString(1, ID);
             
@@ -249,7 +260,7 @@
             
             while(ReviewRec.next()){
                 
-                ReviewsList.clear();
+                //ReviewsList.clear();
                 eachReview = new ReviewsDataModel();
                 
                 eachReview.UserID = ReviewRec.getInt("CustomerID");
@@ -259,6 +270,7 @@
                 eachReview.ReviewDate = ReviewRec.getDate("ReviewDate");
                 
                 ReviewsList.add(eachReview);
+                break;
                 
             }
             
@@ -1100,7 +1112,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(url, User, Password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =? order by PicID desc";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,PID);
                             ResultSet cover = coverPst.executeQuery();
@@ -1128,6 +1140,9 @@
                             catch(Exception e){
 
                             }
+                                 
+                                 if(Base64GalleryPhotos.size() > 6)
+                                     break;
                                 
                             }
                             
@@ -1145,13 +1160,13 @@
                         
                         try{
                             
-                            firstPic = Base64GalleryPhotos.get(0);
-                            seventhPic = Base64GalleryPhotos.get((Base64GalleryPhotos.size()-1));
-                            secondPic = Base64GalleryPhotos.get(1);
-                            thirdPic = Base64GalleryPhotos.get(2);  
-                            fourthPic = Base64GalleryPhotos.get(3);
-                            fithPic = Base64GalleryPhotos.get(4);
-                            sixthPic = Base64GalleryPhotos.get(5);
+                            firstPic = Base64GalleryPhotos.get(1);
+                            seventhPic = Base64GalleryPhotos.get(0);
+                            secondPic = Base64GalleryPhotos.get(2);
+                            thirdPic = Base64GalleryPhotos.get(3);  
+                            fourthPic = Base64GalleryPhotos.get(4);
+                            fithPic = Base64GalleryPhotos.get(5);
+                            sixthPic = Base64GalleryPhotos.get(6);
                             
                             
                         }catch(Exception e){}

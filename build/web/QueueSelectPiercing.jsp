@@ -44,10 +44,15 @@
         //if(UserAccount.AccountType.equals("BusinessAccount"))
             //response.sendRedirect("ServiceProviderPage.jsp");
         
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-        String User = "sa"; //datebase user account
-        String Password = "Password@2014"; //database password
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
     %>
     
     <%!
@@ -57,10 +62,18 @@
            private Connection conn; //connection object variable
            private ResultSet records; //Resultset object variable
            private Statement st;
-           private String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-           private String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-           private String User = "sa"; //datebase user account
-           private String Password = "Password@2014"; //database password
+           private String Driver;
+           private String url;
+           private String User;
+           private String Password;
+           
+           public void initializeDBParams(String driver, String url, String user, String password){
+               
+               this.Driver = driver;
+               this.url = url;
+               this.User = user;
+               this.Password = password;
+           }
            
            public ResultSet getRecords(){
                try{
@@ -82,6 +95,7 @@
         
         <%
             getUserDetails details = new getUserDetails(); //instantiating getUserDetails Class
+            details.initializeDBParams(Driver, url, User, Password);
             
             ArrayList <ProviderInfo> providersList = new ArrayList<>(); //ArrayList to store all providerInfo
             

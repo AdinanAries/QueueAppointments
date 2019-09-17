@@ -65,10 +65,15 @@
         JOptionPane.showMessageDialog(null, calMDate);
         */
         
-        String Url ="jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-        String Driver ="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String user ="sa";
-        String password ="Password@2014";
+        /*config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));*/
+        
+        String Url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String user = config.getServletContext().getAttribute("DBUser").toString();
+        String password = config.getServletContext().getAttribute("DBPassword").toString();
         
         int notiCounter = 0;
         
@@ -858,7 +863,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select top 7 * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,UserID);
                             ResultSet cover = coverPst.executeQuery();
@@ -886,6 +891,9 @@
                             catch(Exception e){
 
                             }
+                                 
+                                 if(Base64GalleryPhotos.size() > 6)
+                                     break;
                                 
                             }
                             
@@ -1260,7 +1268,7 @@
         try{
             Class.forName(Driver);
             Connection ReviewsConn = DriverManager.getConnection(Url, user, password);
-            String ReviewString = "Select * from QueueServiceProviders.ProviderCustomersReview where ProviderID = ?";
+            String ReviewString = "Select * from QueueServiceProviders.ProviderCustomersReview where ProviderID = ? order by ReviewID desc";
             PreparedStatement ReviewPst = ReviewsConn.prepareStatement(ReviewString);
             ReviewPst.setInt(1, UserID);
             
@@ -1269,7 +1277,7 @@
             ReviewsDataModel eachReview;
             
             while(ReviewRec.next()){
-                ReviewsList.clear();
+                //ReviewsList.clear();
                 eachReview = new ReviewsDataModel();
                 
                 eachReview.UserID = ReviewRec.getInt("CustomerID");
@@ -1279,6 +1287,7 @@
                 eachReview.ReviewDate = ReviewRec.getDate("ReviewDate");
                 
                 ReviewsList.add(eachReview);
+                break;
                 
             }
             
@@ -7218,7 +7227,8 @@
                                         
                                     </div>
                                     
-                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Your Queue Stats.</p></center>
+                                    <!--center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Your Queue Stats.</p></center-->
+                                    
                                     <center><p onclick="showUpdateLoginDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Edit Your Login Info.</p></center>
                                     
                                     <div id="UpdateLoginDiv" style="text-align: center; background-color: #6699ff; display: none;">

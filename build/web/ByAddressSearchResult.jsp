@@ -217,11 +217,11 @@
         //if(UserAccount.AccountType.equals("BusinessAccount"))
             //response.sendRedirect("ServiceProviderPage.jsp");
         
-        //connection parameters
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-        String User = "sa"; //datebase user account
-        String Password = "Password@2014"; //database password
+        //connection arguments
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         //getting search parameters for search query
         String City = request.getParameter("city4Search").trim();
@@ -304,10 +304,18 @@
            private Statement st;
            
            //connection parameters
-           private String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-           private String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-           private String User = "sa"; //datebase user account
-           private String Password = "Password@2014"; //database password
+           private String Driver;
+           private String url;
+           private String User;
+           private String Password;
+           
+           public void initializeDBParams(String driver, String url, String user, String password){
+               
+               this.Driver = driver;
+               this.url = url;
+               this.User = user;
+               this.Password = password;
+           }
            
            public ResultSet getRecords(int ProvID, String SVCTypeAppend){
               
@@ -338,6 +346,8 @@
         <%
             //instantiating getUserDetails class
             getUserDetails details = new getUserDetails();
+            details.initializeDBParams(Driver, url, User, Password);
+            
             ArrayList <ProviderInfo> providersList = new ArrayList<>(); //ArrayList of ProviderInfo that models the providerInfo table data
             
             for(int q = 0; q < ProviderIDList.size(); q++){

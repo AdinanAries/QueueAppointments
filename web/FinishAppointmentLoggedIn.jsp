@@ -81,10 +81,11 @@
             response.sendRedirect("LogInPage.jsp");
         */
         
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-        String User = "sa";
-        String Password = "Password@2014";
+        //connection arguments
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         try{
             
@@ -167,10 +168,18 @@
            //class fields
            private Connection conn;
            private ResultSet records;
-           private String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-           private String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-           private String User = "sa";
-           private String Password = "Password@2014";
+           private String Driver;
+           private String url;
+           private String User;
+           private String Password;
+           
+           public void initializeDBParams(String driver, String url, String user, String password){
+               
+               this.Driver = driver;
+               this.url = url;
+               this.User = user;
+               this.Password = password;
+           }
            
            public ResultSet getRecords(String ID){
                
@@ -239,6 +248,8 @@
             String ID = request.getParameter("UserID");
             
             getUserDetails details = new getUserDetails();
+            details.initializeDBParams(Driver, url, User, Password);
+            
             ArrayList <ProviderInfo> providersList = new ArrayList<>();
             ResultSet rows = details.getRecords(ID);
             

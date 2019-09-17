@@ -27,10 +27,15 @@
     <%
         String base64Image = "";
         
-        String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //Driver Class
-        String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue"; //url (database)
-        String User = "sa"; //datebase user account
-        String Password = "Password@2014"; //database password
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         int UserID = 0;
         
@@ -109,8 +114,22 @@
             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
             <input type="hidden" name="User" value="<%=NewUserName%>" />
             
-            <input style="width: 90%;" type="file" name="file" value="" /><br />
-            <input style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" />
+            <p style="text-align: center; margin: 5px; color: white;">Choose a picture to upload</p>
+            
+            <input id="PhotoFileFld" style="width: 90%; background-color: white; border: 1px solid #ccc;" type="file" name="file" value="" /><br />
+            <input id="uploadBtn" style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" />
+            
+            <script>
+                setInterval(function(){
+                    
+                    if(document.getElementById("PhotoFileFld").value === ""){
+                        document.getElementById("uploadBtn").style.display = "none";
+                    }else{
+                        document.getElementById("uploadBtn").style.display = "block";
+                    }
+                    
+                },1);
+            </script>
         </form>
         <p style="border-top: 1px solid darkgrey; margin-top: 10px;"></p>
         <a href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>

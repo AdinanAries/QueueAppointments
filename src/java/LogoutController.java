@@ -46,10 +46,6 @@ public class LogoutController extends HttpServlet {
             //this message displays in the login status area of the main Queue page
             String Message = "You are not logged in";
             
-            //setting UserAccount Fields to defaults
-            UserAccount.LoggedInUsers.get(UserIndex).setAccountType("");
-            UserAccount.LoggedInUsers.get(UserIndex).setUserID(0);
-            
             //UserAccount.UserID = 0;
             //UserAccount.AccountType = "";
             //UserAccount.UserName = "";
@@ -63,6 +59,10 @@ public class LogoutController extends HttpServlet {
                 DltSesPst.executeUpdate();
             }
             catch(Exception e){}
+            
+            //setting UserAccount Fields to defaults
+            UserAccount.LoggedInUsers.get(UserIndex).setAccountType(null);
+            UserAccount.LoggedInUsers.get(UserIndex).setUserID(0);
             
             response.sendRedirect("Queue.jsp?Message="+Message);
             

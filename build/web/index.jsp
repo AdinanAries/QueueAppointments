@@ -21,6 +21,12 @@
     </head>
     
     <%
+        
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
         response.sendRedirect("Queue.jsp");
         
         //this stores the UserIndex for session tracking

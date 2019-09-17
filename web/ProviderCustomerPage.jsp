@@ -68,6 +68,11 @@
         
         int notiCounter = 0;
         
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
         //connection arguments
         String Url = config.getServletContext().getAttribute("DBUrl").toString();
         String Driver = config.getServletContext().getAttribute("DBDriver").toString();
@@ -5375,7 +5380,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =? order by PicID desc";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,FavProvID);
                             ResultSet cover = coverPst.executeQuery();

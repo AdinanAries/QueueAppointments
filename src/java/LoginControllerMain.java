@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
 
 public class LoginControllerMain extends HttpServlet {
 
-    int Flag = 0;
-          
             //Database connection parameters
            String Driver = "";
            String url = "";
@@ -43,6 +41,7 @@ public class LoginControllerMain extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
+           int Flag = 0;
            int UserID = 0;
            String SessionID = "";
         
@@ -57,7 +56,7 @@ public class LoginControllerMain extends HttpServlet {
            
         try{
             //first connection query attempt (to customers table)
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName(Driver);
             Connection conn = DriverManager.getConnection(url, user, password);
             String Query = "Select * from ProviderCustomers.UserAccount where UserName=? and Password=?";
             PreparedStatement pst = conn.prepareStatement(Query);
@@ -108,7 +107,7 @@ public class LoginControllerMain extends HttpServlet {
             //send query to providers table
             if(UserID == 0){
                 try{
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    Class.forName(Driver);
                     Connection conn2 = DriverManager.getConnection(url, user, password);
                     String Query2 = "Select * from QueueServiceProviders.UserAccount where UserName =? and Password =?";
                     PreparedStatement pst2 = conn2.prepareStatement(Query2);
@@ -159,6 +158,8 @@ public class LoginControllerMain extends HttpServlet {
                 }catch(Exception e ){
                     e.printStackTrace();
                 }
+                
+                
                 if(Flag == 0){
                     String Message = "Unable to login. Enter valid Username and Password";
                     response.sendRedirect("LogInPage.jsp?Message="+Message);

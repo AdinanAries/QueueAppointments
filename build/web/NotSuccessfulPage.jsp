@@ -38,8 +38,8 @@
     </head>
   
     <%
-        if(UserAccount.AccountType.equals("BusinessAccount"))
-            response.sendRedirect("ServiceProviderPage.jsp");
+        //if(UserAccount.AccountType.equals("BusinessAccount"))
+            //response.sendRedirect("ServiceProviderPage.jsp");
             
     %>
     
