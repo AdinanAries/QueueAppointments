@@ -310,8 +310,43 @@
                     <p id="FGPassDivStatusTxt" style="margin-bottom: 15px; font-weight: bolder;">Enter your email below</p>
                     
                     <input id="forgotPassEmailFld" onmousemove="findAt();" type="email" value="" placeholder="enter you email address" size="45" style="background-color: #6699ff; margin: 10px;"/>
-                    <p><input id="forgotPassBtn" style="background-color: pink; border: 1px solid black; padding: 10px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization code" /><p>
+                    <p><input id="forgotPassBtn" style="background-color: pink; border: 1px solid black; padding: 10px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
                     
+                        <script>
+                            $(document).ready(function(){
+                                
+                                $("#forgotPassBtn").click(function(event){
+                                    
+                                    var Email = document.getElementById("forgotPassEmailFld").value;
+                                    
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "FGPasswordEmailExists",
+                                        data: "Email="+Email,
+                                        success: function(result){
+                                            alert(result);
+                                            
+                                            if(result !== "false"){
+                                                
+                                                //generate and send my link here
+                                                
+                                                document.getElementById("FGPassDivStatusTxt").innerHTML = "authorization link has been sent to provided email below";
+                                                document.getElementById("FGPassDivStatusTxt").style.backgroundColor = "green";
+                                                document.getElementById("FGPassDivStatusTxt").style.color = "white";
+                                                
+                                            }else{
+                                                document.getElementById("FGPassDivStatusTxt").innerHTML = "this email is not associated with any Queue account";
+                                                document.getElementById("FGPassDivStatusTxt").style.backgroundColor = "red";
+                                                document.getElementById("FGPassDivStatusTxt").style.color = "white";
+                                            }
+                                        }
+                                    });
+                                    
+                                });
+                            });
+                        </script>
+                        
+                        
                         <script>
                             
                                 var AtFound = false;
@@ -344,7 +379,7 @@
                                     if(AtFound && DotFound){
                                         document.getElementById("forgotPassBtn").style.backgroundColor = "pink";
                                         document.getElementById("forgotPassBtn").disabled = false;
-                                        document.getElementById("FGPassDivStatusTxt").innerHTML = "you may send verification code";
+                                        //document.getElementById("FGPassDivStatusTxt").innerHTML = "you may send verification code";
                                     }else{
                                         document.getElementById("FGPassDivStatusTxt").innerHTML = "this email must be associated to your queue account";
                                         document.getElementById("forgotPassBtn").style.backgroundColor = "darkgrey";

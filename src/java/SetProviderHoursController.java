@@ -368,6 +368,8 @@ public class SetProviderHoursController extends HttpServlet {
         
         String ProviderID = request.getParameter("ProviderID");
         String UserIndex = request.getParameter("UserIndex");
+        String NewUserName = request.getParameter("User");
+        //JOptionPane.showMessageDialog(null, NewUserName);
         
         try{
             Class.forName(Driver);
@@ -395,7 +397,7 @@ public class SetProviderHoursController extends HttpServlet {
             
             HoursPst.executeUpdate();
             
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex);
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
             JOptionPane.showMessageDialog(null, "Hours Updated Successfuly!");
         }catch(Exception e){
             e.printStackTrace();

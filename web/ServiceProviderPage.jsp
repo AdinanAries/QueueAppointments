@@ -78,7 +78,7 @@
         int notiCounter = 0;
         
         String NewsPicSrc = "view-wallpaper-7.jpg";
-        String lastNewsMsg = "";
+        String lastNewsMsg = "Use Queue upates to advertise your products and services and also to keep customers informed";
         String LastNewsID = "";
         
         int d = 0;
@@ -1858,7 +1858,7 @@
                                                 data: "MessageID="+MessageID,
                                                 success: function(result){
                                                     
-                                                    alert(result);
+                                                    //alert(result);
                                                     
                                                     $.ajax({
                                                         type:"POST",
@@ -4841,7 +4841,7 @@
                                         if(ClientsList.size() == 0){
                                     %>
                                     
-                                    <p style="background-color: red; color: white;">You don't have any clients in your clients list. Move up to history spots to add your customers to your clients list</p>
+                                    <p style="background-color: red; color: white;">You don't have any clients in your clients list. To add clients, go to your current or future line or your history to add customers from your bookings</p>
                                     <script>
                                         document.getElementById("MkReservationBtn").style.backgroundColor = "darkgrey";
                                         document.getElementById("MkReservationBtn").disabled = true;
@@ -6017,6 +6017,7 @@
                                         
                                         <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                         <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <center><input id="UpdateHoursBtn" style="border: 1px solid black; background-color: pink; padding: 5px; border-radius: 4px;" type="submit" value="Update Your Hours" name="UpdateHoursBtn" /></center>
                                         
                                     </form>

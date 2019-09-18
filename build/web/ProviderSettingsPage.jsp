@@ -271,8 +271,8 @@
             e.printStackTrace();
         }
         
-        String LastNewsID = "";
-        String lastNewsMsg = "";
+        String LastNewsID = "view-wallpaper-7.jpg";
+        String lastNewsMsg = "Use Queue upates to advertise your products and services and also to keep customer's informed";
         String NewsPicSrc = "";
         
         try{

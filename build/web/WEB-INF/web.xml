@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    
     <servlet>
         <servlet-name>LoginControllerMain</servlet-name>
         <servlet-class>LoginControllerMain</servlet-class>
@@ -345,6 +344,10 @@
         <servlet-name>getProvFeedbackDate</servlet-name>
         <servlet-class>getProvFeedbackDate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FGPasswordEmailExists</servlet-name>
+        <servlet-class>FGPasswordEmailExists</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -673,6 +676,10 @@
         <servlet-name>getProvFeedbackDate</servlet-name>
         <url-pattern>/getProvFeedbackDate</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FGPasswordEmailExists</servlet-name>
+        <url-pattern>/FGPasswordEmailExists</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -698,10 +705,8 @@
             <param-value>Password@2014</param-value>
         </init-param>
     </servlet>
-    
     <!--init-param>
         <param-name>mappedfile</param-name>
         <param-value>false</param-value>
     </init-param-->
-    
 </web-app>
