@@ -3233,11 +3233,19 @@
                                <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px; margin-bottom: 5px;">Show Your Profile Details</p></center>
                                
                                <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 5px; margin-top: 0; margin-bottom: 10px; background-color: cornflowerblue; border-right: darkblue 1px solid; border-bottom: darkblue 1px solid; padding-top: 10px;">
-                                   
+                                
                                 <%
                                     if(Base64Pic != ""){
                                 %> 
-                                   <center><img style="margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="170" height="150"/></center>
+                                
+                                <center><div style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; padding: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">
+                                    <div style="height: 5px; background-size: cover; margin-left: 5px; margin-right: 5px; margin-bottom: 150px; background-color: #334d81;" >
+                                        <center><img style="margin-top: 0; border-radius: 100%; border: 5px solid #334d81; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="150" height="150"/></center>
+                                    </div>
+                                    <div style="background-color: #334d81; height: 5px; margin-left: 5px; margin-right: 5px;">
+                                    </div>
+                                </div></center>
+                                
                                 <%
                                     } else{
                                 %>
@@ -3247,9 +3255,12 @@
                                 <%
                                     }
                                 %>
-                                    <center><table style="border-spacing: 1px; border-top: 1px solid darkblue;" border="0">
-                                            <tr><td style="padding-bottom: 2px;"><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
-                                                        <span id="FullNameDetail"><%=FullName%></span></p></td></tr>
+                                
+                                <center><p style='font-weight: bolder;'><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                        <span id="FullNameDetail"><%=FullName%></span></p></center>
+                                
+                                <center><table style="border-spacing: 1px; border-top: 1px solid darkblue;" border="0">
+                                            <tr><td style="padding-bottom: 2px;"></td></tr>
                                             <tr><td style="padding-bottom: 2px;"><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
                                                         <span id="PhoneNumberDetail"><%=PhoneNumber%></span>, 
                                                         <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <span id="EmailDetail"><%=Email%></span></p></td></tr>
