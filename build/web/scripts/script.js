@@ -1,4 +1,9 @@
-//var datesP = document.getElementById("displayDate");
+/*var datesP = document.getElementById("displayDate");
+//the above code line would break the program where displayDate element doesn't exist
+
+if (document.getElementById("displayDate"))
+  var datesP = document.getElementById("displayDate");
+//only create the date element variable if the displayDate object exists in the DOM*/
 
 function QueueClock() {
   var date = new Date();
@@ -27,11 +32,11 @@ function QueueClock() {
   }
 
   if (minutes.length < 2) {
-    minutes = "0" + minutes;
+    minutes = `0 + ${minutes}`;
   }
 
   if (seconds.length < 5) {
-    seconds = "0" + seconds;
+    seconds = `0 + ${seconds}`;
   }
 
   var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
