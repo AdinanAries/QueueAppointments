@@ -324,7 +324,7 @@
                                         url: "FGPasswordEmailExists",
                                         data: "Email="+Email,
                                         success: function(result){
-                                            alert(result);
+                                            //alert(result);
                                             
                                             if(result !== "false"){
                                                 
