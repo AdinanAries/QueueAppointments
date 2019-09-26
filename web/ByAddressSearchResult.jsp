@@ -47,6 +47,8 @@
         boolean isTypeChck = false;
         String SVCTypeAppend = " and ( ";
         
+        
+        //put this in try block for incase its not called from homepage but from more button where params within the try doesn't exist
         try{
         
             String Barber = request.getParameter("Barber");
@@ -952,6 +954,9 @@
                                         
                                     <%
                                         
+                                        //getting intervals from database for use to set spot intervals
+                                        //use a default value of 30mins
+                                        
                                         int IntervalsValue = 30;
         
                                         try{
@@ -972,14 +977,20 @@
                                             e.printStackTrace();
                                         }
                         
-                                        Date currentDate = new Date();//default date constructor returns current date 
+                                        Date currentDate = new Date(); //default date constructor returns current date 
                                         String CurrentTime = currentDate.toString().substring(11,16);
                                         String DayOfWeek = currentDate.toString().substring(0,3);
-                                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd"); //formatting date to a string value of month day, year
-                                        String stringDate = formattedDate.format(currentDate); //calling format function to format date object
+                                        
+                                        //getting date to be displayed along hours open
+                                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd");
+                                        String stringDate = formattedDate.format(currentDate);
+                                        
+                                        //use this Date formatter for SQL date
                                         SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
                                         String QueryDate = QuerySdf.format(currentDate);
                                         
+                                        
+                                        //Use these ArrayList to keep track of spot variations as to whether taken, available or this customer's spot
                                         ArrayList<String> AllAvailableTimeList = new ArrayList<>();
                                         ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
                                         ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
@@ -987,21 +998,26 @@
                                         ArrayList<String> AllThisCustomerTakenTime = new ArrayList<>();
                                         ArrayList<String> AllThisCustomerTakenFormattedTakenTime = new ArrayList<>();
                                         
+                                        //start and closing times - raw and formatted - of each provider displayed
                                         String DailyStartTime = "";
                                         String DailyClosingTime = "";
                                         String FormattedStartTime = "";
                                         String FormattedClosingTime = "";
+                                        
+                                        
                                         int startHour = 0;
                                         int startMinute = 0;
                                         int closeHour = 0;
                                         int closeMinute = 0;
                                         
+                                        //Keeping counts of various lists
                                         int TotalAvailableList = 0;
                                         int TotalUnavailableList = 0;
                                         int TotalThisCustomerTakenList = 0;
                                     %>
                                     
                                     <%
+                                        //use these variables to keep each day of the week start and close times for providers displayed
                                         String MonDailyStartTime = "";
                                         String MonDailyClosingTime = "";
                                         String TueDailyStartTime = "";
@@ -1059,6 +1075,8 @@
                                             e.printStackTrace();
                                         }
                                         
+                                        
+                                        //A switch statement would've been ideal, but hey, lets assign days of week based on what actual day is returned by new date() object 
                                         try{
                                                 if(DayOfWeek.equalsIgnoreCase("Mon")){
                                                     DailyStartTime = MonDailyStartTime.substring(0,5);
@@ -1091,11 +1109,11 @@
                                                 }
                                                 
                                                 
-                                                
+                                                //need to format day of the week from raw 24 hour database format to 12 hour ampm type of time
                                                 startHour = Integer.parseInt(DailyStartTime.substring(0,2));
                                                 startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
                                                         
-                                                        //formatting the time for user convenience
+                                                        //formatting the time to improve user experience
                                                         if( startHour > 12)
                                                         {
                                                              int TempHour = startHour - 12;
@@ -1178,6 +1196,8 @@
                                     %>
                                    
                                     <%
+                                        
+                                        //computing the spots starting from current time
                                         int CurrentHour = Integer.parseInt(CurrentTime.substring(0,2));
                                         int CurrentMinute = Integer.parseInt(CurrentTime.substring(3,5));
                                         
