@@ -182,6 +182,7 @@
     <%!
         
        class getUserDetails{
+           
            //class instance fields
            private Connection conn;
            private ResultSet records;
@@ -191,6 +192,10 @@
            private String User;
            private String Password;
            
+           
+           //initialize Database Parameters using data from deployment descriptor (web.xml)
+           //Uses servlet config object to grab the servlet context object returned from the get ServletContext() Method of the Servlet config
+           //All DB parameters provided as initparams which can be accessed using config.getInitPameter() API function for the context object
            public void initializeDBParams(String driver, String url, String user, String password){
                
                this.Driver = driver;

@@ -1401,6 +1401,7 @@
                                             }
                                         
 
+                                            //this lets you calculate spots from 12am to 12pm..
                                             if(isTodayClosed == true){
                                                 
                                                 DailyStartTime = "00:00";
@@ -1457,6 +1458,7 @@
                                             <tr>
                                                 
                                             <%
+                                                
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
                                                 
