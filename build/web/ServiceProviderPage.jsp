@@ -3874,7 +3874,7 @@
                           
                         try{    
                             //put this in a try catch block for incase getProfilePicture returns nothing
-                            Blob profilepic = FutureAppointmentList.get(w).getDisplayPic(); 
+                            Blob profilepic = FutureAppointmentList.get(w).getDisplayPic(); //Returns Blob data. Blob is the Datatype used by SQLDBs to store ByteArray data
                             InputStream inputStream = profilepic.getBinaryStream();
                             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                             byte[] buffer = new byte[4096];
@@ -4039,12 +4039,17 @@
                                                         success: function(result){  
                                                           //alert(result);
                                                           document.getElementById("changeFutureAppointmetForm<%=WString%>").style.display = "none";
+                                                          
+                                                          //JQuery Ajax takes an object as a parameter.
                                                           $.ajax({
+                                                              //Object's data fields (State)
                                                               type: "POST",
                                                               url: "GetUpdateSpotInfo",
                                                               data: "AppointmentID="+AppointmentID,
+                                                              
+                                                              //Object's methods (Behavior)
                                                               success: function(result){
-                                                                  //alert(result);
+                                                                  //alert(result); //result contains data or information returned by/from controller/logic
                                                                   var AppointmentData = JSON.parse(result);
                                                                   document.getElementById("FutureTimeSpan<%=WString%>").innerHTML = AppointmentData.AppointmentTime;
                                                                   document.getElementById("FutureDateSpan<%=WString%>").innerHTML = AppointmentData.AppointmentDate;
@@ -4137,11 +4142,9 @@
                                         
                                         <script>
                                                 
-                                                            $( 
-                                                                    function(){
-                                                                            $( "#datepickerFuture<%=WString%>" ).datepicker();
-                                                                    } 
-                                                             );
+                                                            $(function(){
+                                                                $( "#datepickerFuture<%=WString%>" ).datepicker();
+                                                            });
                                                             
                                                         //---------------------------------------------
                                                         // var datepicker = document.getElementById("datepicker<%=WString%>");
