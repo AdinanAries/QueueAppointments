@@ -1274,11 +1274,11 @@
             
             ResultSet ReviewRec = ReviewPst.executeQuery();
             
-            ReviewsDataModel eachReview;
+            ReviewsDataModel eachReview; //Create a reference one and assign different objects to it
             
             while(ReviewRec.next()){
                 //ReviewsList.clear();
-                eachReview = new ReviewsDataModel();
+               eachReview = new ReviewsDataModel(); 
                 
                 eachReview.UserID = ReviewRec.getInt("CustomerID");
                 eachReview.ReviewID = ReviewRec.getInt("ReviewID");
@@ -2413,6 +2413,8 @@
                                         SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
                                         String QueryDate = QuerySdf.format(currentDate);
                                         
+                                        
+                                        //this is an arrayList with a Generic of type String
                                         ArrayList<String> AllAvailableTimeList = new ArrayList<>();
                                         ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
                                         ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
