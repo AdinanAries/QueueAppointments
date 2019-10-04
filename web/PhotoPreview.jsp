@@ -150,9 +150,11 @@
                 
                 <script>
                     var ThisCell;
-                    
+                  
+                //make sure the document is fully loaded before the following code is executable
                 $(document).ready(function(){
                     
+                    //adding JQUERY event hander for click events on the deleteBtn
                     $("#deleteBtn").click(function(event){
                         
                         var ID = document.getElementById("selectedPhID").value;
@@ -165,10 +167,11 @@
                             data: "PhotoID="+ID,  
                             success: function(result){
                                 
+                                //jquery ajax which calls controller and updates the DOM as required per the output
                                 $.ajax({
                                     type: "POST",
-                                    url: "GetPhotoAfterDelete",
-                                    data: "ProviderID="+ProviderID,
+                                    url: "GetPhotoAfterDelete", //url here uses a relative path(Also URL pattern is stated within web.xml(webapp deployment descriptor)
+                                    data: "ProviderID="+ProviderID, //QueryString to be passed to the servlet(Acting as a web service)
                                     success: function(result){
                                         //alert(result);
                                         var PhObject = JSON.parse(result);
@@ -246,6 +249,7 @@
                                         document.getElementById("selectedPhID").value = ID;
                                         
                                         var ChosenImage = document.getElementById("ChosenImage");
+                                        //DOM manipulation
                                         ChosenImage.setAttribute("src", "data:image/jpg;base64,<%=base64Image%>");
                                         ThisCell = document.getElementById("picCell<%=i%>").getAttribute("id");
                                         
