@@ -330,11 +330,9 @@
                                                 
                                                 //generate and send my link here
                                                 
-                                                document.getElementById("FGPassDivStatusTxt").innerHTML = "authorization link has been sent to " + Email;
+                                                document.getElementById("FGPassDivStatusTxt").innerHTML = "authorization link has been sent to provided email below";
                                                 document.getElementById("FGPassDivStatusTxt").style.backgroundColor = "green";
                                                 document.getElementById("FGPassDivStatusTxt").style.color = "white";
-                                                document.getElementById("forgotPassBtn").style.display = "none";
-                                                document.getElementById("forgotPassEmailFld").style.display = "none";
                                                 
                                             }else{
                                                 document.getElementById("FGPassDivStatusTxt").innerHTML = "this email is not associated with any Queue account";
