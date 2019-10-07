@@ -45,6 +45,20 @@
         String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         String Message = "";
+        String Email = "";
+        String AccountType = "";
+        
+        try{
+            AccountType = request.getParameter("AccountType");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        try{
+            Email = request.getParameter("Email");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
         try{
             Message = request.getParameter("Message");
@@ -309,6 +323,32 @@
                         <input class="button" type="reset" value="Reset" name="resetbtn" />
                         <input id="loginPageBtn" class="button" type="button" value="Update" name="submitbtn" />
                     </form>
+                
+                <script>
+                    
+                    $(document).ready(function(){
+                        $("#loginPageBtn").click(function(event){
+                            
+                            var UserName = document.getElementById("LoginPageUserNameFld").value;
+                            var NewPassword = document.getElementById("LoginPagePasswordFld").value;
+                            var Email = <%=Email%>;
+                            var ACCountType = <%=AccountType%>;
+                            alert(UserName);
+                            alert(NewPassword);
+                            
+                            $.ajax({
+                                type: "POST",
+                                url: "",
+                                data: "UserName="+UserName+"&Password="+NewPassword+"&Email="+Email,
+                                success: function(result){
+                                    
+                                }
+                            });
+                            
+                        });
+                    });
+                    
+                </script>
                 
                     
                 <h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; background-color: blue; padding: 4px; border: 1px solid black;">I don't have a user account. Sign-up now!</a></h5>

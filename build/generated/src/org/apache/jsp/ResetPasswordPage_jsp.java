@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import javax.swing.JOptionPane;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -65,6 +66,7 @@ public final class ResetPasswordPage_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("\n");
       out.write("<html>\n");
@@ -94,12 +96,29 @@ public final class ResetPasswordPage_jsp extends org.apache.jasper.runtime.HttpJ
         String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         String Message = "";
+        String Email = "";
+        String AccountType = "";
+        
+        try{
+            AccountType = request.getParameter("AccountType");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        try{
+            Email = request.getParameter("Email");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
         try{
             Message = request.getParameter("Message");
-            
         }catch(Exception e){
             e.printStackTrace();
+        }
+        
+        if(Message == null){
+            Message = "Please enter your existing username and your new password";
         }
         
         /*try{
@@ -372,24 +391,54 @@ if(Message != null){
       out.write("                    \n");
       out.write("                <center><h2 style=\"margin-bottom: 20px;\">Reset Your Password</h2></center>\n");
       out.write("                \n");
-      out.write("                <form id=\"LoginForm\" name=\"login\" action=\"LoginControllerMain\" method=\"POST\"><table border=\"0\"> \n");
-      out.write("                        \n");
+      out.write("                <form id=\"LoginForm\" name=\"login\" method=\"POST\">\n");
+      out.write("                    \n");
+      out.write("                    <table border=\"0\"> \n");
       out.write("                            <tbody>\n");
       out.write("                                <tr>\n");
-      out.write("                                    <td><input id=\"LoginPageUserNameFld\" placeholder=\"enter your Queue user name here\" type=\"text\" name=\"username\" value=\"\" size=\"45\" style=\"background-color: #6699ff;\"/></td>\n");
+      out.write("                                    <td><input id=\"LoginPageUserNameFld\" placeholder=\"enter your current username here\" type=\"text\" name=\"username\" value=\"\" size=\"45\" style=\"background-color: #6699ff;\"/></td>\n");
       out.write("                                </tr>\n");
       out.write("                                <tr>\n");
-      out.write("                                    <td><input id=\"LoginPagePasswordFld\" placeholder='enter new password' type=\"password\" name=\"password\" value=\"\" size=\"45\" style=\"background-color: #6699ff;\"/></td>\n");
+      out.write("                                    <td><input id=\"LoginPagePasswordFld\" placeholder='enter your new password' type=\"password\" name=\"password\" value=\"\" size=\"45\" style=\"background-color: #6699ff;\"/></td>\n");
       out.write("                                </tr>\n");
       out.write("                            </tbody>\n");
       out.write("                        </table>\n");
       out.write("                    \n");
       out.write("                        <input class=\"button\" type=\"reset\" value=\"Reset\" name=\"resetbtn\" />\n");
-      out.write("                        <input id=\"loginPageBtn\" class=\"button\" type=\"submit\" value=\"Login\" name=\"submitbtn\" />\n");
+      out.write("                        <input id=\"loginPageBtn\" class=\"button\" type=\"button\" value=\"Update\" name=\"submitbtn\" />\n");
       out.write("                    </form>\n");
       out.write("                \n");
-      out.write("                               <center><h5 id=\"toggleShowFGPassDivLnk\" onclick=\"showForgotPassDiv();\" style=\"width: 200px; color: green; cursor: pointer; margin: 10px; padding: 4px;\">forgot my password</h5></center>\n");
+      out.write("                <script>\n");
+      out.write("                    \n");
+      out.write("                    $(document).ready(function(){\n");
+      out.write("                        $(\"#loginPageBtn\").click(function(event){\n");
+      out.write("                            \n");
+      out.write("                            var UserName = document.getElementById(\"LoginPageUserNameFld\").value;\n");
+      out.write("                            var NewPassword = document.getElementById(\"LoginPagePasswordFld\").value;\n");
+      out.write("                            var Email = ");
+      out.print(Email);
+      out.write(";\n");
+      out.write("                            var ACCountType = ");
+      out.print(AccountType);
+      out.write(";\n");
+      out.write("                            alert(UserName);\n");
+      out.write("                            alert(NewPassword);\n");
+      out.write("                            \n");
+      out.write("                            $.ajax({\n");
+      out.write("                                type: \"POST\",\n");
+      out.write("                                url: \"\",\n");
+      out.write("                                data: \"UserName=\"+UserName+\"&Password=\"+NewPassword+\"&Email=\"+Email,\n");
+      out.write("                                success: function(result){\n");
+      out.write("                                    \n");
+      out.write("                                }\n");
+      out.write("                            });\n");
+      out.write("                            \n");
+      out.write("                        });\n");
+      out.write("                    });\n");
+      out.write("                    \n");
+      out.write("                </script>\n");
       out.write("                \n");
+      out.write("                    \n");
       out.write("                <h5  style = \"margin: 10px;\" ><a href=\"SignUpPage.jsp\" style=\"color: white; background-color: blue; padding: 4px; border: 1px solid black;\">I don't have a user account. Sign-up now!</a></h5>\n");
       out.write("                </div></center>\n");
       out.write("                <center><h4 style = \"margin-bottom: 15px;\">____________________________________________</h4></center>\n");
