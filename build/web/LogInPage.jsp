@@ -326,7 +326,11 @@
                                         success: function(result){
                                             //alert(result);
                                             
-                                            if(result !== "false"){
+                                            var JObject = JSON.parse(result);
+                                            alert(JObject.AccountType);
+                                            
+                                            
+                                            if(JObject.Exists !== "false"){
                                                 
                                                 //generate and send my link here
                                                 
