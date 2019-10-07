@@ -4,6 +4,7 @@
     Author     : aries
 --%>
 
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.io.ByteArrayOutputStream"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.sql.Blob"%>
@@ -47,9 +48,12 @@
         
         try{
             Message = request.getParameter("Message");
-            
         }catch(Exception e){
             e.printStackTrace();
+        }
+        
+        if(Message == null){
+            Message = "Please enter your existing username and your new password";
         }
         
         /*try{
@@ -287,127 +291,26 @@
                     <center><h4 style="color: white; margin-bottom: 15px; background-color: red; max-width: 350px;"><%=Message%></h4></center>
                 <%}%>
                     
-                <center><h2 style="margin-bottom: 20px;">Login Here</h2></center>
+                <center><h2 style="margin-bottom: 20px;">Reset Your Password</h2></center>
                 
-                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST"><table border="0"> 
-                        
+                <form id="LoginForm" name="login" method="POST">
+                    
+                    <table border="0"> 
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="45" style="background-color: #6699ff;"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your current username here" type="text" name="username" value="" size="45" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder='enter your password here' type="password" name="password" value="" size="45" style="background-color: #6699ff;"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder='enter your new password' type="password" name="password" value="" size="45" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn" />
-                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                        <input id="loginPageBtn" class="button" type="button" value="Update" name="submitbtn" />
                     </form>
                 
-                <center><div id="forgotPassDiv" style="display: none;">
                     
-                    <p id="FGPassDivStatusTxt" style="margin-bottom: 15px; font-weight: bolder;">Enter your email below</p>
-                    
-                    <input id="forgotPassEmailFld" onmousemove="findAt();" type="email" value="" placeholder="enter you email address" size="45" style="background-color: #6699ff; margin: 10px;"/>
-                    <p><input id="forgotPassBtn" style="background-color: pink; border: 1px solid black; padding: 10px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
-                    
-                        <script>
-                            $(document).ready(function(){
-                                
-                                $("#forgotPassBtn").click(function(event){
-                                    
-                                    var Email = document.getElementById("forgotPassEmailFld").value;
-                                    
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "FGPasswordEmailExists",
-                                        data: "Email="+Email,
-                                        success: function(result){
-                                            //alert(result);
-                                            
-                                            if(result !== "false"){
-                                                
-                                                //generate and send my link here
-                                                
-                                                document.getElementById("FGPassDivStatusTxt").innerHTML = "authorization link has been sent to provided email below";
-                                                document.getElementById("FGPassDivStatusTxt").style.backgroundColor = "green";
-                                                document.getElementById("FGPassDivStatusTxt").style.color = "white";
-                                                
-                                            }else{
-                                                document.getElementById("FGPassDivStatusTxt").innerHTML = "this email is not associated with any Queue account";
-                                                document.getElementById("FGPassDivStatusTxt").style.backgroundColor = "red";
-                                                document.getElementById("FGPassDivStatusTxt").style.color = "white";
-                                            }
-                                        }
-                                    });
-                                    
-                                });
-                            });
-                        </script>
-                        
-                        
-                        <script>
-                            
-                                var AtFound = false;
-                                var DotFound = false;
-
-                                function findAt(){
-                                    
-                                    var email = document.getElementById("forgotPassEmailFld").value;
-                                    
-                                    if(email.includes('@')){
-                                        AtFound = true;
-                                    }else{
-                                        AtFound = false;
-                                    }
-                                    if(email.includes('.')){
-                                        DotFound = true;
-                                    }else{
-                                        DotFound = false;
-                                    }
-                                }
-                            
-                            setInterval(function(){
-                                
-                                if(document.getElementById("forgotPassEmailFld").value === ""){
-                                    document.getElementById("forgotPassBtn").style.backgroundColor = "darkgrey";
-                                    document.getElementById("forgotPassBtn").disabled = true;
-                                    AtFound = false;
-                                    DotFound = false;
-                                }else{
-                                    if(AtFound && DotFound){
-                                        document.getElementById("forgotPassBtn").style.backgroundColor = "pink";
-                                        document.getElementById("forgotPassBtn").disabled = false;
-                                        //document.getElementById("FGPassDivStatusTxt").innerHTML = "you may send verification code";
-                                    }else{
-                                        document.getElementById("FGPassDivStatusTxt").innerHTML = "this email must be associated to your queue account";
-                                        document.getElementById("forgotPassBtn").style.backgroundColor = "darkgrey";
-                                        document.getElementById("forgotPassBtn").disabled = true;
-                                    }
-                                    
-                                }
-                                
-                            },1);
-                            
-                            function showForgotPassDiv(){
-                                if(document.getElementById("forgotPassDiv").style.display === "none"){
-                                    document.getElementById("LoginForm").style.display = "none";
-                                    document.getElementById("forgotPassDiv").style.display = "block";
-                                    document.getElementById("toggleShowFGPassDivLnk").innerHTML = "Show Login";
-                                }else{
-                                    document.getElementById("LoginForm").style.display = "block";
-                                    document.getElementById("forgotPassDiv").style.display = "none";
-                                    document.getElementById("toggleShowFGPassDivLnk").innerHTML = "forgot my password";
-                                }
-                            }
-                            
-                        </script>
-                        
-                    </div></center>
-                
-                <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: green; cursor: pointer; margin: 10px; padding: 4px;">forgot my password</h5></center>
-                
                 <h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; background-color: blue; padding: 4px; border: 1px solid black;">I don't have a user account. Sign-up now!</a></h5>
                 </div></center>
                 <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
