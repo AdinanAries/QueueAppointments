@@ -360,6 +360,14 @@
         <servlet-name>UpdatePassword</servlet-name>
         <servlet-class>UpdatePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QueueMailerUtil</servlet-name>
+        <servlet-class>com.arieslab.queue.queue_model.QueueMailerUtil</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QueueMailer</servlet-name>
+        <servlet-class>QueueMailer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -699,6 +707,14 @@
     <servlet-mapping>
         <servlet-name>UpdatePassword</servlet-name>
         <url-pattern>/UpdatePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueueMailerUtil</servlet-name>
+        <url-pattern>/QueueMailerUtil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueueMailer</servlet-name>
+        <url-pattern>/QueueMailer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,6 +7,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ProviderSubscription.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DeleteServiceController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdateAppointmentController.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/QueueMailer.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/scripts/ActivateBkAppBtn.js</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/BookedAppointment.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdateProvBizInfoController.java</file>
@@ -48,6 +49,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ResetAppointmentParameters.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectBrowsLashes.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectHolisticMed.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/QueueMailerUtil.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ViewCustomerReviews.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getProvFeedbackDate.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getCustFeedbackDate.java</file>

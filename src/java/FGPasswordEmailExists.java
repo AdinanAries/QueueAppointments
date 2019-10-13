@@ -44,6 +44,8 @@ public class FGPasswordEmailExists extends HttpServlet {
         
         String Exists = "false";
         String AccountType = "";
+        boolean isCustAccount = false;
+        boolean isProvAccount = false;
         
         try{
             Class.forName(Driver);
@@ -55,6 +57,7 @@ public class FGPasswordEmailExists extends HttpServlet {
             while(pswdRec.next()){
                 Exists = pswdRec.getString("Customer_ID").trim();
                 AccountType = "Customer";
+                isCustAccount = true;
             }
             
         }catch(Exception e){}
@@ -70,9 +73,14 @@ public class FGPasswordEmailExists extends HttpServlet {
                 
                 Exists = pswdRec.getString("Provider_ID").trim();
                 AccountType = "Business";
+                isProvAccount = true;
             }
             
         }catch(Exception e){}
+        
+        if(isCustAccount && isProvAccount){
+            AccountType = "Both";
+        }
         
         response.getWriter().print(
                 "{" +
