@@ -327,12 +327,28 @@
                                             //alert(result);
                                             
                                             var JObject = JSON.parse(result);
-                                            alert(JObject.AccountType);
-                                            
                                             
                                             if(JObject.Exists !== "false"){
                                                 
-                                                //generate and send my link here
+                                                var AccountType = JObject.AccountType;
+                                                
+                                                var URLLink = ('http://localhost/QueueWebAppPrototype/ResetPasswordPage.jsp?Email='+Email);    
+                                                URLLink = (URLLink + '%26AccountType='+ AccountType);
+                                                
+                                                var ReportLink = "http://localhost/QueueSpamReport.jsp?UserEmail="+Email;
+                                                
+                                                var emailMessage = `Warning: This email is sent from your Queue account due to a request to reset your password. If you haven't requested a password update, then click on the following link, ( `+ ReportLink +`) to report this insident as it may be resulting from malicious activities.
+                                                                    \n\nImportant Notice: Please delete this email immediately after resetting your password.
+                                                                    \n\nClick on the following link to reset your password: `+ URLLink;
+                                                
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "QueueMailer",
+                                                    data: "to="+Email+"&subject=Queue%20Password%20Update&msg="+emailMessage,
+                                                    success: function(result){
+                                                        
+                                                    }
+                                                });
                                                 
                                                 document.getElementById("FGPassDivStatusTxt").innerHTML = "authorization link has been sent to " + Email;
                                                 document.getElementById("FGPassDivStatusTxt").style.backgroundColor = "green";

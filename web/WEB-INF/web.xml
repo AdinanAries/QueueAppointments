@@ -368,6 +368,18 @@
         <servlet-name>QueueMailer</servlet-name>
         <servlet-class>QueueMailer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmailMobileValidation</servlet-name>
+        <servlet-class>EmailMobileValidation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PasswordResetController</servlet-name>
+        <servlet-class>PasswordResetController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckLoginNameController</servlet-name>
+        <servlet-class>CheckLoginNameController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -715,6 +727,18 @@
     <servlet-mapping>
         <servlet-name>QueueMailer</servlet-name>
         <url-pattern>/QueueMailer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailMobileValidation</servlet-name>
+        <url-pattern>/EmailMobileValidation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasswordResetController</servlet-name>
+        <url-pattern>/PasswordResetController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckLoginNameController</servlet-name>
+        <url-pattern>/CheckLoginNameController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

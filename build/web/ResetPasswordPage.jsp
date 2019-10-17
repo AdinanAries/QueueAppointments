@@ -298,50 +298,167 @@
                 <cetnter><p> </p></cetnter>
                 
                 <center><div id ="logindetails" style="padding-top: 15px;">
-                <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
-                <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
+                <!--center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
+                <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center-->
                 
                 <%if(Message != null){%>
-                    <center><h4 style="color: white; margin-bottom: 15px; background-color: red; max-width: 350px;"><%=Message%></h4></center>
+                    <center><h4 style="color: white; margin-bottom: 15px; background-color: green; max-width: 350px;"><%=Message%></h4></center>
                 <%}%>
                     
                 <center><h2 style="margin-bottom: 20px;">Reset Your Password</h2></center>
                 
+                <%if(AccountType.equals("Both")){%>
+                    <p style="color: white; margin-bottom: 10px; max-width: 350px; background-color: red;">Your email is associated with a business and a customer account.
+                        Choose which account-type to update
+                    </p>
+                    <div style="margin-bottom: 10px;">
+                        <input id="CustRadio" type="radio" name="accountType" value="Customer"/><label for="CustRadio" style="color: white;">Customer Account</label>
+                        <input id="ProvRadio" type="radio" name="accountType" value="Business"/><label for="ProvRadio" style="color: white;">Business Account</label>
+                    </div>
+                <%  
+                    
+                    }
+                %>
+                
+                <input id="ResetUserEmail" type="hidden" value="<%=Email%>" />
                 <form id="LoginForm" name="login" method="POST">
                     
-                    <table border="0"> 
+                    <table border="0" style="border-top: 1px solid darkblue; border-bottom: 1px solid darkblue; padding: 10px;"> 
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your current username here" type="text" name="username" value="" size="45" style="background-color: #6699ff;"/></td>
+                                    <center><p id="nameStatus" style="display: none; background-color: red; color: white; margin-bottom: 10px; max-width: 350px;"></p></center>
+                                    <td><p>Enter your existing username below</p>
+                                        <input id="LoginPageUserNameFld" placeholder="enter your current username here" type="text" name="username" value="" size="45" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder='enter your new password' type="password" name="password" value="" size="45" style="background-color: #6699ff;"/></td>
+                                    <td>
+                                        <center><p id="telStatus" style="display: none; background-color: red; color: white; margin-bottom: 10px; max-width: 350px;"></p></center>
+                                        <p>Enter your mobile number below</p>
+                                        <input id="LoginPageMobileFld" placeholder='enter your mobile number here' type="text" name="mobileFld" value="" size="45" style="background-color: #6699ff;"/></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Enter your new password below</p>
+                                        <input id="LoginPagePasswordFld" placeholder='enter your new password here' type="password" name="password" value="" size="45" style="background-color: #6699ff;"/></td>
+                                </tr>
+                                <tr>
+                                    <td><p>Confirm your new password below</p>
+                                        <input id="LoginConfirmPasswordFld" placeholder='confirm your new password here' type="password" name="confirmPassword" value="" size="45" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table>
                     
+                        <script>
+                            setInterval(function() {
+                                
+                                var UserName = document.getElementById("LoginPageUserNameFld").value;
+                                var MobileNumber = document.getElementById("LoginPageMobileFld").value;
+                                var Password = document.getElementById("LoginPagePasswordFld").value;
+                                var CPassword = document.getElementById("LoginConfirmPasswordFld").value;
+                                
+                                if(UserName === "" || MobileNumber === "" || Password === "" || CPassword === ""){
+                                    document.getElementById("ResetLoginBtn").style.backgroundColor = "darkgrey";
+                                    document.getElementById("ResetLoginBtn").style.disabled = true;
+                                }else {
+                                    document.getElementById("ResetLoginBtn").style.backgroundColor = "pink";
+                                    document.getElementById("ResetLoginBtn").style.disabled = false;
+                                }
+                                
+                            }, 1);
+                        </script>
+                    
                         <input class="button" type="reset" value="Reset" name="resetbtn" />
-                        <input id="loginPageBtn" class="button" type="button" value="Update" name="submitbtn" />
+                        <input id="ResetLoginBtn" class="button" type="button" value="Update" name="submitbtn" />
                     </form>
                 
                 <script>
                     
+                    
+                    
                     $(document).ready(function(){
-                        $("#loginPageBtn").click(function(event){
+                        
+                        document.getElementById("LoginPageUserNameFld").value = "";
+                        document.getElementById("LoginPagePasswordFld").value = "";
+                        
+                        $("#ResetLoginBtn").click(function(event){
                             
                             var UserName = document.getElementById("LoginPageUserNameFld").value;
                             var NewPassword = document.getElementById("LoginPagePasswordFld").value;
-                            var Email = <%=Email%>;
-                            var ACCountType = <%=AccountType%>;
+                            var MobileNumber = document.getElementById("LoginPageMobileFld").value;
+                            
+                            var Email = '<%=Email%>';
+                            var AccountType = '<%=AccountType%>';
+                            
+                            if(AccountType === 'Both'){
+                                
+                                if(document.getElementById("CustRadio").checked)
+                                    AccountType = document.getElementById("CustRadio").value;
+                                else if(document.getElementById("ProvRadio").checked)
+                                    AccountType = document.getElementById("ProvRadio").value;
+                                else 
+                                    AccountType = document.getElementById("CustRadio").value;
+                            }
+                            
+                            /*alert(AccountType);    
                             alert(UserName);
                             alert(NewPassword);
+                            alert(MobileNumber);*/
                             
+                            //checking if Email matches with telephone number
                             $.ajax({
                                 type: "POST",
-                                url: "",
-                                data: "UserName="+UserName+"&Password="+NewPassword+"&Email="+Email,
+                                url: "EmailMobileValidation",
+                                data: "Email="+Email+"&Mobile="+MobileNumber+"&AccountType="+AccountType,
                                 success: function(result){
                                     
+                                    var FoundObj = JSON.parse(result);
+                                    var UserID = FoundObj.UserID;
+                                    
+                                    if(FoundObj.Found === "true"){
+                                        
+                                        //check to see if username is correct
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "CheckLoginNameController",
+                                            data: "UserID="+UserID+"&AccountType="+AccountType,
+                                            success: function(result){
+                                                
+                                                //alert(result);
+                                                if(result !== "none" && result === UserName){
+                                                  
+                                                    //Update Password here
+                                                    document.getElementById("telStatus").style.display = "none";
+                                                    document.getElementById("nameStatus").style.display = "none";
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "PasswordResetController",
+                                                        data: "UserID="+UserID+"&Password="+NewPassword+"&AccountType="+AccountType,
+                                                        success: function(result){
+                                                            window.location.replace("./LogInPage.jsp");
+
+                                                            /*if(AccountType === "Business"){
+                                                                $.ajax({
+                                                                    type: "POST",
+                                                                    url: "",
+                                                                    data: "",
+                                                                });
+                                                            }else if(AccountType === "Customer"){
+
+                                                            }*/
+                                                        }
+                                                    });
+                                                }else {
+                                                    document.getElementById("telStatus").style.display = "none";
+                                                    document.getElementById("nameStatus").style.display = "block";
+                                                    document.getElementById("nameStatus").innerHTML = "User Name provided doesn't match user account information";
+                                                    document.getElementById("LoginPageUserNameFld").value = "";
+                                                }
+                                            }
+                                        });
+                                    }else {
+                                        document.getElementById("telStatus").style.display = "block";
+                                        document.getElementById("telStatus").innerHTML = "Mobile number provided doesn't match user account information";
+                                        document.getElementById("LoginPageMobileFld").value = "";
+                                    }
                                 }
                             });
                             
@@ -351,9 +468,9 @@
                 </script>
                 
                     
-                <h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; background-color: blue; padding: 4px; border: 1px solid black;">I don't have a user account. Sign-up now!</a></h5>
+                <!--h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; background-color: blue; padding: 4px; border: 1px solid black;">I don't have a user account. Sign-up now!</a></h5-->
                 </div></center>
-                <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
+                <!--center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center-->
             
             </div>
                 

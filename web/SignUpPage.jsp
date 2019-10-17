@@ -326,7 +326,103 @@
                                     <td><p>Last Name</p><input type="text" id="lastName" name="lastName" value="<%=lName%>" size="50" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Email</p><input type="text" id="email" name="email" value="<%=email%>" size="50" style="background-color: #6699ff;"/></td>
+                                    <td>
+                                        <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
+                                        <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="email" name="email" value="<%=email%>" size="50" style="background-color: #6699ff;"/>
+                                        <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
+                                            <div id='CustsendVerifyDiv'>
+                                                <center><input id='CustSendverifyEmailBtn' type='button' value='Click here to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                            </div>
+                                            <div id='CustverifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
+                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 350px;'>We will be sending a verification code to your email. You should enter the code below</p>
+                                                <p style='color: #ccc;'><input id="CustEmailConfirm" type="text" style="border: 1px solid black;" /></p>
+                                            </div>
+                                            <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='Enter verification code and click here' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                            <script>
+                                                
+                                                var CustEmailVerified = false;
+                                                var CustPageJustLoaded = true;
+                                                
+                                                setInterval(function(){
+                                                    
+                                                    if(!CustPageJustLoaded){
+                                                        
+                                                        if(CustEmailVerified){
+                                                            document.getElementById("CustEmailStatus").style.display = "block";
+                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "green";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "Your email has been verified";
+                                                            document.getElementById("AddUserSignUpBtn").style.display = "block";
+                                                            document.getElementById("CustEmailVeriDiv").style.display = "none";
+                                                        }else{
+                                                            document.getElementById("CustEmailStatus").style.display = "block";
+                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "Plase verify your email";
+                                                            document.getElementById("AddUserSignUpBtn").style.display = "none";
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                                ,1);
+                                                
+                                                var CustSetVerifyFalse = function(){
+                                                    CustEmailVerified = false;
+                                                    document.getElementById("CustSendverifyEmailBtn").style.display = "block";
+                                                };
+                                                var CustShowEmailVerify = function(){
+                                                    document.getElementById("CustEmailVeriDiv").style.display = "block";
+                                                    //document.getElementById("provSignUpBtn").style.display = "none";
+                                                };
+                                                var CustCloseEmailVerify = function(){
+                                                    CustPageJustLoaded = false;
+                                                    if(document.getElementById("email").value === ""){
+                                                        document.getElementById("CustEmailVeriDiv").style.display = "none";
+                                                        document.getElementById("CustEmailStatus").innerHTML = "Please enter a valid email";
+                                                        document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                        //document.getElementById("provSignUpBtn").style.display = "block";
+                                                    }
+                                                };
+                                                
+                                                var CustVeriCode;
+                                                
+                                                $(document).ready(function(){
+                                                    $("#CustSendverifyEmailBtn").click(function(event){
+                                                        
+                                                        CustVeriCode = Math.floor(100000 + Math.random() * 900000);
+                                                        CustVeriCode = CustVeriCode + "";
+                                                        
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "Verification Code has been sent to your Email";
+                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
+                                                        document.getElementById("CustSendverifyEmailBtn").style.display = "none";
+                                                        
+                                                        var to = document.getElementById("email").value;
+                                                        var Message = CustVeriCode + ' is your Queue verification code';
+                                                        
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "QueueMailer",
+                                                            data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
+                                                            success: function(result){
+                                                                
+                                                            }
+                                                        });
+                                                        
+                                                    });
+                                                });
+                                                
+                                                var CustVerifyCode = function () {
+                                                    
+                                                    if(document.getElementById("CustEmailConfirm").value === CustVeriCode){
+                                                        CustEmailVerified = true;
+                                                    }
+                                                    else{
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "Make sure verification code is entered or is correct";
+                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "red";
+                                                    }
+                                                        
+                                                };
+                                            </script>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><p>Phone Number</p><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" type="text" id="phoneNumber" name="phoneNumber" value="<%=telNumber%>" size="50" style="background-color: #6699ff;"/></td>
@@ -386,7 +482,7 @@
                         <center><p style="width: 180px; background-color: green; color: white;" id="formStatus"></p></center>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input class="button" id="AddUserSignUpBtn" type="submit" value="Sign up" name="submitbtn" />
+                        <input class="button" id="AddUserSignUpBtn" type="submit" value="Signup" name="submitbtn" />
                     </form>
                                 
                     <script>
@@ -444,10 +540,109 @@
                                     <td><p>Last Name</p><input id="lastProvName" type="text" name="lastProvName" value="<%=lName%>" size="50" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Email</p><input id="provEmail" type="text" name="provEmail" value="<%=email%>" size="50" style="background-color: #6699ff;"/></td>
+                                    <td>
+                                        <center><p id='BizEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
+                                        <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="provEmail" type="text" name="provEmail" value="<%=email%>" size="50" style="background-color: #6699ff;"/>
+                                        <div id='BizEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
+                                            <div id='sendVerifyDiv'>
+                                                <center><input id='SendverifyEmailBtn' type='button' value='Click here to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                            </div>
+                                            <div id='verifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
+                                                <p id='vCodeStatus' style='padding-left: 5px; color: white; max-width: 350px;'>We will be sending a verification code to your email. You should enter the code below</p>
+                                                <p style='color: #ccc;'><input id="BizEmailConfirm" type="text" style="border: 1px solid black;" /></p>
+                                            </div>
+                                            <center><input id='verifyEmailBtn' onclick="VerifyCode();" type='button' value='Enter verification code and click here' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                            <script>
+                                                
+                                                var EmailVerified = false;
+                                                var PageJustLoaded = true;
+                                                
+                                                setInterval(function(){
+                                                    
+                                                    if(!PageJustLoaded){
+                                                        
+                                                        if(EmailVerified){
+                                                            document.getElementById("BizEmailStatus").style.display = "block";
+                                                            document.getElementById("BizEmailStatus").style.backgroundColor = "green";
+                                                            document.getElementById("BizEmailStatus").innerHTML = "Your email has been verified";
+                                                            document.getElementById("provSignUpBtn").style.display = "block";
+                                                            document.getElementById("BizEmailVeriDiv").style.display = "none";
+                                                        }else{
+                                                            document.getElementById("BizEmailStatus").style.display = "block";
+                                                            document.getElementById("BizEmailStatus").style.backgroundColor = "red";
+                                                            document.getElementById("BizEmailStatus").innerHTML = "Plase verify your email";
+                                                            document.getElementById("provSignUpBtn").style.display = "none";
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                                ,1);
+                                                
+                                                var SetVerifyFalse = function(){
+                                                    EmailVerified = false;
+                                                    document.getElementById("SendverifyEmailBtn").style.display = "block";
+                                                };
+                                                var ShowEmailVerify = function(){
+                                                    document.getElementById("BizEmailVeriDiv").style.display = "block";
+                                                    //document.getElementById("provSignUpBtn").style.display = "none";
+                                                };
+                                                var CloseEmailVerify = function(){
+                                                    PageJustLoaded = false;
+                                                    if(document.getElementById("provEmail").value === ""){
+                                                        document.getElementById("BizEmailVeriDiv").style.display = "none";
+                                                        document.getElementById("BizEmailStatus").innerHTML = "Please enter a valid email";
+                                                        document.getElementById("BizEmailStatus").style.backgroundColor = "red";
+                                                        //document.getElementById("provSignUpBtn").style.display = "block";
+                                                    }
+                                                };
+                                                
+                                                var VeriCode;
+                                                
+                                                $(document).ready(function(){
+                                                    $("#SendverifyEmailBtn").click(function(event){
+                                                        
+                                                        VeriCode = Math.floor(100000 + Math.random() * 900000);
+                                                        VeriCode = VeriCode + "";
+                                                        
+                                                        document.getElementById("vCodeStatus").innerHTML = "Verification Code has been sent to your Email";
+                                                        document.getElementById("vCodeStatus").style.backgroundColor = "green";
+                                                        document.getElementById("SendverifyEmailBtn").style.display = "none";
+                                                        
+                                                        var to = document.getElementById("provEmail").value;
+                                                        var Message = VeriCode + ' is your Queue verification code';
+                                                        
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "QueueMailer",
+                                                            data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
+                                                            success: function(result){
+                                                                
+                                                            }
+                                                        });
+                                                        
+                                                    });
+                                                });
+                                                
+                                                var VerifyCode = function () {
+                                                    
+                                                    if(document.getElementById("BizEmailConfirm").value === VeriCode){
+                                                        EmailVerified = true;
+                                                    }
+                                                    else{
+                                                        document.getElementById("vCodeStatus").innerHTML = "Make sure verification code is entered or is correct";
+                                                        document.getElementById("vCodeStatus").style.backgroundColor = "red";
+                                                    }
+                                                        
+                                                };
+                                            </script>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Phone Number</p><input onclick="checkMiddleNumberProPer();" onkeydown="checkMiddleNumberProPer();" id="provPhoneNumber" type="text" name="provPhoneNumber" value="<%=telNumber%>" size="50" style="background-color: #6699ff;"/></td>
+                                    <td>
+                                        <p>Phone Number</p><input onclick="checkMiddleNumberProPer();" onkeydown="checkMiddleNumberProPer();" id="provPhoneNumber" type="text" name="provPhoneNumber" value="<%=telNumber%>" size="50" style="background-color: #6699ff;"/>
+                                        
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -666,8 +861,8 @@
                         <center><p style="width: 180px; background-color: red; color: white;" id="provPasswordStatus"></p></center>
                         <center><p style="width: 180px; background-color: green; color: white;" id="provFormStatus"></p></center>
                         
-                        <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="provSignUpBtn" class="button" type="submit" value="Sign up" name="provSignUpBtn" />
+                        <p style='min-width: 350px;'><input class="button" type="reset" value="Reset" name="resetbtn"/>
+                            <input id="provSignUpBtn" class="button" type="submit" value="Sign up" name="provSignUpBtn" /></p>
                     </form>
                                 
                     <script>

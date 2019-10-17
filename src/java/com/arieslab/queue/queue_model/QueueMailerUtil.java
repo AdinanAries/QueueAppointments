@@ -16,7 +16,7 @@ import javax.activation.*;
 
 public class QueueMailerUtil {
     
-        public void send(String to, String subject, String msg) {
+       /* public void send(String to, String subject, String msg) {
         final String user="aries.tutorials.videos@gmail.com";//change accordingly  
         final String pass="Password@2014";  
 
@@ -33,7 +33,7 @@ public class QueueMailerUtil {
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "true");
         props.put("mail.smtp.ssl.enable", "true");
-        /*prop key="mail.smtp.starttls.enable"   */
+        /*prop key="mail.smtp.starttls.enable"   /
        SecurityManager security = System.getSecurityManager();
 
         Session session = Session.getInstance(props,  
@@ -68,16 +68,16 @@ public class QueueMailerUtil {
             throw new RuntimeException(e);  
          }
         
-        }
-    /*
-    final String senderEmailID = "aries.tutorials.videos@gmail.com";
+        }*/
+    
+    final String senderEmailID = "noreply.arieslab.queue@gmail.com";
     final String senderPassword = "Password@2014";
     final String emailSMTPserver = "smtp.gmail.com";
     //final String emailSMTPserver = "Smtp.live.com";
-    final String emailServerPort = "587";
+    final String emailServerPort = "465";
     String receiverEmailID = null;
     String emailSubject = "Test Mail";
-    String emailBody = ":)";
+    String emailBody = "";
 
     //mail.smtp.ssl.enable = "true";
     public void send(String receiverEmailID, String Subject, String Body) {
@@ -95,7 +95,7 @@ public class QueueMailerUtil {
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.ssl.enable", "true");
-        /*prop key="mail.smtp.starttls.enable"   /
+        /*prop key="mail.smtp.starttls.enable"   */
         SecurityManager security = System.getSecurityManager();
         //mail.smtp.ssl.enable "true"
         
@@ -104,17 +104,17 @@ public class QueueMailerUtil {
         try {
             
             //SMTPAuthenticator auth = new SMTPAuthenticator();
-            Session session = Session.getInstance(props, new SMTPAuthenticator("aries.tutorials.videos@gmail.com", "Password@2014"));
+            Session session = Session.getInstance(props, new SMTPAuthenticator("noreply.arieslab.queue@gmail.com", "Password@2014"));
             
             MimeMessage msg = new MimeMessage(session);
             msg.setText(emailBody);
             msg.setSubject(emailSubject);
             msg.setFrom(new InternetAddress(senderEmailID));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmailID));
-            JOptionPane.showMessageDialog(null, "About to send email to " + receiverEmailID + ": MSG from " + senderEmailID);
+            
             Transport.send(msg);
             //sendMessage(msg, msg.getAllRecipients());
-            JOptionPane.showMessageDialog(null, "Message sent Successfully:)");
+            JOptionPane.showMessageDialog(null, "Message sent Successfully");
         }
 
         catch (Exception mex) {
@@ -139,7 +139,5 @@ public class QueueMailerUtil {
             return new PasswordAuthentication(user, pwd);
         }
     }
-
-*/
-    
+ 
 }

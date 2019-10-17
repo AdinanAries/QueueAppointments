@@ -15,13 +15,13 @@ public class QueueMailer extends HttpServlet {
             throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
           
-        //String to = request.getParameter("to");  
-        //String subject = request.getParameter("subject");  
-        //String msg = request.getParameter("msg");  
+        String to = request.getParameter("to");  
+        String subject = request.getParameter("subject");  
+        String msg = request.getParameter("msg");  
         
-        String to = "aries.tutorials.videos@gmail.com";
+        /*String to = "aries.tutorials.videos@gmail.com";
         String subject = "Queuetest";
-        String msg = "Queuetestmsg";
+        String msg = "Queuetestmsg";*/
 
         QueueMailerUtil email = new QueueMailerUtil();
         email.send(to, subject, msg);
