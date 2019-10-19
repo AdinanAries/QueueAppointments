@@ -6571,6 +6571,7 @@
                                         <script>
                                             
                                             var isCardAdded = false;
+                                            var cardVerified = 0;
                                             
                                             setInterval(function(){
                                                     var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
@@ -6610,6 +6611,7 @@
                                             $(document).ready(function(){
                                                 
                                                 $("#validateCnclPlcyCardBtn").click(function(event){
+                                                    
                                                     if(document.getElementById("validateCnclPlcyCardBtn").disabled === false){
                                                         
                                                         alert("clicked");
@@ -6628,8 +6630,8 @@
                                                                     //saving card to database
                                                                     $.ajax({
                                                                         type: "POST",
-                                                                        url: "",
-                                                                        data: "",
+                                                                        url: "SaveProviderBizBankCard",
+                                                                        data: "ProviderID=" + '<=UserID%>' + "&AccNo=" + CPcNumber + "&AccHName=" + CPcName + "&AccRNo=" + CPcRNumber + "&AccSecCode=" + CPSecCode + "&AccExpDate=" + CPcDate + "&Verified=" + cardVerified,
                                                                         success: function(result){
 
                                                                         }

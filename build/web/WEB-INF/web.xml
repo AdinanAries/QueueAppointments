@@ -380,6 +380,10 @@
         <servlet-name>CheckLoginNameController</servlet-name>
         <servlet-class>CheckLoginNameController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SaveProviderBizBankCard</servlet-name>
+        <servlet-class>SaveProviderBizBankCard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -739,6 +743,10 @@
     <servlet-mapping>
         <servlet-name>CheckLoginNameController</servlet-name>
         <url-pattern>/CheckLoginNameController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveProviderBizBankCard</servlet-name>
+        <url-pattern>/SaveProviderBizBankCard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
