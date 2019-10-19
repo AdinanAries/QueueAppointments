@@ -886,7 +886,7 @@
                                         if(!isLineAvailable){
                                     %>
                                     
-                                    <p style="background-color: red; color: white; text-align: center;">There is no line currently available for this service provider</p>
+                                    <p style="background-color: red; color: white; text-align: center;">There is no line available on <%=DayOfWeek%>, <%=stringDate%></p>
                                     
                                     <%}%>
                                     

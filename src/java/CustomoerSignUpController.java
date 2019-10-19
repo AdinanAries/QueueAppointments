@@ -1,6 +1,7 @@
 
 
 import com.arieslab.queue.queue_model.ExistingProviderAccountsModel;
+import com.arieslab.queue.queue_model.QueueMailerUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -175,6 +176,21 @@ public class CustomoerSignUpController extends HttpServlet {
                     pst3.executeUpdate();
                     
                     if(UserID != 0){
+                        
+                        //Send Queue admin an email for newly created accounts
+                        {
+                            String to = "tech.arieslab@outlook.com";
+                            String subject = "Customer Account Added";
+                            String msg = "Customer account has been added with the following details:\n";
+                            msg += "CustomerID: " + UserID + "\n";
+                            msg += "Customer Name: " + fName + " " + mName + " " + lName + "\n";
+                            msg += "Email: " + email + "\n";
+                            msg += "Tel: " + phoneNumber + "\n";
+
+
+                            QueueMailerUtil EmailObj = new QueueMailerUtil();
+                            EmailObj.send(to, subject, msg);
+                        }
                         
                         int yourIndex = UserAccount.newUser(UserID, userName, "CustomerAccount");
                         //request.setAttribute("UserIndex", yourIndex);

@@ -6563,6 +6563,7 @@
                                         
                                         <p style="text-align: left; color: white; background-color: red; border: 1px solid black; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation and No-Show Policy</label>
                                             </p>
+                                        <p id='BankCardValidStatus' style='color: white; text-align: center;'></p>
                                         <center><input id="submitCnclPlcyBtn" style="padding: 5px; border: 1px solid black; border-radius: 4px; background-color: pink;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
                                     </form>
                                    </div>
@@ -6580,117 +6581,170 @@
                                                     
                                                     
                                                     if(CPcNumber === "" || CPcName === "" || CPSecCode === "" || CPcDate === "" || CPcRNumber === ""){
-                                                        document.getElementById("validateCnclPlcyCardBtn").innerHTML = "unconpleted form";
+                                                        document.getElementById("validateCnclPlcyCardBtn").innerHTML = "uncompleted form";
                                                         document.getElementById("validateCnclPlcyCardBtn").style.color = "white";
                                                         document.getElementById("validateCnclPlcyCardBtn").disabled = true;
                                                         document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "red";
+                                                        document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "darkgrey";
+                                                        document.getElementById("submitCnclPlcyBtn").disabled = true;
                                                     }else{
                                                         document.getElementById("validateCnclPlcyCardBtn").innerHTML = "Validate this card";
                                                         document.getElementById("validateCnclPlcyCardBtn").disabled = false;
                                                         document.getElementById("validateCnclPlcyCardBtn").style.color = "black";
                                                         document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "pink";
+                                                        document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "pink";
+                                                        document.getElementById("submitCnclPlcyBtn").disabled = false;
                                                     }
                                             }, 1);
+                                            
+                                            setInterval(function(){
+                                                if(document.getElementById("RmvCnclPlcy").checked === true){
+                                                    isCardAdded = true;
+                                                    document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "pink";
+                                                    document.getElementById("submitCnclPlcyBtn").disabled = false;
+                                                }
+                                            }
+                                            ,1);
                                             
                                             //this is where to verify my card
                                             $(document).ready(function(){
                                                 
                                                 $("#validateCnclPlcyCardBtn").click(function(event){
-                                                    alert("clicked");
-                                                    /*$.ajax({
-                                                        type: "POST",
-                                                        url: "",
-                                                        data: "",
-                                                        success: function(result){
-                                                            //if(result === "success"){
-                                                                document.getElementById("bizBankforCancelStatus").innerHTML = "Customer payments are recieved on" + CPcNumber.substring() + "*********" + CPcNumber.substring();
-                                                                isCardAdded = true;
-                                                             }
-                                                            //else
-                                                                document.getelementById("bizBankforCancelStatus").innerHTML = "Your business bank card isn't valid. You cannot recieve payments on this card";
-                                                        }
-                                                    });*/
+                                                    if(document.getElementById("validateCnclPlcyCardBtn").disabled === false){
+                                                        
+                                                        alert("clicked");
+                                                        isCardAdded = true;
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.display = "none";
+                                                        
+                                                        //call verification controller here
+                                                        /*$.ajax({
+                                                            type: "POST",
+                                                            url: "",
+                                                            data: "",
+                                                            success: function(result){
+            
+                                                                //if(result === "success"){
+            
+                                                                    //saving card to database
+                                                                    $.ajax({
+                                                                        type: "POST",
+                                                                        url: "",
+                                                                        data: "",
+                                                                        success: function(result){
+
+                                                                        }
+                                                                    });
+                                                                    document.getElementById("BankCardValidStatus").innerHTML = "Customer payments are recieved on" + CPcNumber.substring() + "*********" + CPcNumber.substring();
+                                                                    document.getElementById("BankCardValidStatus").style.backgroundColor = "green";
+                                                                    isCardAdded = true;
+            
+                                                                 }
+                                                                //else{
+                                                                    document.getElementById("BankCardValidStatus").innerHTML = "Your business bank card isn't valid. You cannot recieve payments on this card";
+                                                                    document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
+                                                                }
+                                                            }
+                                                        });*/
+            
+                                                    }
                                                 });
                                                 
                                             });
                                             
                                             $(document).ready(function() {                        
-                                                    $('#submitCnclPlcyBtn').click(function(event) {  
+                                                    $('#submitCnclPlcyBtn').click(function(event) {
                                                         
-                                                        var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
-                                                        var CPcName = document.getElementById("CnclPlcyCardName").value;
-                                                        var CPcRNumber = document.getElementById("CnclPlcyRoutingNumber").value;
-                                                        var CPSecCode = document.getElementById("CnclPlcySecCode").value;
-                                                        var CPcDate = document.getElementById("CnclPlcyExpDate").value;
+                                                        if(isCardAdded){
+                                                        
+                                                            var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
+                                                            var CPcName = document.getElementById("CnclPlcyCardName").value;
+                                                            var CPcRNumber = document.getElementById("CnclPlcyRoutingNumber").value;
+                                                            var CPSecCode = document.getElementById("CnclPlcySecCode").value;
+                                                            var CPcDate = document.getElementById("CnclPlcyExpDate").value;
 
-                                                        var ProviderID = document.getElementById("PIDforCnclPlcy").value;
-                                                        var DHH = document.getElementById("HHforCancellation");
-                                                        var DurationHH = DHH.options[DHH.selectedIndex].text;
-                                                        var DMM = document.getElementById("MMforCancellation");
-                                                        var DurationMM = DMM.options[DMM.selectedIndex].text;
-                                                        var ChargeCost = document.getElementById("ChargeCost").value;
-                                                        var timeElapse = document.getElementById("timeElapse").value;
-                                                        var PercentOption = document.getElementById("ChargePercent");
-                                                        var ChargePercent = PercentOption.options[PercentOption.selectedIndex].text;
-                                                        
-                                                        if(ChargePercent.length === 3)
-                                                            ChargePercent = "0" + ChargePercent;
+                                                            var ProviderID = document.getElementById("PIDforCnclPlcy").value;
+                                                            var DHH = document.getElementById("HHforCancellation");
+                                                            var DurationHH = DHH.options[DHH.selectedIndex].text;
+                                                            var DMM = document.getElementById("MMforCancellation");
+                                                            var DurationMM = DMM.options[DMM.selectedIndex].text;
+                                                            var ChargeCost = document.getElementById("ChargeCost").value;
+                                                            var timeElapse = document.getElementById("timeElapse").value;
+                                                            var PercentOption = document.getElementById("ChargePercent");
+                                                            var ChargePercent = PercentOption.options[PercentOption.selectedIndex].text;
 
-                                                        ChargePercent = ChargePercent.substring(0,3);
-                                                        var RMVCNCLOption = document.getElementById("RmvCnclPlcy");
-                                                        
-                                                        var RemoveCancellation = "OFF";
-                                                        if(RMVCNCLOption.checked === true){
-                                                            RemoveCancellation = "ON";
-                                                        }
-                                                        
-                                                        /*alert("ProviderID: " +ProviderID);
-                                                        alert("DurationHH: " +DurationHH);
-                                                        alert("DurationMM: " +DurationMM);
-                                                        alert("ChargeCost: " +ChargeCost);
-                                                        alert("TimeElapse: " +timeElapse);
-                                                        alert("ChargePercent: " +ChargePercent);
-                                                        alert("RemoveCancellation: " +RemoveCancellation);*/
-                                                        
-                                                        $.ajax({  
-                                                        type: "POST",  
-                                                        url: "CancellationPolicyController",  
-                                                        data: "ProviderID="+ProviderID+"&DurationFldHH="+DurationHH+"&ChargeCost="+ChargeCost+"&DurationFldMM="+DurationMM+"&TimeElapse="+timeElapse+"&ChargePercent="+ChargePercent+"&RMVCnclPlcy="+RemoveCancellation,  
-                                                        success: function(result){  
-                                                          //alert(result);
-                                                          document.getElementById("CnclPlcyForm").style.display = "none";
-                                                          
-                                                          var Hour = 0;
-                                                          if(parseInt(DurationHH, 10) === 1)
-                                                              Hour = 60;
-                                                          if(parseInt(DurationHH, 10) === 2)
-                                                              Hour = 120;
-                                                          if(parseInt(DurationHH, 10) === 3)
-                                                              Hour = 180;
-                                                          if(parseInt(DurationHH, 10) === 4)
-                                                              Hour = 240;
-                                                          if(parseInt(DurationHH, 10) === 5)
-                                                              Hour = 300;
-                                                          
-                                                          if(document.getElementById("RmvCnclPlcy").checked === true){
+                                                            if(ChargePercent.length === 3)
+                                                                ChargePercent = "0" + ChargePercent;
+
+                                                            ChargePercent = ChargePercent.substring(0,3);
+                                                            var RMVCNCLOption = document.getElementById("RmvCnclPlcy");
+
+                                                            var RemoveCancellation = "OFF";
+                                                            if(RMVCNCLOption.checked === true){
+                                                                RemoveCancellation = "ON";
+                                                            }
+
+                                                            /*alert("ProviderID: " +ProviderID);
+                                                            alert("DurationHH: " +DurationHH);
+                                                            alert("DurationMM: " +DurationMM);
+                                                            alert("ChargeCost: " +ChargeCost);
+                                                            alert("TimeElapse: " +timeElapse);
+                                                            alert("ChargePercent: " +ChargePercent);
+                                                            alert("RemoveCancellation: " +RemoveCancellation);*/
+
+                                                            $.ajax({  
+                                                            type: "POST",  
+                                                            url: "CancellationPolicyController",  
+                                                            data: "ProviderID="+ProviderID+"&DurationFldHH="+DurationHH+"&ChargeCost="+ChargeCost+"&DurationFldMM="+DurationMM+"&TimeElapse="+timeElapse+"&ChargePercent="+ChargePercent+"&RMVCnclPlcy="+RemoveCancellation,  
+                                                            success: function(result){  
+                                                              //alert(result);
+                                                              document.getElementById("CnclPlcyForm").style.display = "none";
+
+                                                              var Hour = 0;
+                                                              if(parseInt(DurationHH, 10) === 1)
+                                                                  Hour = 60;
+                                                              if(parseInt(DurationHH, 10) === 2)
+                                                                  Hour = 120;
+                                                              if(parseInt(DurationHH, 10) === 3)
+                                                                  Hour = 180;
+                                                              if(parseInt(DurationHH, 10) === 4)
+                                                                  Hour = 240;
+                                                              if(parseInt(DurationHH, 10) === 5)
+                                                                  Hour = 300;
                                                               
-                                                             document.getElementById("PercentSpan").innerHTML = 0 + "% of service cost";
-                                                             document.getElementById("TimeSpan").innerHTML = "at " + 0 + " mins to spot due time";
-                                                             document.getElementById("CnclPlcyChckOFF").checked = true;
-                                                             document.getElementById("CnclPlcyChck").checked = false;
-                                                             //if(isCardAdded === true)
-                                                             document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
-                                                              
-                                                          }else{
-                                                          
-                                                             document.getElementById("PercentSpan").innerHTML = parseInt(ChargePercent, 10) + "% of service cost";
-                                                             document.getElementById("TimeSpan").innerHTML = "at " + (parseInt(Hour, 10) + parseInt(DurationMM, 10))+ " mins to spot due time";
-                                                             //if(isCardAdded === true)
-                                                             document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
-                                                          }
-                                                        }                
-                                                      });
+                                                              document.getElementById("bizBankforCancelStatus").style.backgroundColor = "green";
+                                                              document.getElementById("bizBankforCancelStatus").innerHTML = "Cancellation policy has been set";
+                                                              document.getElementById("BankCardValidStatus").style.backgroundColor = "green";
+                                                              document.getElementById("BankCardValidStatus").innerHTML = "Cancellation policy has been set";
+
+                                                              if(document.getElementById("RmvCnclPlcy").checked === true){
+
+                                                                 document.getElementById("PercentSpan").innerHTML = 0 + "% of service cost";
+                                                                 document.getElementById("TimeSpan").innerHTML = "at " + 0 + " mins to spot due time";
+                                                                 document.getElementById("CnclPlcyChckOFF").checked = true;
+                                                                 document.getElementById("CnclPlcyChck").checked = false;
+                                                                 document.getElementById("bizBankforCancelStatus").style.backgroundColor = "red";
+                                                                 document.getElementById("bizBankforCancelStatus").innerHTML = "No cancellation policy";
+                                                                 document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
+                                                                 document.getElementById("BankCardValidStatus").innerHTML = "No cancellation policy";
+                                                                 //if(isCardAdded === true)
+                                                                 //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
+
+                                                              }else{
+
+                                                                document.getElementById("PercentSpan").innerHTML = parseInt(ChargePercent, 10) + "% of service cost";
+                                                                document.getElementById("TimeSpan").innerHTML = "at " + (parseInt(Hour, 10) + parseInt(DurationMM, 10))+ " mins to spot due time";
+                                                                 //if(isCardAdded === true)
+                                                                 //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
+                                                              }
+                                                            }                
+                                                          });
                                                         
+                                                      }else{
+                                                          document.getElementById("bizBankforCancelStatus").style.backgroundColor = "red";
+                                                          document.getElementById("bizBankforCancelStatus").innerHTML = "Please validate your bank card";
+                                                          document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
+                                                          document.getElementById("BankCardValidStatus").innerHTML = "Please validate your bank card";
+                                                      }
                                                     });
                                                 });
                                         </script>

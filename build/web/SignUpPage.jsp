@@ -328,7 +328,8 @@
                                 <tr>
                                     <td>
                                         <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                        <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="email" name="email" value="<%=email%>" size="50" style="background-color: #6699ff;"/>
+                                        <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="<%=email%>" size="50" style="background-color: #6699ff;"/>
+                                        <input id='email' type='hidden' value=''/>
                                         <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
                                                 <center><input id='CustSendverifyEmailBtn' type='button' value='Click here to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
@@ -343,6 +344,11 @@
                                                 var CustEmailVerified = false;
                                                 var CustPageJustLoaded = true;
                                                 
+                                                if(document.getElementById("visibleEmail").value !== ""){
+                                                    //Execute this code when page loads with information from prio page
+                                                    CustPageJustLoaded = false;
+                                                }
+                                                
                                                 setInterval(function(){
                                                     
                                                     if(!CustPageJustLoaded){
@@ -351,13 +357,13 @@
                                                             document.getElementById("CustEmailStatus").style.display = "block";
                                                             document.getElementById("CustEmailStatus").style.backgroundColor = "green";
                                                             document.getElementById("CustEmailStatus").innerHTML = "Your email has been verified";
-                                                            document.getElementById("AddUserSignUpBtn").style.display = "block";
+                                                            document.getElementById("email").value = document.getElementById("visibleEmail").value;
                                                             document.getElementById("CustEmailVeriDiv").style.display = "none";
                                                         }else{
                                                             document.getElementById("CustEmailStatus").style.display = "block";
                                                             document.getElementById("CustEmailStatus").style.backgroundColor = "red";
                                                             document.getElementById("CustEmailStatus").innerHTML = "Plase verify your email";
-                                                            document.getElementById("AddUserSignUpBtn").style.display = "none";
+                                                            document.getElementById("email").value = "";
                                                         }
                                                     }
                                                     
@@ -374,7 +380,7 @@
                                                 };
                                                 var CustCloseEmailVerify = function(){
                                                     CustPageJustLoaded = false;
-                                                    if(document.getElementById("email").value === ""){
+                                                    if(document.getElementById("visibleEmail").value === ""){
                                                         document.getElementById("CustEmailVeriDiv").style.display = "none";
                                                         document.getElementById("CustEmailStatus").innerHTML = "Please enter a valid email";
                                                         document.getElementById("CustEmailStatus").style.backgroundColor = "red";
@@ -394,7 +400,7 @@
                                                         document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
                                                         document.getElementById("CustSendverifyEmailBtn").style.display = "none";
                                                         
-                                                        var to = document.getElementById("email").value;
+                                                        var to = document.getElementById("visibleEmail").value;
                                                         var Message = CustVeriCode + ' is your Queue verification code';
                                                         
                                                         $.ajax({
@@ -542,7 +548,8 @@
                                 <tr>
                                     <td>
                                         <center><p id='BizEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                        <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="provEmail" type="text" name="provEmail" value="<%=email%>" size="50" style="background-color: #6699ff;"/>
+                                        <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="visibleProvEmail" type="text" name="provEmail" value="<%=email%>" size="50" style="background-color: #6699ff;"/>
+                                        <input id='provEmail' type='hidden' value='' />
                                         <div id='BizEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='sendVerifyDiv'>
                                                 <center><input id='SendverifyEmailBtn' type='button' value='Click here to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
@@ -557,6 +564,10 @@
                                                 var EmailVerified = false;
                                                 var PageJustLoaded = true;
                                                 
+                                                if(document.getElementById("visibleProvEmail").value !== ""){
+                                                    PageJustLoaded = false;
+                                                }
+                                                
                                                 setInterval(function(){
                                                     
                                                     if(!PageJustLoaded){
@@ -565,13 +576,13 @@
                                                             document.getElementById("BizEmailStatus").style.display = "block";
                                                             document.getElementById("BizEmailStatus").style.backgroundColor = "green";
                                                             document.getElementById("BizEmailStatus").innerHTML = "Your email has been verified";
-                                                            document.getElementById("provSignUpBtn").style.display = "block";
+                                                            document.getElementById("provEmail").value = document.getElementById("visibleProvEmail").value;
                                                             document.getElementById("BizEmailVeriDiv").style.display = "none";
                                                         }else{
                                                             document.getElementById("BizEmailStatus").style.display = "block";
                                                             document.getElementById("BizEmailStatus").style.backgroundColor = "red";
                                                             document.getElementById("BizEmailStatus").innerHTML = "Plase verify your email";
-                                                            document.getElementById("provSignUpBtn").style.display = "none";
+                                                            document.getElementById("provEmail").value = "";
                                                         }
                                                     }
                                                     
@@ -588,7 +599,7 @@
                                                 };
                                                 var CloseEmailVerify = function(){
                                                     PageJustLoaded = false;
-                                                    if(document.getElementById("provEmail").value === ""){
+                                                    if(document.getElementById("visibleProvEmail").value === ""){
                                                         document.getElementById("BizEmailVeriDiv").style.display = "none";
                                                         document.getElementById("BizEmailStatus").innerHTML = "Please enter a valid email";
                                                         document.getElementById("BizEmailStatus").style.backgroundColor = "red";
@@ -608,7 +619,7 @@
                                                         document.getElementById("vCodeStatus").style.backgroundColor = "green";
                                                         document.getElementById("SendverifyEmailBtn").style.display = "none";
                                                         
-                                                        var to = document.getElementById("provEmail").value;
+                                                        var to = document.getElementById("visibleProvEmail").value;
                                                         var Message = VeriCode + ' is your Queue verification code';
                                                         
                                                         $.ajax({

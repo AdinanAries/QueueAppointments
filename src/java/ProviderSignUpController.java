@@ -287,6 +287,22 @@ public class ProviderSignUpController extends HttpServlet {
                     
             if(UserID != 0){
                 
+                //Send Queue admin an email for newly created accounts
+                {
+                    String to = "tech.arieslab@outlook.com";
+                    String subject = "Provider Account Added";
+                    String msg = "Provider account has been added with the following details:\n";
+                    msg += "AccountID: " + UserID + "\n";
+                    msg += "Provider Name: " + fName + " " + mName + " " + lName + "\n";
+                    msg += "Company: " + businessName + "\n";
+                    msg += "Email: " + email + "\n";
+                    msg += "Tel: " + phoneNumber + "\n";
+                    
+                    
+                    QueueMailerUtil EmailObj = new QueueMailerUtil();
+                    EmailObj.send(to, subject, msg);
+                }
+                
                 int yourIndex = UserAccount.newUser(UserID, userName, "BusinessAccount");
                 //request.setAttribute("UserIndex", yourIndex);
                 response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+yourIndex+"&User="+userName);
