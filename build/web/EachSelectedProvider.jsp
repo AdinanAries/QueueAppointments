@@ -391,7 +391,7 @@
                         <tr style="background-color: #333333;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> - <%=DateOfUpdate%></p></p>
+                                    <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=DateOfUpdate%></p></p>
                                     
                                     <%if(MsgPhoto.equals("")){%>
                                     <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
