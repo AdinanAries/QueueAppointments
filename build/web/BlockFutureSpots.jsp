@@ -692,25 +692,25 @@
                                             
                                             <% 
                                                 
-                                                if(bookedTimeFlag == 1){
-                                                    
-                                                    HowManyColums++;
-                                                    isLineAvailable = true;
-                                                    
-                                                    TotalUnavailableList++;
-                                                    AllUnavailableTimeList.add(NextAvailableTime);
-                                                    AllUnavailableFormattedTimeList.add(NextAvailableFormattedTime);
-                                                    int t = d + 1;
+                                                        if(bookedTimeFlag == 1){
+
+                                                            HowManyColums++;
+                                                            isLineAvailable = true;
+
+                                                            TotalUnavailableList++;
+                                                            AllUnavailableTimeList.add(NextAvailableTime);
+                                                            AllUnavailableFormattedTimeList.add(NextAvailableFormattedTime);
+                                                            int t = d + 1;
                                             %>
                                             
-                                            <td onclick="showLineTakenMessage(<%=t%><%=TotalUnavailableList%>)">
-                                                <p style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
-                                                <img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
-                                            </td>
-                                                
+                                                            <td onclick="showLineTakenMessage(<%=t%><%=TotalUnavailableList%>)">
+                                                                <p style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
+                                                                <img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
+                                                            </td>
+
                                             <%  
                                                     
-                                                }
+                                                        }
                                             
                                             %>
                                             
@@ -718,49 +718,49 @@
                                                 </td-->
                                                 
                                             <% 
-                                                if(bookedTimeFlag == 0){
-                                                    
-                                                    HowManyColums++;
-                                                    isLineAvailable = true;
-                                                    
-                                                    TotalAvailableList++;
-                                                    AllAvailableTimeList.add(NextAvailableTime);
-                                                    AllAvailableFormattedTimeList.add(NextAvailableFormattedTime);
-                                                    int t = d + 1;
+                                                        if(bookedTimeFlag == 0){
+
+                                                            HowManyColums++;
+                                                            isLineAvailable = true;
+
+                                                            TotalAvailableList++;
+                                                            AllAvailableTimeList.add(NextAvailableTime);
+                                                            AllAvailableFormattedTimeList.add(NextAvailableFormattedTime);
+                                                            int t = d + 1;
                                             %>
                                                 
-                                                 <td onclick="ShowQueueLinDivBookAppointment(<%=t%><%=TotalAvailableList%>)">
-                                                     <p style="font-size: 12px; font-weight: bold; color: blue;"><%=NextAvailableFormattedTime%></p>
-                                                     <img src="icons/icons8-standing-man-filled-50 (1).png" width="50" height="50" alt="icons8-standing-man-filled-50 (1)"/>
-                                                </td>
+                                                            <td onclick="ShowQueueLinDivBookAppointment(<%=t%><%=TotalAvailableList%>)">
+                                                                <p style="font-size: 12px; font-weight: bold; color: blue;"><%=NextAvailableFormattedTime%></p>
+                                                                <img src="icons/icons8-standing-man-filled-50 (1).png" width="50" height="50" alt="icons8-standing-man-filled-50 (1)"/>
+                                                           </td>
                                                 
                                             <% 
-                                                  }
+                                                        }
 
                                             %>
                                                 
                                             <%
-                                            if(bookedTimeFlag == 2){
-                                                
-                                                HowManyColums++;
-                                                isLineAvailable = true;
-                                                
-                                                TotalThisCustomerTakenList++;
-                                                AllThisProviderBlockedTime.add(NextAvailableTime);
-                                                AllThisProviderBlockedFormattedTakenTime.add(NextAvailableFormattedTime);
-                                                
-                                                int t = d + 1;
-                                                
+                                                        if(bookedTimeFlag == 2){
+
+                                                            HowManyColums++;
+                                                            isLineAvailable = true;
+
+                                                            TotalThisCustomerTakenList++;
+                                                            AllThisProviderBlockedTime.add(NextAvailableTime);
+                                                            AllThisProviderBlockedFormattedTakenTime.add(NextAvailableFormattedTime);
+
+                                                            int t = d + 1;
+
                                             %>
                                             
-                                                <td onclick="showYourPositionMessage(<%=t%><%=TotalThisCustomerTakenList%>)">
-                                                    <p style="font-size: 12px; font-weight: bold; color: green;"><%=NextAvailableFormattedTime%></p>
-                                                    <img src="icons/icons8-standing-man-filled-50 (2).png" width="50" height="50" alt="icons8-standing-man-filled-50 (2)"/>
-                                                </td>
+                                                            <td onclick="showYourPositionMessage(<%=t%><%=TotalThisCustomerTakenList%>)">
+                                                                <p style="font-size: 12px; font-weight: bold; color: green;"><%=NextAvailableFormattedTime%></p>
+                                                                <img src="icons/icons8-standing-man-filled-50 (2).png" width="50" height="50" alt="icons8-standing-man-filled-50 (2)"/>
+                                                            </td>
                                                 
-                                            <%  }
+                                            <%          }
                                             
-                                                bookedTimeFlag = 0;
+                                                        bookedTimeFlag = 0;
                                             
                                             %>
                                                 <!--td>9:30am<img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
@@ -892,10 +892,11 @@
                                     <%}%>
                                     
                                     <%
-                                        
+                                        //this code lines copied from different page. Not really Usefull for this page.
                                         for(int z = 0; z < AllUnavailableTimeList.size(); z++){
                                             
                                             String NextUnavailableTimeForMessage = AllUnavailableFormattedTimeList.get(z);
+                                            //JOptionPane.showMessageDialog(null, NextUnavailableTimeForMessage);
                                             
                                             int t = d + 1;
                                             int q = z + 1;
@@ -908,11 +909,13 @@
                                         if(!isLineAvailable){
                                     %>
                                     
-                                    <p style="background-color: red; color: white; text-align: center;">There is no line available on <%=DayOfWeek%>, <%=stringDate%></p>
+                                        <p style="background-color: red; color: white; text-align: center;">There is no line available on <%=DayOfWeek%>, <%=stringDate%></p>
                                     
                                     <%}%>
                                     
                                     <%
+                                        
+                                        //untaken time spots that can be blocked by services provider
                                         
                                         for(int z = 0; z < AllAvailableTimeList.size(); z++){
                                             
@@ -926,58 +929,58 @@
                                             
                                     %>
                                     
-                                    <form style="display: none;" id="bookAppointmentFromLineDiv<%=t%><%=q%>" name="bookAppointmentFromLineDiv" action="BlockFutureSpotController" method="POST">
-                                        <input type="hidden" name="CustomerID" value="1" />
-                                        <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                        <input type="hidden" name="GetDate" value="<%=SpotsDate%>" />
-                                        <input type="hidden" name="formsOrderedServices" value="Blocked Time" />
-                                        <input type="hidden" name="formsDateValue" value="<%=QueryDate%>" />
-                                        <input type="hidden" name="formsTimeValue" value="<%=NextAvailableTimeForForm%>" />
-                                        <input type="hidden" name="TotalPrice" value="00.00" />
-                                        <input type="hidden" name="payment" value="None" />
-                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>"/>
-                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                            <form style="display: none;" id="bookAppointmentFromLineDiv<%=t%><%=q%>" name="bookAppointmentFromLineDiv" action="BlockFutureSpotController" method="POST">
+                                                <input type="hidden" name="CustomerID" value="1" />
+                                                <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
+                                                <input type="hidden" name="GetDate" value="<%=SpotsDate%>" />
+                                                <input type="hidden" name="formsOrderedServices" value="Blocked Time" />
+                                                <input type="hidden" name="formsDateValue" value="<%=QueryDate%>" />
+                                                <input type="hidden" name="formsTimeValue" value="<%=NextAvailableTimeForForm%>" />
+                                                <input type="hidden" name="TotalPrice" value="00.00" />
+                                                <input type="hidden" name="payment" value="None" />
+                                                <input type="hidden" name="UserIndex" value="<%=UserIndex%>"/>
+                                                <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
                                     <%
-                                        //making sure thisTime is 5 characters long string. needed to avoid string out-of-bounds indices
-                                        if(thisTime.length() == 4)
-                                            thisTime = "0" + thisTime;
-                                        
-                                        //making sure NextAvailableTimeForForm is 5 characters long string. needed to avoid string out-of-bounds indices
-                                        if(NextAvailableTimeForForm.length() == 4)
-                                            NextAvailableTimeForForm = "0" + NextAvailableTimeForForm;
-                                        
-                                        //Getting Time parts (HH and MM)
-                                        int TempThisHour = Integer.parseInt(thisTime.substring(0,2));
-                                        int TempThisMinute = Integer.parseInt(thisTime.substring(3,5));
-                                        int AppointmentHour = Integer.parseInt(NextAvailableTimeForForm.substring(0,2));
-                                        int AppointmentMinute = Integer.parseInt(NextAvailableTimeForForm.substring(3,5));
-                                        
-                                        if(TempThisHour > AppointmentHour && (QueueDate.equals(Today))){}
-                                        
-                                        else if(TempThisHour == AppointmentHour && (QueueDate.equals(Today))){
-                                            
-                                            if(TempThisMinute <= AppointmentMinute){
+                                            //making sure thisTime is 5 characters long string. needed to avoid string out-of-bounds indices
+                                            if(thisTime.length() == 4)
+                                                thisTime = "0" + thisTime;
+
+                                            //making sure NextAvailableTimeForForm is 5 characters long string. needed to avoid string out-of-bounds indices
+                                            if(NextAvailableTimeForForm.length() == 4)
+                                                NextAvailableTimeForForm = "0" + NextAvailableTimeForForm;
+
+                                            //Getting Time parts (HH and MM)
+                                            int TempThisHour = Integer.parseInt(thisTime.substring(0,2));
+                                            int TempThisMinute = Integer.parseInt(thisTime.substring(3,5));
+                                            int AppointmentHour = Integer.parseInt(NextAvailableTimeForForm.substring(0,2));
+                                            int AppointmentMinute = Integer.parseInt(NextAvailableTimeForForm.substring(3,5));
+
+                                            if(TempThisHour > AppointmentHour && (QueueDate.equals(Today))){}
+
+                                            else if(TempThisHour == AppointmentHour && (QueueDate.equals(Today))){
+
+                                                if(TempThisMinute <= AppointmentMinute){
                                         
                                     
                                     %>
                                     
                                         
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                        
-                                    <%      }
-                                        }else if(TempThisHour < AppointmentHour && (QueueDate.equals(Today))) {
+                                    <%          }
+                                            }else if(TempThisHour < AppointmentHour && (QueueDate.equals(Today))) {
                                     %>
                                     
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
-                                    <%}else if(!QueueDate.equals(Today)){%>
+                                    <%      }else if(!QueueDate.equals(Today)){%>
                                     
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
                                     <%}%>
                                     
-                                    </form>
+                                            </form>
                                         
                                     <%}%>
                                     
@@ -1140,34 +1143,44 @@
                 
                 <script>
                                     
-                                                        var currentDate = new Date();
-                                                        var currentTime = '<%=JSCurrentTime%>';
+                        var currentDate = new Date();
+                        var currentTime = '<%=JSCurrentTime%>';
                                                         
-                                                        var currentHour = currentTime.substring(0,2);
-                                                        var currentMinute = currentTime.substring(3,5);
+                        var currentHour = currentTime.substring(0,2);
+                        var currentMinute = currentTime.substring(3,5);
 
-                                                         var currentMonth = currentDate.getMonth();
-                                                                 currentMonth += 1;
-                                                                 currentMonth += "";
+                        var currentMonth = currentDate.getMonth();
+                        currentMonth += 1;
+                        currentMonth += "";
 
-                                                                 if(currentMonth.length < 2)
-                                                                         currentMonth = "0" + currentMonth;
+                        if(currentMonth.length < 2)
+                        currentMonth = "0" + currentMonth;
 
-                                                         var currentDay = currentDate.getDate() + "";
+                        var currentDay = currentDate.getDate() + "";
 
-                                                                 if(currentDay.length < 2)
-                                                                         currentDay = "0" + currentDay;
+                        if(currentDay.length < 2)
+                            currentDay = "0" + currentDay;
 
-                                                         var currentYear = currentDate.getFullYear();
+                        var currentYear = currentDate.getFullYear();
 
-                                                         currentDate = currentMonth + "/" + currentDay + "/" + currentYear;
-                                                         var currentDate2 = currentYear + "-" + currentMonth + "-" + currentDay;
+                        currentDate = currentMonth + "/" + currentDay + "/" + currentYear;
+                        var currentDate2 = currentYear + "-" + currentMonth + "-" + currentDay;
                                                          
-                                    </script>
+                </script>
                     
+                <%
+                    //formatting date for taken spots list
+                    SimpleDateFormat TKSDF1 = new SimpleDateFormat("MM/dd/yyyy");
+                    Date TKDate = TKSDF1.parse(SpotsDate);
+                    String TKDayOfWeek = TKDate.toString().substring(0,3);
+                    SimpleDateFormat TKSDF = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMM dd, yyyy");
+                    String TKStringDate = TKSDF.format(TKDate);
+                    
+                    
+                %>
                 
                 <div id="CurrentProvAppointmentsDiv">
-                            <center><h4 style="margin: 5px; color: white;">Taken Spots on Selected Date</h4></center>
+                            <center><h4 style="margin: 5px; color: white;">Taken Spots on <%=TKDayOfWeek%>, <%=TKStringDate%></h4></center>
                 <center><table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
                         <tbody>
                             
@@ -1206,31 +1219,30 @@
                         catch(Exception e){}
 
                           
+                        String TimeToUse = "";
+                        int Hours = Integer.parseInt(Time.substring(0,2));
+                        String Minutes = Time.substring(2,5);
 
-                            String TimeToUse = "";
-                            int Hours = Integer.parseInt(Time.substring(0,2));
-                            String Minutes = Time.substring(2,5);
-
-                            if( Hours > 12)
-                            {
-                                int TempHour = Hours - 12;
-                                TimeToUse = Integer.toString(TempHour) + Minutes + "pm";
-                            }
-                            else if(Hours == 0){
-                                TimeToUse = "12" + Minutes + "am";
-                            }
-                            else if(Hours == 12){
-                                TimeToUse = Time + "pm";
-                            }
-                            else{
-                                TimeToUse = Time +"am";
-                            }
+                        if( Hours > 12)
+                        {
+                            int TempHour = Hours - 12;
+                            TimeToUse = Integer.toString(TempHour) + Minutes + "pm";
+                        }
+                        else if(Hours == 0){
+                            TimeToUse = "12" + Minutes + "am";
+                        }
+                        else if(Hours == 12){
+                            TimeToUse = Time + "pm";
+                        }
+                        else{
+                            TimeToUse = Time +"am";
+                        }
                 
                           
-                          Date date = AppointmentList.get(w).getDateOfAppointment();
+                        Date date = AppointmentList.get(w).getDateOfAppointment();
                           
-                          SimpleDateFormat sdf2 = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");
-                          String DateOfAppointment = sdf2.format(date);
+                        SimpleDateFormat sdf2 = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");
+                        String DateOfAppointment = sdf2.format(date);
                           
     %>
                         <tr>
