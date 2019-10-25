@@ -384,6 +384,10 @@
         <servlet-name>SaveProviderBizBankCard</servlet-name>
         <servlet-class>SaveProviderBizBankCard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BlockFutureSpotController</servlet-name>
+        <servlet-class>BlockFutureSpotController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -747,6 +751,10 @@
     <servlet-mapping>
         <servlet-name>SaveProviderBizBankCard</servlet-name>
         <url-pattern>/SaveProviderBizBankCard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlockFutureSpotController</servlet-name>
+        <url-pattern>/BlockFutureSpotController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

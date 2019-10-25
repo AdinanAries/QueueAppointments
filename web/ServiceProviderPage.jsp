@@ -6694,51 +6694,51 @@
                                                             alert("RemoveCancellation: " +RemoveCancellation);*/
 
                                                             $.ajax({  
-                                                            type: "POST",  
-                                                            url: "CancellationPolicyController",  
-                                                            data: "ProviderID="+ProviderID+"&DurationFldHH="+DurationHH+"&ChargeCost="+ChargeCost+"&DurationFldMM="+DurationMM+"&TimeElapse="+timeElapse+"&ChargePercent="+ChargePercent+"&RMVCnclPlcy="+RemoveCancellation,  
-                                                            success: function(result){  
-                                                              //alert(result);
-                                                              document.getElementById("CnclPlcyForm").style.display = "none";
+                                                                type: "POST",  
+                                                                url: "CancellationPolicyController",  
+                                                                data: "ProviderID="+ProviderID+"&DurationFldHH="+DurationHH+"&ChargeCost="+ChargeCost+"&DurationFldMM="+DurationMM+"&TimeElapse="+timeElapse+"&ChargePercent="+ChargePercent+"&RMVCnclPlcy="+RemoveCancellation,  
+                                                                success: function(result){  
+                                                                  //alert(result);
+                                                                  document.getElementById("CnclPlcyForm").style.display = "none";
 
-                                                              var Hour = 0;
-                                                              if(parseInt(DurationHH, 10) === 1)
-                                                                  Hour = 60;
-                                                              if(parseInt(DurationHH, 10) === 2)
-                                                                  Hour = 120;
-                                                              if(parseInt(DurationHH, 10) === 3)
-                                                                  Hour = 180;
-                                                              if(parseInt(DurationHH, 10) === 4)
-                                                                  Hour = 240;
-                                                              if(parseInt(DurationHH, 10) === 5)
-                                                                  Hour = 300;
-                                                              
-                                                              document.getElementById("bizBankforCancelStatus").style.backgroundColor = "green";
-                                                              document.getElementById("bizBankforCancelStatus").innerHTML = "Cancellation policy has been set";
-                                                              document.getElementById("BankCardValidStatus").style.backgroundColor = "green";
-                                                              document.getElementById("BankCardValidStatus").innerHTML = "Cancellation policy has been set";
+                                                                  var Hour = 0;
+                                                                  if(parseInt(DurationHH, 10) === 1)
+                                                                      Hour = 60;
+                                                                  if(parseInt(DurationHH, 10) === 2)
+                                                                      Hour = 120;
+                                                                  if(parseInt(DurationHH, 10) === 3)
+                                                                      Hour = 180;
+                                                                  if(parseInt(DurationHH, 10) === 4)
+                                                                      Hour = 240;
+                                                                  if(parseInt(DurationHH, 10) === 5)
+                                                                      Hour = 300;
 
-                                                              if(document.getElementById("RmvCnclPlcy").checked === true){
+                                                                  document.getElementById("bizBankforCancelStatus").style.backgroundColor = "green";
+                                                                  document.getElementById("bizBankforCancelStatus").innerHTML = "Cancellation policy has been set";
+                                                                  document.getElementById("BankCardValidStatus").style.backgroundColor = "green";
+                                                                  document.getElementById("BankCardValidStatus").innerHTML = "Cancellation policy has been set";
 
-                                                                 document.getElementById("PercentSpan").innerHTML = 0 + "% of service cost";
-                                                                 document.getElementById("TimeSpan").innerHTML = "at " + 0 + " mins to spot due time";
-                                                                 document.getElementById("CnclPlcyChckOFF").checked = true;
-                                                                 document.getElementById("CnclPlcyChck").checked = false;
-                                                                 document.getElementById("bizBankforCancelStatus").style.backgroundColor = "red";
-                                                                 document.getElementById("bizBankforCancelStatus").innerHTML = "No cancellation policy";
-                                                                 document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
-                                                                 document.getElementById("BankCardValidStatus").innerHTML = "No cancellation policy";
-                                                                 //if(isCardAdded === true)
-                                                                 //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
+                                                                  if(document.getElementById("RmvCnclPlcy").checked === true){
 
-                                                              }else{
+                                                                     document.getElementById("PercentSpan").innerHTML = 0 + "% of service cost";
+                                                                     document.getElementById("TimeSpan").innerHTML = "at " + 0 + " mins to spot due time";
+                                                                     document.getElementById("CnclPlcyChckOFF").checked = true;
+                                                                     document.getElementById("CnclPlcyChck").checked = false;
+                                                                     document.getElementById("bizBankforCancelStatus").style.backgroundColor = "red";
+                                                                     document.getElementById("bizBankforCancelStatus").innerHTML = "No cancellation policy";
+                                                                     document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
+                                                                     document.getElementById("BankCardValidStatus").innerHTML = "No cancellation policy";
+                                                                     //if(isCardAdded === true)
+                                                                     //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
 
-                                                                document.getElementById("PercentSpan").innerHTML = parseInt(ChargePercent, 10) + "% of service cost";
-                                                                document.getElementById("TimeSpan").innerHTML = "at " + (parseInt(Hour, 10) + parseInt(DurationMM, 10))+ " mins to spot due time";
-                                                                 //if(isCardAdded === true)
-                                                                 //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
-                                                              }
-                                                            }                
+                                                                  }else{
+
+                                                                    document.getElementById("PercentSpan").innerHTML = parseInt(ChargePercent, 10) + "% of service cost";
+                                                                    document.getElementById("TimeSpan").innerHTML = "at " + (parseInt(Hour, 10) + parseInt(DurationMM, 10))+ " mins to spot due time";
+                                                                     //if(isCardAdded === true)
+                                                                     //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
+                                                                  }
+                                                                }                
                                                           });
                                                         
                                                       }else{
@@ -6812,6 +6812,8 @@
                                     <div id="SubscriptionDiv" style="text-align: center; background-color: #6699ff; padding: 5px; display: none;">
                                         
                                     <form action="ProviderSubscriptionLoggedIn.jsp" method="POST">
+                                        
+                                        
                                     <p style="text-align: center; color: white; margin-bottom: 10px;">Your Queue Subscription</p>
                                     <input type="hidden" name="SubscStatusValue" value="" />
                                     <p style="background-color: red; color: white; text-align: center; margin: 5px;">You have not subscribed</p>
@@ -6976,7 +6978,8 @@
                                                 <td><input id="cardDateSBB" placeholder="not added" style="background-color: #6699ff" type="text" name="CardExpForSubscription" value="" /></td>
                                             </tr>
                                         </tbody>
-                                    </table> <script>
+                                    </table> 
+                                        <script>
                                                     var ExpDateSBBFld = document.getElementById("cardDateSBB");
                                                          
                                                          setInterval(function(){

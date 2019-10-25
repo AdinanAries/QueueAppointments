@@ -56,7 +56,11 @@ function toggleEnableFinalApntmntBtn() {
   submitAppointment.style.backgroundColor = "darkgrey";
   submitAppointment.disabled = true;
 
-  var Cash = document.getElementById("Cash").checked;
+  var Cash;
+  if(document.getElementById("Cash")){
+    Cash = document.getElementById("Cash").checked;
+  }
+  
   var CreditDebit = document.getElementById("Credit/Debit").checked;
   var formsTimeValue = document.getElementById("formsTimeValue").value;
   var formsDateValue = document.getElementById("formsDateValue").value;

@@ -25,7 +25,6 @@ public class BlockSpotController extends HttpServlet {
         
     @Override
     public void init(ServletConfig config){
-                
         url = config.getServletContext().getAttribute("DBUrl").toString(); 
         Driver = config.getServletContext().getAttribute("DBDriver").toString();
         user = config.getServletContext().getAttribute("DBUser").toString();
@@ -57,7 +56,6 @@ public class BlockSpotController extends HttpServlet {
         ResendAppointmentData.PaymentMethod = PaymentMethod;
         ResendAppointmentData.ServicesCost = ServicesCost;
         ResendAppointmentData.CreditCardNumber = DebitCreditCardNumber;
-        
         
         //calculate for the next and last 30 mins
             String TimeAfter30Mins = "";
@@ -92,7 +90,6 @@ public class BlockSpotController extends HttpServlet {
             
             //JOptionPane.showMessageDialog(null, TimeAfter30Mins);
             
-        
             int TempHour2 = Integer.parseInt(TempAppointmentTime.substring(0,2));
             int TempMinute2 = Integer.parseInt(TempAppointmentTime.substring(3,5));
         
@@ -121,8 +118,6 @@ public class BlockSpotController extends HttpServlet {
         
         }
         
-        
-        
         StatusesClass.AppointmentStatus = "";
         
 //getting the day for chosen date------------------------------------------------------------------------------------------
@@ -146,101 +141,100 @@ public class BlockSpotController extends HttpServlet {
             
         }catch(Exception e){}
         
-                                        String MonDailyStartTime = "";
-                                        String MonDailyClosingTime = "";
-                                        String TueDailyStartTime = "";
-                                        String TueDailyClosingTime = "";
-                                        String WedDailyStartTime = "";
-                                        String WedDailyClosingTime = "";
-                                        String ThursDailyStartTime = "";
-                                        String ThursDailyClosingTime = "";
-                                        String FriDailyStartTime = "";
-                                        String FriDailyClosingTime = "";
-                                        String SatDailyStartTime = "";
-                                        String SatDailyClosingTime = "";
-                                        String SunDailyStartTime = "";
-                                        String SunDailyClosingTime = "";
+        String MonDailyStartTime = "";
+        String MonDailyClosingTime = "";
+        String TueDailyStartTime = "";
+        String TueDailyClosingTime = "";
+        String WedDailyStartTime = "";
+        String WedDailyClosingTime = "";
+        String ThursDailyStartTime = "";
+        String ThursDailyClosingTime = "";
+        String FriDailyStartTime = "";
+        String FriDailyClosingTime = "";
+        String SatDailyStartTime = "";
+        String SatDailyClosingTime = "";
+        String SunDailyStartTime = "";
+        String SunDailyClosingTime = "";
                                         
-                                        //getting starting and closing hours for eah day
-                                        try{
+        //getting starting and closing hours for eah day
+        try{
                                             
-                                            Class.forName(Driver);
-                                            Connection hoursConn = DriverManager.getConnection(url, user, password);
-                                            String hourString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
+            Class.forName(Driver);
+            Connection hoursConn = DriverManager.getConnection(url, user, password);
+            String hourString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
                                             
-                                            PreparedStatement hourPst = hoursConn.prepareStatement(hourString);
-                                            hourPst.setString(1, ProviderID);
-                                            ResultSet hourRow = hourPst.executeQuery();
+            PreparedStatement hourPst = hoursConn.prepareStatement(hourString);
+            hourPst.setString(1, ProviderID);
+            ResultSet hourRow = hourPst.executeQuery();
                                             
-                                            while(hourRow.next()){
+            while(hourRow.next()){
                                                 
                                                 
-                                                MonDailyStartTime = hourRow.getString("MondayStart");
-                                                MonDailyClosingTime = hourRow.getString("MondayClose");
+                MonDailyStartTime = hourRow.getString("MondayStart");
+                MonDailyClosingTime = hourRow.getString("MondayClose");
                                                 
-                                                TueDailyStartTime = hourRow.getString("TuesdayStart");
-                                                TueDailyClosingTime = hourRow.getString("TuesdayClose");
+                TueDailyStartTime = hourRow.getString("TuesdayStart");
+                TueDailyClosingTime = hourRow.getString("TuesdayClose");
                                                 
-                                                WedDailyStartTime = hourRow.getString("WednessdayStart");
-                                                WedDailyClosingTime = hourRow.getString("WednessdayClose");
+                WedDailyStartTime = hourRow.getString("WednessdayStart");
+                WedDailyClosingTime = hourRow.getString("WednessdayClose");
                                                
-                                                ThursDailyStartTime = hourRow.getString("ThursdayStart");
-                                                ThursDailyClosingTime = hourRow.getString("ThursdayClose");
+                ThursDailyStartTime = hourRow.getString("ThursdayStart");
+                ThursDailyClosingTime = hourRow.getString("ThursdayClose");
                                                
-                                                FriDailyStartTime = hourRow.getString("FridayStart");
-                                                FriDailyClosingTime = hourRow.getString("FridayClose");
+                FriDailyStartTime = hourRow.getString("FridayStart");
+                FriDailyClosingTime = hourRow.getString("FridayClose");
                                                 
-                                                SatDailyStartTime = hourRow.getString("SaturdayStart");
-                                                SatDailyClosingTime = hourRow.getString("SaturdayClose");
+                SatDailyStartTime = hourRow.getString("SaturdayStart");
+                SatDailyClosingTime = hourRow.getString("SaturdayClose");
                                                 
-                                                SunDailyStartTime = hourRow.getString("SundayStart");
-                                                SunDailyClosingTime = hourRow.getString("SundayClose");
+                SunDailyStartTime = hourRow.getString("SundayStart");
+                SunDailyClosingTime = hourRow.getString("SundayClose");
                                                 
                                                 
-                                            }
-                                            
-                                        }catch(Exception e){
-                                            e.printStackTrace();
-                                        }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
                                         
-                                        try{
-                                                if(DayOfWeek.equalsIgnoreCase("Mon")){
-                                                    DailyStartTime = MonDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = MonDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Tue")){
-                                                    DailyStartTime = TueDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = TueDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Wed")){
+        try{
+            if(DayOfWeek.equalsIgnoreCase("Mon")){
+                DailyStartTime = MonDailyStartTime.substring(0,5);
+                DailyClosingTime = MonDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Tue")){
+                DailyStartTime = TueDailyStartTime.substring(0,5);
+                DailyClosingTime = TueDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Wed")){
                                                     
-                                                    DailyStartTime = WedDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = WedDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Thu")){
-                                                    DailyStartTime = ThursDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = ThursDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Fri")){
-                                                    DailyStartTime = FriDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = FriDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Sat")){
-                                                    DailyStartTime = SatDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = SatDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Sun")){
-                                                    DailyStartTime = SunDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = SunDailyClosingTime.substring(0,5);
-                                                }
-                                        }catch(Exception e){}
+                DailyStartTime = WedDailyStartTime.substring(0,5);
+                DailyClosingTime = WedDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Thu")){
+                DailyStartTime = ThursDailyStartTime.substring(0,5);
+                DailyClosingTime = ThursDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Fri")){
+                DailyStartTime = FriDailyStartTime.substring(0,5);
+                DailyClosingTime = FriDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Sat")){
+                DailyStartTime = SatDailyStartTime.substring(0,5);
+                DailyClosingTime = SatDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Sun")){
+                DailyStartTime = SunDailyStartTime.substring(0,5);
+                DailyClosingTime = SunDailyClosingTime.substring(0,5);
+            }
+        }catch(Exception e){}
                                         
-                                if(DailyStartTime == "")
-                                    DailyStartTime = "01:00";
-                                if(DailyClosingTime == "")
-                                    DailyClosingTime = "23:00";
-                                //JOptionPane.showMessageDialog(null, DailyStartTime);
-                                //JOptionPane.showMessageDialog(null, DailyClosingTime);
+        if(DailyStartTime == "")
+            DailyStartTime = "01:00";
+        if(DailyClosingTime == "")
+            DailyClosingTime = "23:00";
+        //JOptionPane.showMessageDialog(null, DailyStartTime);
+        //JOptionPane.showMessageDialog(null, DailyClosingTime);
      
     String CompareTime = AppointmentTime;
     if(CompareTime.length() == 4)
@@ -365,11 +359,13 @@ public class BlockSpotController extends HttpServlet {
         }
         
         if(selectFlag == 0){
+            
             try{
 
                 Class.forName(Driver);
                 Connection appointmentConn = DriverManager.getConnection(url, user, password);
-                String appointmentString = "insert into QueueObjects.BookedAppointment values"
+                String appointmentString = "insert into QueueObjects.BookedAppointment (CustomerID, ProviderID, OrderedServices, AppointmentDate, AppointmentTime, ServicesCost,"
+                        + "PaymentMethod, DebitCreditCardNumber) values"
                         + " (?, ?, ?, ?, ?, ?, ?, ?)";
 
                 PreparedStatement appointmentPst = appointmentConn.prepareStatement(appointmentString);
@@ -381,7 +377,7 @@ public class BlockSpotController extends HttpServlet {
                 appointmentPst.setString(6, ServicesCost);
                 appointmentPst.setString(7, PaymentMethod);
                 appointmentPst.setString(8, DebitCreditCardNumber);
-
+                
                 appointmentPst.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "Spot Blocked");

@@ -57,11 +57,13 @@
                         int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
                         String NewUserName = request.getParameter("User");
                         
+                        //Since this is services provider page.
                         int ProviderID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
                         
                          String SpotsDate = request.getParameter("GetDate");
                         int IntervalsValue = 30;
         
+                        //Getting Spot intervals from Settings DB table
                         try{
 
                             Class.forName(Driver);
@@ -81,49 +83,61 @@
                         }
                         
 
+                        //Provides unique ID for each provider at bookAppointmentFromLineDivForm
                         int d = 0;
                         
-                        
+                        //formatting date value from request object in order to be used in database to get all 
                         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                        //This date obj is not based on current date (new Date()), it is from Date value from request Obj
                         java.util.Date DayOfAppointment = sdf.parse(SpotsDate);
                         String QueueDate = sdf.format(DayOfAppointment);
 
-                         
-                        String CurrentTime = DayOfAppointment.toString().substring(11,16);
+                        //Gettring Current Time 
+                        String CurrentTime = DayOfAppointment.toString().substring(11,16); //this contains 00:00 since date isn't created from new Date()
                         
-            
         
-                                        Date currentDate = DayOfAppointment;//default date constructor returns current date 
-                                        String JSCurrentTime = currentDate.toString().substring(11,16); //forJavaScript;
-                                        String DayOfWeek = currentDate.toString().substring(0,3);
-                                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd"); //formatting date to a string value of month day, year
-                                        String stringDate = formattedDate.format(currentDate); //calling format function to format date object
-                                        SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
-                                        String QueryDate = QuerySdf.format(currentDate);
+                        Date currentDate = DayOfAppointment; 
+                        
+                        String JSCurrentTime = currentDate.toString().substring(11,16); //forJavaScript, initial value is 00:00; 
+                        
+                        String DayOfWeek = currentDate.toString().substring(0,3);
+                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd"); //formatting date to a string value of month day, year
+                        String stringDate = formattedDate.format(currentDate); //calling format function to format date object
+                        SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
+                        String QueryDate = QuerySdf.format(currentDate);
                                         
-                                        ArrayList<String> AllAvailableTimeList = new ArrayList<>();
-                                        ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
-                                        ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
-                                        ArrayList<String> AllUnavailableFormattedTimeList = new ArrayList<>();
-                                        ArrayList<String> AllThisProviderBlockedTime = new ArrayList<>();
-                                        ArrayList<String> AllThisProviderBlockedFormattedTakenTime = new ArrayList<>();
-                                        ArrayList<String> BlockedAppointmentIDs = new ArrayList<>();
+                        //List Items to contain various varying spot times (Available, taken and blocked) 
+                        //Some List Items store formatted varying spot times for user display.
+                        ArrayList<String> AllAvailableTimeList = new ArrayList<>();
+                        ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
+                        ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
+                        ArrayList<String> AllUnavailableFormattedTimeList = new ArrayList<>();
+                        ArrayList<String> AllThisProviderBlockedTime = new ArrayList<>();
+                        ArrayList<String> AllThisProviderBlockedFormattedTakenTime = new ArrayList<>();
+                        ArrayList<String> BlockedAppointmentIDs = new ArrayList<>();
                                         
-                                        String DailyStartTime = "";
-                                        String DailyClosingTime = "";
-                                        String FormattedStartTime = "";
-                                        String FormattedClosingTime = "";
-                                        int startHour = 0;
-                                        int startMinute = 0;
-                                        int closeHour = 0;
-                                        int closeMinute = 0;
-                                        
-                                        int TotalAvailableList = 0;
-                                        int TotalUnavailableList = 0;
-                                        int TotalThisCustomerTakenList = 0;
-                                    %>
+                        //Variables to store Start and Closing times both farmatted and non-formatted
+                        String DailyStartTime = "";
+                        String DailyClosingTime = "";
+                        String FormattedStartTime = "";
+                        String FormattedClosingTime = "";
+                        
+                        //Used to store time parts for starting and closing times
+                        int startHour = 0;
+                        int startMinute = 0;
+                        int closeHour = 0;
+                        int closeMinute = 0;
+                               
+                        //Stores total number items in various spots lists
+                        int TotalAvailableList = 0;
+                        int TotalUnavailableList = 0;
+                        int TotalThisCustomerTakenList = 0;
+                %>
                                     
-                                    <%
+                <%
+                    
+                                        //needed to collect each individual starting and closing days for all week long
+                                        //then assigning the right value based on day of week as presented from Date created from SpotsDate(Mon, Tue, Wed, etc.)
                                         String MonDailyStartTime = "";
                                         String MonDailyClosingTime = "";
                                         String TueDailyStartTime = "";
@@ -274,15 +288,15 @@
                                         SimpleDateFormat DateForCompareSdf = null;
                                         java.util.Date DateForClosedCompare = null;
                                         try{
-                                            DateForCompareSdf = new SimpleDateFormat("MM/dd/yyyy");
-                                            DateForClosedCompare = sdf.parse(SpotsDate);
+                                            DateForCompareSdf = new SimpleDateFormat("MM/dd/yyyy"); //Use default java date format because SpotsDate is in this format
+                                            DateForClosedCompare = sdf.parse(SpotsDate);//Parsing SpotsDate String which is in the format provided above
                                         
                                         }catch(Exception e){}
                                         
                                         //Date DateForClosedCompare = new Date();
                                         SimpleDateFormat DateForCompareSdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                                        String StringDateForCompare = DateForCompareSdf2.format(DateForClosedCompare);
-                                        
+                                        //the below StringDate Compares with SQL Date to make sure its not a closed date
+                                        String StringDateForCompare = DateForCompareSdf2.format(DateForClosedCompare); //Creating String Date from Date Object into format provider above
                                         
                                         try{
                                             
@@ -324,7 +338,7 @@
                                         int CurrentMinute = Integer.parseInt(DailyStartTime.substring(3,5));
                                         
                                         
-                                        //do all this for status led
+                                        //do all this for open or closed status led
                                         String StatusLedCurrentTime = currentDate.toString().substring(11,16);
                                         int StatusLedCurrentHour = Integer.parseInt(StatusLedCurrentTime.substring(0,2));
                                         int StatusLedCurrentMinute = Integer.parseInt(StatusLedCurrentTime.substring(3,5));
@@ -343,7 +357,9 @@
                                         
                                         }
                                         
+                                        //Used to store and keep track of time after 30mins intervals
                                         String NextAvailableTime = "" ;
+                                        //Used to store and keep track of 12hour format time after 30mins for display
                                         String NextAvailableFormattedTime = "";
                                         
                                         int y = 0;
@@ -362,20 +378,23 @@
                                         int Hourfor30Mins = CurrentHour;
                                         
                                         if(NextThirtyMinutes >= 60){
+                                        //this is code is only to increment Hour and make sure it doesn't exceed providers closing time 
+                                        //first increment hour when Minutes is greater than 60 after increment
                                             
                                             ++NextHour;
                                             
                                             if(DailyClosingTime != ""){
+                                                //Perform these operations when provider has a closing time
                                                 
                                                 if(NextHour > closeHour && closeHour != 0){
-
+                                                    //make sure that next hour hasn't exceeded providers closing time hour
                                                     NextHour = closeHour - 1;
 
                                                 }
-                                                else if(closeHour == 0)
+                                                else if(closeHour == 0)//if data returned from database is 00 for 12am then use 23
                                                     NextHour = 23;
                                                     
-                                            }else if(NextHour > 23){
+                                            }else if(NextHour > 23){//this is neccessary because closing hour may not necessarily be up to 23
                                                 NextHour = 23;
                                             }
                                             
@@ -497,13 +516,13 @@
                                     */
                                         
                                         //this part of the algorithm changed
-                                        int twoHours = CurrentHour + 23;
+                                        int twoHours = CurrentHour + 23; //two hours determins how long should outer loop run
                                         
-                                        if(DailyClosingTime != ""){
+                                        if(DailyClosingTime != ""){ //Making sure that loop doesn't run past the closing time if there is and not doesn't go past 23
                                             
                                             if(twoHours > closeHour && closeHour != 0){
 
-                                                    twoHours = closeHour - 1;
+                                                    twoHours = closeHour - 1; //remove 1 from closing time so that there is spot up to the next hour after closing time 
 
                                                 }
                                             else if(closeHour == 0)
@@ -524,7 +543,7 @@
                                     %>
                                       
                                     <%
-                                    if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
+                                        if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
                                     %>
                                                  
                                     <p style="color: tomato;">You're not open on <%=DayOfWeek%>...</p>
@@ -572,8 +591,11 @@
                                             <tr>
                                                 
                                             <%
+                                                
                                                 int HowManyColums = 0;
                                                 int BookedSpots = 0;
+                                                
+                                                //use this variable to flag when there isn't any spot available
                                                 boolean isLineAvailable = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
@@ -581,62 +603,62 @@
                                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00"))
                                                         break;
                                                    
-                                                    for(y = CurrentMinute; y <= 60;){
+                                                    for(y = CurrentMinute; y <= 60;){ //CurrentMinute is needed to start from current minute of current time
                                                         
                                             %>
                                             
                                             <%
-                                                String AppointmentID = "";
-                                                 
-                                                try{
-                                                    
-                                                    Class.forName(Driver);
-                                                    Connection LineDivConn = DriverManager.getConnection(Url, user, password);
-                                                    String LineDivString = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ? and (AppointmentTime between ? and ?)";
-                                                    
-                                                    PreparedStatement LineDivPst = LineDivConn.prepareStatement(LineDivString);
-                                                    LineDivPst.setInt(1, ProviderID);
-                                                    LineDivPst.setString(2, QueryDate);
-                                                    LineDivPst.setString(3, CurrentTime);
-                                                    LineDivPst.setString(4, NextAvailableTime);
-                                                    
-                                                    ResultSet LineDivRow = LineDivPst.executeQuery();
-                                                    
-                                                    while(LineDivRow.next()){
-                                                        
-                                                        bookedTimeFlag = 1;
-                                                        
-                                                        String Reason = LineDivRow.getString("OrderedServices").trim();
-                                                        
-                                                        
-                                                        if(Reason.equals("Blocked Time")){
-                                                            
-                                                            bookedTimeFlag = 2;
-                                                            AppointmentID = LineDivRow.getString("AppointmentID");
-                                                            BlockedAppointmentIDs.add(AppointmentID);
-                                                            
+                                                        String AppointmentID = "";
+
+                                                        try{
+
+                                                            Class.forName(Driver);
+                                                            Connection LineDivConn = DriverManager.getConnection(Url, user, password);
+                                                            String LineDivString = "Select * from QueueObjects.BookedAppointment where ProviderID = ? and AppointmentDate = ? and (AppointmentTime between ? and ?)";
+
+                                                            PreparedStatement LineDivPst = LineDivConn.prepareStatement(LineDivString);
+                                                            LineDivPst.setInt(1, ProviderID);
+                                                            LineDivPst.setString(2, QueryDate);
+                                                            LineDivPst.setString(3, CurrentTime);
+                                                            LineDivPst.setString(4, NextAvailableTime);
+
+                                                            ResultSet LineDivRow = LineDivPst.executeQuery();
+
+                                                            while(LineDivRow.next()){
+
+                                                                bookedTimeFlag = 1;
+
+                                                                String Reason = LineDivRow.getString("OrderedServices").trim();
+
+
+                                                                if(Reason.equals("Blocked Time")){
+
+                                                                    bookedTimeFlag = 2;
+                                                                    AppointmentID = LineDivRow.getString("AppointmentID");
+                                                                    BlockedAppointmentIDs.add(AppointmentID);
+
+                                                                }
+
+                                                                CurrentTime = LineDivRow.getString("AppointmentTime");
+
+
+                                                                int k = Integer.parseInt(CurrentTime.substring(0,2));
+                                                                int l = Integer.parseInt(CurrentTime.substring(3,5));
+
+                                                                x = Integer.parseInt(CurrentTime.substring(0,2));
+                                                                y = Integer.parseInt(CurrentTime.substring(3,5));
+
+                                                                ++l;
+                                                                CurrentTime = k + ":" + l;
+
+                                                                break;
+
+
+                                                            }
                                                         }
-                                                        
-                                                        CurrentTime = LineDivRow.getString("AppointmentTime");
-                                                        
-                                                        
-                                                        int k = Integer.parseInt(CurrentTime.substring(0,2));
-                                                        int l = Integer.parseInt(CurrentTime.substring(3,5));
-                                                        
-                                                        x = Integer.parseInt(CurrentTime.substring(0,2));
-                                                        y = Integer.parseInt(CurrentTime.substring(3,5));
-                                                        
-                                                        ++l;
-                                                        CurrentTime = k + ":" + l;
-                                                        
-                                                        break;
-                                                      
-                                                        
-                                                    }
-                                                }
-                                                catch(Exception e){
-                                                    e.printStackTrace();
-                                                }
+                                                        catch(Exception e){
+                                                            e.printStackTrace();
+                                                        }
                                             %>
                                             
                                             <%
@@ -894,30 +916,38 @@
                                         
                                         for(int z = 0; z < AllAvailableTimeList.size(); z++){
                                             
-                                            String NextAvailableTimeForForm = AllAvailableTimeList.get(z);
-                                            String NextAvailableTimeForFormDisplay = AllAvailableFormattedTimeList.get(z);
+                                            String NextAvailableTimeForForm = AllAvailableTimeList.get(z);//Time data to be sent to BlockFutureSpotController
                                             
-                                            int t = d + 1;
-                                            int q = z + 1;
+                                            String NextAvailableTimeForFormDisplay = AllAvailableFormattedTimeList.get(z);//Time data to be displayed for User (12hour formatted)
+                                            
+                                            //variables that help make HTML Element IDs unique
+                                            int t = d + 1; //this changes per provider information
+                                            int q = z + 1; //this changes per form for each provider
                                             
                                     %>
                                     
-                                    <form style="display: none;" id="bookAppointmentFromLineDiv<%=t%><%=q%>" name="bookAppointmentFromLineDiv" action="BlockSpotController" method="POST">
+                                    <form style="display: none;" id="bookAppointmentFromLineDiv<%=t%><%=q%>" name="bookAppointmentFromLineDiv" action="BlockFutureSpotController" method="POST">
                                         <input type="hidden" name="CustomerID" value="1" />
                                         <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
+                                        <input type="hidden" name="GetDate" value="<%=SpotsDate%>" />
                                         <input type="hidden" name="formsOrderedServices" value="Blocked Time" />
                                         <input type="hidden" name="formsDateValue" value="<%=QueryDate%>" />
                                         <input type="hidden" name="formsTimeValue" value="<%=NextAvailableTimeForForm%>" />
                                         <input type="hidden" name="TotalPrice" value="00.00" />
                                         <input type="hidden" name="payment" value="None" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>"/>
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                        <%
+                                    <%
+                                        //making sure thisTime is 5 characters long string. needed to avoid string out-of-bounds indices
                                         if(thisTime.length() == 4)
                                             thisTime = "0" + thisTime;
+                                        
+                                        //making sure NextAvailableTimeForForm is 5 characters long string. needed to avoid string out-of-bounds indices
                                         if(NextAvailableTimeForForm.length() == 4)
                                             NextAvailableTimeForForm = "0" + NextAvailableTimeForForm;
                                         
+                                        //Getting Time parts (HH and MM)
                                         int TempThisHour = Integer.parseInt(thisTime.substring(0,2));
                                         int TempThisMinute = Integer.parseInt(thisTime.substring(3,5));
                                         int AppointmentHour = Integer.parseInt(NextAvailableTimeForForm.substring(0,2));
@@ -972,20 +1002,20 @@
                                     </form>
                                 </div></center>
                     
-                    <script>
-                        $( 
-                            function(){
-                                $( "#Fdatepicker" ).datepicker({
-                                    minDate: 0
-                                });
-                            } 
-                        );
-                
-                        function checkFdatePicker(){
-                                        
+                                <script>
+                                    $( 
+                                        function(){
+                                            $( "#Fdatepicker" ).datepicker({
+                                                minDate: 0
+                                            });
+                                        } 
+                                    );
+
+                                    function checkFdatePicker(){
+
                                         var Fdatepicker = document.getElementById("Fdatepicker");
                                         var GenerateSpotsBtn = document.getElementById("GenerateSpotsBtn");
-                                        
+
                                         if(Fdatepicker.value === ""){
                                             GenerateSpotsBtn.style.backgroundColor = "darkgrey";
                                             GenerateSpotsBtn.disabled = true;
@@ -993,30 +1023,37 @@
                                         else{
                                             GenerateSpotsBtn.style.backgroundColor = "pink";
                                             GenerateSpotsBtn.disabled = false;
-                                            
+
                                         }
-                                            
-                                        
+
+
                                     }
-                                    
-                                    setInterval(checkFdatePicker,1);
-                                    
-                    </script>
-                    
-                    <center><a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="width: 100%; max-width: 590px; padding: 5px; background-color: pink; color: white; text-align:center; ">Go to your dashboard</p></a></center>
-    
-                    <%
+
+                                     setInterval(checkFdatePicker,1);
+
+                                </script>
+
+                                <center><a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="width: 100%; max-width: 590px; padding: 5px; background-color: pink; color: white; text-align:center; ">Go to your dashboard</p></a></center>
+
+                <%
                         
+                    //ArrayList that stores all Appointments for selected date on this page
+                    ArrayList<BookedAppointmentList> AppointmentList = new ArrayList<>();
                         
-                        ArrayList<BookedAppointmentList> AppointmentList = new ArrayList<>();
                     //Getting this day's Appointments
                     try{
                         
+                        /*
+                           MM/dd/yyyy is the default Java Date Format
+                           yyyy-MM-dd is the default SQL Date
+                        */
+                        
+                        //SpotsDate is in this formate which looks similar from default date format from java Date() class
                         SimpleDateFormat appointmentsSdf = new SimpleDateFormat("MM/dd/yyyy");
-                        java.util.Date MainAppointmentDate = appointmentsSdf.parse(SpotsDate);
+                        java.util.Date MainAppointmentDate = appointmentsSdf.parse(SpotsDate); //Parsing String SpotsDate to a date Obj in the format of appointmentSdf
 
-                        SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        String StrinCurrentdate = currentDateFormat.format(MainAppointmentDate);
+                        SimpleDateFormat currentDateFormat = new SimpleDateFormat("yyyy-MM-dd"); //Another Date format that can be understood by SQL
+                        String StrinCurrentdate = currentDateFormat.format(MainAppointmentDate); //Now Formatting previously created date obj for SQL
                         //JOptionPane.showMessageDialog(null, StrinCurrentdate);
 
                         Class.forName(Driver);
@@ -1025,13 +1062,14 @@
                         PreparedStatement appointmentPst = appointmentConn.prepareStatement(appointment);
 
                         appointmentPst.setInt(1,ProviderID);
-                        appointmentPst.setString(2, StrinCurrentdate);
+                        appointmentPst.setString(2, StrinCurrentdate); //StringCurrentDate Contains SQL Date Format Equivalent of SpotsDate from Request Obj
                         ResultSet rows = appointmentPst.executeQuery();
 
                         BookedAppointmentList ListItem;
 
                         while(rows.next()){
-
+                            
+                            //skip Blocked Spots (don't include them in the appointments list
                             String Reason = rows.getString("OrderedServices").trim();
                             if(Reason.equals("Blocked Time")){
 
