@@ -525,26 +525,23 @@
                                         ProvEmail = ProvRec.getString("Email").trim();
                                         
                                         try{    
-                                                            //put this in a try catch block for incase getProfilePicture returns nothing
-                                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
-                                                            InputStream inputStream = Pic.getBinaryStream();
-                                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                            byte[] buffer = new byte[4096];
-                                                            int bytesRead = -1;
+                                            //put this in a try catch block for incase getProfilePicture returns nothing
+                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                            InputStream inputStream = Pic.getBinaryStream();
+                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                            byte[] buffer = new byte[4096];
+                                            int bytesRead = -1;
 
-                                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                                outputStream.write(buffer, 0, bytesRead);
-                                                            }
+                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                outputStream.write(buffer, 0, bytesRead);
+                                            }
 
-                                                            byte[] imageBytes = outputStream.toByteArray();
+                                            byte[] imageBytes = outputStream.toByteArray();
 
-                                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
 
 
-                                                        }
-                                                        catch(Exception e){
-
-                                                        }
+                                        }catch(Exception e){}
                                         
                                     }
                                     
@@ -1280,7 +1277,7 @@
                                         //use this if there is no appointment for the next hour
                                         int Hourfor30Mins = CurrentHour;
                                         
-                                        if(NextThirtyMinutes >= 60){
+                                        while(NextThirtyMinutes >= 60){
                                             
                                             ++NextHour;
                                             
@@ -1306,7 +1303,7 @@
                                         }
                                         
                                         //use this if there is no appointment for the next hour
-                                        if(ActualThirtyMinutesAfter >= 60){
+                                        while(ActualThirtyMinutesAfter >= 60){
                                             
                                             ++Hourfor30Mins;
                                             
@@ -1375,7 +1372,7 @@
                                         
                                                 int TempHour = CurrentHour;
 
-                                                if(TempMinute >= 60){
+                                                while(TempMinute >= 60){
 
                                                     ++TempHour;
 
@@ -1509,6 +1506,7 @@
                                                 
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
+                                                boolean broken = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -1516,6 +1514,16 @@
                                                         break;
                                                    
                                                     for(y = CurrentMinute; y <= 60;){
+                                                        
+                                                        if(isFirstAppointmentFound == 0){
+
+                                                            y = Integer.parseInt(CurrentTime.substring(3,5));
+                                                            isFirstAppointmentFound = 2;
+                                                            //JOptionPane.showMessageDialog(null, y);
+                                                        }
+                                                        
+                                                        if(broken)
+                                                            break;
                                                         
                                             %>
                                             
@@ -1671,7 +1679,7 @@
                                                         
                                                         y += IntervalsValue;
                                                         
-                                                        if(y >= 60){
+                                                        while(y >= 60){
                                                              
                                                             x++;
                                                             
@@ -1684,6 +1692,7 @@
                                                                //breaking out of this inner loop  
                                                                //incidentally the condition of outer loop becomes false
                                                                //thereby exiting as well
+                                                               broken = true;
                                                                break;
                                                             }
                                                         }

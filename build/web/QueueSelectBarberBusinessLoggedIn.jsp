@@ -930,6 +930,7 @@
                                         String DailyClosingTime = "";
                                         String FormattedStartTime = "";
                                         String FormattedClosingTime = "";
+                                        
                                         int startHour = 0;
                                         int startMinute = 0;
                                         int closeHour = 0;
@@ -1056,8 +1057,8 @@
                                                         //formatting the time for user convenience
                                                         if( closeHour > 12)
                                                         {
-                                                             int TempHour = closeHour - 12;
-                                                             FormattedClosingTime = Integer.toString(TempHour) + ":" +  DailyClosingTime.substring(3,5) + " pm";
+                                                            int TempHour = closeHour - 12;
+                                                            FormattedClosingTime = Integer.toString(TempHour) + ":" +  DailyClosingTime.substring(3,5) + " pm";
                                                         }
                                                         else if(closeHour == 0){
                                                             FormattedClosingTime = "12" + ":" + DailyClosingTime.substring(3,5) + " am";
@@ -1151,7 +1152,10 @@
                                         //use this if there is no appointment for the next hour
                                         int Hourfor30Mins = CurrentHour;
                                         
-                                        if(NextThirtyMinutes >= 60){
+                                        //initial 30mins wont be sufficient for 5hour spot intervals
+                                        //spots may be miscalculated when there is an initail booking for 5 hour spots
+                                        //this can lead to less timing for initial booking
+                                        while(NextThirtyMinutes >= 60){
                                             
                                             ++NextHour;
                                             
@@ -1177,7 +1181,7 @@
                                         }
                                         
                                         //use this if there is no appointment for the next hour
-                                        if(ActualThirtyMinutesAfter >= 60){
+                                        while(ActualThirtyMinutesAfter >= 60){
                                             
                                             ++Hourfor30Mins;
                                             
@@ -1246,7 +1250,7 @@
                                         
                                                 int TempHour = CurrentHour;
 
-                                                if(TempMinute >= 60){
+                                                while(TempMinute >= 60){
 
                                                     ++TempHour;
 
@@ -1281,6 +1285,8 @@
                                                 break;
                                                 
                                             }
+                                            
+                                            //set next available time with code block below if it wasn't set from a previously taken spot
                                             if(Next30MinsAppointmentFlag == 0){
                                                 
                                                 if(TimeWith30Mins.length() == 4)
@@ -1376,8 +1382,10 @@
                                             <tr>
                                                 
                                             <%
+                                                
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
+                                                boolean broken = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -1385,6 +1393,16 @@
                                                         break;
                                                    
                                                     for(y = CurrentMinute; y <= 60;){
+                                                        
+                                                        if(isFirstAppointmentFound == 0){
+
+                                                            y = Integer.parseInt(CurrentTime.substring(3,5));
+                                                            isFirstAppointmentFound = 2;
+                                                            //JOptionPane.showMessageDialog(null, y);
+                                                        }
+                                                        
+                                                        if(broken)
+                                                            break;
                                                         
                                             %>
                                             
@@ -1540,7 +1558,7 @@
                                                         
                                                         y += IntervalsValue;
                                                         
-                                                        if(y >= 60){
+                                                        while(y >= 60){
                                                              
                                                             x++;
                                                             
@@ -1550,9 +1568,9 @@
                                                                 y = 0;
                                                              
                                                             if(x > twoHours){
-                                                               //breaking out of this inner loop  
-                                                               //incidentally the condition of outer loop becomes false
-                                                               //thereby exiting as well
+                                                                
+                                                               //breaks from this immediate loop while flaging outer loop for exit as well
+                                                               broken = true;
                                                                break;
                                                             }
                                                         }

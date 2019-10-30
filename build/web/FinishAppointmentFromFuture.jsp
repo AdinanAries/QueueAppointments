@@ -892,7 +892,7 @@
 
                             TempMinute += IntervalsValue;
 
-                            if(TempMinute >= 60){
+                            while(TempMinute >= 60){
 
                                 TempHour++;
 
@@ -967,6 +967,7 @@
                                 TimeRangePst.setString(8, TimeAfter30Mins);
 
                                 ResultSet TimeRangeRow = TimeRangePst.executeQuery();
+                                
                                 while(TimeRangeRow.next()){
                                     
                                     TimeBookedFlag = 1;
@@ -978,7 +979,7 @@
                                     //ThisAppointmentHour++;
                                     ThisAppointmentMinute += (IntervalsValue + 1);
                                     
-                                    if(ThisAppointmentMinute >= 60){
+                                    while(ThisAppointmentMinute >= 60){
                                         
                                         ThisAppointmentHour++;
                                         
@@ -1273,24 +1274,24 @@
                                             HourForFormattedTimedAvail = Integer.parseInt(FormattedAvailableTime.substring(0,2));
                                             MinuteFroFormattedTimeAvail = Integer.parseInt(FormattedAvailableTime.substring(3,5));
                                                         
-                                                        //formatting the time for user convenience
-                                                        if( HourForFormattedTimedAvail > 12)
-                                                        {
-                                                             int TempHourAvail = HourForFormattedTimedAvail - 12;
-                                                             FormattedAvailableTime = Integer.toString(TempHourAvail) + ":" +  FormattedAvailableTime.substring(3,5) + " pm";
-                                                        }
-                                                        else if(HourForFormattedTimedAvail == 0){
-                                                            FormattedAvailableTime = "12" + ":" + FormattedAvailableTime.substring(3,5) + " am";
-                                                        }
-                                                        else if(HourForFormattedTimedAvail == 12){
-                                                            FormattedAvailableTime = FormattedAvailableTime + " pm";
-                                                        }
-                                                        else{
-                                                            FormattedAvailableTime = FormattedAvailableTime +" am";
-                                                        }
+                                            //formatting the time for user convenience
+                                            if( HourForFormattedTimedAvail > 12)
+                                            {
+                                                int TempHourAvail = HourForFormattedTimedAvail - 12;
+                                                FormattedAvailableTime = Integer.toString(TempHourAvail) + ":" +  FormattedAvailableTime.substring(3,5) + " pm";
+                                            }
+                                            else if(HourForFormattedTimedAvail == 0){
+                                                FormattedAvailableTime = "12" + ":" + FormattedAvailableTime.substring(3,5) + " am";
+                                            }
+                                            else if(HourForFormattedTimedAvail == 12){
+                                                FormattedAvailableTime = FormattedAvailableTime + " pm";
+                                            }
+                                            else{
+                                                FormattedAvailableTime = FormattedAvailableTime +" am";
+                                            }
                                                         
-                                                        if(AllAvailableTimeList.get(q) == CurrentTime)
-                                                            continue;
+                                            //if(AllAvailableTimeList.get(q) == CurrentTime)
+                                                //continue;
                                         
                                     %>
                                    

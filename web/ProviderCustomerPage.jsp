@@ -3644,7 +3644,7 @@
                                             <center><table>
                                                 <tbody>
                                                 <tr>
-                                                    <td>Compose Message Below</td>
+                                                    <td>Compose feedback message below</td>
                                                 </tr>
                                                 <tr>
                                                     <td><textarea id="FeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" cols="40">

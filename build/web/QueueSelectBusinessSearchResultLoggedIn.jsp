@@ -1129,6 +1129,7 @@
                                         String DailyClosingTime = "";
                                         String FormattedStartTime = "";
                                         String FormattedClosingTime = "";
+                                        
                                         int startHour = 0;
                                         int startMinute = 0;
                                         int closeHour = 0;
@@ -1329,9 +1330,28 @@
                                                 CurrentMinute = startMinute;
                                                 
                                             }
-                                        
+                                            
+                                            /*this is constant regardless of current time
+                                            if(IntervalsValue >= 120){
+
+                                                CurrentHour = startHour;
+                                                CurrentMinute = startMinute;
+                                                CurrentTime = DailyStartTime;
+
+                                            }*/
+                                            
                                         }
                                         
+                                        /*this is constant regardless of current time
+                                        if(IntervalsValue >= 120 && DailyStartTime == ""){
+                                                
+                                            CurrentHour = 1;
+                                            CurrentMinute = 0;
+                                            CurrentTime = "01:00";
+                                                
+                                        }*/
+                                        
+                                        //variables below keep the ultimate available times for spots
                                         String NextAvailableTime = "" ;
                                         String NextAvailableFormattedTime = "";
                                         
@@ -1350,7 +1370,7 @@
                                         //use this if there is no appointment for the next hour
                                         int Hourfor30Mins = CurrentHour;
                                         
-                                        if(NextThirtyMinutes >= 60){
+                                        while(NextThirtyMinutes >= 60){
                                             
                                             ++NextHour;
                                             
@@ -1378,7 +1398,7 @@
                                         }
                                         
                                         //use this if there is no appointment for the next hour
-                                        if(ActualThirtyMinutesAfter >= 60){
+                                        while(ActualThirtyMinutesAfter >= 60){
                                             
                                             ++Hourfor30Mins;
                                             
@@ -1416,6 +1436,7 @@
                                             ThirtyPst.setInt(1, providersList.get(i).getID());
                                             ThirtyPst.setString(2, QueryDate);
                                             ThirtyPst.setString(3, CurrentTime);
+                                            //JOptionPane.showMessageDialog(null,CurrentTime);
                                             ThirtyPst.setString(4, TimeAfter30Mins);
                                             
                                             ResultSet ThirtyMinsRow = ThirtyPst.executeQuery();
@@ -1436,7 +1457,7 @@
                                         
                                                 int TempHour = CurrentHour;
 
-                                                if(TempMinute >= 60){
+                                                while(TempMinute >= 60){
 
                                                     ++TempHour;
 
@@ -1461,6 +1482,9 @@
                                                 
                                             }
                                             if(Next30MinsAppointmentFlag == 0){
+
+                                                //if(isFirstAppointmentFound == 0)
+                                                    //TimeWith30Mins = CurrentTime;
                                                 
                                                 if(TimeWith30Mins.length() == 4)
                                                     TimeWith30Mins = "0" + TimeWith30Mins;
@@ -1550,20 +1574,31 @@
                                     
                                         
                                     <div class="scrolldiv" style="width: 280px; max-width: 500px; overflow-x: auto;">
-                                    <table>
+                                    <table id="SpotsTable">
                                         <tbody>
                                             <tr>
                                                 
                                             <%
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
-                                                
+                                                boolean broken = false;
+                                               
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
                                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00"))
                                                         break;
                                                    
                                                     for(y = CurrentMinute; y <= 60;){
+                                                        
+                                                        if(isFirstAppointmentFound == 0){
+
+                                                            y = Integer.parseInt(CurrentTime.substring(3,5));
+                                                            isFirstAppointmentFound = 2;
+                                                            //JOptionPane.showMessageDialog(null, y);
+                                                        }
+                                                        
+                                                        if(broken)
+                                                            break;
                                                         
                                             %>
                                             
@@ -1614,8 +1649,7 @@
                                             %>
                                             
                                             <%
-                                                        
-                                                    
+                                                   
                                                         String thisMinute = Integer.toString(y);
                                                         
                                                         if(thisMinute.length() < 2){
@@ -1643,23 +1677,53 @@
                                             %>
                                             
                                             <% 
+                                                /*--------------------------------------
+                                                    
+                                                    boolean isSpotPast = false;
+                                                    boolean isNonePresentSpot = true;
+                                                    
+                                                    if(NextAvailableTime.length() < 5)
+                                                        NextAvailableTime = "0" + NextAvailableTime;
+
+                                                    String Now = new Date().toString().substring(11,16);
+                                                    //JOptionPane.showMessageDialog(null, Now.substring(0,2));
+
+                                                    //JOptionPane.showMessageDialog(null, Integer.parseInt(NextAvailableTime.substring(0,2)));
+
+                                                    if(Now.length() < 5)
+                                                        Now = "0" + Now;
+
+                                                    if(Integer.parseInt(NextAvailableTime.substring(0,2)) < Integer.parseInt(Now.substring(0,2))){
+                                                        isSpotPast = true;
+                                                    }else if(Integer.parseInt(NextAvailableTime.substring(0,2)) == Integer.parseInt(Now.substring(0,2))){
+                                                        if(Integer.parseInt(NextAvailableTime.substring(3,5)) < Integer.parseInt(Now.substring(3,5)))
+                                                            isSpotPast = true;
+                                                    }
+                                                    //--------------------------------------
+                                                */      
+                                                
+
+                                                
                                                 if(bookedTimeFlag == 1){
                                                     
-                                                    HowManyColums++;
-                                                    isLineAvailable = true;
+                                                    //if(!isSpotPast){
                                                     
-                                                    TotalUnavailableList++;
-                                                    AllUnavailableTimeList.add(NextAvailableTime);
-                                                    AllUnavailableFormattedTimeList.add(NextAvailableFormattedTime);
-                                                    int t = i + 1;
+                                                        HowManyColums++;
+                                                        isLineAvailable = true;
+
+                                                        TotalUnavailableList++;
+                                                        AllUnavailableTimeList.add(NextAvailableTime);
+                                                        AllUnavailableFormattedTimeList.add(NextAvailableFormattedTime);
+                                                        int t = i + 1;
                                             %>
                                             
-                                            <td onclick="showLineTakenMessage(<%=t%><%=TotalUnavailableList%>)">
-                                                <p style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
-                                                <img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
-                                            </td>
+                                                        <td onclick="showLineTakenMessage(<%=t%><%=TotalUnavailableList%>)">
+                                                            <p style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
+                                                            <img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
+                                                        </td>
                                                 
-                                            <%  
+                                            <% 
+                                                    //}
                                                     
                                                 }
                                             
@@ -1671,44 +1735,50 @@
                                             <% 
                                                 if(bookedTimeFlag == 0){
                                                     
-                                                    HowManyColums++;
-                                                    isLineAvailable = true;
+                                                    //if(!isSpotPast){
                                                     
-                                                    TotalAvailableList++;
-                                                    AllAvailableTimeList.add(NextAvailableTime);
-                                                    AllAvailableFormattedTimeList.add(NextAvailableFormattedTime);
-                                                    int t = i + 1;
+                                                        HowManyColums++;
+                                                        isLineAvailable = true;
+
+                                                        TotalAvailableList++;
+                                                        AllAvailableTimeList.add(NextAvailableTime);
+                                                        AllAvailableFormattedTimeList.add(NextAvailableFormattedTime);
+                                                        int t = i + 1;
                                             %>
                                                 
-                                                 <td onclick="ShowQueueLinDivBookAppointment(<%=t%><%=TotalAvailableList%>)">
-                                                     <p style="font-size: 12px; font-weight: bold; color: blue;"><%=NextAvailableFormattedTime%></p>
-                                                     <img src="icons/icons8-standing-man-filled-50 (1).png" width="50" height="50" alt="icons8-standing-man-filled-50 (1)"/>
-                                                </td>
+                                                        <td onclick="ShowQueueLinDivBookAppointment(<%=t%><%=TotalAvailableList%>)">
+                                                            <p style="font-size: 12px; font-weight: bold; color: blue;"><%=NextAvailableFormattedTime%></p>
+                                                            <img src="icons/icons8-standing-man-filled-50 (1).png" width="50" height="50" alt="icons8-standing-man-filled-50 (1)"/>
+                                                        </td>
                                                 
                                             <% 
-                                                  }
+                                                    //}
+                                                }
 
                                             %>
                                                 
                                             <%
-                                            if(bookedTimeFlag == 2){
-                                                
-                                                HowManyColums++;
-                                                isLineAvailable = true;
-                                                
-                                                TotalThisCustomerTakenList++;
-                                                AllThisCustomerTakenTime.add(NextAvailableTime);
-                                                AllThisCustomerTakenFormattedTakenTime.add(NextAvailableFormattedTime);
-                                                int t = i + 1;
+                                                if(bookedTimeFlag == 2){
+
+                                                    //if(!isSpotPast){
+
+                                                        HowManyColums++;
+                                                        isLineAvailable = true;
+
+                                                        TotalThisCustomerTakenList++;
+                                                        AllThisCustomerTakenTime.add(NextAvailableTime);
+                                                        AllThisCustomerTakenFormattedTakenTime.add(NextAvailableFormattedTime);
+                                                        int t = i + 1;
                                                 
                                             %>
                                             
-                                                <td onclick="showYourPositionMessage(<%=t%><%=TotalThisCustomerTakenList%>)">
-                                                    <p style="font-size: 12px; font-weight: bold; color: green;"><%=NextAvailableFormattedTime%></p>
-                                                    <img src="icons/icons8-standing-man-filled-50 (2).png" width="50" height="50" alt="icons8-standing-man-filled-50 (2)"/>
-                                                </td>
+                                                        <td onclick="showYourPositionMessage(<%=t%><%=TotalThisCustomerTakenList%>)">
+                                                            <p style="font-size: 12px; font-weight: bold; color: green;"><%=NextAvailableFormattedTime%></p>
+                                                            <img src="icons/icons8-standing-man-filled-50 (2).png" width="50" height="50" alt="icons8-standing-man-filled-50 (2)"/>
+                                                        </td>
                                                 
-                                            <%  }
+                                            <%      //}
+                                                }
                                             
                                                 bookedTimeFlag = 0;
                                             
@@ -1719,7 +1789,7 @@
                                                         
                                                         y += IntervalsValue;
                                                         
-                                                        if(y >= 60){
+                                                        while(y >= 60){
                                                              
                                                             x++;
                                                             
@@ -1732,6 +1802,7 @@
                                                                //breaking out of this inner loop  
                                                                //incidentally the condition of outer loop becomes false
                                                                //thereby exiting as well
+                                                               broken = true;
                                                                break;
                                                             }
                                                         }
@@ -1841,7 +1912,7 @@
                                         <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                         <p style="margin-top: 5px; color: red; text-align: center;">OR</p>
                                     </form>
-                                        
+                                    
                                     <%}%>
                                 
                                 </div></center>

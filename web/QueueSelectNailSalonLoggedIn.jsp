@@ -940,6 +940,7 @@
                                         String DailyClosingTime = "";
                                         String FormattedStartTime = "";
                                         String FormattedClosingTime = "";
+                                        
                                         int startHour = 0;
                                         int startMinute = 0;
                                         int closeHour = 0;
@@ -1161,7 +1162,7 @@
                                         //use this if there is no appointment for the next hour
                                         int Hourfor30Mins = CurrentHour;
                                         
-                                        if(NextThirtyMinutes >= 60){
+                                        while(NextThirtyMinutes >= 60){
                                             
                                             ++NextHour;
                                             
@@ -1187,7 +1188,7 @@
                                         }
                                         
                                         //use this if there is no appointment for the next hour
-                                        if(ActualThirtyMinutesAfter >= 60){
+                                        while(ActualThirtyMinutesAfter >= 60){
                                             
                                             ++Hourfor30Mins;
                                             
@@ -1256,7 +1257,7 @@
                                         
                                                 int TempHour = CurrentHour;
 
-                                                if(TempMinute >= 60){
+                                                while(TempMinute >= 60){
 
                                                     ++TempHour;
 
@@ -1388,6 +1389,7 @@
                                             <%
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
+                                                boolean broken = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -1395,6 +1397,16 @@
                                                         break;
                                                    
                                                     for(y = CurrentMinute; y <= 60;){
+                                                        
+                                                        if(isFirstAppointmentFound == 0){
+
+                                                            y = Integer.parseInt(CurrentTime.substring(3,5));
+                                                            isFirstAppointmentFound = 2;
+                                                            //JOptionPane.showMessageDialog(null, y);
+                                                        }
+                                                        
+                                                        if(broken)
+                                                            break;
                                                         
                                             %>
                                             
@@ -1550,7 +1562,7 @@
                                                         
                                                         y += IntervalsValue;
                                                         
-                                                        if(y >= 60){
+                                                        while(y >= 60){
                                                              
                                                             x++;
                                                             
@@ -1563,6 +1575,7 @@
                                                                //breaking out of this inner loop  
                                                                //incidentally the condition of outer loop becomes false
                                                                //thereby exiting as well
+                                                               broken = true;
                                                                break;
                                                             }
                                                         }

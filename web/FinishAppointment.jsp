@@ -895,8 +895,8 @@
 
                             TempMinute += IntervalsValue;
 
-                            if(TempMinute >= 60){
-
+                            while(TempMinute >= 60){
+                                
                                 TempHour++;
 
                                 if(TempMinute > 60 && TempMinute != 60)
@@ -920,13 +920,15 @@
                             //JOptionPane.showMessageDialog(null, TimeAfter30Mins);
 
 
+                            //the original algo here is go back an hour and start counting up till its about 30 mins before current time
                             int TempHour2 = Integer.parseInt(TempAppointmentTime.substring(0,2));
                             int TempMinute2 = Integer.parseInt(TempAppointmentTime.substring(3,5));
 
                             TempHour2 -= 1; //turning this into 60 minutes
 
-                            TempMinute2 += 60;
-
+                            TempMinute2 += 60; //this makes TempMinute2 greater than IntervalsValue according to the prio algo (30 mins algo)
+                            
+                            //make TempMinute2 greater the the value of IntervalsValue so you can subtract IntervalsValue from it
                             TempMinute2 -= IntervalsValue;
 
                             while(TempMinute2 >= 60){
@@ -970,6 +972,7 @@
                                 TimeRangePst.setString(8, TimeAfter30Mins);
 
                                 ResultSet TimeRangeRow = TimeRangePst.executeQuery();
+                                
                                 while(TimeRangeRow.next()){
                                     
                                     TimeBookedFlag = 1;
@@ -981,8 +984,7 @@
                                     //ThisAppointmentHour++;
                                     ThisAppointmentMinute += (IntervalsValue + 1);
                                     
-                                    if(ThisAppointmentMinute >= 60){
-                                        
+                                    while(ThisAppointmentMinute >= 60){
                                         ThisAppointmentHour++;
                                         
                                         if(ThisAppointmentMinute > 60 && ThisAppointmentMinute != 60)
@@ -1331,24 +1333,26 @@
                                             HourForFormattedTimedAvail = Integer.parseInt(FormattedAvailableTime.substring(0,2));
                                             MinuteFroFormattedTimeAvail = Integer.parseInt(FormattedAvailableTime.substring(3,5));
                                                         
-                                                        //formatting the time for user convenience
-                                                        if( HourForFormattedTimedAvail > 12)
-                                                        {
-                                                             int TempHourAvail = HourForFormattedTimedAvail - 12;
-                                                             FormattedAvailableTime = Integer.toString(TempHourAvail) + ":" +  FormattedAvailableTime.substring(3,5) + " pm";
-                                                        }
-                                                        else if(HourForFormattedTimedAvail == 0){
-                                                            FormattedAvailableTime = "12" + ":" + FormattedAvailableTime.substring(3,5) + " am";
-                                                        }
-                                                        else if(HourForFormattedTimedAvail == 12){
-                                                            FormattedAvailableTime = FormattedAvailableTime + " pm";
-                                                        }
-                                                        else{
-                                                            FormattedAvailableTime = FormattedAvailableTime +" am";
-                                                        }
+                                            //formatting the time for user convenience
+                                            if( HourForFormattedTimedAvail > 12)
+                                            {
+                                                int TempHourAvail = HourForFormattedTimedAvail - 12;
+                                                FormattedAvailableTime = Integer.toString(TempHourAvail) + ":" +  FormattedAvailableTime.substring(3,5) + " pm";
+                                            }
+                                            else if(HourForFormattedTimedAvail == 0){
+                                                FormattedAvailableTime = "12" + ":" + FormattedAvailableTime.substring(3,5) + " am";
+                                            }
+                                            else if(HourForFormattedTimedAvail == 12){
+                                                FormattedAvailableTime = FormattedAvailableTime + " pm";
+                                            }
+                                            else{
+                                                FormattedAvailableTime = FormattedAvailableTime +" am";
+                                            }
                                                         
-                                                        if(AllAvailableTimeList.get(q) == CurrentTime)
-                                                            continue;
+                                                        
+                                            //broken algo part to avoid hiding of current spot of current time
+                                            //if(AllAvailableTimeList.get(q) == CurrentTime)
+                                                //continue;
                                         
                                     %>
                                    

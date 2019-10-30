@@ -223,6 +223,9 @@ public class ProvidersUpdateAppointment extends HttpServlet {
     }
     
 if(selectFlag != 2){
+    
+            boolean isCustSpot = false;
+            boolean isDoubleBooking = false;
         
         //calculate for the next and last 30 mins_______________________________
             
@@ -291,6 +294,33 @@ if(selectFlag != 2){
         
         StatusesClass.AppointmentStatus = "";
         
+        try{
+            
+            Class.forName(Driver);
+            Connection selectConn = DriverManager.getConnection(url, user, password);
+            String selectString = "Select * from QueueObjects.BookedAppointment where "
+                    + "CustomerID =? and ProviderID =? and AppointmentDate=? and AppointmentTime=?";
+            
+            PreparedStatement selectPst = selectConn.prepareStatement(selectString);
+            selectPst.setString(1, CustomerID);
+            selectPst.setString(2, ProviderID);
+            selectPst.setString(3, AppointmentDate);
+            selectPst.setString(4, AppointmentTime);
+            
+            ResultSet selectRow = selectPst.executeQuery();
+            
+            while(selectRow.next()){
+                selectFlag = 1;
+                isCustSpot = true;
+                
+                JOptionPane.showMessageDialog(null, "Not Allowed: This customer already has this spot");
+                //response.sendRedirect("ServiceProviderPage.jsp");
+                break;
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
         try{
             
@@ -307,37 +337,15 @@ if(selectFlag != 2){
             ResultSet selectRow = selectPst.executeQuery();
             
             while(selectRow.next()){
-                selectFlag = 1;
-                StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                        ", " + AppointmentDate + ".\nThe spot you selected is already taken";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                isDoubleBooking = true;
+                //selectFlag = 1;
+                
+                if(!isCustSpot)
+                    JOptionPane.showMessageDialog(null, "Warning: " + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nTime chosen may cause double booking");
                 //response.sendRedirect("ServiceProviderPage.jsp");
-            }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        try{
-            
-            Class.forName(Driver);
-            Connection selectConn = DriverManager.getConnection(url, user, password);
-            String selectString = "Select * from QueueObjects.BookedAppointment where "
-                    + "CustomerID =? and AppointmentDate=? and AppointmentTime=?";
-            
-            PreparedStatement selectPst = selectConn.prepareStatement(selectString);
-            selectPst.setString(1, CustomerID);
-            selectPst.setString(2, AppointmentDate);
-            selectPst.setString(3, AppointmentTime);
-            
-            ResultSet selectRow = selectPst.executeQuery();
-            
-            while(selectRow.next()){
-                selectFlag = 1;
-                StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                        ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                //response.sendRedirect("ServiceProviderPage.jsp");
+                
+                break;
             }
             
         }catch(Exception e){
@@ -366,10 +374,9 @@ if(selectFlag != 2){
             ResultSet TimeRangeRow = TimeRangePst.executeQuery();
             while(TimeRangeRow.next()){
                 
-                selectFlag = 1;
-                StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                        ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot or \n is less than 15 minutes before or after a spot you've taken.";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+               if(!isCustSpot && !isDoubleBooking)
+                    JOptionPane.showMessageDialog(null, "Warning: " + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot");
                 //response.sendRedirect("ServiceProviderPage.jsp");
                 break;
                 

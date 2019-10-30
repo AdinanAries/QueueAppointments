@@ -377,7 +377,7 @@
                                         //use this if there is no appointment for the next hour
                                         int Hourfor30Mins = CurrentHour;
                                         
-                                        if(NextThirtyMinutes >= 60){
+                                        while(NextThirtyMinutes >= 60){
                                         //this is code is only to increment Hour and make sure it doesn't exceed providers closing time 
                                         //first increment hour when Minutes is greater than 60 after increment
                                             
@@ -408,7 +408,7 @@
                                         }
                                         
                                         //use this if there is no appointment for the next hour
-                                        if(ActualThirtyMinutesAfter >= 60){
+                                        while(ActualThirtyMinutesAfter >= 60){
                                             
                                             ++Hourfor30Mins;
                                             
@@ -594,6 +594,7 @@
                                                 
                                                 int HowManyColums = 0;
                                                 int BookedSpots = 0;
+                                                boolean broken = false;
                                                 
                                                 //use this variable to flag when there isn't any spot available
                                                 boolean isLineAvailable = false;
@@ -603,8 +604,11 @@
                                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00"))
                                                         break;
                                                    
+                                                    //CurrenMinute will never be more than 60 since time mins never exceeds 60
                                                     for(y = CurrentMinute; y <= 60;){ //CurrentMinute is needed to start from current minute of current time
                                                         
+                                                        if(broken == true)
+                                                            break;
                                             %>
                                             
                                             <%
@@ -769,8 +773,8 @@
                                                         
                                                         y += IntervalsValue;
                                                         
-                                                        if(y >= 60){
-                                                             
+                                                        while(y >= 60){
+                                                            
                                                             x++;
                                                             
                                                             if(y > 60)
@@ -779,10 +783,11 @@
                                                                 y = 0;
                                                              
                                                             if(x > twoHours){
-                                                               //breaking out of this inner loop  
-                                                               //incidentally the condition of outer loop becomes false
-                                                               //thereby exiting as well
+                                                               //breaks from this while loop
+                                                               
+                                                               broken = true;
                                                                break;
+                                                               
                                                             }
                                                         }
                                                         

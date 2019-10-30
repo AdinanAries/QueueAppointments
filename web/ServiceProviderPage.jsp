@@ -2427,6 +2427,7 @@
                                         String DailyClosingTime = "";
                                         String FormattedStartTime = "";
                                         String FormattedClosingTime = "";
+                                        
                                         int startHour = 0;
                                         int startMinute = 0;
                                         int closeHour = 0;
@@ -2668,7 +2669,7 @@
                                         //use this if there is no appointment for the next hour
                                         int Hourfor30Mins = CurrentHour;
                                         
-                                        if(NextThirtyMinutes >= 60){
+                                        while(NextThirtyMinutes >= 60){
                                             
                                             ++NextHour;
                                             
@@ -2696,7 +2697,7 @@
                                         }
                                         
                                         //use this if there is no appointment for the next hour
-                                        if(ActualThirtyMinutesAfter >= 60){
+                                        while(ActualThirtyMinutesAfter >= 60){
                                             
                                             ++Hourfor30Mins;
                                             
@@ -2881,6 +2882,7 @@
                                                 int HowManyColums = 0;
                                                 int BookedSpots = 0;
                                                 boolean isLineAvailable = false;
+                                                boolean broken = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -2888,6 +2890,8 @@
                                                         break;
                                                   
                                                     for(y = CurrentMinute; y <= 60;){
+                                                        if(broken)
+                                                            break;
                                                         
                                             %>
                                             
@@ -3053,7 +3057,7 @@
                                                         
                                                         y += IntervalsValue;
                                                         
-                                                        if(y >= 60){
+                                                        while(y >= 60){
                                                              
                                                             x++;
                                                             
@@ -3066,6 +3070,7 @@
                                                                //breaking out of this inner loop  
                                                                //incidentally the condition of outer loop becomes false
                                                                //thereby exiting as well
+                                                               broken = true;
                                                                break;
                                                             }
                                                         }
@@ -3261,18 +3266,34 @@
                                         <form style=" margin-top: 5px; border-top: 1px solid darkgray;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
                                             <p style="text-align: center; color: #000099; margin: 5px; font-weight: bolder;">Change Your Spots Intervals</p>
                                             <p style="text-align: center;">Set intervals time below</p>
-                                            <p style="color: red;"><select style="border: 0; text-align: right; background-color: #eeeeee; color: black;" name="SpotsIntervals">
-                                                    <option><%=IntervalsValue%></option>
-                                                    <option>15</option>
-                                                    <option>30</option>
-                                                    <option>45</option>
-                                                    <option>60</option>
-                                                </select> Minutes</p>
                                             
-                                            <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                            <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
-                                            <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                            <input style="border: darkgray 1px solid; background-color: #eeeeee; padding: 5px;" type="submit" value="Change" name="SetSpotsIntervalBtn" />
+                                            <center><div>
+                                                <p style="color: red;"><select style="border: 0; text-align: right; background-color: #eeeeee; color: #ff3333; font-weight: bold;" name="SpotsIntervals">
+                                                        <option value="<%=IntervalsValue%>"><%=IntervalsValue%> minutes</option>
+                                                        <option value="15">15 minutes</option>
+                                                        <option value="30">30 minutes</option>
+                                                        <option value="45">45 minutes</option>
+                                                        <option value="60">1 hour</option>
+                                                        <option value="90">1 hour, 30 minutes</option>
+                                                        <option value="120">2 hours</option>
+                                                        <option value="150">2 hours, 30 minutes</option>
+                                                        <option value="180">3 hours</option>
+                                                        <option value="210">3 hours, 30 minutes</option>
+                                                        <option value="240">4 hours</option>
+                                                        <option value="270">4 hours, 30 minutes</option>
+                                                        <option value="300">5 hours</option>
+                                                        <!--option value="90">1 hour, 30 minutes</option>
+                                                        <option value="120">2 hours</option>
+                                                        <option value="150">2 hours, 30 minutes</option>
+                                                        <option value="180">3 hours</option-->
+                                                    </select></p>
+
+                                                <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                                <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
+                                                <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                                <input style="background-color: #ff3333; border: 0; color: white; padding: 5px;" type="submit" value="Change" name="SetSpotsIntervalBtn" />
+                                            </div></center>
+                                                
                                         </form>
                                     </div></center>
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>

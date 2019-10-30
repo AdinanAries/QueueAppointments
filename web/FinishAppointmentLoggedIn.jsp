@@ -1222,9 +1222,10 @@
                             TempHour = Integer.parseInt(TempAppointmentTime.substring(0,2));
                             TempMinute = Integer.parseInt(TempAppointmentTime.substring(3,5));
 
+                            //time after 30 mins in any case would be the intervals value set by service provider(default is 30 mins)
                             TempMinute += IntervalsValue;
 
-                            if(TempMinute >= 60){
+                            while(TempMinute >= 60){
 
                                 TempHour++;
 
@@ -1299,6 +1300,7 @@
                                 TimeRangePst.setString(8, TimeAfter30Mins);
 
                                 ResultSet TimeRangeRow = TimeRangePst.executeQuery();
+                                
                                 while(TimeRangeRow.next()){
                                     
                                     TimeBookedFlag = 1;
@@ -1310,7 +1312,11 @@
                                     //ThisAppointmentHour++;
                                     ThisAppointmentMinute += (IntervalsValue + 1);
                                     
-                                    if(ThisAppointmentMinute >= 60){
+                                    //TempAppointmentTime wont be modified if there isn't any appointment in between provided time range
+                                    //This means that if BookedTimeFlag is still 0 then add the time generated for TempAppointmentTime into
+                                    //  the list of available times
+                                    
+                                    while(ThisAppointmentMinute >= 60){
                                         
                                         ThisAppointmentHour++;
                                         
@@ -1334,9 +1340,14 @@
                                 e.printStackTrace();
                             }
                             
+                            
+                            //add time into the available times list if its not taken
+                            //or if you don't find any gaken  spot in the range of spot intervals where it belongs
                             if(TimeBookedFlag == 0){
                             
                                 AllAvailableTimeList.add(TempAppointmentTime);
+                                //Make the new TempAppointmentTime be 30 mins after the current time which in any case wont be 30 mins
+                                //  but will the spot intervals set by this provider
                                 TempAppointmentTime = TimeAfter30Mins;
                                 
                             }
@@ -1653,24 +1664,24 @@
                                             HourForFormattedTimedAvail = Integer.parseInt(FormattedAvailableTime.substring(0,2));
                                             MinuteFroFormattedTimeAvail = Integer.parseInt(FormattedAvailableTime.substring(3,5));
                                                         
-                                                        //formatting the time for user convenience
-                                                        if( HourForFormattedTimedAvail > 12)
-                                                        {
-                                                             int TempHourAvail = HourForFormattedTimedAvail - 12;
-                                                             FormattedAvailableTime = Integer.toString(TempHourAvail) + ":" +  FormattedAvailableTime.substring(3,5) + " pm";
-                                                        }
-                                                        else if(HourForFormattedTimedAvail == 0){
-                                                            FormattedAvailableTime = "12" + ":" + FormattedAvailableTime.substring(3,5) + " am";
-                                                        }
-                                                        else if(HourForFormattedTimedAvail == 12){
-                                                            FormattedAvailableTime = FormattedAvailableTime + " pm";
-                                                        }
-                                                        else{
-                                                            FormattedAvailableTime = FormattedAvailableTime +" am";
-                                                        }
+                                            //formatting the time for user convenience
+                                            if( HourForFormattedTimedAvail > 12)
+                                            {
+                                                int TempHourAvail = HourForFormattedTimedAvail - 12;
+                                                FormattedAvailableTime = Integer.toString(TempHourAvail) + ":" +  FormattedAvailableTime.substring(3,5) + " pm";
+                                            }
+                                            else if(HourForFormattedTimedAvail == 0){
+                                                FormattedAvailableTime = "12" + ":" + FormattedAvailableTime.substring(3,5) + " am";
+                                            }
+                                            else if(HourForFormattedTimedAvail == 12){
+                                                FormattedAvailableTime = FormattedAvailableTime + " pm";
+                                            }
+                                            else{
+                                                FormattedAvailableTime = FormattedAvailableTime +" am";
+                                            }
                                                         
-                                                        if(AllAvailableTimeList.get(q) == CurrentTime)
-                                                            continue;
+                                            //if(AllAvailableTimeList.get(q) == CurrentTime)
+                                                //continue;
                                         
                                     %>
                                    
