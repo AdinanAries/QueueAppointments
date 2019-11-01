@@ -1632,7 +1632,7 @@
                                                             if(DailyStartTime != ""){
                                                                 
                                                                 //Reversing the increment in hour when minute is greater than 30mins with an increment of 30mins
-                                                                if(x > startHour){
+                                                                if(Integer.parseInt(CurrentTime.substring(0,2)) > startHour){
 
                                                                     if(Integer.parseInt(CurrentTime.substring(3,5)) >= 30){
                                                                         x = x - 1;
@@ -1650,7 +1650,10 @@
                                                             //Minute Setting
                                                             if(DailyStartTime != ""){
                                                               
-                                                                if(x < startHour){
+                                                                if(Integer.parseInt(CurrentTime.substring(0,2)) < startHour){
+                                                                    
+                                                                    if(x > startHour)
+                                                                        x = startHour;
                                                                     
                                                                     //if calculated time is before opening time, use the start minute of this providers starting time
                                                                     y = startMinute;
