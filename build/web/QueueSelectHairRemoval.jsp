@@ -883,6 +883,71 @@
                                                 NextThirtyMinutes = 0;
                                         }
                                         
+                                        //Calculate for time of most recent past appointment possibility
+                                        String LastAppointmentTime = "";
+                                        
+                                        int LATHour = Integer.parseInt(CurrentTime.substring(0,2));
+                                        int LATMinute = Integer.parseInt(CurrentTime.substring(3,5)) + 300;
+                                        
+                                        LATHour -= 5;
+                                        
+                                        LATMinute -= IntervalsValue;
+                                        
+                                        if(DailyStartTime != ""){
+                                            
+                                            if(LATHour <= startHour){
+                                                LATHour = startHour;
+                                                LATMinute = startMinute;
+                                            }
+                                        }else if(LATHour < 1){
+                                            LATHour = 1;
+                                            LATMinute = Integer.parseInt(CurrentTime.substring(3,5));
+                                        }
+                                            
+                                        while(LATMinute >= 60){
+                                            
+                                            //Avoid incrementing the hour hand as it will skip the start of the day
+                                            if(DailyStartTime != ""){
+                                                
+                                                if(LATHour == startHour){
+                                                    break;
+                                                }
+                                                    
+                                            }else if(LATHour == 1){
+                                                break;
+                                            }
+                                            
+                                            LATHour++;
+                                            
+                                            /*if(DailyStartTime != ""){
+
+                                                if(LATHour < startHour){
+                                                    LATHour = startHour;
+                                                    LATMinute = closeMinute;
+                                                    break;
+                                                }
+                                            }else if(LATHour < 1){
+                                                LATHour = 1;
+                                                break;
+                                            }*/
+                                            
+                                            if(LATMinute > 60)
+                                                LATMinute -= 60;
+                                            
+                                            else if(LATMinute == 60)
+                                                LATMinute = 0;
+                                            
+                                                
+                                        }
+                                        
+                                        if(Integer.toString(LATMinute).length() < 2){
+                                            LastAppointmentTime = Integer.toString(LATHour) + ":0" + Integer.toString(LATMinute);
+                                        }else{
+                                            LastAppointmentTime = Integer.toString(LATHour) + ":" + Integer.toString(LATMinute);
+                                        }
+                                        
+                                        //JOptionPane.showMessageDialog(null, LastAppointmentTime);
+                                        
                                         //use this if there is no appointment for the next hour
                                         while(ActualThirtyMinutesAfter >= 60){
                                             
@@ -932,7 +997,7 @@
                                             PreparedStatement ThirtyPst = ThirtyMinsConn.prepareStatement(ThirtyMinsString);
                                             ThirtyPst.setInt(1, providersList.get(i).getID());
                                             ThirtyPst.setString(2, QueryDate);
-                                            ThirtyPst.setString(3, CurrentTime);
+                                            ThirtyPst.setString(3, LastAppointmentTime);
                                             ThirtyPst.setString(4, TimeAfter30Mins);
                                             
                                             ResultSet ThirtyMinsRow = ThirtyPst.executeQuery();
@@ -1093,11 +1158,55 @@
                                                    
                                                     for(y = CurrentMinute; y <= 60;){
                                                         
+                                                        //use current time when no appointment no appointment exists in the range of current time spot
+                                                        //----------------------------------------------------------------------------------------
+                                                        //Hour Setting
                                                         if(isFirstAppointmentFound == 0){
 
-                                                            y = Integer.parseInt(CurrentTime.substring(3,5));
-                                                            isFirstAppointmentFound = 2;
-                                                            //JOptionPane.showMessageDialog(null, y);
+                                                            if(DailyStartTime != ""){
+                                                                
+                                                                //Reversing the increment in hour when minute is greater than 30mins with an increment of 30mins
+                                                                if(Integer.parseInt(CurrentTime.substring(0,2)) > startHour){
+
+                                                                    if(Integer.parseInt(CurrentTime.substring(3,5)) >= 30){
+                                                                        x = x - 1;
+                                                                    }
+
+                                                                }
+                                                            }
+                                                            //if this provider doesn't have hour open set then check to make sure that hour is reduces of previous increment for 30mim increment
+                                                            else if(Integer.parseInt(CurrentTime.substring(3,5)) >= 30){
+                                                                x = x - 1;
+                                                            }
+                                                            
+                                                            //now working on assigning the value of minute to current time minute for when first appointment isn't booked
+                                                            //-----------------------------------------------------------------------------------------------
+                                                            //Minute Setting
+                                                            if(DailyStartTime != ""){
+                                                              
+                                                                if(Integer.parseInt(CurrentTime.substring(0,2)) < startHour){
+                                                                    
+                                                                    if(x > startHour)
+                                                                        x = startHour;
+                                                                    
+                                                                    //if calculated time is before opening time, use the start minute of this providers starting time
+                                                                    y = startMinute;
+                                                                    isFirstAppointmentFound = 2;
+                                                                }else{
+                                                                    
+                                                                    //else if the calculated time isn't before opening time, then use the current minute of current time
+                                                                    y = Integer.parseInt(CurrentTime.substring(3,5));
+                                                                    isFirstAppointmentFound = 2;
+                                                                }
+                                                                
+                                                            }else{
+                                                                
+                                                                //else if this provider doen't have hours open set, use the current minute of current time
+                                                                y = Integer.parseInt(CurrentTime.substring(3,5));
+                                                                isFirstAppointmentFound = 2;
+                                                            }
+                                                                
+                                                                //JOptionPane.showMessageDialog(null, y);
                                                         }
                                                         
                                                         if(broken)
