@@ -932,23 +932,9 @@
                             //make TempMinute2 greater the the value of IntervalsValue so you can subtract IntervalsValue from it
                             TempMinute2 -= IntervalsValue;
                             
-                            //do this to avoid TempMinute2 being over the normal 60 mins per hour
-                            // and also to avoid TempHour2 being lses then the providers opening time is there is
-                            // and if there isn't, avoid it being less than at least 1am;
-                            if(DailyStartTime != ""){
-                                            
-                                if(TempHour2 < startHour){
-                                    TempHour2 = startHour;
-                                    TempMinute2 = startMinute;
-                                }
-                            }else if(TempHour2 < 1){
-                                TempHour2 = 1;
-                                TempMinute2 = Integer.parseInt(CurrentTime.substring(3,5));
-                            }
-
                             while(TempMinute2 >= 60){
                                 
-                                //Avoid incrementing the hour hand as it will skip the start of the day
+                                /*Avoid incrementing the hour hand as it will skip the start of the day
                                 if(DailyStartTime != ""){
                                                 
                                     if(TempHour2 == startHour){
@@ -957,7 +943,7 @@
                                                     
                                 }else if(TempHour2 == 1){
                                     break;
-                                }
+                                }*/
 
                                 TempHour2++;
 
@@ -971,10 +957,24 @@
                                     TempHour2 = 23;
                             }
                             
+                             //do this to avoid TempMinute2 being over the normal 60 mins per hour
+                            // and also to avoid TempHour2 being lses then the providers opening time is there is
+                            // and if there isn't, avoid it being less than at least 1am;
+                            if(DailyStartTime != ""){
+                                            
+                                if(TempHour2 < startHour){
+                                    TempHour2 = startHour;
+                                    TempMinute2 = startMinute;
+                                }
+                            }else if(TempHour2 < 1){
+                                TempHour2 = 1;
+                                TempMinute2 = Integer.parseInt(CurrentTime.substring(3,5));
+                            }
+                            
                             String SMinute2 = Integer.toString(TempMinute2);
                             
                             if(Integer.toString(TempMinute2).length() < 2)
-                                SMinute2 = "0" + TempMinute;
+                                SMinute2 = "0" + TempMinute2;
 
                             TimeBefore30Mins = TempHour2 + ":" + SMinute2;
                             //JOptionPane.showMessageDialog(null, TimeBefore30Mins);

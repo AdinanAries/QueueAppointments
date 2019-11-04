@@ -367,6 +367,29 @@
             String StringCurrentdate = currentDateFormat.format(currentDate);
             String CurrentTimeForAppointment = currentDate.toString().substring(11,16);
             
+            
+            //the original algo here is go back an hour and start counting up till its about 30 mins before current time
+            if(CurrentTimeForAppointment.length() < 5)
+                CurrentTimeForAppointment = "0" + CurrentTimeForAppointment;
+            
+            int TempHour2 = Integer.parseInt(CurrentTimeForAppointment.substring(0,2));
+            int TempMinute2 = Integer.parseInt(CurrentTimeForAppointment.substring(3,5));
+
+            TempHour2 -= 5; //turning this into 300 minutes
+            
+            if(TempHour2 < 1){
+                TempHour2 = 1;
+                TempMinute2 = 1;
+                
+            }
+               
+            String SMinute2 = Integer.toString(TempMinute2);
+                            
+            if(Integer.toString(TempMinute2).length() < 2)
+                SMinute2 = "0" + TempMinute2;
+
+            CurrentTimeForAppointment = TempHour2 + ":" + SMinute2;
+            
             Class.forName(Driver);
             Connection conn = DriverManager.getConnection(Url, user, password);
             String Select = "Select * from QueueObjects.BookedAppointment where CustomerID = ? and AppointmentDate = ? and AppointmentTime >= ? order by AppointmentTime asc";
@@ -4048,8 +4071,12 @@
                                     <% 
                                         
                                         String JString = "";
+                                        int appointmentItemCounter = 0;
                                         
                                         for(int j = 0; j < AppointmentList.size(); j++){
+                                            
+                                            boolean isCurrentSpot = false;
+                                            boolean isSpotNow = false;
                                             
                                             JString = Integer.toString(j);
                                             String AppointmentTime = AppointmentList.get(j).getTimeOfAppointment().substring(0,5);
@@ -4106,7 +4133,148 @@
                                             String ProviderTel = AppointmentList.get(j).getProviderTel();
                                             String ProviderEmail = AppointmentList.get(j).getProviderEmail();
                                             String AppointmentReason = AppointmentList.get(j).getReason().trim();
+                                            
+                                        //--------------------------------------------------------------------------------    
+                                            
+                                            //checking to see if AppointmentTime is now;
+                                            if(AppointmentTime.length() < 5)
+                                                AppointmentTime = "0" + AppointmentTime;
+
+                                            String Now = new Date().toString().substring(11,16);
+
+                                            if(Now.length() < 5)
+                                                Now = "0" + Now;
+                                            
+                                            if(Integer.parseInt(AppointmentTime.substring(0,2)) < Integer.parseInt(Now.substring(0,2))){
+                                                isSpotNow = true;
+                                            }else if(Integer.parseInt(AppointmentTime.substring(0,2)) == Integer.parseInt(Now.substring(0,2))){
+                                                if(Integer.parseInt(AppointmentTime.substring(3,5)) <= Integer.parseInt(Now.substring(3,5)))
+                                                    isSpotNow = true;
+                                            }
+                                            
+                                                //getting intervals value for this provider
+                                                int IntervalsValue = 30;
+
+                                                try{
+                                                    Class.forName(Driver);
+                                                    Connection IntervalsConn = DriverManager.getConnection(Url, user, password);
+                                                    String IntervalsString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'SpotsIntervals%'";
+                                                    PreparedStatement IntervalsPst = IntervalsConn.prepareStatement(IntervalsString);
+                                                    IntervalsPst.setInt(1,ProviderID);
+
+                                                    ResultSet IntervalsRec = IntervalsPst.executeQuery();
+
+                                                    while(IntervalsRec.next()){
+                                                        IntervalsValue = Integer.parseInt(IntervalsRec.getString("CurrentValue").trim());
+                                                    }
+
+
+                                                }catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+
+                                                //----------------------------------------------------------------------------------
+                                                    //the original algo here is go back an hour and start counting up till its about 30 mins before current time
+                                                    int TempHour2 = Integer.parseInt(Now.substring(0,2));
+                                                    int TempMinute2 = Integer.parseInt(Now.substring(3,5));
+
+                                                    TempHour2 -= 5; //turning this into 300 minutes
+
+
+                                                    TempMinute2 += 300; //this makes TempMinute2 greater than IntervalsValue according to the prio algo (30 mins algo)
+
+                                                    TempMinute2 -= IntervalsValue;
+                                           
+                                                    while(TempMinute2 >= 60){
+                                                        
+                                                        /*if(TempHour2 == 1)
+                                                            break;*/
+                                                        
+                                                        TempHour2++;
+
+                                                        if(TempMinute2 > 60 && TempMinute2 != 60)
+                                                            TempMinute2 -= 60;
+
+                                                        else if(TempMinute2 == 60)
+                                                            TempMinute2 = 0;
+
+                                                        if(TempHour2 > 23)
+                                                            TempHour2 = 23;
+                                                    }
+                                                    
+                                                    if(TempHour2 < 1){
+                                                        TempHour2 = 1;
+                                                        TempMinute2 = 1;
+                                                    }
+
+                                                    String SMinute2 = Integer.toString(TempMinute2);
+
+                                                    if(Integer.toString(TempMinute2).length() < 2)
+                                                        SMinute2 = "0" + TempMinute2;
+
+                                                    String ExpectedAppointmentExpire = TempHour2 + ":" + SMinute2;
+                                                    
+                                                    //checking to make sure time is not after ExpectedExpire;
+                                                    if(ExpectedAppointmentExpire.length() < 5)
+                                                        ExpectedAppointmentExpire = "0" + ExpectedAppointmentExpire;
+
+                                                    if(Integer.parseInt(AppointmentTime.substring(0,2)) > Integer.parseInt(ExpectedAppointmentExpire.substring(0,2))){
+                                                        isCurrentSpot = true;
+                                                    }else if(Integer.parseInt(AppointmentTime.substring(0,2)) == Integer.parseInt(ExpectedAppointmentExpire.substring(0,2))){
+                                                        if(Integer.parseInt(AppointmentTime.substring(3,5)) >= Integer.parseInt(ExpectedAppointmentExpire.substring(3,5)))
+                                                            isCurrentSpot = true;
+                                                    }
+                                                //----------------------------------------------------------------------------------
+                                            //}
+                                            //if isCurrentSpot is true and isSpotFuture is true then show the div for the ongoing spot.
+                                                
+                                            if(isCurrentSpot && isSpotNow){
+                                            
+                                    %>
+                                    
+                                    <div style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: #ffc700; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
+                                     
+                                    <%
+                                        if(Base64ProvPic != ""){
+                                    %>
+                                    <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                                     <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                        </div></center>
+                                    <%
+                                        }
+                                    %>
+                                       
+                                        <form action="EachSelectedProviderLoggedIn.jsp" method="POST">
+                                                <input type='hidden' name='UserID' value='<%=ProviderID%>'/>
+                                                <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                                <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                                
+                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderName%>'s"/>
+                                                </span><span> started at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
+                                                <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                                    <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border: 0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
+                                            
+                                        </form>
+                                        <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                            <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
+                                        <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
+                                        <p></P>
+                                        
+                                    </div>
+                                    
+                                    <%      }
+                                            if(Integer.parseInt(AppointmentTime.substring(0,2)) < Integer.parseInt(Now.substring(0,2))){
+
+                                                continue;
+
+                                            }else if(Integer.parseInt(AppointmentTime.substring(0,2)) == Integer.parseInt(Now.substring(0,2)) && Integer.parseInt(AppointmentTime.substring(3,5)) < Integer.parseInt(Now.substring(3,5))){
+                                                
+                                                continue;
+
+                                            }else{
+                                                appointmentItemCounter++;
+                                            }
                                     %>
                                     
                                     <div id="AppointmentDiv<%=JString%>" style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
@@ -4485,7 +4653,7 @@
                                     <!--input type="hidden" name="TotalBookedAppointments" value="<=JString%>" /-->
                                     
                                     <%
-                                        if(AppointmentList.size() == 0){
+                                        if(AppointmentList.size() == 0 || appointmentItemCounter == 0){
                                     
                                     %>
                                     

@@ -51,6 +51,9 @@
     <%
         
         int UserID = 0;
+        String Base64Pic = "";
+        
+        String NewUserName = request.getParameter("User");
         
         int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
        
@@ -229,9 +232,98 @@
             }catch(Exception e){
                 e.printStackTrace();
             }
+            
+            try{
+            
+            Class.forName(Driver);
+            Connection PicConn = DriverManager.getConnection(url, User, Password);
+            String PicQuery = "Select Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+            PreparedStatement PicPst = PicConn.prepareStatement(PicQuery);
+            PicPst.setInt(1, UserID);
+            
+            ResultSet PicRec = PicPst.executeQuery();
+            
+            while(PicRec.next()){
+                
+                try{    
+                    //put this in a try catch block for incase getProfilePicture returns nothing
+                    Blob profilepic = PicRec.getBlob("Profile_Pic"); 
+                    InputStream inputStream = profilepic.getBinaryStream();
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = -1;
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+
+                    byte[] imageBytes = outputStream.toByteArray();
+
+                     Base64Pic = Base64.getEncoder().encodeToString(imageBytes);
+                     
+                    }
+                    catch(Exception e){}
+
+                }
+
+            }catch(Exception e){e.printStackTrace();}
         %>
         
     <body>
+        
+        <div id="PermanentDiv" style="">
+            
+                    <a href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 80px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+                        <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                            Home</p></a>
+                        
+            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                    tech.arieslab@outlook.com | 
+                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                    (1) 732-799-9546
+                </p>
+            </div>
+            
+            <div style="float: right; width: 50px;">
+                <%
+                    if(Base64Pic != ""){
+                %>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                        <img id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
+                    </div></center>
+                <%
+                    }else{
+                %>
+                
+                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                                <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                            </div></center>
+                
+                <%}%>
+            </div>
+            
+            <ul>
+                <a  href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                    <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                    Home</li></a>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                    Calender</li>
+                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                    Account</li>
+            </ul>
+        
+            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
+                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                            type="submit" value="Search" />
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type='hidden' name='User' value='<%=NewUserName%>' />
+                </form>
+            </div>
+        </div>
         
         <div id="container">
             
@@ -259,6 +351,414 @@
             <center><a href="PageController?UserIndex=<%=UserIndex%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
             
         </div>
+            
+            <div id='Extras' style=''>
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            
+                <div style="max-height: 600px; overflow-y: auto;">
+                    
+                    <%
+                        int newsItems = 0;
+                        String newsQuery = "";
+                        String base64Profile = "";
+                        
+                       // while(newsItems < 10){
+                            
+                            try{
+                                Class.forName(Driver);
+                                Connection CustConn = DriverManager.getConnection(url, User, Password);
+                                String CustQuery = "select * from ProviderCustomers.ProvNewsForClients where CustID = ? order by ID desc";
+                                PreparedStatement CustPst = CustConn.prepareStatement(CustQuery);
+                                CustPst.setInt(1, UserID);
+                                ResultSet CustRec = CustPst.executeQuery();
+                                
+                                while(CustRec.next()){
+                                    
+                                    String MessageID = CustRec.getString("MessageID").trim();
+                                    
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection newsConn = DriverManager.getConnection(url, User, Password);
+                                        newsQuery = "Select * from QueueServiceProviders.MessageUpdates where MsgID = ?";
+                                        PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
+                                        newsPst.setString(1, MessageID);
+                                        ResultSet newsRec = newsPst.executeQuery();
+
+                                        while(newsRec.next()){
+
+                                            newsItems++;
+                                            
+                                            String ProvID = newsRec.getString("ProvID");
+                                            String ProvFirstName = "";
+                                            String ProvCompany = "";
+                                            String ProvAddress = "";
+                                            String ProvTel = "";
+                                            String ProvEmail = "";
+
+                                            String Msg = newsRec.getString("Msg").trim();
+                                            String MsgPhoto = "";
+
+                                            try{    
+                                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                                    InputStream inputStream = Pic.getBinaryStream();
+                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                    byte[] buffer = new byte[4096];
+                                                    int bytesRead = -1;
+
+                                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                        outputStream.write(buffer, 0, bytesRead);
+                                                    }
+
+                                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                }
+                                                catch(Exception e){
+
+                                                }
+
+
+                                                try{
+                                                    Class.forName(Driver);
+                                                    Connection ProvConn = DriverManager.getConnection(url, User, Password);
+                                                    String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                                                    PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
+                                                    ProvPst.setString(1, ProvID);
+
+                                                    ResultSet ProvRec = ProvPst.executeQuery();
+
+                                                    while(ProvRec.next()){
+                                                        ProvFirstName = ProvRec.getString("First_Name").trim();
+                                                        ProvCompany = ProvRec.getString("Company").trim();
+                                                        ProvTel = ProvRec.getString("Phone_Number").trim();
+                                                        ProvEmail = ProvRec.getString("Email").trim();
+                                                        
+                                                        try{    
+                                                            //put this in a try catch block for incase getProfilePicture returns nothing
+                                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                                            InputStream inputStream = Pic.getBinaryStream();
+                                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                            byte[] buffer = new byte[4096];
+                                                            int bytesRead = -1;
+
+                                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                                outputStream.write(buffer, 0, bytesRead);
+                                                            }
+
+                                                            byte[] imageBytes = outputStream.toByteArray();
+
+                                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                        }
+                                                        catch(Exception e){
+
+                                                        }
+                                                    }
+
+                                                }catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+
+                                                try{
+                                                    Class.forName(Driver);
+                                                    Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
+                                                    String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
+                                                    PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
+                                                    ProvLocPst.setString(1, ProvID);
+
+                                                    ResultSet ProvLocRec = ProvLocPst.executeQuery();
+
+                                                    while(ProvLocRec.next()){
+                                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
+                                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
+                                                        String NTown = ProvLocRec.getString("Town").trim();
+                                                        String NCity = ProvLocRec.getString("City").trim();
+                                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
+
+                                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
+                                                    }
+                                                }catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+                    %>
+
+                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
+                        <tbody>
+                            <tr style="background-color: #333333;">
+                                <td>
+                                    <div id="ProvMsgBxOne">
+                                        
+                                        <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                            <!--div style="float: right; width: 65px;" -->
+                                                <%
+                                                    if(base64Profile != ""){
+                                                %>
+                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                        <img id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <!--/div></center-->
+                                                <%
+                                                    }else{
+                                                %>
+
+                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                    <img style='width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <!--/div></center-->
+
+                                                <%}%>
+                                            <!--/div-->
+                                            <div>
+                                                <p><%=ProvFirstName%></p>
+                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                            </div>
+                                        </div>
+                                        
+                                        <%if(MsgPhoto.equals("")){%>
+                                        <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                        <%} else{ %>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                        <%}%>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td>
+                                    <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
+                                    <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                        <%=ProvEmail%></p>
+                                    <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                        <%=ProvTel%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                        <%=ProvCompany%></p>
+                                    <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                        <%=ProvAddress%></p>
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td>
+                                    <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <%  
+                                        if(newsItems > 10)
+                                            break;
+                                    }
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    //}
+                
+                    if(newsItems < 10){
+               
+                        try{
+                            Class.forName(Driver);
+                            Connection newsConn = DriverManager.getConnection(url, User, Password);
+                            String newsQuery2 = "Select * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                            PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
+                            ResultSet newsRec = newsPst.executeQuery();
+
+                            while(newsRec.next()){
+
+                                newsItems++;
+
+                                String ProvID = newsRec.getString("ProvID");
+                                String ProvFirstName = "";
+                                String ProvCompany = "";
+                                String ProvAddress = "";
+                                String ProvTel = "";
+                                String ProvEmail = "";
+
+                                String Msg = newsRec.getString("Msg").trim();
+                                String MsgPhoto = "";
+
+                                try{    
+                                        //put this in a try catch block for incase getProfilePicture returns nothing
+                                        Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                        InputStream inputStream = Pic.getBinaryStream();
+                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                        byte[] buffer = new byte[4096];
+                                        int bytesRead = -1;
+
+                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                            outputStream.write(buffer, 0, bytesRead);
+                                        }
+
+                                        byte[] imageBytes = outputStream.toByteArray();
+
+                                        MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                    }
+                                    catch(Exception e){
+
+                                    }
+
+
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection ProvConn = DriverManager.getConnection(url, User, Password);
+                                        String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                                        PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
+                                        ProvPst.setString(1, ProvID);
+
+                                        ResultSet ProvRec = ProvPst.executeQuery();
+
+                                        while(ProvRec.next()){
+                                            ProvFirstName = ProvRec.getString("First_Name").trim();
+                                            ProvCompany = ProvRec.getString("Company").trim();
+                                            ProvTel = ProvRec.getString("Phone_Number").trim();
+                                            ProvEmail = ProvRec.getString("Email").trim();
+
+                                            try{
+
+                                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                                Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                                InputStream inputStream = Pic.getBinaryStream();
+                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                byte[] buffer = new byte[4096];
+                                                int bytesRead = -1;
+
+                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                    outputStream.write(buffer, 0, bytesRead);
+                                                }
+
+                                                byte[] imageBytes = outputStream.toByteArray();
+
+                                                base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                            }
+                                            catch(Exception e){
+
+                                            }
+                                        }
+
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
+                                        String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
+                                        PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
+                                        ProvLocPst.setString(1, ProvID);
+
+                                        ResultSet ProvLocRec = ProvLocPst.executeQuery();
+
+                                        while(ProvLocRec.next()){
+                                            String NHouseNumber = ProvLocRec.getString("House_Number").trim();
+                                            String NStreet = ProvLocRec.getString("Street_Name").trim();
+                                            String NTown = ProvLocRec.getString("Town").trim();
+                                            String NCity = ProvLocRec.getString("City").trim();
+                                            String NZipCode = ProvLocRec.getString("Zipcode").trim();
+
+                                            ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
+                                        }
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                %>
+                
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
+                    <tbody>
+                        <tr style="background-color: #333333;">
+                            <td>
+                                <div id="ProvMsgBxOne">
+                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                        <!--div style="float: right; width: 65px;" -->
+                                            <%
+                                                if(base64Profile != ""){
+                                            %>
+                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                    <img id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                <!--/div></center-->
+                                            <%
+                                                }else{
+                                            %>
+
+                                            <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                <img style='width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                            <!--/div></center-->
+
+                                            <%}%>
+                                        <!--/div-->
+                                        <div>
+                                            <p><%=ProvFirstName%></p>
+                                            <p style='color: violet;'><%=ProvCompany%></p>
+                                        </div>
+                                    </div>
+                                    <%if(MsgPhoto.equals("")){%>
+                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <%} else{ %>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <%}%>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
+                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                    <%=ProvEmail%></p>
+                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                    <%=ProvTel%></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                    <%=ProvCompany%></p>
+                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                    <%=ProvAddress%></p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <%
+                            if(newsItems > 10)
+                                break;
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+            
+                }
+            %>
+               </div> 
+            </div>
             
         <div id="content">
             
@@ -1189,14 +1689,14 @@
                                                         var ApptReason = document.getElementById("formsOrderedServices").value;
                                                         var PayMeth = $("input:radio[name=payment]:checked").val();
                                                         
-                                                        alert("ProviderID: "+ProviderID);
+                                                        /*alert("ProviderID: "+ProviderID);
                                                         alert("CustomerID: "+CustomerID);
                                                         alert("UserIndex: "+UserIndex);
                                                         alert("TotalPrice: "+TotalPrice);
                                                         alert("ApptDate: "+ApptDate);
                                                         alert("ApptTime: "+ApptTime);
                                                         alert("ApptReason: "+ApptReason);
-                                                        alert("Payment Method: "+PayMeth);
+                                                        alert("Payment Method: "+PayMeth);*/
                                                         
                                                         
                                                         $.ajax({  
@@ -1360,6 +1860,113 @@
         </div>
                     
         <div id="newbusiness">
+            
+            <div id="ExtraproviderIcons" style="padding-top: 10px;"> 
+             
+                <div id="SearchDivNB">
+                <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type="hidden" name="User" value="<%=NewUserName%>" />
+                    <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                        Find services at location below</p>
+                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
+                    </form></center>
+                </div>
+                
+             <center><h4 style="margin: 5px; margin-top: 15px;">Explore Service Providers</h4></center>
+                
+                <div id="firstSetProvIcons">
+                <center><table id="providericons">
+                        <tbody>
+                        <tr>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a href="QueueSelectPodiatryLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectMassageLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MedEsthSelect">Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                    </tbody>
+                    </table></center>
+                    
+                    <center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center>
+                
+                </div>
+                
+                <div id="secondSetProvIcons" style="display: none;">
+                    <center><table id="providericons">
+                        <tbody>
+                        <tr>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBrowLashLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
+                            </a></center></td>
+                             <td style="width: 33.3%;"><center><a href="QueueSelectDieticianLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectPetServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PetServicesSelect">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a href="QueueSelectHomeServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectPiercingLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectTattooLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
+                            </a></center></td>
+                        <tr>
+                            <td><center><a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectPersonalTrainerLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                    </tbody>
+                    </table></center>
+                    
+                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
+                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center>
+                
+                </div>
+                
+                <div id="thirdSetProvIcons" style="display: none;">
+                        <center><table id="providericons">
+                        <tbody>
+                            <tr>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectHairRemovalLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            </a></center></td>
+                            </tr> 
+                            <tr>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
+                                </a></center></td>
+                            </tr>
+                    </tbody>
+                    </table></center>
+                    
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center>
+
+                </div>
+            </div>
             
         </div>
                     

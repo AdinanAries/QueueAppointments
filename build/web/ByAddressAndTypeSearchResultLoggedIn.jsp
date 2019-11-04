@@ -1415,21 +1415,10 @@
                                         LATHour -= 5;
                                         
                                         LATMinute -= IntervalsValue;
-                                        
-                                        if(DailyStartTime != ""){
-                                            
-                                            if(LATHour <= startHour){
-                                                LATHour = startHour;
-                                                LATMinute = startMinute;
-                                            }
-                                        }else if(LATHour < 1){
-                                            LATHour = 1;
-                                            LATMinute = Integer.parseInt(CurrentTime.substring(3,5));
-                                        }
                                             
                                         while(LATMinute >= 60){
                                             
-                                            //Avoid incrementing the hour hand as it will skip the start of the day
+                                            /*Avoid incrementing the hour hand as it will skip the start of the day
                                             if(DailyStartTime != ""){
                                                 
                                                 if(LATHour == startHour){
@@ -1438,7 +1427,7 @@
                                                     
                                             }else if(LATHour == 1){
                                                 break;
-                                            }
+                                            }*/
                                             
                                             LATHour++;
                                             
@@ -1461,6 +1450,17 @@
                                                 LATMinute = 0;
                                             
                                                 
+                                        }
+                                        
+                                        if(DailyStartTime != ""){
+                                            
+                                            if(LATHour <= startHour){
+                                                LATHour = startHour;
+                                                LATMinute = startMinute;
+                                            }
+                                        }else if(LATHour < 1){
+                                            LATHour = 1;
+                                            LATMinute = Integer.parseInt(CurrentTime.substring(3,5));
                                         }
                                         
                                         if(Integer.toString(LATMinute).length() < 2){

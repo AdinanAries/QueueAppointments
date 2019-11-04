@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -95,6 +96,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                     UserID = loginAccount.getInt("CustomerId");
                     VerifiedName = DatabaseUserName;
                     
+                    //UserAccount Class uses an ArrayList to manage logged in users
                     yourIndex = UserAccount.newUser(Integer.parseInt(CustomerID), DatabaseUserName, "CustomerAccount");
                     request.setAttribute("UserName", DatabaseUserName);
                     request.setAttribute("UserIndex", yourIndex);
@@ -325,11 +327,43 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                             DailyClosingTime = SunDailyClosingTime.substring(0,5);
                         }
                     }catch(Exception e){}
+                    
+                    if(DailyStartTime.length() < 5)
+            DailyStartTime = "0" + DailyStartTime;
+        if(DailyClosingTime.length() < 5)
+            DailyClosingTime = "0" + DailyClosingTime;
+        
+        if(DailyStartTime == "")
+            DailyStartTime = "01:00";
+        if(DailyClosingTime == "")
+            DailyClosingTime = "23:00";
+        
+        int startHour = Integer.parseInt(DailyStartTime.substring(0,2));
+        int startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
+        int closingHour = Integer.parseInt(DailyClosingTime.substring(0,2));
+        int closingMinute = Integer.parseInt(DailyClosingTime.substring(3,5));
+        int IntervalsValue = 30;
+        String CurrentTime = new Date().toString().substring(11,16);
+        
+        try{
+
+            Class.forName(Driver);
+            Connection intervalsConn = DriverManager.getConnection(url, user, password);
+            String intervalsString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'SpotsIntervals%'";
+            PreparedStatement intervalsPst = intervalsConn.prepareStatement(intervalsString);
+
+            intervalsPst.setString(1, ProviderID);
+
+            ResultSet intervalsRec = intervalsPst.executeQuery();
+
+            while(intervalsRec.next()){
+                IntervalsValue = Integer.parseInt(intervalsRec.getString("CurrentValue").trim());
+            }
+        }catch(Exception e){
+                e.printStackTrace();
+        }
                                         
-                    if(DailyStartTime == "")
-                        DailyStartTime = "01:00";
-                    if(DailyClosingTime == "")
-                        DailyClosingTime = "23:00";
+                    
                     //JOptionPane.showMessageDialog(null, DailyStartTime);
                     //JOptionPane.showMessageDialog(null, DailyClosingTime);
     
@@ -379,8 +413,8 @@ public class LoginAndSendAppointmentController extends HttpServlet {
 
 //----------------------------------------------------------------------------------------------------------------------
                     if(selectFlag != 2){
-                        //calculate for the next and last 30 mins_______________________________
-
+                        
+                        //calculate for the next and last 30 mins
                             String TimeAfter30Mins = "";
                             String TimeBefore30Mins = "";
                             String TempAppointmentTime = AppointmentTime;
@@ -392,7 +426,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                             int TempHour = Integer.parseInt(TempAppointmentTime.substring(0,2));
                             int TempMinute = Integer.parseInt(TempAppointmentTime.substring(3,5));
 
-                            TempMinute += 15;
+                            TempMinute += (IntervalsValue - 1);
 
                             if(TempMinute >= 60){
 
@@ -408,8 +442,12 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                                     TempHour = 23;
 
                             }
-
-                            TimeAfter30Mins = TempHour + ":" + TempMinute;
+                            
+                            String StringMinute = Integer.toString(TempMinute);
+                            if(Integer.toString(TempMinute).length() < 2)
+                                StringMinute = "0" + StringMinute;
+                            
+                            TimeAfter30Mins = TempHour + ":" + StringMinute;
 
                             //JOptionPane.showMessageDialog(null, TimeAfter30Mins);
 
@@ -417,13 +455,24 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                             int TempHour2 = Integer.parseInt(TempAppointmentTime.substring(0,2));
                             int TempMinute2 = Integer.parseInt(TempAppointmentTime.substring(3,5));
 
-                            TempHour2 -= 1; //turning this into 60 minutes
+                            TempHour2 -= 5;
 
-                            TempMinute2 += 60;
+                            TempMinute2 += 300; 
 
-                            TempMinute2 -= 15;
+                            TempMinute2 -= (IntervalsValue + 1);
 
                             while(TempMinute2 >= 60){
+
+                                /*Avoid incrementing the hour hand as it will skip the start of the day
+                                if(DailyStartTime != ""){
+
+                                    if(TempHour2 == startHour){
+                                         break;
+                                    }
+
+                                }else if(TempHour2 == 1){
+                                    break;
+                                }*/
 
                                 TempHour2++;
 
@@ -436,42 +485,34 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                                 if(TempHour2 > 23)
                                     TempHour2 = 23;
                             }
+                            
+                            if(DailyStartTime != ""){
 
-                            TimeBefore30Mins = TempHour2 + ":" + TempMinute2;
-                            //JOptionPane.showMessageDialog(null, TimeBefore30Mins);
+                                if(TempHour2 < startHour){
+                                    TempHour2 = startHour;
+                                    TempMinute2 = startMinute + 1;
+                                }
+                            }else if(TempHour2 < 1){
+                                TempHour2 = 1;
+                                TempMinute2 = 1;
+                            }
+
+                            String SMinute2 = Integer.toString(TempMinute2);
+
+                            if(Integer.toString(TempMinute2).length() < 2)
+                                SMinute2 = "0" + TempMinute2;
+
+                            TimeBefore30Mins = TempHour2 + ":" + SMinute2;
 
                         }
+                        //JOptionPane.showMessageDialog(null, TimeBefore30Mins);
 
 
 
                         StatusesClass.AppointmentStatus = "";
 
-
-                        try{
-
-                            Class.forName(Driver);
-                            Connection selectConn = DriverManager.getConnection(url, user, password);
-                            String selectString = "Select * from QueueObjects.BookedAppointment where "
-                                    + "ProviderID =? and AppointmentDate=? and AppointmentTime=?";
-
-                            PreparedStatement selectPst = selectConn.prepareStatement(selectString);
-                            selectPst.setString(1, ProviderID);
-                            selectPst.setString(2, AppointmentDate);
-                            selectPst.setString(3, AppointmentTime);
-
-                            ResultSet selectRow = selectPst.executeQuery();
-
-                            while(selectRow.next()){
-                                selectFlag = 1;
-                                StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                                        ", " + AppointmentDate + ".\nThe spot you selected is already taken";
-                                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                                response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+VerifiedName);
-                            }
-
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
+                        boolean isYourSpot = false;
+                        boolean isSpotTaken = false;
 
                         try{
 
@@ -489,9 +530,40 @@ public class LoginAndSendAppointmentController extends HttpServlet {
 
                             while(selectRow.next()){
                                 selectFlag = 1;
+                                isYourSpot = true;
+                                
                                 StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                                        ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time";
+                                            ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time";
                                 JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                                response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+VerifiedName);
+                            }
+
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        
+                        try{
+
+                            Class.forName(Driver);
+                            Connection selectConn = DriverManager.getConnection(url, user, password);
+                            String selectString = "Select * from QueueObjects.BookedAppointment where "
+                                    + "ProviderID =? and AppointmentDate=? and AppointmentTime=?";
+
+                            PreparedStatement selectPst = selectConn.prepareStatement(selectString);
+                            selectPst.setString(1, ProviderID);
+                            selectPst.setString(2, AppointmentDate);
+                            selectPst.setString(3, AppointmentTime);
+
+                            ResultSet selectRow = selectPst.executeQuery();
+
+                            while(selectRow.next()){
+                                selectFlag = 1;
+                                isSpotTaken = true;
+                                if(!isYourSpot){
+                                    StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
+                                            ", " + AppointmentDate + ".\nThe spot you selected is already taken";
+                                    JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                                }
                                 response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+VerifiedName);
                             }
 
@@ -522,9 +594,11 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                             while(TimeRangeRow.next()){
 
                                 selectFlag = 1;
-                                StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                                        ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot or \n is less than 15 minutes before or after a spot you've taken.";
-                                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                                if(!isYourSpot && !isSpotTaken){
+                                    StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
+                                            ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot.";
+                                    JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                                }
                                 response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+VerifiedName);
                                 break;
 
