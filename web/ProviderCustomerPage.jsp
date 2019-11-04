@@ -915,26 +915,23 @@
                                             String MsgPhoto = "";
 
                                             try{    
-                                                    //put this in a try catch block for incase getProfilePicture returns nothing
-                                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
-                                                    InputStream inputStream = Pic.getBinaryStream();
-                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                    byte[] buffer = new byte[4096];
-                                                    int bytesRead = -1;
+                                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                                Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                                InputStream inputStream = Pic.getBinaryStream();
+                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                byte[] buffer = new byte[4096];
+                                                int bytesRead = -1;
 
-                                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                        outputStream.write(buffer, 0, bytesRead);
-                                                    }
-
-                                                    byte[] imageBytes = outputStream.toByteArray();
-
-                                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
-
-
+                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                    outputStream.write(buffer, 0, bytesRead);
                                                 }
-                                                catch(Exception e){
 
-                                                }
+                                                byte[] imageBytes = outputStream.toByteArray();
+
+                                                MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                            }catch(Exception e){}
 
 
                                                 try{
@@ -1318,8 +1315,6 @@
                                         int count = 1;
                                         
                                         for(int aptNum = 0; aptNum < AppointmentListExtra.size(); aptNum++ ){
-                                            
-                                            
                                             
                                             int AptID = AppointmentListExtra.get(aptNum).getAppointmentID();
                                             String ProvName = AppointmentListExtra.get(aptNum).getProviderName();

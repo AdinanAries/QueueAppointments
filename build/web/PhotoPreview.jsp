@@ -123,8 +123,7 @@
                 FirstImage = Base64.getEncoder().encodeToString(imageBytes);
 
 
-            }
-            catch(Exception e){}
+            }catch(Exception e){}
     
     
     %>
@@ -208,32 +207,32 @@
                         <tr>
     <%
         
-        String base64Image = "";
-        
-        for(int i = 0; i < AllPhotos.size(); i++){
-           
-            try{    
-                //put this in a try catch block for incase getProfilePicture returns nothing
-                Blob profilepic = AllPhotos.get(i); 
-                InputStream inputStream = profilepic.getBinaryStream();
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
-                int bytesRead = -1;
+                    String base64Image = "";
 
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
+                    for(int i = 0; i < AllPhotos.size(); i++){
 
-                byte[] imageBytes = outputStream.toByteArray();
+                        try{    
+                            //put this in a try catch block for incase getProfilePicture returns nothing
+                            Blob profilepic = AllPhotos.get(i); 
+                            InputStream inputStream = profilepic.getBinaryStream();
+                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                            byte[] buffer = new byte[4096];
+                            int bytesRead = -1;
 
-                base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                outputStream.write(buffer, 0, bytesRead);
+                            }
+
+                            byte[] imageBytes = outputStream.toByteArray();
+
+                            base64Image = Base64.getEncoder().encodeToString(imageBytes);
 
 
-            }
-            catch(Exception e){}
-            
-            int PhotoID = PhotoIDs.get(i);
-        
+                        }
+                        catch(Exception e){}
+
+                        int PhotoID = PhotoIDs.get(i);
+
     %>
                         <td id="picCell<%=i%>">
                             <div id="photoNumber<%=i%>" style="margin: 2px; background-size: cover; width: 120px; height: 120px; background-image: url('data:image/jpg;base64,<%=base64Image%>'); "></div>
