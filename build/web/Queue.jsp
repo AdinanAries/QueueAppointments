@@ -137,6 +137,12 @@
             <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
             <center><p style="font-size: 25px; font-family: serif; margin: 5px;"><b>Find medical & beauty places</b></p></center>
             
+            <center><a href="NewsUpadtesPage.jsp"><p id='QShowNews22' 
+                style='background-color: #ccccff; color: black; border-top: 1px solid white; padding-top: 5px; cursor: pointer;'>
+                    <img style='background-color: white; width: 25px; height: 24px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+                    <sup style='font-size: 17px;'>Show News Updates</sup>
+            </p></a></center>
+            
         </div>
             
             <div id="Extras">
@@ -339,11 +345,11 @@
             
             <div id="nav">
                 
-                <h4><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h4>
+                <!--h4><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h4>
                 <!--h4><a href="SignUpPage.jsp" style=" color: #000099;">First time on Queue (Sign-up now)</a></h4-->
                 <!--h4><a href="PageController?Message=<=Message%>" style=" color: black;">Go to your dashboard/Login now</a></h4-->
-                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center>
-                        
+                <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
+               
                 <center><div class =" SearchObject">
                         
                     <form name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
@@ -706,10 +712,7 @@
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 Show News Updates</p>
             
-            <a href="NewsUpadtesPage.jsp"><p id='QShowNews22' 
-                style='background-color: #334d81; color: white; border: 2px solid white; padding: 5px; cursor: pointer;'>
-                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
-                Show News Updates</p></a>
+            
             
             <center><p id='addBizTxt' style="font-size: 20px;  margin-bottom: 10px; color: #000099"><b>Add your business or create customer account below</b>
                 </p></center>

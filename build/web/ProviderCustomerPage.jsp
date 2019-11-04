@@ -2030,12 +2030,13 @@
             
         <div id="content">
             <center><a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; color: black; padding: 5px;'>
-                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
-                        News | 
-                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
-                        Notifications<sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> | 
-                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
-                        Calender
+                    <div style='border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                        News </div>
+                    <div style='border-right: 1px solid grey; width: 37%; float: left;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
+                        Notifications<sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> </div>
+                    <div style='width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                        Calender</div>
+                    <p style='clear: both;'></p>
                     </div></a></center>
             <div id="nav">
                 
@@ -2152,7 +2153,7 @@
                 %>
                     
                 <center><p style="color: white; background-color: green; margin-bottom: 15px; margin-top: 0; max-width: 300px">
-                        <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - Explore Below </p></center>
+                        <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - What are you looking for? </p></center>
                  
                 <!--cetnter><h4></h4></cetnter-->
                 
