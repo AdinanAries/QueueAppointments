@@ -1432,8 +1432,8 @@
                                     <%
                                         try{
                                             
-                                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                             String SDate = sdf.format(new Date());
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                            String SDate = sdf.format(new Date());
                                             
                                             Class.forName(Driver);
                                             Connection EventsConn = DriverManager.getConnection(Url, user, password);
@@ -1522,7 +1522,7 @@
                                         dynamic: false,
                                         dropdown: true,
                                         scrollbar: true
-                                    });
+                                });
 
                                 setInterval(function(){
                                     var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn");
