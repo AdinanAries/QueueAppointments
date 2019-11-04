@@ -2480,9 +2480,18 @@
   <!-------------------------------------------------------------------------------------------------------------------------------------------------->
             
             <div id="content"  onclick="hideDropDown();">
-            <div id="nav">
-                <h4><a href="https://adinanaries.wixsite.com/arieslab" style ="color: blanchedalmond">AriesLab.com</a></h4>
-                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center>
+            <div id="nav" style='padding: 0;'>
+                
+                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='ProvPhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
+                        News | 
+                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                        Notifications<sup style='color: red; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup> | 
+                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                        Calender
+                </div></a>
+                <!--h4><a href="https://adinanaries.wixsite.com/arieslab" style ="color: blanchedalmond">AriesLab.com</a></h4>
+                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                
             </div>
             <div id="main">
@@ -2973,29 +2982,29 @@
                                             <%
                                                         
                                                     
-                                                        String thisMinute = Integer.toString(y);
+                                                String thisMinute = Integer.toString(y);
                                                         
-                                                        if(thisMinute.length() < 2){
-                                                            thisMinute = "0" + thisMinute;
-                                                        }
+                                                if(thisMinute.length() < 2){
+                                                    thisMinute = "0" + thisMinute;
+                                                }
                                                         
-                                                        NextAvailableTime = x + ":" + thisMinute;
+                                                NextAvailableTime = x + ":" + thisMinute;
                                                         
-                                                        //formatting the time for user convenience
-                                                        if( x > 12)
-                                                        {
-                                                             int TempHour = x - 12;
-                                                             NextAvailableFormattedTime = Integer.toString(TempHour) + ":" +  thisMinute + "pm";
-                                                        }
-                                                        else if(x == 0){
-                                                            NextAvailableFormattedTime = "12" + ":" + thisMinute + "am";
-                                                        }
-                                                        else if(x == 12){
-                                                            NextAvailableFormattedTime = NextAvailableTime + "pm";
-                                                        }
-                                                        else{
-                                                            NextAvailableFormattedTime = NextAvailableTime +"am";
-                                                        }
+                                                //formatting the time for user convenience
+                                                if( x > 12)
+                                                {
+                                                    int TempHour = x - 12;
+                                                    NextAvailableFormattedTime = Integer.toString(TempHour) + ":" +  thisMinute + "pm";
+                                                }
+                                                else if(x == 0){
+                                                    NextAvailableFormattedTime = "12" + ":" + thisMinute + "am";
+                                                }
+                                                else if(x == 12){
+                                                    NextAvailableFormattedTime = NextAvailableTime + "pm";
+                                                }
+                                                else{
+                                                    NextAvailableFormattedTime = NextAvailableTime +"am";
+                                                }
                                                      
                                             %>
                                             
@@ -4985,14 +4994,7 @@
             <center><div id="Providerprofile" style="border-bottom: 10px solid cornflowerblue;  width: 100%; max-width: 700px;">
                  
                 <h4 style="color: black; margin-bottom: 10px;">Your Business Profile</h4>
-                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='ProvPhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
-                                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
-                                    News | 
-                                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                                    Notifications<sup style='color: red; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup> | 
-                                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                                    Calender
-                                </div></a>
+                
                 <table id="ProviderprofileTable" style="border-spacing: 0; width: 100%; max-width: 600px;">
                     
                     <tbody>

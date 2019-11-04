@@ -302,7 +302,7 @@ if(selectFlag != 2){
             TempMinute2 += 300; 
               
             //removing one minute from the intervals value makes it reach up to one min less than the most recent previous spot
-            TempMinute2 -= (IntervalsValue + 1);
+            TempMinute2 -= (IntervalsValue - 1);
              
             while(TempMinute2 >= 60){
                                 

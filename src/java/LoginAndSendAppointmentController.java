@@ -459,7 +459,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
 
                             TempMinute2 += 300; 
 
-                            TempMinute2 -= (IntervalsValue + 1);
+                            TempMinute2 -= (IntervalsValue - 1);
 
                             while(TempMinute2 >= 60){
 

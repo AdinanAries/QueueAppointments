@@ -2029,10 +2029,17 @@
             
             
         <div id="content">
-            
+            <center><a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; color: black; padding: 5px;'>
+                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                        News | 
+                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
+                        Notifications<sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> | 
+                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                        Calender
+                    </div></a></center>
             <div id="nav">
                 
-                <h3><a href="index.jsp?UserIndex=<%=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>
+                <!--h3><a href="index.jsp?UserIndex=<%=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>
                 <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                 
                 <h4><a href="" style=" color: black;"></a></h4>
@@ -2144,10 +2151,10 @@
                     }
                 %>
                     
-                <center><p style="color: white; background-color: green; margin-bottom: 10px; margin-top: 0; max-width: 300px">
-                        Logged in as <span id="NameForLoginStatus"><%=FirstName%></span> </p></center>
+                <center><p style="color: white; background-color: green; margin-bottom: 15px; margin-top: 0; max-width: 300px">
+                        <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - Explore Below </p></center>
                  
-                <cetnter><h4>Explore Service Providers</h4></cetnter>
+                <!--cetnter><h4></h4></cetnter-->
                 
                 <div id="firstSetProvIcons">
                 <center><table id="providericons">
@@ -3334,16 +3341,10 @@
                                <!-- <div class="propic">
                                     <img src="" width="100" height="100"/>
                                 </div> -->
-                               <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='PhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
-                                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
-                                    News | 
-                                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                                    Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup> | 
-                                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                                    Calender
-                                </div></a>
                                     
-                               <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px; margin-bottom: 5px;">Show Your Profile Details</p></center>
+                               <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: #3d6999; border: 1px solid black; color: white; padding: 5px; margin-bottom: 5px;">
+                                       <img style='background-color: white;' src="icons/icons8-user-15.png" width="20" height="20" alt="icons8-user-15"/>
+                                       Show Your Profile Details</p></center>
                                
                                <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 5px; margin-top: 0; margin-bottom: 10px; background-color: cornflowerblue; border-right: darkblue 1px solid; border-bottom: darkblue 1px solid; padding-top: 10px;">
                                 
@@ -4249,7 +4250,7 @@
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
-                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderName%>'s"/>
+                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderName%>"/>
                                                 </span><span> started at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
                                                 <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>

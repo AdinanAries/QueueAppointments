@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -285,234 +286,267 @@ public class SignupAndSendAppointmentController extends HttpServlet {
             
         }catch(Exception e){}
         
-                                        String MonDailyStartTime = "";
-                                        String MonDailyClosingTime = "";
-                                        String TueDailyStartTime = "";
-                                        String TueDailyClosingTime = "";
-                                        String WedDailyStartTime = "";
-                                        String WedDailyClosingTime = "";
-                                        String ThursDailyStartTime = "";
-                                        String ThursDailyClosingTime = "";
-                                        String FriDailyStartTime = "";
-                                        String FriDailyClosingTime = "";
-                                        String SatDailyStartTime = "";
-                                        String SatDailyClosingTime = "";
-                                        String SunDailyStartTime = "";
-                                        String SunDailyClosingTime = "";
+        String MonDailyStartTime = "";
+        String MonDailyClosingTime = "";
+        String TueDailyStartTime = "";
+        String TueDailyClosingTime = "";
+        String WedDailyStartTime = "";
+        String WedDailyClosingTime = "";
+        String ThursDailyStartTime = "";
+        String ThursDailyClosingTime = "";
+        String FriDailyStartTime = "";
+        String FriDailyClosingTime = "";
+        String SatDailyStartTime = "";
+        String SatDailyClosingTime = "";
+        String SunDailyStartTime = "";
+        String SunDailyClosingTime = "";
                                         
-                                        //getting starting and closing hours for eah day
-                                        try{
+        //getting starting and closing hours for eah day
+        try{
                                             
-                                            Class.forName(Driver);
-                                            Connection hoursConn = DriverManager.getConnection(url, user, password);
-                                            String hourString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
+            Class.forName(Driver);
+            Connection hoursConn = DriverManager.getConnection(url, user, password);
+            String hourString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
                                             
-                                            PreparedStatement hourPst = hoursConn.prepareStatement(hourString);
-                                            hourPst.setString(1, ProviderID);
-                                            ResultSet hourRow = hourPst.executeQuery();
+            PreparedStatement hourPst = hoursConn.prepareStatement(hourString);
+            hourPst.setString(1, ProviderID);
+            ResultSet hourRow = hourPst.executeQuery();
                                             
-                                            while(hourRow.next()){
+            while(hourRow.next()){
                                                 
                                                 
-                                                MonDailyStartTime = hourRow.getString("MondayStart");
-                                                MonDailyClosingTime = hourRow.getString("MondayClose");
+                MonDailyStartTime = hourRow.getString("MondayStart");
+                MonDailyClosingTime = hourRow.getString("MondayClose");
                                                 
-                                                TueDailyStartTime = hourRow.getString("TuesdayStart");
-                                                TueDailyClosingTime = hourRow.getString("TuesdayClose");
+                TueDailyStartTime = hourRow.getString("TuesdayStart");
+                TueDailyClosingTime = hourRow.getString("TuesdayClose");
                                                 
-                                                WedDailyStartTime = hourRow.getString("WednessdayStart");
-                                                WedDailyClosingTime = hourRow.getString("WednessdayClose");
+                WedDailyStartTime = hourRow.getString("WednessdayStart");
+                WedDailyClosingTime = hourRow.getString("WednessdayClose");
                                                
-                                                ThursDailyStartTime = hourRow.getString("ThursdayStart");
-                                                ThursDailyClosingTime = hourRow.getString("ThursdayClose");
+                ThursDailyStartTime = hourRow.getString("ThursdayStart");
+                ThursDailyClosingTime = hourRow.getString("ThursdayClose");
                                                
-                                                FriDailyStartTime = hourRow.getString("FridayStart");
-                                                FriDailyClosingTime = hourRow.getString("FridayClose");
+                FriDailyStartTime = hourRow.getString("FridayStart");
+                FriDailyClosingTime = hourRow.getString("FridayClose");
                                                 
-                                                SatDailyStartTime = hourRow.getString("SaturdayStart");
-                                                SatDailyClosingTime = hourRow.getString("SaturdayClose");
+                SatDailyStartTime = hourRow.getString("SaturdayStart");
+                SatDailyClosingTime = hourRow.getString("SaturdayClose");
                                                 
-                                                SunDailyStartTime = hourRow.getString("SundayStart");
-                                                SunDailyClosingTime = hourRow.getString("SundayClose");
+                SunDailyStartTime = hourRow.getString("SundayStart");
+                SunDailyClosingTime = hourRow.getString("SundayClose");
                                                 
                                                 
-                                            }
+            }
                                             
-                                        }catch(Exception e){
-                                            e.printStackTrace();
-                                        }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
                                         
-                                        try{
-                                                if(DayOfWeek.equalsIgnoreCase("Mon")){
-                                                    DailyStartTime = MonDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = MonDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Tue")){
-                                                    DailyStartTime = TueDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = TueDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Wed")){
+        try{
+            if(DayOfWeek.equalsIgnoreCase("Mon")){
+                DailyStartTime = MonDailyStartTime.substring(0,5);
+                DailyClosingTime = MonDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Tue")){
+                DailyStartTime = TueDailyStartTime.substring(0,5);
+                DailyClosingTime = TueDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Wed")){
                                                     
-                                                    DailyStartTime = WedDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = WedDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Thu")){
-                                                    DailyStartTime = ThursDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = ThursDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Fri")){
-                                                    DailyStartTime = FriDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = FriDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Sat")){
-                                                    DailyStartTime = SatDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = SatDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Sun")){
-                                                    DailyStartTime = SunDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = SunDailyClosingTime.substring(0,5);
-                                                }
-                                        }catch(Exception e){}
+                DailyStartTime = WedDailyStartTime.substring(0,5);
+                DailyClosingTime = WedDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Thu")){
+                DailyStartTime = ThursDailyStartTime.substring(0,5);
+                DailyClosingTime = ThursDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Fri")){
+                DailyStartTime = FriDailyStartTime.substring(0,5);
+                DailyClosingTime = FriDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Sat")){
+                DailyStartTime = SatDailyStartTime.substring(0,5);
+                DailyClosingTime = SatDailyClosingTime.substring(0,5);
+            }
+            if(DayOfWeek.equalsIgnoreCase("Sun")){
+                DailyStartTime = SunDailyStartTime.substring(0,5);
+                DailyClosingTime = SunDailyClosingTime.substring(0,5);
+            }
+        }catch(Exception e){}
                                         
-                                 if(DailyStartTime == "")
-                                    DailyStartTime = "01:00";
-                                if(DailyClosingTime == "")
-                                    DailyClosingTime = "23:00";
-                                //JOptionPane.showMessageDialog(null, DailyStartTime);
-                                //JOptionPane.showMessageDialog(null, DailyClosingTime);
+        if(DailyStartTime == "")
+            DailyStartTime = "01:00";
+        if(DailyClosingTime == "")
+            DailyClosingTime = "23:00";
+                                
+        int startHour = Integer.parseInt(DailyStartTime.substring(0,2));
+        int startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
+        int closingHour = Integer.parseInt(DailyClosingTime.substring(0,2));
+        int closingMinute = Integer.parseInt(DailyClosingTime.substring(3,5));
+        int IntervalsValue = 30;
+        String CurrentTime = new Date().toString().substring(11,16);
+        
+        try{
+
+            Class.forName(Driver);
+            Connection intervalsConn = DriverManager.getConnection(url, user, password);
+            String intervalsString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'SpotsIntervals%'";
+            PreparedStatement intervalsPst = intervalsConn.prepareStatement(intervalsString);
+
+            intervalsPst.setString(1, ProviderID);
+
+            ResultSet intervalsRec = intervalsPst.executeQuery();
+
+            while(intervalsRec.next()){
+                IntervalsValue = Integer.parseInt(intervalsRec.getString("CurrentValue").trim());
+            }
+        }catch(Exception e){
+                e.printStackTrace();
+        }
+                                
+        //JOptionPane.showMessageDialog(null, DailyStartTime);
+        //JOptionPane.showMessageDialog(null, DailyClosingTime);
      
-    String CompareTime = AppointmentTime;
-    if(CompareTime.length() == 4)
-        CompareTime = "0" + CompareTime;
-    
-    if(Integer.parseInt(CompareTime.substring(0,2)) < Integer.parseInt(DailyStartTime.substring(0,2))){
-        selectFlag = 2;
-        response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
-        JOptionPane.showMessageDialog(null, "Account Created Successfully");
-        JOptionPane.showMessageDialog(null,"Queue was not finished; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
-    }
-    
-    if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyStartTime.substring(0,2))){
-        if(Integer.parseInt(CompareTime.substring(3,5)) < Integer.parseInt(DailyStartTime.substring(3,5))){
+        String CompareTime = AppointmentTime;
+        if(CompareTime.length() == 4)
+            CompareTime = "0" + CompareTime;
+
+        if(Integer.parseInt(CompareTime.substring(0,2)) < Integer.parseInt(DailyStartTime.substring(0,2))){
             selectFlag = 2;
             response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
             JOptionPane.showMessageDialog(null, "Account Created Successfully");
             JOptionPane.showMessageDialog(null,"Queue was not finished; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
         }
-    }
-    
-    if(Integer.parseInt(CompareTime.substring(0,2)) > Integer.parseInt(DailyClosingTime.substring(0,2))){
-        selectFlag = 2;
-        response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
-        JOptionPane.showMessageDialog(null, "Account Created Successfully");
-        JOptionPane.showMessageDialog(null,"Queue was not finished; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
-    }
-    
-    if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyClosingTime.substring(0,2))){
-        if(Integer.parseInt(CompareTime.substring(3,5)) > Integer.parseInt(DailyClosingTime.substring(3,5))){
+
+        if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyStartTime.substring(0,2))){
+            if(Integer.parseInt(CompareTime.substring(3,5)) < Integer.parseInt(DailyStartTime.substring(3,5))){
+                selectFlag = 2;
+                response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
+                JOptionPane.showMessageDialog(null, "Account Created Successfully");
+                JOptionPane.showMessageDialog(null,"Queue was not finished; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
+            }
+        }
+
+        if(Integer.parseInt(CompareTime.substring(0,2)) > Integer.parseInt(DailyClosingTime.substring(0,2))){
             selectFlag = 2;
             response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
             JOptionPane.showMessageDialog(null, "Account Created Successfully");
             JOptionPane.showMessageDialog(null,"Queue was not finished; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
         }
-    }
+
+        if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyClosingTime.substring(0,2))){
+            if(Integer.parseInt(CompareTime.substring(3,5)) > Integer.parseInt(DailyClosingTime.substring(3,5))){
+                selectFlag = 2;
+                response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
+                JOptionPane.showMessageDialog(null, "Account Created Successfully");
+                JOptionPane.showMessageDialog(null,"Queue was not finished; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
+            }
+        }
     
 //----------------------------------------------------------------------------------------------------------------------
         if(selectFlag != 2){
         
-        //calculate for the next and last 30 mins_______________________________
-            
-            String TimeAfter30Mins = "";
-            String TimeBefore30Mins = "";
-            String TempAppointmentTime = AppointmentTime;
-            
+        //calculate for the next and last 30 mins
+        String TimeAfter30Mins = "";
+        String TimeBefore30Mins = "";
+        String TempAppointmentTime = AppointmentTime;
+
         {
             if(TempAppointmentTime.length() == 4)
-               TempAppointmentTime = "0" + TempAppointmentTime;
-        
+                TempAppointmentTime = "0" + TempAppointmentTime;
+
             int TempHour = Integer.parseInt(TempAppointmentTime.substring(0,2));
             int TempMinute = Integer.parseInt(TempAppointmentTime.substring(3,5));
-        
-            TempMinute += 15;
-        
+
+            TempMinute += (IntervalsValue - 1);
+
             if(TempMinute >= 60){
-            
+
                 TempHour++;
-        
+
                 if(TempMinute > 60 && TempMinute != 60)
                     TempMinute -= 60;
-        
+
                 else if(TempMinute == 60)
                     TempMinute = 0;
-                
+
                 if(TempHour > 23)
                     TempHour = 23;
-        
-            }
-        
-            TimeAfter30Mins = TempHour + ":" + TempMinute;
-            
-            //JOptionPane.showMessageDialog(null, TimeAfter30Mins);
-            
-        
-            int TempHour2 = Integer.parseInt(TempAppointmentTime.substring(0,2));
-            int TempMinute2 = Integer.parseInt(TempAppointmentTime.substring(3,5));
-        
-            TempHour2 -= 1; //turning this into 60 minutes
-        
-            TempMinute2 += 60;
-            
-            TempMinute2 -= 15;
-        
-            while(TempMinute2 >= 60){
-                
-                TempHour2++;
-                
-                if(TempMinute2 > 60 && TempMinute2 != 60)
-                    TempMinute2 -= 60;
-        
-                else if(TempMinute2 == 60)
-                    TempMinute2 = 0;
-                
-                if(TempHour2 > 23)
-                    TempHour2 = 23;
-            }
-        
-            TimeBefore30Mins = TempHour2 + ":" + TempMinute2;
-            //JOptionPane.showMessageDialog(null, TimeBefore30Mins);
-        
-        }
+
+                }
+                            
+                String StringMinute = Integer.toString(TempMinute);
+                if(Integer.toString(TempMinute).length() < 2)
+                    StringMinute = "0" + StringMinute;
+                            
+                TimeAfter30Mins = TempHour + ":" + StringMinute;
+
+                //JOptionPane.showMessageDialog(null, TimeAfter30Mins);
+
+
+                int TempHour2 = Integer.parseInt(TempAppointmentTime.substring(0,2));
+                int TempMinute2 = Integer.parseInt(TempAppointmentTime.substring(3,5));
+
+                TempHour2 -= 5;
+
+                TempMinute2 += 300; 
+
+                TempMinute2 -= (IntervalsValue - 1);
+
+                while(TempMinute2 >= 60){
+
+                    /*Avoid incrementing the hour hand as it will skip the start of the day
+                    if(DailyStartTime != ""){
+
+                        if(TempHour2 == startHour){
+                            break;
+                        }
+
+                    }else if(TempHour2 == 1){
+                        break;
+                    }*/
+
+                    TempHour2++;
+
+                    if(TempMinute2 > 60 && TempMinute2 != 60)
+                        TempMinute2 -= 60;
+
+                    else if(TempMinute2 == 60)
+                        TempMinute2 = 0;
+
+                    if(TempHour2 > 23)
+                        TempHour2 = 23;
+                    }
+                            
+                    if(DailyStartTime != ""){
+
+                        if(TempHour2 < startHour){
+                            TempHour2 = startHour;
+                            TempMinute2 = startMinute + 1;
+                        }
+                    }else if(TempHour2 < 1){
+                            TempHour2 = 1;
+                            TempMinute2 = 1;
+                    }
+
+                    String SMinute2 = Integer.toString(TempMinute2);
+
+                    if(Integer.toString(TempMinute2).length() < 2)
+                        SMinute2 = "0" + TempMinute2;
+
+                        TimeBefore30Mins = TempHour2 + ":" + SMinute2;
+
+                    }
+                    //JOptionPane.showMessageDialog(null, TimeBefore30Mins);
+
         
         
         
         StatusesClass.AppointmentStatus = "";
         
-        
-        try{
-            
-            Class.forName(Driver);
-            Connection selectConn = DriverManager.getConnection(url, user, password);
-            String selectString = "Select * from QueueObjects.BookedAppointment where "
-                    + "ProviderID =? and AppointmentDate=? and AppointmentTime=?";
-            
-            PreparedStatement selectPst = selectConn.prepareStatement(selectString);
-            selectPst.setString(1, ProviderID);
-            selectPst.setString(2, AppointmentDate);
-            selectPst.setString(3, AppointmentTime);
-            
-            ResultSet selectRow = selectPst.executeQuery();
-            
-            while(selectRow.next()){
-                selectFlag = 1;
-                StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                        ", " + AppointmentDate + ".\nThe spot you selected is already taken";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
-            }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        boolean isYourSpot = false;
+        boolean isSpotTaken = false;
         
         try{
             
@@ -530,9 +564,39 @@ public class SignupAndSendAppointmentController extends HttpServlet {
             
             while(selectRow.next()){
                 selectFlag = 1;
+                isYourSpot = true;
                 StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time";
                 JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        try{
+            
+            Class.forName(Driver);
+            Connection selectConn = DriverManager.getConnection(url, user, password);
+            String selectString = "Select * from QueueObjects.BookedAppointment where "
+                    + "ProviderID =? and AppointmentDate=? and AppointmentTime=?";
+            
+            PreparedStatement selectPst = selectConn.prepareStatement(selectString);
+            selectPst.setString(1, ProviderID);
+            selectPst.setString(2, AppointmentDate);
+            selectPst.setString(3, AppointmentTime);
+            
+            ResultSet selectRow = selectPst.executeQuery();
+            
+            while(selectRow.next()){
+                selectFlag = 1;
+                isSpotTaken = true;
+                if(!isYourSpot){
+                    StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
+                            ", " + AppointmentDate + ".\nThe spot you selected is already taken";
+                    JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                }
                 response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
             }
             
@@ -560,12 +624,15 @@ public class SignupAndSendAppointmentController extends HttpServlet {
             TimeRangePst.setString(8, TimeAfter30Mins);
             
             ResultSet TimeRangeRow = TimeRangePst.executeQuery();
+            
             while(TimeRangeRow.next()){
                 
                 selectFlag = 1;
-                StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
-                        ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot or \n is less than 15 minutes before or after a spot you've taken.";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                if(!isYourSpot && !isSpotTaken){
+                    StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
+                            ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot or \n is less than 15 minutes before or after a spot you've taken.";
+                    JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                }
                 response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+yourIndex+"&User="+UserName);
                 break;
                 

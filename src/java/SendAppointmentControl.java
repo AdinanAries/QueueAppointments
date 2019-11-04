@@ -327,7 +327,7 @@ public class SendAppointmentControl extends HttpServlet {
             
             TimeAfter30Mins = TempHour + ":" + StringMinute;
             
-            //JOptionPane.showMessageDialog(null, TimeAfter30Mins);
+            JOptionPane.showMessageDialog(null, TimeAfter30Mins);
             
         
             int TempHour2 = Integer.parseInt(TempAppointmentTime.substring(0,2));
@@ -337,7 +337,7 @@ public class SendAppointmentControl extends HttpServlet {
                            
             TempMinute2 += 300; 
             
-            TempMinute2 -= (IntervalsValue + 1);
+            TempMinute2 -= (IntervalsValue - 1);
             
             while(TempMinute2 >= 60){
                                 
