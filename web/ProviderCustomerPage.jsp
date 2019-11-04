@@ -1970,7 +1970,7 @@
                         
                         for(int notify = 0 ; notify < Notifications.size(); notify++){
                     
-                        if(!isTrWhite){
+                            if(!isTrWhite){
                             
                     %>
                     
