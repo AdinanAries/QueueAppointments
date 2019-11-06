@@ -712,8 +712,7 @@
                 }
                 
             </script>
-            
-            
+               
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                     tech.arieslab@outlook.com | 
@@ -740,8 +739,11 @@
                 <%}%>
             </div>
             
+            <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>'><div style='border:2px solid red; width: 40px; height: 27px; margin-top: 5px; float: right; border-radius: 4px; margin-right: 5px;'>
+                    <img style='background-color:white; width: 40px; height: 27px;border-radius: 3px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+                </div></a>
             
-            <ul>
+            <ul style="margin-right: 5px;">
                 <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
                 </textarea>
                 <li onclick="showCustExtraNotification();" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
@@ -2024,15 +2026,15 @@
             
             
         <div id="content">
-            <center><a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; color: black; padding: 5px;'>
-                    <div style='border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
-                        News </div>
-                    <div style='border-right: 1px solid grey; width: 37%; float: left;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
-                        Notifications<sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> </div>
-                    <div style='width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
-                        Calender</div>
+            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; padding: 5px;'>
+                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>'><div style='color: green; border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: #99ffcc;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                        News </div></a>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; border-right: 1px solid grey; width: 37%; float: left;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
+                            Notifications<sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> </div></a>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 30%; color: black; float: left;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                        Calender</div></a>
                     <p style='clear: both;'></p>
-                    </div></a></center>
+                    </div></center>
             <div id="nav">
                 
                 <!--h3><a href="index.jsp?UserIndex=<%=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>

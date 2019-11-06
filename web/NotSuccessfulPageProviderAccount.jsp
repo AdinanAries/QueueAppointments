@@ -128,20 +128,20 @@
                             String MsgPhoto = "";
                             
                             try{    
-                                    //put this in a try catch block for incase getProfilePicture returns nothing
-                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
-                                    InputStream inputStream = Pic.getBinaryStream();
-                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                    byte[] buffer = new byte[4096];
-                                    int bytesRead = -1;
+                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                InputStream inputStream = Pic.getBinaryStream();
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                byte[] buffer = new byte[4096];
+                                int bytesRead = -1;
 
-                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                        outputStream.write(buffer, 0, bytesRead);
-                                    }
+                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                    outputStream.write(buffer, 0, bytesRead);
+                                }
 
-                                    byte[] imageBytes = outputStream.toByteArray();
+                                byte[] imageBytes = outputStream.toByteArray();
 
-                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+                                MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
 
 
                                 }

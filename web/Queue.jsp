@@ -91,8 +91,12 @@
                         <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
                     </div></center>
             </div>
+            
+            <a href='NewsUpadtesPage.jsp'><div style='border:2px solid red; width: 40px; height: 27px; margin-top: 5px; float: right; border-radius: 4px; margin-right: 5px;'>
+                    <img style='background-color:white; width: 40px; height: 27px;border-radius: 3px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+                </div></a>
         
-            <ul>
+            <ul style="margin-right: 5px;">
                 <a  href="LogInPage.jsp">
                     <li style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Your Dashboard</li></a>

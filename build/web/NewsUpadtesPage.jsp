@@ -81,7 +81,7 @@
     <center><div id="PhoneExtras">
             
             <div id='PhoneNews' style='width: 100%; max-width: 500px;' >
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from your providers</p></center>
+            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from services providers</p></center>
             
             <div style="overflow-y: auto;">
                   

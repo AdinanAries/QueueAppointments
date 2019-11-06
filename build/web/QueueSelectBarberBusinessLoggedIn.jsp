@@ -1192,7 +1192,7 @@
                                             
                                         while(LATMinute >= 60){
                                             
-                                            //Avoid incrementing the hour hand as it will skip the start of the day
+                                            /*Avoid incrementing the hour hand as it will skip the start of the day
                                             if(DailyStartTime != ""){
                                                 
                                                 if(LATHour == startHour){
@@ -1201,7 +1201,7 @@
                                                     
                                             }else if(LATHour == 1){
                                                 break;
-                                            }
+                                            }*/
                                             
                                             LATHour++;
                                             

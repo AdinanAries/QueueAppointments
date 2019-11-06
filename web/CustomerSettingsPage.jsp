@@ -54,6 +54,8 @@
         String NameFromList = "";
         String NewUserName = "";
         
+        int Settings = Integer.parseInt(request.getParameter("Settings"));
+        
         try{
             UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
         }catch(Exception e){}
@@ -319,6 +321,9 @@
     <center><div id="PhoneExtras" style="">
             
             <div id='PhoneNews' style='width: 100%;' >
+                <script>
+                    document.getElementById("PhoneNews").style.display = "none";
+                </script>
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from your providers</p></center>
             
                <div style="max-height: 100%; overflow-y: auto;">
@@ -1530,5 +1535,14 @@
     
     <script src="scripts/script.js"></script>
     <script src="scripts/QueueLineDivBehavior.js"></script>
+    
+    <script>
+            var Settings = '<%=Settings%>';
+            
+            if(Settings === '1')
+                showPCustExtraNotification();
+            else if(Settings === '2')
+                showPCustExtraCal();
+    </script>
     
 </html>
