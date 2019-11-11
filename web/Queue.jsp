@@ -76,6 +76,35 @@
     
     <body>
         
+        <script>
+            
+            function getLocation(){
+                if (navigator.geolocation){
+                  navigator.geolocation.getCurrentPosition(showPosition);
+
+                }else{ 
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+
+            function showPosition(position){
+                
+              $.ajax({
+                    type: "GET",
+                    data: 'latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&sensor=true&key=AIzaSyAoltHbe0FsMkNbMCAbY5dRYBjxwkdSVQQ',
+                    url: 'https://maps.googleapis.com/maps/api/geocode/json',
+                    success: function(result){
+                        
+                        alert(result.error_message);
+                        
+                    }
+                });
+            }
+            
+            getLocation();
+            
+        </script>
+        
         <div id="PermanentDiv" style="">
             
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">

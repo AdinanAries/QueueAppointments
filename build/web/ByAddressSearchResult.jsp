@@ -220,10 +220,19 @@
             //response.sendRedirect("ServiceProviderPage.jsp");
         
         //connection arguments
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
+        
+        try{
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            response.sendRedirect("Queue.jsp");
+        }
         
         //getting search parameters for search query
         String City = request.getParameter("city4Search").trim();

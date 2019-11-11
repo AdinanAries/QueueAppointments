@@ -52,7 +52,88 @@
     
     <%
         
+        
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        //connection arguments
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        
         int UserID = 0;
+        String Base64Pic = "";
+        boolean isSameSessionData = true;
+        boolean isUserIndexInList = true;
+        String NewUserName = "";
+        int UserIndex = 0;
+        
+        try{
+            NewUserName = request.getParameter("User");
+
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+
+            String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+
+            if(tempAccountType.equals("CustomerAccount"))
+                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+            if(tempAccountType.equals("BusinessAccount")){
+                request.setAttribute("UserIndex", UserIndex);
+                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+            }
+
+            //else if(UserID == 0)
+                //response.sendRedirect("LogInPage.jsp");
+        }catch(Exception e){
+            isUserIndexInList = false;
+        }
+        
+        String SessionID = request.getRequestedSessionId();
+        String DatabaseSession = "";
+        //JOptionPane.showMessageDialog(null, SessionID);
+        
+        //getting session data from database
+        try{
+            Class.forName(Driver);
+            Connection SessionConn = DriverManager.getConnection(url, User, Password);
+            String SessionString = "Select * from QueueObjects.UserSessions where UserIndex = ?";
+            PreparedStatement SessionPst = SessionConn.prepareStatement(SessionString);
+            SessionPst.setInt(1, UserIndex);
+            ResultSet SessionRec = SessionPst.executeQuery();
+            
+            while(SessionRec.next()){
+                
+                DatabaseSession = SessionRec.getString("SessionNo").trim();
+            }
+            
+        }catch(Exception e){}
+        
+        //JOptionPane.showMessageDialog(null, DatabaseSession);
+        if(!SessionID.equals(DatabaseSession)){
+            
+            try{
+                Class.forName(Driver);
+                Connection DltSesConn = DriverManager.getConnection(url, User, Password);
+                String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
+                PreparedStatement DltSesPst = DltSesConn.prepareStatement(DltSesString);
+                DltSesPst.setInt(1, UserIndex);
+                DltSesPst.executeUpdate();
+                
+            }
+            catch(Exception e){}
+            
+            isSameSessionData = false;
+            //response.sendRedirect("LogInPage.jsp");
+        }
+        
+        if(!isSameSessionData || UserID == 0 || !isUserIndexInList)
+            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+        
+        /*int UserID = 0;
         String Base64Pic = "";
         
         int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
@@ -71,21 +152,20 @@
         else if(UserID == 0)
             response.sendRedirect("LogInPage.jsp");
         
-        /*
         
-        if(UserAccount.AccountType.equals("BusinessAccount"))
-            response.sendRedirect("ServiceProviderPage.jsp");
+        //if(UserAccount.AccountType.equals("BusinessAccount"))
+            //response.sendRedirect("ServiceProviderPage.jsp");
 
             
-            else if(UserAccount.UserID == 0)
-            response.sendRedirect("LogInPage.jsp");
-        */
+            //else if(UserAccount.UserID == 0)
+            //response.sendRedirect("LogInPage.jsp");
+        
         
         //connection arguments
         String url = config.getServletContext().getAttribute("DBUrl").toString();
         String Driver = config.getServletContext().getAttribute("DBDriver").toString();
         String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();*/
         
         try{
             
@@ -123,7 +203,7 @@
             
         }catch(Exception e){e.printStackTrace();}
         
-        String SessionID = request.getRequestedSessionId();
+        /*String SessionID = request.getRequestedSessionId();
         String DatabaseSession = "";
         //JOptionPane.showMessageDialog(null, SessionID);
         
@@ -157,7 +237,7 @@
             catch(Exception e){}
             
             response.sendRedirect("LogInPage.jsp");
-        }
+        }*/
         
     %>
     

@@ -86,6 +86,9 @@
         //UserAccount.UserID stores UserID after Login Successfully
         ProviderCustomerData.eachCustomer = null;
         int JustLogged = 0;
+        boolean isSameUserName = true;
+        boolean isSameSessionData = true;
+        boolean isUserIndexInList = true;
         int UserID = 0;
         String NewUserName = "";
         String NameFromList = "";
@@ -123,7 +126,8 @@
                 
             //incase of array flush
             if(!NewUserName.equals(NameFromList)){
-                response.sendRedirect("LogInPage.jsp");
+                isSameUserName = false;
+                //response.sendRedirect("LogInPage.jsp");
             }
             
             /*if(tempAccountType.equals("BusinessAccount")){
@@ -131,11 +135,12 @@
                 request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
             }*/
 
-            if(UserID == 0)
-                response.sendRedirect("LogInPage.jsp");
+            /*if(UserID == 0)
+                response.sendRedirect("LogInPage.jsp");*/
             
         }catch(Exception e){
-            response.sendRedirect("LogInPage.jsp");
+            isUserIndexInList = false;
+            //response.sendRedirect("LogInPage.jsp");
         }
         
         String SessionID = request.getRequestedSessionId();
@@ -171,10 +176,13 @@
             }
             catch(Exception e){}
             
-            response.sendRedirect("LogInPage.jsp");
+            isSameSessionData = false;
+            //response.sendRedirect("LogInPage.jsp");
         }
         
-        if(JustLogged == 1){
+        if(!isSameSessionData || !isSameUserName || UserID == 0 || !isUserIndexInList)
+            response.sendRedirect("Queue.jsp");
+        else if(JustLogged == 1){
             response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
         }
         
@@ -700,6 +708,12 @@
     
     <body>
         
+        <script>
+            setTimeout(function(){
+                window.location.replace("ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>");
+            }, 60000);
+        </script>
+        
         <div id="PermanentDiv" style="">
             
             <img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
@@ -739,7 +753,7 @@
                 <%}%>
             </div>
             
-            <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>'><div style='border:2px solid red; width: 40px; height: 27px; margin-top: 5px; float: right; border-radius: 4px; margin-right: 5px;'>
+            <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='border:2px solid red; width: 40px; height: 27px; margin-top: 5px; float: right; border-radius: 4px; margin-right: 5px;'>
                     <img style='background-color:white; width: 40px; height: 27px;border-radius: 3px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </div></a>
             
@@ -2027,7 +2041,7 @@
             
         <div id="content">
             <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; padding: 5px;'>
-                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>'><div style='color: green; border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: #99ffcc;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                         News </div></a>
                     <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; border-right: 1px solid grey; width: 37%; float: left;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
                             Notifications<sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> </div></a>

@@ -49,42 +49,61 @@
     </head>
     
     <%
-        
-        int UserID = 0;
-        String Base64Pic = "";
-        
-        String NewUserName = request.getParameter("User");
-        
-        int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
-       
-        String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
-        
-        if(tempAccountType.equals("CustomerAccount"))
-            UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
-        
-        if(tempAccountType.equals("BusinessAccount")){
-            request.setAttribute("UserIndex", UserIndex);
-            request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
-        }
-        
-        else if(UserID == 0)
-            response.sendRedirect("LogInPage.jsp");
-        
-        //if(UserAccount.AccountType.equals("BusinessAccount"))
-            //response.sendRedirect("ServiceProviderPage.jsp");
-            
-            //else if(UserAccount.UserID == 0)
-            //response.sendRedirect("LogInPage.jsp");
-        
         config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
         config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
         config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
         config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
         
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        String Driver = "";
+        String url = "";
+        String User = "";
+        String Password = "";
+        
+        boolean isTrySuccess = true;
+        
+        String NewUserName = "";
+        int UserIndex = -1;
+        int UserID = 0;
+        String Base64Pic = "";
+        
+        try{
+        
+            NewUserName = request.getParameter("User");
+
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+
+            String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+
+            if(tempAccountType.equals("CustomerAccount"))
+                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+            if(tempAccountType.equals("BusinessAccount")){
+                request.setAttribute("UserIndex", UserIndex);
+                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+            }
+
+            /*else if(UserID == 0)
+                response.sendRedirect("LogInPage.jsp");*/
+
+            //if(UserAccount.AccountType.equals("BusinessAccount"))
+                //response.sendRedirect("ServiceProviderPage.jsp");
+
+                //else if(UserAccount.UserID == 0)
+                //response.sendRedirect("LogInPage.jsp");
+
+
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+
+        }catch(Exception e){
+            isTrySuccess = false;
+        }
+        
+        if(!isTrySuccess  || UserID == 0){
+            response.sendRedirect("LogInPage.jsp");
+        }
     %>
     
     <%!

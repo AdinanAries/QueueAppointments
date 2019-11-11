@@ -45,28 +45,52 @@
     
     
     <%
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
-    
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
+        
+        boolean isTrySuccess = true;
+        
+        int UserIndex = -1;
         int UserID = 0;
+        String NewUserName = "";
         
-        int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+        try{
+
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+
+            NewUserName = request.getParameter("User");
+
+            String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+
+            UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+            //if(tempAccountType.equals("BusinessAccount")){
+                //request.setAttribute("UserIndex", UserIndex);
+                //request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+            //}
+
+            //if(UserID == 0)
+                //response.sendRedirect("LogInPage.jsp");
         
-        String NewUserName = request.getParameter("User");
+        }catch(Exception e){
+            isTrySuccess = false;
+        }
         
-        String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
-        
-        UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
-        
-        //if(tempAccountType.equals("BusinessAccount")){
-            //request.setAttribute("UserIndex", UserIndex);
-            //request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
-        //}
-        
-        if(UserID == 0)
-            response.sendRedirect("LogInPage.jsp");
+        if(!isTrySuccess || UserID == 0){
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+        }
 
         
         int picCounter = 0;

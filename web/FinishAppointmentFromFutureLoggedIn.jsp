@@ -50,6 +50,11 @@
     
     <%
         
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
         //connection arguments
         String url = config.getServletContext().getAttribute("DBUrl").toString();
         String Driver = config.getServletContext().getAttribute("DBDriver").toString();
@@ -58,23 +63,31 @@
         
         int UserID = 0;
         String Base64Pic = "";
+        boolean isSameSessionData = true;
+        boolean isUserIndexInList = true;
+        String NewUserName = "";
+        int UserIndex = 0;
         
-        String NewUserName = request.getParameter("User");
-        
-        int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
-        
-        String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
-        
-        if(tempAccountType.equals("CustomerAccount"))
-            UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
-        
-        if(tempAccountType.equals("BusinessAccount")){
-            request.setAttribute("UserIndex", UserIndex);
-            request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+        try{
+            NewUserName = request.getParameter("User");
+
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+
+            String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+
+            if(tempAccountType.equals("CustomerAccount"))
+                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+            if(tempAccountType.equals("BusinessAccount")){
+                request.setAttribute("UserIndex", UserIndex);
+                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+            }
+
+            //else if(UserID == 0)
+                //response.sendRedirect("LogInPage.jsp");
+        }catch(Exception e){
+            isUserIndexInList = false;
         }
-        
-        else if(UserID == 0)
-            response.sendRedirect("LogInPage.jsp");
         
         String SessionID = request.getRequestedSessionId();
         String DatabaseSession = "";
@@ -106,11 +119,16 @@
                 PreparedStatement DltSesPst = DltSesConn.prepareStatement(DltSesString);
                 DltSesPst.setInt(1, UserIndex);
                 DltSesPst.executeUpdate();
+                
             }
             catch(Exception e){}
             
-            response.sendRedirect("LogInPage.jsp");
+            isSameSessionData = false;
+            //response.sendRedirect("LogInPage.jsp");
         }
+        
+        if(!isSameSessionData || UserID == 0 || !isUserIndexInList)
+            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
         
         try{
             

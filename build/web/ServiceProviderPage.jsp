@@ -65,10 +65,10 @@
         JOptionPane.showMessageDialog(null, calMDate);
         */
         
-        /*config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
         config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
         config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
-        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));*/
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
         
         String Url = config.getServletContext().getAttribute("DBUrl").toString();
         String Driver = config.getServletContext().getAttribute("DBDriver").toString();
@@ -86,6 +86,10 @@
         Date ThisDate = new Date();//default date constructor returns current date 
         String CurrentTime = ThisDate.toString().substring(11,16);
         String CurrentDay = ThisDate.toString().substring(0,3);
+        
+        boolean isSameUserName = true;
+        boolean isSameSessionNumber = true;
+        boolean isTrySuccess = true;
         
         String DailyOpenTime = "";
         String DailyOffTime = "";
@@ -168,19 +172,21 @@
 
             //incase of array flush
             if(!NewUserName.equals(UserNameFrmList)){
-                response.sendRedirect("LogInPage.jsp");
+                isSameUserName = false;
+                //response.sendRedirect("LogInPage.jsp");
             }
 
             /*if(tempAccountType.equals("CustomerAccount")){
                 request.setAttribute("UserIndex", UserIndex);
                 request.getRequestDispatcher("ProviderCustomerPage.jsp").forward(request, response);
-            }*/
+            }
 
             if(UserID == 0)
-                response.sendRedirect("LogInPage.jsp");
+                response.sendRedirect("LogInPage.jsp");*/
 
         }catch(Exception e){
-            response.sendRedirect("LogInPage.jsp");
+            isTrySuccess = false;
+            //response.sendRedirect("LogInPage.jsp");
         }
         
         String SessionID = request.getRequestedSessionId();
@@ -216,10 +222,14 @@
             }
             catch(Exception e){}
             
-            response.sendRedirect("LogInPage.jsp");
+            isSameSessionNumber = false;
+            //response.sendRedirect("LogInPage.jsp");
         }
         
-        if(JustLogged == 1){
+        if(!isSameSessionNumber || UserID == 0 || !isSameUserName || !isTrySuccess){
+            response.sendRedirect("LogInPage.jsp");
+        }
+        else if(JustLogged == 1){
             response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
         }
       
@@ -1662,6 +1672,12 @@
         }
     %>
     <body>
+        
+        <script>
+            setTimeout(function(){
+                window.location.replace("ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>");
+            },60000);
+        </script>
         
         <div id="PermanentDiv" style="">
             

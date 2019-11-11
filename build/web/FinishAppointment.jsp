@@ -47,6 +47,10 @@
         
         int UserID = 0;
         
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
         
         //if(UserAccount.AccountType.equals("BusinessAccount"))
             //response.sendRedirect("ServiceProviderPage.jsp");
@@ -55,10 +59,19 @@
                 + "\n or signup if you don't have user account";
         
         //connection arguments
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
+        
+        try{
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            response.sendRedirect("Queue.jsp");
+        }
     %>
     
     <%!

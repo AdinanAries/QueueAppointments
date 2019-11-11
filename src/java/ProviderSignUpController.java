@@ -217,7 +217,7 @@ public class ProviderSignUpController extends HttpServlet {
             pst.setString(5, phoneNumber);
             pst.setString(6, email);
             pst.setString(7, businessName);
-            pst.setInt(8, 1);
+            pst.setInt(8, 5);
             pst.setString(9, businessType);
             
             pst.executeUpdate();

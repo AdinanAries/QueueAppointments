@@ -49,10 +49,18 @@
     
     <%
         
+        config.getServletContext().setAttribute("DBUrl",config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver",config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser",config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword",config.getInitParameter("password"));
+        
         int UserID = 0;
         int UserIndex = -1;
         String NameFromList = "";
         String NewUserName = "";
+        
+        boolean isTrySuccess = true;
+        boolean isSameUserName = true;
         
         int Settings = Integer.parseInt(request.getParameter("Settings"));
         
@@ -79,7 +87,8 @@
                 
             //incase of array flush
             if(!NewUserName.equals(NameFromList)){
-                response.sendRedirect("LogInPage.jsp");
+                isSameUserName = false;
+               // response.sendRedirect("LogInPage.jsp");
             }
             
             /*if(tempAccountType.equals("BusinessAccount")){
@@ -87,10 +96,13 @@
                 request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
             }*/
 
-            if(UserID == 0)
-                response.sendRedirect("LogInPage.jsp");
             
         }catch(Exception e){
+            isTrySuccess = false;
+            //response.sendRedirect("LogInPage.jsp");
+        }
+        
+        if(!isSameUserName || !isTrySuccess || UserID == 0){
             response.sendRedirect("LogInPage.jsp");
         }
         

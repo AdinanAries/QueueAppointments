@@ -40,11 +40,25 @@
     </head>
     
     <%
+        config.getServletContext().setAttribute("DBUrl",config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver",config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser",config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword",config.getInitParameter("password"));
+        
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
+        
         //connection arguments
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        try{
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            response.sendRedirect("LogInPage.jsp");
+        }
     %>
     
     <%!

@@ -32,29 +32,45 @@
         config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
         config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
         
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
         
         int UserID = 0;
+        String NewUserName = "";
+        int UserIndex = 0;
         
-        String NewUserName = request.getParameter("User");
+        boolean isTrySuccess = true;
         
-        int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
-       
-        String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
-        
-        if(tempAccountType.equals("CustomerAccount"))
-            UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
-        
-        if(tempAccountType.equals("BusinessAccount")){
-            request.setAttribute("UserIndex", UserIndex);
-            request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+        try{
+            
+            NewUserName = request.getParameter("User");
+
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+
+            String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+
+            if(tempAccountType.equals("CustomerAccount"))
+                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+            if(tempAccountType.equals("BusinessAccount")){
+                request.setAttribute("UserIndex", UserIndex);
+                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+            }
+
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+            
+        }catch(Exception e){
+            isTrySuccess = false;
         }
         
-        else if(UserID == 0)
+        if(!isTrySuccess || UserID == 0){
             response.sendRedirect("LogInPage.jsp");
+        }
         
         int ID = UserID;
         

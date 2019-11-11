@@ -45,37 +45,43 @@
     <%
         String ServiceType = "";
         
+        String NewUserName = "";
         int UserID = 0;
-        
-        String NewUserName = request.getParameter("User");
         String Base64Pic = "";
+        int UserIndex = 0;
+        String tempAccountType = "";
         
-        int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
-       
-        String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
         
-        if(tempAccountType.equals("CustomerAccount"))
-            UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+        try{
+            NewUserName = request.getParameter("User");
         
-        if(tempAccountType.equals("BusinessAccount")){
-            request.setAttribute("UserIndex", UserIndex);
-            request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
-        }
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+            //JOptionPane.showMessageDialog(null, UserIndex);
         
-        else if(UserID == 0)
-            response.sendRedirect("LogInPage.jsp");
+            tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
         
-       // if(UserAccount.AccountType.equals("BusinessAccount"))
-            //response.sendRedirect("ServiceProviderPage.jsp");
+            if(tempAccountType.equals("CustomerAccount"))
+                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+            if(tempAccountType.equals("BusinessAccount")){
+                request.setAttribute("UserIndex", UserIndex);
+                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+            }
+
+            /*else if(UserID == 0)
+                response.sendRedirect("LogInPage.jsp");*/
             
-       // else if(UserAccount.UserID == 0)
-            //response.sendRedirect("LogInPage.jsp");
-        
-        //connection arguments
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+        }
         
         try{
             

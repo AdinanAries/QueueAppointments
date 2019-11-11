@@ -43,10 +43,19 @@
         config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
         config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
         
-        String Driver = config.getInitParameter("databaseDriver");
-        String url = config.getInitParameter("databaseUrl");
-        String User = config.getInitParameter("user");
-        String Password = config.getInitParameter("password");
+        String Driver = "";
+        String User = "";
+        String url = "";
+        String Password = "";
+        
+        try{
+            Driver = config.getInitParameter("databaseDriver");
+            url = config.getInitParameter("databaseUrl");
+            User = config.getInitParameter("user");
+            Password = config.getInitParameter("password");
+        }catch(Exception e){
+            response.sendRedirect("Queue.jsp");
+        }
         
         String fName = "";
         String lName = "";

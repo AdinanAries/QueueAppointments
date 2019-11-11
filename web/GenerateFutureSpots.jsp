@@ -38,34 +38,47 @@
                                         
                 <%
                     
-                         int UserID = 0;
-        
-                        int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
-                        
-                        String NewUserName = request.getParameter("User");
+                        String NewUserName = "";
+                        int UserID = 0;
+                        int UserIndex = 0;
+                        String tempAccountType = "";
 
-                        String tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+                        String Url = "";
+                        String Driver = "";
+                        String user = "";
+                        String password = "";
 
-                        if(tempAccountType.equals("CustomerAccount"))
-                            UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+                        try{
+                            NewUserName = request.getParameter("User");
 
-                        if(tempAccountType.equals("BusinessAccount")){
-                            request.setAttribute("UserIndex", UserIndex);
-                            request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+                            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+                            //JOptionPane.showMessageDialog(null, UserIndex);
+
+                            tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+
+                            if(tempAccountType.equals("CustomerAccount"))
+                                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+                            if(tempAccountType.equals("BusinessAccount")){
+                                request.setAttribute("UserIndex", UserIndex);
+                                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+                            }
+
+                            /*else if(UserID == 0)
+                                response.sendRedirect("LogInPage.jsp");*/
+
+                            Url = config.getServletContext().getAttribute("DBUrl").toString();
+                            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+                            user = config.getServletContext().getAttribute("DBUser").toString();
+                            password = config.getServletContext().getAttribute("DBPassword").toString();
+                        }catch(Exception e){
+                            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
                         }
-        
-                        else if(UserID == 0)
-                            response.sendRedirect("LogInPage.jsp");
                         
-                         String ProviderID = request.getParameter("ProviderID");
-                         int CustomerID = UserID;
-                         String SpotsDate = request.getParameter("GetDate");
+                        String ProviderID = request.getParameter("ProviderID");
+                        int CustomerID = UserID;
+                        String SpotsDate = request.getParameter("GetDate");
                          
-                        String Url = config.getServletContext().getAttribute("DBUrl").toString();
-                        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-                        String user = config.getServletContext().getAttribute("DBUser").toString();
-                        String password = config.getServletContext().getAttribute("DBPassword").toString();
-
                         int IntervalsValue = 30;
         
                         try{

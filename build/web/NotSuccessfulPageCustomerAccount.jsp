@@ -39,12 +39,26 @@
     </head>
   
     <%
+        
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
       
+        String Url = "";
+        String Driver = "";
+        String user = "";
+        String password = "";
+        
         //connection arguments
-        String Url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String user = config.getServletContext().getAttribute("DBUser").toString();
-        String password = config.getServletContext().getAttribute("DBPassword").toString();
+        try{
+            Url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            user = config.getServletContext().getAttribute("DBUser").toString();
+            password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            response.sendRedirect("SignUpPage.jsp");
+        }
     %>
     
         <body>

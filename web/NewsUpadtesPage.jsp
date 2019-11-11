@@ -49,6 +49,11 @@
     
     <%
         
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
         int UserID = 0;
         int UserIndex = -1;
         String NameFromList = "";
@@ -70,17 +75,20 @@
     
     <body style="background-color: #ccccff;">
         
-    <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
+    <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
        
             <p style='color: white;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 Queue News Area
-            </p>
+            
+            <a  href="Queue.jsp">
+                    <span style='margin-right: 5px; cursor: pointer; color: white; float: right; border: 2px solid white; padding: 3px; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                        Home</span></a></p>
              
         </div></center>
         
     <center><div id="PhoneExtras">
             
-            <div id='PhoneNews' style='width: 100%; max-width: 500px;' >
+            <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 50px;' >
             <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from services providers</p></center>
             
             <div style="overflow-y: auto;">

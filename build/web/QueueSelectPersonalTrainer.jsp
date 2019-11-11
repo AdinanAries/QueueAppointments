@@ -44,10 +44,23 @@
         //if(UserAccount.AccountType.equals("BusinessAccount"))
             //response.sendRedirect("ServiceProviderPage.jsp");
         
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
+        
+        String PCity = "";
+        String PTown = "";
+        String PZipCode = "";
+        
+        try{
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            response.sendRedirect("Queue.jsp");
+        }
     %>
     
     <%!
@@ -61,6 +74,7 @@
            private String url;
            private String User;
            private String Password;
+           private String IDList = "(";
            
            public void initializeDBParams(String driver, String url, String user, String password){
                
@@ -70,11 +84,39 @@
                this.Password = password;
            }
            
+           public void getIDsFromAddress(String city, String town, String zipCode){
+               
+               try{
+                   
+                   Class.forName(Driver);
+                   conn = DriverManager.getConnection(url, User, Password);
+                   String AddressQuery = "Select ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%'";// and Zipcode = "+zipCode;//+" ORDER BY NEWID()";
+                   PreparedStatement AddressPst = conn.prepareStatement(AddressQuery);
+                   ResultSet ProvAddressRec = AddressPst.executeQuery();
+                   
+                   boolean isFirst = true;
+                   while(ProvAddressRec.next()){
+                       
+                       if(!isFirst)
+                           IDList += ",";
+                       
+                       IDList += ProvAddressRec.getString("ProviderID");
+                       //JOptionPane.showMessageDialog(null, ProvAddressRec.getInt("ProviderID"));
+                       //ProviderIDsFromAddress.add(ProvAddressRec.getInt("ProviderID"));
+                       isFirst = false;
+                   }
+                   IDList += ")";
+                   //JOptionPane.showMessageDialog(null, IDList);
+                   
+               }catch(Exception e){}
+               
+           }
+           
            public ResultSet getRecords(){
                try{
                     Class.forName(Driver); //registering driver class
                     conn = DriverManager.getConnection(url,User,Password); //creating a connection object
-                    String  select = "Select top 10 * from QueueServiceProviders.ProviderInfo where Service_Type like 'Personal Trainer%' ORDER BY NEWID()"; //SQL query string
+                    String  select = "Select top 10 * from QueueServiceProviders.ProviderInfo where Service_Type like 'Personal Trainer%' and Provider_ID in "+ IDList + " ORDER BY NEWID()"; //SQL query string
                     st = conn.createStatement();  //Creating a statement object
                     records = st.executeQuery(select); //execute Query
 
@@ -91,7 +133,7 @@
         <%
             getUserDetails details = new getUserDetails(); //instantiating getUserDetails Class
             details.initializeDBParams(Driver, url, User, Password);
-            
+            details.getIDsFromAddress(PCity, PTown, PZipCode);
             ArrayList <ProviderInfo> providersList = new ArrayList<>(); //ArrayList to store all providerInfo
             
             ResultSet rows = details.getRecords(); //getRecords() of getUserDetials class returns its records variable of ResultSet type
