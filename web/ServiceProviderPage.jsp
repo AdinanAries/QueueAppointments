@@ -5587,7 +5587,7 @@
                                         </tbody>
                                      </table></center>
                                      
-                                     <center><P><img style="cursor: pointer;" onclick = "toggleHideAddServiceDiv()" src="icons/icons8-add-new-40.png" width="40" height="40" alt="icons8-add-new-40"/>
+                                     <center><P><img style="cursor: pointer; border: 1px solid black; background-color: white; border-radius: 4px;" onclick = "toggleHideAddServiceDiv()" src="icons/icons8-add-new-40.png" width="40" height="40" alt="icons8-add-new-40"/>
                                      </P></center>
                                      
                                      <center><div style=" display: none; margin-bottom: 5px;" id="addServiceDiv">

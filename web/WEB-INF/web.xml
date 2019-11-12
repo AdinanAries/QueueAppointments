@@ -388,6 +388,18 @@
         <servlet-name>BlockFutureSpotController</servlet-name>
         <servlet-class>BlockFutureSpotController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetLoggedInUsersCount</servlet-name>
+        <servlet-class>com.queue.admins.GetLoggedInUsersCount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetLogins</servlet-name>
+        <servlet-class>com.queue.admins.GetLogins</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllQueueUsers</servlet-name>
+        <servlet-class>com.queue.admins.GetAllQueueUsers</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -755,6 +767,18 @@
     <servlet-mapping>
         <servlet-name>BlockFutureSpotController</servlet-name>
         <url-pattern>/BlockFutureSpotController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLoggedInUsersCount</servlet-name>
+        <url-pattern>/GetLoggedInUsersCount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLogins</servlet-name>
+        <url-pattern>/GetLogins</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllQueueUsers</servlet-name>
+        <url-pattern>/GetAllQueueUsers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
