@@ -610,7 +610,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
 
 
                         //____________________________________________________________________________________
-
+                        //JOptionPane.showMessageDialog(null, selectFlag);
                         if(selectFlag == 0){
                             try{
 

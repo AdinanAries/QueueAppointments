@@ -460,7 +460,7 @@
                             </center>
                         </div>
                     </div>
-                    <div class='settingsCompartment' style="width: 24.7%; border: 1px solid darkgrey; height: 100px; float: left;">
+                    <div class='settingsCompartment' style="width: 24.7%; border: 1px solid darkgrey; height: 100px; float: left; color: darkblue;">
                         <p style="text-align: center; color: red;">Feedback</p>
                         <div style="padding-left: 5px; padding-right: 5px; background-color: #ccc;">
                             <p style="width: 60%; float: left;">Unseen Business Messages:<p>
@@ -486,7 +486,7 @@
                             </center>
                         </div>
                     </div>
-                    <div class='settingsCompartment' style="width: 24.7%; border: 1px solid darkgrey; height: 100px; float: left;">
+                    <div class='settingsCompartment' style="width: 24.7%; border: 1px solid darkgrey; height: 100px; float: left; color: darkblue;">
                         <p style="text-align: center; color: red;">Miscellaneous</p>
                         <div style="padding-left: 5px; padding-right: 5px; background-color: #ccc;">
                             <p style="width: 60%; float: left;">Activity Notifications:<p>

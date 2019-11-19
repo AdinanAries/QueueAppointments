@@ -64,7 +64,7 @@
         String Password = "";
         
         String PCity = "New York";
-        String PTown = "Bronx";
+        String PTown = "BX";
         String PZipCode = "10457";
         
         try{
@@ -832,7 +832,7 @@
                     <%
                         //getting coverdata
                         
-                        try{
+                       try{
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(url, User, Password);

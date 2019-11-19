@@ -121,8 +121,8 @@
                     </div></center>
             </div>
             
-            <a href='NewsUpadtesPage.jsp'><div style='border:2px solid red; width: 40px; height: 27px; margin-top: 5px; float: right; border-radius: 4px; margin-right: 5px;'>
-                    <img style='background-color:white; width: 40px; height: 27px;border-radius: 3px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+            <a href='NewsUpadtesPage.jsp'><div style='width: 40px; height: 27px; margin-top: 5px; float: right; margin-right: 5px;'>
+                    <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </div></a>
         
             <ul style="margin-right: 5px;">
@@ -374,7 +374,7 @@
             </div>
             </div>
             
-        <div id="content">
+        <div class="DashboardContent" id="">
             
             <div id="nav">
                 

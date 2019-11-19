@@ -1673,11 +1673,11 @@
     %>
     <body>
         
-        <script>
+        <!--script>
             setTimeout(function(){
                 window.location.replace("ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>");
             },60000);
-        </script>
+        </script-->
         
         <div id="PermanentDiv" style="">
             
@@ -3316,147 +3316,7 @@
                                         </form>
                                     </div></center>
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                
-                <p style='text-align: center;'>Recent Customer Review</p>
-                
-    <%
-                                    for(int x = 0; x < ReviewsList.size(); x++){
-
-                                        String ReviewMessage = "";
-
-                                        SimpleDateFormat ReviewSDF = new SimpleDateFormat("MMM dd, yyyy");
-                                        String ReviewStringDate = ReviewSDF.format(ReviewsList.get(x).ReviewDate);
-
-                                        try{
-
-                                            ReviewMessage = ReviewsList.get(x).ReviewMessage;
-
-                                        }catch(Exception e){}
-
-                                        int CustomerRating = ReviewsList.get(x).Rating;
-                                        int CustomerID = ReviewsList.get(x).UserID;
-                                        String CustomerFullName = "";
-                                        String Base64Image = "";
-
-                                        try{
-
-                                            Class.forName(Driver);
-                                            Connection ReviewCustConn = DriverManager.getConnection(Url, user, password);
-                                            String CustString = "Select * from ProviderCustomers.CustomerInfo where Customer_ID = ?";
-                                            PreparedStatement CustInfoPst = ReviewCustConn.prepareStatement(CustString);
-                                            CustInfoPst.setInt(1, CustomerID);
-
-                                            ResultSet CustRec = CustInfoPst.executeQuery();
-
-                                            while(CustRec.next()){
-
-                                                String FirstName = CustRec.getString("First_Name").trim();
-                                                String MiddleName = CustRec.getString("Middle_Name").trim();
-                                                String LastName = CustRec.getString("Last_Name").trim();
-
-                                                CustomerFullName = FirstName + " " + MiddleName + " " + LastName;
-
-
-                                                try{    
-                                                    //put this in a try catch block for incase getProfilePicture returns nothing
-                                                    Blob profilepic = CustRec.getBlob("Profile_Pic"); 
-                                                    InputStream inputStream = profilepic.getBinaryStream();
-                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                    byte[] buffer = new byte[4096];
-                                                    int bytesRead = -1;
-
-                                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                        outputStream.write(buffer, 0, bytesRead);
-                                                    }
-
-                                                    byte[] imageBytes = outputStream.toByteArray();
-
-                                                     Base64Image = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                                }
-                                                catch(Exception e){}
-
-
-                                            }
-
-                                        }catch(Exception e){
-                                            e.printStackTrace();
-                                        }
-
-                        %>
-
-                                         <center><div style='background-color: black; padding: 1px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 5px; width: 98%; max-width: 600px; margin-left: 0;'>
-
-                                            <%
-                                                if(Base64Image == ""){
-                                            %> 
-
-                                            <center><img style="border-radius: 5px; float: left; width: 15%;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
-
-                                                </center>
-
-                                            <%
-                                                }else{
-                                            %>
-                                                    <img style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
-
-                                            <%
-                                                }
-                                            %>
-                            <center><div style='float: right; width: 84%;'>                 
-                            <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
-
-                            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: blue; font-size: 20px;">
-
-
-                                                        <%
-                                                            if(CustomerRating == 5){
-
-                                                        %> 
-                                                        ★★★★★
-                                                        <%
-                                                             }else if(CustomerRating == 4){
-                                                        %>
-                                                        ★★★★☆
-                                                        <%
-                                                             }else if(CustomerRating == 3){
-                                                        %>
-                                                        ★★★☆☆
-                                                        <%
-                                                             }else if(CustomerRating == 2){
-                                                        %>
-                                                        ★★☆☆☆
-                                                        <%
-                                                             }else if(CustomerRating == 1){
-                                                        %>
-                                                        ★☆☆☆☆
-                                                        <%}%>
-                                                        </span>
-                            </p>
-
-                            <%
-                                if(!ReviewMessage.equals("")){
-                            %>
-                            <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
-
-                            <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
-                            <%}%>
-                            </div></center>
-
-                            <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
-
-                        </div></center>
-
-                        <%}%>
-                        
-                        <%
-                            if(ReviewsList.size() == 0){
-                        %>
-
-                        <center><p style="color: white; background-color: red; text-align: center; margin: 10px; max-width: 600px;">You don't have any customer reviews</p></center>
-                        
-                        <%}%>
+            
                 
                 <div style=" display: block;" id="appointmentsDiv">
                 <center><div style=" width: 100%; max-width: 650px;">
@@ -5227,6 +5087,148 @@
                                                     
                                                 </script>
                                         </div></center>
+                                                
+                                            
+                <p style='text-align: center;'>Recent Customer Review</p>
+                
+    <%
+                                    for(int x = 0; x < ReviewsList.size(); x++){
+
+                                        String ReviewMessage = "";
+
+                                        SimpleDateFormat ReviewSDF = new SimpleDateFormat("MMM dd, yyyy");
+                                        String ReviewStringDate = ReviewSDF.format(ReviewsList.get(x).ReviewDate);
+
+                                        try{
+
+                                            ReviewMessage = ReviewsList.get(x).ReviewMessage;
+
+                                        }catch(Exception e){}
+
+                                        int CustomerRating = ReviewsList.get(x).Rating;
+                                        int CustomerID = ReviewsList.get(x).UserID;
+                                        String ClientFullName = "";
+                                        String Base64Image = "";
+
+                                        try{
+
+                                            Class.forName(Driver);
+                                            Connection ReviewCustConn = DriverManager.getConnection(Url, user, password);
+                                            String CustString = "Select * from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+                                            PreparedStatement CustInfoPst = ReviewCustConn.prepareStatement(CustString);
+                                            CustInfoPst.setInt(1, CustomerID);
+
+                                            ResultSet CustRec = CustInfoPst.executeQuery();
+
+                                            while(CustRec.next()){
+
+                                                String FirstName = CustRec.getString("First_Name").trim();
+                                                String MiddleName = CustRec.getString("Middle_Name").trim();
+                                                String LastName = CustRec.getString("Last_Name").trim();
+
+                                                ClientFullName = FirstName + " " + MiddleName + " " + LastName;
+
+
+                                                try{    
+                                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                                    Blob profilepic = CustRec.getBlob("Profile_Pic"); 
+                                                    InputStream inputStream = profilepic.getBinaryStream();
+                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                    byte[] buffer = new byte[4096];
+                                                    int bytesRead = -1;
+
+                                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                        outputStream.write(buffer, 0, bytesRead);
+                                                    }
+
+                                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                                     Base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                }
+                                                catch(Exception e){}
+
+
+                                            }
+
+                                        }catch(Exception e){
+                                            e.printStackTrace();
+                                        }
+
+                        %>
+
+                                         <center><div style='background-color: black; padding: 1px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 5px; width: 98%; max-width: 452px; margin-left: 0;'>
+
+                                            <%
+                                                if(Base64Image == ""){
+                                            %> 
+
+                                            <center><img style="border-radius: 5px; float: left; width: 15%;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
+
+                                                </center>
+
+                                            <%
+                                                }else{
+                                            %>
+                                                    <img style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+
+                                            <%
+                                                }
+                                            %>
+                            <center><div style='float: right; width: 84%;'>                 
+                            <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=ClientFullName%></p>
+
+                            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: blue; font-size: 20px;">
+
+
+                                                        <%
+                                                            if(CustomerRating == 5){
+
+                                                        %> 
+                                                        ★★★★★
+                                                        <%
+                                                             }else if(CustomerRating == 4){
+                                                        %>
+                                                        ★★★★☆
+                                                        <%
+                                                             }else if(CustomerRating == 3){
+                                                        %>
+                                                        ★★★☆☆
+                                                        <%
+                                                             }else if(CustomerRating == 2){
+                                                        %>
+                                                        ★★☆☆☆
+                                                        <%
+                                                             }else if(CustomerRating == 1){
+                                                        %>
+                                                        ★☆☆☆☆
+                                                        <%}%>
+                                                        </span>
+                            </p>
+
+                            <%
+                                if(!ReviewMessage.equals("")){
+                            %>
+                            <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
+
+                            <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
+                            <%}%>
+                            </div></center>
+
+                            <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
+
+                        </div></center>
+
+                        <%}%>
+                        
+                        <%
+                            if(ReviewsList.size() == 0){
+                        %>
+
+                        <center><p style="color: white; background-color: red; text-align: center; margin: 10px; max-width: 600px;">You don't have any customer reviews</p></center>
+                        
+                        <%}%>
                                         
                                         <%
                                             if(firstPic != ""){

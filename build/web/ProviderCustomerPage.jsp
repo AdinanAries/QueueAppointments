@@ -708,11 +708,11 @@
     
     <body>
         
-        <script>
+        <!--script>
             setTimeout(function(){
-                window.location.replace("ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>");
+                window.location.replace("ProviderCustomerPage.jsp?UserIndex=<=UserIndex%>&User=<=NewUserName%>");
             }, 60000);
-        </script>
+        </script-->
         
         <div id="PermanentDiv" style="">
             
@@ -745,16 +745,15 @@
                 <%
                     }else{
                 %>
-                
-                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
-                            </div></center>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
+                        <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                    </div></center>
                 
                 <%}%>
             </div>
             
-            <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='border:2px solid red; width: 40px; height: 27px; margin-top: 5px; float: right; border-radius: 4px; margin-right: 5px;'>
-                    <img style='background-color:white; width: 40px; height: 27px;border-radius: 3px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+            <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='width: 40px; height: 27px; margin-top: 6.2px; float: right; margin-right: 5px;'>
+                    <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </div></a>
             
             <ul style="margin-right: 5px;">
@@ -792,11 +791,11 @@
                     });
                 </script>
                 
-            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; max-width: 590px; float: right; margin-right: 5px; border-radius: 4px;'>
                 <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; font-weight: bolder; border-radius: 4px;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
-                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; border-radius: 4px; background-color: navy; color: white; padding: 7px; font-size: 15px;" 
                             type="submit" value="Search" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type='hidden' name='User' value='<%=NewUserName%>' />
@@ -2039,7 +2038,7 @@
         </div>
             
             
-        <div id="content">
+        <div class="DashboardContent" id="">
             <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; padding: 5px;'>
                     <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                         News </div></a>
