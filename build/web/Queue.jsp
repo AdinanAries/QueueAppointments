@@ -75,30 +75,64 @@
     %>
     
     <body>
+        <!--a id='mapLink'>Click here to see location</a-->
         
         <script>
             
+            /*if ("geolocation" in navigator) {
+                alert("I'm you location navigator");
+            } else {
+                alert("You don't have any location navigator");
+            }*/
+            
+            function GetGoogleMapsJSON(lat, long){
+                    
+                    alert(lat);
+                    alert(long);
+                    $.ajax({
+                        type: "GET",
+                        data: 'latlng=' + lat + ',' + long + '&sensor=true&key=AIzaSyAoltHbe0FsMkNbMCAbY5dRYBjxwkdSVQQ',
+                        url: 'https://maps.googleapis.com/maps/api/geocode/json',
+                        success: function(result){
+
+                            alert(result.error_message);
+
+                        }
+                    });
+                    
+                    /*var mapLink = document.getElementById("mapLink");
+                    mapLink.href = "";
+                    mapLink.href = 'https://www.openstreetmap.org/#map=18/'+lat+'/'+long;*/
+                    
+                }
+
+            function showPosition(position){
+                GetGoogleMapsJSON(position.coords.latitude, position.coords.longitude);
+            }
+            
+            function locationErrorHandling(error){
+                alert("ERROR(" + error.code + "): " + error.message);
+                //Will add error handling here;
+            }
+            
+            var locationOptions = {
+                
+                enableHighAccuracy: true, 
+                maximumAge        : 30000, 
+                timeout           : 27000
+            
+            };
+            
             function getLocation(){
                 if (navigator.geolocation){
-                  navigator.geolocation.getCurrentPosition(showPosition);
+                  //navigator.geolocation.getCurrentPosition(showPosition);
+                  var watchID = navigator.geolocation.watchPosition(showPosition, locationErrorHandling, locationOptions);
+                  //alert(watchID);
+                  //navigator.geolocation.clearWatch(watchID);
 
                 }else{ 
                     alert("Geolocation is not supported by this browser.");
                 }
-            }
-
-            function showPosition(position){
-                
-              $.ajax({
-                    type: "GET",
-                    data: 'latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&sensor=true&key=AIzaSyAoltHbe0FsMkNbMCAbY5dRYBjxwkdSVQQ',
-                    url: 'https://maps.googleapis.com/maps/api/geocode/json',
-                    success: function(result){
-                        
-                        alert(result.error_message);
-                        
-                    }
-                });
             }
             
             getLocation();
