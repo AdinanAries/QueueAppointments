@@ -212,8 +212,8 @@
                     <ul id="miniNavIcons" style="float: left;">
                         <a href="Queue.jsp"><li><img src="icons/icons8-home-24.png" width="24" height="24" alt="icons8-home-24"/>
                             </li></a>
-                        <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
-                        </li>
+                        <!--li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
+                        </li-->
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResult.jsp" method="POST">
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
@@ -1573,16 +1573,16 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your first name" type="text" name="firstName" value="" size="50"/></td>
+                                <td><input placeholder="enter your first name" type="text" name="firstName" value="" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your last name" type="text" name="lastName" value="" size="50"/></td>
+                                <td><input placeholder="enter your last name" type="text" name="lastName" value="" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="50"/></td>
+                                <td><input placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your email address here" type="text" name="email" value="" size="50"/></td>
+                                <td><input placeholder="enter your email address here" type="text" name="email" value="" size="40"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1602,10 +1602,10 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input placeholder="enter your Queue user name here" type="text" name="username" value="" size="50"/></td>
+                                    <td><input placeholder="enter your Queue user name here" type="text" name="username" value="" size="40"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input placeholder="enter your password here" type="password" name="password" value="" size="50"/></td>
+                                    <td><input placeholder="enter your password here" type="password" name="password" value="" size="40"/></td>
                                 </tr>
                             </tbody>
                         </table>

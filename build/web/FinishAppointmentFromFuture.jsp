@@ -277,8 +277,8 @@
                     <ul id="miniNavIcons" style="float: left;">
                         <a href="ProviderCustomerPage.jsp"><li><img src="icons/icons8-home-24.png" width="24" height="24" alt="icons8-home-24"/>
                             </li></a>
-                        <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
-                        </li>
+                        <!--li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
+                        </li-->
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResult.jsp" method="POST">
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
@@ -1622,7 +1622,7 @@
                     
         <div id="newbusiness">
             
-            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to find a line spot</h2></center>
+            <!--center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to find a line spot</h2></center>
             
             <div id="businessdetails">
                 
@@ -1673,7 +1673,7 @@
                         <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
-                </div></center>
+                </div></center-->
             
         </div>
                     

@@ -1790,7 +1790,7 @@
                     <p style='width: 225px; float: left; margin-top: 5px; margin-left: 0;'>
                         <span onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 75px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide spots</span>
                         <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>  
-                            <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Post an update</span></a>
+                            <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Add News</span></a>
                     </p>
                     
                     <p style='clear: both;'></p>

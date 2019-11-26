@@ -5,7 +5,7 @@ function toggleShowCardDetailsDiv(){
 	
 	submitAppointment.style.display = "none";
 	$("#CreditDebitCardDetails").slideDown("slow");
-	$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+	$("html, body").animate({ scrollTop: $(document).height()}, "slow");
 	//CardDetailsDiv.style.display = "block";
 	
 	

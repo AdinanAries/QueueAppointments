@@ -2043,7 +2043,7 @@
                     <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                         News </div></a>
                     <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; border-right: 1px solid grey; width: 37%; float: left;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
-                            Notifications<sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> </div></a>
+                            Noti. <sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> </div></a>
                     <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 30%; color: black; float: left;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
                         Calender</div></a>
                     <p style='clear: both;'></p>
@@ -2072,7 +2072,7 @@
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
                     <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>Town: <input style="background-color: #6699ff; width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
                     <div class='scrolldiv' style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
                         <table style='width: 2500px;'>
@@ -4040,7 +4040,7 @@
                                             </tbody>
                                         </table>
                                         
-                                <div onscroll="showselectCustSpttabs();"  class="scrolldiv" style=" height: 600px; overflow-y: auto;">
+                                <div class="scrolldiv" style=" height: 600px; overflow-y: auto;">
                                    
                                    <script>
                                         function showselectCustSpttabs(){

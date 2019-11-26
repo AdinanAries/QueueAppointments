@@ -1025,11 +1025,33 @@ function toggleHideAppointmentsDiv() {
     appointmentsDiv.style.display = "none";
     hideAppointments.innerHTML = "Show Spots";
   } else {
+    $("html, body").animate({ scrollTop: 490 }, "fast");
     appointmentsDiv.style.display = "block";
     hideAppointments.innerHTML = "Hide Spots";
   }
 
-  $("html, body").animate({ scrollTop: 0 }, "fast");
+}
+
+function hideProvApptListAndMkReservForMobile(){
+    if($(window).width() < 1000)
+    {
+        var appointmentsDiv = document.getElementById("appointmentsDiv");
+        var hideAppointments = document.getElementById("hideAppointments");
+        
+        appointmentsDiv.style.display = "none";
+        hideAppointments.innerHTML = "Show Spots";
+        hideAppointments.style.backgroundColor = "red";
+        hideAppointments.style.color = "white";
+        
+        document.getElementById("MakeReservationForm").style.display = "none";
+        
+    } else {
+       // change functionality for larger screens
+    }
+}
+
+if(document.getElementById("hideAppointments") && document.getElementById("appointmentsDiv")){
+    hideProvApptListAndMkReservForMobile();
 }
 
 $(window).scroll(function() {

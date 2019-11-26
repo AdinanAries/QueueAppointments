@@ -430,7 +430,7 @@
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
                     <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>Town: <input style="background-color: #6699ff; width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
                     <div class='scrolldiv' style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
                         <table style='width: 2500px;'>
@@ -793,16 +793,16 @@
                                 <td><p style="color: white; text-align: center;">Provide your information below<p></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="50"/></td>
+                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="50"/></td>
+                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="50"/></td>
+                                <td><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="50"/></td>
+                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="40"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -854,10 +854,10 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="50"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="40"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password" type="password" name="password" value="" size="51"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password" type="password" name="password" value="" size="40"/></td>
                                 </tr>
                             </tbody>
                         </table>
