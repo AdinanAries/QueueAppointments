@@ -297,6 +297,18 @@ select {
   padding-left: 0;
 }
 
+#DashboardLocationSearchForm{
+    background-color: #6699ff; 
+    border: 1px solid darkblue; 
+    padding: 5px; 
+    border-radius: 5px; 
+    width: 95%;
+}
+
+#DashboardLocationSearchForm input{
+    background-color: #6699ff;
+}
+
 @media only screen and (max-width: 1000px) {
   .scrolldiv::-webkit-scrollbar {
     display: none;
@@ -305,6 +317,7 @@ select {
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
   }
+  
   /*#appointmentsDiv{
       display: none;
   }
@@ -914,4 +927,74 @@ input[type=radio]{
 input[type=radio]:checked {
     border-color: #4ED164;
     box-shadow: inset 20px 0 0 0 #4ED164;
+}
+
+@media only screen and (max-width: 700px){
+    #providericons tr td img{
+        width: 45px;
+        height: 45px;
+    }
+    #providericons tr td p{
+        font-size: 14px;
+    }
+    #DashboardLocationSearchFilter{
+        font-size: 13px;
+    }
+    #DashboardLogo{
+        width: 120px;
+        height: 40px;
+    }
+    
+    #LocSearchDiv{
+        /*background-color: #7f93f2;*/
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+    #DashboardLocationSearchForm{
+        background-color: #9bb1d0; 
+        border: 0; 
+        
+    }
+    #DashboardLocationSearchForm input[type="text"]{
+        border-radius: 0;
+        background-color: #9bb1d0;
+        
+    }
+    #DashboardLocationSearchForm input[type="submit"]{
+        font-size: 15px;
+        
+    }
+    input[type="text"]{
+        border-radius: 0;
+    }
+    input[type="password"]{
+        border-radius: 0;
+    }
+    .SearchObject{
+        border: 0;
+        width: 100%;
+        text-align: right;
+    }
+    .SearchObject input[type="text"]{
+        border-radius: 0;
+        background-color: #3d6999;
+        color: white;
+        margin-left: 0;
+        min-width: 75%;
+        border-right: 0;
+        height: auto;
+        padding: 6px;
+        
+    }
+    .SearchObject input[type="submit"]{
+        border-radius: 0;
+        background-color: #3d6999;
+        color: white;
+        margin-left: 0;
+        min-width: 20%;
+        border: 1px solid white;
+        height: auto;
+        padding: 5px;
+        font-weight: bolder;
+    }
 }

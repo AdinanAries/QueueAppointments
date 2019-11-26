@@ -5865,47 +5865,47 @@
                                     <div style="width: 100%;">
                                     <form name="HoursOpen" action="SetProviderHoursController" method="POST">
                                     
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Sunday:</span>
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Sun:</span>
                                         <input id="SundayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayStart" value="<%=ThisProvider.TimeOpen.SundayStart%>" readonly/> -
                                         <input id="SundayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayClose" value="<%=ThisProvider.TimeOpen.SundayClose%>" readonly/>
                                         <input id="SundayChck" type="checkbox" name="SundayChck" value="12:00 am" />
-                                        <label for="SundayChck">Closed</label></p>
+                                        <label for="SundayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Monday:</span>
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Mon:</span>
                                         <input id="MondayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="MondayStart" value="<%=ThisProvider.TimeOpen.MondayStart%>" readonly/> -
                                         <input id="MondayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="MondayClose" value="<%=ThisProvider.TimeOpen.MondayClose%>" readonly/>
                                         <input id="MondayChck" type="checkbox" name="MondayChck" value="12:00 am" />
-                                        <label for="MondayChck">Closed</label></p>
+                                        <label for="MondayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Tuesday:</span>
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Tue:</span>
                                         <input id="TuesdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayStart" value="<%=ThisProvider.TimeOpen.TuesdayStart%>" readonly/> -
                                         <input id="TuesdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayClose" value="<%=ThisProvider.TimeOpen.TuesdayClose%>" readonly/>
                                         <input id="TuesdayChck" type="checkbox" name="TuesdayChck" value="12:00 am" />
-                                        <label for="TuesdayChck">Closed</label></p>
+                                        <label for="TuesdayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Wednesday:</span>
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Wed:</span>
                                         <input id="WednesdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="WednesdayStart" value="<%=ThisProvider.TimeOpen.WednessdayStart%>" readonly/> -
                                         <input id="WednesdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="WednesdayClose" value="<%=ThisProvider.TimeOpen.WednessdayClose%>" readonly/>
                                         <input id="WednesdayChck" type="checkbox" name="WednesdayChck" value="12:00 am" />
-                                        <label for="WednesdayChck">Closed</label></p>
+                                        <label for="WednesdayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Thursday:</span>
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Thu:</span>
                                         <input id="ThursdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayStart" value="<%=ThisProvider.TimeOpen.ThursdayStart%>" readonly/> -
                                         <input id="ThursdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayClose" value="<%=ThisProvider.TimeOpen.ThursdayClose%>" readonly/>
                                         <input id="ThursdayChck" type="checkbox" name="ThursdayChck" value="12:00 am" />
-                                        <label for="ThursdayChck">Closed</label></p>
+                                        <label for="ThursdayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Friday:</span>
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Fri:</span>
                                         <input id="FridayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="FridayStart" value="<%=ThisProvider.TimeOpen.FridayStart%>" readonly/> -
                                         <input id="FridayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="FridayClose" value="<%=ThisProvider.TimeOpen.FridayClose%>" readonly/>
                                         <input id="FridayChck" type="checkbox" name="FridayChck" value="12:00 am" />
-                                        <label for="FridayChck">Closed</label></p>
+                                        <label for="FridayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Saturday:</span>
+                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Sat:</span>
                                         <input id="SaturdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayStart" value="<%=ThisProvider.TimeOpen.SaturdayStart%>" readonly/> -
                                         <input id="SaturdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayClose" value="<%=ThisProvider.TimeOpen.SaturdayClose%>" readonly/>
                                         <input id="SaturdayChck" type="checkbox" name="SaturdayChck" value="12:00 am" />
-                                        <label for="SaturdayChck">Closed</label></p>
+                                        <label for="SaturdayChck">Close</label></p>
                                         
                                         <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                         <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
@@ -6296,9 +6296,9 @@
                                     
                                    <div style="background-color: #6699ff;">
                                    <div id="CnclPlcyInfo" style="display: none; padding: 5px;">       
-                                    <p>Cancellation Elapse: <span id="TimeSpan" style="color: #eeeeee;">at <%=TimeElapseValue%> to spot due time</span></p>
-                                    <p>Charge: <span id="PercentSpan" style="color: #eeeeee;"><%=ChargePercentValue%> of service cost</span></p>
-                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: #6699ff; width: 200px; border: 1px solid black; margin: 5px;">Change Cancellation Policy</p></center>
+                                    <p>Charge: <span id="TimeSpan" style="color: #eeeeee;">at <%=TimeElapseValue%> to spot due time</span></p>
+                                    <p>Penalty: <span id="PercentSpan" style="color: #eeeeee;"><%=ChargePercentValue%> of service cost</span></p>
+                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: #6699ff; width: 200px; border: 1px solid black; margin: 5px;">Change Policy</p></center>
                                     <center><p  id="bizBankforCancelStatus" style="color: white; background-color: red; text-align: center;"></p></center>
                                    </div>
                                    
@@ -6448,7 +6448,7 @@
                                                     </script>
                                                     <p id="validateCnclPlcyCardBtn" style="cursor: pointer; color: black; background-color: pink; width: 270px; padding: 5px; border: 1px solid black; text-align: center;">Validate this card</p>
                                         
-                                        <p style="text-align: left; color: white; background-color: red; border: 1px solid black; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation and No-Show Policy</label>
+                                        <p style="text-align: left; color: white; background-color: red; border: 1px solid black; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation Policy</label>
                                             </p>
                                         <p id='BankCardValidStatus' style='color: white; text-align: center;'></p>
                                         <center><input id="submitCnclPlcyBtn" style="padding: 5px; border: 1px solid black; border-radius: 4px; background-color: pink;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
@@ -7034,14 +7034,14 @@
                                         </table>
                                         <p style="color: white;">Your Business Location (Address)</p>
                                         <p style="margin: 5px; text-align: center;">Providing accurate address information<br/>will help customers locate your business</p>
-                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="50" style="background-color: #6699ff; border: 1px solid black;"/></p>
+                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="35" style="background-color: #6699ff; border: 1px solid black;"/></p>
                                         
                                         <p> House<input id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="<%=HouseNumber%>" size="4" style="background-color: #6699ff;"/>
-                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="<%=StreetName%>" size="24" style="background-color: #6699ff;"/></p>
-                                        <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="<%=Town%>" size="43" style="background-color: #6699ff;"/></p>
-                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="<%=City%>" size="22" style="background-color: #6699ff;"/>
+                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="<%=StreetName%>" size="11" style="background-color: #6699ff;"/></p>
+                                        <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="<%=Town%>" size="28" style="background-color: #6699ff;"/></p>
+                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="<%=City%>" size="10" style="background-color: #6699ff;"/>
                                         Zip Code:<input id="ZCode" type="text" name="ZCode" placeholder='123...' value="<%=ZipCode%>" size="4" style="background-color: #6699ff;"/></p>
-                                        <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="<%=Country%>" size="40" style="background-color: #6699ff;"/></p>
+                                        <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="<%=Country%>" size="25" style="background-color: #6699ff;"/></p>
                                         
                                         <input id="ProvIDforUpdateBiz" type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                         <input id="UpdateProvBizBtn" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="button" value="Update" name="updateBizInfoBtn" />

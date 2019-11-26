@@ -877,7 +877,7 @@
         <div id="header">
             
             <center><p> </p></center>
-            <center><img src="QueueLogo.png" style="margin-top: 5px;" /></center>
+            <center><img id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;" /></center>
             
         </div>
                             
@@ -2066,20 +2066,20 @@
                 </div></center>
                         
                 <div id="LocSearchDiv" style="margin-top: 5px;">
-                <center><form style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px; border-radius: 5px; width: 95%;" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
+                <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p>Town: <input style="width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div class='scrolldiv' style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
                                     <td style='border-right: 1px solid darkblue;'>
-                                        <p><input name='Barber' id='barberFlt' type="checkbox" value="ON" /><label for='barberFlt'>Barber Shop</label></p>
+                                        <p><input name='Barber' id='barberFlt' type="checkbox" value="ON" /><label for='barberFlt'>Barbershop</label></p>
                                     </td>
                                     <td style='border-right: 1px solid darkblue;'>
                                     <input name='Beauty' id='BeautyFlt' type="checkbox" value="ON" /><label for='BeautyFlt'>Beauty Salon</label>
@@ -2145,7 +2145,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
+                    <p><input type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                     
@@ -2163,7 +2163,7 @@
                 %>
                     
                 <center><p style="color: white; background-color: green; margin-bottom: 15px; margin-top: 0; max-width: 300px">
-                        <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - What are you looking for? </p></center>
+                        <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - Explore below </p></center>
                  
                 <!--cetnter><h4></h4></cetnter-->
                 

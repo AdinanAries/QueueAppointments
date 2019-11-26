@@ -201,8 +201,8 @@
         <div id="header">
             
             <cetnter><p> </p></cetnter>
-            <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
-            <center><p style="font-size: 25px; font-family: serif; margin: 5px;"><b>Find medical & beauty places</b></p></center>
+            <center><image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/></center>
+            <center><p style="font-size: 20px; font-family: serif; margin: 5px;"><b>Find medical & beauty places</b></p></center>
             
             <center><a href="NewsUpadtesPage.jsp"><p id='QShowNews22' 
                 style='background-color: #ccccff; color: black; border-top: 1px solid white; padding-top: 5px; cursor: pointer;'>
@@ -426,18 +426,18 @@
                 </div></center>
                 
                 <div id="LocSearchDiv" style="margin-top: 5px;">
-                <center><form action="ByAddressSearchResult.jsp" method="POST" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px; border-radius: 5px; width: 95%;">
+                <center><form id="DashboardLocationSearchForm" action="ByAddressSearchResult.jsp" method="POST" style="">
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p>Town: <input style=" width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div class='scrolldiv' style='width: 95%; overflow-x: auto; color: white; background-color: #3d6999;'>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
                                     <td style='border-right: 1px solid darkblue;'>
-                                        <p><input name='Barber' id='barberFlt' type="checkbox" value="ON" /><label for='barberFlt'>Barber Shop</label></p>
+                                        <p><input name='Barber' id='barberFlt' type="checkbox" value="ON" /><label for='barberFlt'>Barbershop</label></p>
                                     </td>
                                     <td style='border-right: 1px solid darkblue;'>
                                     <input name='Beauty' id='BeautyFlt' type="checkbox" value="ON" /><label for='BeautyFlt'>Beauty Salon</label>
@@ -503,7 +503,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
+                    <p><input type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 

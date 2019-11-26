@@ -1968,16 +1968,16 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="firstName" value="enter your first name" size="50"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="firstName" value="enter your first name" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="lastName" value="enter your last name" size="50"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="lastName" value="enter your last name" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="telNumber" value="enter your telephone/mobile number here" size="50"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="telNumber" value="enter your telephone/mobile number here" size="40"/></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="email" value="enter your email address here" size="50"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="email" value="enter your email address here" size="40"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1997,10 +1997,10 @@
                         <table border="0"> 
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="50"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="40"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password here" type="password" name="password" value="" size="50"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password here" type="password" name="password" value="" size="40"/></td>
                                 </tr>
                             </tbody>
                         </table>
