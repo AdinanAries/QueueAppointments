@@ -217,7 +217,7 @@
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResult.jsp" method="POST">
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
-                                   placeholder="Search provider" name="SearchFld" type="text"  value="" size="30" />
+                                   placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
                                    type="submit" value="Search" />
                     </form>
@@ -457,7 +457,7 @@
                 
                 <center><div id="providerlist">
                 
-                <center><table id="providerdetails" style="border-spacing: 12px;">
+                <center><table id="providerdetails" style="">
                         
                     <%
                         //for loop gets individual provider details

@@ -351,12 +351,12 @@
                     <ul id="miniNavIcons" style="float: left;">
                         <a href="PageController?UserIndex=<%=UserIndex%>"><li><img src="icons/icons8-home-24.png" width="24" height="24" alt="icons8-home-24"/>
                             </li></a>
-                        <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
-                        </li>
+                        <!--li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
+                        </li-->
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
-                                   placeholder="Search provider" name="SearchFld" type="text"  value="" size="30" />
+                                   placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
                                    type="submit" value="Search" />
@@ -804,7 +804,7 @@
                 <center><div id="providerlist">
                 <h4 style="color: black; padding-top: 5px;">Finish Here</h4>
                 
-                <center><table id="providerdetails" style="border-spacing: 10px;">
+                <center><table id="providerdetails" style="">
                         
                     <%
                         

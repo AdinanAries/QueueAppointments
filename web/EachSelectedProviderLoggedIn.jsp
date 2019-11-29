@@ -386,7 +386,7 @@
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
-                                   placeholder="Search provider" name="SearchFld" type="text"  value="" size="30" />
+                                   placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
                                    type="submit" value="Search" />
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>"/>
@@ -729,7 +729,7 @@
                 <cetnter><p> </p></cetnter>
                 <center><div id="providerlist">
                 
-                <center><table id="providerdetails" style="border-spacing: 10px;">
+                <center><table id="providerdetails" style="">
                         
                     <%
                         //for loop iterates providerInfo records in ArrayList and gets each List element
@@ -1332,7 +1332,7 @@
 
         %>
         
-                         <center><div style='background-color: black; padding: 1px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 1px; width: 100%; margin-left: 0;'>
+                         <center><div style='background-color: black; padding: 1px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 1px; width: 99%; margin-left: 0;'>
                     
                             <%
                                 if(Base64Image == ""){
@@ -1350,7 +1350,7 @@
                             <%
                                 }
                             %>
-            <center><div style='float: right; width: 84%;'>                 
+            <center><div style='float: right; width: 82%;'>                 
             <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
             
             <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: blue; font-size: 20px;">

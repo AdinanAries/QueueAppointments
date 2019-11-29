@@ -747,7 +747,7 @@
                                     <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
                                     <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 1px solid white; background-color: #eeeeee; padding: 5px;' type="button" name="CalDateVal" 
+                                                                          font-weight: bolder; border: 1px solid white; background-color: #eeeeee; padding: 5px;' type="text" name="CalDateVal" 
                                                                           value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
@@ -952,9 +952,8 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea  onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>
-                                        </textarea></p>
+                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
                                     <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
@@ -963,7 +962,9 @@
                                         });
                                       });
                                     </script>
-                                    <p>Time: <input id="AddEvntTime" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
+                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea  onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
+                                        </textarea></p>
                                 </div>
                             </td>
                             
@@ -976,18 +977,50 @@
                                 document.getElementById("AddEvntDesc").value = "Add event description here...";
                         }
                         
-                        $('#AddEvntTime').timepicker({
-                                timeFormat: 'HH:mm',
-                                interval: 10,
-                                minTime: '00',
-                                maxTime: '23:59',
-                                defaultTime: '12',
-                                startTime: '00',
-                                dynamic: false,
-                                dropdown: true,
-                                scrollbar: true
-                            });
-                        
+                        function SetTimetoHiddenEventInput(){
+                            var EventTime = document.getElementById("DisplayedAddEvntTime").value;
+                                    
+                            if(EventTime.length < 8){
+                                EventTime = "0" + EventTime;
+                                //alert(EventTime);
+                            }
+                                    
+                            if(EventTime.substring(6,8) === "PM"){
+                                if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                    EventTime = EventTime.substring(0,5);
+                                }else{
+                                    EventTime = (parseInt(EventTime.substring(0,2),10) + 12) + ":" + EventTime.substring(3,5);
+                                }
+                            }else if(EventTime.substring(6,8) === "AM"){
+                                if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                    EventTime = "00:" + EventTime.substring(3,5);
+                                }else{
+                                    EventTime = EventTime.substring(0,5);
+                                }
+                            }
+                                    
+                            document.getElementById("AddEvntTime").value = EventTime;
+                            //alert(document.getElementById("AddEvntTime").value);
+                        }
+                                
+                        $('#DisplayedAddEvntTime').timepicker({
+                            timeFormat: 'hh:mm p',
+                            interval: 10,
+                            minTime: '00',
+                            maxTime: '23:59',
+                            defaultTime: '12',
+                            startTime: '00',
+                            dynamic: false,
+                            dropdown: true,
+                            scrollbar: true,
+                            change: function(){
+                                SetTimetoHiddenEventInput();
+                            }
+                                        
+                        });
+
+                        SetTimetoHiddenEventInput();
+                                
                         setInterval(function(){
                             var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn");
                             var CalUpdateEvntBtn = document.getElementById("CalUpdateEvntBtn");
@@ -1036,8 +1069,8 @@
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
                                 <center><input id="CalSaveEvntBtn" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Change' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Change' /></center>
                             </td>
                         </tr>
                         

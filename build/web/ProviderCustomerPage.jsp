@@ -865,7 +865,7 @@
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
-                                   placeholder="Search provider" name="SearchFld" type="text"  value="" size="30" />
+                                   placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                             <input type='hidden' name='User' value='<%=NewUserName%>' />
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
@@ -1324,7 +1324,7 @@
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv' style='height: 290px; overflow-y: auto;'>
+                                <div id='CalApptListDiv' style='height: 244px; overflow-y: auto;'>
                                     
                                     <%
                                         int count = 1;
@@ -1443,7 +1443,7 @@
                                 
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
                                 
-                                <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
+                                <div id='EventsListDiv' style='height: 244px; overflow-y: auto;'>
                                     <%
                                         try{
                                             
@@ -1503,9 +1503,8 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>
-                                        </textarea></p>
+                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
                                     <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
@@ -1514,21 +1513,49 @@
                                         });
                                       });
                                     </script>
-                                    <p>Time: <input id="AddEvntTime" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
+                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
+                                        </textarea></p>
                                 </div>
                             </td>
                             
                             <script>
                         
                                 document.getElementById("AddEvntDesc").value = "Add event description here...";
-
+                                
                                 function checkEmptyEvntDesc(){
                                     if(document.getElementById("AddEvntDesc").value === "")
                                         document.getElementById("AddEvntDesc").value = "Add event description here...";
                                 }
-
-                                $('#AddEvntTime').timepicker({
-                                        timeFormat: 'HH:mm',
+                                
+                                function SetTimetoHiddenEventInput(){
+                                    var EventTime = document.getElementById("DisplayedAddEvntTime").value;
+                                    
+                                    if(EventTime.length < 8){
+                                        EventTime = "0" + EventTime;
+                                        //alert(EventTime);
+                                    }
+                                    
+                                    if(EventTime.substring(6,8) === "PM"){
+                                        if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                            EventTime = EventTime.substring(0,5);
+                                        }else{
+                                            EventTime = (parseInt(EventTime.substring(0,2),10) + 12) + ":" + EventTime.substring(3,5);
+                                        }
+                                    }else if(EventTime.substring(6,8) === "AM"){
+                                        if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                            EventTime = "00:" + EventTime.substring(3,5);
+                                        }else{
+                                            EventTime = EventTime.substring(0,5);
+                                        }
+                                    }
+                                    
+                                    document.getElementById("AddEvntTime").value = EventTime;
+                                    //alert(document.getElementById("AddEvntTime").value);
+                                }
+                                
+                                $('#DisplayedAddEvntTime').timepicker({
+                                        timeFormat: 'hh:mm p',
                                         interval: 10,
                                         minTime: '00',
                                         maxTime: '23:59',
@@ -1536,9 +1563,15 @@
                                         startTime: '00',
                                         dynamic: false,
                                         dropdown: true,
-                                        scrollbar: true
+                                        scrollbar: true,
+                                        change: function(){
+                                            SetTimetoHiddenEventInput();
+                                        }
+                                        
                                 });
 
+                                SetTimetoHiddenEventInput();
+                                
                                 setInterval(function(){
                                     var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn");
                                     var CalUpdateEvntBtn = document.getElementById("CalUpdateEvntBtn");
@@ -2625,7 +2658,7 @@
                                 
                                 <input type="hidden" id="CalApptUserID2" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv2' style='height: 290px; overflow-y: auto;'>
+                                <div id='CalApptListDiv2' style='height: 244px; overflow-y: auto;'>
                                     
                                     <%
                                         int count2 = 1;
@@ -2747,7 +2780,7 @@
                                 
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
                                 
-                                <div id='EventsListDiv2' style='height: 290px; overflow-y: auto;'>
+                                <div id='EventsListDiv2' style='height: 244px; overflow-y: auto;'>
                                     <%
                                         try{
                                             
@@ -2807,9 +2840,8 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Title: <input id="AddEvntTtle2" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea onfocusout="checkEmptyEvntDesc2();" id="AddEvntDesc2" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
-                                        </textarea></p>
+                                    <p>Time: <input id="DisplayedAddEvntTime2" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <input id="AddEvntTime2" style='background-color: white;' type="hidden" name="EvntTime" value="" />
                                     <p>Date: <input id='EvntDatePicker2' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
@@ -2818,31 +2850,64 @@
                                         });
                                       });
                                     </script>
-                                    <p>Time: <input id="AddEvntTime2" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
+                                    <p>Title: <input id="AddEvntTtle2" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea onfocusout="checkEmptyEvntDesc2();" id="AddEvntDesc2" name="EvntDesc" rows="7" style='width: 98%;'>Describe this event here
+                                        </textarea></p>
                                 </div>
                             </td>
                             
                             <script>
                         
                             document.getElementById("AddEvntDesc2").value = "Add event description here...";
-
+                            
                             function checkEmptyEvntDesc2(){
                                 if(document.getElementById("AddEvntDesc2").value === "")
                                     document.getElementById("AddEvntDesc2").value = "Add event description here...";
                             }
 
-                            $('#AddEvntTime2').timepicker({
-                                    timeFormat: 'HH:mm',
-                                    interval: 10,
-                                    minTime: '00',
-                                    maxTime: '23:59',
-                                    defaultTime: '12',
-                                    startTime: '00',
-                                    dynamic: false,
-                                    dropdown: true,
-                                    scrollbar: true
+                            function SetTimetoHiddenEventInput(){
+                                    var EventTime = document.getElementById("DisplayedAddEvntTime2").value;
+                                    
+                                    if(EventTime.length < 8){
+                                        EventTime = "0" + EventTime;
+                                        //alert(EventTime);
+                                    }
+                                    
+                                    if(EventTime.substring(6,8) === "PM"){
+                                        if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                            EventTime = EventTime.substring(0,5);
+                                        }else{
+                                            EventTime = (parseInt(EventTime.substring(0,2),10) + 12) + ":" + EventTime.substring(3,5);
+                                        }
+                                    }else if(EventTime.substring(6,8) === "AM"){
+                                        if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                            EventTime = "00:" + EventTime.substring(3,5);
+                                        }else{
+                                            EventTime = EventTime.substring(0,5);
+                                        }
+                                    }
+                                    
+                                    document.getElementById("AddEvntTime2").value = EventTime;
+                                }
+                                
+                                $('#DisplayedAddEvntTime2').timepicker({
+                                        timeFormat: 'hh:mm p',
+                                        interval: 10,
+                                        minTime: '00',
+                                        maxTime: '23:59',
+                                        defaultTime: '12',
+                                        startTime: '00',
+                                        dynamic: false,
+                                        dropdown: true,
+                                        scrollbar: true,
+                                        change: function(){
+                                            SetTimetoHiddenEventInput();
+                                        }
+                                        
                                 });
 
+                                SetTimetoHiddenEventInput();
+                                
                             setInterval(function(){
                                 var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn2");
                                 var CalUpdateEvntBtn = document.getElementById("CalUpdateEvntBtn2");
