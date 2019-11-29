@@ -225,6 +225,9 @@ select {
             position: fixed;*/
   /*height: 100%;*/
 }
+#ProviderReviewsListDiv{
+    padding-top: 210px;
+}
 #logindetails {
   margin-left: auto;
   margin-right: auto;
@@ -1019,6 +1022,20 @@ input[type=radio]:checked {
     #main{
         padding-bottom: 5px;
     }
-    
-      
+    /*#ProviderReviewSummary{
+        max-height: 100px; ;
+        overflow-y: auto;
+    }*/
+    #providerReviewSummery{
+        display:none;
+    }
+    #summeryBtn{
+        
+    }
+    #ProviderReviewsListDiv{
+        padding-top: 150px;
+    }
+    #header{
+        display: none;
+    }
 }

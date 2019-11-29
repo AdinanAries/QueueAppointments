@@ -23,8 +23,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <title>Reviews</title>
+        
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+        
     </head>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
     <%
         config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
@@ -178,8 +194,8 @@
             }
         %>
      
-        <div style="position: fixed;  width: 94.5%;padding: 0;">
-    <center><div style="z-index: 100; background-color: #333333; width: 99%; box-shadow: 3px 3px 3px darkslategrey; max-width: 420px; margin-bottom: 5px; padding: 3px; padding-top: 10px; padding-bottom: 10px; border-radius: 10px; border: 1px solid white;">
+        <div style="position: fixed;  width: 96.5%;padding: 0;">
+    <center><div id='ProviderReviewSummary' style="z-index: 100; background-color: #333333; width: 100%; box-shadow: 3px 3px 3px darkslategrey; max-width: 420px; margin-bottom: 5px; padding: 3px; padding-top: 10px; padding-bottom: 10px; border-radius: 10px; border: 1px solid white;">
            
             
                             <%
@@ -199,10 +215,10 @@
                                 }
                             %>
                             
-                            <div style="width: 83%; float: right;">
+                            <div style="width: 81%; float: right;">
                                 <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=ProvFullName%></p>
             <p style='color: white; text-align: left; margin: 0;'><%=ProvCompany%> - <%=ServiceType%></p>
-            <p style='color: darkgray; text-align: left; margin: 0;'>Total Rating: <span style="color: blue; font-size: 25px;">
+            <p style='color: darkgray; text-align: left; margin: 0;'>Total Rating: <span style="color: orange; font-size: 25px;">
                                                     
                                 
                                         <%
@@ -229,7 +245,8 @@
                                         <%}%>
                                         </span>
             </p>
-            <p style="text-align: center; color: tomato; margin: 0;border-top: 1px solid darkgray; padding: 5px; width: 96%; margin-top: 5px;">Summary</p>
+            <p id='summeryBtn' onclick='showSummery();' style="text-align: center; color: tomato; margin: 0;border-top: 1px solid darkgray; padding: 5px; width: 96%; margin-top: 5px;">Summary</p>
+            <div id='providerReviewSummery'>
             <p style="color: darkgray; margin: 0; text-align: left;">Total Reviews: <span style="color:#6699ff ;"> <%if(NumberOfRatings == 1){%>Review<%} else{%> Reviews<%}%> from
                     <%=NumberOfRatings%> <%if(NumberOfRatings == 1){%>person.<%} else{%> people.<%}%></span></p>
             
@@ -237,13 +254,34 @@
             <p style="color: darkgray; margin: 0; text-align: left;">Raw Rating: <span style="color:#6699ff ;">Rated with <%=CalculatedRating%> points.</span></p>
             <p style="color: darkgray; margin: 0; text-align: left;">Approximated Rating: <span style="color:#6699ff ;">Rated as <%=RatingsAvg%><%if(RatingsAvg == 1){%> star.<%} else{%> stars.<%}%></span></p>
             </div>
+            </div>
+            <script>
+                   
+                function showSummery(){
+                    
+                    if($(window).width() < 1000){
+                        
+                        if(document.getElementById("providerReviewSummery").style.display === "none"){
+                            $("#providerReviewSummery").slideDown("fast");
+                            document.getElementById("providerReviewSummery").style.display = "block";
+                            document.getElementById("summeryBtn").innerHTML = "Minimize";
+                        }else{
+                            $("#providerReviewSummery").slideUp("fast");  
+                            document.getElementById("providerReviewSummery").style.display = "none";
+                            document.getElementById("summeryBtn").innerHTML = "Summary";
+                        }
+
+                    }
+                };
+                
+            </script>
                             
             <p style="clear: both;"></p>
             
         </div></center>
         </div>
         
-        <div style="padding-top: 210px;">
+        <div id='ProviderReviewsListDiv' style="">
             
         <h3 style='color: white; text-align: center; margin: 0;'>Reviews</h3>
         

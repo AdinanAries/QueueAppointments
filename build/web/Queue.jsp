@@ -198,7 +198,7 @@
                 </center>
             </div>
             
-        <div id="header">
+        <div style='display: block;' id="header">
             
             <cetnter><p> </p></cetnter>
             <center><image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/></center>
