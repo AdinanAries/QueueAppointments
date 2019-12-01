@@ -410,7 +410,7 @@
             
         <div class="DashboardContent" id="">
             
-            <div id="nav">
+            <div id="nav" style='display: block;'>
                 
                 <!--h4><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h4>
                 <!--h4><a href="SignUpPage.jsp" style=" color: #000099;">First time on Queue (Sign-up now)</a></h4-->

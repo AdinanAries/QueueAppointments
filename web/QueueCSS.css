@@ -151,6 +151,7 @@ select {
   text-align: center;
   padding-bottom: 10px;
   padding-top: 5px;
+  display: none;
   /*float: left;*/
 }
 #UpdateUserAccountForm {
@@ -749,7 +750,7 @@ select {
     scrollbar-track-color: #6699ff;
   }
   #main {
-    min-height: 660px;
+    min-height: 675px;
   }
   .Main {
     height: 400px;
@@ -1007,7 +1008,7 @@ input[type=radio]:checked {
         width: 60%;
     }
     #providerdetails{
-        border-spacing: 0 12px;
+        border-spacing: 0 7px;
     }
     #providerdetails .propic{
         height: 80px;
@@ -1036,6 +1037,13 @@ input[type=radio]:checked {
         padding-top: 150px;
     }
     #header{
+        display: none;
+    }
+    #nav{
+        display: block;
+        padding: 0;
+    }
+    #ProviderHeader img{
         display: none;
     }
 }

@@ -874,7 +874,7 @@
                 </center>
             </div>
             
-        <div style='display: block;' id="header">
+        <div id="header">
             
             <center><p> </p></center>
             <center><img id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;" /></center>
@@ -2081,7 +2081,7 @@
                         Calender</div></a>
                     <p style='clear: both;'></p>
                     </div></center>
-            <div id="nav">
+            <div id="nav" style='display: block;'>
                 
                 <!--h3><a href="index.jsp?UserIndex=<%=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>
                 <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->

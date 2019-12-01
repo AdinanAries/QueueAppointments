@@ -120,11 +120,11 @@
         
         <div id="container">
             
-        <div id="header">
+        <div id="header" style='display: block;'>
             
             <cetnter><p> </p></cetnter>
             <center><a href="LoginPageToQueue"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
-            <center><h3 style="color: #000099;">Find Your Spot Now!</h3></center>
+            <center><h3 style="color: #000099;">Find A Line Spot Now!</h3></center>
             
         </div>
             
@@ -327,8 +327,8 @@
             
             <div id="nav">
                 
-                <h3><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h3>
-                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center>
+                <!--h3><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h3>
+                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
             </div>
             
             <div id="main">

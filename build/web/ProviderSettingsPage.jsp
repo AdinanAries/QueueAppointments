@@ -53,6 +53,13 @@
         int UserIndex = -1;
         String NameFromList = "";
         String NewUserName = "";
+        String Settings = "";
+        
+        try{
+            Settings = request.getParameter("Settings");
+        }catch(Exception e){
+            
+        }
         
         try{
             UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
@@ -1432,5 +1439,19 @@
     
     <script src="scripts/script.js"></script>
     <script src="scripts/QueueLineDivBehavior.js"></script>
-    
+    <script>
+            var Settings = "<%=Settings%>";
+               //alert(Settings);
+            if(Settings === "1"){
+                showPCustExtraNews();
+            }else if(Settings === "2"){
+                showPCustExtraNotification();
+            }else if(Settings === "3"){
+                showPCustExtraCal();
+            }else if(Settings === "4"){
+                showPCustExtraUsrAcnt();
+            }else{
+                //do nothing
+            }
+        </script>
 </html>

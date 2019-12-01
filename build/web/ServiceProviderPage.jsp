@@ -1720,11 +1720,11 @@
             </div>
             
             <ul>
-                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                     Notifications<sup style='color: red; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
                 <li id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
-                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
             </ul>
         
@@ -2498,14 +2498,14 @@
             <div id="content"  onclick="hideDropDown();">
             <div id="nav" style='padding: 0;'>
                 
-                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div id='ProvPhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
-                    <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
-                        News | 
-                    <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                        Notifications<sup style='color: red; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup> | 
-                    <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                        Calender
-                </div></a>
+                <div id='ProvPhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                    <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1' style='color: white;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
+                        News | </a>
+                    <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                        Notifications<sup style='color: red; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup> | </a>
+                    <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3' style='color: white;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                        Calender </a>
+                </div>
                 <!--h4><a href="https://adinanaries.wixsite.com/arieslab" style ="color: blanchedalmond">AriesLab.com</a></h4>
                 <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                
@@ -2521,7 +2521,7 @@
                     }
                 %>
                    
-                <center><p id="LoginNameDisplay" style="color: white; background-color: green; margin-bottom: 20px; padding-left: 15px; max-width: 300px">Logged in as <%=FirstNameAndCompany%> </p></center>
+                <center><p id="LoginNameDisplay" style="color: white; background-color: green; margin-bottom: 20px; padding-left: 15px; max-width: 300px"><%=FirstNameAndCompany%> </p></center>
                
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                 
