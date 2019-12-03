@@ -17,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class DeleteAppointment extends HttpServlet {
@@ -132,7 +131,8 @@ public class DeleteAppointment extends HttpServlet {
                 }
         
         //response.sendRedirect("ProviderCustomerPage.jsp");
-        JOptionPane.showMessageDialog(null, "Spot deleted successfully");
+        //JOptionPane.showMessageDialog(null, "Spot deleted successfully");
+        response.getWriter().print("Spot deleted successfully");
       
     }
 

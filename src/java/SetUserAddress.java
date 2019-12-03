@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class SetUserAddress extends HttpServlet {
     
@@ -61,8 +60,8 @@ public class SetUserAddress extends HttpServlet {
                addressPst.setString(7, ZipCode);
                
                addressPst.executeUpdate();
-               JOptionPane.showMessageDialog(null, "Address added successfully!");
-               response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+               //JOptionPane.showMessageDialog(null, "Address added successfully!");
+               response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Address added successfully");
                
            }catch(Exception e){
                

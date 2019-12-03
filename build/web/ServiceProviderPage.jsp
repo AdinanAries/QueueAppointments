@@ -33,6 +33,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue | Business</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,7 +143,11 @@
         int UserIndex = -1;
         String NewUserName = "";
         String UserNameFrmList = "";
+        String ControllerResult = "";
         
+        try{
+            ControllerResult = request.getParameter("result");
+        }catch(Exception e){}
         try{
             UserIndex = Integer.parseInt(request.getAttribute("UserIndex").toString());
             JustLogged = 1;
@@ -3521,13 +3526,18 @@
                                     
                                                                       
                                                                       Clients.appendChild(Div); 
+                                                                      alert("Customer added to your list");
                                                                   }
                                                               });
                                                           }
+                                                          else{
+                                                           alert(result);
                                                         }                
-                                                      });
+                                                    }
                                                 });
+                                              });
                                             });
+                                            
                                         </script>
                                     </center>
                                     
@@ -3911,11 +3921,14 @@
                                     
                                                                       
                                                                       Clients.appendChild(Div); 
+                                                                      alert("Customer added to your list");
                                                                   }
                                                               });
-                                                          }
+                                                          }else{
+                                                            alert(result);
                                                         }                
-                                                      });
+                                                      }
+                                                    });
                                                 });
                                             });
                                         </script>
@@ -4299,10 +4312,13 @@
                                                                                      '</div>' ;
                                                                           
                                                                   BlockedPeopleDiv.appendChild(div);
-                                                              }
-                                                          });
-                                                        }
-                                                       }                
+                                                                  alert("This customer has been blocked");
+                                                                }
+                                                            });
+                                                          }else{
+                                                                alert("This customer is already blocked");
+                                                          }
+                                                       }
                                                       });
                                                         
                                                     });
@@ -4379,13 +4395,16 @@
                                     
                                                                       
                                                                       Clients.appendChild(Div); 
+                                                                      alert("Customer added to your list")
                                                                   }
                                                               });
-                                                          }
+                                                          }else{
+                                                            alert(result);
                                                         }                
-                                                      });
+                                                      }
                                                         
                                                     });
+                                                  });
                                                 });
                                             </script>
                                         
@@ -7589,7 +7608,11 @@
     </div>
                                      
     </body>
-    
+    <script>
+        var ControllerResult = "<%=ControllerResult%>";
+        if(ControllerResult !== "null")
+            alert(ControllerResult);
+    </script>
     <script src="scripts/script.js"></script>
     <script src="scripts/checkAppointmentDateUpdate.js"></script>
     <script src="scripts/QueueLineDivBehavior.js"></script>

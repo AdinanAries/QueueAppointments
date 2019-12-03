@@ -36,6 +36,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="scripts/QueueLineDivBehavior.js"></script>
@@ -1968,16 +1969,16 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="firstName" value="enter your first name" size="40"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="firstName" value="enter your first name" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="lastName" value="enter your last name" size="40"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="lastName" value="enter your last name" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="telNumber" value="enter your telephone/mobile number here" size="40"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="telNumber" value="enter your telephone/mobile number here" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="email" value="enter your email address here" size="40"/></td>
+                                <td><input onfocus="this.value=''" type="text" name="email" value="enter your email address here" size="37"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1997,10 +1998,10 @@
                         <table border="0"> 
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="40"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="37"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password here" type="password" name="password" value="" size="40"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password here" type="password" name="password" value="" size="37"/></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,7 +52,8 @@ public class BlockCustController extends HttpServlet {
             
             while(BlckCustRec.next()){
                 isCustBlocked = true;
-                JOptionPane.showMessageDialog(null, "Person already Blocked");
+                //JOptionPane.showMessageDialog(null, "Person already Blocked");
+                response.getWriter().print("Person already Blocked");
                 //response.sendRedirect("ServiceProviderPage.jsp");
             }
         }
@@ -71,7 +71,7 @@ public class BlockCustController extends HttpServlet {
                 BlckCustPst.setString(2, CustomerID);
 
                 BlckCustPst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Person Blocked Successfully");
+                //JOptionPane.showMessageDialog(null, "Person Blocked Successfully");
                 response.getWriter().print("notInList");
                 //response.sendRedirect("ServiceProviderPage.jsp");
             }

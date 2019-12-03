@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class BlockSpotController extends HttpServlet {
     
@@ -243,28 +242,28 @@ public class BlockSpotController extends HttpServlet {
     if(Integer.parseInt(CompareTime.substring(0,2)) < Integer.parseInt(DailyStartTime.substring(0,2))){
         selectFlag = 2;
         response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyStartTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) < Integer.parseInt(DailyStartTime.substring(3,5))){
             selectFlag = 2;
             response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
         }
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) > Integer.parseInt(DailyClosingTime.substring(0,2))){
         selectFlag = 2;
         response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyClosingTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) > Integer.parseInt(DailyClosingTime.substring(3,5))){
             selectFlag = 2;
             response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
         }
     }
     
@@ -289,8 +288,9 @@ public class BlockSpotController extends HttpServlet {
                 selectFlag = 1;
                 StatusesClass.AppointmentStatus = "Unavailable spot: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nThis Spot is already blocked";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Unavailable spot: " + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nThis Spot is already blocked");
             }
             
         }catch(Exception e){
@@ -315,8 +315,9 @@ public class BlockSpotController extends HttpServlet {
                 selectFlag = 1;
                 StatusesClass.AppointmentStatus = "Unavailable spot: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nYou've alreay blocked this spot";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Unavailable%20spot:%20" + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nYou've%20alreay%20blocked%20this%20spot");
             }
             
         }catch(Exception e){
@@ -348,8 +349,9 @@ public class BlockSpotController extends HttpServlet {
                 selectFlag = 1;
                 StatusesClass.AppointmentStatus = "Unavailable spot: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot.";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Unavailable spot: " + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot.");
                 break;
                 
             }
@@ -380,8 +382,8 @@ public class BlockSpotController extends HttpServlet {
                 
                 appointmentPst.executeUpdate();
 
-                JOptionPane.showMessageDialog(null, "Spot Blocked");
-                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                //JOptionPane.showMessageDialog(null, "Spot Blocked");
+                response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Spot Blocked");
 
             }catch(Exception e){
                 e.printStackTrace();

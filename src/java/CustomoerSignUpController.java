@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.arieslab.queue.queue_model.UserAccount;
 import javax.servlet.ServletConfig;
-import javax.swing.JOptionPane;
 
 public class CustomoerSignUpController extends HttpServlet {
 

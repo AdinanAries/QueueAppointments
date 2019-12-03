@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class DeleteClientController extends HttpServlet {
@@ -49,7 +48,8 @@ public class DeleteClientController extends HttpServlet {
             DltClientPst.executeUpdate();
             
             //response.sendRedirect("ServiceProviderPage.jsp");
-            JOptionPane.showMessageDialog(null, "Client Deleted Successfully!");
+            //JOptionPane.showMessageDialog(null, "Client Deleted Successfully!");
+            response.getWriter().print("Client Deleted Successfully");
             
         }catch(Exception e){
             e.printStackTrace();

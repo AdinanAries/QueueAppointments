@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,7 +65,8 @@ public class SendProvFeedbackMsg extends HttpServlet {
             FeedBackPst.setString(3, StringDate);
             FeedBackPst.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Your feedback was sent successfully!");
+            //JOptionPane.showMessageDialog(null, "Your feedback was sent successfully!");
+            response.getWriter().print("Your feedback was sent successfully");
             
         }catch(Exception e){
             e.printStackTrace();

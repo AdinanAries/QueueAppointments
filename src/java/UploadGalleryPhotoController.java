@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.swing.JOptionPane;
 
 @MultipartConfig(maxFileSize = 16177215)
 
@@ -90,8 +89,8 @@ public class UploadGalleryPhotoController extends HttpServlet {
             
             if(isAnyUploadSuccessful){
             
-            response.sendRedirect("UploadGalleryPhotoWindow.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null, "Photo Uploaded Successfully!");
+            response.sendRedirect("UploadGalleryPhotoWindow.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Photo Uploaded Successfully");
+            //JOptionPane.showMessageDialog(null, "Photo Uploaded Successfully!");
 
             
         }

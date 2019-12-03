@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class OpenClosedDateController extends HttpServlet {
@@ -45,7 +44,8 @@ public class OpenClosedDateController extends HttpServlet {
             OpenPst.executeUpdate();
             
             //response.sendRedirect("ServiceProviderPage.jsp");
-            JOptionPane.showMessageDialog(null, "Closed Day Openned");
+            //JOptionPane.showMessageDialog(null, "Closed Day Openned");
+            response.getWriter().print("Closed Day Openned");
             
             
         }catch(Exception e){}

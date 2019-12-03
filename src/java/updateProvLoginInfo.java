@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class updateProvLoginInfo extends HttpServlet {
     
@@ -83,7 +82,7 @@ public class updateProvLoginInfo extends HttpServlet {
 
                 LoginPst.executeUpdate();
                 //response.sendRedirect("ServiceProviderPage.jsp");
-                JOptionPane.showMessageDialog(null, "Update Successful");
+                //JOptionPane.showMessageDialog(null, "Update Successful");
                 result = "success";
 
             }

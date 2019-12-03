@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class DeleteNewService extends HttpServlet {
 
@@ -45,8 +44,8 @@ public class DeleteNewService extends HttpServlet {
             
             RMVSVCPst.executeUpdate();
             
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null, "Service Deleted Successfully!");
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Service Deleted Successfully");
+            //JOptionPane.showMessageDialog(null, "Service Deleted Successfully!");
             
         }catch(Exception e){
             e.printStackTrace();

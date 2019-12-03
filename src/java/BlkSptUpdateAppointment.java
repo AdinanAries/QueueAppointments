@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class BlkSptUpdateAppointment extends HttpServlet {
@@ -191,29 +190,29 @@ public class BlkSptUpdateAppointment extends HttpServlet {
     
     if(Integer.parseInt(CompareTime.substring(0,2)) < Integer.parseInt(DailyStartTime.substring(0,2))){
         selectFlag = 2;
-        response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+        response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Not%20Successful.%20Time%20chosen%20is%20earlier%20than%20your%20opening%20time.\nYou%20open%20at%20" + DailyStartTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyStartTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) < Integer.parseInt(DailyStartTime.substring(3,5))){
             selectFlag = 2;
-            response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+            response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Not%20Successful.%20Time%20chosen%20is%20earlier%20than%20your%20opening%20time.\nYou%20open%20at%20" + DailyStartTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
         }
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) > Integer.parseInt(DailyClosingTime.substring(0,2))){
         selectFlag = 2;
-        response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+        response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&user=Not%20Successful.%20Time%20chosen%20is%20later%20than%20your%20closing%20time.\nYou%20close%20at%20" + DailyClosingTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyClosingTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) > Integer.parseInt(DailyClosingTime.substring(3,5))){
             selectFlag = 2;
-            response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+            response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Not%20Successful.%20Time%20chosen%20is%20later%20than%20your%20closing%20time.\nYou%20close%20at%20" + DailyClosingTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
         }
     }
     
@@ -305,8 +304,9 @@ if(selectFlag != 2){
                 selectFlag = 1;
                 StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nThe spot you selected is already taken";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
+                //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Unavailable%20Appointment%20time:%20" + AppointmentTime + 
+                        ",%20" + AppointmentDate + ".\nThe%20spot%20you%20selected%20is%20already%20taken");
             }
             
         }catch(Exception e){
@@ -331,8 +331,9 @@ if(selectFlag != 2){
                 selectFlag = 1;
                 StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
+                //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Unavailable%20Appointment%20time:%20" + AppointmentTime + 
+                        ",%20" + AppointmentDate + ".\nYou've%20alreay%20taken%20a%20spot%20for%20this%20same%20time");
             }
             
         }catch(Exception e){
@@ -364,8 +365,9 @@ if(selectFlag != 2){
                 selectFlag = 1;
                 StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot or \n is less than 15 minutes before or after a spot you've taken.";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
+                //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Unavailable%20Appointment%20time:%20" + AppointmentTime + 
+                        ",%20" + AppointmentDate + ".\nThe%20spot%20you've%20chosen%20overlaps%20with%20another%20spot%20or%20\n%20is%20less%20than%2015%20minutes%20before%20or%20after%20a%20spot%20you've%20taken.");
                 break;
                 
             }
@@ -390,8 +392,8 @@ if(selectFlag != 2){
             
             int updateSuccess = updatePst.executeUpdate();
             
-            response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null, "Spot Changed Successfully");
+            response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Spot%20Changed%20Successfully");
+            //JOptionPane.showMessageDialog(null, "Spot Changed Successfully");
             
         }
         catch(Exception e){

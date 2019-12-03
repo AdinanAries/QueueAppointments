@@ -50,6 +50,8 @@ function QueueClock() {
 
 //setInterval(QueueClock, 1000);
 
+
+
 function toggleEnableFinalApntmntBtn() {
   var submitAppointment = document.getElementById("submitAppointment");
 

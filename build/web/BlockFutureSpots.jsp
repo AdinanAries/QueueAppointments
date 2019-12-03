@@ -30,6 +30,7 @@
         
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
@@ -56,6 +57,11 @@
                         
                         int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
                         String NewUserName = request.getParameter("User");
+                        String ControllerResult = "";
+                        
+                        try{
+                            ControllerResult = request.getParameter("result");
+                        }catch(Exception e){}
                         
                         //Since this is services provider page.
                         int ProviderID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
@@ -851,7 +857,7 @@
                                     %>     
                                             
                                     
-                                    <form name="ReleaseSpot" style='background-color: green; display: none; margin-bottom: 5px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotController" method="POST">
+                                    <form name="ReleaseSpot" style='background-color: green; display: none; margin-bottom: 5px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotControllerforBlockSpotsPage" method="POST">
                                         
                                    <p style="color: white; text-align: center;" id="">You blocked <%=NextThisAvailableTimeForDisplay%></p>
                                         
@@ -876,6 +882,9 @@
                                     %>
                                         
                                         <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
                                         <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
                                     
                                     <%      }
@@ -883,11 +892,17 @@
                                     %>
                                     
                                         <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
                                         <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
                                     
                                     <%} else if(!QueueDate.equals(Today)){%>
                                     
                                         <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
+                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
                                         <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
                                     
                                     <%}%>
@@ -1445,7 +1460,13 @@
                 </div>
             </div>
     </body>
-    
+    <script>
+        var ControllerResult = "<%=ControllerResult%>";
+        
+        if(ControllerResult !== "null")
+            alert(ControllerResult);
+        
+    </script>
     <script src="scripts/script.js"></script>
     <script src="scripts/QueueLineDivBehavior.js"></script>
     

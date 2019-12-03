@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.swing.JOptionPane;
 
 @MultipartConfig(maxFileSize = 16177215)
 
@@ -147,10 +146,10 @@ public class UploadCoverPhotoControl extends HttpServlet {
             
             if(isAnyUploadSuccessful){
             
-                String Url = "UploadProviderProfilePhoto.jsp?UserIndex="+UserIndex+"&User="+NewUserName;
+                String Url = "UploadProviderProfilePhoto.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Cover Photo Updated Successfully";
 
                 response.sendRedirect(Url);
-                JOptionPane.showMessageDialog(null, "Cover Photo Updated Successfully!");
+                //JOptionPane.showMessageDialog(null, "Cover Photo Updated Successfully!");
 
             
             }

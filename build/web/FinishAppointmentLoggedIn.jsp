@@ -37,6 +37,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -1923,7 +1924,10 @@
                                                         success: function(result){  
                                                           //alert(result);
                                                           if(result === "Success"){
+                                                              alert("You've been enqueued successfully!");
                                                               window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                          }else{
+                                                              alert(result);
                                                           }
                                                           //document.getElementById("eachClosedDate<>").style.display = "none";
                                                         }                
@@ -2133,7 +2137,7 @@
                     
         <div id="newbusiness">
             
-            <div id="ExtraproviderIcons" style="padding-top: 10px;"> 
+            <div id="ExtraproviderIcons" style="margin-top: -13px;"> 
              
                 <div id="SearchDivNB">
                 <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">

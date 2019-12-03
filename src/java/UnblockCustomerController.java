@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,7 +49,8 @@ public class UnblockCustomerController extends HttpServlet {
             unblockPst.setString(1, BlockedID);
             
             unblockPst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Person Unblocked Successfully");
+            //JOptionPane.showMessageDialog(null, "Person Unblocked Successfully");
+            response.getWriter().print("Person Unblocked Successfully");
             //response.sendRedirect("ServiceProviderPage.jsp");
             
         }catch(Exception e){

@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class addFavProvController extends HttpServlet {
 
@@ -53,7 +52,8 @@ public class addFavProvController extends HttpServlet {
                while(favRow.next()){
                    flag = 1;
                    //response.sendRedirect("ProviderCustomerPage.jsp");
-                   JOptionPane.showMessageDialog(null, "Provider already in your favorites list");
+                   //JOptionPane.showMessageDialog(null, "Provider already in your favorites list");
+                   response.getWriter().print("Provider already in your favorites list");
                }
                
            }catch(Exception e){
@@ -76,7 +76,7 @@ public class addFavProvController extends HttpServlet {
                 addFavPst.executeUpdate();
 
                 //response.sendRedirect("ProviderCustomerPage.jsp");
-                JOptionPane.showMessageDialog(null, "Provider added to your favorites list");
+                //JOptionPane.showMessageDialog(null, "Provider added to your favorites list");
                 response.getWriter().print("NewAdded");
 
             }catch(Exception e){

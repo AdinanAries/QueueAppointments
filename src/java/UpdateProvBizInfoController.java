@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class UpdateProvBizInfoController extends HttpServlet {
 
@@ -112,7 +111,8 @@ public class UpdateProvBizInfoController extends HttpServlet {
             
             BizInfoPst.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Update Successful");
+            //JOptionPane.showMessageDialog(null, "Update Successful");
+            response.getWriter().print("Update Successful");
             //response.sendRedirect("ServiceProviderPage.jsp");
             
             

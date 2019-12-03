@@ -13,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -229,7 +228,8 @@ public class SendCustomerReviewController extends HttpServlet {
             
             updateProvInfoPst.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Your review was added sucessfully");
+            //JOptionPane.showMessageDialog(null, "Your review was added sucessfully");
+            response.getWriter().print("Your review was added sucessfully");
             //response.sendRedirect("ProviderCustomerPage.jsp");
         
         }catch(Exception e){

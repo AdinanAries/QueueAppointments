@@ -35,6 +35,7 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -2064,7 +2065,7 @@
                             
         <div id="newbusiness">
             
-            <div id="ExtraproviderIcons" style="padding-top: 10px;">
+            <div id="ExtraproviderIcons" style="margin-top: -13px;">
              
                 <div id="SearchDivNB">
                 <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%">

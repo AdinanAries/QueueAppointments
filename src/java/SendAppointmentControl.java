@@ -16,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 @WebServlet(urlPatterns = {"/SendAppointmentControl"})
 public class SendAppointmentControl extends HttpServlet {
@@ -39,7 +38,7 @@ public class SendAppointmentControl extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String Response = "Fail";
+        String Response = "";
         
         String UserIndex = request.getParameter("UserIndex");
         String CustomerID = request.getParameter("CustomerID");
@@ -98,7 +97,8 @@ public class SendAppointmentControl extends HttpServlet {
                 if(StringDateForCompare.equals(ClosedRec.getString("DateToClose").trim())){
                     isTodayClosed = true;
                     //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
-                    JOptionPane.showMessageDialog(null, "Provider is closed on chosen date");
+                    //JOptionPane.showMessageDialog(null, "Provider is closed on chosen date");
+                    response.getWriter().print("Provider is closed on chosen date");
                 }
                                                 
             }
@@ -267,28 +267,32 @@ public class SendAppointmentControl extends HttpServlet {
     if(Integer.parseInt(CompareTime.substring(0,2)) < Integer.parseInt(DailyStartTime.substring(0,2))){
         selectFlag = 2;
         //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
+        response.getWriter().print("Not Successful. Time chosen is earlier than providers opening time.\nProvider opens at " + DailyStartTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyStartTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) < Integer.parseInt(DailyStartTime.substring(3,5))){
             selectFlag = 2;
             //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
+            response.getWriter().print("Not Successful. Time chosen is earlier than providers opening time.\nProvider opens at " + DailyStartTime);
         }
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) > Integer.parseInt(DailyClosingTime.substring(0,2))){
         selectFlag = 2;
         //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
+        response.getWriter().print("Not Successful. Time chosen is later than providers closing time.\nProvider closes at " + DailyClosingTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyClosingTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) > Integer.parseInt(DailyClosingTime.substring(3,5))){
             selectFlag = 2;
             //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
+            response.getWriter().print("Not Successful. Time chosen is later than providers closing time.\nProvider closes at " + DailyClosingTime);
         }
     }
     
@@ -306,7 +310,7 @@ public class SendAppointmentControl extends HttpServlet {
         
             TempMinute += (IntervalsValue - 1);
         
-            if(TempMinute >= 60){
+            while(TempMinute >= 60){
             
                 TempHour++;
         
@@ -410,7 +414,9 @@ public class SendAppointmentControl extends HttpServlet {
                 isYourSpot = true;
                 StatusesClass.AppointmentStatus = "Unavailable spot: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time";
-                JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                response.getWriter().print("Unavailable spot: " + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time");
                 //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
             }
             
@@ -438,7 +444,9 @@ public class SendAppointmentControl extends HttpServlet {
                 if(!isYourSpot){
                     StatusesClass.AppointmentStatus = "Unavailable spot: " + AppointmentTime + 
                             ", " + AppointmentDate + ".\nThe spot you selected is already taken";
-                    JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                    //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                    response.getWriter().print("Unavailable spot: " + AppointmentTime + 
+                            ", " + AppointmentDate + ".\nThe spot you selected is already taken");
                 }
                 //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
             }
@@ -474,7 +482,9 @@ public class SendAppointmentControl extends HttpServlet {
                 if(!isYourSpot && !isSpotTaken){
                     StatusesClass.AppointmentStatus = "Unavailable spot: " + AppointmentTime + 
                             ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot.";
-                    JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                    //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
+                    response.getWriter().print("Unavailable spot: " + AppointmentTime + 
+                            ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot.");
                 }
                 //response.sendRedirect("ResetAppointmentParameters.jsp?UserIndex="+UserIndex);
                 break;
@@ -553,7 +563,7 @@ public class SendAppointmentControl extends HttpServlet {
                 }
                 
                 
-                JOptionPane.showMessageDialog(null, "You've been enqueued successfully!");
+                //JOptionPane.showMessageDialog(null, "You've been enqueued successfully!");
                 Response = "Success";
                 
                 //request.getRequestDispatcher("ProviderCustomerPage.jsp?UserIndex="+UserIndex).forward(request,response);

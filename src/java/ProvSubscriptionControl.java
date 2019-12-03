@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class ProvSubscriptionControl extends HttpServlet {
@@ -58,7 +57,8 @@ public class ProvSubscriptionControl extends HttpServlet {
             
             SubsPst.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Subscription finished successfully");
+            //JOptionPane.showMessageDialog(null, "Subscription finished successfully");
+            response.getWriter().print("Subscription finished successfully");
             
         }catch(Exception e){
             e.printStackTrace();

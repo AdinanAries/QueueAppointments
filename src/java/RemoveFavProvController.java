@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class RemoveFavProvController extends HttpServlet {
 
@@ -46,7 +45,8 @@ public class RemoveFavProvController extends HttpServlet {
                delProvPst.executeUpdate();
                
                //response.sendRedirect("ProviderCustomerPage.jsp");
-               JOptionPane.showMessageDialog(null, "Provider removed from your favorites");
+               //JOptionPane.showMessageDialog(null, "Provider removed from your favorites");
+               response.getWriter().print("Provider removed from your favorites");
                
                
            }catch(Exception e){

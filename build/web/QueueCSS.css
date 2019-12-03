@@ -2,6 +2,8 @@
   -webkit-appearance: none;
   padding: 0;
   margin: 0;
+  font-family: 'Roboto';
+  font-size: 14px;
   /*font-family: "Helvetica";*/
 }
 body {
@@ -128,6 +130,9 @@ select {
   position: relative;
   /*box-shadow: 4px 4px 10px #334d81;
 			margin-bottom: 1px;*/
+}
+#ExploreAndAccountButtons{
+    display: none;
 }
 #header img {
   width: 180px;
@@ -333,12 +338,15 @@ select {
 
 #footer {
   clear: both;
-  background-color: #ff3333;
+  background-color: #9bb1d0;
   text-align: right;
-  padding-right: 3px;
+  padding-right: 7px;
+  padding-top: 3px;
+  padding-bottom: 4px;
 }
 #footer p {
   margin: 0;
+  margin-right: 7px;
 }
 #providericons td {
   /*background-color: pink;*/
@@ -399,7 +407,7 @@ select {
 .SearchObject {
   border: black solid 1px;
   border-radius: 4px;
-  max-width: 330px;
+  width: 330px;
   text-align: right;
   padding: 0;
   margin-top: 5px;
@@ -629,6 +637,16 @@ select {
   display: none;
 }
 @media only screen and (min-width: 1000px) {
+    body{
+        position: fixed;
+        width: 100%;
+    }
+    #footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
   #QShowNews2 {
     display: block;
   }
@@ -706,8 +724,9 @@ select {
     /*box-shadow: #2c3539 3px 3px 4px;*/
     position: fixed;
     width: 100%;
-    height: 40px;
+    height: 41px;
     background-color: #000099;
+    padding-top: 1px;
     z-index: 110;
   }
   #PermanentDiv ul {
@@ -852,6 +871,9 @@ select {
   #ProInfoDiv {
     display: block;
   }
+  #ExtraDivSearch input{
+      margin: 0;
+  }
 }
 @media only screen and (min-width: 1400px) {
   #ProvPhoneNotiBar {
@@ -935,6 +957,29 @@ input[type=radio]:checked {
 }
 
 @media only screen and (max-width: 700px){
+    #ExploreDiv{
+        min-height: 800px;
+        background-color: #6699ff;
+    }
+    *{
+        font-family: 'Roboto';
+        font-size: 14px;
+    }
+    .UserProfileContainer{
+        display:none;
+    }
+    #ShowProInfo{
+        display: none;
+    }
+    #ProInfoDiv{
+        display: block;
+        width: 100%;
+        margin: 0;
+        border: 0;
+    }
+    #newbusiness{
+        padding: 0;
+    }
     #providericons tr td img{
         width: 45px;
         height: 45px;
@@ -951,9 +996,7 @@ input[type=radio]:checked {
     }
     
     #LocSearchDiv{
-        /*background-color: #7f93f2;*/
         padding-bottom: 5px;
-        padding-top: 5px;
     }
     #DashboardLocationSearchForm{
         background-color: #9bb1d0; 
@@ -976,6 +1019,8 @@ input[type=radio]:checked {
         border-radius: 0;
     }
     .SearchObject{
+        background-color: #3d6999;
+        border-radius: 0;
         border: 0;
         width: 100%;
         text-align: right;
@@ -1008,7 +1053,7 @@ input[type=radio]:checked {
         width: 60%;
     }
     #providerdetails{
-        border-spacing: 0 7px;
+        border-spacing: 0 3px;
     }
     #providerdetails .propic{
         height: 80px;
@@ -1045,5 +1090,40 @@ input[type=radio]:checked {
     }
     #ProviderHeader img{
         display: none;
+    }
+    #ExploreAndAccountButtons{
+        position: fixed;
+        z-index: 110;
+        left: 0px;
+        bottom: 0px;
+        background-color: #eeeeee;
+        border-top: 1px solid #ccc;
+        width: 100%;
+        display: block;
+    }
+    #ExploreAndAccountButtons #accountBtn{
+        float: right;
+        width: 49%;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        cursor: pointer;
+    }
+    #ExploreAndAccountButtons #exploreBtn{
+        float: left;
+        width: 49%;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+    .DashboardFooter{
+        margin-bottom: 28px;
+    }
+    #YourAccountH4{
+        display: none;
+    }
+    #miniNav{
+        background-color: #9bb1d0;
+        display: block;
     }
 }

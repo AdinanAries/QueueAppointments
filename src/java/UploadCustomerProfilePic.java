@@ -20,7 +20,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 @WebServlet(urlPatterns = {"/UploadCustomerProfilePic"})
 @MultipartConfig(maxFileSize = 16177215)
@@ -83,8 +82,8 @@ public class UploadCustomerProfilePic extends HttpServlet {
                 
             if (row > 0) {
 
-                response.sendRedirect("UploadPhotoWindow.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-                JOptionPane.showMessageDialog(null, "Profile Photo Updated Successfully!");
+                response.sendRedirect("UploadPhotoWindow.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Profile Photo Updated Successfully");
+                //JOptionPane.showMessageDialog(null, "Profile Photo Updated Successfully!");
 
             }
                 

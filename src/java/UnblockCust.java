@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class UnblockCust extends HttpServlet {
 
@@ -44,8 +43,8 @@ public class UnblockCust extends HttpServlet {
             unblockPst.setString(1, BlockedID);
             
             unblockPst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Person Unblocked Successfully");
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+            //JOptionPane.showMessageDialog(null, "Person Unblocked Successfully");
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Person Unblocked Successfully");
             
         }catch(Exception e){
             e.printStackTrace();

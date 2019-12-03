@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class DeleteServiceController extends HttpServlet {
@@ -46,7 +45,8 @@ public class DeleteServiceController extends HttpServlet {
             RMVSVCPst.executeUpdate();
             
             //response.sendRedirect("ServiceProviderPage.jsp");
-            JOptionPane.showMessageDialog(null, "Service Deleted Successfully!");
+            //JOptionPane.showMessageDialog(null, "Service Deleted Successfully!");
+            response.getWriter().print("Service Deleted Successfully");
             
         }catch(Exception e){
             e.printStackTrace();

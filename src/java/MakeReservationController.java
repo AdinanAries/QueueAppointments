@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class MakeReservationController extends HttpServlet {
@@ -283,28 +282,32 @@ public class MakeReservationController extends HttpServlet {
     if(Integer.parseInt(CompareTime.substring(0,2)) < Integer.parseInt(DailyStartTime.substring(0,2))){
         selectFlag = 2;
         //response.sendRedirect("ServiceProviderPage.jsp");
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+        response.getWriter().print("Not Successful. Time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyStartTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) < Integer.parseInt(DailyStartTime.substring(3,5))){
             selectFlag = 2;
             //response.sendRedirect("ServiceProviderPage.jsp");
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
+            response.getWriter().print("Not Successful; time chosen is earlier than your opening time\nYou open at " + DailyStartTime);
         }
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) > Integer.parseInt(DailyClosingTime.substring(0,2))){
         selectFlag = 2;
         //response.sendRedirect("ServiceProviderPage.jsp");
-        JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+        //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+        response.getWriter().print("Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
     }
     
     if(Integer.parseInt(CompareTime.substring(0,2)) == Integer.parseInt(DailyClosingTime.substring(0,2))){
         if(Integer.parseInt(CompareTime.substring(3,5)) > Integer.parseInt(DailyClosingTime.substring(3,5))){
             selectFlag = 2;
             //response.sendRedirect("ServiceProviderPage.jsp");
-            JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+            //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
+            response.getWriter().print("Not Successful; time chosen is later than your closing time\nYou close at " + DailyClosingTime);
         }
     }
     
@@ -334,7 +337,8 @@ public class MakeReservationController extends HttpServlet {
                 isCustSpot = true;
                 //StatusesClass.AppointmentStatus = "Warning: " + AppointmentTime + 
                 //        ", " + AppointmentDate + ".\n This Customer may not be available at chosen time. They already have a booking at " + AppointmentTime;
-                JOptionPane.showMessageDialog(null, "Reservation Not Allowed: This customer already has this spot");
+                //JOptionPane.showMessageDialog(null, "Reservation Not Allowed: This customer already has this spot");
+                response.getWriter().print("Reservation Not Allowed: This customer already has this spot");
                 //response.sendRedirect("ServiceProviderPage.jsp");
                 break;
             }
@@ -362,7 +366,9 @@ public class MakeReservationController extends HttpServlet {
                 //selectFlag = 1;
                 //StatusesClass.AppointmentStatus = ;
                 if(!isCustSpot)
-                    JOptionPane.showMessageDialog(null, "Warning: " + AppointmentTime + 
+                    /*JOptionPane.showMessageDialog(null, "Warning: " + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nTime chosen may cause double booking");*/
+                response.getWriter().print("Warning: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nTime chosen may cause double booking");
                 //response.sendRedirect("ServiceProviderPage.jsp");
                 break;
@@ -393,7 +399,9 @@ public class MakeReservationController extends HttpServlet {
                 //selectFlag = 1;
                 //StatusesClass.AppointmentStatus = ;
                 if(!isCustSpot && !isDoubleBooking)
-                    JOptionPane.showMessageDialog(null, "Warning: " + AppointmentTime + 
+                    /*JOptionPane.showMessageDialog(null, "Warning: " + AppointmentTime + 
+                        ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot");*/
+                response.getWriter().print("Warning: " + AppointmentTime + 
                         ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot");
                 //response.sendRedirect("ServiceProviderPage.jsp");
                 break;
@@ -470,7 +478,8 @@ public class MakeReservationController extends HttpServlet {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(null, "Reservation made successfully!");
+                //JOptionPane.showMessageDialog(null, "Reservation made successfully!");
+                response.getWriter().print("Reservation made successfully");
                 //response.sendRedirect("ServiceProviderPage.jsp");
 
             }catch(Exception e){

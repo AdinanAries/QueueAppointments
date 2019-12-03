@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class SetSpotsIntervalController extends HttpServlet {
@@ -49,8 +48,8 @@ public class SetSpotsIntervalController extends HttpServlet {
             
             intervalPst.executeUpdate();
             
-            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null, "New spot intervals set");
+            response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=New spot intervals set");
+            //JOptionPane.showMessageDialog(null, "New spot intervals set");
             
             
         }catch(Exception e){

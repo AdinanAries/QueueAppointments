@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class ChangeServiceController extends HttpServlet {
@@ -82,7 +81,8 @@ public class ChangeServiceController extends HttpServlet {
             AddSVCPst.executeUpdate();
             
             //response.sendRedirect("ServiceProviderPage.jsp");
-            JOptionPane.showMessageDialog(null, "Service Updated Successfully!");
+            //JOptionPane.showMessageDialog(null, "Service Updated Successfully!");
+            response.getWriter().print("Service Updated Successfully");
             
         }catch(Exception e){
             e.printStackTrace();

@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class DeletePhotoByProv extends HttpServlet {
 
@@ -46,7 +45,8 @@ public class DeletePhotoByProv extends HttpServlet {
             dltPST.setString(1, PhotoID);
             
             dltPST.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Photo Deleted");
+            //JOptionPane.showMessageDialog(null, "Photo Deleted");
+            response.getWriter().print("Photo Deleted");
             
         }catch(Exception e){
             e.printStackTrace();

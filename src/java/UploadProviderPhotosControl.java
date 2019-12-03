@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.swing.JOptionPane;
 
 @MultipartConfig(maxFileSize = 16177215)
 
@@ -91,8 +90,8 @@ public class UploadProviderPhotosControl extends HttpServlet {
         
         if(isAnyUploadSuccessful){
             
-            response.sendRedirect("UploadProviderProfilePhoto.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null, "Profile Photo Updated Successfully!");
+            response.sendRedirect("UploadProviderProfilePhoto.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Profile Photo Updated Successfully");
+            //JOptionPane.showMessageDialog(null, "Profile Photo Updated Successfully!");
 
             
         }

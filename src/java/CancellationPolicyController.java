@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class CancellationPolicyController extends HttpServlet {
 
@@ -103,7 +102,8 @@ public class CancellationPolicyController extends HttpServlet {
                 DltPolicyPst.executeUpdate();
                 
                 //response.sendRedirect("ServiceProviderPage.jsp");
-                JOptionPane.showMessageDialog(null, "Update Successful");
+                //JOptionPane.showMessageDialog(null, "Update Successful");
+                response.getWriter().print("Update Successful");
                 
             }catch(Exception e){
                 e.printStackTrace();
@@ -142,7 +142,8 @@ public class CancellationPolicyController extends HttpServlet {
                 PolicyPst.executeUpdate();
 
                 //response.sendRedirect("ServiceProviderPage.jsp");
-                JOptionPane.showMessageDialog(null, "Update Successful");
+                //JOptionPane.showMessageDialog(null, "Update Successful");
+                response.getWriter().print("Update Successful");
             }catch(Exception e){
                 e.printStackTrace();
             }

@@ -9,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class BlkSptDeleteAppointment extends HttpServlet {
 
@@ -48,8 +47,8 @@ public class BlkSptDeleteAppointment extends HttpServlet {
         catch(Exception e){
             e.printStackTrace();
         }
-        response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName);
-        JOptionPane.showMessageDialog(null, "Appointment deleted successfully");
+        response.sendRedirect("BlockFutureSpots.jsp?UserIndex="+UserIndex+"&GetDate="+GetDate+"&User="+NewUserName+"&result=Appointment%20deleted%20successfully");
+        //JOptionPane.showMessageDialog(null, "Appointment deleted successfully");
         
     }
 

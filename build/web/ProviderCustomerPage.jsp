@@ -39,6 +39,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -92,7 +93,11 @@
         int UserID = 0;
         String NewUserName = "";
         String NameFromList = "";
+        String ControllerResult = "";
         
+        try{
+            ControllerResult = request.getParameter("result");
+        }catch(Exception e){}
         
         int UserIndex = -1;
         
@@ -884,7 +889,7 @@
         <div id="Extras">
             
             <div id='News' style=''>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News updates from your providers</p></center>
             
                 <div style="max-height: 600px; overflow-y: auto;">
                     
@@ -1289,7 +1294,7 @@
             </div>
             
             <div id='Calender' style='display: none; margin-top: 5px;'>
-                <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
+                <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Calender</p></center>
             
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>
@@ -1786,7 +1791,7 @@
             </div>
                              
         <div id='ExtrasUserAccountDiv' style='display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Account</p></center>
             
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>
@@ -2006,7 +2011,7 @@
             </div>
                                 
             <div id='ExtrasNotificationDiv' style='display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Notifications</p></center>
             
             <div style=' height: 630px; overflow-y: auto;'>
                 <table  id="ExtrasTab" cellspacing="0">
@@ -2072,21 +2077,48 @@
             
             
         <div class="DashboardContent" id="">
-            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; padding: 5px;'>
-                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; border-right: 1px solid grey; width: 30%; float: left;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
-                        News </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; border-right: 1px solid grey; width: 37%; float: left;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
-                            Noti. <sup style='color: red; padding-right: 2px;'> <%=notiCounter%></sup> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 30%; color: black; float: left;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
-                        Calender</div></a>
+            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; padding-top: 2px;'>
+                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; width: 30%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                            <p style='margin-top: 0;'>News</p> </div></a>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; width: 37%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: 1px solid #ccccff; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                            <p style='margin-top: -4px;'>Notification</p> </div></a>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 30%; color: black; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                            <p style='margin-top: 0;'>Calender</p></div></a>
                     <p style='clear: both;'></p>
                     </div></center>
-            <div id="nav" style='display: block;'>
+                        
+            <center><div id="ExploreAndAccountButtons">
+                    <div onclick="showDashboardExplore();" id="exploreBtn">Explore</div>
+                    <div onclick="showDashboardAccount();" id="accountBtn">Account</div>
+                    <p style="clear: both;"></p>
+                    
+                    <script>
+                        function showDashboardExplore(){
+                            document.querySelector(".UserProfileContainer").style.display = "none";
+                            document.getElementById("accountBtn").style.background = "none";
+                            document.getElementById("ExploreDiv").style.display = "block";
+                            document.getElementById("exploreBtn").style.backgroundColor = "#ccc";
+                        }
+                        function showDashboardAccount(){
+                            document.querySelector(".UserProfileContainer").style.display = "block";
+                            document.getElementById("accountBtn").style.backgroundColor = "#ccc";
+                            document.getElementById("ExploreDiv").style.display = "none";
+                            document.getElementById("exploreBtn").style.background = "none";
+                        }
+                    </script>
+                    
+            </div></center>
+                     
+            <div id="ExploreDiv">
                 
+            <div id="nav" style='display: block;'>
+               
                 <!--h3><a href="index.jsp?UserIndex=<%=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>
                 <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                 
                 <h4><a href="" style=" color: black;"></a></h4>
+                
+                
                 
                 <center><div class ="SearchObject">
                         
@@ -2097,7 +2129,7 @@
                     </form> 
                         
                 </div></center>
-                        
+                
                 <div id="LocSearchDiv" style="margin-top: 5px;">
                 <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
@@ -2206,25 +2238,25 @@
                         <tr>
                             <td style="width: 33.3%;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
-                            </a></center></td>
                             <td style="width: 33.3%;"><center><a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
                             </a></center></td>
                         </tr>
                         <tr>
                             <td><center><a href="QueueSelectPodiatryLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
+                            <td><center><a href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
                             </a></center></td>
                             <td><center><a href="QueueSelectMassageLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
                             </a></center></td>
                         </tr>
                         <tr>
-                            <td><center><a href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            <td><center><a href="QueueSelectTattooLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MedEsthSelect">Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            <td><center><a href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MedEsthSelect">Medical Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
                             </a></center></td>
                         </tr>
                     </tbody>
@@ -2250,14 +2282,14 @@
                             </a></center></td>
                             <td><center><a href="QueueSelectPiercingLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectTattooLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
+                            <td><center><a href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
                             </a></center></td>
                         <tr>
                             <td><center><a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
                             </a></center></td>
                             <td><center><a href="QueueSelectPersonalTrainerLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
+                            <td><center><a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
                             </a></center></td>
                         </tr>
                     </tbody>
@@ -2291,10 +2323,10 @@
                 </div>
                 
             </div>
-                
+          </div>    
         </div>
                 
-        <div onclick='hideExtraDropDown();' id="newbusiness" style="padding-top: 0;">
+        <div onclick='hideExtraDropDown();' class="UserProfileContainer" id="newbusiness" style="padding-top: 0;">
                 
                 <!----------------------------------------------------------------------------------------------------------------->
         <div id='Extras2Container' style='z-index: 200;'>
@@ -3401,7 +3433,7 @@
         
                 <!------------------------------------------------------------------------------------------------------------------>
             
-            <center><h4 style="margin-top: 1px; margin-bottom: 5px; color: #000099">Your Account</h4></center>
+            <center><h4 id="YourAccountH4" style="margin-top: 1px; margin-bottom: 5px; color: #000099">Your Account</h4></center>
             
                 <div id="Customerprofile" style="border-bottom: 10px solid cornflowerblue; padding-top: 0;">
                     
@@ -3422,7 +3454,7 @@
                                        <img style='background-color: white;' src="icons/icons8-user-15.png" width="20" height="20" alt="icons8-user-15"/>
                                        Show Your Profile Details</p></center>
                                
-                               <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 5px; margin-top: 0; margin-bottom: 10px; background-color: cornflowerblue; border-right: darkblue 1px solid; border-bottom: darkblue 1px solid; padding-top: 10px;">
+                               <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 10px; margin-top: 0; background-color: cornflowerblue; padding-top: 10px;">
                                 
                                 <%
                                     if(Base64Pic != ""){
@@ -3449,7 +3481,7 @@
                                 <center><p style='font-weight: bolder;'><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
                                         <span id="FullNameDetail"><%=FullName%></span></p></center>
                                 
-                                <center><table style="border-spacing: 1px; border-top: 1px solid darkblue;" border="0">
+                                <center><table style="border-spacing: 1px; width: 100%; text-align: center;" border="0">
                                             <tr><td style="padding-bottom: 2px;"></td></tr>
                                             <tr><td style="padding-bottom: 2px;"><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
                                                         <span id="PhoneNumberDetail"><%=PhoneNumber%></span>, 
@@ -3747,7 +3779,7 @@
                                                     <td>Compose feedback message below</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><textarea id="FeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" cols="40">
+                                                    <td><textarea id="FeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" cols="35">
                                                         </textarea></td>
                                                 </tr>
                                                 </tbody>
@@ -3823,22 +3855,22 @@
                                                     
                                         </script>
                                         
-                                        <p style="border-top: 1px solid darkblue;"></p>
+                                        <p style=""></p>
                                         
-                                        <div style="text-align: right; margin-right: 39px; margin-top: 10px;">
+                                        <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
                                             <div class="tooltip">
                                             <img style="margin-right: 10px; cursor: pointer;" onclick="showUserFeedBackForm()" src="icons/icons8-feedback-20.png" width="20" height="20" alt="icons8-feedback-20"/>
-                                            <p class="tooltiptext">send feedback message<br></p>
+                                            
                                             </div>
                                             
                                             <div class="tooltip">
                                                 <p><img style="margin-right: 10px; cursor: pointer;" onclick = "showUserProfileForm()" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/><p>
-                                                <p class="tooltiptext">edit your profile<br></p>
+                                                <!--p class="tooltiptext"><br></p-->
                                             </div>
                                             
                                             <div class="tooltip">
                                                 <p><img style="cursor: pointer;" onclick = "showSettingsDiv()" src="icons/icons8-settings-20.png" width="20" height="20" alt="icons8-settings-20"/></p>
-                                                <p class="tooltiptext">change settings<br></p>
+                                                
                                             </div>
                                         </div>
                                                 
@@ -4089,21 +4121,21 @@
                                             
                                         </script>
                                         
-                                        <table id="selectCustSpttabs" cellspacing="0" style="width: 100%;">
+                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; margin-top: -5px;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding: 5px; cursor: pointer; border-radius: 4px; border-top: 1px solid black; width: 33.3%;">
+                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding: 5px; cursor: pointer; border-top: 1px solid black; width: 33.3%;  background-color: #ccccff;">
                                                         Your Spots
                                                     </td>
-                                                    <td onclick="activateHistory()" id="HistoryTab" style="padding: 5px; cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td onclick="activateHistory()" id="HistoryTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
                                                         History
                                                     </td>
-                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="padding: 5px; cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
                                                         Favorites
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table></center>
                                         
                                 <div class="scrolldiv" style=" height: 600px; overflow-y: auto;">
                                    
@@ -4113,7 +4145,7 @@
                                         }
                                     </script>
                                         
-                                <div id="serviceslist" style="padding-bottom: 0;" class="AppListDiv">
+                                <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
                                     
                                     <p style="color: tomato; margin-top: 10px;">Today's Spots</p>
                                    
@@ -4740,7 +4772,7 @@
                                     
                                     <!--------------------------------------------------------------------------------------------------------------------------------------------->
                                     
-                                    <p style="color: tomato; margin-top: 10px; border-top: 1px solid darkgray; width: 100%; max-width: 500px;">Future Spots</p>
+                                    <p style="color: tomato; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
                                     
                                     <%
                                         
@@ -5191,7 +5223,7 @@
                                     
                                 </div> 
                                         
-                                <div id="serviceslist" class="AppHistoryDiv" style="">
+                                <div id="serviceslist" class="AppHistoryDiv" style="border-top: 0;">
                                     
                                     <p style="color: tomato; margin: 10px;">Your Past Spots</p>
                                     
@@ -5630,7 +5662,7 @@
                                 
                             %>
                     
-                                <div id="serviceslist" style="margin-top: 0;" class="FavDiv">
+                                <div id="serviceslist" style="margin-top: 0; border-top: 0;" class="FavDiv">
                               
                                      <p style="color: tomato; margin: 10px;">Your Favorite Providers</p>
                                       
@@ -5882,13 +5914,19 @@
                 </div>
                   
                                         
-        <div id="footer">
+        <div class="DashboardFooter" id="footer">
             <p>AriesLab &copy;2019</p>
         </div>
                                         
     </div>
                                         
     </body>
+    <script>
+        var ControllerResult = "<%=ControllerResult%>";
+        
+        if(ControllerResult !== "null")
+            alert(ControllerResult);
+    </script>
     
     <script src="scripts/script.js"></script>
     <!--script src="scripts/checkAppointmentDateUpdate.js"></script-->

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.arieslab.queue.queue_model.UserAccount;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-import javax.swing.JOptionPane;
 
 public class LoginControllerMain extends HttpServlet {
 

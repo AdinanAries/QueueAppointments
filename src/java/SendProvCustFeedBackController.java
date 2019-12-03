@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 public class SendProvCustFeedBackController extends HttpServlet {
     
@@ -51,7 +50,8 @@ public class SendProvCustFeedBackController extends HttpServlet {
             FeedBackPst.setString(3, StringDate);
             FeedBackPst.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Your feedback was sent successfully!");
+            //JOptionPane.showMessageDialog(null, "Your feedback was sent successfully!");
+            response.getWriter().print("Your feedback was sent successfully");
             //response.sendRedirect("ProviderCustomerPage.jsp");
             
             

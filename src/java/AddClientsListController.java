@@ -53,7 +53,8 @@ public class AddClientsListController extends HttpServlet {
             while(clientRec.next()){
                 
                 ExistsFlag = 1;
-                JOptionPane.showMessageDialog(null, "Client already in your list");
+                response.getWriter().print("Client already in your list");
+                //JOptionPane.showMessageDialog(null, "Client already in your list");
                 //response.sendRedirect("ServiceProviderPage.jsp");
                 
             }
@@ -76,7 +77,7 @@ public class AddClientsListController extends HttpServlet {
                 AddClientPST.executeUpdate();
 
                 //response.sendRedirect("ServiceProviderPage.jsp");
-                JOptionPane.showMessageDialog(null, "Client added to your clients list");
+                //JOptionPane.showMessageDialog(null, "Client added to your clients list");
                 response.getWriter().print("notInList");
 
             }catch(Exception e){

@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class updateCustomerUserAccount extends HttpServlet {
@@ -90,7 +89,8 @@ public class updateCustomerUserAccount extends HttpServlet {
             addressPst.executeUpdate();
             
             //response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex);
-            JOptionPane.showMessageDialog(null, "Profile updated successfully!");
+            //JOptionPane.showMessageDialog(null, "Profile updated successfully!");
+            response.getWriter().print("Profile updated successfully");
             
         }catch(Exception e){
             e.printStackTrace();

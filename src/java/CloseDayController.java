@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 
 public class CloseDayController extends HttpServlet {
@@ -64,7 +63,8 @@ public class CloseDayController extends HttpServlet {
             while(CheckRec.next()){
                 isClosed = true;
                 //response.sendRedirect("ServiceProviderPage.jsp");
-                JOptionPane.showMessageDialog(null, "Date Already Closed");
+                //JOptionPane.showMessageDialog(null, "Date Already Closed");
+                response.getWriter().print("Date Already Closed");
                 
             }
         
@@ -86,7 +86,7 @@ public class CloseDayController extends HttpServlet {
             ClosePst.executeUpdate();
             
             //response.sendRedirect("ServiceProviderPage.jsp");
-            JOptionPane.showMessageDialog(null, "Date Closed");
+            //JOptionPane.showMessageDialog(null, "Date Closed");
             response.getWriter().print("notInList");
             
             
