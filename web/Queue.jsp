@@ -627,7 +627,7 @@
                    border-radius: 5px;  color: white; cursor: pointer; border: 1px solid white; text-align: center; background-color: red;'>hide
                 </p>
                 
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from service providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Updates from service providers</p></center>
             
             <div style="max-height: 600px; overflow-y: auto;">
                 <%

@@ -337,7 +337,7 @@
                 <script>
                     document.getElementById("PhoneNews").style.display = "none";
                 </script>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from your providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Updates from your providers</p></center>
             
                <div style="max-height: 100%; overflow-y: auto;">
                     
@@ -738,7 +738,7 @@
             </div>
             
             <div id='PhoneCalender' style='display: none; margin-top: 5px; width: 100%;'>
-                <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
+                <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
             
                 <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
@@ -1236,7 +1236,7 @@
             </div>
                              
         <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
             
                 <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
@@ -1516,7 +1516,7 @@
             </div>
                                 
             <div id='PhoneExtrasNotificationDiv' style='width: 100%; display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
             
                 <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>

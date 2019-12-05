@@ -66,6 +66,11 @@
         int UserIndex = -1;
         int UserID = 0;
         String Base64Pic = "";
+        String ControllerResult = "";
+        
+        try{
+            ControllerResult = request.getParameter("result");
+        }catch(Exception e){}
         
         try{
         
@@ -373,7 +378,7 @@
         </div>
             
             <div id='Extras' style=''>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             
                 <div style="max-height: 600px; overflow-y: auto;">
                     
@@ -2000,14 +2005,17 @@
     
     <script>
     
-    document.getElementById("showAllSuggestedTimeBtn").style.display = "none";
-    //document.getElementById("showCustomizeTimeBtn").style.display = "none";
-    
-    window.scrollTo(0,document.body.scrollHeight);
-    //document.getElementById("customizeAppointmentTime").style.display = "block";
-    document.getElementById("AllSuggestedTimeDiv").style.display = "block";
-            
-            
+        document.getElementById("showAllSuggestedTimeBtn").style.display = "none";
+        //document.getElementById("showCustomizeTimeBtn").style.display = "none";
+
+        window.scrollTo(0,document.body.scrollHeight);
+        //document.getElementById("customizeAppointmentTime").style.display = "block";
+        document.getElementById("AllSuggestedTimeDiv").style.display = "block";
+
+
+        var ControllerResult = "<%=ControllerResult%>";
+         if(ControllerResult !== "null")
+             alert(ControllerResult);
     </script>
     
     <script src="scripts/script.js"></script>

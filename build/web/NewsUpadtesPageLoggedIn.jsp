@@ -107,7 +107,7 @@
             
             <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 50px;' >
             <div id='News' style=''>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             
                 <div style="overflow-y: auto;">
                     

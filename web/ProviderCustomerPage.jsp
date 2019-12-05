@@ -1641,8 +1641,8 @@
                                         url: "DltEvntAjax",
                                         data: "EventID="+EventID,
                                         success: function(result){
-                                            if(result === "success")
-                                                alert(result);
+                                            if(result === "success"){
+                                                alert("Event Deleted Successfully");
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn").style.display = "block";
@@ -1650,7 +1650,9 @@
                                                 document.getElementById("AddEvntDesc").value = "";
                                                 document.getElementById("EvntDatePicker").value = "";
                                                 document.getElementById("AddEvntTime").value = "";
+                                                document.getElementById("DisplayedAddEvntTime").value = "";
                                                 document.getElementById("EvntIDFld").value = "";
+                                            }
                                         }
                                         
                                     });
@@ -1695,7 +1697,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
-                                            //alert(result);
+                                           alert("Event Updated Successfully");
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -1724,6 +1726,7 @@
                                     document.getElementById("AddEvntDesc").value = "";
                                     document.getElementById("EvntDatePicker").value = "";
                                     document.getElementById("AddEvntTime").value = "";
+                                    document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
                                 
                             }
@@ -1754,7 +1757,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&CustomerID="+CustID,
                                         success: function(result){
                                             
-                                            //alert(result);
+                                            alert("Event Added Successufuly");
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -1781,6 +1784,7 @@
                                     document.getElementById("AddEvntDesc").value = "";
                                     document.getElementById("EvntDatePicker").value = "";
                                     document.getElementById("AddEvntTime").value = "";
+                                    document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
                                     
                                 });
@@ -1849,7 +1853,7 @@
                                             data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
                                             success: function(result){
                                                 if(result === "success"){
-                                                    //alert(result);
+                                                    alert("Update Successful");
                                                     var FullName = FirstName + " " + MiddleName + " " + LastName;
                                                     document.getElementById("FullNameDetail").innerHTML = FullName;
                                                     document.getElementById("PhoneNumberDetail").innerHTML = Phone;
@@ -1898,21 +1902,22 @@
                                                              type: "POST",  
                                                              url: "SendProvCustFeedBackController",  
                                                              data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
-                                                             success: function(result){  
+                                                             success: function(result){ 
+                                                               alert(result);
                                                                document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv").style.display = "block";
                                                                document.getElementById("ExtLasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
 
                                                                $.ajax({  
-                                                             type: "POST",  
-                                                             url: "getCustFeedbackDate",  
-                                                             data: "CustomerID="+CustomerID,  
-                                                             success: function(result){  
-                                                                 //alert(result);
-                                                                 document.getElementById("ExtFeedBackDate").innerHTML = result +" ";
-                                                             }                
-                                                           });
-                                                        }                
+                                                                type: "POST",  
+                                                                url: "getCustFeedbackDate",  
+                                                                data: "CustomerID="+CustomerID,  
+                                                                success: function(result){  
+                                                                        alert(result);
+                                                                        document.getElementById("ExtFeedBackDate").innerHTML = result +" ";
+                                                                    }                
+                                                                });
+                                                            }                
                                                       });
                                                         
                                                     });
@@ -1988,6 +1993,7 @@
                                                         }
 
                                                     });
+                                                    alert("Update Successful");
                                                 }
                                             }
                                                                     
@@ -2077,10 +2083,10 @@
             
             
         <div class="DashboardContent" id="">
-            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #ccccff; border-top: 1px solid white; padding-top: 2px;'>
+            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px;'>
                     <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; width: 30%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                             <p style='margin-top: 0;'>News</p> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; width: 37%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: 1px solid #ccccff; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; width: 37%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
                             <p style='margin-top: -4px;'>Notification</p> </div></a>
                     <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 30%; color: black; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
                             <p style='margin-top: 0;'>Calender</p></div></a>
@@ -2088,22 +2094,45 @@
                     </div></center>
                         
             <center><div id="ExploreAndAccountButtons">
-                    <div onclick="showDashboardExplore();" id="exploreBtn">Explore</div>
-                    <div onclick="showDashboardAccount();" id="accountBtn">Account</div>
+                    <div onclick="showDashboardExplore();" id="exploreBtn">
+                        <img style="display: none;" id="RegularExploreIcon" src="icons/SecondExploreIcon.png" width="30" height="30" alt=""/>
+                        <img style="display: none;" id="ActiveExploreIcon" src="icons/ExploreIcon.png" width="30" height="30" alt=""/>
+                        <p style="padding: 0; margin-top: -5px;">Explore</p></div>
+                    <div onclick="showDashboardAccount();" id="accountBtn">
+                        <img style="display: none;" id="ActiveUserProfile" src="icons/UserProfileIcon.png" width="30" height="30" alt=""/>
+                        <img style="display: none;" id="RegularUserProfile" src="icons/SecondUserProfileIcon.png" width="30" height="30" alt=""/>
+                        <p style="padding: 0; margin-top: -5px;">Account</p></div>
                     <p style="clear: both;"></p>
                     
                     <script>
+                        document.getElementById("ActiveExploreIcon").style.display = "block";
+                        document.getElementById("RegularUserProfile").style.display = "block";
                         function showDashboardExplore(){
                             document.querySelector(".UserProfileContainer").style.display = "none";
-                            document.getElementById("accountBtn").style.background = "none";
                             document.getElementById("ExploreDiv").style.display = "block";
-                            document.getElementById("exploreBtn").style.backgroundColor = "#ccc";
+                            
+                            document.getElementById("ActiveUserProfile").style.display = "none";
+                            document.getElementById("RegularUserProfile").style.display = "block";
+                            
+                            document.getElementById("RegularExploreIcon").style.display = "none";
+                            document.getElementById("ActiveExploreIcon").style.display = "block";
+                            
+                            document.body.scrollTop = 0;
+                            document.documentElement.scrollTop = 0;
+                            
                         }
                         function showDashboardAccount(){
                             document.querySelector(".UserProfileContainer").style.display = "block";
-                            document.getElementById("accountBtn").style.backgroundColor = "#ccc";
                             document.getElementById("ExploreDiv").style.display = "none";
-                            document.getElementById("exploreBtn").style.background = "none";
+                            
+                            document.getElementById("ActiveUserProfile").style.display = "block";
+                            document.getElementById("RegularUserProfile").style.display = "none";
+                            
+                            document.getElementById("RegularExploreIcon").style.display = "block";
+                            document.getElementById("ActiveExploreIcon").style.display = "none";
+                            
+                            document.body.scrollTop = 0;
+                            document.documentElement.scrollTop = 0;
                         }
                     </script>
                     
@@ -3005,7 +3034,7 @@
                                         data: "EventID="+EventID,
                                         success: function(result){
                                             if(result === "success")
-                                                //alert(result);
+                                                alert("Event Deleted Successfully");
                                                 document.getElementById("CalUpdateEvntBtn2").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn2").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn2").style.display = "block";
@@ -3013,6 +3042,7 @@
                                                 document.getElementById("AddEvntDesc2").value = "";
                                                 document.getElementById("EvntDatePicker2").value = "";
                                                 document.getElementById("AddEvntTime2").value = "";
+                                                document.getElementById("DisplayedAddEvntTime2").vlaue = "";
                                                 document.getElementById("EvntIDFld2").value = "";
                                         }
                                         
@@ -3058,7 +3088,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
-                                            //alert(result);
+                                            alert("Event Updated Successfully");
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -3087,6 +3117,7 @@
                                     document.getElementById("AddEvntDesc2").value = "";
                                     document.getElementById("EvntDatePicker2").value = "";
                                     document.getElementById("AddEvntTime2").value = "";
+                                    document.getElementById("DisplayedAddEvntTime2").vlaue = "";
                                     document.getElementById("EvntIDFld2").value = "";
                                 
                             }
@@ -3117,7 +3148,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&CustomerID="+CustID,
                                         success: function(result){
                                             
-                                            //alert(result);
+                                            alert("Event Added Successfully");
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -3144,6 +3175,7 @@
                                     document.getElementById("AddEvntDesc2").value = "";
                                     document.getElementById("EvntDatePicker2").value = "";
                                     document.getElementById("AddEvntTime2").value = "";
+                                    document.getElementById("DisplayedAddEvntTime2").vlaue = "";
                                     document.getElementById("EvntIDFld2").value = "";
                                     
                                 });
@@ -3212,7 +3244,7 @@
                                             data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
                                             success: function(result){
                                                 if(result === "success"){
-                                                    //alert(result);
+                                                    alert("Update Successful");
                                                     var FullName = FirstName + " " + MiddleName + " " + LastName;
                                                     document.getElementById("FullNameDetail").innerHTML = FullName;
                                                     document.getElementById("PhoneNumberDetail").innerHTML = Phone;
@@ -3260,20 +3292,22 @@
                                                              type: "POST",  
                                                              url: "SendProvCustFeedBackController",  
                                                              data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
-                                                             success: function(result){  
+                                                             success: function(result){ 
+                                                                 
+                                                               alert(result);
                                                                document.getElementById("ExtFeedBackTxtFld2").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv2").style.display = "block";
                                                                document.getElementById("ExtLasReviewMessageP2").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
 
                                                                $.ajax({  
-                                                             type: "POST",  
-                                                             url: "getCustFeedbackDate",  
-                                                             data: "CustomerID="+CustomerID,  
-                                                             success: function(result){  
-                                                                 //alert(result);
-                                                                 document.getElementById("ExtFeedBackDate2").innerHTML = result +" ";
-                                                             }                
-                                                           });
+                                                                    type: "POST",  
+                                                                    url: "getCustFeedbackDate",  
+                                                                    data: "CustomerID="+CustomerID,  
+                                                                    success: function(result){  
+                                                                        //alert(result);
+                                                                        document.getElementById("ExtFeedBackDate2").innerHTML = result +" ";
+                                                                    }                
+                                                                });
                                                         }                
                                                       });
                                                         
@@ -3329,6 +3363,7 @@
                                                     //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
                                                 }
                                                 if(result === "success"){
+                                                    alert("Update Successful");
                                                     document.getElementById("ExtraNewPasswordFld2").value = "";
                                                     document.getElementById("ExtraCurrentPasswordFld2").value = "";
                                                     document.getElementById("ExtraCurrentPasswordFld2").style.backgroundColor = "#eeeeee";
@@ -3454,26 +3489,41 @@
                                        <img style='background-color: white;' src="icons/icons8-user-15.png" width="20" height="20" alt="icons8-user-15"/>
                                        Show Your Profile Details</p></center>
                                
-                               <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 10px; margin-top: 0; background-color: cornflowerblue; padding-top: 10px;">
+                               <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 10px; margin-top: 0; background-color: cornflowerblue;">
                                 
                                 <%
                                     if(Base64Pic != ""){
                                 %> 
                                 
-                                <center><div style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; padding: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">
-                                    <div style="height: 5px; background-size: cover; margin-left: 5px; margin-right: 5px; margin-bottom: 150px; background-color: #334d81;" >
-                                        <center><img style="margin-top: 0; border-radius: 100%; border: 5px solid #334d81; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="150" height="150"/></center>
+                                    <center><div id="WideScreenProfilePic" style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; padding: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">
+                                        <div style="height: 5px; background-size: cover; margin-left: 5px; margin-right: 5px; margin-bottom: 150px; background-color: #334d81;" >
+                                            <center><img style="margin-top: 0; border-radius: 100%; border: 5px solid #334d81; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="150" height="150"/></center>
+                                        </div>
+                                        <div style="background-color: #334d81; height: 5px; margin-left: 5px; margin-right: 5px;">
+                                        </div>
+                                    </div></center>
+                                    
+                                    <div id="SmallscreenProfilePic">
+                                        <center><div class ="SearchObject">
+                                            <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                                                <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                                <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                                <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" />
+                                            </form> 
+                                        </div></center>
+                                        <div style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; height: 100px; margin-bottom: 60px; border-bottom: #3d6999 1px solid">
+                                            <div id="" style="height: 100px; background-color: #6699ff; opacity: 0.7;"></div>        
+                                            <img style="position: relative; z-index: 2; margin-top: -50px; margin-left: 6px; border-radius: 100%; border: #3d6999 1px solid; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="100" height="100"/>
+                                            
+                                        </div>
                                     </div>
-                                    <div style="background-color: #334d81; height: 5px; margin-left: 5px; margin-right: 5px;">
-                                    </div>
-                                </div></center>
                                 
                                 <%
                                     } else{
                                 %>
-                                   
+                                
                                    <center><a href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; border-radius: 4px; background-color: pink; color: black; padding: 5px; border: solid black 1px; width: 200px; text-align: center; margin-bottom: 5px;">Add Profile Picture<p></a></center>
-                                       
+                                    
                                 <%
                                     }
                                 %>
@@ -3721,12 +3771,13 @@
                                                                 
                                                                 success: function(result){
                                                                     
+                                                                    alert("Update Successful");
+                                                                    
                                                                     $.ajax({
                                                                         type: "POST",
                                                                         url: "GetCustPerInfo",
                                                                         data: "CustomerID="+CustomerID,
                                                                         success: function(result){
-                                                                            //alert(result);
                                                                             
                                                                             var PersonalInfo = JSON.parse(result);
                                                                             
@@ -3797,25 +3848,26 @@
                                                         var CustomerID = document.getElementById("FeedBackUserID").value;
                                                         
                                                         $.ajax({  
-                                                        type: "POST",  
-                                                        url: "SendProvCustFeedBackController",  
-                                                        data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
-                                                        success: function(result){  
-                                                          document.getElementById("FeedBackTxtFld").innerHTML = "Add your message here...";
-                                                          document.getElementById("LastReviewMessageDiv").style.display = "block";
-                                                          document.getElementById("LasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
-                                                          
-                                                          $.ajax({  
-                                                        type: "POST",  
-                                                        url: "getCustFeedbackDate",  
-                                                        data: "CustomerID="+CustomerID,  
-                                                        success: function(result){  
-                                                            //alert(result);
-                                                            document.getElementById("FeedBackDate").innerHTML = result +" ";
-                                                        }                
-                                                      });
-                                                        }                
-                                                      });
+                                                            type: "POST",  
+                                                            url: "SendProvCustFeedBackController",  
+                                                            data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
+                                                            success: function(result){
+                                                              alert(result);
+                                                              document.getElementById("FeedBackTxtFld").innerHTML = "Add your message here...";
+                                                              document.getElementById("LastReviewMessageDiv").style.display = "block";
+                                                              document.getElementById("LasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
+
+                                                              $.ajax({  
+                                                                type: "POST",  
+                                                                url: "getCustFeedbackDate",  
+                                                                data: "CustomerID="+CustomerID,  
+                                                                success: function(result){  
+                                                                    //alert(result);
+                                                                    document.getElementById("FeedBackDate").innerHTML = result + " ";
+                                                                }                
+                                                              });
+                                                            }                
+                                                        });
                                                         
                                                     });
                                                 });
@@ -3948,6 +4000,7 @@
                                                                                 }
 
                                                                             });
+                                                                            alert("Update Successful");
                                                                         }
                                                                     }
                                                                     
@@ -4447,7 +4500,7 @@
                                                         url: "UpdateAppointmentController",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("changeBookedAppointmetForm<%=JString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -4609,7 +4662,7 @@
                                                         url: "DeleteAppointment",  
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("AppointmentDiv<%=JString%>").style.display = "none";
                                                         }                
                                                       });
@@ -4637,7 +4690,8 @@
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){
                                                             
-                                                         if(result === "NewAdded"){ 
+                                                         if(result === "NewAdded"){
+                                                             alert("Provider added to your favorites");
                                                             $.ajax({
 
                                                                 type: "POST",
@@ -4724,6 +4778,8 @@
                                                                     
                                                                 }
                                                             });
+                                                         }else{
+                                                            alert(result);
                                                          }
                                                         }                
                                                       });
@@ -4891,7 +4947,7 @@
                                                         url: "UpdateAppointmentController",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("changeFutureAppointmetForm<%=QString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -5056,7 +5112,7 @@
                                                         url: "DeleteAppointment",  
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("FutureAppointmentDiv<%=QString%>").style.display = "none";
                                                         }                
                                                       });
@@ -5084,7 +5140,9 @@
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
                                                           
-                                                         if(result === "NewAdded"){ 
+                                                         if(result === "NewAdded"){
+                                                             alert("Provider added to your favorites");
+                                                             
                                                             $.ajax({
 
                                                                 type: "POST",
@@ -5173,6 +5231,8 @@
                                                                     
                                                                 }
                                                             });
+                                                         }else{
+                                                          alert(result);
                                                          }
                                                           
                                                         }                
@@ -5333,7 +5393,7 @@
                                                         url: "DeleteAppointment",  
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert("This is history has been removed");
                                                           document.getElementById("HistoryAppointmentDiv<%=JString%>").style.display = "none";
                                                         }                
                                                       });
@@ -5413,7 +5473,7 @@
                                                         url: "SendCustomerReviewController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&rate="+RateValue+"&Review="+ReviewMessage,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("ProviderReview<%=JString%>").innerHTML = "Review sent. Click here to See more...";
                                                           document.getElementById("ratingAndReviewForm<%=JString%>").style.display = "none";
                                                         }                
@@ -5477,8 +5537,9 @@
                                                         url: "addFavProvController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          
                                                           if(result === "NewAdded"){
+                                                              alert("Provider added to your favorites");
                                                             $.ajax({
 
                                                                 type: "POST",
@@ -5567,6 +5628,8 @@
                                                                     
                                                                 }
                                                             });
+                                                          }else{
+                                                            alert(result);
                                                           }
                                                         }                
                                                       });
@@ -5851,14 +5914,14 @@
                                                         var ProvID = document.getElementById("ProvID<%=SString%>").value;
                                                         
                                                         $.ajax({  
-                                                        type: "POST",  
-                                                        url: "RemoveFavProvController",  
-                                                        data: "UserID="+ProvID,  
-                                                        success: function(result){  
-                                                          //alert(result);
-                                                          document.getElementById("FavoriteProvDiv<%=SString%>").style.display = "none";
-                                                        }                
-                                                      });
+                                                            type: "POST",  
+                                                            url: "RemoveFavProvController",  
+                                                            data: "UserID="+ProvID,  
+                                                            success: function(result){  
+                                                              alert(result);
+                                                              document.getElementById("FavoriteProvDiv<%=SString%>").style.display = "none";
+                                                            }                
+                                                        });
                                                         
                                                     });
                                                 });

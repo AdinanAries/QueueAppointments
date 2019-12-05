@@ -62,7 +62,7 @@ public class RemoveLastFavProv extends HttpServlet {
                
                delProvPst.executeUpdate();
                
-               response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+               response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName+"&result=Provider removed from your favorites");
                //JOptionPane.showMessageDialog(null, "Provider removed from your favorites");
                
                

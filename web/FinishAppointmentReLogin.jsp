@@ -42,6 +42,12 @@
         String Driver = "";
         String User = "";
         String Password = "";
+        String ControllerResult = "";
+        
+        //put this in a try{}catch(){} for incase the current request has no such parameter
+        try{
+            ControllerResult = request.getParameter("result");
+        }catch(Exception e){}
         
        try{
             url = config.getServletContext().getAttribute("DBUrl").toString();
@@ -167,7 +173,7 @@
             
         <div id="Extras">
             
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Updates from service providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Updates from service providers</p></center>
             
             <div style="max-height: 600px; overflow-y: auto;">
                 <%
@@ -500,6 +506,11 @@
     </div>
                 
     </body>
+    <script>
+        var ControllerResult = "<%=ControllerResult%>";
+        if(ControllerResult !== "null")
+            alert(ControllerResult);
+    </script>
     
     <script src="scripts/script.js"></script>
     <script src="scripts/SignUpandSendAppointmentBtn.js"></script>

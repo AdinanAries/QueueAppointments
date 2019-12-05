@@ -405,7 +405,7 @@
             
             <div id="Extras">
             
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">News Updates from <%=NewsProvName%></p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">News Updates from <%=NewsProvName%></p></center>
             
                 <div style="max-height: 600px; overflow-y: auto;">
                     

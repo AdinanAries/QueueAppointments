@@ -42,6 +42,11 @@
         int UserID = 0;
         String NewUserName = "";
         int UserIndex = 0;
+        String ControllerResult = "";
+        
+        try{
+            ControllerResult = request.getParameter("result");
+        }catch(Exception e){}
         
         boolean isTrySuccess = true;
         
@@ -153,4 +158,9 @@
         <a href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
         
     </body>
+    <script>
+        var ControllerResult = "<%=ControllerResult%>";
+        if(ControllerResult !== "null")
+            alert(ControllerResult);
+    </script>
 </html>
