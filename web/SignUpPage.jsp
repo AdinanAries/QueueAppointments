@@ -362,7 +362,9 @@
                 </div><center>
                     
                 <div class="scrolldiv" style=" height: 450px; overflow-y: auto; width: auto;">
-                <center><h4 style = "margin-bottom: 15px;">_____________________________________</h4></center>
+                    
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
+                
                 <center><h3 style="color: white; margin-bottom: 15px; background-color: red;"></h3></center>
                 
                 <form style="display: none;" name="customerForm" id="customerForm" action="CustomoerSignUpController" method="POST">
@@ -371,18 +373,18 @@
                     <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><p>First Name</p><input type="text" id="firstName" name="firstName" value="<%=fName%>" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>First Name</p><input type="text" id="firstName" name="firstName" value="<%=fName%>" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Middle Name</p><input type="text" id="middleName" name="middleName" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Middle Name</p><input type="text" id="middleName" name="middleName" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Last Name</p><input type="text" id="lastName" name="lastName" value="<%=lName%>" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Last Name</p><input type="text" id="lastName" name="lastName" value="<%=lName%>" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                        <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="<%=email%>" size="40" style="background-color: #6699ff;"/>
+                                        <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="<%=email%>" size="37" style="background-color: #6699ff;"/>
                                         <input id='email' type='hidden' value=''/>
                                         <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
@@ -485,7 +487,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Phone Number</p><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" type="text" id="phoneNumber" name="phoneNumber" value="<%=telNumber%>" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Phone Number</p><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" type="text" id="phoneNumber" name="phoneNumber" value="<%=telNumber%>" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -527,14 +529,14 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="40" style="background-color: #6699ff;"/>
+                                    <td><p>User Name</p><input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="37" style="background-color: #6699ff;"/>
                                         <center><p id="CustUserNameStatus" style="color: white; background-color: red; text-align: center; max-width: 250px;"></p></center></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input type="password" id="firstPassword" name="firstPassword" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password</p><input type="password" id="firstPassword" name="firstPassword" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password (Again)</p><input type="password" id="secondPassword" name="secondPassword" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password (Again)</p><input type="password" id="secondPassword" name="secondPassword" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -591,18 +593,18 @@
                     <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><p>First Name</p><input id="firstProvName" type="text" name="firstProvName" value="<%=fName%>" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>First Name</p><input id="firstProvName" type="text" name="firstProvName" value="<%=fName%>" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Middle Name</p><input id="middleProvName" type="text" name="middleProvName" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Middle Name</p><input id="middleProvName" type="text" name="middleProvName" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Last Name</p><input id="lastProvName" type="text" name="lastProvName" value="<%=lName%>" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Last Name</p><input id="lastProvName" type="text" name="lastProvName" value="<%=lName%>" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <center><p id='BizEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                        <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="visibleProvEmail" type="text" name="provEmail" value="<%=email%>" size="40" style="background-color: #6699ff;"/>
+                                        <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="visibleProvEmail" type="text" name="provEmail" value="<%=email%>" size="37" style="background-color: #6699ff;"/>
                                         <input id='provEmail' type='hidden' value='' />
                                         <div id='BizEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='sendVerifyDiv'>
@@ -705,7 +707,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>Phone Number</p><input onclick="checkMiddleNumberProPer();" onkeydown="checkMiddleNumberProPer();" id="provPhoneNumber" type="text" name="provPhoneNumber" value="<%=telNumber%>" size="40" style="background-color: #6699ff;"/>
+                                        <p>Phone Number</p><input onclick="checkMiddleNumberProPer();" onkeydown="checkMiddleNumberProPer();" id="provPhoneNumber" type="text" name="provPhoneNumber" value="<%=telNumber%>" size="37" style="background-color: #6699ff;"/>
                                         
                                     </td>
                                 </tr>
@@ -749,7 +751,7 @@
                     <center><table border="0">
                             <tbody>
                                 <tr>
-                                    <td style="padding-bottom: 10px;"><p>Business Name</p><input id="businessName" type="text" name="businessName" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td style="padding-bottom: 10px;"><p>Business Name</p><input id="businessName" type="text" name="businessName" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 
                                 <tr>
@@ -761,14 +763,14 @@
                                         
                                         <h3 style="text-align: center; color: #000099;">Enter your address below</h3>
                                         
-                                        <p> House<input onkeydown="checkMiddleNumberHNumber();" onclick="checkMiddleNumberHNumber();" id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="" size="4" style="background-color: #6699ff;"/>
-                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="" size="15" style="background-color: #6699ff;"/></p>
+                                        <p> House<input onkeydown="checkMiddleNumberHNumber();" onclick="checkMiddleNumberHNumber();" id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="" size="5" style="background-color: #6699ff;"/>
+                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="" size="18" style="background-color: #6699ff;"/></p>
                                         <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="" size="32" style="background-color: #6699ff;"/></p>
-                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="" size="15" style="background-color: #6699ff;"/>
-                                            Zip Code:<input onclick="checkMiddleNumberZCode();" onkeydown="checkMiddleNumberZCode();" id="ZCode" type="text" name="ZCode" placeholder='123...' value="" size="4" style="background-color: #6699ff;"/></p>
+                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="" size="18" style="background-color: #6699ff;"/>
+                                            Zip Code:<input onclick="checkMiddleNumberZCode();" onkeydown="checkMiddleNumberZCode();" id="ZCode" type="text" name="ZCode" placeholder='123...' value="" size="5" style="background-color: #6699ff;"/></p>
                                         <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="" size="30" style="background-color: #6699ff;"/></p>
                                         
-                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="40" style="background-color: #6699ff; border: 1px solid black;"/></p>
+                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="37" style="background-color: #6699ff; border: 1px solid black;"/></p>
                                        </td>
                                 </tr>
                                 
@@ -837,10 +839,10 @@
                                 </script>
                                 
                                 <tr>
-                                    <td style="padding-top: 10px;"><p>Business Email</p><input id="businessEmail" type="text" name="businessEmail" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td style="padding-top: 10px;"><p>Business Email</p><input id="businessEmail" type="text" name="businessEmail" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Business Telephone</p><input onclick="checkMiddleNumberProBiz();" onkeydown="checkMiddleNumberProBiz();" id="businessTel" type="text" name="businessTel" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Business Telephone</p><input onclick="checkMiddleNumberProBiz();" onkeydown="checkMiddleNumberProBiz();" id="businessTel" type="text" name="businessTel" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
                                     <td><select id="businessType" name="businessType">
@@ -870,7 +872,7 @@
                                         </select></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="otherBusinessType" type="text" name="otherBusinessType" value="Specify business type here if not in categories" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><input id="otherBusinessType" type="text" name="otherBusinessType" value="Specify business type here if not in categories" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table></center>
@@ -912,14 +914,14 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="setProvPasswordsZero();" onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="40" style="background-color: #6699ff;"/>
+                                    <td><p>User Name</p><input onkeyup="setProvPasswordsZero();" onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="37" style="background-color: #6699ff;"/>
                                         <center><p id="provUserNameStatus" style="background-color: red; color: white; text-align: center; max-width: 250px;"></center></p></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input id="firstProvPassword" type="password" name="firstProvPassword" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password</p><input id="firstProvPassword" type="password" name="firstProvPassword" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password (Again)</p><input id="secondProvPassword" type="password" name="secondProvPassword" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password (Again)</p><input id="secondProvPassword" type="password" name="secondProvPassword" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -974,7 +976,7 @@
                 </div>
                 </div></center>
                 
-                <center><h4 style = "margin-bottom: 15px;">_____________________________________</h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
                 <center><p id="alreadyAccountStatus" ><a style="color: #000099;" href="LogInPage.jsp">Already have an account? <span style="color: #ffffff">Login now.</span></a></p></center>
             </div>
             
@@ -987,7 +989,7 @@
                 
                 <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
                 
-                <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid mediumblue;"></h4></center>
                   
                 <center><h2 style="margin-bottom: 20px;">Login here</h2></center>
                 
@@ -1006,7 +1008,7 @@
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
                         <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
                     </form>
-                <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid mediumblue;"></h4></center>
                 </div></center>
             
             </div>

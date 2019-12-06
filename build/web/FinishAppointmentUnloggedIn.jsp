@@ -382,10 +382,10 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder='enter your Queue user name here' type="text" name="username" value="" size="40"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder='enter your Queue user name here' type="text" name="username" value="" size="37"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="Password" type="password" name="password" value="" size="40"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder="Password" type="password" name="password" value="" size="37"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -463,19 +463,19 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input id="SUPfirstName" placeholder='enter your first name' type="text" name="firstName" value="" size="40"/></td>
+                                <td><input id="SUPfirstName" placeholder='enter your first name' type="text" name="firstName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="SUPmiddleName" placeholder='enter your middle name'  type="text" name="middleName" value="" size="40"/></td>
+                                <td><input id="SUPmiddleName" placeholder='enter your middle name'  type="text" name="middleName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="SUPlastName" placeholder='enter your last name'  type="text" name="lastName" value="" size="40"/></td>
+                                <td><input id="SUPlastName" placeholder='enter your last name'  type="text" name="lastName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="SUPtelephone" placeholder='enter your telephone/mobile number here'  type="text" name="telNumber" value="" size="40"/></td>
+                                <td><input id="SUPtelephone" placeholder='enter your telephone/mobile number here'  type="text" name="telNumber" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="SUPemail" placeholder='enter your email address here'  type="text" name="email" value="" size="40"/></td>
+                                <td><input id="SUPemail" placeholder='enter your email address here'  type="text" name="email" value="" size="37"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -486,13 +486,13 @@
                             <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input id="SUPuserName" placeholder='enter login user name here' type="text" name="username" value="" size="40"/></td>
+                                    <td><input id="SUPuserName" placeholder='enter login user name here' type="text" name="username" value="" size="37"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input id="SUPpassword" placeholder='Password' type="password" name="password" value="" size="40"/></td>
+                                    <td><p>Password</p><input id="SUPpassword" placeholder='Password' type="password" name="password" value="" size="37"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Confirm Password</p><input id="SUPconfirm" placeholder='Re-enter Password' type="password" name="confirm" value="" size="40"/></td>
+                                    <td><p>Confirm Password</p><input id="SUPconfirm" placeholder='Re-enter Password' type="password" name="confirm" value="" size="37"/></td>
                                 </tr>
                             </tbody>
                             </table>

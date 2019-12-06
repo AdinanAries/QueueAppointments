@@ -277,6 +277,8 @@
                                         ChosenImage.setAttribute("src", "data:image/jpg;base64,<%=base64Image%>");
                                         ThisCell = document.getElementById("picCell<%=i%>").getAttribute("id");
                                         
+                                        $("html, body").animate({ scrollTop: 0 }, "fast");
+                                        
                                     });
                                 });
                                 

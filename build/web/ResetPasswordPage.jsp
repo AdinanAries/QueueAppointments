@@ -329,21 +329,21 @@
                                 <tr>
                                     <center><p id="nameStatus" style="display: none; background-color: red; color: white; margin-bottom: 10px; max-width: 350px;"></p></center>
                                     <td><p>Enter your existing username below</p>
-                                        <input id="LoginPageUserNameFld" placeholder="enter your current username here" type="text" name="username" value="" size="45" style="background-color: #6699ff;"/></td>
+                                        <input id="LoginPageUserNameFld" placeholder="enter your current username here" type="text" name="username" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <center><p id="telStatus" style="display: none; background-color: red; color: white; margin-bottom: 10px; max-width: 350px;"></p></center>
                                         <p>Enter your mobile number below</p>
-                                        <input id="LoginPageMobileFld" placeholder='enter your mobile number here' type="text" name="mobileFld" value="" size="45" style="background-color: #6699ff;"/></td>
+                                        <input id="LoginPageMobileFld" placeholder='enter your mobile number here' type="text" name="mobileFld" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
                                     <td><p>Enter your new password below</p>
-                                        <input id="LoginPagePasswordFld" placeholder='enter your new password here' type="password" name="password" value="" size="45" style="background-color: #6699ff;"/></td>
+                                        <input id="LoginPagePasswordFld" placeholder='enter your new password here' type="password" name="password" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
                                     <td><p>Confirm your new password below</p>
-                                        <input id="LoginConfirmPasswordFld" placeholder='confirm your new password here' type="password" name="confirmPassword" value="" size="45" style="background-color: #6699ff;"/></td>
+                                        <input id="LoginConfirmPasswordFld" placeholder='confirm your new password here' type="password" name="confirmPassword" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -490,16 +490,16 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="45"/></td>
+                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="45"/></td>
+                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="45"/></td>
+                                <td><input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="45"/></td>
+                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
                             </tr>
                         </tbody>
                     </table>

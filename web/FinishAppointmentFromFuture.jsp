@@ -1623,7 +1623,7 @@
                     
         <div id="newbusiness">
             
-            <!--center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to find a line spot</h2></center>
+            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to find a line spot</h2></center>
             
             <div id="businessdetails">
                 
@@ -1633,16 +1633,16 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="50"/></td>
+                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="50"/></td>
+                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="50"/></td>
+                                <td><input id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="50"/></td>
+                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1662,10 +1662,10 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="50"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="37"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password" type="password" name="password" value="" size="50"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password" type="password" name="password" value="" size="37"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1674,7 +1674,7 @@
                         <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
-                </div></center-->
+                </div></center>
             
         </div>
                     

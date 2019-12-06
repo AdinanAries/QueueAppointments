@@ -230,6 +230,7 @@
                                 
                                 var chosenImage = document.getElementById("chosenImage");
                                 chosenImage.setAttribute("src", "data:image/jpg;base64,<%=base64Image%>");
+                                $("html, body").animate({ scrollTop: 0 }, "fast");
                                 
                             });
                             

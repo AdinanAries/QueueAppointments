@@ -1567,16 +1567,16 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your first name" type="text" name="firstName" value="" size="40"/></td>
+                                <td><input placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your last name" type="text" name="lastName" value="" size="40"/></td>
+                                <td><input placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="40"/></td>
+                                <td><input placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input placeholder="enter your email address here" type="text" name="email" value="" size="40"/></td>
+                                <td><input placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1596,10 +1596,10 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input placeholder="enter your Queue user name here" type="text" name="username" value="" size="40"/></td>
+                                    <td><input placeholder="enter your Queue user name here" type="text" name="username" value="" size="37"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input placeholder="enter your password here" type="password" name="password" value="" size="40"/></td>
+                                    <td><input placeholder="enter your password here" type="password" name="password" value="" size="37"/></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -338,7 +338,7 @@
                 
                 <center><div id ="logindetails" style="padding-top: 15px;">
                 <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
-                <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
+                <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
                 
                 <%if(Message != null){%>
                     <center><h4 style="color: white; margin-bottom: 15px; background-color: red; max-width: 350px;"><%=Message%></h4></center>
@@ -350,10 +350,10 @@
                         
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder='enter your password here' type="password" name="password" value="" size="40" style="background-color: #6699ff;"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder='enter your password here' type="password" name="password" value="" size="37" style="background-color: #6699ff;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -485,11 +485,11 @@
                         
                     </div></center>
                 
-                <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: green; cursor: pointer; margin: 10px; padding: 4px;">forgot my password</h5></center>
+                <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: white; cursor: pointer; margin: 10px; padding: 4px;">forgot my password</h5></center>
                 
-                <h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; background-color: blue; padding: 4px; border: 1px solid black;">I don't have a user account. Sign-up now!</a></h5>
+                <h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; padding: 4px;">I don't have a user account</a></h5>
                 </div></center>
-                <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
             
             </div>
                 
@@ -497,7 +497,7 @@
                 
         <div id="newbusiness" style="height: 525px;">
             
-            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up to add your business or to find a spot</h2></center>
+            <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up to add your business or to find a spot</h2></center>
             
             <div id="businessdetails">
             <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST">
@@ -508,16 +508,16 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="40"/></td>
+                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="40"/></td>
+                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="40"/></td>
+                                <td><input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="40"/></td>
+                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
                             </tr>
                         </tbody>
                     </table>

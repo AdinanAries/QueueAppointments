@@ -458,6 +458,7 @@ if(selectFlag != 2){
                 }
             
             //response.sendRedirect("ServiceProviderPage.jsp");
+            response.getWriter().print("Update Successful");
             
         }
         catch(Exception e){
@@ -465,7 +466,7 @@ if(selectFlag != 2){
         }
         
     }
-}
+    }
     }
 
 

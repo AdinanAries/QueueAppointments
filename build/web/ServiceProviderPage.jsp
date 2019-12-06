@@ -2058,7 +2058,7 @@
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv' style='height: 290px; overflow-y: auto;'>
+                                <div id='CalApptListDiv' style='height: 244px; overflow-y: auto;'>
                                     
                                     <%
                                         int count = 1;
@@ -2177,7 +2177,7 @@
                         <tr id='EventsTr' style="background-color: #eeeeee;">
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
-                                <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
+                                <div id='EventsListDiv' style='height: 244px;; overflow-y: auto;'>
                                     <%
                                         try{
                                             
@@ -2235,9 +2235,8 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>
-                                        </textarea></p>
+                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                        <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
                                     <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
@@ -2246,7 +2245,9 @@
                                         });
                                       });
                                     </script>
-                                    <p>Time: <input id="AddEvntTime" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
+                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
+                                        </textarea></p>
                                 </div>
                             </td>
                         </tr>
@@ -2308,17 +2309,49 @@
 
                                 }, 1);
                                 
-                                $('#AddEvntTime').timepicker({
-                                        timeFormat: 'HH:mm',
-                                        interval: 10,
-                                        minTime: '00',
-                                        maxTime: '23:59',
-                                        defaultTime: '12',
-                                        startTime: '00',
-                                        dynamic: false,
-                                        dropdown: true,
-                                        scrollbar: true
-                                    });
+                                function SetTimetoHiddenEventInput(){
+                            var EventTime = document.getElementById("DisplayedAddEvntTime").value;
+                                    
+                            if(EventTime.length < 8){
+                                EventTime = "0" + EventTime;
+                                //alert(EventTime);
+                            }
+                                    
+                            if(EventTime.substring(6,8) === "PM"){
+                                if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                    EventTime = EventTime.substring(0,5);
+                                }else{
+                                    EventTime = (parseInt(EventTime.substring(0,2),10) + 12) + ":" + EventTime.substring(3,5);
+                                }
+                            }else if(EventTime.substring(6,8) === "AM"){
+                                if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                    EventTime = "00:" + EventTime.substring(3,5);
+                                }else{
+                                    EventTime = EventTime.substring(0,5);
+                                }
+                            }
+                                    
+                            document.getElementById("AddEvntTime").value = EventTime;
+                            //alert(document.getElementById("AddEvntTime").value);
+                        }
+                                
+                        $('#DisplayedAddEvntTime').timepicker({
+                            timeFormat: 'hh:mm p',
+                            interval: 10,
+                            minTime: '00',
+                            maxTime: '23:59',
+                            defaultTime: '12',
+                            startTime: '00',
+                            dynamic: false,
+                            dropdown: true,
+                            scrollbar: true,
+                            change: function(){
+                                SetTimetoHiddenEventInput();
+                            }
+                                        
+                        });
+
+                        SetTimetoHiddenEventInput();
 
                         </script>
                             
@@ -2336,7 +2369,7 @@
                                         data: "EventID="+EventID,
                                         success: function(result){
                                             if(result === "success")
-                                                alert(result);
+                                                alert("Event Deleted Successfully");
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn").style.display = "block";
@@ -2344,6 +2377,7 @@
                                                 document.getElementById("AddEvntDesc").value = "";
                                                 document.getElementById("EvntDatePicker").value = "";
                                                 document.getElementById("AddEvntTime").value = "";
+                                                document.getElementById("DisplayedAddEvntTime").value = "";
                                                 document.getElementById("EvntIDFld").value = "";
                                         }
                                         
@@ -2388,7 +2422,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
-                                            //alert(result);
+                                            alert("Event Updated Successfully");
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -2417,6 +2451,7 @@
                                     document.getElementById("AddEvntDesc").value = "";
                                     document.getElementById("EvntDatePicker").value = "";
                                     document.getElementById("AddEvntTime").value = "";
+                                    document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
                                 
                             }
@@ -2444,7 +2479,7 @@
                                         url: "AddEventProv",
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&ProviderID="+ProvID,
                                         success: function(result){
-                                            
+                                            alert("Event Added Successfully");
                                             var Evnt = JSON.parse(result);
                                             
                                             if(Evnt.JQDate === EvntDate){
@@ -2465,6 +2500,7 @@
                                     document.getElementById("AddEvntDesc").value = "";
                                     document.getElementById("EvntDatePicker").value = "";
                                     document.getElementById("AddEvntTime").value = "";
+                                    document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
                                     
                                 });
@@ -3565,7 +3601,7 @@
                                                         url: "ProvidersUpdateAppointment",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("changeBookedAppointmetForm<%=WString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -3682,25 +3718,25 @@
 
                                                                  if((new Date(document.getElementById("datepicker<%=WString%>").value)) < (new Date())){
 
-                                                                                 if(document.getElementById("datepicker<%=WString%>").value === currentDate){
+                                                                    if(document.getElementById("datepicker<%=WString%>").value === currentDate){
 
-                                                                                         if(document.getElementById("datePickerStatus<%=WString%>").innerHTML === ""){
-                                                                                                 document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Today's Date: " + currentDate;
-                                                                                                 document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "green";
-                                                                                         }
+                                                                        if(document.getElementById("datePickerStatus<%=WString%>").innerHTML === ""){
+                                                                            document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Today's Date: " + currentDate;
+                                                                            document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "green";
+                                                                        }
 
-                                                                                 }
-                                                                                 else{
-                                                                                         document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Only today's date or future date allowed";
-                                                                                         document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "red";
-                                                                                         document.getElementById("datepicker<%=WString%>").value = currentDate;
-                                                                                 }
+                                                                    }
+                                                                    else{
+                                                                        document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Only today's date or future date allowed";
+                                                                        document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "red";
+                                                                        document.getElementById("datepicker<%=WString%>").value = currentDate;
+                                                                    }
                                                                  }
                                                                  else{
 
-                                                                         document.getElementById("datePickerStatus<%=WString%>").innerHTML = "";
-                                                                         //datePickerStatus.innerHTML = "Chosen Date: " + datepicker.value;
-                                                                         //datePickerStatus.style.backgroundColor = "green";
+                                                                    document.getElementById("datePickerStatus<%=WString%>").innerHTML = "";
+                                                                    //datePickerStatus.innerHTML = "Chosen Date: " + datepicker.value;
+                                                                    //datePickerStatus.style.backgroundColor = "green";
                                                                  }
 
                                                          }
@@ -3738,7 +3774,7 @@
                                                         url: "providerDeleteAppointment",  
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert("Spot Deleted Successfully");
                                                           document.getElementById("ApptRow<%=WString%>").style.display = "none";
                                                         }                
                                                       });
@@ -3958,7 +3994,7 @@
                                                         url: "ProvidersUpdateAppointment",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("changeFutureAppointmetForm<%=WString%>").style.display = "none";
                                                           
                                                           //JQuery Ajax takes an object as a parameter.
@@ -4134,7 +4170,7 @@
                                                         url: "providerDeleteAppointment",  
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert("Spot Deleted Successfully");
                                                           document.getElementById("futureApptRow<%=WString%>").style.display = "none";
                                                         }                
                                                       });
@@ -4395,7 +4431,7 @@
                                     
                                                                       
                                                                       Clients.appendChild(Div); 
-                                                                      alert("Customer added to your list")
+                                                                      alert("Customer added to your list");
                                                                   }
                                                               });
                                                           }else{
@@ -4428,7 +4464,7 @@
                                                         url: "providerDeleteAppointment",  
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
-                                                          
+                                                          alert("This history has been deleted successfully");
                                                           document.getElementById("HistoryApptRow<%=WString%>").style.display = "none";
                                                         }                
                                                       });
@@ -4543,6 +4579,9 @@
                                                         
                                                     }                
                                                 });
+                                                alert("Day Closed");
+                                            }else{
+                                                alert("Day Already Closed");
                                             }
                                           }                
                                         });
@@ -4592,7 +4631,7 @@
                                                         url: "OpenClosedDateController",  
                                                         data: "ClosedID="+ClosedID,  
                                                         success: function(result){  
-                                                          
+                                                          alert("Closed day has been opened");
                                                           document.getElementById("eachClosedDate<%=ij%>").style.display = "none";
                                                         }                
                                                       });
@@ -4775,7 +4814,7 @@
                                                         url: "MakeReservationController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&formsDateValue="+reserveDate+"&formsTimeValue="+reserveTime+"&formsOrderedServices="+Reason,  
                                                         success: function(result){  
-                                                          
+                                                          alert(result);
                                                           //document.getElementById("MakeReservationForm").style.display = "none";
                                                         }                
                                                       });
@@ -5043,6 +5082,7 @@
                                                                 url: "UpdateProvPerInfoController",
                                                                 data: "ProviderID="+ProviderID+"&FirstNameFld="+FirstName+"&MiddleNameFld="+MiddleName+"&LastNameFld="+LastName+"&EmailFld="+PerEmail+"&MobileNumberFld="+PerTel,
                                                                 success: function(result){
+                                                                    alert(result);
                                                                     
                                                                    $.ajax({
                                                                         type: "POST",
@@ -5491,7 +5531,9 @@
                                                         type: "POST",  
                                                         url: "ChangeServiceController",  
                                                         data: "SerivceNameFld="+ServiceName+"&ServicePriceFldDD="+PriceDD+"&ServicePriceFldCC="+PriceCC+"&DurationFldHH="+DurationHH+"&DurationFldMM="+DurationMM+"&DescriptionFld="+ServiceNotes+"&ServiceID="+ServiceID,  
-                                                        success: function(result){  
+                                                        success: function(result){ 
+                                                            
+                                                            alert(result);
                                                           
                                                           document.getElementById("changeServiceForm<%=IString%>").style.display = "none";
                                                           
@@ -5559,7 +5601,7 @@
                                                         url: "DeleteServiceController",  
                                                         data: "ServiceID="+ServiceID,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("ServiceRow<%=i%>").style.display = "none";
                                                         }                
                                                       });
@@ -5736,7 +5778,7 @@
                                                         url: "AddServicesController",  
                                                         data: "SerivceNameFld="+ServiceName+"&ServicePriceFldDD="+PriceDD+"&ServicePriceFldCC="+PriceCC+"&DurationFldHH="+DurationHH+"&DurationFldMM="+DurationMM+"&DescriptionFld="+ServiceNotes+"&ProviderID="+ProviderID,  
                                                         success: function(result){  
-                                                          
+                                                          alert(result);
                                                           document.getElementById("addServiceDiv").style.display = "none";
                                                           document.getElementById("AddServiceName").value = "";
                                                           document.getElementById("NewPriceDD").value = "";
@@ -6600,7 +6642,7 @@
                                                                 url: "CancellationPolicyController",  
                                                                 data: "ProviderID="+ProviderID+"&DurationFldHH="+DurationHH+"&ChargeCost="+ChargeCost+"&DurationFldMM="+DurationMM+"&TimeElapse="+timeElapse+"&ChargePercent="+ChargePercent+"&RMVCnclPlcy="+RemoveCancellation,  
                                                                 success: function(result){  
-                                                                  //alert(result);
+                                                                  alert(result);
                                                                   document.getElementById("CnclPlcyForm").style.display = "none";
 
                                                                   var Hour = 0;
@@ -7094,7 +7136,7 @@
                                                         url: "UpdateProvBizInfoController",  
                                                         data: "HouseNumber="+HouseNumber+"&ProviderID="+ProviderID+"&Street="+Street+"&Town="+Town+"&City="+City+"&Country="+Country+"&ZCode="+ZCode+"&BusinessEmailFld="+BusinessEmail+"&BusinessTelephoneNumberFld="+BusinessTel+"&BusinessType="+BizType+"&BusinessNameFld="+BusinessName,  
                                                         success: function(result){  
-                                                          //alert(result);
+                                                          alert(result);
                                                           document.getElementById("EditBizInfoDiv").style.display = "none";
                                                           $.ajax({  
                                                             type: "POST",  
@@ -7235,6 +7277,7 @@
                                                                             //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
                                                                         }
                                                                         if(result === "success"){
+                                                                            alert("Update Successful");
                                                                             document.getElementById("newPassfld").value = "";
                                                                             document.getElementById("compareOldPassfld").value = "";
                                                                             document.getElementById("compareOldPassfld").style.backgroundColor = "#6699ff";
@@ -7556,7 +7599,7 @@
                                                         url: "UnblockCustomerController",  
                                                         data: "BlockedID="+BlockedID,  
                                                         success: function(result){  
-                                                          
+                                                          alert(result);
                                                           document.getElementById("ClientsRow<%=eachBlocked%>").style.display = "none";
                                                         }                
                                                       });

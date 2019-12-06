@@ -1087,7 +1087,7 @@
                                         data: "EventID="+EventID,
                                         success: function(result){
                                             if(result === "success")
-                                                //alert(result);
+                                                alert("Event Deleted Successfully");
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn").style.display = "block";
@@ -1095,6 +1095,7 @@
                                                 document.getElementById("AddEvntDesc").value = "";
                                                 document.getElementById("EvntDatePicker").value = "";
                                                 document.getElementById("AddEvntTime").value = "";
+                                                document.getElementById("DisplayedAddEvntTime").value = "";
                                                 document.getElementById("EvntIDFld").value = "";
                                         }
                                         
@@ -1140,7 +1141,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
-                                            //alert(result);
+                                            alert("Event Updated Successfully");
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -1169,6 +1170,7 @@
                                     document.getElementById("AddEvntDesc").value = "";
                                     document.getElementById("EvntDatePicker").value = "";
                                     document.getElementById("AddEvntTime").value = "";
+                                    document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
                                 
                             }
@@ -1199,7 +1201,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&CustomerID="+CustID,
                                         success: function(result){
                                             
-                                            //alert(result);
+                                            alert("Event Added Successfully");
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -1226,6 +1228,7 @@
                                     document.getElementById("AddEvntDesc").value = "";
                                     document.getElementById("EvntDatePicker").value = "";
                                     document.getElementById("AddEvntTime").value = "";
+                                    document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
                                     
                                 });
@@ -1343,7 +1346,8 @@
                                                              type: "POST",  
                                                              url: "SendProvCustFeedBackController",  
                                                              data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
-                                                             success: function(result){  
+                                                             success: function(result){ 
+                                                               alert(result);
                                                                document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv").style.display = "block";
                                                                document.getElementById("ExtLasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
@@ -1384,9 +1388,7 @@
                             
                             <script>
                                     function checkExtraLogInFormFieldsStatus() {
-                                    var changeUserAccountStatus = document.getElementById(
-                                      "ExtrachangeUserAccountStatus"
-                                    );
+                                    var changeUserAccountStatus = document.getElementById("ExtrachangeUserAccountStatus");
                                     var LoginFormBtn = document.getElementById("ExtraLoginFormBtn");
                                     var NewPasswordFld = document.getElementById("ExtraNewPasswordFld");
                                     var CurrentPasswordFld = document.getElementById("ExtraCurrentPasswordFld");
@@ -1471,6 +1473,7 @@
                                                     //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
                                                 }
                                                 if(result === "success"){
+                                                    alert("Update Successful");
                                                     document.getElementById("ExtraNewPasswordFld").value = "";
                                                     document.getElementById("ExtraCurrentPasswordFld").value = "";
                                                     document.getElementById("ExtraCurrentPasswordFld").style.backgroundColor = "#eeeeee";
@@ -1488,7 +1491,6 @@
                                                         success: function(result){
 
                                                             document.getElementById("ExtraUpdateLoginNameFld").value = result;
-
 
                                                         }
 

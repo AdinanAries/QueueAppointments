@@ -28,6 +28,8 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getLastProvNews.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/FinishAppointmentFromFuture.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/ProviderInfo.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueAdmins.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/icons/UserProfileIcon.png</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectDentistLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SetUserAddress.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/providerDeleteAppointment.java</file>
@@ -54,6 +56,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/QueueMailerUtil.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueCSS.css</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ViewCustomerReviews.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/scripts/script.js</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getProvFeedbackDate.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/PasswordResetController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getCustFeedbackDate.java</file>
@@ -173,6 +176,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UnblockCustomerController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdatePassword.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/UploadProviderProfilePhoto.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ContactUs.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueLogo.png</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectTattooLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetProvPerInfo.java</file>
@@ -185,6 +189,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DltProvEvntAjax.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectHomeServe.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectPhysicalTherapyLoggedIn.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UnblockSpotControllerforBlockSpotsPage.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/AddEventProv.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/SignUpPage.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectPodiatry.jsp</file>
@@ -205,6 +210,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SetSpotsIntervalController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DltProvNews.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectPiercingLoggedIn.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ContactCss.css</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetLastFavProv.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectTattoo.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SendCustomerReviewController.java</file>
