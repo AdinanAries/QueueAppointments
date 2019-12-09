@@ -711,7 +711,7 @@
         
     %>
     
-    <body>
+    <body id="CustomerPageHtmlBody">
         
         <!--script>
             setTimeout(function(){
@@ -868,14 +868,32 @@
                         <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
                         </li>
                     </ul>
-                    <form name="miniDivSearch" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                            <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
+                    <div>
+                            <input id="MiniNavSearchBox" style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
                                    placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                             <input type='hidden' name='User' value='<%=NewUserName%>' />
-                            <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
-                                   type="submit" value="Search" />
-                    </form>
+                            <input onclick="SearchFromMiniNav();" style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
+                                   type="button" value="Search" />
+                    </div>
+                    <script>
+                        function SearchFromMiniNav(){
+                            
+                            document.getElementById("SpotsIframe").style.display = "none";
+                            document.getElementById("FavoritesIframe").style.display = "none";
+                            document.getElementById("ExploreDiv").style.display = "none";
+                            document.getElementById("SearchIframe").style.display = "block";
+                            document.querySelector(".UserProfileContainer").style.display = "none";
+                            
+                            var SearchString = document.getElementById("MiniNavSearchBox").value;
+                            
+                            document.getElementById("SearchIframe").src = "QueueSelectBusinessSearchResultLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>&SearchFld="+SearchString;
+                            
+                            document.body.scrollTop = 0;
+                            document.documentElement.scrollTop = 0;
+                        }
+                        
+                    </script>
                 </center>
             </div>
             
@@ -2083,62 +2101,198 @@
             
             
         <div class="DashboardContent" id="">
-            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px;'>
-                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; width: 30%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
-                            <p style='margin-top: 0;'>News</p> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; width: 37%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
-                            <p style='margin-top: -4px;'>Notification</p> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 30%; color: black; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
-                            <p style='margin-top: 0;'>Calender</p></div></a>
+            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px; width: 100%;'>
+                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                            <p style='margin-top: 0; font-size: 11px;'>News</p> </div></a>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                            <p style='margin-top: -4px; font-size: 11px;'>Notification</p> </div></a>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 25%; color: black; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                            <p style='margin-top: 0; font-size: 11px;'>Calender</p></div></a>
+                            <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='width: 25%; color: black; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
+                            <p style='margin-top: 0; font-size: 11px;'>Settings</p></div></a>
                     <p style='clear: both;'></p>
                     </div></center>
                         
             <center><div id="ExploreAndAccountButtons">
                     <div onclick="showDashboardExplore();" id="exploreBtn">
-                        <img style="display: none;" id="RegularExploreIcon" src="icons/SecondExploreIcon.png" width="30" height="30" alt=""/>
-                        <img style="display: none;" id="ActiveExploreIcon" src="icons/ExploreIcon.png" width="30" height="30" alt=""/>
-                        <p style="padding: 0; margin-top: -5px;">Explore</p></div>
+                        <img style="display: none;" id="RegularExploreIcon" src="icons/SecondExploreIcon.png" width="29" height="29" alt=""/>
+                        <img style="display: none;" id="ActiveExploreIcon" src="icons/ExploreIcon.png" width="29" height="29" alt=""/>
+                        <p id="ExploreBtnText" style="padding: 0; font-size: 12px; margin-top: -6px;">Explore</p>
+                    </div>
+                    <div onclick="showDashboardSpots();" style="margin-top: 1px;" id="QueueIconBtn">
+                            <img style="display: none;" style="" id="QueueIcon" src="icons/Logo.png" alt="" width="24" height="24"/>
+                            <!--img style="display: none;" style="" id="FavoritesIcon" src="icons/FavoritesIcon.png" alt="" width="32" height="32"/-->
+                            <p id="SpotsBtnTxt" style="padding: 0; font-size: 12px; margin-top: -2px;">Spots</p>
+                    </div>
+                    <div onclick="showDashboardFavorites();" style="margin-top: -3px" id="favoritesBtn">
+                            <img style="display: none;" style="" id="SecondFavoritesIcon" src="icons/SecondFavoritesIcon.png" alt="" width="32" height="32"/>
+                            <img style="display: none;" style="" id="FavoritesIcon" src="icons/FavoritesIcon.png" alt="" width="32" height="32"/>
+                            <p id="FavoritesBtnTxt" style="padding: 0; font-size: 12px; margin-top: -6px;">Favorites</p>
+                    </div>
                     <div onclick="showDashboardAccount();" id="accountBtn">
+                            <%
+                                if(Base64Pic != ""){
+                            %>
+                            <!--center><div id="custProPicDisplay" style="width: 100%; max-width: 340px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                             <img style="border-radius: 100%; border: #ccc 1px solid; margin-bottom: 0; margin-left: -5px; margin-top: -34px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="40" height="40"/>
+                                <!--/div></center-->
+                            <%
+                                }
+                            %>
                         <img style="display: none;" id="ActiveUserProfile" src="icons/UserProfileIcon.png" width="30" height="30" alt=""/>
                         <img style="display: none;" id="RegularUserProfile" src="icons/SecondUserProfileIcon.png" width="30" height="30" alt=""/>
-                        <p style="padding: 0; margin-top: -5px;">Account</p></div>
+                        <p id="AccountBtnTxt" style="padding: 0; font-size: 12px; margin-top: -6px;">Account</p>
+                    </div>
                     <p style="clear: both;"></p>
                     
                     <script>
                         document.getElementById("ActiveExploreIcon").style.display = "block";
                         document.getElementById("RegularUserProfile").style.display = "block";
-                        function showDashboardExplore(){
+                        document.getElementById("FavoritesIcon").style.display = "block";
+                        document.getElementById("QueueIcon").style.display = "block";
+                        
+                        document.getElementById("ExploreBtnText").style.color = "blue";
+                        
+                        function showDashboardSpots(){
+                            
+                            if(document.getElementById("SpotsIframe").style.display === "block"){
+                                document.getElementById("SpotsIframe").src = "ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                            }
+                            
+                            document.getElementById("QueueIcon").style.cssText = "opacity: 1;-moz-filter: grayscale(0%);-ms-filter: grayscale(0%); -o-filter: grayscale(0%);filter: grayscale(0%);";
+                            document.getElementById("QueueIcon").style.display = "none";
+                            document.getElementById("QueueIcon").style.display = "block";
+                            
                             document.querySelector(".UserProfileContainer").style.display = "none";
-                            document.getElementById("ExploreDiv").style.display = "block";
+                            document.getElementById("FavoritesIframe").style.display = "none";
+                            document.getElementById("ExploreDiv").style.display = "none";
+                            document.getElementById("SpotsIframe").style.display = "block";
+                            document.getElementById("SearchIframe").style.display = "none";
                             
                             document.getElementById("ActiveUserProfile").style.display = "none";
+                            document.getElementById("SecondFavoritesIcon").style.display = "none";
+                            document.getElementById("RegularUserProfile").style.display = "block";
+                            
+                            document.getElementById("RegularExploreIcon").style.display = "block";
+                            document.getElementById("FavoritesIcon").style.display = "block";
+                            document.getElementById("ActiveExploreIcon").style.display = "none";
+                            
+                            document.getElementById("SpotsBtnTxt").style.color = "blue";
+                            document.getElementById("ExploreBtnText").style.color = "black";
+                            document.getElementById("FavoritesBtnTxt").style.color = "black";
+                            document.getElementById("AccountBtnTxt").style.color = "black";
+                            
+                            document.body.scrollTop = 0;
+                            document.documentElement.scrollTop = 0;
+                            
+                        }
+                        
+                        function showDashboardExplore(){
+                            
+                            if(document.getElementById("ExploreDiv").style.display === "block"){
+                                document.getElementById("ExploreDiv").src = "ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                            }
+                            
+                            document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
+                            document.getElementById("QueueIcon").style.display = "none";
+                            document.getElementById("QueueIcon").style.display = "block";
+                            
+                            document.querySelector(".UserProfileContainer").style.display = "none";
+                            document.getElementById("FavoritesIframe").style.display = "none";
+                            document.getElementById("ExploreDiv").style.display = "block";
+                            document.getElementById("SpotsIframe").style.display = "none";
+                            document.getElementById("SearchIframe").style.display = "none";
+                            
+                            document.getElementById("ActiveUserProfile").style.display = "none";
+                            document.getElementById("SecondFavoritesIcon").style.display = "none";
                             document.getElementById("RegularUserProfile").style.display = "block";
                             
                             document.getElementById("RegularExploreIcon").style.display = "none";
+                            document.getElementById("FavoritesIcon").style.display = "block";
                             document.getElementById("ActiveExploreIcon").style.display = "block";
+                            
+                            document.getElementById("ExploreBtnText").style.color = "blue";
+                            document.getElementById("SpotsBtnTxt").style.color = "black";
+                            document.getElementById("FavoritesBtnTxt").style.color = "black";
+                            document.getElementById("AccountBtnTxt").style.color = "black";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
                             
                         }
                         function showDashboardAccount(){
+                        
+                            if(document.querySelector(".UserProfileContainer").style.display === "block"){
+                                document.querySelector(".UserProfileContainer").src = "ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                            }
+                        
+                        
+                            document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
+                            document.getElementById("QueueIcon").style.display = "none";
+                            document.getElementById("QueueIcon").style.display = "block";
+                        
                             document.querySelector(".UserProfileContainer").style.display = "block";
+                            document.getElementById("FavoritesIframe").style.display = "none";
                             document.getElementById("ExploreDiv").style.display = "none";
+                            document.getElementById("SpotsIframe").style.display = "none";
+                            document.getElementById("SearchIframe").style.display = "none";
                             
                             document.getElementById("ActiveUserProfile").style.display = "block";
+                            document.getElementById("SecondFavoritesIcon").style.display = "none";
                             document.getElementById("RegularUserProfile").style.display = "none";
                             
                             document.getElementById("RegularExploreIcon").style.display = "block";
+                            document.getElementById("FavoritesIcon").style.display = "block";
                             document.getElementById("ActiveExploreIcon").style.display = "none";
+                            
+                            document.getElementById("AccountBtnTxt").style.color = "blue";
+                            document.getElementById("SpotsBtnTxt").style.color = "black";
+                            document.getElementById("FavoritesBtnTxt").style.color = "black";
+                            document.getElementById("ExploreBtnText").style.color = "black";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
+                            
+                        }
+                        
+                        function showDashboardFavorites(){
+                        
+                            if(document.getElementById("FavoritesIframe").style.display === "block"){
+                                document.getElementById("FavoritesIframe").src = "AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                            }
+                            
+                            document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
+                            document.getElementById("QueueIcon").style.display = "none";
+                            document.getElementById("QueueIcon").style.display = "block";
+                        
+                            document.querySelector(".UserProfileContainer").style.display = "none";
+                            document.getElementById("FavoritesIframe").style.display = "block";
+                            document.getElementById("ExploreDiv").style.display = "none";
+                            document.getElementById("SpotsIframe").style.display = "none";
+                            document.getElementById("SearchIframe").style.display = "none";
+                            
+                            document.getElementById("ActiveUserProfile").style.display = "none";
+                            document.getElementById("SecondFavoritesIcon").style.display = "block";
+                            document.getElementById("RegularUserProfile").style.display = "block";
+                            
+                            document.getElementById("RegularExploreIcon").style.display = "block";
+                            document.getElementById("FavoritesIcon").style.display = "none";
+                            document.getElementById("ActiveExploreIcon").style.display = "none";
+                            
+                            document.getElementById("FavoritesBtnTxt").style.color = "blue";
+                            document.getElementById("SpotsBtnTxt").style.color = "black";
+                            document.getElementById("AccountBtnTxt").style.color = "black";
+                            document.getElementById("ExploreBtnText").style.color = "black";
+                            
+                            document.body.scrollTop = 0;
+                            document.documentElement.scrollTop = 0;
+                            
                         }
                     </script>
                     
             </div></center>
                      
-            <div id="ExploreDiv">
+            <div id="DesktopExplore" >
                 
             <div id="nav" style='display: block;'>
                
@@ -2246,17 +2400,9 @@
             </div>
             
             <div id="main" class="Main">
-                <%
-                    if(Base64Pic != ""){
-                %>
-                <center><div id="custProPicDisplay" style="width: 100%; max-width: 340px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                 <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="40" height="40"/>
-                    </div></center>
-                <%
-                    }
-                %>
+                
                     
-                <center><p style="color: white; background-color: green; margin-bottom: 15px; margin-top: 0; max-width: 300px">
+                <center><p style="color: white; margin-bottom: 5px; padding-top: 10px; max-width: 300px">
                         <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - Explore below </p></center>
                  
                 <!--cetnter><h4></h4></cetnter-->
@@ -2355,7 +2501,7 @@
           </div>    
         </div>
                 
-        <div onclick='hideExtraDropDown();' class="UserProfileContainer" id="newbusiness" style="padding-top: 0;">
+        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0;">
                 
                 <!----------------------------------------------------------------------------------------------------------------->
         <div id='Extras2Container' style='z-index: 200;'>
@@ -5971,18 +6117,35 @@
                                     
                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <input type="submit" value="Logout" class="button" />
+                    <input style="width: 95%; height: auto;" type="submit" value="Logout" class="button" />
                 </form> 
                 
                 </div>
                   
-                                        
+                <div id="IframesDiv">
+                    
+                   <iframe onload="GoToMobileTop();" id="FavoritesIframe" style="position: absolute; background-color: #6699ff;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="GoToMobileTop();" style="position: absolute; background-color: #6699ff;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="GoToMobileTop();" style="position: absolute; background-color: #6699ff;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="GoToMobileTop();" id="SpotsIframe" style="position: absolute; background-color: #ccccff;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>             
+                   <iframe onload="GoToMobileTop();" id="SearchIframe" style="position: absolute; background-color: #6699ff"  src=""></iframe>
+                   
+                   <script>
+                       
+                       function GoToMobileTop(){
+                           $("html, body").animate({ scrollTop: 0}, "fast");
+                       }
+                       
+                    </script>
+                    
+                </div>
+                   
         <div class="DashboardFooter" id="footer">
             <p>AriesLab &copy;2019</p>
         </div>
                                         
     </div>
-                                        
+                                    
     </body>
     <script>
         var ControllerResult = "<%=ControllerResult%>";

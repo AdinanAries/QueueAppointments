@@ -93,11 +93,11 @@
     
     <body style='background-color: #7e7e7e;'>
         
-    <center><div style="position: fixed; width: 100%; padding: 0;">
+    <!--center><div style="position: fixed; width: 100%; padding: 0;">
             <center><a href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="margin-top: 5px; margin-bottom: 0; background-color: pink; color: white; padding: 5px; width: 150px; max-width: 400px; border: 1px solid red;">Your Dashboard</p></a>
             </center>
-    </div></center>
-    <center><div style="padding-top: 43px;"> 
+    </div></center-->
+    <center><div style=""> 
             
         <center><h3 style='color: white; text-align: center; margin-bottom: 0; margin-top: 0; width: 120px;'>Your Reviews</h3></center>
         

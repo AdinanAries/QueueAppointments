@@ -634,7 +634,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                                 insertPst.executeUpdate();
 
                                 //JOptionPane.showMessageDialog(null, "You've been enqueued successfully!");
-                                response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+yourIndex+"&User="+VerifiedName+"result=You've been enqueued successfully");
+                                response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+yourIndex+"&User="+VerifiedName+"&result=You've been enqueued successfully");
                                 //response.sendRedirect("ProviderCustomerPage.jsp");
 
                             }catch(Exception e){

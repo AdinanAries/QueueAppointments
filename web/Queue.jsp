@@ -203,15 +203,15 @@
             
             <cetnter><p> </p></cetnter>
             <center><image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/></center>
-            <center><p style="font-size: 20px; font-family: serif; margin: 5px;"><b>Find medical & beauty places</b></p></center>
+            <center><p style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></center>
+            
+        </div>
             
             <center><a href="NewsUpadtesPage.jsp"><p id='QShowNews22' 
-                style='background-color: #ccccff; color: black; border-top: 1px solid white; padding-top: 5px; cursor: pointer;'>
+                style='background-color: #6699ff; color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0;'>
                     <img style='background-color: white; width: 25px; height: 24px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                     <sup style='font-size: 17px;'>Show News Updates</sup>
             </p></a></center>
-            
-        </div>
             
             <div id="Extras">
             
@@ -512,7 +512,7 @@
             
             <div id="main" class="Main" style="padding-top: 5px;">
                
-                <center><p style="max-width: 350px; color: white; background-color: red; margin-bottom: 10px;"><%=Message%></p><center>
+                <!--center><p style="max-width: 350px; color: white; background-color: red; margin-bottom: 10px;"><=Message%></p><center-->
                
                 <!--h1>Academic Appointments</h1>
                 <h2>Select Service category</h2>
@@ -522,7 +522,7 @@
                 
                 
                 <h1>Beaty Services Appointments</h1-->
-                <h4>Select Service category</h4>
+                <h4 style="padding: 5px;">Select Service category</h4>
                 
                  <div id="firstSetProvIcons">
                 <center><table id="providericons">

@@ -31,7 +31,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     
-    <body style="background-color: #7e7e7e;">
+    <body style="background-color: #7e7e7e; position: absolute; width: 100%;">
         <h3 style="text-align: center; margin: 5px; color: white;">Available Future Spots</h3>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                

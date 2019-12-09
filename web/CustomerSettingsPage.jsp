@@ -1507,9 +1507,9 @@
                         </tr>
                         <tr>
                             <td>
-                                <form action = "LogoutController" name="LogoutForm" method="POST"> 
+                                <form style="margin-top: 10px;" action="LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input style='width: 100%; background-color: red; color: white; border: 0; padding: 4px; border-radius: 0; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
                                 </form>
                             </td>
                         </tr>
@@ -1591,6 +1591,8 @@
                 showPCustExtraNotification();
             else if(Settings === '2')
                 showPCustExtraCal();
+            else if(Settings === '3')
+                showPCustExtraUsrAcnt();
     </script>
     
 </html>

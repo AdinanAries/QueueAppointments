@@ -10,6 +10,7 @@ body {
   background-color: #2c3539;
   overflow-x: hidden;
 }
+
 a {
   text-decoration: none;
 }
@@ -41,6 +42,23 @@ h3 {
 }
 #DropDown ul li:hover {
   background-color: darkgrey;
+}
+#FavoritesIframe{
+    display: none;
+    width: 100%;
+    border: 0;
+}
+#ExploreDiv{
+    display: none;
+}
+#SpotsIframe{
+    display: none; 
+}
+#SearchIframe{
+    display: none;
+}
+.UserProfileContainer{
+        display: none;
 }
 #miniNav {
   /*background-color: pink;*/
@@ -963,16 +981,34 @@ input[type=radio]:checked {
 }
 
 @media only screen and (max-width: 700px){
+    #DesktopExplore{
+        display: none;
+    }
+    .DesktopUserAccount{
+        display: none;
+    }
     #ExploreDiv{
-        min-height: 800px;
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border: 0;
         background-color: #6699ff;
+        overflow-y: scroll;
+        /*top: 40px;
+        bottom: 41px;*/
     }
     *{
         font-family: 'Roboto';
         font-size: 14px;
     }
     .UserProfileContainer{
-        display:none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: none;
+        overflow-y: scroll;
     }
     #ShowProInfo{
         display: none;
@@ -1107,19 +1143,34 @@ input[type=radio]:checked {
         border-top: 1px solid #ccc;
         width: 100%;
         display: block;
+        display: table-row;
     }
     #ExploreAndAccountButtons #accountBtn{
         float: right;
-        width: 49%;
-        padding-top: 4px;
-        padding-bottom: 4px;
+        width: 24%;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        cursor: pointer;
+    }
+    #ExploreAndAccountButtons #QueueIconBtn{
+        float: left;
+        width: 24%;
+        padding-top: 1px;
+        padding-bottom: 1px;
         cursor: pointer;
     }
     #ExploreAndAccountButtons #exploreBtn{
         float: left;
-        width: 49%;
-        padding-top: 4px;
-        padding-bottom: 4px;
+        width: 24%;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        cursor: pointer;
+    }
+    #ExploreAndAccountButtons #favoritesBtn{
+        float: left;
+        width: 24%;
+        padding-top: 1px;
+        padding-bottom: 1px;
         cursor: pointer;
     }
     .DashboardFooter{
@@ -1138,10 +1189,78 @@ input[type=radio]:checked {
     #SmallscreenProfilePic{
         display: block;
     }
-    /*#smallScreenProfileCover{
-        -moz-filter: blur(4px);
-        -ms-filter: blur(4px);
-        -o-filter: blur(4px);
-        filter: blur(4px);
+    #FavoritesIframe{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        overflow-y: scroll;
+    }
+    #SpotsIframe{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 0; 
+        overflow-y: scroll;
+    }
+    #SearchIframe{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border: 0; 
+        overflow-y: scroll;
+    }
+    #footer{
+        display: none;
+    }
+    body{
+        position: absolute;
+        height: calc(100% - 81px);
+        width: 100%;
+        background-color: #6699ff;
+    }
+    /*#CustomerPageHtmlBody{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    #container{
+        width: 100%;
+        height: 100%;
+    }
+    #IframesDiv{
+        height: calc(100% - 81px);
     }*/
+    #QueueIcon{
+        opacity: 0.8;
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+}
+
+@media only screen and (max-width: 320px){
+    /*.UserProfileContainer{
+        margin-bottom: 40px;
+    }
+    #FavoritesIframe{
+        margin-bottom: 40px;
+    }
+    #SpotsIframe{
+        margin-bottom: 40px;
+    }
+    #SearchIframe{
+        margin-bottom: 40px;
+    }
+    #ExploreDiv{
+        margin-bottom: 40px;
+    }*/
+    
+    body{
+        position: static;
+        height: auto;
+        padding-bottom: 41px;
+    }
+    
 }

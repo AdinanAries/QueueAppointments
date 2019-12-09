@@ -747,7 +747,7 @@
                 <script src="scripts/script.js"></script>
                 
                 <center><div class =" SearchObject">
-                        
+                   
                     <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                         <input type="hidden" name="User" value="<%=NewUserName%>" />
