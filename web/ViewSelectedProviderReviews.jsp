@@ -251,8 +251,8 @@
             <p style="color: darkgray; margin: 0; text-align: left;">Total Reviews: <span style="color:#6699ff ;"> <%if(NumberOfRatings == 1){%>Review<%} else{%> Reviews<%}%> from
                     <%=NumberOfRatings%> <%if(NumberOfRatings == 1){%>person.<%} else{%> people.<%}%></span></p>
             
-            <p style="color: darkgray; margin: 0; text-align: left;">Rating Score: <span style="color:#6699ff ;">Scored <%=TotalRatings%>/<%=FullRating%> points.</span></p>
-            <p style="color: darkgray; margin: 0; text-align: left;">Raw Rating: <span style="color:#6699ff ;">Rated with <%=CalculatedRating%> points.</span></p>
+            <p style="color: darkgray; margin: 0; text-align: left;">Rating Score: <span style="color:#6699ff ;">Scores <%=TotalRatings%>/<%=FullRating%> points.</span></p>
+            <p style="color: darkgray; margin: 0; text-align: left;">Exact Rating: <span style="color:#6699ff ;">Gets <%=CalculatedRating%>/5 stars.</span></p>
             <p style="color: darkgray; margin: 0; text-align: left;">Approximated Rating: <span style="color:#6699ff ;">Rated as <%=RatingsAvg%><%if(RatingsAvg == 1){%> star.<%} else{%> stars.<%}%></span></p>
             </div>
             </div>

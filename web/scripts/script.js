@@ -1024,14 +1024,23 @@ function toggleHideAppointmentsDiv() {
   //appointmentsDiv.style.display = "block";
 
   if (appointmentsDiv.style.display === "block") {
-    appointmentsDiv.style.display = "none";
+    $("#appointmentsDiv").fadeOut("fast");
     hideAppointments.innerHTML = "Show Spots";
+    $("html, body").animate({ scrollTop: 0}, "fast");
+    appointmentsDiv.style.display = "none";
   } else {
-    $("html, body").animate({ scrollTop: 490 }, "fast");
-    appointmentsDiv.style.display = "block";
+    $("html, body").animate({ scrollTop: 298 }, "fast");
+    $("#appointmentsDiv").fadeIn("slow");
     hideAppointments.innerHTML = "Hide Spots";
+    appointmentsDiv.style.display = "block";
   }
 
+}
+
+function showProfile(){
+    $('html, body').animate({
+        'scrollTop' : $("#newbusiness").position().top
+    });
 }
 
 function hideProvApptListAndMkReservForMobile(){
@@ -1042,7 +1051,7 @@ function hideProvApptListAndMkReservForMobile(){
         
         appointmentsDiv.style.display = "none";
         hideAppointments.innerHTML = "Show Spots";
-        hideAppointments.style.backgroundColor = "red";
+        //hideAppointments.style.backgroundColor = "red";
         hideAppointments.style.color = "white";
         
         document.getElementById("MakeReservationForm").style.display = "none";

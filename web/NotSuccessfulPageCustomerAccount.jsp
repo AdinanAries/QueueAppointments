@@ -62,7 +62,7 @@
         }
     %>
     
-        <body>
+        <body style="padding-bottom: 0;">
             
         <div id="PermanentDiv" style="">
             

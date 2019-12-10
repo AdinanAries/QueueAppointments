@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <title>Queue: Subscribe</title>
     </head>
-    <body style="margin: 0;">
+    <body style="margin: 0; padding-bottom: 0; background-color: #ccccff;">
         
         <center><div style="width: 100%; max-width: 700px; background-color: #6699ff; padding-bottom: 10px; min-height: 800px;">
                 

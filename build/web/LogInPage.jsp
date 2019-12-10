@@ -85,7 +85,7 @@
         }catch(Exception e){}*/
     %>
     
-    <body>
+    <body style="padding-bottom: 0; background-color: #ccccff;">
         
         <div id="PermanentDiv" style="">
             
@@ -338,7 +338,7 @@
                 
                 <center><div id ="logindetails" style="padding-top: 15px;">
                 <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
-                <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
+                <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                 
                 <%if(Message != null){%>
                     <center><h4 style="color: white; margin-bottom: 15px; background-color: red; max-width: 350px;"><%=Message%></h4></center>
@@ -489,7 +489,7 @@
                 
                 <h5  style = "margin: 10px;" ><a href="SignUpPage.jsp" style="color: white; padding: 4px;">I don't have a user account</a></h5>
                 </div></center>
-                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
             
             </div>
                 

@@ -75,7 +75,7 @@
         
     %>
     
-    <body>
+    <body style="padding-bottom: 0; background-color: #ccccff;">
         <!--a id='mapLink'>Click here to see location</a-->
         
         <script>

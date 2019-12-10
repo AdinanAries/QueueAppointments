@@ -206,7 +206,7 @@
             
         %>
         
-    <body>
+    <body style="padding-bottom: 0; background-color: #ccccff;">
         
         <div id="PermanentDiv" style="">
             

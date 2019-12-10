@@ -155,7 +155,7 @@
             </script>
         </form>
         <p style="border-top: 1px solid darkgrey; margin-top: 10px;"></p>
-        <a href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
+        <!--a href="ProviderCustomerPage.jsp?UserIndex=<=UserIndex%>&User=<=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a-->
         
     </body>
     <script>

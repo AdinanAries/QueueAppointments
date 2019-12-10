@@ -154,7 +154,7 @@
     %>
     
     
-    <body style="background-color: #333333; margin:0; padding:0;">
+    <body style="background-color: #333333; margin:0; padding:0; position: absolute; width: 100%;">
         
     
             

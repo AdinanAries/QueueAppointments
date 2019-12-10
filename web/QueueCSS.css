@@ -981,6 +981,12 @@ input[type=radio]:checked {
 }
 
 @media only screen and (max-width: 700px){
+    #QueuLineDiv table tbody tr td:hover {
+        background: none;
+        border: 0;
+        border-top: 1px solid darkgray;
+        border-bottom: 1px solid darkgray;
+    }
     #DesktopExplore{
         display: none;
     }
@@ -1133,6 +1139,9 @@ input[type=radio]:checked {
     }
     #ProviderHeader img{
         display: none;
+    }
+    #ProviderHeader{
+        padding-top: 32px;;
     }
     #ExploreAndAccountButtons{
         position: fixed;

@@ -285,10 +285,10 @@
             <div id="miniNav" style="display: none;">
                 <center>
                     <ul id="miniNavIcons" style="float: left;">
-                        <a href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><li><img src="icons/icons8-home-24.png" width="24" height="24" alt="icons8-home-24"/>
-                            </li></a>
-                        <!--li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
-                        </li-->
+                        <!--a href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><li><img src="icons/icons8-home-24.png" width="24" height="24" alt="icons8-home-24"/>
+                            </li></a-->
+                        <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
+                        </li>
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                         <input type="hidden" name="User" value="<%=NewUserName%>" />

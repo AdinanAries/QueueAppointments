@@ -84,7 +84,7 @@
        
     %>
     
-    <body style="background-color: #ccccff;">
+    <body style="background-color: #ccccff; padding-bottom: 0;">
         
         <!--script>
             setTimeout(function(){

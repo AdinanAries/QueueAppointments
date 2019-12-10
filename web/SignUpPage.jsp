@@ -90,7 +90,7 @@
         
     %>
     
-    <body>
+    <body style="padding-bottom: 0; background-color: #ccccff;">
         
         <div id="PermanentDiv" style="">
             
@@ -363,7 +363,7 @@
                     
                 <div class="scrolldiv" style=" height: 450px; overflow-y: auto; width: auto;">
                     
-                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                 
                 <center><h3 style="color: white; margin-bottom: 15px; background-color: red;"></h3></center>
                 
@@ -976,7 +976,7 @@
                 </div>
                 </div></center>
                 
-                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid aqua;"></h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                 <center><p id="alreadyAccountStatus" ><a style="color: #000099;" href="LogInPage.jsp">Already have an account? <span style="color: #ffffff">Login now.</span></a></p></center>
             </div>
             
@@ -989,7 +989,7 @@
                 
                 <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
                 
-                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid mediumblue;"></h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                   
                 <center><h2 style="margin-bottom: 20px;">Login here</h2></center>
                 
@@ -1008,7 +1008,7 @@
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
                         <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
                     </form>
-                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px; border-bottom: 1px solid mediumblue;"></h4></center>
+                <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                 </div></center>
             
             </div>

@@ -2102,13 +2102,13 @@
             
         <div class="DashboardContent" id="">
             <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px; width: 100%;'>
-                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>News</p> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
                             <p style='margin-top: -4px; font-size: 11px;'>Notification</p> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 25%; color: black; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>Calender</p></div></a>
-                            <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='width: 25%; color: black; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
+                            <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>Settings</p></div></a>
                     <p style='clear: both;'></p>
                     </div></center>

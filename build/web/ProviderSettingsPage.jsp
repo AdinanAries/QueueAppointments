@@ -327,7 +327,7 @@
         }
     %>
     
-    <body style="background-color: #ccccff;">
+    <body style="background-color: #ccccff; padding-bottom: 0;">
         
     <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
             
@@ -803,9 +803,8 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
-                                        </textarea></p>
+                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                        <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
                                     <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
@@ -814,7 +813,9 @@
                                         });
                                       });
                                     </script>
-                                    <p>Time: <input id="AddEvntTime" style='background-color: white;' type="text" name="EvntTime" value="" /></p>
+                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
+                                        </textarea></p>
                                 </div>
                             </td>
                         </tr>
@@ -876,17 +877,49 @@
 
                                 }, 1);
                                 
-                                $('#AddEvntTime').timepicker({
-                                        timeFormat: 'HH:mm',
-                                        interval: 10,
-                                        minTime: '00',
-                                        maxTime: '23:59',
-                                        defaultTime: '12',
-                                        startTime: '00',
-                                        dynamic: false,
-                                        dropdown: true,
-                                        scrollbar: true
-                                    });
+                                function SetTimetoHiddenEventInput(){
+                            var EventTime = document.getElementById("DisplayedAddEvntTime").value;
+                                    
+                            if(EventTime.length < 8){
+                                EventTime = "0" + EventTime;
+                                //alert(EventTime);
+                            }
+                                    
+                            if(EventTime.substring(6,8) === "PM"){
+                                if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                    EventTime = EventTime.substring(0,5);
+                                }else{
+                                    EventTime = (parseInt(EventTime.substring(0,2),10) + 12) + ":" + EventTime.substring(3,5);
+                                }
+                            }else if(EventTime.substring(6,8) === "AM"){
+                                if(parseInt(EventTime.substring(0,2), 10) === 12){
+                                    EventTime = "00:" + EventTime.substring(3,5);
+                                }else{
+                                    EventTime = EventTime.substring(0,5);
+                                }
+                            }
+                                    
+                            document.getElementById("AddEvntTime").value = EventTime;
+                            //alert(document.getElementById("AddEvntTime").value);
+                        }
+                                
+                        $('#DisplayedAddEvntTime').timepicker({
+                            timeFormat: 'hh:mm p',
+                            interval: 10,
+                            minTime: '00',
+                            maxTime: '23:59',
+                            defaultTime: '12',
+                            startTime: '00',
+                            dynamic: false,
+                            dropdown: true,
+                            scrollbar: true,
+                            change: function(){
+                                SetTimetoHiddenEventInput();
+                            }
+                                        
+                        });
+
+                        SetTimetoHiddenEventInput();
 
                         </script>
                             

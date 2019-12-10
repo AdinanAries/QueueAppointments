@@ -1676,7 +1676,7 @@
             e.printStackTrace();
         }
     %>
-    <body>
+    <body style="padding-bottom: 0; background-color: #ccccff;">
         
         <!--script>
             setTimeout(function(){
@@ -1763,7 +1763,7 @@
                 
         <div onclick='hideExtraDropDown();' id="container">
             
-            <div id="miniNavPov" style="height: 35px; padding-top: 5px; padding-right: 2px;">
+            <div id="miniNavPov" style="height: 35px; padding-top: 3px; padding-bottom: 3px; padding-right: 2px; background-color: #334d81; opacity: 0.9">
                 <center>
                     <script>
                         function showDropDown(){
@@ -1786,23 +1786,43 @@
                         }
                     </script>
                     
-                    <div style="float: right; width: 45px; padding-right: 5px;">
+                    <div style="float: right; width: 15%;" onclick="showProfile();">
                         <img style="border-radius: 100%; border: 1px solid green;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
                     
                     </div>
                     <!--onclick='hideDropDownBtnclick();'-->
                     
-                    <p style='width: 225px; float: left; margin-top: 5px; margin-left: 0;'>
-                        <span onclick="toggleHideAppointmentsDiv()" id="hideAppointments" style="background-color: #000099; width: 75px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Hide spots</span>
-                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>  
-                            <span onclick="" id="" style="background-color: #000099; width: 150px; color: white; border: 1px solid black; padding: 5px; cursor: pointer; border-radius: 4px;">Add News</span></a>
-                    </p>
+                    <div style='width: 85%; float: left; margin-left: 0;'>
+                        <div onclick="toggleHideAppointmentsDiv()" style="width: 25%; color: white; float: left; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/Logo.png" alt="" width="25" height="25"/>
+                            <p style="font-size: 11px; margin-top: -5px;" id="hideAppointments">Hide Spots</p>
+                        </div>
+                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'>  
+                            <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
+                                <img style="background-color: white; border-radius: 2px;" src="icons/icons8-google-news-50.png" alt="" height="25" width="25"/>
+                                <p style="font-size: 11px; margin-top: -5px;">Add News</p>
+                            </div>
+                        </a>
+                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3' style='color: white;'>
+                            <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
+                                <img style="background-color: white; border-radius: 2px;" src="icons/icons8-calendar-50.png" alt="" height="25" width="25"/>
+                                <p style="font-size: 11px; margin-top: -5px;">Calender</p>
+                            </div>
+                        </a>
+                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'>
+                            <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
+                                <p style=' width: 13px; position: absolute; z-index: 1000; font-size: 11px; color: red; margin-left: 11%; border: #334d81 1px solid; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;'><%=notiCounter%></p>
+                                <img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="25" alt="icons8-notification-50"/>
+                                <p style="font-size: 11px; margin-top: -5px;">Notifications</p>
+                            </div>
+                        </a>
+                    </div>
                     
                     <p style='clear: both;'></p>
                     
                 </center>
                 
-                
+                            <p style="clear: both;"></p>
             </div>
             
             
@@ -1821,7 +1841,7 @@
             
             <div id='News' style=''>
             
-                <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 20px;">Update your clients on whats new</p>
+                <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 16px; text-align: center;">Update your clients on whats new</p>
                 
                 <form method="POST" enctype="multipart/form-data">
                 <table  id="ExtrasTab" cellspacing="0">
@@ -2539,35 +2559,27 @@
             <div id="content"  onclick="hideDropDown();">
             <div id="nav" style='padding: 0;'>
                 
-                <div id='ProvPhoneNotiBar' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
-                    <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1' style='color: white;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
-                        News | </a>
-                    <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                        Notifications<sup style='color: red; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup> | </a>
-                    <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3' style='color: white;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                        Calender </a>
-                </div>
                 <!--h4><a href="https://adinanaries.wixsite.com/arieslab" style ="color: blanchedalmond">AriesLab.com</a></h4>
                 <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                
             </div>
-            <div id="main">
-                <%
+            <div id="main" style="">
+                <!--%
                     if(base64Image != ""){
                 %>
                 <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                 <img id="photoStatus" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>" width="40" height="40"/>
+                 <img id="photoStatus" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<=base64Image%>" width="40" height="40"/>
                     </div></center>
-                <%
+                <
                     }
                 %>
                    
-                <center><p id="LoginNameDisplay" style="color: white; background-color: green; margin-bottom: 20px; padding-left: 15px; max-width: 300px"><%=FirstNameAndCompany%> </p></center>
+                <center><p id="LoginNameDisplay" style="color: white; background-color: green; margin-bottom: 20px; padding-left: 15px; max-width: 300px"><=FirstNameAndCompany%> </p></center-->
                
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                 
                           
-                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px;">
+                <center><div id="QueuLineDiv" style="width: 100%; margin-bottom: 0;">
                                         
                                     <%
                                         Date currentDate = new Date();//default date constructor returns current date 
@@ -3359,17 +3371,17 @@
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
             
                 
-                <div style=" display: block;" id="appointmentsDiv">
-                <center><div style=" width: 100%; max-width: 650px;">
+                <div style=" display: block;" id="appointmentsDiv" style="">
+                <center><div style=" width: 100%;">
                              
                                     
-                                        <table cellspacing="0" style="width: 100%; border-bottom: 1px solid #000099;">
+                                        <table cellspacing="0" style="width: 100%;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; border-radius: 4px; border-top: 1px solid black; cursor: pointer; width: 50%;">
+                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px;  border-top: 1px solid black; cursor: pointer; width: 50%;">
                                                         Current Line
                                                     </td>
-                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
+                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
                                                         History
                                                     </td>
                                                 </tr>
@@ -3379,7 +3391,7 @@
                                 
                     </div></center>
                     
-                    <div class="scrolldiv" style=" height: 400px; overflow-y: auto;">
+                    <div class="scrolldiv" style=" height: 400px; overflow-y: auto; min-width: 100%;">
                         
                         <script>
                                     
@@ -3409,7 +3421,7 @@
                     
                     <div id="CurrentProvAppointmentsDiv">
                 <cetnter><h4 style="margin: 5px;">Next Client</h4></cetnter>
-                <center><table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
+                <center><table id="ProviderAppointmentList" style="border-spacing: 0 5px; border: 0; width: 100%;">
                         <tbody>
                             
     <%
@@ -3808,7 +3820,7 @@
                     </table></center>
                 
                 <center><h4 style="margin: 10px; border-top: 1px solid darkblue; max-width: 500px;">Future Line</h4></center>
-                <center><table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
+                <center><table id="ProviderAppointmentList" style="border-spacing: 0 5px; border: 0; width: 100%;">
                         <tbody>
                             
     <%
@@ -4204,7 +4216,7 @@
                 <div id="ProviderAppointmentHistoryDiv" style= "display: none;">
                 <center><h4 style="margin: 5px;">Your History</h4></center>
                 
-                <center><table id="ProviderAppointmentHistory" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
+                <center><table id="ProviderAppointmentHistory" style="border-spacing: 0 5px; border: 0; width: 100%;">
                         <tbody>
                             
     <%
@@ -4499,7 +4511,7 @@
             </div>
                     
                 <div id='ReservationAndFutureSpots' style='overflow-y: auto;'>  
-                    <center><table style="width: 100%; border: 1px solid black; max-width: 600px;">
+                    <center><table style="width: 100%; border: 1px solid black;">
                         <tbody>
                             <tr>
                                 <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; border: 1px solid black; width: 33.3%; background-color: pink; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
@@ -7637,7 +7649,7 @@
                 
                 <form action = "LogoutController" name="LogoutForm" method="POST">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <center><input type="submit" value="Logout" class="button" /></center>
+                    <center><input style="width: 97%;" type="submit" value="Logout" class="button" /></center>
                 </form>
                 
                 </div>
