@@ -2026,6 +2026,11 @@
                             
                             </table></center>
                         
+                        <%
+                            if(providersList.size() > 4){
+                        %>
+                             
+                        
                             <form method="POST"  action='ByAddressAndTypeSearchResultLoggedIn.jsp'>
                                 <input type='hidden' name='city4Search' value='<%=City%>'/>
                                 <input type='hidden' name='town4Search' value='<%=Town%>'/>
@@ -2036,6 +2041,10 @@
                                 <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
                                 <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
                             </form>
+                                
+                        <%
+                            }
+                        %>
                         
                 </div></center>
                 

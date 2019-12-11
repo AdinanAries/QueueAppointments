@@ -2048,6 +2048,10 @@
                             
                             </table></center>
                             
+                            <%
+                                if(providersList.size() > 4){
+                            %>
+                            
                             <form method="POST"  action='QueueSelectBusinessSearchResultLoggedIn.jsp'>
                                 <input type='hidden' name='SearchFld' value='<%=Search%>'/>
                                 <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>

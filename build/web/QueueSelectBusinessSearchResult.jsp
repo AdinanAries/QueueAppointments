@@ -1728,12 +1728,18 @@
                             
                             </table></center>
                             
+                            <%
+                                if(providersList.size() > 4){
+                            %>
+                            
                             <form method="POST"  action='QueueSelectBusinessSearchResult.jsp'>
                                 <input type='hidden' name='SearchFld' value='<%=Search%>'/>
                                 <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>
                                 <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
                             </form>
                             
+                            <%}%>
+                                
                 </div></center>
                 
             </div>

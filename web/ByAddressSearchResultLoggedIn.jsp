@@ -2199,6 +2199,12 @@
                                  SVCTypeAppend = SVCTypeAppend.replaceAll("'","2");
                                  //JOptionPane.showMessageDialog(null, SVCTypeAppend);
                              %>
+                             
+                             <%
+                                 if(providersList.size() > 4){
+                             %>
+                             
+                             
                             <form method="POST"  action='ByAddressSearchResultLoggedIn.jsp'>
                                 <input type='hidden' name='city4Search' value='<%=City%>'/>
                                 <input type='hidden' name='town4Search' value='<%=Town%>'/>
@@ -2210,6 +2216,9 @@
                                 <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
                             </form>
                             
+                            <%
+                                }
+                            %>
                 </div></center>
                  
             </div>

@@ -1847,11 +1847,21 @@
                             </table></center>
                             
                 </div></center>
+                
+                <%
+                    if(providersList.size() > 9){
+                %>
+                
                 <form name="GetMoreRecords" action="QueueSelectMakeUpArtistLoggedIn.jsp">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input style="border: 0; color: white; background-color: #6699ff;" type="submit" value="See More..." name="MoreRecBtn" />
                 </form>
+                    
+                <%
+                    }
+                %>
+                
             </div>
                             
         </div>

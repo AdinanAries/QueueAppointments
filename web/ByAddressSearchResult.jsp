@@ -279,6 +279,7 @@
                 ZipCode = "";
         }
         
+         
         /*JOptionPane.showMessageDialog(null, City);
         JOptionPane.showMessageDialog(null, Town);
         JOptionPane.showMessageDialog(null, ZipCode);*/
@@ -288,7 +289,7 @@
         try{
             Class.forName(Driver);
             Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where (City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")"
+            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where (City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")" //If for instance only ZipCode is provided, then that particular record should be an empty string for City and an empty string for Town but ZipCode be the value Provided; all three arguments must hold true;
                     + "or (Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (City like '%"+City+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")";
             
             PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
@@ -1941,7 +1942,12 @@
                                  SVCTypeAppend = SVCTypeAppend.replaceAll("'","2");
                                  //JOptionPane.showMessageDialog(null, SVCTypeAppend);
                              %>
-                            <form method="POST"  action='ByAddressSearchResult.jsp'>
+                            
+                             <%
+                                 if(providersList.size() > 4){
+                             %>
+                             
+                             <form method="POST"  action='ByAddressSearchResult.jsp'>
                                 <input type='hidden' name='city4Search' value='<%=City%>'/>
                                 <input type='hidden' name='town4Search' value='<%=Town%>'/>
                                 <input type='hidden' name='zcode4Search' value='<%=ZipCode%>'/>
@@ -1949,6 +1955,10 @@
                                 <input type='hidden' name='SVCTypeAppend' value='<%=SVCTypeAppend%>'/>
                                 <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
                             </form>
+                            
+                            <%
+                                }
+                            %>
                             
                 </div></center>
                 

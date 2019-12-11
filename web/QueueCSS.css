@@ -722,7 +722,7 @@ select {
     position: fixed;
     background: none;
     margin-top: 70px;
-    height: 560px;
+    height: 80%;
     overflow-y: auto;
     border-bottom: 1px solid black;
     scrollbar-track-color: #ccccff;
@@ -778,9 +778,9 @@ select {
     width: 66%;
     margin-left: 0;
     float: right;
-    overflow-y: auto;
     padding-top: 0;
-    height: 690px;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
     scrollbar-track-color: #6699ff;
   }
   .DashboardContent {
@@ -789,9 +789,10 @@ select {
     margin-left: 0;
     float: right;
     padding-top: 0;
-    height: 690px;
+    height: calc(100vh - 50px);
     scrollbar-track-color: #6699ff;
   }
+  /*main contains just explore icons*/
   #main {
     min-height: 675px;
   }
