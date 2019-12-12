@@ -266,8 +266,7 @@
     %>
     
     <body style="position: absolute; width: 100%;">
-    
-                
+          
             <div id="nav" style='display: block; '>
                
                 <center><div class ="SearchObject">

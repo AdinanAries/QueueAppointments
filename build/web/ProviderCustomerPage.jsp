@@ -713,7 +713,27 @@
     
     <body id="CustomerPageHtmlBody">
         
-        <div class="QueueLoader">
+        <div id="ExploreLoading" class="QueueLoader">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
+        <div id="SpotsLoading" class="QueueLoader">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
+        <div id="UserProfileLoading" class="QueueLoader">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
+        <div id="FavoritesLoading" class="QueueLoader">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
+        <div id="SearchLoading" class="QueueLoader">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
@@ -2161,6 +2181,7 @@
                         function showDashboardSpots(){
                             
                             if(document.getElementById("SpotsIframe").style.display === "block"){
+                                OnloadedSpots = 0;
                                 document.getElementById("SpotsIframe").src = "ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
@@ -2193,8 +2214,9 @@
                         }
                         
                         function showDashboardExplore(){
-                            
+                        
                             if(document.getElementById("ExploreDiv").style.display === "block"){
+                                OnloadedExplore = 0;
                                 document.getElementById("ExploreDiv").src = "ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
@@ -2228,9 +2250,9 @@
                         function showDashboardAccount(){
                         
                             if(document.querySelector(".UserProfileContainer").style.display === "block"){
+                                OnloadedUser = 0;
                                 document.querySelector(".UserProfileContainer").src = "ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
-                        
                         
                             document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
                             document.getElementById("QueueIcon").style.display = "none";
@@ -2263,6 +2285,7 @@
                         function showDashboardFavorites(){
                         
                             if(document.getElementById("FavoritesIframe").style.display === "block"){
+                                OnloadedFavorites = 0;
                                 document.getElementById("FavoritesIframe").src = "AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
@@ -6126,20 +6149,166 @@
                 </form> 
                 
                 </div>
-                  
+                   
                 <div id="IframesDiv">
                     
-                   <iframe onload="GoToMobileTop();" id="FavoritesIframe" style="position: absolute; background-color: #6699ff;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
-                   <iframe onload="GoToMobileTop();" style="position: absolute; background-color: #6699ff;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
-                   <iframe onload="GoToMobileTop();" style="position: absolute; background-color: #6699ff;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
-                   <iframe onload="GoToMobileTop();" id="SpotsIframe" style="position: absolute; background-color: #ccccff;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>             
-                   <iframe onload="GoToMobileTop();" id="SearchIframe" style="position: absolute; background-color: #6699ff"  src=""></iframe>
+                    <iframe onload="OnloadExploreMeth();" style="position: absolute; background-color: #6699ff;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   
+                   <script>
+                       var OnloadedExplore = 0;
+                       
+                       function OnloadExploreMeth(){
+                           $("html, body").animate({ scrollTop: 0}, "fast");
+                           OnloadedExplore = 1;
+                       }
+                       
+                       function checkExploreLoadStatus(){
+                           
+                           if(document.getElementById("ExploreDiv").style.display === "none"){
+                                document.getElementById("ExploreLoading").style.display = "none";
+                            }else if(OnloadedExplore === 1){
+                                document.getElementById("ExploreLoading").style.display = "none";
+                            }else{
+                                document.getElementById("ExploreLoading").style.display = "block";
+                                    
+                            }
+                            
+                       }
+                       
+                        setInterval(
+                            function(){
+                                checkExploreLoadStatus();
+                        }, 1);
+                   </script>
+                    
+                   <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background-color: #ccccff; display: none;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>             
+                   
+                   <script>
+                       var OnloadedSpots = 0;
+                       
+                       function OnloadSpotsMeth(){
+                           $("html, body").animate({ scrollTop: 0}, "fast");
+                           OnloadedSpots = 1;
+                       }
+                       
+                        function checkSpotsLoadStatus(){
+                           
+                           if(document.getElementById("SpotsIframe").style.display === "none"){
+                                document.getElementById("SpotsLoading").style.display = "none";
+                            }else if(OnloadedSpots === 1){
+                                document.getElementById("SpotsLoading").style.display = "none";
+                            }else{
+                                document.getElementById("SpotsLoading").style.display = "block";
+                                    
+                            }
+                            
+                       }
+                       
+                        setInterval(
+                            function(){
+                                checkSpotsLoadStatus();
+                        }, 1);
+                       
+                   </script>
+                   
+                   <iframe onload="OnloadFavoritesMeth();" id="FavoritesIframe" style="position: absolute; background-color: #6699ff; display: none;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   
+                   <script>
+                       var OnloadedFavorites = 0;
+                       
+                       function OnloadFavoritesMeth(){
+                           $("html, body").animate({ scrollTop: 0}, "fast");
+                           OnloadedFavorites = 1;
+                       }
+                       
+                        function checkFavoritesLoadStatus(){
+                           
+                           if(document.getElementById("FavoritesIframe").style.display === "none"){
+                                document.getElementById("FavoritesLoading").style.display = "none";
+                            }else if(OnloadedFavorites === 1){
+                                document.getElementById("FavoritesLoading").style.display = "none";
+                            }else{
+                                document.getElementById("FavoritesLoading").style.display = "block";
+                                    
+                            }
+                            
+                       }
+                       
+                        setInterval(
+                            function(){
+                                checkFavoritesLoadStatus();
+                        }, 1);
+                       
+                   </script>
+                   
+                   
+                   <iframe onload="OnloadAccountMeth();" style="position: absolute; background-color: #6699ff; display: none;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
                    
                    <script>
                        
-                       function GoToMobileTop(){
+                       var OnloadedUser = 0;
+                       
+                       function OnloadAccountMeth(){
                            $("html, body").animate({ scrollTop: 0}, "fast");
+                           OnloadedUser = 1;
                        }
+                       
+                        function checkUserAcountWindowLoadStatus(){
+                           
+                           if(document.querySelector(".UserProfileContainer").style.display === "none"){
+                                document.getElementById("UserProfileLoading").style.display = "none";
+                            }else if(OnloadedUser === 1){
+                                document.getElementById("UserProfileLoading").style.display = "none";
+                            }else{
+                                document.getElementById("UserProfileLoading").style.display = "block";
+                                    
+                            }
+                            
+                       }
+                       
+                        setInterval(
+                            function(){
+                                checkUserAcountWindowLoadStatus();
+                        }, 1);
+                   </script>
+                   
+                   <iframe onload="OnloadSearchIframetMeth();" id="SearchIframe" style="position: absolute; background-color: #6699ff; display: none;"  src=""></iframe>
+                   
+                   <script>
+                       var OnloadedSearch = 0;
+                       
+                       function OnloadSearchIframetMeth(){
+                           $("html, body").animate({ scrollTop: 0}, "fast");
+                           OnloadedSearch = 1;
+                           
+                       }
+                       
+                        function checkSeachLoadStatus(){
+                           
+                           if(document.getElementById("SearchIframe").style.display === "none"){
+                                document.getElementById("SearchLoading").style.display = "none";
+                            }else if(OnloadedSearch === 1){
+                                document.getElementById("SearchLoading").style.display = "none";
+                            }else{
+                                document.getElementById("SearchLoading").style.display = "block";
+                                    
+                            }
+                            
+                       }
+                       
+                        setInterval(
+                            function(){
+                                checkSeachLoadStatus();
+                        }, 1);
+                       
+                   </script>
+                   
+                   <script>
+                       
+                       //document.getElementById("UserProfileLoading").style.display = "none";
+                       //document.getElementById("SearchLoading").style.display = "none";
+                       //document.getElementById("SpotsLoading").style.display = "none";
+                       //document.getElementById("FavoritesLoading").style.display = "none";
                        
                     </script>
                     

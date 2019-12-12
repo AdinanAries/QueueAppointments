@@ -48,11 +48,27 @@ function QueueClock() {
 
 //QueueClock();
 
-//setInterval(QueueClock, 1000);
+//setInterval(QueueClock, 1000); 
 
-function showQueueLoader(){
-    document.querySelector(".QueueLoader").style.display = "block";
+/*function HideExploreLoader(){
+    document.getElementById("ExploreLoading").style.display = "block";
 }
+
+function HideAccountLoader(){
+    document.getElementById("UserProfileLoading").style.display = "none";
+}
+
+function HideSpotsLoader(){
+    document.getElementById("SpotsLoading").style.display = "none";
+}
+
+function HideSearchLoader(){
+    document.getElementById("SearchLoading").style.display = "none";
+}
+
+function HideFavoritesLoader(){
+    document.getElementById("FavoritesLoading").style.display = "none";
+}*/
 
 
 function toggleEnableFinalApntmntBtn() {
