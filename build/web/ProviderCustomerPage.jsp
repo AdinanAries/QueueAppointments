@@ -6175,10 +6175,14 @@
                             
                        }
                        
-                        setInterval(
-                            function(){
-                                checkExploreLoadStatus();
-                        }, 1);
+                       
+                            setInterval(
+                                function(){
+                                    if($(window).width() < 1000){
+                                        checkExploreLoadStatus();
+                                    }
+                            }, 1);
+                        
                    </script>
                     
                    <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background-color: #ccccff; display: none;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>             
@@ -6206,7 +6210,9 @@
                        
                         setInterval(
                             function(){
-                                checkSpotsLoadStatus();
+                                if($(window).width() < 1000){
+                                    checkSpotsLoadStatus();
+                                }
                         }, 1);
                        
                    </script>
@@ -6236,7 +6242,9 @@
                        
                         setInterval(
                             function(){
-                                checkFavoritesLoadStatus();
+                                if($(window).width() < 1000){
+                                    checkFavoritesLoadStatus();
+                                }
                         }, 1);
                        
                    </script>
@@ -6268,7 +6276,9 @@
                        
                         setInterval(
                             function(){
-                                checkUserAcountWindowLoadStatus();
+                                if($(window).width() < 1000){
+                                    checkUserAcountWindowLoadStatus();
+                                }
                         }, 1);
                    </script>
                    
@@ -6298,7 +6308,9 @@
                        
                         setInterval(
                             function(){
-                                checkSeachLoadStatus();
+                                if($(window).width() < 1000){
+                                    checkSeachLoadStatus();
+                                }
                         }, 1);
                        
                    </script>
