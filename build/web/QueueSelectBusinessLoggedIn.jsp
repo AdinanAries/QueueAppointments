@@ -311,9 +311,9 @@
             
         <div id="Extras">
             
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News updates from your providers</p></center>
             
-                <div style="max-height: 600px; overflow-y: auto;">
+                <div style="max-height: 87vh; overflow-y: auto;">
                     
                     <%
                         int newsItems = 0;

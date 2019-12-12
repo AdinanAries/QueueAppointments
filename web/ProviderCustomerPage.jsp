@@ -713,6 +713,11 @@
     
     <body id="CustomerPageHtmlBody">
         
+        <div class="QueueLoader">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
         <!--script>
             setTimeout(function(){
                 window.location.replace("ProviderCustomerPage.jsp?UserIndex=<=UserIndex%>&User=<=NewUserName%>");

@@ -50,6 +50,9 @@ function QueueClock() {
 
 //setInterval(QueueClock, 1000);
 
+function showQueueLoader(){
+    document.querySelector(".QueueLoader").style.display = "block";
+}
 
 
 function toggleEnableFinalApntmntBtn() {
