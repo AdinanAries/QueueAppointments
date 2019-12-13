@@ -84,7 +84,12 @@
        
     %>
     
-    <body style="background-color: #ccccff; padding-bottom: 0;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #ccccff; padding-bottom: 0; position: absolute;">
+        
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         
         <!--script>
             setTimeout(function(){

@@ -1676,7 +1676,12 @@
             e.printStackTrace();
         }
     %>
-    <body style="padding-bottom: 0; background-color: #ccccff;">
+    <body onload="document.getElementById('ProviderPageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
+        
+        <div id="ProviderPageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         
         <!--script>
             setTimeout(function(){

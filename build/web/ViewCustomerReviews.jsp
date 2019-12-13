@@ -91,7 +91,12 @@
         }
     %>
     
-    <body style='background-color: #7e7e7e;'>
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style='background-color: #7e7e7e;'>
+        
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         
     <!--center><div style="position: fixed; width: 100%; padding: 0;">
             <center><a href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="margin-top: 5px; margin-bottom: 0; background-color: pink; color: white; padding: 5px; width: 150px; max-width: 400px; border: 1px solid red;">Your Dashboard</p></a>

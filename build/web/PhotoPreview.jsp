@@ -154,9 +154,13 @@
     %>
     
     
-    <body style="background-color: #333333; margin:0; padding:0; position: absolute; width: 100%;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #333333; margin:0; padding:0; position: absolute; width: 100%;">
         
-    
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
             
         <h3 style="text-align: center; color: white;">Photos</h3>
         

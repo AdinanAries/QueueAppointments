@@ -74,7 +74,12 @@
        
     %>
     
-    <body style="background-color: #ccccff; padding-bottom: 0;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #ccccff; padding-bottom: 0; position: absolute;">
+        
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         
     <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
        

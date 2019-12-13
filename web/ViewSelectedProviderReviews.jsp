@@ -109,7 +109,12 @@
         }
     %>
     
-    <body style='background-color: #7e7e7e;'>
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style='background-color: #7e7e7e;'>
+        
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         
         <%
             int NumberOfRatings = 0;

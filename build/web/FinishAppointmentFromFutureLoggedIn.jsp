@@ -327,9 +327,14 @@
             }
         %>
         
-    <body>
+    <body  onload="document.getElementById('PageLoader').style.display = 'none';">
         
         <div id="PermanentDiv" style="">
+            
+            <div id="PageLoader" class="QueueLoader" style="display: block;">
+                <div class="QueueLoaderSpinner"></div>
+                <img src="icons/Logo.png" alt=""/>
+            </div>
             
             <a href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 80px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
                         <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>

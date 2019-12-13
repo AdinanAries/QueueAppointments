@@ -121,7 +121,12 @@
         
     %>
     
-    <body style="background-color: #7e7e7e;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #7e7e7e;">
+        
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
     
     <center><div style='width: 100%; max-width: 500px;'>
     <center><h3 style='color: white;'>Upload Photo</h3></center>

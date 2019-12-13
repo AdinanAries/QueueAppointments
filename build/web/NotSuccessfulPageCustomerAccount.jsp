@@ -62,7 +62,12 @@
         }
     %>
     
-        <body style="padding-bottom: 0;">
+        <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0;">
+            
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
             
         <div id="PermanentDiv" style="">
             

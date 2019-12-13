@@ -711,7 +711,12 @@
         
     %>
     
-    <body id="CustomerPageHtmlBody">
+    <body onload="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';" id="CustomerPageHtmlBody">
+        
+        <div id="MainProviderCustomerPagePageLoader" class="QueueLoader">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         
         <div id="ExploreLoading" class="QueueLoader">
             <div class="QueueLoaderSpinner"></div>

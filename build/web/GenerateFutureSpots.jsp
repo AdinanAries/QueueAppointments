@@ -31,7 +31,13 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     
-    <body style="background-color: #7e7e7e; position: absolute; width: 100%;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #7e7e7e; position: absolute; width: 100%;">
+        
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
         <h3 style="text-align: center; margin: 5px; color: white;">Available Future Spots</h3>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                

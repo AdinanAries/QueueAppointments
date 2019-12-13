@@ -259,6 +259,13 @@ select {
     }
 }
 
+#MainProviderCustomerPagePageLoader{
+    display: block;
+}
+#AllFavoritesPageLoader{
+    display: block;
+}
+
 .searchbtn {
   border: 0;
   background-color: pink;
@@ -1025,6 +1032,20 @@ input[type=radio]:checked {
       display: block;
       top: 37%;
       left: 37%;
+    }
+    #PageLoader{
+        top: 200px;
+        left: 37%;
+    }
+    #ProviderPageLoader{
+        top: 200px;
+        left: 37%;
+    }
+    #MainProviderCustomerPagePageLoader{
+    display: none;
+    }
+    #AllFavoritesPageLoader{
+        display: none;
     }
     #QueuLineDiv table tbody tr td:hover {
         background: none;

@@ -75,7 +75,12 @@
         
     %>
     
-    <body style="padding-bottom: 0; background-color: #ccccff;">
+    <body onload="document.getElementById('HomePageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
+        
+        <div id="HomePageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         <!--a id='mapLink'>Click here to see location</a-->
         
         <script>

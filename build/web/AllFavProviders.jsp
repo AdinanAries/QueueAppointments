@@ -238,7 +238,12 @@
             
         %>
         
-    <body>
+    <body  onload="document.getElementById('AllFavoritesPageLoader').style.display = 'none';">
+        
+        <div id="AllFavoritesPageLoader" class="QueueLoader">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
         
         <div id="PermanentDiv" style="">
             
