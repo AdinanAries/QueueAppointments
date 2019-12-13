@@ -1867,6 +1867,17 @@
                 </form>
                     
                 <%}%>
+                
+                <%
+                    if(providersList.size() == 0){
+                %>
+                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; width: fit-content; padding: 5px;">
+                        No Hair Removal services found at this time. Use search box above to explore more
+                    </p></center>
+                <%
+                    }
+                %>
+                
             </div>
                             
         </div>

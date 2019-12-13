@@ -1042,10 +1042,11 @@ input[type=radio]:checked {
         left: 37%;
     }
     #MainProviderCustomerPagePageLoader{
-    display: none;
+        display: none;
     }
     #AllFavoritesPageLoader{
-        display: none;
+        top: 200px;
+        left: 37%;
     }
     #QueuLineDiv table tbody tr td:hover {
         background: none;

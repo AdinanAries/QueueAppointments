@@ -733,7 +733,7 @@
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <div id="FavoritesLoading" class="QueueLoader">
+        <div id="FavoritesLoading" class="QueueLoader"  style="display: none;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
@@ -6232,7 +6232,7 @@
                            OnloadedFavorites = 1;
                        }
                        
-                        function checkFavoritesLoadStatus(){
+                        /*function checkFavoritesLoadStatus(){
                            
                            if(document.getElementById("FavoritesIframe").style.display === "none"){
                                 document.getElementById("FavoritesLoading").style.display = "none";
@@ -6250,7 +6250,7 @@
                                 if($(window).width() < 1000){
                                     checkFavoritesLoadStatus();
                                 }
-                        }, 1);
+                        }, 1);*/
                        
                    </script>
                    
