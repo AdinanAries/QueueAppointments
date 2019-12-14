@@ -1569,7 +1569,7 @@
                 <%
                     if(providersList.size() == 0){
                 %>
-                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; width: fit-content; padding: 5px;">
+                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; margin-bottom: 200px; width: fit-content; padding: 5px;">
                         No Holistic Medicine services found at this time. Use search box above to explore more
                     </p></center>
                 <%
