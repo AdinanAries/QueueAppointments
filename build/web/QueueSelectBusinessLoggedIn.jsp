@@ -251,7 +251,7 @@
                     if(Base64Pic != ""){
                 %>
                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
+                        <img class="fittedImg" id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
                     </div></center>
                 <%
                     }else{
@@ -461,7 +461,7 @@
                                                     if(base64Profile != ""){
                                                 %>
                                                     <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     <!--/div></center-->
                                                 <%
                                                     }else{
@@ -655,7 +655,7 @@
                                                     if(base64Profile != ""){
                                                 %>
                                                     <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     <!--/div></center-->
                                                 <%
                                                     }else{
@@ -887,7 +887,7 @@
                                 
                             <center>
                             <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                <img src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                             </div>
                             
                             <div class="proinfo">

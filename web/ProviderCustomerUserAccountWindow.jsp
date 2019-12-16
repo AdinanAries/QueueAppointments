@@ -736,7 +736,7 @@
                                 
                                     <center><div id="WideScreenProfilePic" style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; padding: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">
                                         <div style="height: 5px; background-size: cover; margin-left: 5px; margin-right: 5px; margin-bottom: 150px; background-color: #334d81;" >
-                                            <center><img style="margin-top: 0; border-radius: 100%; border: 5px solid #334d81; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="150" height="150"/></center>
+                                            <center><img class="fittedImg" style="margin-top: 0; border-radius: 100%; border: 5px solid #334d81; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="150" height="150"/></center>
                                         </div>
                                         <div style="background-color: #334d81; height: 5px; margin-left: 5px; margin-right: 5px;">
                                         </div>
@@ -752,7 +752,7 @@
                                         </div></center>
                                         <div style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; height: 100px; margin-bottom: 60px; border-bottom: #3d6999 1px solid">
                                             <div id="" style="height: 100px; background-color: #6699ff; opacity: 0.7;"></div>        
-                                            <img style="position: relative; z-index: 2; margin-top: -50px; margin-left: 6px; border-radius: 100%; border: #3d6999 1px solid; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="100" height="100"/>
+                                            <img class="fittedImg" style="position: relative; z-index: 2; margin-top: -50px; margin-left: 6px; border-radius: 100%; border: #3d6999 1px solid; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="100" height="100"/>
                                             
                                         </div>
                                     </div>
@@ -1639,7 +1639,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -1684,7 +1684,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -1974,7 +1974,7 @@
                                                                     Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
                                     
                                                                                     '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
+                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
                                                                                     '</div>' +
 
                                                                                     '<div style="padding-top: 75px;">' +
@@ -2139,7 +2139,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -2289,9 +2289,9 @@
                                             <script>
                                                 
                                                             $( 
-                                                                    function(){
-                                                                            $( "#datepickerFuture<%=QString%>" ).datepicker();
-                                                                    } 
+                                                                function(){
+                                                                    $( "#datepickerFuture<%=QString%>" ).datepicker();
+                                                                } 
                                                              );
                                                             
                                                         //---------------------------------------------
@@ -2426,7 +2426,7 @@
                                                                     Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
                                     
                                                                                     '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
+                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
                                                                                     '</div>' +
 
                                                                                     '<div style="padding-top: 75px;">' +
@@ -2594,7 +2594,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -2823,7 +2823,7 @@
                                                                     Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
                                     
                                                                                     '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
+                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
                                                                                     '</div>' +
 
                                                                                     '<div style="padding-top: 75px;">' +
@@ -3102,7 +3102,7 @@
                                 <div id="FavoriteProvDiv<%=SString%>" class="EacFavsDiv" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">
                                     
                                     <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                            <img style="border: 5px solid white;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                            <img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                                     </div>
                                     
                                     <div style="padding-top: 75px;">

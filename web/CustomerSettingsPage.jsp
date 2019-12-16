@@ -486,7 +486,7 @@
                                                     if(base64Profile != ""){
                                                 %>
                                                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                                        <img id="" style="width:50px; height: 50px; border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="width:50px; height: 50px; border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     </div></center>
                                                 <%
                                                     }else{
@@ -676,7 +676,7 @@
                                                 if(base64Profile != ""){
                                             %>
                                                 <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                                    <img id="" style="width:50px; height: 50px; border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <img class="fittedImg" id="" style="width:50px; height: 50px; border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 </div></center>
                                             <%
                                                 }else{

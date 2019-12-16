@@ -48,7 +48,7 @@ function QueueClock() {
 
 //QueueClock();
 
-//setInterval(QueueClock, 1000); 
+//setInterval(QueueClock, 1000);
 
 /*function HideExploreLoader(){
     document.getElementById("ExploreLoading").style.display = "block";
@@ -70,7 +70,6 @@ function HideFavoritesLoader(){
     document.getElementById("FavoritesLoading").style.display = "none";
 }*/
 
-
 function toggleEnableFinalApntmntBtn() {
   var submitAppointment = document.getElementById("submitAppointment");
 
@@ -78,10 +77,11 @@ function toggleEnableFinalApntmntBtn() {
   submitAppointment.disabled = true;
 
   var Cash;
-  if(document.getElementById("Cash")){
+  if (document.getElementById("Cash")) {
+    //returns true if checked, otherwise false
     Cash = document.getElementById("Cash").checked;
   }
-  
+
   var CreditDebit = document.getElementById("Credit/Debit").checked;
   var formsTimeValue = document.getElementById("formsTimeValue").value;
   var formsDateValue = document.getElementById("formsDateValue").value;
@@ -106,7 +106,7 @@ function toggleEnableFinalApntmntBtn() {
 
   if (
     (Cash === true || CreditDebit === true) &&
-    (formsTimeValue !== " " && formsDateValue !== "")
+    formsTimeValue !== " " && formsDateValue !== ""
   ) {
     submitAppointment.style.backgroundColor = "red";
     submitAppointment.disabled = false;
@@ -1045,7 +1045,7 @@ function toggleHideAppointmentsDiv() {
   if (appointmentsDiv.style.display === "block") {
     $("#appointmentsDiv").fadeOut("fast");
     hideAppointments.innerHTML = "Show Spots";
-    $("html, body").animate({ scrollTop: 0}, "fast");
+    $("html, body").animate({ scrollTop: 0 }, "fast");
     appointmentsDiv.style.display = "none";
   } else {
     $("html, body").animate({ scrollTop: 298 }, "fast");
@@ -1053,35 +1053,35 @@ function toggleHideAppointmentsDiv() {
     hideAppointments.innerHTML = "Hide Spots";
     appointmentsDiv.style.display = "block";
   }
-
 }
 
-function showProfile(){
-    $('html, body').animate({
-        'scrollTop' : $("#newbusiness").position().top
-    });
+function showProfile() {
+  $("html, body").animate({
+    scrollTop: $("#newbusiness").position().top
+  });
 }
 
-function hideProvApptListAndMkReservForMobile(){
-    if($(window).width() < 1000)
-    {
-        var appointmentsDiv = document.getElementById("appointmentsDiv");
-        var hideAppointments = document.getElementById("hideAppointments");
-        
-        appointmentsDiv.style.display = "none";
-        hideAppointments.innerHTML = "Show Spots";
-        //hideAppointments.style.backgroundColor = "red";
-        hideAppointments.style.color = "white";
-        
-        document.getElementById("MakeReservationForm").style.display = "none";
-        
-    } else {
-       // change functionality for larger screens
-    }
+function hideProvApptListAndMkReservForMobile() {
+  if ($(window).width() < 1000) {
+    var appointmentsDiv = document.getElementById("appointmentsDiv");
+    var hideAppointments = document.getElementById("hideAppointments");
+
+    appointmentsDiv.style.display = "none";
+    hideAppointments.innerHTML = "Show Spots";
+    //hideAppointments.style.backgroundColor = "red";
+    hideAppointments.style.color = "white";
+
+    document.getElementById("MakeReservationForm").style.display = "none";
+  } else {
+    // change functionality for larger screens
+  }
 }
 
-if(document.getElementById("hideAppointments") && document.getElementById("appointmentsDiv")){
-    hideProvApptListAndMkReservForMobile();
+if (
+  document.getElementById("hideAppointments") &&
+  document.getElementById("appointmentsDiv")
+) {
+  hideProvApptListAndMkReservForMobile();
 }
 
 $(window).scroll(function() {

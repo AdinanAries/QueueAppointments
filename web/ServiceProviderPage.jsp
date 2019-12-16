@@ -1716,7 +1716,7 @@
                     if(base64Image != ""){
                 %>
                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30"/>
+                        <img class="fittedImg" id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30"/>
                     </div></center>
                 <%
                     }else{
@@ -1792,7 +1792,7 @@
                     </script>
                     
                     <div style="float: right; width: 15%;" onclick="showProfile();">
-                        <img style="border-radius: 100%; border: 1px solid green;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
+                        <img class="fittedImg" style="border-radius: 100%; border: 1px solid green;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
                     
                     </div>
                     <!--onclick='hideDropDownBtnclick();'-->
@@ -3501,7 +3501,7 @@
                             if(Base64CustPic != ""){
                         %>
                                 <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                    <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                                    <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                                 </div></center>
                         <%
                             }
@@ -3562,7 +3562,7 @@
                                                                       var Clients = document.getElementById("ProviderClientsDiv");
                                                                       
                                                                       Div.innerHTML = '<div style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">' +
-                                                                                      '<center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
+                                                                                      '<center><img class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
                                                                                             '<div style="float: right; width: 83%;">' +
                                                                                                     '<p style="font-weight: bolder;">'+CustName+'</p>' +
                                                                                                     '<p>'+CustMobile+'</p>' +
@@ -3896,7 +3896,7 @@
                             if(Base64CustPic != ""){
                         %>
                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                         <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                             </div></center>
                         <%
                             }
@@ -3957,7 +3957,7 @@
                                                                       var Clients = document.getElementById("ProviderClientsDiv");
                                                                       
                                                                       Div.innerHTML = '<div style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">' +
-                                                                                      '<center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
+                                                                                      '<center><img class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
                                                                                             '<div style="float: right; width: 83%;">' +
                                                                                                     '<p style="font-weight: bolder;">'+CustName+'</p>' +
                                                                                                     '<p>'+CustMobile+'</p>' +
@@ -4292,7 +4292,7 @@
                             if(Base64CustPic != ""){
                         %>
                              <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                            <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                            <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                             </div></center>
                         <%
                             }
@@ -4348,7 +4348,7 @@
                                                                   var div = document.createElement('div');
                                                                   
                                                                   div.innerHTML = '<div style="background-color: #6699ff; padding: 5px;  margin-bottom: 5px;">' +
-                                                                                    '<center><img style="border-radius: 5px; float: left; border-radius: 100%; background-color: black;" src="data:image/jpg;base64,'+ProfilePic+'" height="50" width="50" /></center>' +
+                                                                                    '<center><img class="fittedImg" class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%; background-color: black;" src="data:image/jpg;base64,'+ProfilePic+'" height="50" width="50" /></center>' +
                                                                                     '<div style="float: right; width: 83%;">' +
                                                                                         '<p style="text-align: left; font-weight: bolder;">'+Name+'</p>' +
                                                                                         '<p style="text-align: left;">'+Mobile+'</p>' +
@@ -4431,7 +4431,7 @@
                                                                       var Clients = document.getElementById("ProviderClientsDiv");
                                                                       
                                                                       Div.innerHTML = '<div style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">' +
-                                                                                      '<center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
+                                                                                      '<center><img class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,'+CustPic+'" height="50" width="50" /></center>' +
                                                                                             '<div style="float: right; width: 83%;">' +
                                                                                                     '<p style="font-weight: bolder;">'+CustName+'</p>' +
                                                                                                     '<p>'+CustMobile+'</p>' +
@@ -4743,7 +4743,7 @@
                                                 <%
                                                     }else{
                                                 %>
-                                                <center><img style="border-radius: 5px; float: right; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
+                                                <center><img class="fittedImg" style="border-radius: 5px; float: right; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
 
                                                 <%
                                                     }
@@ -4952,7 +4952,9 @@
                         <tr>
                             <td><center>
                                 
-                                <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
+                                <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                    
+                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
                                     
                             <%
                                 if(base64Image == ""){
@@ -4965,7 +4967,7 @@
                             <%
                                 }else{
                             %>
-                                    <img style="border: #ccccff solid 5px;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                    <img class="fittedImg" style="border: #ccccff solid 5px;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                                     
                             <%
                                 }
@@ -5247,7 +5249,7 @@
                                                 <%
                                                     }else{
                                                 %>
-                                                        <img style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+                                                        <img  class="fittedImg" style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
 
                                                 <%
                                                     }
@@ -5318,7 +5320,7 @@
                                             if(seventhPic != ""){
                                         %>
                                             
-                                            <center><img src="data:image/jpg;base64,<%=seventhPic%>" width="100%" height="300" style="max-width: 350px; margin-bottom: 0;  border-radius: 5px;"/></center>
+                                            <center><img  class="fittedImg" src="data:image/jpg;base64,<%=seventhPic%>" width="100%" height="300" style="max-width: 350px; margin-bottom: 0;  border-radius: 5px;"/></center>
                                          
                                         <%}%>
                                             <center><table style=" width: 100%; max-width: 350px; margin-top: 0;">
@@ -7452,7 +7454,7 @@
                             <%
                                 }else{
                             %>
-                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
+                            <center><img  class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
                                     
                             <%
                                 }
@@ -7588,7 +7590,7 @@
                             <%
                                 }else{
                             %>
-                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
+                            <center><img  class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
                                     
                             <%
                                 }

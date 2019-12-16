@@ -431,7 +431,7 @@
                                                     if(base64Profile != ""){
                                                 %>
                                                     <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     <!--/div></center-->
                                                 <%
                                                     }else{
@@ -1122,7 +1122,7 @@
                         <tr>
                             <td>
                                 <center><div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                    <img src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                    <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                                 </div></center>
                     
                                 <div class="proinfo">

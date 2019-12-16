@@ -167,7 +167,7 @@
         
         <div id="selectedImage" style="padding: 5px; margin-bottom: 5px; max-height: 570px; padding-top: 20px; background-color: black;">
             
-            <center><img id="ChosenImage" style="width: 100%; max-width: 600px;  max-height: 500px;" src="data:image/jpg;base64,<%=FirstImage%>"/></center>
+            <center><img class="fittedImg" id="ChosenImage" style="width: 100%; max-width: 600px;  max-height: 500px;" src="data:image/jpg;base64,<%=FirstImage%>"/></center>
 
             
             <center><div style="width: 100%; max-width: 600px;">

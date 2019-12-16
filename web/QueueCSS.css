@@ -10,6 +10,17 @@ body {
   background-color: #2c3539;
   overflow-x: hidden;
 }
+.fittedImg{
+    object-fit: cover;
+}
+
+.propic img{
+    object-fit: cover;
+}
+
+#GalleryThumnail img{
+    object-fit: cover;
+}
 
 a {
   text-decoration: none;

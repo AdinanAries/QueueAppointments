@@ -956,7 +956,7 @@
                             <td>
                                 
                                 <center><div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                    <img src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                    <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                                 </div></center>
                     
                             <div class="proinfo" style="padding-left: 0;">
@@ -1009,6 +1009,9 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <%if(ReviewsList.size() != 0){%>
+                                        <p style="text-align: center; color: tomato;">Last Review</p>
+                                        <%}%>
                     <%
                                     for(int x = 0; x < ReviewsList.size(); x++){
 
@@ -1089,7 +1092,7 @@
                                             <%
                                                 }else{
                                             %>
-                                                    <img style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+                                                    <img class="fittedImg" style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
 
                                             <%
                                                 }
@@ -1149,7 +1152,7 @@
                                             if(firstPic != ""){
                                         %>
                                          
-                                        <div style="margin-bottom: 15px; background: #eeeeee; padding: 3px; padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey;">
+                                        <div id="GalleryThumnail" style="margin-bottom: 15px; background: #eeeeee; padding: 3px; padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey;">
                                         
                                             <p style="text-align: center; color: tomato; padding-bottom: 5px;">Photo Gallery</p>
                                             
