@@ -425,7 +425,6 @@
                     <%
                         int newsItems = 0;
                         String newsQuery = "";
-                        String base64Profile = "";
                         
                        // while(newsItems < 10){
                             
@@ -451,6 +450,7 @@
 
                                         while(newsRec.next()){
 
+                                            String base64Profile = "";
                                             newsItems++;
                                             
                                             String ProvID = newsRec.getString("ProvID");
@@ -570,7 +570,7 @@
                                                 %>
 
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
 
                                                 <%}%>
@@ -645,6 +645,7 @@
 
                             while(newsRec.next()){
 
+                                String base64Profile = "";
                                 newsItems++;
 
                                 String ProvID = newsRec.getString("ProvID");
@@ -764,7 +765,7 @@
                                                 %>
 
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
 
                                                 <%}%>
@@ -1445,7 +1446,7 @@
                         <tr>
                             <td>
                                 <center><div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                    <img src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                    <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                                 </div></center>
                     
                                 <div class="proinfo">

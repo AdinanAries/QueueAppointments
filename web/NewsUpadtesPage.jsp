@@ -59,9 +59,6 @@
         int UserIndex = -1;
         String NameFromList = "";
         String NewUserName = "";
-        String base64Profile = "";
-         
-        
         
         int notiCounter = 0;
         
@@ -110,6 +107,7 @@
                         
                         while(newsRec.next()){
                             
+                            String base64Profile = "";
                             newsItems++;
                             
                             String ProvID = newsRec.getString("ProvID");

@@ -349,7 +349,6 @@
                     <%
                         int newsItems = 0;
                         String newsQuery = "";
-                        String base64Profile = "";
                         
                        // while(newsItems < 10){
                             
@@ -374,7 +373,8 @@
                                         ResultSet newsRec = newsPst.executeQuery();
 
                                         while(newsRec.next()){
-
+                                            
+                                            String base64Profile = "";
                                             newsItems++;
                                             
                                             String ProvID = newsRec.getString("ProvID");
@@ -565,6 +565,7 @@
 
                             while(newsRec.next()){
 
+                                String base64Profile = "";
                                 newsItems++;
 
                                 String ProvID = newsRec.getString("ProvID");

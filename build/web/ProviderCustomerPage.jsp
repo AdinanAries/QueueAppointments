@@ -944,7 +944,6 @@
                     <%
                         int newsItems = 0;
                         String newsQuery = "";
-                        String base64Profile = "";
                         
                        // while(newsItems < 10){
                             
@@ -969,7 +968,8 @@
                                         ResultSet newsRec = newsPst.executeQuery();
 
                                         while(newsRec.next()){
-
+                                            
+                                            String base64Profile = "";
                                             newsItems++;
                                             
                                             String ProvID = newsRec.getString("ProvID");
@@ -1086,7 +1086,7 @@
                                                 %>
 
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
 
                                                 <%}%>
@@ -1161,6 +1161,7 @@
 
                             while(newsRec.next()){
 
+                                String base64Profile = "";
                                 newsItems++;
 
                                 String ProvID = newsRec.getString("ProvID");
@@ -1280,7 +1281,7 @@
                                             %>
 
                                             <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                <img style='width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                             <!--/div></center-->
 
                                             <%}%>
@@ -2577,6 +2578,7 @@
 
                                         while(newsRec.next()){
 
+                                            String base64Profile = "";
                                             newsItems2++;
                                             
                                             String ProvID = newsRec.getString("ProvID");
@@ -2626,6 +2628,25 @@
                                                         ProvCompany = ProvRec.getString("Company").trim();
                                                         ProvTel = ProvRec.getString("Phone_Number").trim();
                                                         ProvEmail = ProvRec.getString("Email").trim();
+                                                        
+                                                        try{    
+                                                            //put this in a try catch block for incase getProfilePicture returns nothing
+                                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                                            InputStream inputStream = Pic.getBinaryStream();
+                                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                            byte[] buffer = new byte[4096];
+                                                            int bytesRead = -1;
+
+                                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                                outputStream.write(buffer, 0, bytesRead);
+                                                            }
+
+                                                            byte[] imageBytes = outputStream.toByteArray();
+
+                                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                                        }catch(Exception e){}
                                                     }
 
                                                 }catch(Exception e){
@@ -2660,7 +2681,32 @@
                             <tr style="background-color: #333333;">
                                 <td>
                                     <div id="ProvMsgBxOne">
-                                        <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> - <%=ProvCompany%></p></p>
+                                        
+                                        <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                            <!--div style="float: right; width: 65px;" -->
+                                                <%
+                                                    if(base64Profile != ""){
+                                                %>
+                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <!--/div></center-->
+                                                <%
+                                                    }else{
+                                                %>
+
+                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <!--/div></center-->
+
+                                                <%}%>
+                                            <!--/div-->
+                                            <div>
+                                                <p><%=ProvFirstName%></p>
+                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                            </div>
+                                        </div>
+                                        
+                                        <!--p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><=ProvFirstName%> - <=ProvCompany%></p></p-->
 
                                         <%if(MsgPhoto.equals("")){%>
                                         <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
@@ -2726,6 +2772,7 @@
 
                             while(newsRec.next()){
 
+                                String base64Profile = "";
                                 newsItems2++;
 
                                 String ProvID = newsRec.getString("ProvID");
@@ -2775,6 +2822,25 @@
                                             ProvCompany = ProvRec.getString("Company").trim();
                                             ProvTel = ProvRec.getString("Phone_Number").trim();
                                             ProvEmail = ProvRec.getString("Email").trim();
+
+                                            try{    
+                                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                                Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                                InputStream inputStream = Pic.getBinaryStream();
+                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                byte[] buffer = new byte[4096];
+                                                int bytesRead = -1;
+
+                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                    outputStream.write(buffer, 0, bytesRead);
+                                                }
+
+                                                byte[] imageBytes = outputStream.toByteArray();
+
+                                                base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                            }catch(Exception e){}
                                         }
 
                                     }catch(Exception e){
@@ -2809,7 +2875,32 @@
                         <tr style="background-color: #333333;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> - <%=ProvCompany%></p></p>
+                                    
+                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                            <!--div style="float: right; width: 65px;" -->
+                                                <%
+                                                    if(base64Profile != ""){
+                                                %>
+                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <!--/div></center-->
+                                                <%
+                                                    }else{
+                                                %>
+
+                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <!--/div></center-->
+
+                                                <%}%>
+                                            <!--/div-->
+                                            <div>
+                                                <p><%=ProvFirstName%></p>
+                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                            </div>
+                                        </div>
+                                    
+                                    <!--p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><=ProvFirstName%> - <=ProvCompany%></p></p-->
                                     
                                     <%if(MsgPhoto.equals("")){%>
                                     <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
