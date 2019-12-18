@@ -1556,7 +1556,7 @@
                         <tr>
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
-                                <div>
+                                <div style="height: auto; overflow-y: auto;">
                                     <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                     <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
                                     <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
