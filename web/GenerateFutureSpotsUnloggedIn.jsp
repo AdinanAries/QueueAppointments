@@ -370,7 +370,7 @@
                                         //use this if there is no appointment for the next hour
                                         int Hourfor30Mins = CurrentHour;
                                         
-                                        if(NextThirtyMinutes >= 60){
+                                        while(NextThirtyMinutes >= 60){
                                             
                                             ++NextHour;
                                             
@@ -398,7 +398,7 @@
                                         }
                                         
                                         //use this if there is no appointment for the next hour
-                                        if(ActualThirtyMinutesAfter >= 60){
+                                        while(ActualThirtyMinutesAfter >= 60){
                                             
                                             ++Hourfor30Mins;
                                             
@@ -760,7 +760,7 @@
                                                         
                                                         y += IntervalsValue;
                                                         
-                                                        if(y >= 60){
+                                                        while(y >= 60){
                                                              
                                                             x++;
                                                             
