@@ -924,7 +924,7 @@
                             Class.forName(Driver);
                             Connection NotiConn = DriverManager.getConnection(Url, user, password);
                             
-                            String Query = "Select Noti_Type, What, Noti_Status, ID from QueueServiceProviders.Notifications where (ProvID = ? and Noti_Type not like 'Today%')"
+                            String Query = "Select top 11 Noti_Type, What, Noti_Status, ID from QueueServiceProviders.Notifications where (ProvID = ? and Noti_Type not like 'Today%')"
                                     + "or (ProvID = ? and Noti_Date = ? and Noti_Type like 'Today%') order by ID desc";
                             PreparedStatement pst = NotiConn.prepareStatement(Query);
                             pst.setInt(1, UserID);
@@ -934,8 +934,9 @@
                             
                             while(Rec.next()){
                                 
-                                if(Rec.getString("Noti_Status") == null)
+                                if(Rec.getString("Noti_Status") == null){
                                     notiCounter++;
+                                }
                                 
                                 if(notiCounter > 10)
                                     break;

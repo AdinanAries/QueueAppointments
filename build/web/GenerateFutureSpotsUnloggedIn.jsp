@@ -102,334 +102,328 @@
                         
             
         
-                                        Date currentDate = DayOfAppointment;//default date constructor returns current date 
-                                        String JSCurrentTime = currentDate.toString().substring(11,16); //forJavaScript;
-                                        String DayOfWeek = currentDate.toString().substring(0,3);
-                                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd"); //formatting date to a string value of month day, year
-                                        String stringDate = formattedDate.format(currentDate); //calling format function to format date object
-                                        SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
-                                        String QueryDate = QuerySdf.format(currentDate);
+                        Date currentDate = DayOfAppointment;//default date constructor returns current date 
+                        String JSCurrentTime = currentDate.toString().substring(11,16); //forJavaScript;
+                        String DayOfWeek = currentDate.toString().substring(0,3);
+                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd"); //formatting date to a string value of month day, year
+                        String stringDate = formattedDate.format(currentDate); //calling format function to format date object
+                        SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
+                        String QueryDate = QuerySdf.format(currentDate);
                                         
-                                        ArrayList<String> AllAvailableTimeList = new ArrayList<>();
-                                        ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
-                                        ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
-                                        ArrayList<String> AllUnavailableFormattedTimeList = new ArrayList<>();
-                                        ArrayList<String> AllThisProviderBlockedTime = new ArrayList<>();
-                                        ArrayList<String> AllThisProviderBlockedFormattedTakenTime = new ArrayList<>();
-                                        ArrayList<String> BlockedAppointmentIDs = new ArrayList<>();
+                        ArrayList<String> AllAvailableTimeList = new ArrayList<>();
+                        ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
+                        ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
+                        ArrayList<String> AllUnavailableFormattedTimeList = new ArrayList<>();
+                        ArrayList<String> AllThisProviderBlockedTime = new ArrayList<>();
+                        ArrayList<String> AllThisProviderBlockedFormattedTakenTime = new ArrayList<>();
+                        ArrayList<String> BlockedAppointmentIDs = new ArrayList<>();
                                         
-                                        String DailyStartTime = "";
-                                        String DailyClosingTime = "";
-                                        String FormattedStartTime = "";
-                                        String FormattedClosingTime = "";
-                                        int startHour = 0;
-                                        int startMinute = 0;
-                                        int closeHour = 0;
-                                        int closeMinute = 0;
+                        String DailyStartTime = "";
+                        String DailyClosingTime = "";
+                        String FormattedStartTime = "";
+                        String FormattedClosingTime = "";
+                        int startHour = 0;
+                        int startMinute = 0;
+                        int closeHour = 0;
+                        int closeMinute = 0;
                                         
-                                        int TotalAvailableList = 0;
-                                        int TotalUnavailableList = 0;
-                                        int TotalThisCustomerTakenList = 0;
-                                    %>
+                        int TotalAvailableList = 0;
+                        int TotalUnavailableList = 0;
+                        int TotalThisCustomerTakenList = 0;
+                    %>
                                     
-                                    <%
-                                        //getting the closed days data
-                                        ArrayList<String> ClosedDates = new ArrayList<>();
-                                        ArrayList<Integer> ClosedIDs = new ArrayList<>();
-                                        boolean isTodayClosed = false;
+                    <%
+                        //getting the closed days data
+                        ArrayList<String> ClosedDates = new ArrayList<>();
+                        ArrayList<Integer> ClosedIDs = new ArrayList<>();
+                        boolean isTodayClosed = false;
                                         
-                                        SimpleDateFormat DateForCompareSdf = null;
-                                        java.util.Date DateForClosedCompare = null;
-                                        try{
-                                            DateForCompareSdf = new SimpleDateFormat("MM/dd/yyyy");
-                                            DateForClosedCompare = sdf.parse(SpotsDate);
+                        SimpleDateFormat DateForCompareSdf = null;
+                        java.util.Date DateForClosedCompare = null;
+                        try{
+                            DateForCompareSdf = new SimpleDateFormat("MM/dd/yyyy");
+                            DateForClosedCompare = sdf.parse(SpotsDate);
                                         
-                                        }catch(Exception e){}
+                        }catch(Exception e){}
                                         
-                                        //Date DateForClosedCompare = new Date();
-                                        SimpleDateFormat DateForCompareSdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                                        String StringDateForCompare = DateForCompareSdf2.format(DateForClosedCompare);
+                        //Date DateForClosedCompare = new Date();
+                        SimpleDateFormat DateForCompareSdf2 = new SimpleDateFormat("yyyy-MM-dd");
+                        String StringDateForCompare = DateForCompareSdf2.format(DateForClosedCompare);
                                         
                                         
-                                        try{
+                        try{
                                             
-                                            Class.forName(Driver);
-                                            Connection CloseddConn = DriverManager.getConnection(Url, user, password);
-                                            String CloseddString = "select * from QueueServiceProviders.ClosedDays where ProviderID = ?";
-                                            PreparedStatement CloseddPst = CloseddConn.prepareStatement(CloseddString);
-                                            CloseddPst.setString(1, ProviderID);
+                            Class.forName(Driver);
+                            Connection CloseddConn = DriverManager.getConnection(Url, user, password);
+                            String CloseddString = "select * from QueueServiceProviders.ClosedDays where ProviderID = ?";
+                            PreparedStatement CloseddPst = CloseddConn.prepareStatement(CloseddString);
+                            CloseddPst.setString(1, ProviderID);
                                             
-                                            ResultSet ClosedRec = CloseddPst.executeQuery();
+                        ResultSet ClosedRec = CloseddPst.executeQuery();
                                             
-                                            while(ClosedRec.next()){
+                        while(ClosedRec.next()){
                                                 
-                                                ClosedDates.add(ClosedRec.getString("DateToClose").trim());
-                                                ClosedIDs.add(ClosedRec.getInt("closedID"));
+                            ClosedDates.add(ClosedRec.getString("DateToClose").trim());
+                            ClosedIDs.add(ClosedRec.getInt("closedID"));
                                                 
-                                                if(StringDateForCompare.equals(ClosedRec.getString("DateToClose").trim())){
-                                                    isTodayClosed = true;
-                                                }
+                            if(StringDateForCompare.equals(ClosedRec.getString("DateToClose").trim())){
+                                isTodayClosed = true;
+                            }
                                                 
-                                                //JOptionPane.showMessageDialog(null, StringDateForCompare);
-                                                //JOptionPane.showMessageDialog(null, ClosedRec.getString("DateToClose").trim());
+                            //JOptionPane.showMessageDialog(null, StringDateForCompare);
+                            //JOptionPane.showMessageDialog(null, ClosedRec.getString("DateToClose").trim());
                                                 
-                                            }
+                        }
                                             
-                                        }catch(Exception e){
-                                            e.printStackTrace();
-                                        }
-                                    %>
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                %>
                                     
-                                    <%
-                                        String MonDailyStartTime = "";
-                                        String MonDailyClosingTime = "";
-                                        String TueDailyStartTime = "";
-                                        String TueDailyClosingTime = "";
-                                        String WedDailyStartTime = "";
-                                        String WedDailyClosingTime = "";
-                                        String ThursDailyStartTime = "";
-                                        String ThursDailyClosingTime = "";
-                                        String FriDailyStartTime = "";
-                                        String FriDailyClosingTime = "";
-                                        String SatDailyStartTime = "";
-                                        String SatDailyClosingTime = "";
-                                        String SunDailyStartTime = "";
-                                        String SunDailyClosingTime = "";
+                <%
+                    String MonDailyStartTime = "";
+                    String MonDailyClosingTime = "";
+                    String TueDailyStartTime = "";
+                    String TueDailyClosingTime = "";
+                    String WedDailyStartTime = "";
+                    String WedDailyClosingTime = "";
+                    String ThursDailyStartTime = "";
+                    String ThursDailyClosingTime = "";
+                    String FriDailyStartTime = "";
+                    String FriDailyClosingTime = "";
+                    String SatDailyStartTime = "";
+                    String SatDailyClosingTime = "";
+                    String SunDailyStartTime = "";
+                    String SunDailyClosingTime = "";
                                         
-                                        //getting starting and closing hours for eah day
-                                        try{
+                    //getting starting and closing hours for eah day
+                    try{
                                             
-                                            Class.forName(Driver);
-                                            Connection hoursConn = DriverManager.getConnection(Url, user, password);
-                                            String hourString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
+                        Class.forName(Driver);
+                        Connection hoursConn = DriverManager.getConnection(Url, user, password);
+                        String hourString = "Select * from QueueServiceProviders.ServiceHours where ProviderID = ?";
                                             
-                                            PreparedStatement hourPst = hoursConn.prepareStatement(hourString);
-                                            hourPst.setString(1, ProviderID);
-                                            ResultSet hourRow = hourPst.executeQuery();
+                        PreparedStatement hourPst = hoursConn.prepareStatement(hourString);
+                        hourPst.setString(1, ProviderID);
+                        ResultSet hourRow = hourPst.executeQuery();
                                             
-                                            while(hourRow.next()){
+                        while(hourRow.next()){
                                                 
+                            MonDailyStartTime = hourRow.getString("MondayStart");
+                            MonDailyClosingTime = hourRow.getString("MondayClose");
                                                 
-                                                MonDailyStartTime = hourRow.getString("MondayStart");
-                                                MonDailyClosingTime = hourRow.getString("MondayClose");
+                            TueDailyStartTime = hourRow.getString("TuesdayStart");
+                            TueDailyClosingTime = hourRow.getString("TuesdayClose");
                                                 
-                                                TueDailyStartTime = hourRow.getString("TuesdayStart");
-                                                TueDailyClosingTime = hourRow.getString("TuesdayClose");
-                                                
-                                                WedDailyStartTime = hourRow.getString("WednessdayStart");
-                                                WedDailyClosingTime = hourRow.getString("WednessdayClose");
+                            WedDailyStartTime = hourRow.getString("WednessdayStart");
+                            WedDailyClosingTime = hourRow.getString("WednessdayClose");
                                                
-                                                ThursDailyStartTime = hourRow.getString("ThursdayStart");
-                                                ThursDailyClosingTime = hourRow.getString("ThursdayClose");
+                            ThursDailyStartTime = hourRow.getString("ThursdayStart");
+                            ThursDailyClosingTime = hourRow.getString("ThursdayClose");
                                                
-                                                FriDailyStartTime = hourRow.getString("FridayStart");
-                                                FriDailyClosingTime = hourRow.getString("FridayClose");
+                            FriDailyStartTime = hourRow.getString("FridayStart");
+                            FriDailyClosingTime = hourRow.getString("FridayClose");
                                                 
-                                                SatDailyStartTime = hourRow.getString("SaturdayStart");
-                                                SatDailyClosingTime = hourRow.getString("SaturdayClose");
+                            SatDailyStartTime = hourRow.getString("SaturdayStart");
+                            SatDailyClosingTime = hourRow.getString("SaturdayClose");
                                                 
-                                                SunDailyStartTime = hourRow.getString("SundayStart");
-                                                SunDailyClosingTime = hourRow.getString("SundayClose");
+                            SunDailyStartTime = hourRow.getString("SundayStart");
+                            SunDailyClosingTime = hourRow.getString("SundayClose");
                                                 
-                                                
-                                            }
+                        }
                                             
-                                        }catch(Exception e){
-                                            e.printStackTrace();
-                                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                                         
-                                        try{
-                                                if(DayOfWeek.equalsIgnoreCase("Mon")){
-                                                    DailyStartTime = MonDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = MonDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Tue")){
-                                                    DailyStartTime = TueDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = TueDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Wed")){
-                                                    
-                                                    DailyStartTime = WedDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = WedDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Thu")){
-                                                    DailyStartTime = ThursDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = ThursDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Fri")){
-                                                    DailyStartTime = FriDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = FriDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Sat")){
-                                                    DailyStartTime = SatDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = SatDailyClosingTime.substring(0,5);
-                                                }
-                                                if(DayOfWeek.equalsIgnoreCase("Sun")){
-                                                    DailyStartTime = SunDailyStartTime.substring(0,5);
-                                                    DailyClosingTime = SunDailyClosingTime.substring(0,5);
-                                                }
+                    try{
+                        
+                        if(DayOfWeek.equalsIgnoreCase("Mon")){
+                            DailyStartTime = MonDailyStartTime.substring(0,5);
+                            DailyClosingTime = MonDailyClosingTime.substring(0,5);
+                        }
+                        if(DayOfWeek.equalsIgnoreCase("Tue")){
+                            DailyStartTime = TueDailyStartTime.substring(0,5);
+                            DailyClosingTime = TueDailyClosingTime.substring(0,5);
+                        }
+                        if(DayOfWeek.equalsIgnoreCase("Wed")){
+                            DailyStartTime = WedDailyStartTime.substring(0,5);
+                            DailyClosingTime = WedDailyClosingTime.substring(0,5);
+                        }
+                        if(DayOfWeek.equalsIgnoreCase("Thu")){
+                            DailyStartTime = ThursDailyStartTime.substring(0,5);
+                            DailyClosingTime = ThursDailyClosingTime.substring(0,5);
+                        }
+                        if(DayOfWeek.equalsIgnoreCase("Fri")){
+                            DailyStartTime = FriDailyStartTime.substring(0,5);
+                            DailyClosingTime = FriDailyClosingTime.substring(0,5);
+                        }
+                        if(DayOfWeek.equalsIgnoreCase("Sat")){
+                            DailyStartTime = SatDailyStartTime.substring(0,5);
+                            DailyClosingTime = SatDailyClosingTime.substring(0,5);
+                        }
+                        if(DayOfWeek.equalsIgnoreCase("Sun")){
+                            DailyStartTime = SunDailyStartTime.substring(0,5);
+                            DailyClosingTime = SunDailyClosingTime.substring(0,5);
+                        }
                                                 
                                                 
-                                                if(DailyStartTime == "")
-                                                    DailyStartTime = "01:00";
-                                                if(DailyClosingTime == "")
-                                                    DailyClosingTime = "23:00";
+                        if(DailyStartTime == "")
+                            DailyStartTime = "01:00";
+                        if(DailyClosingTime == "")
+                            DailyClosingTime = "23:00";
                                                 
                                                 
-                                                startHour = Integer.parseInt(DailyStartTime.substring(0,2));
-                                                startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
+                        startHour = Integer.parseInt(DailyStartTime.substring(0,2));
+                        startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
                                                         
-                                                        //formatting the time for user convenience
-                                                        if( startHour > 12)
-                                                        {
-                                                             int TempHour = startHour - 12;
-                                                             FormattedStartTime = Integer.toString(TempHour) + ":" +  DailyStartTime.substring(3,5) + " pm";
-                                                        }
-                                                        else if(startHour == 0){
-                                                            FormattedStartTime = "12" + ":" + DailyStartTime.substring(3,5) + " am";
-                                                        }
-                                                        else if(startHour == 12){
-                                                            FormattedStartTime = DailyStartTime + " pm";
-                                                        }
-                                                        else{
-                                                            FormattedStartTime = DailyStartTime +" am";
-                                                        }
+                        //formatting the time for user convenience
+                        if( startHour > 12){
+                            int TempHour = startHour - 12;
+                            FormattedStartTime = Integer.toString(TempHour) + ":" +  DailyStartTime.substring(3,5) + " pm";
+                        }
+                        else if(startHour == 0){
+                            FormattedStartTime = "12" + ":" + DailyStartTime.substring(3,5) + " am";
+                        }
+                        else if(startHour == 12){
+                            FormattedStartTime = DailyStartTime + " pm";
+                        }
+                        else{
+                            FormattedStartTime = DailyStartTime +" am";
+                        }
                                                
-                                                closeHour = Integer.parseInt(DailyClosingTime.substring(0,2));
-                                                closeMinute = Integer.parseInt(DailyClosingTime.substring(3,5));
+                        closeHour = Integer.parseInt(DailyClosingTime.substring(0,2));
+                        closeMinute = Integer.parseInt(DailyClosingTime.substring(3,5));
                                                         
-                                                        //formatting the time for user convenience
-                                                        if( closeHour > 12)
-                                                        {
-                                                             int TempHour = closeHour - 12;
-                                                             FormattedClosingTime = Integer.toString(TempHour) + ":" +  DailyClosingTime.substring(3,5) + " pm";
-                                                        }
-                                                        else if(closeHour == 0){
-                                                            FormattedClosingTime = "12" + ":" + DailyClosingTime.substring(3,5) + " am";
-                                                        }
-                                                        else if(closeHour == 12){
-                                                            FormattedClosingTime = DailyClosingTime + " pm";
-                                                        }
-                                                        else{
-                                                            FormattedClosingTime = DailyClosingTime +" am";
-                                                        }
+                        //formatting the time for user convenience
+                        if( closeHour > 12){
+                            int TempHour = closeHour - 12;
+                            FormattedClosingTime = Integer.toString(TempHour) + ":" +  DailyClosingTime.substring(3,5) + " pm";
+                        }
+                        else if(closeHour == 0){
+                            FormattedClosingTime = "12" + ":" + DailyClosingTime.substring(3,5) + " am";
+                        }
+                        else if(closeHour == 12){
+                            FormattedClosingTime = DailyClosingTime + " pm";
+                        }
+                        else{
+                            FormattedClosingTime = DailyClosingTime +" am";
+                        }
                                                         
-                                                        if(closeHour == 0)
-                                                            closeHour = 23;
-                                            }
-                                            catch(Exception e){}
+                        if(closeHour == 0)
+                            closeHour = 23;
+                    }catch(Exception e){}
                                         
                                         
-                                    %>
+                %>
                                     
-                                    <%
-                                        if(DailyStartTime == "")
-                                            DailyStartTime = "01:00";
-                                        if(DailyClosingTime == "")
-                                            DailyClosingTime = "23:00";
+                <%
+                    if(DailyStartTime == "")
+                        DailyStartTime = "01:00";
+                    if(DailyClosingTime == "")
+                        DailyClosingTime = "23:00";
                                                 
-                                        CurrentTime = DailyStartTime;
-                                        int CurrentHour = Integer.parseInt(DailyStartTime.substring(0,2));
-                                        int CurrentMinute = Integer.parseInt(DailyStartTime.substring(3,5));
+                    CurrentTime = DailyStartTime;
+                    int CurrentHour = Integer.parseInt(DailyStartTime.substring(0,2));
+                    int CurrentMinute = Integer.parseInt(DailyStartTime.substring(3,5));
                                         
                                         
-                                        //do all this for status led
-                                        String StatusLedCurrentTime = currentDate.toString().substring(11,16);
-                                        int StatusLedCurrentHour = Integer.parseInt(StatusLedCurrentTime.substring(0,2));
-                                        int StatusLedCurrentMinute = Integer.parseInt(StatusLedCurrentTime.substring(3,5));
+                    //do all this for status led
+                    String StatusLedCurrentTime = currentDate.toString().substring(11,16);
+                    int StatusLedCurrentHour = Integer.parseInt(StatusLedCurrentTime.substring(0,2));
+                    int StatusLedCurrentMinute = Integer.parseInt(StatusLedCurrentTime.substring(3,5));
                                         
-                                        int CurrentHourForStatusLed = StatusLedCurrentHour;
-                                        int CurrentMinuteForStatusLed = StatusLedCurrentMinute;
+                    int CurrentHourForStatusLed = StatusLedCurrentHour;
+                    int CurrentMinuteForStatusLed = StatusLedCurrentMinute;
                                         
-                                        if(DailyStartTime != ""){
+                    if(DailyStartTime != ""){
                                             
-                                            if(CurrentHour < startHour){
-                                            
-                                                CurrentHour = startHour;
-                                                CurrentMinute = startMinute;
-                                                
-                                            }
-                                        
-                                        }
-                                        
-                                        String NextAvailableTime = "" ;
-                                        String NextAvailableFormattedTime = "";
-                                        
-                                        int y = 0;
-                                        int isFirstAppointmentFound = 0;
-                                        int bookedTimeFlag = 0;
-                                        int myAppointmentTimeFlag = 0;
-                                        
-                                        int NextThirtyMinutes = CurrentMinute + 30;
-                                        
-                                        //use this if there is no appointment for the next hour
-                                        int ActualThirtyMinutesAfter = CurrentMinute + 30;
-                                        
-                                        int NextHour = CurrentHour;
-                                        
-                                        //use this if there is no appointment for the next hour
-                                        int Hourfor30Mins = CurrentHour;
-                                        
-                                        while(NextThirtyMinutes >= 60){
-                                            
-                                            ++NextHour;
-                                            
-                                            if(DailyClosingTime != ""){
-                                                
-                                                if(NextHour > closeHour && closeHour != 0){
+                        if(CurrentHour < startHour){
+                            CurrentHour = startHour;
+                            CurrentMinute = startMinute;
 
-                                                    NextHour = closeHour - 1;
+                        }
+                                        
+                    }
+                                        
+                    String NextAvailableTime = "" ;
+                    String NextAvailableFormattedTime = "";
+                                        
+                    int y = 0;
+                    int isFirstAppointmentFound = 0;
+                    int bookedTimeFlag = 0;
+                    int myAppointmentTimeFlag = 0;
+                                        
+                    int NextThirtyMinutes = CurrentMinute + 30;
+                                        
+                    //use this if there is no appointment for the next hour
+                    int ActualThirtyMinutesAfter = CurrentMinute + 30;
+                                        
+                    int NextHour = CurrentHour;
+                                        
+                    //use this if there is no appointment for the next hour
+                    int Hourfor30Mins = CurrentHour;
+                                        
+                    while(NextThirtyMinutes >= 60){
+                                            
+                        ++NextHour;
+                                            
+                        if(DailyClosingTime != ""){
+                                                
+                        if(NextHour > closeHour && closeHour != 0){
 
-                                                }
-                                                else if(closeHour == 0)
-                                                    NextHour = 23;
+                            NextHour = closeHour - 1;
+
+                        }
+                        else if(closeHour == 0)
+                            NextHour = 23;
                                                     
-                                            }else if(NextHour > 23){
-                                                NextHour = 23;
-                                            }
+                        }else if(NextHour > 23){
+                            NextHour = 23;
+                        }
                                             
                                             
                                             
-                                            if(NextThirtyMinutes > 60)
-                                                NextThirtyMinutes -= 60;
+                        if(NextThirtyMinutes > 60)
+                            NextThirtyMinutes -= 60;
                                             
-                                            else if(NextThirtyMinutes == 60)
-                                                NextThirtyMinutes = 0;
-                                        }
+                        else if(NextThirtyMinutes == 60)
+                            NextThirtyMinutes = 0;
+                        }
                                         
-                                        //use this if there is no appointment for the next hour
-                                        while(ActualThirtyMinutesAfter >= 60){
+                        //use this if there is no appointment for the next hour
+                        while(ActualThirtyMinutesAfter >= 60){
                                             
-                                            ++Hourfor30Mins;
+                            ++Hourfor30Mins;
                                             
-                                            if(Hourfor30Mins > 23)
-                                                Hourfor30Mins = 23;
+                            if(Hourfor30Mins > 23)
+                                Hourfor30Mins = 23;
                                             
-                                            if(ActualThirtyMinutesAfter > 60)
-                                                ActualThirtyMinutesAfter -= 60;
+                            if(ActualThirtyMinutesAfter > 60)
+                                ActualThirtyMinutesAfter -= 60;
                                             
-                                            else if(ActualThirtyMinutesAfter == 60)
-                                                ActualThirtyMinutesAfter = 0;
-                                        }
+                            else if(ActualThirtyMinutesAfter == 60)
+                                ActualThirtyMinutesAfter = 0;
+                        }
                                         
-                                        String p = Integer.toString(NextThirtyMinutes);
-                                        String h = Integer.toString(ActualThirtyMinutesAfter);
+                        String p = Integer.toString(NextThirtyMinutes);
+                        String h = Integer.toString(ActualThirtyMinutesAfter);
                                         
-                                        if(p.length() < 2)
-                                            p = "0" + p;
+                        if(p.length() < 2)
+                            p = "0" + p;
                                         
-                                        if(h.length() < 2)
-                                            h = "0" + h;
+                        if(h.length() < 2)
+                            h = "0" + h;
                                         
-                                        String TimeAfter30Mins = NextHour + ":" + p;
-                                        String TimeWith30Mins = Hourfor30Mins + ":" + h;
-                                        NextAvailableTime = NextHour + ":" + p;
-                                        //JOptionPane.showMessageDialog(null, CurrentTime);
-                                        //JOptionPane.showMessageDialog(null, NextAvailableTime);
-                                        int Next30MinsAppointmentFlag = 0;
+                        String TimeAfter30Mins = NextHour + ":" + p;
+                        String TimeWith30Mins = Hourfor30Mins + ":" + h;
+                        NextAvailableTime = NextHour + ":" + p;
+                        //JOptionPane.showMessageDialog(null, CurrentTime);
+                        //JOptionPane.showMessageDialog(null, NextAvailableTime);
+                        int Next30MinsAppointmentFlag = 0;
                                         
-                                        /*
-                                        try{
+                        /*
+                        try{
                                             
                                             Class.forName(Driver);
                                             Connection ThirtyMinsConn = DriverManager.getConnection(Url, user, password);
