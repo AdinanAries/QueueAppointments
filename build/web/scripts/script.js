@@ -1108,3 +1108,43 @@ function showPhotoUploadwindow() {
   );
   //"height=500,width=600,status=yes,toolbar=no,menubar=no,location=no");
 }
+
+/*var HeightFirstAttemp = false;
+var pageHeight = 0;
+var pageWidth = 0;
+
+function GetPageHeight(){
+    
+    if(HeightFirstAttemp === false){
+        pageHeight = $("body").height();
+        pageWidth = $("body").width();
+    }
+    
+    HeightFirstAttemp = true;
+    
+    //alert(pageHeight);   
+    //alert(pageWidth);
+}
+
+GetPageHeight();*/
+
+function setBodyToScroll(){
+    
+    if($("body").height() < 720 && $("body").width() > 1000){
+        
+        document.getElementById("footer").style.display = "none";
+        //document.getElementById("content").style.height = "auto";
+        document.getElementById("main").style.minHeight = "700px";
+        
+        document.querySelector(".DashboardContent").style.height = "700px";
+        document.querySelector(".Main").style.height = "700px";
+        
+        document.getElementsByTagName("body")[0].style.position = "static";
+        document.getElementsByTagName("body")[0].style.height = "700px";
+        document.getElementsByTagName("body")[0].style.overflowY = "scroll";
+        
+    }
+    
+}
+
+setBodyToScroll();
