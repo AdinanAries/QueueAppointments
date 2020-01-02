@@ -168,7 +168,12 @@
             
         }catch(Exception e){}
         
-        //JOptionPane.showMessageDialog(null, DatabaseSession);
+        JOptionPane.showMessageDialog(null, DatabaseSession);
+        JOptionPane.showMessageDialog(null, SessionID);
+        
+        if(SessionID == null){
+            SessionID = "";
+        }
         if(!SessionID.equals(DatabaseSession)){
             
             try{
