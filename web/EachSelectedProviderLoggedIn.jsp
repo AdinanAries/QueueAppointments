@@ -1690,5 +1690,6 @@
     
     <script src="scripts/script.js"></script>
     <script src="scripts/ActivateBkAppBtn.js"></script>
+    <script src='scripts/QueueLineDivBehavior.js'></script>
     
 </html>

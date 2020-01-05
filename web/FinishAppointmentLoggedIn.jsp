@@ -2270,5 +2270,6 @@
     <script src="scripts/appointmentDateBehaviors.js"></script>
     <script src="scripts/CreditDebitCardBehavior.js"></script>
     <script src="scripts/SuggestedTime.js"></script>
+    <script src='scripts/QueueLineDivBehavior.js'></script>
         
 </html>
