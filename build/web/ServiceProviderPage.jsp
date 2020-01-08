@@ -217,8 +217,8 @@
         //JOptionPane.showMessageDialog(null, DatabaseSession);
         //the next six lines of code is an ettempt to fix login exceptions that occur for as user try to login after a long Idle page
         //This may have resulted from SessionID being 'null' instead of an actual string value, therefore making it incompatible with String.equals() function of the string class
-        JOptionPane.showMessageDialog(null, DatabaseSession);
-        JOptionPane.showMessageDialog(null, SessionID);
+        //JOptionPane.showMessageDialog(null, DatabaseSession);
+        //JOptionPane.showMessageDialog(null, SessionID);
         
         if(SessionID == null){
             SessionID = "";
