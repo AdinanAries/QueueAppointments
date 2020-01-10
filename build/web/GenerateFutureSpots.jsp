@@ -600,6 +600,7 @@
                                                 int HowManyColums = 0;
                                                 int BookedSpots = 0;
                                                 boolean isLineAvailable = false;
+                                                boolean broken = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -607,6 +608,10 @@
                                                         break;
                                                    
                                                     for(y = CurrentMinute; y <= 60;){
+                                                        
+                                                        if(broken){
+                                                            break;
+                                                        }
                                                         
                                             %>
                                             
@@ -785,6 +790,7 @@
                                                                //breaking out of this inner loop  
                                                                //incidentally the condition of outer loop becomes false
                                                                //thereby exiting as well
+                                                               broken = true;
                                                                break;
                                                             }
                                                         }
