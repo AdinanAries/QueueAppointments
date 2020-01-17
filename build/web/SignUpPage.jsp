@@ -423,7 +423,7 @@
                                                         }else{
                                                             document.getElementById("CustEmailStatus").style.display = "block";
                                                             document.getElementById("CustEmailStatus").style.backgroundColor = "red";
-                                                            document.getElementById("CustEmailStatus").innerHTML = "Plase verify your email";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "Please verify your email";
                                                             document.getElementById("email").value = "";
                                                         }
                                                     }

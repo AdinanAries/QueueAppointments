@@ -328,8 +328,8 @@
         try{
             Class.forName(Driver);
             Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where (City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")"
-                    + "or (Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (City like '%"+City+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")";
+            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where (City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")";
+                    //+ "or (Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (City like '%"+City+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")";
             
             PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
             

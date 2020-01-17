@@ -289,8 +289,8 @@
         try{
             Class.forName(Driver);
             Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where (City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")" //If for instance only ZipCode is provided, then that particular record should be an empty string for City and an empty string for Town but ZipCode be the value Provided; all three arguments must hold true;
-                    + "or (Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (City like '%"+City+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")";
+            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where (City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")"; //If for instance only ZipCode is provided, then that particular record should be an empty string for City and an empty string for Town but ZipCode be the value Provided; all three arguments must hold true;
+                    //+ "or (Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (City like '%"+City+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")";
             
             PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
             

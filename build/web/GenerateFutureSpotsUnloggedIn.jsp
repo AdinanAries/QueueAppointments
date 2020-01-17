@@ -772,6 +772,7 @@
                                                                //incidentally the condition of outer loop becomes false
                                                                //thereby exiting as well
                                                                broken = true;
+                                                               //the following line of code exits from this immediate while loop not the overall inner for loop
                                                                break;
                                                             }
                                                         }
