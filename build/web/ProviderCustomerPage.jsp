@@ -840,7 +840,7 @@
             }
             
             function locationErrorHandling(error){
-                alert("ERROR(" + error.code + "): " + error.message);
+                //alert("ERROR(" + error.code + "): " + error.message);
                 //Will add error handling here;
             }
             
@@ -861,7 +861,7 @@
                   //navigator.geolocation.clearWatch(watchID);
 
                 }else{ 
-                    alert("Geolocation is not supported by this browser.");
+                    alert("Location is not supported by this browser.");
                 }
             }
             
