@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<jnlp spec="1.0+"
+            codebase="http://localhost:8080/QueueWebAppPrototype/" href="QueueJNLP.jnlp">
+		<information>
+			<title>Queue</title>
+			<vendor>AriesLab</vendor>
+			<homepage href="http://localhost:8080/QueueWebAppPrototype/" />
+			<description>Queue on Windows Desktop</description>
+			<offline-allowed/>
+		</information>
+		<resources>
+			<!-- Application Resources -->
+			<j2se version="1.8+" 
+				href="http://www.oracle.com/technetwork/java/javase/downloads"/>
+			<jar href="QueueMainPrototype.jar"
+				main="true"/>
+		</resources>
+		<application-desc main-class="com.arieslab.queue.prototype.Queuedashboard.class">
+		</application-desc>
+		<update check="background"/>
+	</jnlp>
