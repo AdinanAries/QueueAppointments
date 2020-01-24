@@ -51,9 +51,10 @@
         String User = "";
         String Password = "";
         
-        String PCity = "New York";
-        String PTown = "Bronx";
-        String PZipCode = "10457";
+        String PCity = session.getAttribute("UserCity").toString();
+        String PTown = session.getAttribute("UserTown").toString();
+        String PZipCode = session.getAttribute("UserZipCode").toString();
+        
         
         try{
             url = config.getServletContext().getAttribute("DBUrl").toString();

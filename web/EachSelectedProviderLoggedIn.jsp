@@ -47,6 +47,11 @@
         String Driver = config.getServletContext().getAttribute("DBDriver").toString();
         String User = config.getServletContext().getAttribute("DBUser").toString();
         String Password = config.getServletContext().getAttribute("DBPassword").toString();*/
+        
+        String PCity = session.getAttribute("UserCity").toString();
+        String PTown = session.getAttribute("UserTown").toString();
+        String PZipCode = session.getAttribute("UserZipCode").toString();
+        
     %>
     
     <%!
@@ -1579,8 +1584,8 @@
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
+                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value="<%=PTown%>"/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
                     <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>

@@ -80,6 +80,10 @@
         String user = config.getServletContext().getAttribute("DBUser").toString();
         String password = config.getServletContext().getAttribute("DBPassword").toString();
         
+        String PCity = session.getAttribute("UserCity").toString();
+        String PTown = session.getAttribute("UserTown").toString();
+        String PZipCode = session.getAttribute("UserZipCode").toString();
+        
         
         Date ThisDate = new Date();//default date constructor returns current date 
         String CurrentTime = ThisDate.toString().substring(11,16);
@@ -287,8 +291,9 @@
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input id="city4Search" style="width: 80%;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
+                    <p>Town: <input id="town4Search" style="width: 35%" type="text" name="town4Search" value="<%=PTown%>"/> Zip Code: <input id="zcode4Search" style="width: 19%;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
+                    
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
                     <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999;'>
                         <table style='width: 2500px;'>

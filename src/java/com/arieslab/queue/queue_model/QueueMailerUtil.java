@@ -114,7 +114,7 @@ public class QueueMailerUtil {
             
             Transport.send(msg);
             //sendMessage(msg, msg.getAllRecipients());
-            JOptionPane.showMessageDialog(null, "Message sent Successfully");
+            //JOptionPane.showMessageDialog(null, "Message sent Successfully");
         }
 
         catch (Exception mex) {

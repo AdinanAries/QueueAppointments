@@ -44,9 +44,13 @@
     </head>
     
     <% 
-        String ZipCode = "10457";
+        /*String ZipCode = "10457";
         String Town = "Bronx";
-        String City = "New York";
+        String City = "New York";*/
+        
+        String City = session.getAttribute("UserCity").toString();
+        String Town = session.getAttribute("UserTown").toString();
+        String ZipCode = session.getAttribute("UserZipCode").toString();;
         
         String NewUserName = "";
         int UserID = 0;
@@ -1907,8 +1911,8 @@
                     <input type="hidden" name="ServiceType" value="Barber" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find barber shops at location below</p>
-                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value="<%=City%>"/></p> 
+                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value="<%=Town%>"/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="<%=ZipCode%>" /></p>
                     <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>

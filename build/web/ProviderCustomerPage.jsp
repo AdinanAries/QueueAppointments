@@ -721,6 +721,170 @@
     
     <body onload="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';" id="CustomerPageHtmlBody">
         
+        <script>
+            
+            var GoogleReturnedZipCode;
+            var GoogleReturnedCity;
+            var GoogleReturnedTown;
+            var GoogleReturnedStreetName;
+            var GoogleReturnedStreetNo;
+            var GoogleReturnedCountry;
+            var GoogleReached = false;
+            
+            var StateAbbrev = {
+                "AL": "Alabama",
+                "AK": "Alaska",
+                "AZ": "Arizona",
+                "AR": "Arkansas",
+                "CA": "California",
+                "CO": "Colorado",
+                "CT": "Connecticut",
+                "DE": "Delaware",
+                "FL": "Florida",
+                "GA": "Georgia",
+                "HI": "Hawaii",
+                "ID": "Idaho",
+                "IL": "Illinois",
+                "IN": "Indiana",
+                "IA": "Iowa",
+                "KS": "Kansas",
+                "KY": "Kentucky",
+                "LA": "Louisiana",
+                "ME": "Maine",
+                "MD": "Maryland",
+                "MA": "Massachusetts",
+                "MI": "Michigan",
+                "MN": "Minnesota",
+                "MS": "Mississippi",
+                "MO": "Missouri",
+                "MT": "Montana",
+                "NE": "Nebraska",
+                "NV": "Nevada",
+                "NH": "New Hampshire",
+                "NJ": "New Jersey",
+                "NM": "New Mexico",
+                "NY": "New York",
+                "NC": "North Carolina",
+                "ND": "North Dakota",
+                "OH": "Ohio",
+                "OK": "Oklahoma",
+                "OR": "Oregon",
+                "PA": "Pennsylvania",
+                "RI": "Rhode Island",
+                "SC": "South Carolina",
+                'SD': "South Dakota",
+                "TN": "Tennessee",
+                "TX": "Texas",
+                "UT": "Utah",
+                "VT": "Vermont",
+                "VA": "Virginia",
+                "WA": "Washington",
+                "WV": "West Virginia",
+                "WI": "Wisconsin",
+                "WY": "Wyoming"
+            };
+            /*if ("geolocation" in navigator) {
+                alert("I'm you location navigator");
+            } else {
+                alert("You don't have any location navigator");
+            }*/
+            
+            function GetGoogleMapsJSON(lat, long){
+                    
+                    //alert(lat);
+                    //alert(long);
+                    $.ajax({
+                        type: "GET",
+                        data: 'latlng=' + lat + ',' + long + '&sensor=true&key=AIzaSyAoltHbe0FsMkNbMCAbY5dRYBjxwkdSVQQ',
+                        url: 'https://maps.googleapis.com/maps/api/geocode/json',
+                        success: function(result){
+
+                            //GoogleReturnedZipCode = result.results[0].address_components[8].long_name;
+                            //GoogleReturnedCity = result.results[0].address_components[4].long_name;
+                            //GoogleReturnedTown = result.results[0].address_components[3].long_name;
+                            
+                            let AddressParts = result.results[0].formatted_address.split(",");
+                            let CityZipCodeParts = AddressParts[2].split(" ");
+                            let StreetParts = AddressParts[0].split();
+                            //alert(result.results[0].formatted_address);
+                            //alert(AddressParts[0]);
+                            let city = CityZipCodeParts[1];
+                            GoogleReturnedTown = AddressParts[1];
+                            if(GoogleReturnedTown === " The Bronx")
+                                GoogleReturnedTown = "Bronx";
+                            GoogleReturnedCity = StateAbbrev[city];
+                            GoogleReturnedZipCode = CityZipCodeParts[2];
+                            GoogleReturnedStreetName = StreetParts[1];
+                            GoogleReturnedStreetNo = StreetParts[0];
+                            GoogleReturnedCountry = AddressParts[3];
+                            addLocationToWebContext();
+                            /*alert(result.results[0].address_components[5].long_name);
+                            alert(result.results[0].address_components[4].long_name);
+                            alert(result.results[0].address_components[3].long_name);
+                            alert(result.results[0].address_components[2].long_name);
+                            alert(result.results[0].address_components[1].long_name);
+                            alert(result.results[0].address_components[0].long_name);*/
+
+                        }
+                    });
+                    
+                    /*var mapLink = document.getElementById("mapLink");
+                    mapLink.href = "";
+                    mapLink.href = 'https://www.openstreetmap.org/#map=18/'+lat+'/'+long;*/
+                    
+                }
+
+            function showPosition(position){
+                GetGoogleMapsJSON(position.coords.latitude, position.coords.longitude);
+                GoogleReached = true;
+            }
+            
+            function locationErrorHandling(error){
+                alert("ERROR(" + error.code + "): " + error.message);
+                //Will add error handling here;
+            }
+            
+            var locationOptions = {
+                
+                enableHighAccuracy: true, 
+                maximumAge        : 30000, 
+                timeout           : 27000
+            
+            };
+            
+            function getLocation(){
+                if (navigator.geolocation){
+                    
+                  var watchID = navigator.geolocation.watchPosition(showPosition, locationErrorHandling, locationOptions);
+                  //navigator.geolocation.getCurrentPosition(showPosition, locationErrorHandling, locationOptions);
+                  //alert(watchID);
+                  //navigator.geolocation.clearWatch(watchID);
+
+                }else{ 
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+            
+            getLocation();
+            
+        </script>
+        
+        <script>
+            function addLocationToWebContext(){
+                
+                  $.ajax({
+                      type: "POST",
+                      data: "city="+GoogleReturnedCity+"&town="+GoogleReturnedTown+"&zipcode="+GoogleReturnedZipCode,
+                      url: "addLocationDataToWebContext",
+                      success: function(result){
+                          //alert("Location added!");
+                      }
+                  });
+                  
+            }
+            
+        </script>
+        
         <div id="MainProviderCustomerPagePageLoader" class="QueueLoader">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
@@ -2361,8 +2525,24 @@
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input id="city4Search" style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p>Town: <input id="town4Search" style="width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
+                    <script>
+                        var setLocation = setInterval(
+                            function(){
+                                
+                                //don't clear interval as long as values are undefined
+                                if(GoogleReturnedCity !== undefined && GoogleReturnedZipCode !== undefined && GoogleReturnedTown !== undefined){
+                                    document.getElementById("city4Search").value = GoogleReturnedCity;
+                                    document.getElementById("zcode4Search").value = GoogleReturnedZipCode;
+                                    document.getElementById("town4Search").value = GoogleReturnedTown;
+                                    clearInterval(setLocation);
+                                }
+                            }, 
+                            1000
+                        );
+                
+                    </script>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
                     <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999;'>
                         <table style='width: 2500px;'>

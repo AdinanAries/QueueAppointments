@@ -92,6 +92,171 @@
     
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         
+        <script>
+            
+            var GoogleReturnedStreetNo;
+            var GoogleReturnedStreetName;
+            var GoogleReturnedZipCode;
+            var GoogleReturnedCity;
+            var GoogleReturnedTown;
+            var GoogleReturnedCountry;
+            var GoogleReached = false;
+            
+            var StateAbbrev = {
+                "AL": "Alabama",
+                "AK": "Alaska",
+                "AZ": "Arizona",
+                "AR": "Arkansas",
+                "CA": "California",
+                "CO": "Colorado",
+                "CT": "Connecticut",
+                "DE": "Delaware",
+                "FL": "Florida",
+                "GA": "Georgia",
+                "HI": "Hawaii",
+                "ID": "Idaho",
+                "IL": "Illinois",
+                "IN": "Indiana",
+                "IA": "Iowa",
+                "KS": "Kansas",
+                "KY": "Kentucky",
+                "LA": "Louisiana",
+                "ME": "Maine",
+                "MD": "Maryland",
+                "MA": "Massachusetts",
+                "MI": "Michigan",
+                "MN": "Minnesota",
+                "MS": "Mississippi",
+                "MO": "Missouri",
+                "MT": "Montana",
+                "NE": "Nebraska",
+                "NV": "Nevada",
+                "NH": "New Hampshire",
+                "NJ": "New Jersey",
+                "NM": "New Mexico",
+                "NY": "New York",
+                "NC": "North Carolina",
+                "ND": "North Dakota",
+                "OH": "Ohio",
+                "OK": "Oklahoma",
+                "OR": "Oregon",
+                "PA": "Pennsylvania",
+                "RI": "Rhode Island",
+                "SC": "South Carolina",
+                'SD': "South Dakota",
+                "TN": "Tennessee",
+                "TX": "Texas",
+                "UT": "Utah",
+                "VT": "Vermont",
+                "VA": "Virginia",
+                "WA": "Washington",
+                "WV": "West Virginia",
+                "WI": "Wisconsin",
+                "WY": "Wyoming"
+            };
+            /*if ("geolocation" in navigator) {
+                alert("I'm you location navigator");
+            } else {
+                alert("You don't have any location navigator");
+            }*/
+            
+            function GetGoogleMapsJSON(lat, long){
+                    
+                    //alert(lat);
+                    //alert(long);
+                    $.ajax({
+                        type: "GET",
+                        data: 'latlng=' + lat + ',' + long + '&sensor=true&key=AIzaSyAoltHbe0FsMkNbMCAbY5dRYBjxwkdSVQQ',
+                        url: 'https://maps.googleapis.com/maps/api/geocode/json',
+                        success: function(result){
+
+                            //GoogleReturnedZipCode = result.results[0].address_components[8].long_name;
+                            //GoogleReturnedCity = result.results[0].address_components[4].long_name;
+                            //GoogleReturnedTown = result.results[0].address_components[3].long_name;
+                            
+                            let AddressParts = result.results[0].formatted_address.split(",");
+                            let CityZipCodeParts = AddressParts[2].split(" ");
+                            let StreetParts = AddressParts[0].split(" ");
+                            //alert(result.results[0].formatted_address);
+                            //alert(AddressParts[0]);
+                            let city = CityZipCodeParts[1];
+                            GoogleReturnedTown = AddressParts[1];
+                            if(GoogleReturnedTown === " The Bronx")
+                                GoogleReturnedTown = "Bronx";
+                            GoogleReturnedCity = StateAbbrev[city];
+                            GoogleReturnedZipCode = CityZipCodeParts[2];
+                            GoogleReturnedStreetName = StreetParts[1];
+                            GoogleReturnedStreetNo = StreetParts[0];
+                            GoogleReturnedCountry = AddressParts[3];
+                            addLocationToWebContext();
+                            /*alert(result.results[0].address_components[5].long_name);
+                            alert(result.results[0].address_components[4].long_name);
+                            alert(result.results[0].address_components[3].long_name);
+                            alert(result.results[0].address_components[2].long_name);
+                            alert(result.results[0].address_components[1].long_name);
+                            alert(result.results[0].address_components[0].long_name);*/
+
+                        }
+                    });
+                    
+                    /*var mapLink = document.getElementById("mapLink");
+                    mapLink.href = "";
+                    mapLink.href = 'https://www.openstreetmap.org/#map=18/'+lat+'/'+long;*/
+                    
+                }
+
+            function showPosition(position){
+                GetGoogleMapsJSON(position.coords.latitude, position.coords.longitude);
+                GoogleReached = true;
+            }
+            
+            function locationErrorHandling(error){
+                alert("ERROR(" + error.code + "): " + error.message);
+                //Will add error handling here;
+            }
+            
+            var locationOptions = {
+                
+                enableHighAccuracy: true, 
+                maximumAge        : 30000, 
+                timeout           : 27000
+            
+            };
+            
+            function getLocation(){
+                if (navigator.geolocation){
+                    
+                  var watchID = navigator.geolocation.watchPosition(showPosition, locationErrorHandling, locationOptions);
+                  //navigator.geolocation.getCurrentPosition(showPosition, locationErrorHandling, locationOptions);
+                  //alert(watchID);
+                  //navigator.geolocation.clearWatch(watchID);
+
+                }else{ 
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+            
+            getLocation();
+            
+        </script>
+        
+        <script>
+            function addLocationToWebContext(){
+                
+                  $.ajax({
+                      type: "POST",
+                      data: "city="+GoogleReturnedCity+"&town="+GoogleReturnedTown+"&zipcode="+GoogleReturnedZipCode,
+                      url: "addLocationDataToWebContext",
+                      success: function(result){
+                          //alert("Location added!");
+                      }
+                  });
+                  
+            }
+            
+        </script>
+        
+        
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
@@ -778,6 +943,25 @@
                                         <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="37" style="background-color: #6699ff; border: 1px solid black;"/></p>
                                        </td>
                                 </tr>
+                                
+                                <script>
+                        var setLocation = setInterval(
+                            function(){
+                                //don't clear interval as long as values are undefined
+                                if(GoogleReturnedCity !== undefined && GoogleReturnedZipCode !== undefined && GoogleReturnedTown !== undefined){
+                                    document.getElementById("HouseNumber").value = GoogleReturnedStreetNo;
+                                    document.getElementById("Street").value = GoogleReturnedStreetName;
+                                    document.getElementById("Town").value = GoogleReturnedTown;
+                                    document.getElementById("City").value = GoogleReturnedCity;
+                                    document.getElementById("ZCode").value = GoogleReturnedZipCode;
+                                    document.getElementById("Country").value = GoogleReturnedCountry;
+                                    clearInterval(setLocation);
+                                }
+                            }, 
+                            1000
+                        );
+                
+                    </script>
                                 
                                 <script>
                                     var HouseNumber = document.getElementById("HouseNumber");

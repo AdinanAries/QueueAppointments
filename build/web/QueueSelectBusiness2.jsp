@@ -52,9 +52,9 @@
         String User = "";
         String Password = "";
         
-        String PCity = "New York";
-        String PTown = "Bronx";
-        String PZipCode = "10457";
+        String PCity = config.getServletContext().getAttribute("UserCity").toString();
+        String PTown = config.getServletContext().getAttribute("UserTown").toString();
+        String PZipCode = config.getServletContext().getAttribute("UserZipCode").toString();
         
         try{
             url = config.getServletContext().getAttribute("DBUrl").toString();
