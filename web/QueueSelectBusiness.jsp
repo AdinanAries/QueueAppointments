@@ -68,9 +68,18 @@
         //JOptionPane.showMessageDialog(null, session.getAttribute("UserTown").toString());
         //JOptionPane.showMessageDialog(null, config.getServletContext().getAttribute("UserZipCode").toString());
         
-        String PCity = session.getAttribute("UserCity").toString();
-        String PTown = session.getAttribute("UserTown").toString();
-        String PZipCode = session.getAttribute("UserZipCode").toString();
+        String PCity = "";
+        String PTown = "";
+        String PZipCode = "";
+        try{
+            PCity = session.getAttribute("UserCity").toString().trim();
+            PTown = session.getAttribute("UserTown").toString().trim();
+            PZipCode = session.getAttribute("UserZipCode").toString().trim();
+        }catch(Exception e){
+            PCity = "";
+            PTown = "";
+            PZipCode = "";
+        }
         
         try{
             

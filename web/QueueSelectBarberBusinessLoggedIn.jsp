@@ -48,9 +48,18 @@
         String Town = "Bronx";
         String City = "New York";*/
         
-        String City = session.getAttribute("UserCity").toString();
-        String Town = session.getAttribute("UserTown").toString();
-        String ZipCode = session.getAttribute("UserZipCode").toString();;
+        String City = "";
+        String Town = "";
+        String ZipCode = "";
+        try{
+            City = session.getAttribute("UserCity").toString().trim();
+            Town = session.getAttribute("UserTown").toString().trim();
+            ZipCode = session.getAttribute("UserZipCode").toString().trim();
+        }catch(Exception e){
+            City = "";
+            Town = "";
+            ZipCode = "";
+        }
         
         String NewUserName = "";
         int UserID = 0;

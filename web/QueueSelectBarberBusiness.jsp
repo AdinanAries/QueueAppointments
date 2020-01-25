@@ -51,9 +51,18 @@
         String User = "";
         String Password = "";
         
-        String PCity = session.getAttribute("UserCity").toString();
-        String PTown = session.getAttribute("UserTown").toString();
-        String PZipCode = session.getAttribute("UserZipCode").toString();
+        String PCity = "";
+        String PTown = "";
+        String PZipCode = "";
+        try{
+            PCity = session.getAttribute("UserCity").toString().trim();
+            PTown = session.getAttribute("UserTown").toString().trim();
+            PZipCode = session.getAttribute("UserZipCode").toString().trim();
+        }catch(Exception e){
+            PCity = "";
+            PTown = "";
+            PZipCode = "";
+        }
         
         
         try{
@@ -93,7 +102,8 @@
                    
                    Class.forName(Driver);
                    conn = DriverManager.getConnection(url, User, Password);
-                   String AddressQuery = "Select ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%'";// and Zipcode = "+zipCode;//+" ORDER BY NEWID()";
+                   String AddressQuery = "Select ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%'";
+                    // and Zipcode = "+zipCode;//+" ORDER BY NEWID()"; adding zipcode to search filter is going to narrow down search results. keeping search result up to whole town coverage
                    PreparedStatement AddressPst = conn.prepareStatement(AddressQuery);
                    ResultSet ProvAddressRec = AddressPst.executeQuery();
                    

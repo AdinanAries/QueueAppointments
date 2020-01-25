@@ -179,15 +179,17 @@
                             let StreetParts = AddressParts[0].split(" ");
                             //alert(result.results[0].formatted_address);
                             //alert(AddressParts[0]);
-                            let city = CityZipCodeParts[1];
-                            GoogleReturnedTown = AddressParts[1];
-                            if(GoogleReturnedTown === " The Bronx")
+                            let city = CityZipCodeParts[1].trim();
+                            GoogleReturnedTown = AddressParts[1].trim();
+                            if(GoogleReturnedTown === "The Bronx")
                                 GoogleReturnedTown = "Bronx";
-                            GoogleReturnedCity = StateAbbrev[city];
-                            GoogleReturnedZipCode = CityZipCodeParts[2];
-                            GoogleReturnedStreetName = StreetParts[1];
-                            GoogleReturnedStreetNo = StreetParts[0];
-                            GoogleReturnedCountry = AddressParts[3];
+                            GoogleReturnedCity = StateAbbrev[city].trim();
+                            GoogleReturnedZipCode = CityZipCodeParts[2].trim();
+                            GoogleReturnedStreetName = StreetParts.slice(1, (StreetParts.length));
+                            GoogleReturnedStreetName = GoogleReturnedStreetName.toString().replace("," , " ");
+                            GoogleReturnedStreetName = GoogleReturnedStreetName.trim();
+                            GoogleReturnedStreetNo = StreetParts[0].trim();
+                            GoogleReturnedCountry = AddressParts[3].trim();
                             addLocationToWebContext();
                             /*alert(result.results[0].address_components[5].long_name);
                             alert(result.results[0].address_components[4].long_name);
