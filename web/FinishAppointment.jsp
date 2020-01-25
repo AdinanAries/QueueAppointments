@@ -1471,7 +1471,7 @@
                                                     if(!hasCancellation){ 
                                                 %>
                                                 <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" value="Cash" style="background-color: white;"/><label for="Cash" style="margin-right: 5px">Later</label></span>
-                                                /<%}%> <span onclick="toggleShowCardDetailsDiv()"><input onclick="toggleShowCardDetailsDiv()" id="Credit/Debit" type="radio" name="payment" value="DebitCreditCard" style="background-color: white;"/><label for="Credit/Debit">Now</label></span></span></p>
+                                                /<%}%> <span onclick="toggleShowCardDetailsDivforLogoutPage()"><input onclick="toggleShowCardDetailsDivforLogoutPage()" id="Credit/Debit" type="radio" name="payment" value="DebitCreditCard" style="background-color: white;"/><label for="Credit/Debit">Now</label></span></span></p>
                                                 <p style="clear: both;"></p>
                                         <p> Price: <span style="color: red; float: right;">$<%=TotalPrice%></span></p>
                                         <p> Tax: <span style="color: red; float: right;">$<%=Tax%></span></p>

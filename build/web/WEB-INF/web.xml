@@ -8,8 +8,8 @@
         <servlet-class>LoginControllerMain</servlet-class>
         <init-param>
             <param-name>databaseUrl</param-name>
-            <param-value>jdbc:sqlserver://queuebdsvr.database.windows.net:1433;database=Queue</param-value>
-            <!--param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value-->
+            <!--param-value>jdbc:sqlserver://queuebdsvr.database.windows.net:1433;database=Queue</param-value-->
+            <param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value>
         </init-param>
         <init-param>
             <param-name>databaseDriver</param-name>
@@ -17,7 +17,8 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>QueueAdmin@queuebdsvr</param-value>
+            <param-value>sa</param-value>
+            <!--param-value>QueueAdmin@queuebdsvr</param-value-->
         </init-param>
         <init-param>
             <param-name>password</param-name>
@@ -807,8 +808,8 @@
         <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
         <init-param>
             <param-name>databaseUrl</param-name>
-            <param-value>jdbc:sqlserver://queuebdsvr.database.windows.net:1433;database=Queue</param-value>
-            <!--param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value-->
+            <!--param-value>jdbc:sqlserver://queuebdsvr.database.windows.net:1433;database=Queue</param-value-->
+            <param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value>
         </init-param>
         <init-param>
             <param-name>databaseDriver</param-name>
@@ -816,7 +817,8 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <param-value>QueueAdmin@queuebdsvr</param-value>
+            <param-value>sa</param-value>
+            <!--param-value>QueueAdmin@queuebdsvr</param-value-->
         </init-param>
         <init-param>
             <param-name>password</param-name>

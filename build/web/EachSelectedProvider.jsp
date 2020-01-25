@@ -230,7 +230,7 @@
         CurrentProvsName = providersList.get(0).getFirstName().trim(); //+ " " + providersList.get(0).getMiddleName().trim() + " " + providersList.get(0).getLastName().trim();
     %>
    
-    <body onload="document.getElementById('PageLoader').style.display = 'none';">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
