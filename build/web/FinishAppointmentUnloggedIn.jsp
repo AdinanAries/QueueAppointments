@@ -25,8 +25,14 @@
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
+        
+         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <!--script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
         
         <title>Queue</title>
         
@@ -480,7 +486,109 @@
                                 <td><input id="SUPtelephone" placeholder='enter your telephone/mobile number here'  type="text" name="telNumber" value="" size="37"/></td>
                             </tr>
                             <tr>
-                                <td><input id="SUPemail" placeholder='enter your email address here'  type="text" name="email" value="" size="37"/></td>
+                                <td>
+                                    <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
+                                    <input onchange='CustSetVerifyFalse();' placeholder='enter your email address here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="37" style="background-color: #6699ff;"/>
+                                    <input id="SUPemail"  type="hidden" name="email" value="" size="37"/>
+                                    <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
+                                            <div id='CustsendVerifyDiv'>
+                                                <center><input id='CustSendverifyEmailBtn' type='button' value='Click here to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                            </div>
+                                            <div id='CustverifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
+                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'>We will be sending a verification code to your email. You should enter the code below</p>
+                                                <p style='color: #ccc;'><input id="CustEmailConfirm" type="text" style="border: 1px solid black;" /></p>
+                                            </div>
+                                            <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='Enter verification code and click here' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                            <script>
+                                                
+                                                var CustEmailVerified = false;
+                                                var CustPageJustLoaded = true;
+                                                
+                                                if(document.getElementById("visibleEmail").value !== ""){
+                                                    //Execute this code when page loads with information from prio page
+                                                    CustPageJustLoaded = false;
+                                                }
+                                                
+                                                setInterval(function(){
+                                                    
+                                                    if(!CustPageJustLoaded){
+                                                        
+                                                        if(CustEmailVerified){
+                                                            document.getElementById("CustEmailStatus").style.display = "block";
+                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "green";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "Your email has been verified";
+                                                            document.getElementById("SUPemail").value = document.getElementById("visibleEmail").value;
+                                                            document.getElementById("CustEmailVeriDiv").style.display = "none";
+                                                        }else{
+                                                            document.getElementById("CustEmailStatus").style.display = "block";
+                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "Please verify your email";
+                                                            document.getElementById("SUPemail").value = "";
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                                ,1);
+                                                
+                                                var CustSetVerifyFalse = function(){
+                                                    CustEmailVerified = false;
+                                                    document.getElementById("CustSendverifyEmailBtn").style.display = "block";
+                                                };
+                                                var CustShowEmailVerify = function(){
+                                                    document.getElementById("CustEmailVeriDiv").style.display = "block";
+                                                    //document.getElementById("provSignUpBtn").style.display = "none";
+                                                };
+                                                var CustCloseEmailVerify = function(){
+                                                    CustPageJustLoaded = false;
+                                                    if(document.getElementById("visibleEmail").value === ""){
+                                                        document.getElementById("CustEmailVeriDiv").style.display = "none";
+                                                        document.getElementById("CustEmailStatus").innerHTML = "Please enter a valid email";
+                                                        document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                        //document.getElementById("provSignUpBtn").style.display = "block";
+                                                    }
+                                                };
+                                                
+                                                var CustVeriCode;
+                                                
+                                                $(document).ready(function(){
+                                                    $("#CustSendverifyEmailBtn").click(function(event){
+                                                        
+                                                        CustVeriCode = Math.floor(100000 + Math.random() * 900000);
+                                                        CustVeriCode = CustVeriCode + "";
+                                                        
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "Verification Code has been sent to your Email";
+                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
+                                                        document.getElementById("CustSendverifyEmailBtn").style.display = "none";
+                                                        
+                                                        var to = document.getElementById("visibleEmail").value;
+                                                        var Message = CustVeriCode + ' is your Queue verification code';
+                                                        
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "QueueMailer",
+                                                            data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
+                                                            success: function(result){
+                                                                
+                                                            }
+                                                        });
+                                                        
+                                                    });
+                                                });
+                                                
+                                                var CustVerifyCode = function () {
+                                                    
+                                                    if(document.getElementById("CustEmailConfirm").value === CustVeriCode){
+                                                        CustEmailVerified = true;
+                                                    }
+                                                    else{
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "Make sure verification code is entered or is correct";
+                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "red";
+                                                    }
+                                                        
+                                                };
+                                            </script>
+                                        </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
