@@ -362,10 +362,10 @@
         <servlet-name>UpdatePassword</servlet-name>
         <servlet-class>UpdatePassword</servlet-class>
     </servlet>
-    <servlet>
+    <!--servlet>
         <servlet-name>QueueMailerUtil</servlet-name>
         <servlet-class>com.arieslab.queue.queue_model.QueueMailerUtil</servlet-class>
-    </servlet>
+    </servlet-->
     <servlet>
         <servlet-name>QueueMailer</servlet-name>
         <servlet-class>QueueMailer</servlet-class>
@@ -750,10 +750,10 @@
         <servlet-name>UpdatePassword</servlet-name>
         <url-pattern>/UpdatePassword</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+    <!--servlet-mapping>
         <servlet-name>QueueMailerUtil</servlet-name>
         <url-pattern>/QueueMailerUtil</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping-->
     <servlet-mapping>
         <servlet-name>QueueMailer</servlet-name>
         <url-pattern>/QueueMailer</url-pattern>

@@ -12,6 +12,9 @@ import java.io.*;
 import java.util.*;
 import javax.activation.*;
 
+import com.sendgrid.*;
+import java.io.IOException;
+
 
 
 public class QueueMailerUtil {
@@ -69,23 +72,25 @@ public class QueueMailerUtil {
          }
         
         }*/
-    
-    final String senderEmailID = "noreply.arieslab.queue@gmail.com";
+    /*-----------------------------------------------------------------------------------
+    SendGrid
+    final String senderEmailID = "azure_b146c4fffe099c6b335762b4a343c227@azure.com";
     final String senderPassword = "Password@2014";
-    final String emailSMTPserver = "smtp.gmail.com";
+    final String emailSMTPserver = "smtp.sendgrid.net";
     //final String emailSMTPserver = "Smtp.live.com";
-    final String emailServerPort = "465";
+    final String emailServerPort = "587";
     String receiverEmailID = null;
     String emailSubject = "Test Mail";
     String emailBody = "";
-
+   ---------------------------------------------------------------------------------------*/
     //mail.smtp.ssl.enable = "true";
-    public void send(String receiverEmailID, String Subject, String Body) {
-        this.receiverEmailID = receiverEmailID;
+    //public void send(String receiverEmailID, String Subject, String Body) {
+        /*this.receiverEmailID = receiverEmailID;
         this.emailSubject = Subject;
         this.emailBody = Body;
         Properties props = new Properties();
         //System.setProperty("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol");
+        props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.user", senderEmailID);
         props.put("mail.smtp.host", emailSMTPserver);
         props.put("mail.smtp.port", emailServerPort);
@@ -96,15 +101,57 @@ public class QueueMailerUtil {
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.ssl.enable", "true");
         /*prop key="mail.smtp.starttls.enable"   */
-        SecurityManager security = System.getSecurityManager();
+        //SecurityManager security = System.getSecurityManager();*/
         //mail.smtp.ssl.enable "true"
+    
+    
+       /*---------------------------------------------------------- 
+        SendGrid
+        Properties properties = new Properties();
+        properties.put("mail.transport.protocol", "smtp");
+        properties.put("mail.smtp.host", "smtp.sendgrid.net");
+        properties.put("mail.smtp.port", 587);
+        properties.put("mail.smtp.auth", "true");
+        -------------------------------------------------------------*/
+    
+        /*-----------------------------------------------------------------------------
+        SendGrid
+        try{
+            
+            Authenticator auth = new SMTPAuthenticator();
+            Session mailSession = Session.getDefaultInstance(properties, auth);
         
+            MimeMessage message = new MimeMessage(mailSession);
+            Multipart multipart = new MimeMultipart("alternative");
+            BodyPart part1 = new MimeBodyPart();
+            part1.setText(Body);
+            //BodyPart part2 = new MimeBodyPart();
+            //part2.setContent();
+            multipart.addBodyPart(part1);
+            //multipart.addBodyPart(part2);
+            message.setFrom(new InternetAddress("noreply.arieslab.queue@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO,
+               new InternetAddress(receiverEmailID));
+            message.setSubject(Subject);
+            message.setContent(multipart);
+            
+            Transport transport = mailSession.getTransport();
+            // Connect the transport object.
+            transport.connect();
+            // Send the message.
+            transport.sendMessage(message, message.getAllRecipients());
+            // Close the connection.
+            transport.close();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        -----------------------------------------------------------------------------*/
         
 
-        try {
-            
+        /*try {
             //SMTPAuthenticator auth = new SMTPAuthenticator();
-            Session session = Session.getInstance(props, new SMTPAuthenticator("noreply.arieslab.queue@gmail.com", "Password@2014"));
+            Session session = Session.getInstance(props, new SMTPAuthenticator("azure_b146c4fffe099c6b335762b4a343c227@azure.com", "Password@2014"));
             
             MimeMessage msg = new MimeMessage(session);
             msg.setText(emailBody);
@@ -119,10 +166,21 @@ public class QueueMailerUtil {
 
         catch (Exception mex) {
             mex.printStackTrace();
+        }*/
+    //}
+    
+        /*----------------------------------------------------------------------------------------------
+        SendGrid
+        private class SMTPAuthenticator extends javax.mail.Authenticator {
+        public PasswordAuthentication getPasswordAuthentication() {
+           String username = "azure_b146c4fffe099c6b335762b4a343c227@azure.com";
+           String password = "Password@2014";
+           return new PasswordAuthentication(username, password);
         }
-    }
-
-    public class SMTPAuthenticator extends Authenticator {
+        }
+        --------------------------------------------------------------------------------------------------*/  
+        
+    /*public class SMTPAuthenticator extends Authenticator {
         String user;
         String pwd;
 
@@ -138,6 +196,27 @@ public class QueueMailerUtil {
         public PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(user, pwd);
         }
-    }
+    }*/
  
+    public void send(String receiverEmailID, String Subject, String Body)throws IOException {
+        Email from = new Email("noreply.arieslab.queue@gmail.com");
+        String subject = Subject;
+        Email to = new Email(receiverEmailID);
+        Content content = new Content("text/plain", Body);
+        Mail mail = new Mail(from, subject, to, content);
+
+        SendGrid sg = new SendGrid("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");
+        Request request = new Request();
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sg.api(request);
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+            System.out.println(response.getHeaders());
+        } catch (IOException ex) {
+          throw ex;
+        }
+    }
 }

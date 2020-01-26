@@ -488,7 +488,7 @@
                             <tr>
                                 <td>
                                     <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                    <input onchange='CustSetVerifyFalse();' placeholder='enter your email address here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="37" style="background-color: #6699ff;"/>
+                                    <input onchange='CustSetVerifyFalse();' placeholder='enter your email address here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="37"/>
                                     <input id="SUPemail"  type="hidden" name="email" value="" size="37"/>
                                     <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>

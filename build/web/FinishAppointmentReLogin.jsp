@@ -479,7 +479,7 @@
                             <tr>
                                 <td>
                                     <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                    <input onchange='CustSetVerifyFalse();' placeholder='enter your email address here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="37" style="background-color: #6699ff;"/>
+                                    <input onchange='CustSetVerifyFalse();' placeholder='enter your email address here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="37" />
                                     <input id="SUPemail" type="hidden" name="email" value="" size="37"/>
                                     <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
@@ -492,7 +492,7 @@
                                             <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='Enter verification code and click here' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
                                             <script>
                                                 
-                                                var CustEmailVerified = false;
+                                                var CustEmailVerified = false; //main controller for all verification related operations. This flag switches to true or false in order to determine what actions to be taken by the verification algorithm
                                                 var CustPageJustLoaded = true;
                                                 
                                                 if(document.getElementById("visibleEmail").value !== ""){
