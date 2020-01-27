@@ -62,6 +62,7 @@
         
         boolean isTrySuccess = true;
         
+        
         String NewUserName = "";
         int UserIndex = -1;
         int UserID = 0;
@@ -73,7 +74,7 @@
         }catch(Exception e){}
         
         try{
-        
+            
             NewUserName = request.getParameter("User");
 
             UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
@@ -188,7 +189,7 @@
                 
             }
            
-            String ID = ResendAppointmentData.ProviderID;
+            String ID = request.getParameter("ProviderID");
             
             getUserDetails details = new getUserDetails();
             ArrayList <ProviderInfo> providersList = new ArrayList<>();
@@ -1708,9 +1709,11 @@
                                         
                                         <script>
                                              
+                                             var NewUserName = '<%=NewUserName%>';
+                                             
                                                $(document).ready(function() {                        
                                                     $('#submitAppointment').click(function(event) {  
-                                                        
+                                                        document.getElementById("PageLoader").style.display = "block";
                                                         var ProviderID = document.getElementById("SendApptPID").value;
                                                         var CustomerID = document.getElementById("SendApptCustID").value;
                                                         var UserIndex = document.getElementById("SendApptUserIndex").value;
@@ -1737,7 +1740,11 @@
                                                         success: function(result){  
                                                           //alert(result);
                                                           if(result === "Success"){
-                                                              window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex);
+                                                              document.getElementById("PageLoader").style.display = "block";
+                                                              window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                          }else{
+                                                              alert(result);
+                                                              document.getElementById("PageLoader").style.display = "none";
                                                           }
                                                           //document.getElementById("eachClosedDate<>").style.display = "none";
                                                         }                

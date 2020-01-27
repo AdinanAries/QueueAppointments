@@ -1919,7 +1919,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#submitAppointment').click(function(event) {  
-                                                        
+                                                        document.getElementById("PageLoader").style.display = "block";
                                                         var ProviderID = document.getElementById("SendApptPID").value;
                                                         var CustomerID = document.getElementById("SendApptCustID").value;
                                                         var UserIndex = document.getElementById("SendApptUserIndex").value;
@@ -1949,10 +1949,12 @@
                                                           if(result === "Success"){
                                                               alert("You've been enqueued successfully!");
                                                               if($(window).width() > 1000){
+                                                                  document.getElementById("PageLoader").style.display = "none";
                                                                 window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
                                                               }
                                                           }else{
                                                               alert(result);
+                                                              document.getElementById("PageLoader").style.display = "none";
                                                           }
                                                           //document.getElementById("eachClosedDate<>").style.display = "none";
                                                         }                
