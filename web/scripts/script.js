@@ -5,6 +5,16 @@ if (document.getElementById("displayDate"))
   var datesP = document.getElementById("displayDate");
 //only create the date element variable if the displayDate object exists in the DOM*/
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+  .then(function(registration) {
+    console.log('Registration successful, scope is:', registration.scope);
+  })
+  .catch(function(error) {
+    console.log('Service worker registration failed, error:', error);
+  });
+}
+
 function QueueClock() {
   var date = new Date();
   var hours = date.getHours() + "";
