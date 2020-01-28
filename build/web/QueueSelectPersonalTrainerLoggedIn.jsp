@@ -32,6 +32,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">

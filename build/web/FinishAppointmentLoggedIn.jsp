@@ -33,6 +33,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link rel="manifest" href="/manifest.json" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -1949,8 +1950,10 @@
                                                           if(result === "Success"){
                                                               alert("You've been enqueued successfully!");
                                                               if($(window).width() > 1000){
-                                                                  document.getElementById("PageLoader").style.display = "none";
+                                                                  //document.getElementById("PageLoader").style.display = "none";
                                                                 window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              }else{
+                                                                window.location.replace("ProviderCustomerSpotsWindow.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
                                                               }
                                                           }else{
                                                               alert(result);

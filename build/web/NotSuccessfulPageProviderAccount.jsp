@@ -30,6 +30,7 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link rel="manifest" href="/manifest.json" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -310,8 +311,11 @@
                     
                     int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
                     ArrayList<ProviderInfo> ExistingAccountsList = new ArrayList<>();
-                    ArrayList localList = ExistingProviderAccountsModel.SignupUserList.get(UserIndex).getList();
-                    //JOptionPane.showMessageDialog(null, localList);
+                    ArrayList localList = null;
+                    try{
+                        localList = ExistingProviderAccountsModel.SignupUserList.get(UserIndex).getList();
+                        //JOptionPane.showMessageDialog(null, localList);
+                    }catch(Exception e){}
                     
                         for(int i = 0; i < localList.size(); i++){
                             
@@ -433,7 +437,64 @@
             </div>
              
         </div>
-                            
+        </div>
+            
+       <div id="newbusiness">
+            
+            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to find a line spot</h2></center>
+            
+            <div id="businessdetails">
+                
+            <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST"><table border="0">
+                        <tbody>
+                            <tr>
+                                <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
+                            </tr>
+                            <tr>
+                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
+                            </tr>
+                            <tr>
+                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
+                            </tr>
+                            <tr>
+                                <td><input id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
+                            </tr>
+                            <tr>
+                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <input class="button" type="reset" value="Reset" name="resetBtn" />
+                    <input id="loginPageSignUpBtn" class="button" type="submit" value="Submit" name="submitBtn" />
+                </form></center>
+                
+            </div>
+            
+                    <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Already with Queue (Login to view and manage your spots)</h2></center>
+                    
+            <center><div id ="logindetails">
+                    
+                    <form name="login" action="LoginControllerMain" method="POST">
+                        
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="37"/></td>
+                                </tr>
+                                <tr>
+                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password" type="password" name="password" value="" size="37"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <input class="button" type="reset" value="Reset" name="resetbtn"/>
+                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                    </form>
+                    
+                </div></center>
+            
+        </div>
         
                             
         <div id="footer" style="clear: both;">
@@ -441,7 +502,7 @@
         </div>
                             
     </div>
-                            
+                             
     </body>
     
     <script src="scripts/script.js"></script>

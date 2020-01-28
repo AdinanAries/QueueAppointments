@@ -33,6 +33,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue | Business</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         
@@ -1740,11 +1741,11 @@
             </div>
             
             <ul>
-                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                     Notifications<sup style='color: red; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
                 <li id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
-                <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
             </ul>
         
@@ -1812,19 +1813,19 @@
                             <img src="icons/Logo.png" alt="" width="25" height="25"/>
                             <p style="font-size: 11px; margin-top: -5px;" id="hideAppointments">Hide Spots</p>
                         </div>
-                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'>  
+                        <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'>  
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
                                 <img style="background-color: white; border-radius: 2px;" src="icons/icons8-google-news-50.png" alt="" height="25" width="25"/>
                                 <p style="font-size: 11px; margin-top: -5px;">Add News</p>
                             </div>
                         </a>
-                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3' style='color: white;'>
+                        <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3' style='color: white;'>
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
                                 <img style="background-color: white; border-radius: 2px;" src="icons/icons8-calendar-50.png" alt="" height="25" width="25"/>
                                 <p style="font-size: 11px; margin-top: -5px;">Calender</p>
                             </div>
                         </a>
-                        <a href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'>
+                        <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'>
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
                                 <p style=' width: 13px; position: absolute; z-index: 1000; font-size: 11px; color: red; margin-left: 11%; border: #334d81 1px solid; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;'><%=notiCounter%></p>
                                 <img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="25" alt="icons8-notification-50"/>
@@ -1934,7 +1935,7 @@
                         <script>
                             $(document).ready(function(){
                                 $("#SaveNewsBtn").click(function(event){
-                                    
+                                    document.getElementById('ProviderPageLoader').style.display = 'block';
                                     var ProviderID = "<%=UserID%>";
                                     var UpdDate = "<%=UpdMDate%>";
                                     var UpdTime = "<%=UpdTime%>";
@@ -1975,7 +1976,7 @@
                                                 data:"MessageID="+data,
                                                 url:"getLastProvNews",
                                                 success: function(result){
-                                                    
+                                                   document.getElementById('ProviderPageLoader').style.display = 'none';
                                                     var MessageData = JSON.parse(result);
                                                     
                                                     var MessagePic = MessageData.Photo;
@@ -2013,7 +2014,7 @@
                                 <script>
                                     $(document).ready(function(){
                                         $("#DltRecentNewsBtn").click(function(event){
-                                            
+                                            document.getElementById('ProviderPageLoader').style.display = 'block';
                                             var MessageID = document.getElementById("RecentMessageID").value;
                                             
                                             $.ajax({
@@ -2021,8 +2022,8 @@
                                                 url: "DltProvNews",
                                                 data: "MessageID="+MessageID,
                                                 success: function(result){
-                                                    
-                                                    //alert(result);
+                                                    alert("Deleted Successfully");
+                                                    document.getElementById('ProviderPageLoader').style.display = 'none';
                                                     
                                                     $.ajax({
                                                         type:"POST",
@@ -2125,7 +2126,7 @@
                                         $(document).ready(function(){
                                             
                                             $("#CalDatePicker").change(function(event){
-                                                
+                                                document.getElementById('ProviderPageLoader').style.display = 'block';
                                                 var date = document.getElementById("CalDatePicker").value;
                                                 var ProviderID = document.getElementById("CalApptUserID").value;
                                                 //alert(ProviderID);
@@ -2198,7 +2199,7 @@
                                                         }
                                                         
                                                         document.getElementById("EventsListDiv").innerHTML = bDiv.innerHTML;
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'none';
                                                     }
                                                     
                                                 });
@@ -2396,6 +2397,7 @@
                             $(document).ready(function(){
                                 
                                 $("#CalDltEvntBtn").click(function(event){
+                                    document.getElementById('ProviderPageLoader').style.display = 'block';
                                     var EventID = document.getElementById("EvntIDFld").value;
                                     
                                     $.ajax({
@@ -2405,6 +2407,7 @@
                                         success: function(result){
                                             if(result === "success")
                                                 alert("Event Deleted Successfully");
+                                                document.getElementById('ProviderPageLoader').style.display = 'none';
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn").style.display = "block";
@@ -2439,6 +2442,7 @@
                             
                             function SendEvntUpdate(){
                                 
+                                document.getElementById('ProviderPageLoader').style.display = 'block';
                                 var EvntTtle = document.getElementById("AddEvntTtle").value;
                                 EvntTtle = EvntTtle.replace("\"","");
                                 var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -2488,6 +2492,7 @@
                                     document.getElementById("AddEvntTime").value = "";
                                     document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
+                                    document.getElementById('ProviderPageLoader').style.display = 'none';
                                 
                             }
                         </script>
@@ -2497,7 +2502,7 @@
                             $(document).ready(function(){
                                 
                                 $("#CalSaveEvntBtn").click(function(event){
-                                    
+                                    document.getElementById('ProviderPageLoader').style.display = 'block';
                                     var EvntTtle = document.getElementById("AddEvntTtle").value;
                                     EvntTtle = EvntTtle.replace("\"","");
                                     var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -2537,7 +2542,7 @@
                                     document.getElementById("AddEvntTime").value = "";
                                     document.getElementById("DisplayedAddEvntTime").value = "";
                                     document.getElementById("EvntIDFld").value = "";
-                                    
+                                    document.getElementById('ProviderPageLoader').style.display = 'none';
                                 });
                             });
                         </script>
@@ -3252,14 +3257,14 @@
                                     %>
                                         
                                         <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
-                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                     
                                     <%      }
                                         }else if(TempThisHour < AppointmentHour) {
                                     %>
                                     
                                         <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
-                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                     
                                     <%}%>
                                     
@@ -3333,13 +3338,13 @@
                                     %>
                                     
                                         
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                        
                                     <%      }
                                         }else if(TempThisHour < AppointmentHour) {
                                     %>
                                     
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                     
                                     <%}%>
                                     
@@ -3378,7 +3383,7 @@
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <input style="background-color: #ff3333; border: 0; color: white; padding: 5px;" type="submit" value="Change" name="SetSpotsIntervalBtn" />
+                                                <input style="background-color: #ff3333; border: 0; color: white; padding: 5px;" type="submit" value="Change" name="SetSpotsIntervalBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                             </div></center>
                                                 
                                         </form>
@@ -3532,7 +3537,7 @@
                                                 
                                             $(document).ready(function(){
                                                 $("#AddClientsFromCurBtn<%=WString%>").click(function(event){
-                                                    
+                                                    document.getElementById('ProviderPageLoader').style.display = 'block';
                                                     var CustomerID = document.getElementById("CCustIDAddClient<%=WString%>").value;
                                                     var ProviderID = document.getElementById("PIDCAddClient<%=WString%>").value;
                                                         
@@ -3548,7 +3553,7 @@
                                                         
                                                         success: function(result){  
                                                           //alert(result);
-                                                          
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           if(result === "notInList"){
                                                               
                                                               $.ajax({
@@ -3598,6 +3603,7 @@
                                                         }                
                                                     }
                                                 });
+                                                
                                               });
                                             });
                                             
@@ -3618,7 +3624,7 @@
                                                
                                                $(document).ready(function() {                        
                                                     $('#changeAppointmentBtn<%=WString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("ChangeAppointmentID<%=WString%>").value;
                                                         var AppointmentTime = document.getElementById("timeFld<%=WString%>").value;
                                                         var AppointmentDate = document.getElementById("datepicker<%=WString%>").value;
@@ -3629,6 +3635,7 @@
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("changeBookedAppointmetForm<%=WString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -3788,7 +3795,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#DeleteApptBtn<%=WString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("DeleteApptID<%=WString%>").value;
                                                         
                                                         
@@ -3802,6 +3809,7 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert("Spot Deleted Successfully");
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("ApptRow<%=WString%>").style.display = "none";
                                                         }                
                                                       });
@@ -3927,7 +3935,7 @@
                                                 
                                             $(document).ready(function(){
                                                 $("#AddClientsFromFutBtn<%=WString%>").click(function(event){
-                                                    
+                                                    document.getElementById('ProviderPageLoader').style.display = 'block';
                                                     var CustomerID = document.getElementById("FCustIDAddClient<%=WString%>").value;
                                                     var ProviderID = document.getElementById("PIDFAddClient<%=WString%>").value;
                                                         
@@ -3943,7 +3951,7 @@
                                                         
                                                         success: function(result){  
                                                           //alert(result);
-                                                          
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           if(result === "notInList"){
                                                               
                                                               $.ajax({
@@ -3992,6 +4000,7 @@
                                                         }                
                                                       }
                                                     });
+                                                    
                                                 });
                                             });
                                         </script>
@@ -4011,7 +4020,7 @@
                                                
                                                $(document).ready(function() {                        
                                                     $('#changeAppointmentBtnFuture<%=WString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("ChangeFutureAppointmentID<%=WString%>").value;
                                                         var AppointmentTime = document.getElementById("timeFldFuture<%=WString%>").value;
                                                         var AppointmentDate = document.getElementById("datepickerFuture<%=WString%>").value;
@@ -4022,6 +4031,7 @@
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("changeFutureAppointmetForm<%=WString%>").style.display = "none";
                                                           
                                                           //JQuery Ajax takes an object as a parameter.
@@ -4184,7 +4194,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#DeleteFutureApptBtn<%=WString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("DeleteFutureApptID<%=WString%>").value;
                                                         
                                                         
@@ -4198,6 +4208,7 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert("Spot Deleted Successfully");
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("futureApptRow<%=WString%>").style.display = "none";
                                                         }                
                                                       });
@@ -4323,7 +4334,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#BlockCustBtn<%=w%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var CustomerID = document.getElementById("CustIDforBlockCustomer<%=w%>").value;
                                                         var ProviderID = document.getElementById("PIDforBlockCustomer<%=w%>").value;
                                                         
@@ -4333,7 +4344,7 @@
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
                                                           //alert(result);
-                                                          
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           if(result === "notInList"){
                                                           $.ajax({
                                                               type: "POST",
@@ -4407,7 +4418,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#addClientBtn<%=WString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var CustomerID = document.getElementById("CustIDAddClient<%=WString%>").value;
                                                         var ProviderID = document.getElementById("PIDAddClient<%=WString%>").value;
                                                         
@@ -4417,6 +4428,7 @@
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
                                                           //alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("AddClientForm<%=WString%>").style.display = "none";
                                                           
                                                           if(result === "notInList"){
@@ -4467,6 +4479,7 @@
                                                       }
                                                         
                                                     });
+                                                        
                                                   });
                                                 });
                                             </script>
@@ -4483,7 +4496,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#DeleteHistoryApptBtn<%=WString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("DeleteHistoryApptID<%=WString%>").value;
                                                         
                                                         $.ajax({  
@@ -4492,11 +4505,13 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert("This history has been deleted successfully");
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("HistoryApptRow<%=WString%>").style.display = "none";
                                                         }                
                                                       });
                                                         
                                                     });
+                                                    
                                                 });
                                     </script>
                                     
@@ -4563,7 +4578,7 @@
                                              
                                 $(document).ready(function() {                        
                                     $('#CloseDayBtn').click(function(event) {  
-                                                        
+                                        document.getElementById('ProviderPageLoader').style.display = 'block';                
                                         var ProviderID = document.getElementById("provIDforClosedDate").value;
                                         var CloseDate = document.getElementById("Ddatepicker").value;
                                         var UserIndex = "<%=UserIndex%>";
@@ -4574,7 +4589,7 @@
                                         url: "CloseDayController",  
                                         data: "ProviderID="+ProviderID+"&GetDate="+CloseDate,  
                                         success: function(result){
-                                            
+                                            document.getElementById('ProviderPageLoader').style.display = 'none';
                                             if(result === "notInList"){
                                                 $.ajax({  
                                                 type: "POST",  
@@ -4598,7 +4613,7 @@
                                                                 '<input id="closedID'+ClosedID+'" type="hidden" name="ClosedID" value="'+ClosedID+'" />'+
                                                                 '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                 '<input name="User" type="hidden" value="'+UserName+'" />' +
-                                                                '<input id="openDayBtn'+ClosedID+'" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Open this day" />' +
+                                                                '<input onclick="document.getElementById(\'ProviderPageLoader\').style.display = \'block\';" id="openDayBtn'+ClosedID+'" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Open this day" />' +
                                                             '</form>';
                                                         
 
@@ -4612,7 +4627,7 @@
                                             }
                                           }                
                                         });
-                                                        
+                                                      
                                         });
                                 });
                             </script>
@@ -4650,7 +4665,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#openDayBtn<%=ij%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var ClosedID = document.getElementById("closedID<%=ij%>").value;
                                                         
                                                         $.ajax({  
@@ -4659,11 +4674,13 @@
                                                         data: "ClosedID="+ClosedID,  
                                                         success: function(result){  
                                                           alert("Closed day has been opened");
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("eachClosedDate<%=ij%>").style.display = "none";
                                                         }                
                                                       });
                                                         
                                                     });
+                                                    
                                                 });
                                             </script>
                             </form>
@@ -4821,14 +4838,14 @@
                                       
                                     <br/>
                                     <input id="reservePID" name="ProviderID" type="hidden" value="<%=UserID%>"/>
-                                    <input id="MkReservationBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" />
+                                    <input id="MkReservationBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                 </form>
                                     
                                     <script>
                                              
                                                $(document).ready(function() {                        
                                                     $('#MkReservationBtn').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var reserveDate = document.getElementById("Rdatepicker").value;
                                                         var reserveTime = document.getElementById("RtimePicker").value;
                                                         var ProviderID = document.getElementById("reservePID").value;
@@ -4842,6 +4859,7 @@
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&formsDateValue="+reserveDate+"&formsTimeValue="+reserveTime+"&formsOrderedServices="+Reason,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           //document.getElementById("MakeReservationForm").style.display = "none";
                                                         }                
                                                       });
@@ -4962,7 +4980,7 @@
                         <tr>
                             <td><center>
                                 
-                                <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
                                     
                                     <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
                                     
@@ -5098,7 +5116,7 @@
                                                 <script>
                                                     $(document).ready(function(){
                                                         $("#UpdateProvPerBtn").click(function(event){
-                                                            
+                                                            document.getElementById('ProviderPageLoader').style.display = 'block';
                                                             var FirstName = document.getElementById("ProvFNameFld").value;
                                                             var MiddleName = document.getElementById("ProvMNameFld").value;
                                                             var LastName = document.getElementById("ProvLNameFld").value;
@@ -5112,7 +5130,8 @@
                                                                 data: "ProviderID="+ProviderID+"&FirstNameFld="+FirstName+"&MiddleNameFld="+MiddleName+"&LastNameFld="+LastName+"&EmailFld="+PerEmail+"&MobileNumberFld="+PerTel,
                                                                 success: function(result){
                                                                     alert(result);
-                                                                    
+                                                                    document.getElementById('ProviderPageLoader').style.display = 'none';
+                                                                    document.getElementById('EditPerInfoDiv').style.display = "none";
                                                                    $.ajax({
                                                                         type: "POST",
                                                                         url: "GetProvPerInfo",
@@ -5140,8 +5159,7 @@
                                                                     });
                                                                     
                                                                 }
-                                                                
-
+                                       
                                                             });
                                                            
                                                         });
@@ -5304,7 +5322,7 @@
                             <%}%>
                             </div></center>
 
-                            <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
+                            <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>' onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
 
                         </div></center>
 
@@ -5356,7 +5374,7 @@
                                                     </td>
                                                     <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=sixthPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px; padding-top: 0;">
                                                         <div style="background-color: black; opacity: 0.7; width: 96%; height: 96%; cursor: pointer; margin-left: 2px;">
-                                                            <a href="PhotoPreview.jsp?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>"><p style="color: white; text-align: center; padding-top: 20px;"><img src="icons/icons8-photo-gallery-20 (1).png" width="20" height="20" alt="icons8-photo-gallery-20 (1)"/>
+                                                            <a href="PhotoPreview.jsp?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style="color: white; text-align: center; padding-top: 20px;"><img src="icons/icons8-photo-gallery-20 (1).png" width="20" height="20" alt="icons8-photo-gallery-20 (1)"/>
                                                             </p>
                                                             <p style="color: white; text-align: center;">View Photos</p></a>
                                                             </div>
@@ -5368,7 +5386,7 @@
                                                     
                                         <%} else{%>
                                         
-                                        <a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>"><p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; border: 1px solid #000099; color: #000099; cursor: pointer; text-align: center;">Create Photo Gallery</p></a>
+                                        <a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; border: 1px solid #000099; color: #000099; cursor: pointer; text-align: center;">Create Photo Gallery</p></a>
                                         
                                         <%}%>
                                       
@@ -5545,7 +5563,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#EditServiceBtn<%=i%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var ServiceName = document.getElementById("EditServiceName<%=i%>").value;
                                                         var PriceDD = document.getElementById("EditPriceDD<%=i%>").value;
                                                         var PriceCC = document.getElementById("EditPriceCC<%=i%>").value;
@@ -5563,7 +5581,7 @@
                                                         success: function(result){ 
                                                             
                                                             alert(result);
-                                                          
+                                                            document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("changeServiceForm<%=IString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -5622,7 +5640,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#deleteSVRBtn<%=i%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var ServiceID = document.getElementById("SVCIDforDelete<%=i%>").value;
                                                         
                                                         $.ajax({  
@@ -5631,6 +5649,7 @@
                                                         data: "ServiceID="+ServiceID,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("ServiceRow<%=i%>").style.display = "none";
                                                         }                
                                                       });
@@ -5791,7 +5810,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#addServiceBtn').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var ServiceName = document.getElementById("AddServiceName").value;
                                                         var PriceDD = document.getElementById("NewPriceDD").value;
                                                         var PriceCC = document.getElementById("NewPriceCC").value;
@@ -5808,6 +5827,7 @@
                                                         data: "SerivceNameFld="+ServiceName+"&ServicePriceFldDD="+PriceDD+"&ServicePriceFldCC="+PriceCC+"&DurationFldHH="+DurationHH+"&DurationFldMM="+DurationMM+"&DescriptionFld="+ServiceNotes+"&ProviderID="+ProviderID,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("addServiceDiv").style.display = "none";
                                                           document.getElementById("AddServiceName").value = "";
                                                           document.getElementById("NewPriceDD").value = "";
@@ -6000,7 +6020,7 @@
                                         <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                         <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <center><input id="UpdateHoursBtn" style="border: 1px solid black; background-color: pink; padding: 5px; border-radius: 4px;" type="submit" value="Update Your Hours" name="UpdateHoursBtn" /></center>
+                                        <center><input id="UpdateHoursBtn" style="border: 1px solid black; background-color: pink; padding: 5px; border-radius: 4px;" type="submit" value="Update Your Hours" name="UpdateHoursBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" /></center>
                                         
                                     </form>
                                     </div>
@@ -6588,7 +6608,7 @@
                                             $(document).ready(function(){
                                                 
                                                 $("#validateCnclPlcyCardBtn").click(function(event){
-                                                    
+                                                    document.getElementById('ProviderPageLoader').style.display = 'block';
                                                     if(document.getElementById("validateCnclPlcyCardBtn").disabled === false){
                                                         
                                                         alert("clicked");
@@ -6601,7 +6621,7 @@
                                                             url: "",
                                                             data: "",
                                                             success: function(result){
-            
+                                                                document.getElementById('ProviderPageLoader').style.display = 'none';
                                                                 //if(result === "success"){
             
                                                                     cardVerified = 1;
@@ -6630,13 +6650,14 @@
                                                         });*/
             
                                                     }
+                                                    
                                                 });
                                                 
                                             });
                                             
                                             $(document).ready(function() {                        
                                                     $('#submitCnclPlcyBtn').click(function(event) {
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         if(isCardAdded){
                                                         
                                                             var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
@@ -6672,6 +6693,7 @@
                                                                 data: "ProviderID="+ProviderID+"&DurationFldHH="+DurationHH+"&ChargeCost="+ChargeCost+"&DurationFldMM="+DurationMM+"&TimeElapse="+timeElapse+"&ChargePercent="+ChargePercent+"&RMVCnclPlcy="+RemoveCancellation,  
                                                                 success: function(result){  
                                                                   alert(result);
+                                                                  document.getElementById('ProviderPageLoader').style.display = 'none';
                                                                   document.getElementById("CnclPlcyForm").style.display = "none";
 
                                                                   var Hour = 0;
@@ -6720,6 +6742,7 @@
                                                           document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
                                                           document.getElementById("BankCardValidStatus").innerHTML = "Please validate your bank card";
                                                       }
+                                                      
                                                     });
                                                 });
                                         </script>
@@ -7142,7 +7165,7 @@
                                                $(document).ready(function() {                        
                                                     $('#UpdateProvBizBtn').click(function(event) {  
                                                         
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var ProviderID = document.getElementById("ProvIDforUpdateBiz").value;
                                                         
                                                         //address information
@@ -7166,6 +7189,7 @@
                                                         data: "HouseNumber="+HouseNumber+"&ProviderID="+ProviderID+"&Street="+Street+"&Town="+Town+"&City="+City+"&Country="+Country+"&ZCode="+ZCode+"&BusinessEmailFld="+BusinessEmail+"&BusinessTelephoneNumberFld="+BusinessTel+"&BusinessType="+BizType+"&BusinessNameFld="+BusinessName,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("EditBizInfoDiv").style.display = "none";
                                                           $.ajax({  
                                                             type: "POST",  
@@ -7281,7 +7305,7 @@
                                     <script>
                                                         $(document).ready(function(){
                                                             $("#updateUsrAcntBtn").click(function(event){
-                                                                
+                                                                document.getElementById('ProviderPageLoader').style.display = 'block';
                                                                 var ProviderID = document.getElementById("ProviderIDforUpdateLogin").value;
                                                                 var UserIndex = document.getElementById("UserIndexforUpdateLogin").value;
                                                                 var UserName = document.getElementById("UsrNamefld").value;
@@ -7293,7 +7317,7 @@
                                                                     url: "updateProvLoginInfo",
                                                                     data: "ProviderID="+ProviderID+"&UserIndex="+UserIndex+"&UserNameFld="+UserName+"&NewPasswordFld="+NewPassword+"&OldPasswordFld="+oldPassword,
                                                                     success: function(result){
-                                                                        
+                                                                        document.getElementById('ProviderPageLoader').style.display = 'none';
                                                                         if(result === "fail"){
                                                                             
                                                                             document.getElementById("WrongPassStatus").style.display = "block";
@@ -7320,10 +7344,7 @@
                                                                                 data: "ProviderID="+ProviderID,
                                                                                 
                                                                                 success: function(result){
-
                                                                                     document.getElementById("UsrNamefld").value = result;
-
-
                                                                                 }
 
                                                                             });
@@ -7486,7 +7507,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#DeleteClientBtn<%=c%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var eachClientID = document.getElementById("ClientIDDltClnt<%=c%>").value;
                                                         var ProviderID = document.getElementById("PIDDltClnt<%=c%>").value;
                                                         
@@ -7495,7 +7516,7 @@
                                                         url: "DeleteClientController",  
                                                         data: "EachClientID="+eachClientID+"&ProviderID="+ProviderID,  
                                                         success: function(result){  
-                                                          
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("EachClientRow<%=c%>").style.display = "none";
                                                         }                
                                                       });
@@ -7620,7 +7641,7 @@
                                              
                                                $(document).ready(function() {                        
                                                     $('#UnblockCleintBtn<%=eachBlocked%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var BlockedID = document.getElementById("BlockedID<%=eachBlocked%>").value;
                                                         
                                                         $.ajax({  
@@ -7629,6 +7650,7 @@
                                                         data: "BlockedID="+BlockedID,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("ClientsRow<%=eachBlocked%>").style.display = "none";
                                                         }                
                                                       });
@@ -7666,7 +7688,7 @@
                 
                 <form action = "LogoutController" name="LogoutForm" method="POST">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <center><input style="width: 97%;" type="submit" value="Logout" class="button" /></center>
+                    <center><input style="width: 97%;" type="submit" value="Logout" class="button" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/></center>
                 </form>
                 
                 </div>

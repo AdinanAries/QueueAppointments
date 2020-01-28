@@ -21,6 +21,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link href='QueueCSS.css' rel='stylesheet' media='screen' type='text/css'/>
         <title>Upload Photo</title>
@@ -80,7 +81,8 @@
         
         int ID = UserID;
         
-        //JOptionPane.showMessageDialog(null, Integer.toString(ID));
+        //JOptionPane.showMessageDialog(null, UserIndex);
+        //JOptionPane.showMessageDialog(null, NewUserName);
         
         try{
             
@@ -147,7 +149,7 @@
             <input type="hidden" name="ProviderID" value="<%=ID%>" />
             
             <input id="GalPhotoFld" style="width: 90%; background-color: white; border: #d8d8d8 1px solid;" type="file" name="file" value="" /><br />
-            <input id="GalUploadBtn" style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" />
+            <input id="GalUploadBtn" style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" onclick="document.getElementById('PageLoader').style.display = 'block';"/>
         
             <script>
                 setInterval(function(){
@@ -163,7 +165,7 @@
             
         </form>
         <p style="border-top: 1px solid darkgrey; margin-top: 10px;"></p>
-        <a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
+        <a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
         
     </body>
 </html>

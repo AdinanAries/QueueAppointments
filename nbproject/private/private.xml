@@ -6,6 +6,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UnblockCust.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/LoginAndSendAppointmentController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getProvUserAccountName.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ProviderSubscription.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DeleteServiceController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/ResendAppointmentData.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdateAppointmentController.java</file>
@@ -37,10 +38,13 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetCustEvntAjax.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/ProcedureClass.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetProvEvntAjax.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ProviderSubscriptionLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UploadCoverPhotoControl.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/updateCustomerUserAccount.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/ServicesAndPrices.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/manifest.json</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SetNotificationAsSeen.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/AddSubscription.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/OpenClosedDateController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/UserAccount.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetCustPerInfo.java</file>
@@ -48,6 +52,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/HoursOpen.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/PageController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/QueueMailerUtil.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/index.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getProvFeedbackDate.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/PasswordResetController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/getCustFeedbackDate.java</file>
@@ -66,6 +71,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/LoginControllerMain.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdatePassword.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SignupAndSendAppointmentController.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/isProviderSubscriptionExpired.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetProvPerInfo.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetEachServiceDetails.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DeleteClientController.java</file>
@@ -79,13 +85,16 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/CancellationPolicyController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/CheckProvUserNameExist.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/AddEventProv.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/isInSubscriptionDB.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UploadCustomerProfilePic.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/ProviderSignUpController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SendProvCustFeedBackController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UploadGalleryPhotoController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/GetUpdateSpotInfo.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/ProviderCustomerData.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/PayAndSubmitQueueLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DltEvntAjax.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/PayAndSubmitQueue.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/CheckLoginNameController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdateProvPerInfoController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/PostProvNews.java</file>

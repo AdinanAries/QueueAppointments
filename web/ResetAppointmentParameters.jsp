@@ -33,6 +33,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,10 +56,11 @@
         config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
         config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
         
-        String Driver = "";
-        String url = "";
-        String User = "";
-        String Password = "";
+        //connection arguments
+        String url = config.getServletContext().getAttribute("DBUrl").toString();
+        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
+        String User = config.getServletContext().getAttribute("DBUser").toString();
+        String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         boolean isTrySuccess = true;
         
@@ -120,10 +122,18 @@
            //class fields
            private Connection conn;
            private ResultSet records;
-           private String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-           private String url = "jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue";
-           private String User = "sa";
-           private String Password = "Password@2014";
+           private String Driver;
+           private String url;
+           private String User;
+           private String Password;
+           
+           public void initializeDBParams(String driver, String url, String user, String password){
+               
+               this.Driver = driver;
+               this.url = url;
+               this.User = user;
+               this.Password = password;
+           }
            
            public ResultSet getRecords(String ID){
                
@@ -192,6 +202,7 @@
             String ID = request.getParameter("ProviderID");
             
             getUserDetails details = new getUserDetails();
+            details.initializeDBParams(Driver, url, User, Password);
             ArrayList <ProviderInfo> providersList = new ArrayList<>();
             ResultSet rows = details.getRecords(ID);
             
@@ -1740,7 +1751,7 @@
                                                         success: function(result){  
                                                           //alert(result);
                                                           if(result === "Success"){
-                                                              document.getElementById("PageLoader").style.display = "block";
+                                                              //document.getElementById("PageLoader").style.display = "block";
                                                               window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
                                                           }else{
                                                               alert(result);

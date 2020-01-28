@@ -1148,3 +1148,16 @@ function setBodyToScroll(){
 }
 
 setBodyToScroll();
+
+/*var allHrefs = document.getElementsByTagName("a");
+
+$(document).ready(function() {
+    for(k = 0; k < allHrefs.length; k++){
+        function(){
+            $("a")[k].click(function() {
+                alert("clicked");
+              document.getElementById("PageLoader").style.display = "block";
+            });
+        };
+    }
+});*/

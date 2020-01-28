@@ -46,7 +46,7 @@ public class OpenDate extends HttpServlet {
             OpenPst.executeUpdate();
             
             response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-            JOptionPane.showMessageDialog(null, "Closed Day Openned");
+            //JOptionPane.showMessageDialog(null, "Closed Day Openned");
             
             
         }catch(Exception e){}

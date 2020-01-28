@@ -410,6 +410,18 @@
         <servlet-name>addLocationDataToWebContext</servlet-name>
         <servlet-class>addLocationDataToWebContext</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddSubscription</servlet-name>
+        <servlet-class>AddSubscription</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>isProviderSubscriptionExpired</servlet-name>
+        <servlet-class>isProviderSubscriptionExpired</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>isInSubscriptionDB</servlet-name>
+        <servlet-class>isInSubscriptionDB</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -797,6 +809,18 @@
     <servlet-mapping>
         <servlet-name>addLocationDataToWebContext</servlet-name>
         <url-pattern>/addLocationDataToWebContext</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSubscription</servlet-name>
+        <url-pattern>/AddSubscription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>isProviderSubscriptionExpired</servlet-name>
+        <url-pattern>/isProviderSubscriptionExpired</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>isInSubscriptionDB</servlet-name>
+        <url-pattern>/isInSubscriptionDB</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

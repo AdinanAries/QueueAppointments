@@ -22,6 +22,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <title>Photos</title>
@@ -174,7 +175,7 @@
             
             <form name="deletePhoto">
                 <input id="selectedPhID" type="hidden" value="<%=FirstID%>" />
-                <input id="deleteBtn" type="button" value="Delete This Photo" style="padding: 5px; background-color: black; color: red; border: 1px solid red; width: 98%; margin-top: 3px; font-weight: bolder; cursor: pointer;" />
+                <input id="deleteBtn" type="button" value="Delete This Photo" style="padding: 5px; background-color: black; color: red; border: 1px solid red; width: 98%; margin-top: 3px; font-weight: bolder; cursor: pointer;" onclick="document.getElementById('PageLoader').style.display = 'block';"/>
                 
                 <script>
                     var ThisCell;
@@ -201,6 +202,7 @@
                                     url: "GetPhotoAfterDelete", //url here uses a relative path(Also URL pattern is stated within web.xml(webapp deployment descriptor)
                                     data: "ProviderID="+ProviderID, //QueryString to be passed to the servlet(Acting as a web service)
                                     success: function(result){
+                                        document.getElementById('PageLoader').style.display = 'none';
                                         //alert(result);
                                         var PhObject = JSON.parse(result);
                                         var Photo = PhObject.Image;
@@ -219,8 +221,8 @@
             </script>
             </form>
                         
-            <center><a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="background-color:#7e7e7e; border:1px solid darkgray; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: right;">Add New Photo</p></a></center>
-            <center><a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="background-color: pink; border:1px solid darkgray; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: left;">Your Dashboard</p></a></center>
+            <center><a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="background-color:#7e7e7e; border:1px solid darkgray; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: right;">Add New Photo</p></a></center>
+            <center><a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="background-color: pink; border:1px solid darkgray; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: left;" >Your Dashboard</p></a></center>
             
             <p style="clear: both;"></p>
             </div></center>

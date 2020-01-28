@@ -1,0 +1,7 @@
+{
+    "name" : "Queue Appointments",
+    "short_name" : "Queue",
+    "start_url" : "/Queue.jsp",
+    "display" : "standalone",
+    "orientation" : "portrait-primary"
+}

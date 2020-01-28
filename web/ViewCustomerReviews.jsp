@@ -22,6 +22,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link href='QueueCSS.css' rel='stylesheet' media='screen' type='text/css' >
         <title>Reviews</title>

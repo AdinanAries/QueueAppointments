@@ -25,6 +25,7 @@
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
+        <link rel="manifest" href="/manifest.json" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -521,7 +522,7 @@
                 <center><div class =" SearchObject">
                         
                     <form name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" />
+                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/>
                     </form> 
                         
                 </div></center>
@@ -619,7 +620,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
+                    <p><input type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                 
@@ -643,27 +644,27 @@
                 <center><table id="providericons">
                         <tbody>
                         <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBusiness.jsp"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectMedicalCenter.jsp"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
+                            <td><center><a href="QueueSelectMedicalCenter.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectDentist.jsp"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectPodiatry.jsp"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectPhisicalTherapy.jsp"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectMassage.jsp"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
+                            <td><center><a href="QueueSelectDentist.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
                             </a></center></td>
                         </tr>
                         <tr>
-                            <td><center><a href="QueueSelectTattoo.jsp"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
+                            <td><center><a href="QueueSelectPodiatry.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectMedAesthet.jsp"><p style="margin:0;" name="MedEsthSelect">Medical Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            <td><center><a href="QueueSelectPhisicalTherapy.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusiness.jsp"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
+                            <td><center><a href="QueueSelectMassage.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a href="QueueSelectTattoo.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectMedAesthet.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MedEsthSelect">Medical Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
                             </a></center></td>
                         </tr>
                     </tbody>
@@ -677,26 +678,26 @@
                     <center><table id="providericons">
                         <tbody>
                         <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBrowsLashes.jsp"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBrowsLashes.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
                             </a></center></td>
-                             <td style="width: 33.3%;"><center><a href="QueueSelectDietician.jsp"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
+                             <td style="width: 33.3%;"><center><a href="QueueSelectDietician.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectPetServe.jsp"><p style="margin:0;" name="PetServicesSelect">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectPetServe.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PetServicesSelect">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
                             </a></center></td>
                         </tr>
                         <tr>
-                            <td><center><a href="QueueSelectHomeServe.jsp"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
+                            <td><center><a href="QueueSelectHomeServe.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectPiercing.jsp"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
+                            <td><center><a href="QueueSelectPiercing.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectHolisticMed.jsp"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            <td><center><a href="QueueSelectHolisticMed.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
                             </a></center></td>
                         <tr>
-                            <td><center><a href="QueueSelectNailSalon.jsp"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
+                            <td><center><a href="QueueSelectNailSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectPersonalTrainer.jsp"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
+                            <td><center><a href="QueueSelectPersonalTrainer.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectHairSalon.jsp"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
+                            <td><center><a href="QueueSelectHairSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
                             </a></center></td>
                         </tr>
                     </tbody>
@@ -711,15 +712,15 @@
                         <center><table id="providericons">
                         <tbody>
                             <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectDaySpa.jsp"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectDaySpa.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectHairRemoval.jsp"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectHairRemoval.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalon.jsp"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
                             </a></center></td>
                             </tr>
                             <tr>
-                                <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtist.jsp"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtist.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
                                 </a></center></td>
                             </tr>
                             
