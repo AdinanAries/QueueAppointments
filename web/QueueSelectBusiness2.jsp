@@ -162,7 +162,15 @@
         %>
         
     <body style="padding-bottom: 0; background-color: #ccccff;">
-        
+        <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+                 box-shadow: 0 0 5px 1px black;'>
+                <center><a href="Queue.jsp"><p  
+                    style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
+                        <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-home-50.png" alt="icons8-home-50-50"/>
+                </p>
+                <p style='font-size: 15px; color: white; margin-top: -5px;'>Home</p>
+                </a></center>
+            </div>
         <div id="PermanentDiv" style="">
             
             <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>

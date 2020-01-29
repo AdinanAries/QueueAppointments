@@ -5,6 +5,7 @@ self.addEventListener('install', function(event) {
     caches.open(cacheName).then(function(cache) {
       return cache.addAll(
         [
+          '/Queue.jsp',
           '/QueueCSS.css',
           'http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',
          

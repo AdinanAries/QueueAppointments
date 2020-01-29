@@ -962,7 +962,7 @@
                 <%}%>
             </div>
             
-            <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='width: 40px; height: 27px; margin-top: 6.2px; float: right; margin-right: 5px;'>
+            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='width: 40px; height: 27px; margin-top: 6.2px; float: right; margin-right: 5px;'>
                     <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </div></a>
             
@@ -1006,7 +1006,7 @@
                     <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; font-weight: bolder; border-radius: 4px;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
                     <input style="font-weight: bolder; margin: 0; border: 1px solid white; border-radius: 4px; background-color: navy; color: white; padding: 7px; font-size: 15px;" 
-                            type="submit" value="Search" />
+                            type="submit" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type='hidden' name='User' value='<%=NewUserName%>' />
                 </form>
@@ -1083,7 +1083,7 @@
                     </div>
                     <script>
                         function SearchFromMiniNav(){
-                            
+                            document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                             document.getElementById("SpotsIframe").style.display = "none";
                             document.getElementById("FavoritesIframe").style.display = "none";
                             document.getElementById("ExploreDiv").style.display = "none";
@@ -1096,6 +1096,9 @@
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
+                            setTimeout(function(){
+                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                            }, 2000);
                         }
                         
                     </script>
@@ -1584,6 +1587,7 @@
                                             
                                             $("#CalDatePicker").change(function(event){
                                                 
+                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                                 var date = document.getElementById("CalDatePicker").value;
                                                 var CustomerID = document.getElementById("CalApptUserID").value;
                                                 //alert(CustomerID);
@@ -1628,7 +1632,7 @@
                                                     data: "Date="+date+"&CustomerID="+CustomerID,
                                                     success: function(result){
                                                         //alert(result);
-                                                        
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                         var EvntsData = JSON.parse(result);
                                                         
                                                         var bDiv = document.createElement('div');
@@ -1858,6 +1862,8 @@
                             $(document).ready(function(){
                                 
                                 $("#CalDltEvntBtn").click(function(event){
+                                    
+                                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                     var EventID = document.getElementById("EvntIDFld").value;
                                     
                                     $.ajax({
@@ -1865,6 +1871,9 @@
                                         url: "DltEvntAjax",
                                         data: "EventID="+EventID,
                                         success: function(result){
+                                            
+                                            document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                            
                                             if(result === "success"){
                                                 alert("Event Deleted Successfully");
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
@@ -1903,6 +1912,8 @@
                             
                             function SendEvntUpdate(){
                                 
+                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                
                                 var EvntTtle = document.getElementById("AddEvntTtle").value;
                                 EvntTtle = EvntTtle.replace("\"","");
                                 var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -1921,6 +1932,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
+                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                            alert("Event Updated Successfully");
                                             
                                             var Evnt = JSON.parse(result);
@@ -1962,6 +1974,8 @@
                                 
                                 $("#CalSaveEvntBtn").click(function(event){
                                     
+                                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                    
                                     var EvntTtle = document.getElementById("AddEvntTtle").value;
                                     EvntTtle = EvntTtle.replace("\"","");
                                     var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -1982,6 +1996,8 @@
                                         success: function(result){
                                             
                                             alert("Event Added Successufuly");
+                                            
+                                            document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -2063,7 +2079,7 @@
                             <script>
                                 $(document).ready(function(){
                                     $("#UpdtPerInfExtraBtn").click(function(){
-                                        
+                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                         var FirstName = document.getElementById("fNameExtraFld").value;
                                         var MiddleName = document.getElementById("mNameExtraFld").value;
                                         var LastName = document.getElementById("lNameExtraFld").value;
@@ -2076,6 +2092,7 @@
                                             url: "updtPerInfoExtraAjax",
                                             data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
                                             success: function(result){
+                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                 if(result === "success"){
                                                     alert("Update Successful");
                                                     var FullName = FirstName + " " + MiddleName + " " + LastName;
@@ -2118,7 +2135,9 @@
                                                 <script>
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn').click(function(event) {  
-
+                                                             
+                                                             document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                             
                                                              var feedback = document.getElementById("ExtFeedBackTxtFld").value;
                                                              var CustomerID = document.getElementById("ExtFeedBackUserID").value;
 
@@ -2128,6 +2147,7 @@
                                                              data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
                                                              success: function(result){ 
                                                                alert(result);
+                                                               document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                                document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv").style.display = "block";
                                                                document.getElementById("ExtLasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
@@ -2169,6 +2189,8 @@
                                 $(document).ready(function(){
                                     $("#ExtraLoginFormBtn").click(function(event){
                                                                 
+                                       document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';       
+                                                        
                                         var CustomerID = document.getElementById("ExtraUserIDforLoginUpdate").value;
                                         var UserIndex = document.getElementById("ExtraUserIndexforLoginUpdate").value;
                                         var UserName = document.getElementById("ExtraUpdateLoginNameFld").value;
@@ -2182,7 +2204,8 @@
                                             success: function(result){
                                                                         
                                                 //alert(result);
-                                                                        
+                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                
                                                 if(result === "fail"){
                                                                             
                                                     document.getElementById("ExtraWrongPassStatus").style.display = "block";
@@ -3212,7 +3235,7 @@
                                         $(document).ready(function(){
                                             
                                             $("#CalDatePicker2").change(function(event){
-                                                
+                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                                 var date = document.getElementById("CalDatePicker2").value;
                                                 var CustomerID = document.getElementById("CalApptUserID2").value;
                                                 //alert(CustomerID);
@@ -3257,7 +3280,7 @@
                                                     data: "Date="+date+"&CustomerID="+CustomerID,
                                                     success: function(result){
                                                         //alert(result);
-                                                        
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                         var EvntsData = JSON.parse(result);
                                                         
                                                         var bDiv = document.createElement('div');
@@ -3487,6 +3510,8 @@
                             $(document).ready(function(){
                                 
                                 $("#CalDltEvntBtn2").click(function(event){
+                                    
+                                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                     var EventID = document.getElementById("EvntIDFld2").value;
                                     
                                     $.ajax({
@@ -3496,6 +3521,7 @@
                                         success: function(result){
                                             if(result === "success")
                                                 alert("Event Deleted Successfully");
+                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                 document.getElementById("CalUpdateEvntBtn2").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn2").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn2").style.display = "block";
@@ -3531,6 +3557,8 @@
                             
                             function SendEvntUpdate2(){
                                 
+                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                
                                 var EvntTtle = document.getElementById("AddEvntTtle2").value;
                                 EvntTtle = EvntTtle.replace("\"","");
                                 var EvntDesc = document.getElementById("AddEvntDesc2").value;
@@ -3550,6 +3578,7 @@
                                         success: function(result){
                                             
                                             alert("Event Updated Successfully");
+                                            document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -3590,6 +3619,8 @@
                                 
                                 $("#CalSaveEvntBtn2").click(function(event){
                                     
+                                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                    
                                     var EvntTtle = document.getElementById("AddEvntTtle2").value;
                                     EvntTtle = EvntTtle.replace("\"","");
                                     var EvntDesc = document.getElementById("AddEvntDesc2").value;
@@ -3610,7 +3641,7 @@
                                         success: function(result){
                                             
                                             alert("Event Added Successfully");
-                                            
+                                            document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                             var Evnt = JSON.parse(result);
                                             
                                             //alert(Evnt.EvntID);
@@ -3692,6 +3723,8 @@
                                 $(document).ready(function(){
                                     $("#UpdtPerInfExtraBtn2").click(function(){
                                         
+                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                        
                                         var FirstName = document.getElementById("fNameExtraFld2").value;
                                         var MiddleName = document.getElementById("mNameExtraFld2").value;
                                         var LastName = document.getElementById("lNameExtraFld2").value;
@@ -3704,6 +3737,9 @@
                                             url: "updtPerInfoExtraAjax",
                                             data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
                                             success: function(result){
+                                                
+                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                
                                                 if(result === "success"){
                                                     alert("Update Successful");
                                                     var FullName = FirstName + " " + MiddleName + " " + LastName;
@@ -3745,7 +3781,9 @@
                                             <script>
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn2').click(function(event) {  
-
+                                                             
+                                                             document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                             
                                                              var feedback = document.getElementById("ExtFeedBackTxtFld2").value;
                                                              var CustomerID = document.getElementById("ExtFeedBackUserID2").value;
 
@@ -3756,6 +3794,7 @@
                                                              success: function(result){ 
                                                                  
                                                                alert(result);
+                                                               document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                                document.getElementById("ExtFeedBackTxtFld2").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv2").style.display = "block";
                                                                document.getElementById("ExtLasReviewMessageP2").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
@@ -3766,6 +3805,7 @@
                                                                     data: "CustomerID="+CustomerID,  
                                                                     success: function(result){  
                                                                         //alert(result);
+                                                                        
                                                                         document.getElementById("ExtFeedBackDate2").innerHTML = result +" ";
                                                                     }                
                                                                 });
@@ -3797,6 +3837,8 @@
                                 $(document).ready(function(){
                                     $("#ExtraLoginFormBtn2").click(function(event){
                                                                 
+                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                        
                                         var CustomerID = document.getElementById("ExtraUserIDforLoginUpdate2").value;
                                         var UserIndex = document.getElementById("ExtraUserIndexforLoginUpdate2").value;
                                         var UserName = document.getElementById("ExtraUpdateLoginNameFld2").value;
@@ -3810,7 +3852,8 @@
                                             success: function(result){
                                                                         
                                                 //alert(result);
-                                                                        
+                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                
                                                 if(result === "fail"){
                                                                             
                                                     document.getElementById("ExtraWrongPassStatus2").style.display = "block";
@@ -3860,7 +3903,7 @@
                             <td>
                                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';"/></center>
                                 </form>
                             </td>
                         </tr>
@@ -3983,7 +4026,7 @@
                                     } else{
                                 %>
                                 
-                                   <center><a href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; border-radius: 4px; background-color: pink; color: black; padding: 5px; border: solid black 1px; width: 200px; text-align: center; margin-bottom: 5px;">Add Profile Picture<p></a></center>
+                                   <center><a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; border-radius: 4px; background-color: pink; color: black; padding: 5px; border: solid black 1px; width: 200px; text-align: center; margin-bottom: 5px;">Add Profile Picture<p></a></center>
                                     
                                 <%
                                     }
@@ -4042,7 +4085,7 @@
                                                 <input type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <center><input id="NewAddressBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="submit" value="Set Address" /></center>
+                                                <center><input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" id="NewAddressBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="submit" value="Set Address" /></center>
                                             
                                                 <script>
                                                     var setAddress = setInterval(
@@ -4077,7 +4120,7 @@
                                               padding-top: 5px;" >
                                             <center><p style="color: white; margin: 5px;">Change profile information</p></center>
                                             
-                                            <center><a href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; background-color: pink; color: black; padding: 5px; border: 1px solid black; border-radius: 5px; text-align: center; width: 300px;">Change Your Profile Photo</p></a></center>
+                                            <center><a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; background-color: pink; color: black; padding: 5px; border: 1px solid black; border-radius: 5px; text-align: center; width: 300px;">Change Your Profile Photo</p></a></center>
                                             <center><table>
                                                 <tbody>
                                                 <tr>
@@ -4227,6 +4270,8 @@
                                                     $(document).ready(function(){
                                                         $("#ChangeProfileUpdateBtn").click(function(event){
                                                             
+                                                            document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                            
                                                             var CustomerID = document.getElementById("CustomerIDforUpdateInfo").value;
                                                             var UserIndex = document.getElementById("UserIndexforUpdateInfo").value;
                                                             var FirstName = document.getElementById("ChangeProfileFirstName").value;
@@ -4253,6 +4298,8 @@
                                                                 success: function(result){
                                                                     
                                                                     alert("Update Successful");
+                                                                    
+                                                                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                                     
                                                                     $.ajax({
                                                                         type: "POST",
@@ -4325,6 +4372,8 @@
                                                $(document).ready(function() {                        
                                                     $('#SendFeedBackBtn').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var feedback = document.getElementById("FeedBackTxtFld").value;
                                                         var CustomerID = document.getElementById("FeedBackUserID").value;
                                                         
@@ -4334,6 +4383,9 @@
                                                             data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
                                                             success: function(result){
                                                               alert(result);
+                                                              
+                                                              document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                              
                                                               document.getElementById("FeedBackTxtFld").innerHTML = "Add your message here...";
                                                               document.getElementById("LastReviewMessageDiv").style.display = "block";
                                                               document.getElementById("LasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
@@ -4435,6 +4487,8 @@
                                                         $(document).ready(function(){
                                                             $("#LoginFormBtn").click(function(event){
                                                                 
+                                                                document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                                
                                                                 var CustomerID = document.getElementById("UserIDforLoginUpdate").value;
                                                                 var UserIndex = document.getElementById("UserIndexforLoginUpdate").value;
                                                                 var UserName = document.getElementById("UpdateLoginNameFld").value;
@@ -4446,6 +4500,8 @@
                                                                     url: "updateLoginController",
                                                                     data: "CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&userName="+UserName+"&newPassword="+NewPassword+"&currentPassword="+oldPassword,
                                                                     success: function(result){
+                                                                        
+                                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                                         
                                                                         //alert(result);
                                                                         
@@ -4625,7 +4681,7 @@
                                             </form>
                                                 </li>
                                                 <li>
-                                                    <a href='ViewCustomerReviews.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>'><p style="cursor: pointer; color: white;"><img src="icons/icons8-popular-20 (1).png" width="20" height="20" alt="icons8-popular-20 (1)"/>
+                                                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='ViewCustomerReviews.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>'><p style="cursor: pointer; color: white;"><img src="icons/icons8-popular-20 (1).png" width="20" height="20" alt="icons8-popular-20 (1)"/>
                                                             Your Reviews</p></a>
                                                 </li>
                                             </ul>
@@ -4892,11 +4948,11 @@
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
-                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderName%>"/>
+                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>"/>
                                                 </span><span> started at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
                                                 <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border: 0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
+                                                    <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border: 0; font-weight: bolder; margin: 0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
                                             
                                         </form>
                                         <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
@@ -4938,11 +4994,11 @@
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
-                                                <P>You are on <span style = "color: blue;"><input style="background-color: white; color: blue; border:0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderName%>'s"/>
+                                                <P>You are on <span style = "color: blue;"><input style="background-color: white; color: blue; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>'s"/>
                                                 </span><span> line at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
                                                 <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span style = "color: blue;"><input style="background-color: white; color: blue; border: 0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
+                                                    <span style = "color: blue;"><input style="background-color: white; color: blue; border: 0; font-weight: bolder; margin: 0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
                                             
                                         </form>
                                         <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
@@ -4972,6 +5028,8 @@
                                                $(document).ready(function() {                        
                                                     $('#changeAppointmentBtn<%=JString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var AppointmentID = document.getElementById("ChangeAppointmentID<%=JString%>").value;
                                                         var AppointmentTime = document.getElementById("timeFld<%=JString%>").value;
                                                         var AppointmentDate = document.getElementById("datepicker<%=JString%>").value;
@@ -4982,6 +5040,9 @@
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                          
                                                           document.getElementById("changeBookedAppointmetForm<%=JString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -5136,6 +5197,8 @@
                                                $(document).ready(function() {                        
                                                     $('#DeleteAppointmentBtn<%=JString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var AppointmentID = document.getElementById("AppointmentID<%=JString%>").value;
                                                         
                                                         $.ajax({  
@@ -5144,6 +5207,9 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                          
                                                           document.getElementById("AppointmentDiv<%=JString%>").style.display = "none";
                                                         }                
                                                       });
@@ -5162,6 +5228,8 @@
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var ProviderID = document.getElementById("ProvIDatAddFav<%=JString%>").value;
                                                         var CustomerID = document.getElementById("CustIDatAddFav<%=JString%>").value;
                                                         
@@ -5170,6 +5238,8 @@
                                                         url: "addFavProvController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){
+                                                            
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                             
                                                          if(result === "NewAdded"){
                                                              alert("Provider added to your favorites");
@@ -5233,7 +5303,7 @@
 
                                                                                     '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -5244,7 +5314,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -5393,10 +5463,10 @@
                                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                            <P>You will be on <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" type="submit"  value="<%= ProviderName%>'s" /></span><span> line</p>
+                                            <P>You will be on <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" type="submit"  value="<%= ProviderName%>'s" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></span><span> line</p>
                                             <p>on <span id="FutureDateSpan<%=QString%>" style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span id="FutureTimeSpan<%=QString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                             <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" type="submit" value="<%= ProviderCompany%>" /></span></span></p>
+                                                <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" type="submit" value="<%= ProviderCompany%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></span></span></p>
                                         
                                         </form>
                                                 
@@ -5419,6 +5489,8 @@
                                                $(document).ready(function() {                        
                                                     $('#changeAppointmentBtnFuture<%=QString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var AppointmentID = document.getElementById("UpdateAppointmentID<%=QString%>").value;
                                                         var AppointmentTime = document.getElementById("timeFldFuture<%=QString%>").value;
                                                         var AppointmentDate = document.getElementById("datepickerFuture<%=QString%>").value;
@@ -5429,6 +5501,9 @@
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                          
                                                           document.getElementById("changeFutureAppointmetForm<%=QString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -5586,6 +5661,8 @@
                                                $(document).ready(function() {                        
                                                     $('#DeleteAppointmentFutureBtn<%=QString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var AppointmentID = document.getElementById("AppointmentIDFuture<%=QString%>").value;
                                                         
                                                         $.ajax({  
@@ -5594,6 +5671,7 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                           document.getElementById("FutureAppointmentDiv<%=QString%>").style.display = "none";
                                                         }                
                                                       });
@@ -5611,7 +5689,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                                         var ProviderID = document.getElementById("ProvIDforAddFav<%=QString%>").value;
                                                         var CustomerID = document.getElementById("CustIDforAddFav<%=QString%>").value;
                                                         
@@ -5620,7 +5698,7 @@
                                                         url: "addFavProvController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
-                                                          
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                          if(result === "NewAdded"){
                                                              alert("Provider added to your favorites");
                                                              
@@ -5685,7 +5763,7 @@
 
                                                                                     '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -5697,7 +5775,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -5847,14 +5925,14 @@
                                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                        <P>You were on<span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderName%>'s"</span><span> line.</p>
+                                        <P>You were on<span style = "color: blue;"> <input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderName%>'s"</span><span> line.</p>
                                         <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                            <span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderCompany%>"</span></span></p>
+                                            <span style = "color: blue;"> <input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderCompany%>"</span></span></p>
                                         <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                             <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
                                         <p>on <span style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span style = "color: red;"> <%= TimeToUse%></span></P>
                                         <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
-                                        <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>"><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
+                                        <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" ><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
                                         
                                         </form>
                                         
@@ -5867,6 +5945,8 @@
                                                $(document).ready(function() {                        
                                                     $('#DeleteAppointmentHistoryBtn<%=JString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var AppointmentID = document.getElementById("AppointmentIDHistory<%=JString%>").value;
                                                         
                                                         $.ajax({  
@@ -5875,6 +5955,7 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert("This is history has been removed");
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                           document.getElementById("HistoryAppointmentDiv<%=JString%>").style.display = "none";
                                                         }                
                                                       });
@@ -5931,6 +6012,8 @@
                                                $(document).ready(function() {                        
                                                     $('#submitReviewBtn<%=JString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var RateValue = 1;
                                                         
                                                         if(document.getElementById("star5<%=JString%>").checked === true){
@@ -5955,6 +6038,7 @@
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&rate="+RateValue+"&Review="+ReviewMessage,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                           document.getElementById("ProviderReview<%=JString%>").innerHTML = "Review sent. Click here to See more...";
                                                           document.getElementById("ratingAndReviewForm<%=JString%>").style.display = "none";
                                                         }                
@@ -6009,7 +6093,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                                         var ProviderID = document.getElementById("ProviderIDforAddFav<%=JString%>").value;
                                                         var CustomerID = document.getElementById("CustomerIDforAddFav<%=JString%>").value;
                                                         
@@ -6018,6 +6102,8 @@
                                                         url: "addFavProvController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
+                                                          
+                                                          document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                           
                                                           if(result === "NewAdded"){
                                                               alert("Provider added to your favorites");
@@ -6082,7 +6168,7 @@
 
                                                                                     '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -6094,7 +6180,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -6392,6 +6478,8 @@
                                                $(document).ready(function() {                        
                                                     $('#DeleteFavProvBtn<%=SString%>').click(function(event) {  
                                                         
+                                                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                                                        
                                                         var ProvID = document.getElementById("ProvID<%=SString%>").value;
                                                         
                                                         $.ajax({  
@@ -6400,6 +6488,7 @@
                                                             data: "UserID="+ProvID,  
                                                             success: function(result){  
                                                               alert(result);
+                                                              document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                               document.getElementById("FavoriteProvDiv<%=SString%>").style.display = "none";
                                                             }                
                                                         });
@@ -6419,7 +6508,7 @@
                                         <input type="hidden" name="UserID" value="<%=FavProvID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />
+                                        <input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
                                         </form></center>
                                         
                                         
@@ -6427,7 +6516,7 @@
                                             
                                     </div>    
                                         
-                                        <a href="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                        <a href="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
                                             <p style="border: 1px solid darkblue; color: darkblue; text-align: center; padding: 5px; max-width: 300px;">View all your favorite providers</p></a>
                                 </div>
                                 
@@ -6452,7 +6541,7 @@
                                     
                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <input style="width: 95%; height: auto;" type="submit" value="Logout" class="button" />
+                    <input style="width: 95%; height: auto;" type="submit" value="Logout" class="button" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
                 </form> 
                 
                 </div>

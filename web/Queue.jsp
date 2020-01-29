@@ -304,14 +304,18 @@
             <cetnter><p> </p></cetnter>
             <center><image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/></center>
             <center><p style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></center>
-            
+            <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+                 box-shadow: 0 0 5px 1px black;'>
+                <center><a href="NewsUpadtesPage.jsp"><p  
+                    style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
+                        <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+                </p>
+                <p style='font-size: 15px; color: white; margin-top: -5px;'>News</p>
+                </a></center>
+            </div>
         </div>
             
-            <center><a href="NewsUpadtesPage.jsp"><p id='QShowNews22' 
-                style='background-color: #6699ff; color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0;'>
-                    <img style='background-color: white; width: 25px; height: 24px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
-                    <sup style='font-size: 17px;'>Show News Updates</sup>
-            </p></a></center>
+            
             
             <div id="Extras">
             

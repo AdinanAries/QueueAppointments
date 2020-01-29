@@ -17,7 +17,9 @@ body {
 .propic img{
     object-fit: cover;
 }
-
+#QShowNews22{
+    z-index: 1000;
+}
 #GalleryThumnail img{
     object-fit: cover;
 }
