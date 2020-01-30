@@ -41,7 +41,13 @@
    
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
-    <body style="background-color: #7e7e7e;">
+    <body style="background-color: #7e7e7e;" onload="document.getElementById('PageLoader').style.display = 'none';">
+        
+        <div id="PageLoader" class="QueueLoader" style="display: block;">
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
         <h3 style="text-align: center; margin: 5px; color: white;">Block Future Spots</h3>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                
@@ -886,7 +892,7 @@
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
-                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
                                     
                                     <%      }
                                         }else if(TempThisHour < AppointmentHour && QueueDate.equals(Today)) {
@@ -896,7 +902,7 @@
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
-                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
                                     
                                     <%} else if(!QueueDate.equals(Today)){%>
                                     
@@ -904,7 +910,7 @@
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
-                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
                                     
                                     <%}%>
                                     
@@ -987,17 +993,17 @@
                                     %>
                                     
                                         
-                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                        
                                     <%          }
                                             }else if(TempThisHour < AppointmentHour && (QueueDate.equals(Today))) {
                                     %>
                                     
-                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
                                     <%      }else if(!QueueDate.equals(Today)){%>
                                     
-                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
                                     <%}%>
                                     
@@ -1022,7 +1028,7 @@
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                     
@@ -1057,7 +1063,7 @@
 
                                 </script>
 
-                                <center><a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="width: 100%; max-width: 590px; padding: 5px; background-color: pink; color: white; text-align:center; ">Go to your dashboard</p></a></center>
+                                <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="width: 100%; max-width: 590px; padding: 5px; background-color: pink; color: white; text-align:center; ">Go to your dashboard</p></a></center>
 
                 <%
                         
@@ -1296,7 +1302,7 @@
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input id="changeAppointmentBtn<%=WString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=WString%>changeAppointment" type="submit" value="Reschedule" />
+                                        <input id="changeAppointmentBtn<%=WString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=WString%>changeAppointment" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Reschedule" />
                                         
                                         <script>
                                                
@@ -1433,7 +1439,7 @@
                                 
                                 <center><form style=" display: none;" id="deleteAppointmentForm<%=WString%>" class="deleteAppointmentForm" name="confirmDeleteAppointment" action="BlkSptDeleteAppointment" method="POST">
                                     <p style="color: red; margin-top: 10px;">Are you sure you want to remove this customer</p>
-                                    <p><input style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="<%=WString%>deleteAppointment" type="submit" value="Yes" />
+                                    <p><input style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="<%=WString%>deleteAppointment" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Yes" />
                                     <span onclick = "hideDelete(<%=WString%>)" style="background-color: blue; border: 1px solid black; color: white; padding: 3px; cursor: pointer;"> NO</span></p>
                                     <input type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
                                     <input type="hidden" name="GetDate" value="<%=SpotsDate%>" />

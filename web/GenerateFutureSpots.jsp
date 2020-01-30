@@ -975,7 +975,7 @@
                                     %>
                                     
                                         
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                        
                                     <%      }else{   %>
 
@@ -985,11 +985,11 @@
                                         }else if(TempThisHour < AppointmentHour && (QueueDate.equals(Today))) {
                                     %>
                                     
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
                                     <%}else if(!QueueDate.equals(Today)){%>
                                     
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
                                     <%}%>
                                     
@@ -1018,7 +1018,7 @@
                                         <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                                         
@@ -1056,7 +1056,7 @@
                                 </script>
                                 
                             </div>
-                            <a href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="padding: 5px; background-color: pink; text-align: center; ">Go to your dashboard</p></a>
+                            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="padding: 5px; background-color: pink; text-align: center; ">Go to your dashboard</p></a>
     
                     </div></center>
     </body>

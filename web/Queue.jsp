@@ -256,12 +256,12 @@
                     </div></center>
             </div>
             
-            <a href='NewsUpadtesPage.jsp'><div style='width: 40px; height: 27px; margin-top: 5px; float: right; margin-right: 5px;'>
+            <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href='NewsUpadtesPage.jsp'><div style='width: 40px; height: 27px; margin-top: 5px; float: right; margin-right: 5px;'>
                     <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </div></a>
         
             <ul style="margin-right: 5px;">
-                <a  href="LogInPage.jsp">
+                <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="LogInPage.jsp">
                     <li style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Your Dashboard</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -275,7 +275,7 @@
                     <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
                     <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
-                            type="submit" value="Search" />
+                           onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Search" />
                 </form>
             </div>
                 <p style='clear: both;'></p>
@@ -294,7 +294,7 @@
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
                                    placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
-                                   type="submit" value="Search" />
+                                  onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Search" />
                     </form>
                 </center>
             </div>
@@ -306,7 +306,7 @@
             <center><p style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></center>
             <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
-                <center><a href="NewsUpadtesPage.jsp"><p  
+                <center><a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="NewsUpadtesPage.jsp"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
                         <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </p>
@@ -624,7 +624,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
+                    <p><input onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                 
@@ -961,7 +961,7 @@
                     </script>
                     
                     <input class="button" type="reset" value="Reset" name="resetBtn" />
-                    <input id="loginPageSignUpBtn" class="button" type="submit" value="Submit" name="submitBtn" />
+                    <input id="loginPageSignUpBtn" class="button" onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Submit" name="submitBtn" />
                 </form></center>
                 
             </div>
@@ -984,7 +984,7 @@
                         </table>
                         
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                        <input id="loginPageBtn" class="button" onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
                 </div></center>

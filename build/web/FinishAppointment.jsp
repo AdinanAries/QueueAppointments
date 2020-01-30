@@ -230,7 +230,7 @@
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
-                <center><a href="Queue.jsp"><p  
+                <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
                         <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-home-50.png" alt="icons8-home-50-50"/>
                 </p>
@@ -244,7 +244,7 @@
         
         <div id="PermanentDiv" style="">
             
-            <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
                         <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                             Home</p></a>
             
@@ -263,7 +263,7 @@
             </div>
         
             <ul>
-                <a  href="Queue.jsp">
+                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp">
                     <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -277,7 +277,7 @@
                     <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
                     <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
-                            type="submit" value="Search" />
+                          onclick="document.getElementById('PageLoader').style.display = 'block';"  type="submit" value="Search" />
                 </form>
             </div>
                 <p style='clear: both;'></p>
@@ -298,7 +298,7 @@
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
                                    placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
-                                   type="submit" value="Search" />
+                                 onclick="document.getElementById('PageLoader').style.display = 'block';"  type="submit" value="Search" />
                     </form>
                 </center>
             </div>
@@ -306,7 +306,7 @@
         <div id="header">
             
             <cetnter><p> </p></cetnter>
-            <center><a href="PageController" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
+            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
             
         </div>
             
@@ -519,7 +519,7 @@
                 <center><div class =" SearchObject">
                         
                     <form name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                    <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" />
+                    <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" name="SearchBtn" />
                     </form> 
                         
                 </div></center> 
@@ -1199,7 +1199,7 @@
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to get spots</p>
                                         <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input type="hidden" name="ProviderID" value="<%=PID%>" />
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                                         
@@ -1505,7 +1505,7 @@
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; background-color: red; color: white;"></p>
                                     <center><input id="submitAppointment" style="border: black solid 1px; background-color: red; border-radius: 5px; color: white;
                                                    padding: 5px;"
-                                                   type="submit" value="Confirm" /></center>
+                                                   onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Confirm" /></center>
                                         
                                          <%
                                             //putting neccessery data into

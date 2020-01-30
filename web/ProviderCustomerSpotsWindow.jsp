@@ -512,6 +512,11 @@
     
     <body style="background-color: #ccccff;">
         
+        <div id="PagePageLoader" class="QueueLoader" style='display: none;'>
+            <div class="QueueLoaderSpinner"></div>
+            <img src="icons/Logo.png" alt=""/>
+        </div>
+        
         <div style="background-color: #ccccff;">
                                         
                                         <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%;">
@@ -751,11 +756,11 @@
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
-                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderName%>"/>
+                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>"/>
                                                 </span><span> started at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
                                                 <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border: 0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
+                                                    <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border: 0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
                                             
                                         </form>
                                         <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
@@ -797,11 +802,11 @@
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
-                                                <P>You are on <span style = "color: blue;"><input style="background-color: white; color: blue; border:0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderName%>'s"/>
+                                                <P>You are on <span style = "color: blue;"><input style="background-color: white; color: blue; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>'s"/>
                                                 </span><span> line at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
                                                 <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span style = "color: blue;"><input style="background-color: white; color: blue; border: 0; font-weight: bolder; margin: 0;" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
+                                                    <span style = "color: blue;"><input style="background-color: white; color: blue; border: 0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
                                             
                                         </form>
                                         <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
@@ -830,7 +835,7 @@
                                                 
                                                $(document).ready(function() {                        
                                                     $('#changeAppointmentBtn<%=JString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("ChangeAppointmentID<%=JString%>").value;
                                                         var AppointmentTime = document.getElementById("timeFld<%=JString%>").value;
                                                         var AppointmentDate = document.getElementById("datepicker<%=JString%>").value;
@@ -841,6 +846,7 @@
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('PagePageLoader').style.display = 'none';
                                                           document.getElementById("changeBookedAppointmetForm<%=JString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -994,7 +1000,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#DeleteAppointmentBtn<%=JString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("AppointmentID<%=JString%>").value;
                                                         
                                                         $.ajax({  
@@ -1003,6 +1009,7 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('PagePageLoader').style.display = 'none';
                                                           document.getElementById("AppointmentDiv<%=JString%>").style.display = "none";
                                                         }                
                                                       });
@@ -1020,7 +1027,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var ProviderID = document.getElementById("ProvIDatAddFav<%=JString%>").value;
                                                         var CustomerID = document.getElementById("CustIDatAddFav<%=JString%>").value;
                                                         
@@ -1029,10 +1036,10 @@
                                                         url: "addFavProvController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){
-                                                            
+                                                            document.getElementById('PagePageLoader').style.display = 'none';
                                                          if(result === "NewAdded"){
                                                              alert("Provider added to your favorites");
-                                                            $.ajax({
+                                                            /*$.ajax({
 
                                                                 type: "POST",
                                                                 url: "GetLastFavProv",
@@ -1046,8 +1053,8 @@
                                                                     var provProPic = favProv.ProfilePic;
                                                                     var provRating = parseInt(favProv.Rating, 10);
                                                                     
-                                                                    var UserIndex = "<%=UserIndex%>";
-                                                                    var UserName = "<%=NewUserName%>";
+                                                                    var UserIndex = "<=UserIndex%>";
+                                                                    var UserName = "<=NewUserName%>";
                                                                     
                                                                     var ratingStars;
                                                                     if(provRating === 5){
@@ -1117,7 +1124,7 @@
                                                                                 document.getElementById("noFavProvStatus").style.display = "none";
                                                                     
                                                                 }
-                                                            });
+                                                            });*/
                                                          }else{
                                                             alert(result);
                                                          }
@@ -1252,10 +1259,10 @@
                                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                            <P>You will be on <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" type="submit"  value="<%= ProviderName%>'s" /></span><span> line</p>
+                                            <P>You will be on <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit"  value="<%= ProviderName%>'s" /></span><span> line</p>
                                             <p>on <span id="FutureDateSpan<%=QString%>" style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span id="FutureTimeSpan<%=QString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                             <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" type="submit" value="<%= ProviderCompany%>" /></span></span></p>
+                                                <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="<%= ProviderCompany%>" /></span></span></p>
                                         
                                         </form>
                                                 
@@ -1277,7 +1284,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#changeAppointmentBtnFuture<%=QString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("UpdateAppointmentID<%=QString%>").value;
                                                         var AppointmentTime = document.getElementById("timeFldFuture<%=QString%>").value;
                                                         var AppointmentDate = document.getElementById("datepickerFuture<%=QString%>").value;
@@ -1288,6 +1295,7 @@
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('PagePageLoader').style.display = 'none';
                                                           document.getElementById("changeFutureAppointmetForm<%=QString%>").style.display = "none";
                                                           
                                                           $.ajax({
@@ -1444,7 +1452,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#DeleteAppointmentFutureBtn<%=QString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("AppointmentIDFuture<%=QString%>").value;
                                                         
                                                         $.ajax({  
@@ -1453,6 +1461,7 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('PagePageLoader').style.display = 'none';
                                                           document.getElementById("FutureAppointmentDiv<%=QString%>").style.display = "none";
                                                         }                
                                                       });
@@ -1470,7 +1479,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var ProviderID = document.getElementById("ProvIDforAddFav<%=QString%>").value;
                                                         var CustomerID = document.getElementById("CustIDforAddFav<%=QString%>").value;
                                                         
@@ -1479,11 +1488,11 @@
                                                         url: "addFavProvController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
-                                                          
+                                                         document.getElementById('PagePageLoader').style.display = 'none';
                                                          if(result === "NewAdded"){
                                                              alert("Provider added to your favorites");
                                                              
-                                                            $.ajax({
+                                                            /*$.ajax({
 
                                                                 type: "POST",
                                                                 url: "GetLastFavProv",
@@ -1493,8 +1502,8 @@
                                                                     
                                                                     var favProv = JSON.parse(result);
                                                                     
-                                                                    var UserIndex = "<%=UserIndex%>";
-                                                                    var UserName = "<%=NewUserName%>";
+                                                                    var UserIndex = "<=UserIndex%>";
+                                                                    var UserName = "<=NewUserName%>";
                                                                     var provName = favProv.Name;
                                                                     var provCoverPic = favProv.CoverPic;
                                                                     var provProPic = favProv.ProfilePic;
@@ -1570,7 +1579,7 @@
                                                                                 document.getElementById("noFavProvStatus").style.display = "none";
                                                                     
                                                                 }
-                                                            });
+                                                            });*/
                                                          }else{
                                                           alert(result);
                                                          }
@@ -1706,9 +1715,9 @@
                                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                        <P>You were on<span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderName%>'s"</span><span> line.</p>
+                                        <P>You were on<span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="<%=ProviderName%>'s"</span><span> line.</p>
                                         <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                            <span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderCompany%>"</span></span></p>
+                                            <span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="<%=ProviderCompany%>"</span></span></p>
                                         <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                             <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
                                         <p>on <span style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span style = "color: red;"> <%= TimeToUse%></span></P>
@@ -1725,7 +1734,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#DeleteAppointmentHistoryBtn<%=JString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("AppointmentIDHistory<%=JString%>").value;
                                                         
                                                         $.ajax({  
@@ -1734,6 +1743,7 @@
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
                                                           alert("This is history has been removed");
+                                                          document.getElementById('PagePageLoader').style.display = 'none';
                                                           document.getElementById("HistoryAppointmentDiv<%=JString%>").style.display = "none";
                                                         }                
                                                       });
@@ -1789,7 +1799,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#submitReviewBtn<%=JString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var RateValue = 1;
                                                         
                                                         if(document.getElementById("star5<%=JString%>").checked === true){
@@ -1814,6 +1824,7 @@
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&rate="+RateValue+"&Review="+ReviewMessage,  
                                                         success: function(result){  
                                                           alert(result);
+                                                          document.getElementById('PagePageLoader').style.display = 'none';
                                                           document.getElementById("ProviderReview<%=JString%>").innerHTML = "Review sent. Click here to See more...";
                                                           document.getElementById("ratingAndReviewForm<%=JString%>").style.display = "none";
                                                         }                
@@ -1868,7 +1879,7 @@
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  
-                                                        
+                                                        document.getElementById('PagePageLoader').style.display = 'block';
                                                         var ProviderID = document.getElementById("ProviderIDforAddFav<%=JString%>").value;
                                                         var CustomerID = document.getElementById("CustomerIDforAddFav<%=JString%>").value;
                                                         
@@ -1877,10 +1888,10 @@
                                                         url: "addFavProvController",  
                                                         data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,  
                                                         success: function(result){  
-                                                          
+                                                          document.getElementById('PagePageLoader').style.display = 'none';
                                                           if(result === "NewAdded"){
                                                               alert("Provider added to your favorites");
-                                                            $.ajax({
+                                                            /*$.ajax({
 
                                                                 type: "POST",
                                                                 url: "GetLastFavProv",
@@ -1890,8 +1901,8 @@
                                                                     
                                                                     var favProv = JSON.parse(result);
                                                                     
-                                                                    var UserName = "<%=NewUserName%>";
-                                                                    var UserIndex = "<%=UserIndex%>";
+                                                                    var UserName = "<=NewUserName%>";
+                                                                    var UserIndex = "<=UserIndex%>";
                                                                     var provName = favProv.Name;
                                                                     var provCoverPic = favProv.CoverPic;
                                                                     var provProPic = favProv.ProfilePic;
@@ -1967,7 +1978,7 @@
                                                                         document.getElementById("noFavProvStatus").style.display = "none";
                                                                     
                                                                 }
-                                                            });
+                                                            });*/
                                                           }else{
                                                             alert(result);
                                                           }

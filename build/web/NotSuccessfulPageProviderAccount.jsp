@@ -74,7 +74,7 @@
             </div>
         
             <ul>
-                <a  href="LogInPage.jsp">
+                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LogInPage.jsp">
                     <li style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Your Dashboard</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -428,7 +428,7 @@
                 <form name="login" action="LoginControllerMain" method="POST">
                     <input style="background-color: white; border: 1px solid black; padding: 2px;" placeholder="enter user name here" type="hidden" name="username" value="<%=UserName%>" />
                     <input style="background-color: white; border: 1px solid black; padding: 2px; width: 50%;" placeholder="enter password here" type="password" name="password" value="" />
-                    <input style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="submit" value="Login" />
+                    <input style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" />
                 </form>
                 
                 <p style="clear: both;"></p>
@@ -466,7 +466,7 @@
                     </table>
                     
                     <input class="button" type="reset" value="Reset" name="resetBtn" />
-                    <input id="loginPageSignUpBtn" class="button" type="submit" value="Submit" name="submitBtn" />
+                    <input id="loginPageSignUpBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Submit" name="submitBtn" />
                 </form></center>
                 
             </div>
@@ -489,7 +489,7 @@
                         </table>
                         
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                        <input id="loginPageBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
                 </div></center>

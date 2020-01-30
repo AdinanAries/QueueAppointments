@@ -84,7 +84,7 @@
             <p style='color: white;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 Queue News Area
             
-            <a  href="Queue.jsp">
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp">
                     <span style='margin-right: 5px; cursor: pointer; color: white; float: right; border: 2px solid white; padding: 3px; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                         Home</span></a></p>
              

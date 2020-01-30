@@ -2157,7 +2157,7 @@
                                                                 url: "getCustFeedbackDate",  
                                                                 data: "CustomerID="+CustomerID,  
                                                                 success: function(result){  
-                                                                        alert(result);
+                                                                        //alert(result);
                                                                         document.getElementById("ExtFeedBackDate").innerHTML = result +" ";
                                                                     }                
                                                                 });
@@ -2255,7 +2255,7 @@
                             <td>
                                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></center>
                                 </form>
                             </td>
                         </tr>
@@ -3409,8 +3409,8 @@
                                 if(document.getElementById("AddEvntDesc2").value === "")
                                     document.getElementById("AddEvntDesc2").value = "Add event description here...";
                             }
-
-                            function SetTimetoHiddenEventInput(){
+                                     
+                            function SetTimetoHiddenEventInput2(){
                                     var EventTime = document.getElementById("DisplayedAddEvntTime2").value;
                                     
                                     if(EventTime.length < 8){
@@ -3446,12 +3446,12 @@
                                         dropdown: true,
                                         scrollbar: true,
                                         change: function(){
-                                            SetTimetoHiddenEventInput();
+                                            SetTimetoHiddenEventInput2();
                                         }
                                         
                                 });
 
-                                SetTimetoHiddenEventInput();
+                                SetTimetoHiddenEventInput2();
                                 
                             setInterval(function(){
                                 var CalSaveEvntBtn = document.getElementById("CalSaveEvntBtn2");
@@ -3667,7 +3667,7 @@
                                     document.getElementById("AddEvntDesc2").value = "";
                                     document.getElementById("EvntDatePicker2").value = "";
                                     document.getElementById("AddEvntTime2").value = "";
-                                    document.getElementById("DisplayedAddEvntTime2").vlaue = "";
+                                    document.getElementById("DisplayedAddEvntTime2").value = "";
                                     document.getElementById("EvntIDFld2").value = "";
                                     
                                 });
@@ -3903,7 +3903,7 @@
                             <td>
                                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';"/></center>
+                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></center>
                                 </form>
                             </td>
                         </tr>

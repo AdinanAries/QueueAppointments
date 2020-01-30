@@ -72,7 +72,7 @@
             
         <div id="PermanentDiv" style="">
             
-            <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
                         <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                             Home</p></a>
             
@@ -91,7 +91,7 @@
             </div>
         
             <ul>
-                <a  href="Queue.jsp">
+                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp">
                     <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -105,7 +105,7 @@
                     <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
                     <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
-                            type="submit" value="Search" />
+                           onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" />
                 </form>
             </div>
                 <p style='clear: both;'></p>
@@ -447,7 +447,7 @@
                 <form name="login" action="LoginControllerMain" method="POST">
                     <input style="background-color: white; border: 1px solid black; padding: 2px;" placeholder="enter user name here" type="hidden" name="username" value="<%=UserName%>" />
                     <input style="background-color: white; border: 1px solid black; padding: 2px; width: 50%;" placeholder="enter password here" type="password" name="password" value="" />
-                    <input style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="submit" value="Login" />
+                    <input style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" />
                 </form>
                 
                 <p style="clear: both;"></p>
@@ -485,7 +485,7 @@
                     </table>
                     
                     <input class="button" type="reset" value="Reset" name="resetBtn" />
-                    <input id="loginPageSignUpBtn" class="button" type="submit" value="Submit" name="submitBtn" />
+                    <input id="loginPageSignUpBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Submit" name="submitBtn" />
                 </form></center>
                 
             </div>
@@ -508,7 +508,7 @@
                         </table>
                         
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                        <input id="loginPageBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
                 </div></center>

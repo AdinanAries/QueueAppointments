@@ -128,7 +128,7 @@
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
        <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
-                <center><a href="Queue.jsp"><p  
+                <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
                         <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-home-50.png" alt="icons8-home-50-50"/>
                 </p>
@@ -142,7 +142,7 @@
         
         <div id="PermanentDiv" style="">
             
-            <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
                         <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                             Home</p></a>
             
@@ -161,7 +161,7 @@
             </div>
         
             <ul>
-                <a  href="Queue.jsp">
+                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp">
                     <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -447,7 +447,7 @@
                         </table>
                         
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
                 </div></center>
@@ -552,7 +552,7 @@
                                                 
                                                 $(document).ready(function(){
                                                     $("#CustSendverifyEmailBtn").click(function(event){
-                                                        
+                                                        document.getElementById('PageLoader').style.display = 'block';
                                                         CustVeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         CustVeriCode = CustVeriCode + "";
                                                         
@@ -568,7 +568,7 @@
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
-                                                                
+                                                                document.getElementById('PageLoader').style.display = 'none';
                                                             }
                                                         });
                                                         
@@ -614,7 +614,7 @@
                         </div>
                     
                     <input class="button" type="reset" value="Reset" name="resetBtn" />
-                    <input id="SignUpAndBookBtn" class="button" type="submit" value="Sign Up" name="submitBtn" />
+                    <input id="SignUpAndBookBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Sign Up" name="submitBtn" />
                 </form></center>
                 
             </div>

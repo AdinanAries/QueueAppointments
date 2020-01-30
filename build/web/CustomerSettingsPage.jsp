@@ -293,7 +293,7 @@
             <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
             </textarea>
             
-            <a href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
                 
                 </li></a>
             <li onclick="showPCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
@@ -811,6 +811,7 @@
                                             
                                             $("#CalDatePicker").change(function(event){
                                                 
+                                                document.getElementById('PageLoader').style.display = 'block';
                                                 var date = document.getElementById("CalDatePicker").value;
                                                 var CustomerID = document.getElementById("CalApptUserID").value;
                                                 //alert(CustomerID);
@@ -855,7 +856,7 @@
                                                     data: "Date="+date+"&CustomerID="+CustomerID,
                                                     success: function(result){
                                                         //alert(result);
-                                                        
+                                                        document.getElementById('PageLoader').style.display = 'none';
                                                         var EvntsData = JSON.parse(result);
                                                         //alert(EvntsData);
                                                         var bDiv = document.createElement('div');
@@ -1086,6 +1087,10 @@
                             $(document).ready(function(){
                                 
                                 $("#CalDltEvntBtn").click(function(event){
+                                    
+                                    document.getElementById('PageLoader').style.display = 'block';
+                                    
+                                    document.getElementById('PageLoader').style.display = 'block';
                                     var EventID = document.getElementById("EvntIDFld").value;
                                     
                                     $.ajax({
@@ -1093,6 +1098,7 @@
                                         url: "DltEvntAjax",
                                         data: "EventID="+EventID,
                                         success: function(result){
+                                            document.getElementById('PageLoader').style.display = 'none';
                                             if(result === "success")
                                                 alert("Event Deleted Successfully");
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
@@ -1129,7 +1135,7 @@
                             }  
                             
                             function SendEvntUpdate(){
-                                
+                                document.getElementById('PageLoader').style.display = 'block';
                                 var EvntTtle = document.getElementById("AddEvntTtle").value;
                                 EvntTtle = EvntTtle.replace("\"","");
                                 var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -1149,6 +1155,7 @@
                                         success: function(result){
                                             
                                             alert("Event Updated Successfully");
+                                            document.getElementById('PageLoader').style.display = 'none';
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -1189,6 +1196,8 @@
                                 
                                 $("#CalSaveEvntBtn").click(function(event){
                                     
+                                    document.getElementById('PageLoader').style.display = 'block';
+                                    
                                     var EvntTtle = document.getElementById("AddEvntTtle").value;
                                     EvntTtle = EvntTtle.replace("\"","");
                                     var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -1209,6 +1218,7 @@
                                         success: function(result){
                                             
                                             alert("Event Added Successfully");
+                                            document.getElementById('PageLoader').style.display = 'none';
                                             
                                             var Evnt = JSON.parse(result);
                                             
@@ -1292,6 +1302,8 @@
                                 $(document).ready(function(){
                                     $("#UpdtPerInfExtraBtn").click(function(){
                                         
+                                        document.getElementById('PageLoader').style.display = 'block';
+                                        
                                         var FirstName = document.getElementById("fNameExtraFld").value;
                                         var MiddleName = document.getElementById("mNameExtraFld").value;
                                         var LastName = document.getElementById("lNameExtraFld").value;
@@ -1304,6 +1316,9 @@
                                             url: "updtPerInfoExtraAjax",
                                             data: "FirstName="+FirstName+"&MiddleName="+MiddleName+"&LastName="+LastName+"&Email="+Email+"&Phone="+Phone+"&CustomerID="+CustomerID,
                                             success: function(result){
+                                                
+                                                document.getElementById('PageLoader').style.display = 'none';
+                                                
                                                 if(result === "success"){
                                                     //alert(result);
                                                     
@@ -1344,7 +1359,9 @@
                                                 <center><input id="ExtSendFeedBackBtn" style="width: 100%; border: 1px solid black; background-color: pink;" type="button" value="Send" /></center>
                                                 <script>
                                                     $(document).ready(function() {                        
-                                                         $('#ExtSendFeedBackBtn').click(function(event) {  
+                                                         $('#ExtSendFeedBackBtn').click(function(event) {
+                                                             
+                                                             document.getElementById('PageLoader').style.display = 'block';
 
                                                              var feedback = document.getElementById("ExtFeedBackTxtFld").value;
                                                              var CustomerID = document.getElementById("ExtFeedBackUserID").value;
@@ -1355,6 +1372,8 @@
                                                              data: "FeedBackMessage="+feedback+"&CustomerID="+CustomerID,  
                                                              success: function(result){ 
                                                                alert(result);
+                                                               document.getElementById('PageLoader').style.display = 'none';
+                                                               
                                                                document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv").style.display = "block";
                                                                document.getElementById("ExtLasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
@@ -1452,7 +1471,8 @@
                             <script>
                                 $(document).ready(function(){
                                     $("#ExtraLoginFormBtn").click(function(event){
-                                                                
+                                        
+                                        document.getElementById('PageLoader').style.display = 'block';
                                         var CustomerID = document.getElementById("ExtraUserIDforLoginUpdate").value;
                                         var UserIndex = document.getElementById("ExtraUserIndexforLoginUpdate").value;
                                         var UserName = document.getElementById("ExtraUpdateLoginNameFld").value;
@@ -1466,7 +1486,8 @@
                                             success: function(result){
                                                                         
                                                 //alert(result);
-                                                                        
+                                                document.getElementById('PageLoader').style.display = 'none';
+                                                
                                                 if(result === "fail"){
                                                                             
                                                     document.getElementById("ExtraWrongPassStatus").style.display = "block";

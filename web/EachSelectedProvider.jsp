@@ -234,7 +234,7 @@
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
-                <center><a href="Queue.jsp"><p  
+                <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
                         <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-home-50.png" alt="icons8-home-50-50"/>
                 </p>
@@ -248,7 +248,7 @@
         
         <div id="PermanentDiv" style="">
             
-            <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
                         <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                             Home</p></a>
             
@@ -267,7 +267,7 @@
             </div>
         
             <ul>
-                <a  href="Queue.jsp">
+                <a onclick="document.getElementById('PageLoader').style.display = 'block';"  href="Queue.jsp">
                     <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -293,7 +293,7 @@
             <div id="miniNav" style="display: none;">
                 <center>
                     <ul id="miniNavIcons" style="float: left;">
-                        <a href="Queue.jsp"><li><img src="icons/icons8-home-24.png" width="24" height="24" alt="icons8-home-24"/>
+                        <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><li><img src="icons/icons8-home-24.png" width="24" height="24" alt="icons8-home-24"/>
                             </li></a>
                         <!--li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
                         </li-->
@@ -302,7 +302,7 @@
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
                                    placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
-                                   type="submit" value="Search" />
+                                 onclick="document.getElementById('PageLoader').style.display = 'block';"  type="submit" value="Search" />
                     </form>
                 </center>
             </div>
@@ -467,7 +467,7 @@
                 <center><div class =" SearchObject">
                         
                     <form name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" />
+                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" name="SearchBtn" />
                     </form> 
                         
                 </div></center> 
@@ -1146,7 +1146,7 @@
                             <%}%>
                             </div></center>
 
-                            <a href='ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
+                            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
 
                         </div></center>
 
@@ -1195,7 +1195,7 @@
                                                     </td>
                                                     <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=sixthPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
                                                         <div style="background-color: black; opacity: 0.7; width: 96%; height: 96%; cursor: pointer; margin-left: 2px;">
-                                                            <a href="ViewProviderPhotos.jsp?Provider=<%=ProviderID%>"><p style="color: white; text-align: center; padding-top: 20px;"><img src="icons/icons8-photo-gallery-20 (1).png" width="20" height="20" alt="icons8-photo-gallery-20 (1)"/>
+                                                            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ViewProviderPhotos.jsp?Provider=<%=ProviderID%>"><p style="color: white; text-align: center; padding-top: 20px;"><img src="icons/icons8-photo-gallery-20 (1).png" width="20" height="20" alt="icons8-photo-gallery-20 (1)"/>
                                                             </p>
                                                             <p style="color: white; text-align: center;">View Photos</p></a>
                                                         </div>
@@ -1275,7 +1275,7 @@
                                             <input type="hidden" name="AppointmentTime" value="<%=AppointmentTime%>" />
                                             <center><input style="border: black solid 1px; background-color: red; border-radius: 5px; color: white;
                                                    padding: 5px;" id="BookAppointmentBtn"
-                                                   type="submit" value="Continue" name="BookAppointmentBtn" /></center>
+                                                  onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Continue" name="BookAppointmentBtn" /></center>
                                             </form>
                                     </div>
                             </td> 
@@ -1309,7 +1309,7 @@
                         </tbody>
                     </table>
                     <input class="button" type="reset" value="Reset" name="resetBtn" />
-                    <input id="loginPageSignUpBtn" class="button" type="submit" value="Submit" name="submitBtn" />
+                    <input id="loginPageSignUpBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Submit" name="submitBtn" />
                 </form></center>
             </div>
                     <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Already with Queue (Login to view and manage your spots)</h2></center>
@@ -1325,7 +1325,7 @@
                             </tbody>
                         </table>
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                        <input id="loginPageBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
                 </div></center>

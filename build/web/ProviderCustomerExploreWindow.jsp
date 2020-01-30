@@ -293,7 +293,7 @@
                     <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" onclick="document.getElementById('PagePageLoader').style.display = 'block';"/>
+                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Search" name="SearchBtn" onclick="document.getElementById('PagePageLoader').style.display = 'block';"/>
                     </form> 
                         
                 </div></center>
