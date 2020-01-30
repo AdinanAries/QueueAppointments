@@ -5,6 +5,7 @@
     "display" : "standalone",
     "orientation" : "portrait-primary",
     "background_color": "#ccccff",
+    "theme_color": "#ccccff",
     "description": "Find medical and beauty services.",
     "icons": [{
       "src": "./HomeIcons/Icon1.png",

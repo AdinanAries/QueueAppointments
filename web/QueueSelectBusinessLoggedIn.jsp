@@ -48,6 +48,14 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
              
         
+    <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
+<meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+    
     </head>
     
     <% 

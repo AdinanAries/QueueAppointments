@@ -41,6 +41,14 @@
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
 
         
     </head>

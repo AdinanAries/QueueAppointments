@@ -14,6 +14,15 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link rel="manifest" href="/manifest.json" />
         <title>Queue: Payment</title>
+        
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
+<link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
+<meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+
     </head>
     
     
