@@ -29,7 +29,7 @@
         <title>Block Future Spots</title>
         
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link rel="manifest" href="/manifest.json" />
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

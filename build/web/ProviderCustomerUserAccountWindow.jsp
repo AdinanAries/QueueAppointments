@@ -39,26 +39,26 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <!--script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"-->
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-<meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
         
     </head>
     
@@ -2631,7 +2631,7 @@
                                             <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
                                         <p>on <span style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span style = "color: red;"> <%= TimeToUse%></span></P>
                                         <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
-                                        <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>"><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
+                                        <a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>"><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
                                         
                                         </form>
                                         

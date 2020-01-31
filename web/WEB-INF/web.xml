@@ -3,6 +3,19 @@
     <listener>
         <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
     </listener>
+    
+    <appSettings>
+        <add key="aspnet:SuppressSameSiteNone" value="true" />
+    </appSettings>
+
+        <system.web>
+            <authentication>
+                <forms cookieSameSite="None" />
+            </authentication>
+
+            <sessionState cookieSameSite="None" />
+    </system.web>
+    
     <servlet>
         <servlet-name>LoginControllerMain</servlet-name>
         <servlet-class>LoginControllerMain</servlet-class>

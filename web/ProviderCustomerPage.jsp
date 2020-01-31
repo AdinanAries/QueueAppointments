@@ -39,11 +39,11 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <!--script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -53,12 +53,12 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-<meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
         
     </head>
     
@@ -6556,8 +6556,6 @@
                    
                 <div id="IframesDiv">
                     
-                    <iframe onload="OnloadExploreMeth();" style="position: absolute; background-color: #6699ff;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
-                   
                    <script>
                        var OnloadedExplore = 0;
                        
@@ -6589,7 +6587,7 @@
                         
                    </script>
                     
-                   <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background-color: #ccccff; display: none;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>             
+                   <iframe onload="OnloadExploreMeth();" style="position: absolute; background-color: #6699ff;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>       
                    
                    <script>
                        var OnloadedSpots = 0;
@@ -6621,7 +6619,7 @@
                        
                    </script>
                    
-                   <iframe onload="OnloadFavoritesMeth();" id="FavoritesIframe" style="position: absolute; background-color: #6699ff; display: none;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background-color: #ccccff; display: none;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
                    
                    <script>
                        var OnloadedFavorites = 0;
@@ -6653,8 +6651,7 @@
                        
                    </script>
                    
-                   
-                   <iframe onload="OnloadAccountMeth();" style="position: absolute; background-color: #6699ff; display: none;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadFavoritesMeth();" id="FavoritesIframe" style="position: absolute; background-color: #6699ff; display: none;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
                    
                    <script>
                        
@@ -6686,7 +6683,7 @@
                         }, 1);
                    </script>
                    
-                   <iframe onload="OnloadSearchIframetMeth();" id="SearchIframe" style="position: absolute; background-color: #6699ff; display: none;"  src=""></iframe>
+                   <iframe onload="OnloadAccountMeth();" style="position: absolute; background-color: #6699ff; display: none;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
                    
                    <script>
                        var OnloadedSearch = 0;
@@ -6718,6 +6715,8 @@
                         }, 1);
                        
                    </script>
+                   
+                   <iframe onload="OnloadSearchIframetMeth();" id="SearchIframe" style="position: absolute; background-color: #6699ff; display: none;"  src=""></iframe>
                    
                    <script>
                        
