@@ -191,7 +191,7 @@
                             <input type="hidden" name="ProviderID" value="<%=ID%>" />
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                             <input type="hidden" name="User" value="<%=NewUserName%>" />
-                            <input id="CvrUploadBtn" style="width: 90%; background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="submit" value="Upload Cover Photo" />
+                            <input id="CvrUploadBtn" style="width: 90%; background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Upload Cover Photo" />
                             
                             <script>
                                 setInterval(function(){
@@ -213,7 +213,7 @@
                             <input type="hidden" name="ProviderID" value="<%=ID%>" />
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                             <input type="hidden" name="User" value="<%=NewUserName%>" />
-                            <input id="ProfUploadBtn" style="width: 90%; background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="submit" value="Upload Profile Photo" />
+                            <input id="ProfUploadBtn" style="width: 90%; background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Upload Profile Photo" />
                             <p style="border-top: 1px solid darkgrey; margin-top: 10px;"></p>
                         
                             <script>
@@ -231,7 +231,7 @@
                         </form>
                                     
                     </div>
-                    <a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
+                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
     
         
     </body>

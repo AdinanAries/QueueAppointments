@@ -348,7 +348,7 @@
             </textarea>    
         
         <ul>
-            <a href='ServiceProviderPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ServiceProviderPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
                 
                 </li></a>
             <li onclick="showPCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
@@ -369,7 +369,7 @@
         <script>
                     $(document).ready(function(){
                         $("#PermDivNotiBtn").click(function(event){
-                            
+                            document.getElementById('PageLoader').style.display = 'block';
                             var NotiIDs = document.getElementById("NotiIDInput").value;
                             var NotiJSON = JSON.parse(NotiIDs);
                             
@@ -382,6 +382,7 @@
                                     data: "ID="+ID,
                                     success: function(result){
                                         document.getElementById("notiCounterSup").innerHTML = " 0 ";
+                                        document.getElementById('PageLoader').style.display = 'none';
                                     }
                                 });
                             }
@@ -475,7 +476,7 @@
                         <script>
                             $(document).ready(function(){
                                 $("#SaveNewsBtn").click(function(event){
-                                    
+                                    document.getElementById('PageLoader').style.display = 'block';
                                     var ProviderID = "<%=UserID%>";
                                     var UpdDate = "<%=UpdMDate%>";
                                     var UpdTime = "<%=UpdTime%>";
@@ -511,6 +512,7 @@
                                         contentType: false,
                                         success:function (data)
                                         {
+                                            document.getElementById('PageLoader').style.display = 'none';
                                             $.ajax({
                                                 type:"POST",
                                                 data:"MessageID="+data,
@@ -558,7 +560,7 @@
                                 <script>
                                     $(document).ready(function(){
                                         $("#DltRecentNewsBtn").click(function(event){
-                                            
+                                            document.getElementById('PageLoader').style.display = 'block';
                                             var MessageID = document.getElementById("RecentMessageID").value;
                                             
                                             $.ajax({
@@ -566,7 +568,7 @@
                                                 url: "DltProvNews",
                                                 data: "MessageID="+MessageID,
                                                 success: function(result){
-                                                    
+                                                    document.getElementById('PageLoader').style.display = 'none';
                                                     //alert(result);
                                                     
                                                     $.ajax({
@@ -671,7 +673,7 @@
                                         $(document).ready(function(){
                                             
                                             $("#CalDatePicker").change(function(event){
-                                                
+                                                document.getElementById('PageLoader').style.display = 'block';
                                                 var date = document.getElementById("CalDatePicker").value;
                                                 var ProviderID = document.getElementById("CalApptUserID").value;
                                                 //alert(ProviderID);
@@ -716,7 +718,7 @@
                                                     data: "Date="+date+"&ProviderID="+ProviderID,
                                                     success: function(result){
                                                         //alert(result);
-                                                        
+                                                        document.getElementById('PageLoader').style.display = 'none';
                                                         var EvntsData = JSON.parse(result);
                                                         
                                                         var bDiv = document.createElement('div');
@@ -942,6 +944,8 @@
                             $(document).ready(function(){
                                 
                                 $("#CalDltEvntBtn").click(function(event){
+                                    
+                                    document.getElementById('PageLoader').style.display = 'block';
                                     var EventID = document.getElementById("EvntIDFld").value;
                                     
                                     $.ajax({
@@ -951,6 +955,7 @@
                                         success: function(result){
                                             if(result === "success")
                                                 alert(result);
+                                                document.getElementById('PageLoader').style.display = 'none';
                                                 document.getElementById("CalUpdateEvntBtn").style.display = "none";
                                                 document.getElementById("CalDltEvntBtn").style.display = "none";
                                                 document.getElementById("CalSaveEvntBtn").style.display = "block";
@@ -984,6 +989,7 @@
                             
                             function SendEvntUpdate(){
                                 
+                                document.getElementById('PageLoader').style.display = 'block';
                                 var EvntTtle = document.getElementById("AddEvntTtle").value;
                                 EvntTtle = EvntTtle.replace("\"","");
                                 var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -1002,6 +1008,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&EventID="+EvntId,
                                         success: function(result){
                                             
+                                            document.getElementById('PageLoader').style.display = 'none';
                                             //alert(result);
                                             
                                             var Evnt = JSON.parse(result);
@@ -1042,6 +1049,7 @@
                                 
                                 $("#CalSaveEvntBtn").click(function(event){
                                     
+                                    document.getElementById('PageLoader').style.display = 'block';
                                     var EvntTtle = document.getElementById("AddEvntTtle").value;
                                     EvntTtle = EvntTtle.replace("\"","");
                                     var EvntDesc = document.getElementById("AddEvntDesc").value;
@@ -1061,6 +1069,7 @@
                                         data: "Title="+EvntTtle+"&Desc="+EvntDesc+"&Date="+EvntDate+"&Time="+EvntTime+"&CalDate="+CalDate+"&ProviderID="+ProvID,
                                         success: function(result){
                                             
+                                            document.getElementById('PageLoader').style.display = 'none';
                                             //alert(result);
                                             
                                             var Evnt = JSON.parse(result);
@@ -1151,6 +1160,7 @@
                                                     $(document).ready(function(){
                                                         $("#ExtUpdateProvPerBtn").click(function(event){
                                                             
+                                                            document.getElementById('PageLoader').style.display = 'block';
                                                             var FirstName = document.getElementById("ExtProvFNameFld").value;
                                                             var MiddleName = document.getElementById("ExtProvMNameFld").value;
                                                             var LastName = document.getElementById("ExtProvLNameFld").value;
@@ -1163,7 +1173,7 @@
                                                                 url: "UpdateProvPerInfoController",
                                                                 data: "ProviderID="+ProviderID+"&FirstNameFld="+FirstName+"&MiddleNameFld="+MiddleName+"&LastNameFld="+LastName+"&EmailFld="+PerEmail+"&MobileNumberFld="+PerTel,
                                                                 success: function(result){
-                                                                    
+                                                                    document.getElementById('PageLoader').style.display = 'none';
                                                                    $.ajax({
                                                                         type: "POST",
                                                                         url: "GetProvPerInfo",
@@ -1250,6 +1260,7 @@
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn').click(function(event) {  
 
+                                                            document.getElementById('PageLoader').style.display = 'block';
                                                              var feedback = document.getElementById("ExtFeedBackTxtFld").value;
                                                              var ProviderID = document.getElementById("ExtFeedBackUserID").value;
 
@@ -1257,7 +1268,9 @@
                                                              type: "POST",  
                                                              url: "SendProvFeedbackMsg",  
                                                              data: "FeedBackMessage="+feedback+"&ProviderID="+ProviderID,  
-                                                             success: function(result){  
+                                                             success: function(result){ 
+                                                                 
+                                                               document.getElementById('PageLoader').style.display = 'none';
                                                                document.getElementById("ExtFeedBackTxtFld").innerHTML = "Add your message here...";
                                                                document.getElementById("ExtLastReviewMessageDiv").style.display = "block";
                                                                document.getElementById("ExtLasReviewMessageP").innerHTML = "You've Sent: "+ "<p style='color: green; font-size: 15px;'>" +feedback+ "</p>";
@@ -1299,6 +1312,7 @@
                                                         $(document).ready(function(){
                                                             $("#ExtupdateUsrAcntBtn").click(function(event){
                                                                 
+                                                                document.getElementById('PageLoader').style.display = 'block';
                                                                 var ProviderID = document.getElementById("ExtProviderIDforUpdateLogin").value;
                                                                 var UserIndex = document.getElementById("ExtUserIndexforUpdateLogin").value;
                                                                 var UserName = document.getElementById("ExtUsrNamefld").value;
@@ -1316,7 +1330,7 @@
                                                                     url: "updateProvLoginInfo",
                                                                     data: "ProviderID="+ProviderID+"&UserIndex="+UserIndex+"&UserNameFld="+UserName+"&NewPasswordFld="+NewPassword+"&OldPasswordFld="+oldPassword,
                                                                     success: function(result){
-                                                                        
+                                                                        document.getElementById('PageLoader').style.display = 'none';
                                                                         //alert(result);
                                                                         
                                                                         if(result === "fail"){
@@ -1407,7 +1421,7 @@
                             <td>
                                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input onclick="document.getElementById('PageLoader').style.display = 'block';" style='width: 95%;' type="submit" value="Logout" class="button" /></center>
                                 </form>
                             </td>
                         </tr>

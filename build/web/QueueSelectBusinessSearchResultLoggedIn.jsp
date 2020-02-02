@@ -277,7 +277,7 @@
         
         <div id="PermanentDiv" style="">
             
-            <a href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 80px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 80px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
                         <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                             Home</p></a>
             
@@ -308,7 +308,7 @@
             </div>
             
             <ul>
-                <a  href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
                     <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -321,7 +321,7 @@
                     <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
                     <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
-                            type="submit" value="Search" />
+                          onclick="document.getElementById('PageLoader').style.display = 'block';"  type="submit" value="Search" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type='hidden' name='User' value='<%=NewUserName%>' />
                 </form>
@@ -345,7 +345,7 @@
                             <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
                                    placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
-                                   type="submit" value="Search" />
+                                onclick="document.getElementById('PageLoader').style.display = 'block';"   type="submit" value="Search" />
                     </form>
                 </center>
             </div>
@@ -353,7 +353,7 @@
         <div id="header">
             
             <cetnter><p> </p></cetnter>
-            <center><a href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
+            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
             
         </div>
             
@@ -783,7 +783,7 @@
                     <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" />
+                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" name="SearchBtn" />
                     </form> 
                         
                 </div></center>
@@ -2053,7 +2053,7 @@
                                         <input type="hidden" name="UserID" value="<%=SID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                         <p style="margin-top: 5px; color: red; text-align: center;">OR</p>
                                     </form>
                                     
@@ -2061,11 +2061,11 @@
                                 
                                 </div></center>
                                                 
-                            <center><form action="EachSelectedProviderLoggedIn.jsp" method="POST" id="SID">   
+                            <center><form action="EachSelectedProviderLoggedIn.jsp" method="POST" id="<%=SID%>">   
                             <input type="hidden" name="UserID" value="<%=SID%>" />
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>"/>
                             <input type="hidden" name="User" value="<%=NewUserName%>" />
-                            <input id="eachprov" type="submit" value="I will choose a different spot" name="submit" />
+                            <input id="eachprov" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="I will choose a different spot" name="submit" />
                             </form></center>
                             
                             </td> 
@@ -2085,7 +2085,7 @@
                                 <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>
                                 <input type='hidden' name='User' value='<%=NewUserName%>' />
                                 <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
-                                <input style='background-color: #6699ff; color: white; border: none;' type='submit' value='See More...' />
+                                <input style='background-color: #6699ff; color: white; border: none;' onclick="document.getElementById('PageLoader').style.display = 'block';" type='submit' value='See More...' />
                             </form>
                             
                             <% 
@@ -2121,7 +2121,7 @@
                         Find services at location below</p>
                     <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
                     <p>Town: <input style="background-color: #6699ff; width: 40%;" type="text" name="town4Search" value="<%=PTown%>"/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
+                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 
@@ -2131,27 +2131,27 @@
                 <center><table id="providericons">
                         <tbody>
                         <tr>
-                            <td style="width: 33.3%; background-color: pink;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
+                            <td style="width: 33.3%; background-color: pink;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectPodiatryLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectMassageLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectMakeUpArtistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
                             </a></center></td>
                         </tr>
                         <tr>
-                            <td><center><a href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectPodiatryLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MedEsthSelect">Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectMassageLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            </a></center></td>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MedEsthSelect">Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            </a></center></td>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
                             </a></center></td>
                         </tr>
                     </tbody>
@@ -2165,26 +2165,26 @@
                     <center><table id="providericons">
                         <tbody>
                         <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBrowLashLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectBrowLashLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
                             </a></center></td>
-                             <td style="width: 33.3%;"><center><a href="QueueSelectDieticianLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
+                             <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectDieticianLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectPetServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PetServicesSelect">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectPetServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PetServicesSelect">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
                             </a></center></td>
                         </tr>
                         <tr>
-                            <td><center><a href="QueueSelectHomeServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHomeServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectPiercingLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectPiercingLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectTattooLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectTattooLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
                             </a></center></td>
                         <tr>
-                            <td><center><a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectPersonalTrainerLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectPersonalTrainerLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
                             </a></center></td>
-                            <td><center><a href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
                             </a></center></td>
                         </tr>
                     </tbody>
@@ -2199,15 +2199,15 @@
                         <center><table id="providericons">
                         <tbody>
                             <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectHairRemovalLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHairRemovalLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
                             </a></center></td>
                             </tr> 
                             <tr>
-                                <td style="width: 33.3%;"><center><a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
+                                <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
                                 </a></center></td>
                             </tr>
                     </tbody>

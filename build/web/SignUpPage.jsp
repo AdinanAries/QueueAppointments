@@ -274,7 +274,7 @@
         
         <div id="PermanentDiv" style="">
             
-            <a href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
                         <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                             Home</p></a>
             
@@ -293,7 +293,7 @@
             </div>
         
             <ul>
-                <a  href="Queue.jsp">
+                <a onclick="document.getElementById('PageLoader').style.display = 'block';"  href="Queue.jsp">
                     <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -309,7 +309,7 @@
         <div id="header" style='display: block;'>
             
             <cetnter><p> </p></cetnter>
-            <center><a href="LoginPageToQueue" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
+            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
             <center><h3 style="color: #000099;">Find A Line Spot Now!</h3></center>
             
         </div>
@@ -629,6 +629,7 @@
                                                 $(document).ready(function(){
                                                     $("#CustSendverifyEmailBtn").click(function(event){
                                                         
+                                                        document.getElementById('PageLoader').style.display = 'block';
                                                         CustVeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         CustVeriCode = CustVeriCode + "";
                                                         
@@ -644,7 +645,7 @@
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
-                                                                
+                                                                document.getElementById('PageLoader').style.display = 'none';
                                                             }
                                                         });
                                                         
@@ -724,7 +725,7 @@
                         <center><p style="width: 180px; background-color: green; color: white;" id="formStatus"></p></center>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input class="button" id="AddUserSignUpBtn" type="submit" value="Signup" name="submitbtn" />
+                        <input class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" id="AddUserSignUpBtn" type="submit" value="Signup" name="submitbtn" />
                     </form>
                                 
                     <script>
@@ -847,7 +848,7 @@
                                                 
                                                 $(document).ready(function(){
                                                     $("#SendverifyEmailBtn").click(function(event){
-                                                        
+                                                        document.getElementById('PageLoader').style.display = 'block'
                                                         VeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         VeriCode = VeriCode + "";
                                                         
@@ -863,7 +864,7 @@
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
-                                                                
+                                                                document.getElementById('PageLoader').style.display = 'none';
                                                             }
                                                         });
                                                         
@@ -1128,7 +1129,7 @@
                         <center><p style="width: 180px; background-color: green; color: white;" id="provFormStatus"></p></center>
                         
                         <p style='min-width: 350px;'><input class="button" type="reset" value="Reset" name="resetbtn"/>
-                            <input id="provSignUpBtn" class="button" type="submit" value="Sign up" name="provSignUpBtn" /></p>
+                            <input id="provSignUpBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Sign up" name="provSignUpBtn" /></p>
                     </form>
                                 
                     <script>
@@ -1205,7 +1206,7 @@
                         </table>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="loginPageBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                        <input id="loginPageBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>
                 <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                 </div></center>

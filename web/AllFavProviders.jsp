@@ -1994,7 +1994,7 @@
                                 
                                 </div></center>
                                                 
-                            <center><form action="EachSelectedProviderLoggedIn.jsp" method="POST" id="SID">   
+                            <center><form action="EachSelectedProviderLoggedIn.jsp" method="POST" id="SID<%=i%>">   
                             <input type="hidden" name="UserID" value="<%=SID%>" />
                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>"/>
                             <input type="hidden" name="User" value="<%=NewUserName%>" />
@@ -2057,7 +2057,7 @@
                     <p style="color: #000099;">Find services near you</p>
                     <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
+                    <p><input onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';" type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 

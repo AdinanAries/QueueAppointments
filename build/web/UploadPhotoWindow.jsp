@@ -155,7 +155,7 @@
             <p style="text-align: center; margin: 5px; color: white;">Choose a picture to upload</p>
             
             <input id="PhotoFileFld" style="width: 90%; background-color: white; border: 1px solid #ccc;" type="file" name="file" value="" /><br />
-            <input id="uploadBtn" style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" />
+            <input id="uploadBtn" style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Upload Photo" />
             
             <script>
                 setInterval(function(){
@@ -170,7 +170,7 @@
             </script>
         </form>
         <p style="border-top: 1px solid darkgrey; margin-top: 10px;"></p>
-        <!--a href="ProviderCustomerPage.jsp?UserIndex=<=UserIndex%>&User=<=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a-->
+        <a id="HomeBtnCustUploadPhoto" onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
         
     </body>
     <script>
