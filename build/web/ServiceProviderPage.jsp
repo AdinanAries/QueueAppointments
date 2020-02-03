@@ -65,6 +65,40 @@
     
     <%
         
+        String GlobalUserName = "";
+        String GlobalUserPassword = "";
+        
+        //I asumed that if session is expired, then this block of code won't succeed, leaving GlobalUserName and GlobalUserPassword with null values
+        //or maybe empty Strings.
+        if(session.getAttribute("ThisProvUserName") != null && session.getAttribute("ThisProvUserPassword") != null){
+            GlobalUserName = session.getAttribute("ThisProvUserName").toString();
+            GlobalUserPassword = session.getAttribute("ThisProvUserPassword").toString();
+        }
+        
+        //JOptionPane.showMessageDialog(null, GlobalUserName);
+        //JOptionPane.showMessageDialog(null, GlobalUserPassword);
+    %>
+    
+    <script>
+        var GlobalUserName = '<%=GlobalUserName%>';
+        var GlobalUserPassword = '<%=GlobalUserPassword%>';
+        
+        //check condition for in order to make sure we aren't storing empty strings or null inside of GlobalUserName and GlobalUserPassword
+        if((GlobalUserName !== 'null' && GlobalUserPassword !== 'null') || (GlobalUserName !== '' && GlobalUserPassword !== '') ){
+            
+            if(window.localStorage.getItem("ProvQueueUserName") === null && window.localStorage.getItem("ProvQueueUserPassword") === null){
+                window.localStorage.setItem("ProvQueueUserName", GlobalUserName);
+                window.localStorage.setItem("ProvQueueUserPassword", GlobalUserPassword);
+                //alert("just got set");
+            }
+            //alert("already there");
+            //alert(window.localStorage.getItem("ProvQueueUserName"));
+            //alert(window.localStorage.getItem("ProvQueueUserPassword"));
+        }
+    </script>
+    
+    <%
+        
         /*
         Calendar cal = Calendar.getInstance(); 
         SimpleDateFormat calSdf = new SimpleDateFormat("MMMMMMMMMMMMM dd, yyyy");
@@ -250,7 +284,17 @@
         }
         
         if(!isSameSessionNumber || UserID == 0 || !isSameUserName || !isTrySuccess){
-            response.sendRedirect("LogInPage.jsp");
+            //response.sendRedirect("LogInPage.jsp");
+    %>
+            <script>
+                var tempUserName = window.localStorage.getItem("ProvQueueUserName");
+                var tempUserPassword = window.localStorage.getItem("ProvQueueUserPassword");
+                
+                document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+
+            </script>
+    <%
         }
         else if(JustLogged == 1){
             response.sendRedirect("ServiceProviderPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
@@ -7694,9 +7738,17 @@
                                      
                 </div></center>
                 
+                <script>
+                    function LogoutMethod(){
+                        document.getElementById('ProviderPageLoader').style.display = 'block';
+                        window.localStorage.removeItem("ProvQueueUserName");
+                        window.localStorage.removeItem("ProvQueueUserPassword");
+                    }
+                </script>
+                            
                 <form action = "LogoutController" name="LogoutForm" method="POST">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <center><input style="width: 97%;" type="submit" value="Logout" class="button" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/></center>
+                    <center><input style="width: 97%;" type="submit" value="Logout" class="button" onclick="LogoutMethod();"/></center>
                 </form>
                 
                 </div>

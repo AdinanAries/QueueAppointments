@@ -131,8 +131,10 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/GenerateFutureSpots.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/FinishAppointmentLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ByAddressAndTypeSearchResultLoggedIn.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ContractServicesCSS.css</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/BlockFutureSpots.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/AddServicesController.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/addLocationDataToWebContext.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectMedicalCenterLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SetProvNotificationAsSeen.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/UploadPhotoWindow.jsp</file>
@@ -185,6 +187,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/updateProvLoginInfo.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DltProvEvntAjax.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectHomeServe.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/icons/icons8-barber-clippers-filled-70.png</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectPhysicalTherapyLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/AddEventProv.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/isInSubscriptionDB.java</file>

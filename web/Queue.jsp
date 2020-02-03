@@ -42,6 +42,32 @@
         <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
         
     </head>
+    <script>
+        var CustPassFlag = "";
+        var ProvPassFlag = "";
+        if((window.localStorage.getItem("QueueUserName") === null || window.localStorage.getItem("QueueUserPassword") === null) 
+                || (window.localStorage.getItem("QueueUserName") === '' || window.localStorage.getItem("QueueUserPassword") === '')){
+            //do nothing
+        }else{
+            //alert(window.localStorage.getItem("QueueUserName"));
+            var tempUserName = window.localStorage.getItem("QueueUserName");
+            var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
+            
+            document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+            //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+        } 
+        
+        if((window.localStorage.getItem("ProvQueueUserName") === null || window.localStorage.getItem("ProvQueueUserPassword") === null) 
+                || (window.localStorage.getItem("ProvQueueUserName") === '' || window.localStorage.getItem("ProvQueueUserPassword") === '')){
+            //do nothing
+        }else{
+            var tempProvUserName = window.localStorage.getItem("ProvQueueUserName");
+            var tempProvUserPassword = window.localStorage.getItem("ProvQueueUserPassword");
+            
+            document.location.href="LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword;
+            //window.location.replace("LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword);
+        }
+    </script>
     
     <%
         

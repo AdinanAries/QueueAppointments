@@ -58,6 +58,12 @@ public class LogoutController extends HttpServlet {
                 DltSesPst.executeUpdate();
             }
             catch(Exception e){}
+             
+            request.getSession().removeAttribute("ThisUserName");
+            request.getSession().removeAttribute("ThisUserPassword");
+            
+            request.getSession().removeAttribute("ThisProvUserName");
+            request.getSession().removeAttribute("ThisProvUserPassword");
             
             //setting UserAccount Fields to defaults
             UserAccount.LoggedInUsers.get(UserIndex).setAccountType(null);

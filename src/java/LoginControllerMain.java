@@ -13,33 +13,35 @@ import javax.servlet.http.HttpServletResponse;
 import com.arieslab.queue.queue_model.UserAccount;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 public class LoginControllerMain extends HttpServlet {
 
-            //Database connection parameters
-           String Driver = "";
-           String url = "";
-           String user = "";
-           String password = "";
+    //Database connection parameters
+    String Driver = "";
+    String url = "";
+    String user = "";
+    String password = "";
     
-            @Override
-            public void init(ServletConfig config){
+    @Override
+    public void init(ServletConfig config){
                 
-                config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
-                config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
-                config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
-                config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
                 
-                url = config.getInitParameter("databaseUrl");
-                Driver = config.getInitParameter("databaseDriver");
-                user = config.getInitParameter("user");
-                password = config.getInitParameter("password");
+        url = config.getInitParameter("databaseUrl");
+        Driver = config.getInitParameter("databaseDriver");
+        user = config.getInitParameter("user");
+        password = config.getInitParameter("password");
                 
-            }
+    }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+      //JOptionPane.showMessageDialog(null, "called");
            int Flag = 0;
            int UserID = 0;
            String SessionID = "";
@@ -47,6 +49,13 @@ public class LoginControllerMain extends HttpServlet {
            //get user provided information
            String UserName = request.getParameter("username");
            String Password = request.getParameter("password");
+           
+           if(UserName == null || UserName.equalsIgnoreCase("")){
+               UserName = " ";
+           }
+           if(Password == null || Password.equalsIgnoreCase("")){
+               Password = " ";
+           }
            
            //resetting UserAccount fields
            //UserAccount.UserID = 0;
@@ -87,6 +96,8 @@ public class LoginControllerMain extends HttpServlet {
                         SessionPst.executeUpdate();
                                 
                     }catch(Exception e){}
+                    
+                    savePassword (request.getSession(), UserName, Password);
                     
                     request.getRequestDispatcher("ProviderCustomerPage.jsp").forward(request, response);
                     
@@ -140,11 +151,16 @@ public class LoginControllerMain extends HttpServlet {
                                 
                             }catch(Exception e){}
                             
+                            saveProvPassword (request.getSession(), UserName, Password);
+                            
                             request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
                             
                             //UserAccount.UserID = account2.getInt("Provider_ID");
                             //UserAccount.AccountType = "BusinessAccount";
                             //response.sendRedirect("ServiceProviderPage.jsp");
+                            
+                            
+                            
                         }
                         else{
                             Flag = 0;
@@ -180,4 +196,21 @@ public class LoginControllerMain extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public void savePassword (HttpSession session, String username, String password){
+        if(session.getAttribute("ThisUserName") != null && session.getAttribute("ThisUserPassword") != null){
+            session.removeAttribute("ThisProvUserName");
+            session.removeAttribute("ThisProvUserPassword");
+        }
+        session.setAttribute("ThisUserName", username);
+        session.setAttribute("ThisUserPassword", password);
+    }
+    
+    public void saveProvPassword (HttpSession session, String username, String password){
+        if(session.getAttribute("ThisProvUserName") != null && session.getAttribute("ThisProvUserPassword") != null){
+            session.removeAttribute("ThisProvUserName");
+            session.removeAttribute("ThisProvUserPassword");
+        }
+        session.setAttribute("ThisProvUserName", username);
+        session.setAttribute("ThisProvUserPassword", password);
+    }
 }

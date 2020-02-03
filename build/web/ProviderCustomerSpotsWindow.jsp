@@ -157,7 +157,7 @@
             //response.sendRedirect("LogInPage.jsp");
         }
         
-        String SessionID = request.getRequestedSessionId();
+        /*String SessionID = request.getRequestedSessionId();
         String DatabaseSession = "";
         //JOptionPane.showMessageDialog(null, SessionID);
         
@@ -198,7 +198,7 @@
             response.sendRedirect("Queue.jsp");
         else if(JustLogged == 1){
             response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-        }
+        }*/
         
         String AppointmentDateValue = "";
         

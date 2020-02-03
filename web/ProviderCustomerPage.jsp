@@ -64,8 +64,48 @@
     
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
+    <script>
+        //window.localStorage.clear();
+        //alert(window.localStorage.getItem("QueueUserName"));
+        </script>
+    
     <%
         
+        String GlobalUserName = "";
+        String GlobalUserPassword = "";
+        
+        //I asumed that if session is expired, then this block of code won't succeed, leaving GlobalUserName and GlobalUserPassword with null values
+        //or maybe empty Strings.
+        if(session.getAttribute("ThisUserName") != null && session.getAttribute("ThisUserPassword") != null){
+            GlobalUserName = session.getAttribute("ThisUserName").toString();
+            GlobalUserPassword = session.getAttribute("ThisUserPassword").toString();
+        }
+        
+        
+        //JOptionPane.showMessageDialog(null, GlobalUserName);
+        //JOptionPane.showMessageDialog(null, GlobalUserPassword);
+    %>
+    
+    <script>
+        var GlobalUserName = '<%=GlobalUserName%>';
+        var GlobalUserPassword = '<%=GlobalUserPassword%>';
+        
+        //check condition for in order to make sure we aren't storing empty strings or null inside of GlobalUserName and GlobalUserPassword
+        if((GlobalUserName !== 'null' && GlobalUserPassword !== 'null') || (GlobalUserName !== '' && GlobalUserPassword !== '') ){
+            
+            if(window.localStorage.getItem("QueueUserName") === null && window.localStorage.getItem("QueueUserPassword") === null){
+                window.localStorage.setItem("QueueUserName", GlobalUserName);
+                window.localStorage.setItem("QueueUserPassword", GlobalUserPassword);
+                //alert("just got set");
+            }
+            //alert("already there");
+            //alert(window.localStorage.getItem("QueueUserName"));
+            //alert(window.localStorage.getItem("QueueUserPassword"));
+        }
+    </script>
+        
+        
+    <%
         //resetting ResendAppointmentData data feilds
         ResendAppointmentData.CustomerID = "";
         ResendAppointmentData.ProviderID = "";
@@ -202,9 +242,19 @@
             //response.sendRedirect("LogInPage.jsp");
         }
         
-        if(!isSameSessionData || !isSameUserName || UserID == 0 || !isUserIndexInList)
-            response.sendRedirect("Queue.jsp");
-        else if(JustLogged == 1){
+        if(!isSameSessionData || !isSameUserName || UserID == 0 || !isUserIndexInList){
+            //response.sendRedirect("Queue.jsp");
+    %>
+        <script>
+            var tempUserName = window.localStorage.getItem("QueueUserName");
+            var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
+            
+            document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+            //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+            
+        </script>
+    <%
+        }else if(JustLogged == 1){
             response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
         }
         
@@ -6546,10 +6596,18 @@
                     </table>
                                      
                 </div>
-                                    
+                       
+                <script>
+                    function LogoutMethod(){
+                        document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                        window.localStorage.removeItem("QueueUserName");
+                        window.localStorage.removeItem("QueueUserPassword");
+                    }
+                </script>
+                
                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <input style="width: 95%; height: auto;" type="submit" value="Logout" class="button" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
+                    <input style="width: 95%; height: auto;" type="submit" value="Logout" class="button" onclick="LogoutMethod()"/>
                 </form> 
                 
                 </div>

@@ -39,7 +39,7 @@
         
         response.sendRedirect("Queue.jsp");
         
-        //this stores the UserIndex for session tracking
+        /*this stores the UserIndex for session tracking
         String UserIndex = "";
         
         try{
@@ -53,7 +53,7 @@
             
         }catch(Exception e){
             e.printStackTrace();
-        }
+        }*/
         
     %>
     
@@ -76,14 +76,14 @@
                 
             <div id="allnavs">
                 
-        <div id="nav">
+        <!--div id="nav">
             
                     <ul>
                         <a href=""><li class="active" style="background-color: #6699ff; border: black solid 1px; color: #000099;">Home Page</li></a>
                         <a href="SoftwareProducts.jsp"><li>AriesLab Products</li></a>
                         <a href="ContactUs.jsp"><li>Contact Us</li></a>
                         <a href="OurReputation.jsp"><li>Our Reputation</li></a>
-                        <a href="PageController?UserIndex=<%=UserIndex%>"><li  id="queuenav" style="color: #ff3333; border:#ff3333 solid 1px;" >Queue</li></a>
+                        <a href="PageController?UserIndex=<=UserIndex%>"><li  id="queuenav" style="color: #ff3333; border:#ff3333 solid 1px;" >Queue</li></a>
                         <a href="ContractServices.jsp"><li>AriesLab Contracts</li></a>
                         <a href="DevelopersJoin.jsp"><li>Join AriesLab</li></a>
                         <a href=""><li>AriesLab Projects</li></a>
@@ -91,7 +91,7 @@
                         <a href=""><li>Learn Programming</li></a>
                         <a href=""><li>IT Solutions</li></a>
                     </ul>
-        </div>
+        </div-->
                 
         </div>
                 <div id ="main">
