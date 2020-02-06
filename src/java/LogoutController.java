@@ -59,11 +59,15 @@ public class LogoutController extends HttpServlet {
             }
             catch(Exception e){}
              
-            request.getSession().removeAttribute("ThisUserName");
-            request.getSession().removeAttribute("ThisUserPassword");
+            if(request.getSession().getAttribute("ThisUserName")!= null && request.getSession().getAttribute("ThisUserPassword") != null){
+                request.getSession().removeAttribute("ThisUserName");
+                request.getSession().removeAttribute("ThisUserPassword");
+            }
             
-            request.getSession().removeAttribute("ThisProvUserName");
-            request.getSession().removeAttribute("ThisProvUserPassword");
+            if(request.getSession().getAttribute("ThisProvUserName") != null && request.getSession().getAttribute("ThisProvUserPassword") != null){
+                request.getSession().removeAttribute("ThisProvUserName");
+                request.getSession().removeAttribute("ThisProvUserPassword");
+            }
             
             //setting UserAccount Fields to defaults
             UserAccount.LoggedInUsers.get(UserIndex).setAccountType(null);

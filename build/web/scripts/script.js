@@ -1171,3 +1171,9 @@ $(document).ready(function() {
         };
     }
 });*/
+
+/*window.addEventListener("beforeunload", function () {
+  document.body.classList.add("animate-out");
+  //$("body").slideDown("fast");
+    //$("#News2").slideDown("fast");
+});*/

@@ -1137,9 +1137,14 @@ input[type=radio]:checked {
         
     }
     #DashboardLocationSearchForm input[type="text"]{
-        border-radius: 0;
+        border-radius: 5px;
+        border: #3d6999 1px solid;
+        color: #3d6999;
         background-color: #9bb1d0;
         
+    }
+    .LocSearchP{
+        color: #3d6999;
     }
     #DashboardLocationSearchForm input[type="submit"]{
         font-size: 15px;
@@ -1359,3 +1364,23 @@ input[type=radio]:checked {
 }
 
 
+.animate-in {
+    -webkit-animation: fadeIn .5s ease-in;
+    animation: fadeIn .5s ease-in;
+}
+
+.animate-out {
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

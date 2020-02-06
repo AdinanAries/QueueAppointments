@@ -1855,8 +1855,11 @@
                     </script>
                     
                     <div style="float: right; width: 15%;" onclick="showProfile();">
-                        <img class="fittedImg" style="border-radius: 100%; border: 1px solid green;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
-                    
+                        <%if(base64Image != ""){%>
+                            <img class="fittedImg" style="border-radius: 100%; border: 1px solid green;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
+                        <%} else{%>
+                            <img style="border-radius: 100%; border: 2px solid white; background-color: white;" src="icons/icons8-user-filled-100.png" width="30" height="30"/>
+                        <%}%>
                     </div>
                     <!--onclick='hideDropDownBtnclick();'-->
                     
@@ -5035,6 +5038,10 @@
                                 <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
                                     
                                     <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
+                                        
+                                    <%if(base64Cover == ""){%>
+                                        <p style="color: white; background-color: red; text-align: center; margin-top: -50px; margin-bottom: 30px;">Click here to add Cover Photo</p>
+                                    <%}%>
                                     
                             <%
                                 if(base64Image == ""){

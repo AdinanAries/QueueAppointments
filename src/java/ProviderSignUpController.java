@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ProviderSignUpController extends HttpServlet {
     
@@ -286,7 +287,7 @@ public class ProviderSignUpController extends HttpServlet {
                     
             if(UserID != 0){
                 
-                //Send Queue admin an email for newly created accounts
+                /*/Send Queue admin an email for newly created accounts
                 {
                     String to = "tech.arieslab@outlook.com";
                     String subject = "Provider Account Added";
@@ -300,7 +301,9 @@ public class ProviderSignUpController extends HttpServlet {
                     
                     QueueMailerUtil EmailObj = new QueueMailerUtil();
                     EmailObj.send(to, subject, msg);
-                }
+                }*/
+                
+                saveProvPassword (request.getSession(), userName, Password);
                 
                 int yourIndex = UserAccount.newUser(UserID, userName, "BusinessAccount");
                 //request.setAttribute("UserIndex", yourIndex);
@@ -331,5 +334,14 @@ public class ProviderSignUpController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public void saveProvPassword (HttpSession session, String username, String password){
+        if(session.getAttribute("ThisProvUserName") != null && session.getAttribute("ThisProvUserPassword") != null){
+            session.removeAttribute("ThisProvUserName");
+            session.removeAttribute("ThisProvUserPassword");
+        }
+        session.setAttribute("ThisProvUserName", username);
+        session.setAttribute("ThisProvUserPassword", password);
+    }
 
 }

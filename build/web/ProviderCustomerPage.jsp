@@ -1142,11 +1142,19 @@
                     <script>
                         function SearchFromMiniNav(){
                             document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
-                            document.getElementById("SpotsIframe").style.display = "none";
+                            
+                            /*document.getElementById("SpotsIframe").style.display = "none";
                             document.getElementById("FavoritesIframe").style.display = "none";
                             document.getElementById("ExploreDiv").style.display = "none";
                             document.getElementById("SearchIframe").style.display = "block";
-                            document.querySelector(".UserProfileContainer").style.display = "none";
+                            document.querySelector(".UserProfileContainer").style.display = "none";*/
+                            
+                            $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
+                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
+                            $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
+                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 100);
+                            $("#SearchIframe").show("slide", { direction: "left" }, 100);
+                            document.getElementById("SearchIframe").style.display = "block";
                             
                             var SearchString = document.getElementById("MiniNavSearchBox").value;
                             
@@ -2389,32 +2397,34 @@
             
         <div class="DashboardContent" id="">
             <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px; width: 100%;'>
-                    <a href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>News</p> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
                             <p style='margin-top: -4px; font-size: 11px;'>Notification</p> </div></a>
-                    <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>Calender</p></div></a>
-                            <a href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
+                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>Settings</p></div></a>
                     <p style='clear: both;'></p>
                     </div></center>
                         
-            <center><div id="ExploreAndAccountButtons">
+            <center><div id="ExploreAndAccountButtons" style="background-color: white;">
                     <div onclick="showDashboardExplore();" id="exploreBtn">
                         <img style="display: none;" id="RegularExploreIcon" src="icons/SecondExploreIcon.png" width="29" height="29" alt=""/>
                         <img style="display: none;" id="ActiveExploreIcon" src="icons/ExploreIcon.png" width="29" height="29" alt=""/>
-                        <p id="ExploreBtnText" style="padding: 0; font-size: 12px; margin-top: -6px;">Explore</p>
+                        <p id="ExploreBtnText" style="padding: 0; font-size: 10px; margin-top: 1px; color: #7e7e7e;">Explore</p>
                     </div>
-                    <div onclick="showDashboardSpots();" style="margin-top: 1px;" id="QueueIconBtn">
-                            <img style="display: none;" style="" id="QueueIcon" src="icons/Logo.png" alt="" width="24" height="24"/>
-                            <!--img style="display: none;" style="" id="FavoritesIcon" src="icons/FavoritesIcon.png" alt="" width="32" height="32"/-->
-                            <p id="SpotsBtnTxt" style="padding: 0; font-size: 12px; margin-top: -2px;">Spots</p>
+                    <div onclick="showDashboardSpots();" id="QueueIconBtn">
+                            <img style="display: none;" style="" id="SpotsIcon" src="icons/SpotsIcon.png" alt="" width="29" height="29"/>
+                            <img style="display: none;" style="" id="ActiveSpotsIcon" src="icons/ActiveSpotsIcon.png" alt="" width="29" height="29"/>
+                            <!--img style="display: none;" style="" id="QueueIcon" src="icons/Logo.png" alt="" width="24" height="24"/>
+                            <img style="display: none;" style="" id="FavoritesIcon" src="icons/FavoritesIcon.png" alt="" width="32" height="32"/-->
+                            <p id="SpotsBtnTxt" style="padding: 0; font-size: 10px; margin-top: 1px; color: #7e7e7e;">Spots</p>
                     </div>
-                    <div onclick="showDashboardFavorites();" style="margin-top: -3px" id="favoritesBtn">
-                            <img style="display: none;" style="" id="SecondFavoritesIcon" src="icons/SecondFavoritesIcon.png" alt="" width="32" height="32"/>
-                            <img style="display: none;" style="" id="FavoritesIcon" src="icons/FavoritesIcon.png" alt="" width="32" height="32"/>
-                            <p id="FavoritesBtnTxt" style="padding: 0; font-size: 12px; margin-top: -6px;">Favorites</p>
+                    <div onclick="showDashboardFavorites();" id="favoritesBtn">
+                            <img style="display: none;" style="" id="SecondFavoritesIcon" src="icons/SecondFavoritesIcon.png" alt="" width="29" height="29"/>
+                            <img style="display: none;" style="" id="FavoritesIcon" src="icons/FavoritesIcon.png" alt="" width="29" height="29"/>
+                            <p id="FavoritesBtnTxt" style="padding: 0; font-size: 10px; margin-top: 1px; color: #7e7e7e;">Favorites</p>
                     </div>
                     <div onclick="showDashboardAccount();" id="accountBtn">
                             <%
@@ -2426,9 +2436,9 @@
                             <%
                                 }
                             %>
-                        <img style="display: none;" id="ActiveUserProfile" src="icons/UserProfileIcon.png" width="30" height="30" alt=""/>
-                        <img style="display: none;" id="RegularUserProfile" src="icons/SecondUserProfileIcon.png" width="30" height="30" alt=""/>
-                        <p id="AccountBtnTxt" style="padding: 0; font-size: 12px; margin-top: -6px;">Account</p>
+                        <img style="display: none;" id="ActiveUserProfile" src="icons/UserProfileIcon.png" width="29" height="29" alt=""/>
+                        <img style="display: none;" id="RegularUserProfile" src="icons/SecondUserProfileIcon.png" width="29" height="29" alt=""/>
+                        <p id="AccountBtnTxt" style="padding: 0; font-size: 10px; margin-top: 1px; color: #7e7e7e;">Account</p>
                     </div>
                     <p style="clear: both;"></p>
                     
@@ -2436,9 +2446,9 @@
                         document.getElementById("ActiveExploreIcon").style.display = "block";
                         document.getElementById("RegularUserProfile").style.display = "block";
                         document.getElementById("FavoritesIcon").style.display = "block";
-                        document.getElementById("QueueIcon").style.display = "block";
+                        document.getElementById("SpotsIcon").style.display = "block";
                         
-                        document.getElementById("ExploreBtnText").style.color = "blue";
+                        document.getElementById("ExploreBtnText").style.color = "darkblue";
                         
                         function showDashboardSpots(){
                             
@@ -2447,15 +2457,24 @@
                                 document.getElementById("SpotsIframe").src = "ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
-                            document.getElementById("QueueIcon").style.cssText = "opacity: 1;-moz-filter: grayscale(0%);-ms-filter: grayscale(0%); -o-filter: grayscale(0%);filter: grayscale(0%);";
+                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 1;-moz-filter: grayscale(0%);-ms-filter: grayscale(0%); -o-filter: grayscale(0%);filter: grayscale(0%);";
                             document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";
+                            document.getElementById("QueueIcon").style.display = "block";*/
+
+                            document.getElementById("ActiveSpotsIcon").style.display = "block";
+                            document.getElementById("SpotsIcon").style.display = "none";
                             
-                            document.querySelector(".UserProfileContainer").style.display = "none";
-                            document.getElementById("FavoritesIframe").style.display = "none";
-                            document.getElementById("ExploreDiv").style.display = "none";
+                            //document.querySelector(".UserProfileContainer").style.display = "none";
+                            //document.getElementById("SearchIframe").style.display = "none";
+                            //document.getElementById("FavoritesIframe").style.display = "none";
+                            //document.getElementById("ExploreDiv").style.display = "none";
+                            
+                            $("#SpotsIframe").show("slide", { direction: "left" }, 100);
+                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
+                            $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
+                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 100);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
                             document.getElementById("SpotsIframe").style.display = "block";
-                            document.getElementById("SearchIframe").style.display = "none";
                             
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
@@ -2465,10 +2484,10 @@
                             document.getElementById("FavoritesIcon").style.display = "block";
                             document.getElementById("ActiveExploreIcon").style.display = "none";
                             
-                            document.getElementById("SpotsBtnTxt").style.color = "blue";
-                            document.getElementById("ExploreBtnText").style.color = "black";
-                            document.getElementById("FavoritesBtnTxt").style.color = "black";
-                            document.getElementById("AccountBtnTxt").style.color = "black";
+                            document.getElementById("SpotsBtnTxt").style.color = "darkblue";
+                            document.getElementById("ExploreBtnText").style.color = "#7e7e7e";
+                            document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
+                            document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2482,15 +2501,25 @@
                                 document.getElementById("ExploreDiv").src = "ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
-                            document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
+                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
                             document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";
+                            document.getElementById("QueueIcon").style.display = "block";*/
+
+                            document.getElementById("ActiveSpotsIcon").style.display = "none";
+                            document.getElementById("SpotsIcon").style.display = "block";
                             
-                            document.querySelector(".UserProfileContainer").style.display = "none";
+                            /*document.querySelector(".UserProfileContainer").style.display = "none";
                             document.getElementById("FavoritesIframe").style.display = "none";
                             document.getElementById("ExploreDiv").style.display = "block";
                             document.getElementById("SpotsIframe").style.display = "none";
-                            document.getElementById("SearchIframe").style.display = "none";
+                            document.getElementById("SearchIframe").style.display = "none";*/
+
+                            $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
+                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
+                            $("#ExploreDiv").show("slide", { direction: "left" }, 100);
+                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 100);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
+                            document.getElementById("ExploreDiv").style.display = "block";
                             
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
@@ -2500,10 +2529,10 @@
                             document.getElementById("FavoritesIcon").style.display = "block";
                             document.getElementById("ActiveExploreIcon").style.display = "block";
                             
-                            document.getElementById("ExploreBtnText").style.color = "blue";
-                            document.getElementById("SpotsBtnTxt").style.color = "black";
-                            document.getElementById("FavoritesBtnTxt").style.color = "black";
-                            document.getElementById("AccountBtnTxt").style.color = "black";
+                            document.getElementById("ExploreBtnText").style.color = "darkblue";
+                            document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
+                            document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
+                            document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2516,15 +2545,25 @@
                                 document.querySelector(".UserProfileContainer").src = "ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                         
-                            document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
+                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
                             document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";
-                        
+                            document.getElementById("QueueIcon").style.display = "block";*/
+
+                            document.getElementById("ActiveSpotsIcon").style.display = "none";
+                            document.getElementById("SpotsIcon").style.display = "block";
+                            
+                            $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
+                            $(".UserProfileContainer").show("slide", { direction: "left" }, 100);
+                            $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
+                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 100);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
                             document.querySelector(".UserProfileContainer").style.display = "block";
+                        
+                            /*document.querySelector(".UserProfileContainer").style.display = "block";
                             document.getElementById("FavoritesIframe").style.display = "none";
                             document.getElementById("ExploreDiv").style.display = "none";
                             document.getElementById("SpotsIframe").style.display = "none";
-                            document.getElementById("SearchIframe").style.display = "none";
+                            document.getElementById("SearchIframe").style.display = "none";*/
                             
                             document.getElementById("ActiveUserProfile").style.display = "block";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
@@ -2534,10 +2573,10 @@
                             document.getElementById("FavoritesIcon").style.display = "block";
                             document.getElementById("ActiveExploreIcon").style.display = "none";
                             
-                            document.getElementById("AccountBtnTxt").style.color = "blue";
-                            document.getElementById("SpotsBtnTxt").style.color = "black";
-                            document.getElementById("FavoritesBtnTxt").style.color = "black";
-                            document.getElementById("ExploreBtnText").style.color = "black";
+                            document.getElementById("AccountBtnTxt").style.color = "darkblue";
+                            document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
+                            document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
+                            document.getElementById("ExploreBtnText").style.color = "#7e7e7e";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2551,15 +2590,25 @@
                                 document.getElementById("FavoritesIframe").src = "AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
-                            document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
+                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
                             document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";
+                            document.getElementById("QueueIcon").style.display = "block";*/
+
+                            document.getElementById("ActiveSpotsIcon").style.display = "none";
+                            document.getElementById("SpotsIcon").style.display = "block";
                         
-                            document.querySelector(".UserProfileContainer").style.display = "none";
+                            $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
+                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
+                            $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
+                            $("#FavoritesIframe").show("slide", { direction: "left" }, 100);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
+                            document.getElementById("ExploreDiv").style.display = "block";
+                        
+                            /*document.querySelector(".UserProfileContainer").style.display = "none";
                             document.getElementById("FavoritesIframe").style.display = "block";
                             document.getElementById("ExploreDiv").style.display = "none";
                             document.getElementById("SpotsIframe").style.display = "none";
-                            document.getElementById("SearchIframe").style.display = "none";
+                            document.getElementById("SearchIframe").style.display = "none";*/
                             
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "block";
@@ -2569,10 +2618,10 @@
                             document.getElementById("FavoritesIcon").style.display = "none";
                             document.getElementById("ActiveExploreIcon").style.display = "none";
                             
-                            document.getElementById("FavoritesBtnTxt").style.color = "blue";
-                            document.getElementById("SpotsBtnTxt").style.color = "black";
-                            document.getElementById("AccountBtnTxt").style.color = "black";
-                            document.getElementById("ExploreBtnText").style.color = "black";
+                            document.getElementById("FavoritesBtnTxt").style.color = "darkblue";
+                            document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
+                            document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
+                            document.getElementById("ExploreBtnText").style.color = "#7e7e7e";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2607,10 +2656,10 @@
                 <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                    <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input id="city4Search" style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input id="town4Search" style="width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
+                    <p class="LocSearchP">City: <input id="city4Search" style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p class="LocSearchP">Town: <input id="town4Search" style="width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
                     <script>
                         var setLocation = setInterval(
                             function(){
@@ -2632,64 +2681,64 @@
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                         <p><input name='Barber' id='barberFlt' type="checkbox" value="ON" /><label for='barberFlt'>Barbershop</label></p>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='Beauty' id='BeautyFlt' type="checkbox" value="ON" /><label for='BeautyFlt'>Beauty Salon</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='DaySpa' id='DaySpaFlt' type="checkbox" value="ON" /><label for='DaySpaFlt'>Day Spa</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='Dentist' id='DentistFlt' type="checkbox" value="ON" /><label for='DentistFlt'>Dentist</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='Dietician' id='DietFlt' type="checkbox" value="ON" /><label for='DietFlt'>Dietician</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='EyeBrows' id='EyebrowsFlt' type="checkbox" value="ON" /><label for='EyebrowsFlt'>Eyebrows and Eyelashes</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='HairRemoval' id='HairRmvFlt' type="checkbox" value="ON" /><label for='HairRmvFlt'>Hair Removal</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='HairSalon' id='HairSlnFlt' type="checkbox" value="ON" /><label for='HairSlnFlt'>Hair Salon</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='HolisticMedicine' id='HolMedFlt' type="checkbox" value="ON" /><label for='HolMedFlt'>Holistic Medicine</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='HomeService' id='HomeSvFlt' type="checkbox" value="ON" /><label for='HomeSvFlt'>Home Services</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='MakeUpArtist' id='MkUpArtistFlt' type="checkbox" value="ON" /><label for='MkUpArtistFlt'>Makeup Artist</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='Massage' id='MassageFlt' type="checkbox" value="ON" /><label for='MassageFlt'>Massage</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='Aethetician' id='MedEsthFlt' type="checkbox" value="ON" /><label for='MedEsthFlt'>Medical Aesthetician</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='MedCenter' id='MedCntrFlt' type="checkbox" value="ON" /><label for='MedCntrFlt'>Medical Center</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='NailSalon' id='NailSlnFlt' type="checkbox" value="ON" /><label for='NailSlnFlt'>Nail Salon</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='PersonalTrainer' id='PsnlTrnFlt' type="checkbox" value="ON" /><label for='PsnlTrnFlt'>Personal Trainer</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='PetServices' id='PetSvcFlt' type="checkbox" value="ON" /><label for='PetSvcFlt'>Pet Services</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='PhysicalTherapy' id='PhThpyFlt' type="checkbox" value="ON" /><label for='PhThpyFlt'>Physical Therapy</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='Piercing' id='PiercingFlt' type="checkbox" value="ON" /><label for='PiercingFlt'>Piercing</label>
                                     </td>
-                                    <td style='border-right: 1px solid darkblue;'>
+                                    <td>
                                     <input name='Podiatry' id='PodiatryFlt' type="checkbox" value="ON" /><label for='PodiatryFlt'>Podiatry</label>
                                     </td>
                                     <td>

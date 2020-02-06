@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.arieslab.queue.queue_model.UserAccount;
 import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpSession;
 
 public class CustomoerSignUpController extends HttpServlet {
 
@@ -176,7 +177,7 @@ public class CustomoerSignUpController extends HttpServlet {
                     
                     if(UserID != 0){
                         
-                        //Send Queue admin an email for newly created accounts
+                        /*/Send Queue admin an email for newly created accounts
                         {
                             String to = "tech.arieslab@outlook.com";
                             String subject = "Customer Account Added";
@@ -189,10 +190,15 @@ public class CustomoerSignUpController extends HttpServlet {
 
                             QueueMailerUtil EmailObj = new QueueMailerUtil();
                             EmailObj.send(to, subject, msg);
-                        }
+                        }*/
+                        
+                        savePassword (request.getSession(), userName, Password);
                         
                         int yourIndex = UserAccount.newUser(UserID, userName, "CustomerAccount");
                         //request.setAttribute("UserIndex", yourIndex);
+                        
+                        
+                        
                         response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+yourIndex+"&User="+userName);
                         
                         //UserAccount.AccountType = "CustomerAccount";
@@ -224,4 +230,12 @@ public class CustomoerSignUpController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public void savePassword (HttpSession session, String username, String password){
+        if(session.getAttribute("ThisUserName") != null && session.getAttribute("ThisUserPassword") != null){
+            session.removeAttribute("ThisProvUserName");
+            session.removeAttribute("ThisProvUserPassword");
+        }
+        session.setAttribute("ThisUserName", username);
+        session.setAttribute("ThisUserPassword", password);
+    }
 }

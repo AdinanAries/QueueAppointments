@@ -288,33 +288,44 @@
      //----------------------------------------------------------------------------------------------------------------------   
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #ccccff; padding-bottom: 0;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #6699ff;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-    <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
+        <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+                 box-shadow: 0 0 5px 1px black;'>
+            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>"><p  
+                    style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
+                        <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-home-50.png" alt="icons8-home-50"/>
+                </p>
+                <p style='font-size: 15px; color: white; margin-top: -5px;'>Home</p>
+            </a></center>
+        </div>
+        
+    <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #ccc 1px solid; position: fixed; width: 100%;'>
         <ul>
             
             <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
             </textarea>
             
-            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
+            <!--a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  
+                    ><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
                 
-                </li></a>
-            <li onclick="showPCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
-                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
-                
-            </li>
-            <li onclick="showPCustExtraNotification();" id='PhPermDivNotiBtn' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><p><img style='background-color: white; margin-right: 0;' src="icons/icons8-notification-50.png" width="28" height="25" alt="icons8-notification-50"/>
-                 <span id='notiCounterSup' style='color: red; background-color: white; padding: 2px; margin-left: 0;'><%=notiCounter%></span></p>
-            </li>
-            <li onclick='showPCustExtraCal();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="28" height="25" alt="icons8-calendar-50"/>
+                </li></a-->
+            <li onclick="showPCustExtraNews();" id='' style="margin-left: 10px; margin-right: 10px;">
+                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="35" height="28" alt="icons8-google-news-50"/>
                 
             </li>
-            <li onclick='showPCustExtraUsrAcnt();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="28" height="25" alt="icons8-user-50 (1)"/>
+            <li onclick="showPCustExtraNotification();" id='PhPermDivNotiBtn' style="margin-left: 10px; margin-right: 10px;"><img src="icons/icons8-notification-50.png" width="36" height="29" alt="icons8-notification-50"/>
+                 <span id='notiCounterSup' style='color: red; background-color: white; padding: 2px 5px; margin-left: -15.5px; border-radius: 100%; border: 1px solid red; font-size: 11px;'><%=notiCounter%></span></p>
+            </li>
+            <li onclick='showPCustExtraCal();' id='' style="margin-left: 10px; margin-right: 10px;"><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="28" height="25" alt="icons8-calendar-50"/>
+                
+            </li>
+            <li onclick='showPCustExtraUsrAcnt();' id='' style="margin-left: 10px; margin-right: 10px;"><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="30" height="28" alt="icons8-user-50 (1)"/>
                 
             </li>
         </ul>
@@ -344,8 +355,8 @@
                 </script>
             
         </div></center>
-        
-    <center><div id="PhoneExtras" style="">
+    <p style="padding-top: 60px;"></p>
+    <center><div id="PhoneExtras" style="padding-bottom: 50px;">
             
             <div id='PhoneNews' style='width: 100%;' >
                 <script>
@@ -1264,7 +1275,7 @@
             </div>
                              
         <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Account Settings</p></center>
             
                 <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
@@ -1543,9 +1554,18 @@
                         </tr>
                         <tr>
                             <td>
+                                
+                                <script>
+                                    function LogoutMethod(){
+                                        document.getElementById('PageLoader').style.display = 'block';
+                                        window.localStorage.removeItem("QueueUserName");
+                                        window.localStorage.removeItem("QueueUserPassword");
+                                    }
+                                </script>
+                                
                                 <form style="margin-top: 10px;" action="LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input style='width: 100%; background-color: red; color: white; border: 0; padding: 4px; border-radius: 0; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input onclick="LogoutMethod();" style='width: 100%; background-color: red; color: white; border: 0; padding: 4px; border-radius: 0; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
                                 </form>
                             </td>
                         </tr>

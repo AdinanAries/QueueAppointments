@@ -629,7 +629,7 @@
                                                 $(document).ready(function(){
                                                     $("#CustSendverifyEmailBtn").click(function(event){
                                                         
-                                                        document.getElementById('PageLoader').style.display = 'block';
+                                                        //document.getElementById('PageLoader').style.display = 'block';
                                                         CustVeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         CustVeriCode = CustVeriCode + "";
                                                         
@@ -640,15 +640,15 @@
                                                         var to = document.getElementById("visibleEmail").value;
                                                         var Message = CustVeriCode + ' is your Queue verification code';
                                                         
-                                                        $.ajax({
+                                                        /*$.ajax({
                                                             type: "POST",
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
                                                                 document.getElementById('PageLoader').style.display = 'none';
                                                             }
-                                                        });
-                                                        
+                                                        });*/
+                                                        document.getElementById("CustEmailConfirm").value = CustVeriCode;
                                                     });
                                                 });
                                                 
@@ -848,7 +848,7 @@
                                                 
                                                 $(document).ready(function(){
                                                     $("#SendverifyEmailBtn").click(function(event){
-                                                        document.getElementById('PageLoader').style.display = 'block'
+                                                        //document.getElementById('PageLoader').style.display = 'block'
                                                         VeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         VeriCode = VeriCode + "";
                                                         
@@ -859,15 +859,15 @@
                                                         var to = document.getElementById("visibleProvEmail").value;
                                                         var Message = VeriCode + ' is your Queue verification code';
                                                         
-                                                        $.ajax({
+                                                        /*$.ajax({
                                                             type: "POST",
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
                                                                 document.getElementById('PageLoader').style.display = 'none';
                                                             }
-                                                        });
-                                                        
+                                                        });*/
+                                                        document.getElementById("BizEmailConfirm").value = VeriCode;
                                                     });
                                                 });
                                                 
@@ -942,14 +942,14 @@
                                         
                                         <p style="margin: 5px; text-align: center;">Providing accurate address information<br/>will help customers locate your business</p>
                                         
-                                        <h3 style="text-align: center; color: #000099;">Enter your address below</h3>
+                                        <h3 style="text-align: center; color: #000099;">Enter your address below</h3>      
                                         
-                                        <p> House<input onkeydown="checkMiddleNumberHNumber();" onclick="checkMiddleNumberHNumber();" id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="" size="5" style="background-color: #6699ff;"/>
-                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="" size="18" style="background-color: #6699ff;"/></p>
-                                        <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="" size="32" style="background-color: #6699ff;"/></p>
-                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="" size="18" style="background-color: #6699ff;"/>
-                                            Zip Code:<input onclick="checkMiddleNumberZCode();" onkeydown="checkMiddleNumberZCode();" id="ZCode" type="text" name="ZCode" placeholder='123...' value="" size="5" style="background-color: #6699ff;"/></p>
-                                        <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="" size="30" style="background-color: #6699ff;"/></p>
+                                        <p> House<input onkeydown="checkMiddleNumberHNumber();" onclick="checkMiddleNumberHNumber();" id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="" size="4" style="background-color: #6699ff;"/>
+                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="" size="11" style="background-color: #6699ff;"/></p>
+                                        <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="" size="28" style="background-color: #6699ff;"/></p>
+                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="" size="10" style="background-color: #6699ff;"/>
+                                            Zip Code:<input onclick="checkMiddleNumberZCode();" onkeydown="checkMiddleNumberZCode();" id="ZCode" type="text" name="ZCode" placeholder='123...' value="" size="4" style="background-color: #6699ff;"/></p>
+                                        <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="" size="25" style="background-color: #6699ff;"/></p>
                                         
                                         <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="37" style="background-color: #6699ff; border: 1px solid black;"/></p>
                                        </td>
