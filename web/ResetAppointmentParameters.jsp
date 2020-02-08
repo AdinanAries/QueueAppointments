@@ -118,11 +118,29 @@
         }
         
         if(!isTrySuccess  || UserID == 0){
-            response.sendRedirect("LogInPage.jsp");
-        }
-    %>
+            //response.sendRedirect("LogInPage.jsp");
+            
+%>
+
+            <script>
+                if($(window).width() > 1000){
+
+                    var tempUserName = window.localStorage.getItem("QueueUserName");
+                    var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
+
+                    //This coinsidentally takes you to login page incase of unavailable login information.
+                    document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+
+                }
+            </script>
     
-    <%!
+<%
+            //response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+        
+        }
+%>
+    
+<%!
         
        class getUserDetails{
            

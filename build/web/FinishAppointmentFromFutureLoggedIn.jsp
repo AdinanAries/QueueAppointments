@@ -149,9 +149,25 @@
             //response.sendRedirect("LogInPage.jsp");
         }
         
-        if(!isSameSessionData || UserID == 0 || !isUserIndexInList)
-            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-        
+        if(!isSameSessionData || UserID == 0 || !isUserIndexInList){
+%>
+
+            <script>
+                if($(window).width() > 1000){
+
+                    var tempUserName = window.localStorage.getItem("QueueUserName");
+                    var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
+
+                    //This coinsidentally takes you to login page incase of unavailable login information.
+                    document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+
+                }
+            </script>
+    
+<%
+            //response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+        }
+            
         try{
             
             Class.forName(Driver);

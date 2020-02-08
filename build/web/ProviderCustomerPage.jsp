@@ -93,11 +93,15 @@
         //check condition for in order to make sure we aren't storing empty strings or null inside of GlobalUserName and GlobalUserPassword
         if((GlobalUserName !== 'null' && GlobalUserPassword !== 'null') || (GlobalUserName !== '' && GlobalUserPassword !== '') ){
             
+            //set this only the first time and on subsequent page loads this condition will return false. Since localStorage.getItem() won't be null for provided parameters
+            //Then when user logs out, the parameters are removed for the local storage, making it possible for it to be reset at next login
+            
             if(window.localStorage.getItem("QueueUserName") === null && window.localStorage.getItem("QueueUserPassword") === null){
                 window.localStorage.setItem("QueueUserName", GlobalUserName);
                 window.localStorage.setItem("QueueUserPassword", GlobalUserPassword);
                 //alert("just got set");
             }
+            
             //alert("already there");
             //alert(window.localStorage.getItem("QueueUserName"));
             //alert(window.localStorage.getItem("QueueUserPassword"));
@@ -2399,7 +2403,8 @@
             <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px; width: 100%;'>
                     <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>News</p> </div></a>
-                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/><sub style='color: red; margin-left: -10px; background-color: white; border-radius: 50px; border: red 1px solid; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
+                            <sub style='color: white; margin-left: -10px; background-color: red; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
                             <p style='margin-top: -4px; font-size: 11px;'>Notification</p> </div></a>
                     <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
                             <p style='margin-top: 0; font-size: 11px;'>Calender</p></div></a>

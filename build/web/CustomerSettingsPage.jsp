@@ -113,7 +113,21 @@
         }
         
         if(!isSameUserName || !isTrySuccess || UserID == 0){
-            response.sendRedirect("LogInPage.jsp");
+            //response.sendRedirect("LogInPage.jsp");
+%>
+            <script>
+               
+                //alert(window.localStorage.getItem("QueueUserName"));
+                var tempUserName = window.localStorage.getItem("QueueUserName");
+                var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
+
+                //This coinsidentally takes you to login page incase of unavailable login information.
+                document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+                 
+
+            </script>
+<%
         }
         
         
@@ -305,29 +319,65 @@
             </a></center>
         </div>
         
-    <center><div id='PhoneSettingsPgNav' style='margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #ccc 1px solid; position: fixed; width: 100%;'>
+    <center><div id='PhoneSettingsPgNav' style='z-index: 1000; margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #ccc 1px solid; position: fixed; width: 100%; max-height: 33px; border-bottom: 1.3px solid #ccc'>
         <ul>
             
             <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
             </textarea>
             
-            <!--a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><li  
+            <!--a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ProviderCustomerPage.jsp?User=<=NewUserName%>&UserIndex=<=UserIndex%>'><li  
                     ><img style='background-color: white;' src="icons/icons8-home-50.png" width="28" height="25" alt="icons8-home-50"/>
                 
                 </li></a-->
-            <li onclick="showPCustExtraNews();" id='' style="margin-left: 10px; margin-right: 10px;">
+            <li onclick="showPCustExtraNews();" id='' style="width: 50px;"><div onclick="IndicateNews();">
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="35" height="28" alt="icons8-google-news-50"/>
+                <p id="NewsIndicator" style="margin-top: 5px; background-color: darkgray; height: 2px;"></p>
+                </div>
+            </li>
+            <li onclick="showPCustExtraNotification();" id='PhPermDivNotiBtn' style="width: 50px;"><div onclick="IndicateNoti();">
+                    <img src="icons/icons8-notification-50.png" width="36" height="29" alt="icons8-notification-50"/>
+                    <span id='notiCounterSup' style='color: white; background-color: red; padding: 2px 5px; margin-left: -16px; border-radius: 100%; font-size: 11px;'><%=notiCounter%></span></p></div>
+                    <p id="NotiIndicator" style="margin-top: 5px; background-color: darkgrey; height: 2px;"></p>
+            </li>
+            <li onclick='showPCustExtraCal();' id='' style="width: 50px;"><div onclick="IndicateCal();">
+                <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="28" height="25" alt="icons8-calendar-50"/>
+                <p id="CalIndicator" style="margin-top: 5px; background-color: darkgrey; height: 2px;"></p>
+                </div>
+            </li>
+            <li onclick='showPCustExtraUsrAcnt();' id='' style="width: 50px;"><div onclick="IndicateSettings();">
+                <img style='background-color: white;' src="icons/icons8-settings-50.png" width="30" height="28" alt="icons8-settings-50"/>
+                <p id="SettingIndicator" style="margin-top: 5px; background-color: darkgrey; height: 2px;"></p>
+                </div>
+            </li>
+            <script>
+                function IndicateSettings(){
+                    document.getElementById("NewsIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("NotiIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("CalIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("SettingIndicator").style.backgroundColor = "#334d81";
+                }
                 
-            </li>
-            <li onclick="showPCustExtraNotification();" id='PhPermDivNotiBtn' style="margin-left: 10px; margin-right: 10px;"><img src="icons/icons8-notification-50.png" width="36" height="29" alt="icons8-notification-50"/>
-                 <span id='notiCounterSup' style='color: red; background-color: white; padding: 2px 5px; margin-left: -15.5px; border-radius: 100%; border: 1px solid red; font-size: 11px;'><%=notiCounter%></span></p>
-            </li>
-            <li onclick='showPCustExtraCal();' id='' style="margin-left: 10px; margin-right: 10px;"><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="28" height="25" alt="icons8-calendar-50"/>
+                function IndicateNoti(){
+                    document.getElementById("NewsIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("NotiIndicator").style.backgroundColor = "#334d81";
+                    document.getElementById("CalIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("SettingIndicator").style.backgroundColor = "darkgrey";
+                }
                 
-            </li>
-            <li onclick='showPCustExtraUsrAcnt();' id='' style="margin-left: 10px; margin-right: 10px;"><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="30" height="28" alt="icons8-user-50 (1)"/>
+                function IndicateNews(){
+                    document.getElementById("NewsIndicator").style.backgroundColor = "#334d81";
+                    document.getElementById("NotiIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("CalIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("SettingIndicator").style.backgroundColor = "darkgrey";
+                }
                 
-            </li>
+                function IndicateCal(){
+                    document.getElementById("NewsIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("NotiIndicator").style.backgroundColor = "darkgrey";
+                    document.getElementById("CalIndicator").style.backgroundColor = "#334d81";
+                    document.getElementById("SettingIndicator").style.backgroundColor = "darkgrey";
+                }
+            </script>
         </ul>
             
             <script>
@@ -1643,12 +1693,20 @@
     <script>
             var Settings = '<%=Settings%>';
             
-            if(Settings === '1')
+            if(Settings === '1'){
                 showPCustExtraNotification();
-            else if(Settings === '2')
+                document.getElementById("NotiIndicator").style.backgroundColor = "#334d81";
+            }
+            else if(Settings === '2'){
                 showPCustExtraCal();
-            else if(Settings === '3')
+                document.getElementById("CalIndicator").style.backgroundColor = "#334d81";
+            }
+            else if(Settings === '3'){
                 showPCustExtraUsrAcnt();
+                document.getElementById("SettingIndicator").style.backgroundColor = "#334d81";
+            }else{
+                document.getElementById("NewsIndicator").style.backgroundColor = "#334d81";
+            }
     </script>
     
 </html>
