@@ -1286,7 +1286,7 @@
                     if(Base64CustPic != ""){
                 %>
                 <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                 <img style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                 <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                     </div></center>
                 <%
                     }

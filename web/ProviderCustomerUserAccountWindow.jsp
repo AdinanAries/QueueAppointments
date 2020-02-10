@@ -775,7 +775,10 @@
                                     } else{
                                 %>
                                 
-                                   <center><a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; border-radius: 4px; background-color: pink; color: black; padding: 5px; border: solid black 1px; width: 200px; text-align: center; margin-bottom: 5px;">Add Profile Picture<p></a></center>
+                                   <div style="text-align: center"><a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                           <p style="cursor: pointer; border-radius: 4px; background-color: pink; color: black; padding: 5px; border: solid black 1px; width: 200px; text-align: center; margin-bottom: 5px; margin-top: 5px;">
+                                               Add Profile Picture<p>
+                                       </a></div>
                                     
                                 <%
                                     }

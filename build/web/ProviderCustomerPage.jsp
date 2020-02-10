@@ -1080,22 +1080,22 @@
             <table id='ExtraDropDown' style='display: none; z-index: 120; background-color: white; margin-top: 40px; position: fixed;  box-shadow: 4px 4px 4px #2c3539;'>
                 <tbody>
                     <tr>
-                        <td onclick="showCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
+                        <td onclick="showCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'>
                             <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
                             News
                         </td>
                     </tr>
                     <tr>
-                        <td onclick="showCustExtraNotification2();" id='PermDivNotiBtn2' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                        <td onclick="showCustExtraNotification2();" id='PermDivNotiBtn2' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                             Notifications<sup id='notiCounterSup2' style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
                         </td>
                     </tr>
                     <tr>
-                        <td onclick='showCustExtraCal2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                        <td onclick='showCustExtraCal2();' id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                             Calender</td>
                     </tr>
                     <tr>
-                        <td onclick='showCustExtraUsrAcnt2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                        <td onclick='showCustExtraUsrAcnt2();' id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                             Account</td>
                     </tr>
                 </tbody>
@@ -1175,14 +1175,14 @@
                 </center>
             </div>
             
-        <div id="header">
+        <div id="header" style="display: none;">
             
             <center><p> </p></center>
             <center><img id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;" /></center>
             
         </div>
                             
-        <div id="Extras">
+        <div id="Extras" style="margin-top: -10px;">
             
             <div id='News' style=''>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News updates from your providers</p></center>
@@ -2753,7 +2753,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></p>
+                    <p><input type="submit" style="font-weight: bolder; background-color: #3d6999; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                     
@@ -2861,7 +2861,13 @@
           </div>    
         </div>
                 
-        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0;">
+        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0; margin-top: 2px;">
+            
+            <script>
+                if($(window).width() > 1000){
+                    document.getElementById("newbusiness").style.height = "90%";
+                }
+            </script>
                 
                 <!----------------------------------------------------------------------------------------------------------------->
         <div id='Extras2Container' style='z-index: 200;'>

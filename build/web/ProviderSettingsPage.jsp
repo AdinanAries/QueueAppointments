@@ -1566,12 +1566,16 @@
                //alert(Settings);
             if(Settings === "1"){
                 showPCustExtraNews();
+                document.getElementById("NewsIndicator").style.backgroundColor = "#334d81";
             }else if(Settings === "2"){
                 showPCustExtraNotification();
+                document.getElementById("NotiIndicator").style.backgroundColor = "#334d81";
             }else if(Settings === "3"){
                 showPCustExtraCal();
+                document.getElementById("CalIndicator").style.backgroundColor = "#334d81";
             }else if(Settings === "4"){
                 showPCustExtraUsrAcnt();
+                document.getElementById("SettingIndicator").style.backgroundColor = "#334d81";
             }else{
                 //do nothing
             }

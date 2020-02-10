@@ -351,7 +351,7 @@ select {
 }
 #eachprov {
   background-color: #eeeeee;
-  color: balck;
+  color: black;
   border: 1px darkgrey solid;
   padding: 5px;
   border-radius: 4px;
@@ -392,15 +392,16 @@ select {
 }
 
 #DashboardLocationSearchForm{
-    background-color: #6699ff; 
-    border: 1px solid darkblue; 
+    background-color: #9bb1d0; 
+    border: #626b9e 1px solid;
     padding: 5px; 
     border-radius: 5px; 
     width: 95%;
 }
 
 #DashboardLocationSearchForm input{
-    background-color: #6699ff;
+    background-color: #9bb1d0;
+    border: 1px solid #626b9e;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -809,7 +810,7 @@ select {
     position: fixed;
     width: 100%;
     height: 41px;
-    background-color: #000099;
+    background-color: #334d81;
     padding-top: 1px;
     z-index: 110;
   }
@@ -830,6 +831,9 @@ select {
     min-width: 100px;
     /*border-radius: 4px;*/
     text-align: center;
+  }
+  #PermanentDiv ul li:hover{
+      color: moccasin;
   }
   #container {
     padding-top: 40px;
@@ -1220,7 +1224,13 @@ input[type=radio]:checked {
         padding-top: 150px;
     }
     #header{
+        padding: 1px;
         display: none;
+    }
+    #DashboardLogo{
+        margin-bottom: -6px;
+        max-width: 80px;
+        max-height: 45px;
     }
     #nav{
         display: block;

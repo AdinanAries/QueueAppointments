@@ -1865,7 +1865,7 @@
                     
                     <div style='width: 85%; float: left; margin-left: 0;'>
                         <div onclick="toggleHideAppointmentsDiv()" style="width: 25%; color: white; float: left; cursor: pointer; border-radius: 4px;">
-                            <img src="icons/Logo.png" alt="" width="25" height="25"/>
+                            <img style="background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;" src="icons/ProviderApptIcon.png" alt="" width="24" height="24"/>
                             <p style="font-size: 11px; margin-top: -5px;" id="hideAppointments">Hide Spots</p>
                         </div>
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'>  
@@ -1897,7 +1897,7 @@
             </div>
             
             
-            <div class="providerHeader" id="ProviderHeader" style=""> <!--onclick="hideDropDown();"-->
+            <div class="providerHeader" id="ProviderHeader" style="display: none;"> <!--onclick="hideDropDown();"-->
                 <cetnter><p> </p></cetnter>
                 <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
                 <!--center><h2 style="color: #000099;">Line Your Customers Now!</h2></center-->
@@ -5018,8 +5018,12 @@
                 }
             </script>
          
-        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px;">
-            
+        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px; margin-top: 1px;">
+            <script>
+                if($(window).width() > 1000){
+                    document.getElementById("newbusiness").style.height = "88.5%";
+                }
+            </script>
             <!------------------------------------------------------------------------------------------------------------------------------------------->
             
             <!------------------------------------------------------------------------------------------------------------------>

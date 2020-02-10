@@ -319,7 +319,7 @@
         <div id="container">
             
             <div id="miniNav" style="display: none;">
-                <center>
+                <div style="text-align: center">
                     <ul id="miniNavIcons" style="float: left;">
                         <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
                         </li>
@@ -330,22 +330,23 @@
                             <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
                                   onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Search" />
                     </form>
-                </center>
+                </div>
             </div>
             
         <div style='display: block;' id="header">
             
-            <cetnter><p> </p></cetnter>
-            <center><image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/></center>
-            <center><p style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></center>
+            <div style="text-align: center;"><p> </p>
+            <image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/>
+            <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p>
+            </div>
             <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
-                <center><a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="NewsUpadtesPage.jsp"><p  
+                <div style="text-align: center;"><a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="NewsUpadtesPage.jsp"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
                         <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </p>
                 <p style='font-size: 15px; color: white; margin-top: -5px;'>News</p>
-                </a></center>
+                </a></div>
             </div>
         </div>
             
@@ -500,9 +501,9 @@
                                     </div>
                                     
                                     <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <div style="text-align: center;"><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></div>
                                     <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <div style="text-align: center;"><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></div>
                                     <%}%>
                                     
                                 </div>
@@ -557,13 +558,15 @@
                 <!--h4><a href="PageController?Message=<=Message%>" style=" color: black;">Go to your dashboard/Login now</a></h4-->
                 <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                
-                <center><div class =" SearchObject">
+                <center>
+                    <div class =" SearchObject">
                         
-                    <form name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                        <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/>
-                    </form> 
-                        
-                </div></center>
+                        <form name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
+                            <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/>
+                        </form> 
+
+                    </div>
+                </center>
                 
                 <div id="LocSearchDiv" style="margin-top: 5px;">
                 <center><form id="DashboardLocationSearchForm" action="ByAddressSearchResult.jsp" method="POST" style="">
@@ -658,7 +661,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
+                    <p><input onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" style="font-weight: bolder; background-color: #3d6999; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                 

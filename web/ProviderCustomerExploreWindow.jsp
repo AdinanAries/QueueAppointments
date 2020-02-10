@@ -390,7 +390,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="font-weight: bolder; background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('PagePageLoader').style.display = 'block';"/></p>
+                    <p><input type="submit" style="font-weight: bolder; background-color: #3d6999; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('PagePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
             </div>

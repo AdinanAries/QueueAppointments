@@ -485,9 +485,9 @@
             
         <div id="header">
             
-            <cetnter><p> </p></cetnter>
-            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
-            <!--center><h1 style="color: #000099;">Find Your Spot Now!</h1></center-->
+            <div style="text-align: center;"><p> </p>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
+            <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
             

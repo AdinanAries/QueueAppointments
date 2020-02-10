@@ -814,7 +814,7 @@ function showCustExtraUsrAcnt() {
   if (
     document.getElementById("ExtrasUserAccountDiv").style.display === "none"
   ) {
-    document.getElementById("PermDivUserBtn").style.backgroundColor = "blue";
+    document.getElementById("PermDivUserBtn").style.backgroundColor = "#3d6999";
     $("#ExtrasUserAccountDiv").slideDown("fast");
   } else {
     document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
@@ -833,7 +833,7 @@ function showCustExtraCal() {
   document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
 
   if (document.getElementById("Calender").style.display === "none") {
-    document.getElementById("PermDivCalBtn").style.backgroundColor = "blue";
+    document.getElementById("PermDivCalBtn").style.backgroundColor = "#3d6999";
     $("#Calender").slideDown("fast");
   } else {
     document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
@@ -854,7 +854,7 @@ function showCustExtraNotification() {
   if (
     document.getElementById("ExtrasNotificationDiv").style.display === "none"
   ) {
-    document.getElementById("PermDivNotiBtn").style.backgroundColor = "blue";
+    document.getElementById("PermDivNotiBtn").style.backgroundColor = "#3d6999";
     $("#ExtrasNotificationDiv").slideDown("fast");
   } else {
     document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";

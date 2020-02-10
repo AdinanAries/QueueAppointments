@@ -307,10 +307,9 @@
         <div id="container">
             
         <div id="header" style='display: block;'>
-            
-            <cetnter><p> </p></cetnter>
-            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
-            <center><h3 style="color: #000099;">Find A Line Spot Now!</h3></center>
+            <div style="text-align: center;"><p> </p>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
+            <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
          

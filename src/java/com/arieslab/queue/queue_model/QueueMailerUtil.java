@@ -205,7 +205,7 @@ public class QueueMailerUtil {
         Content content = new Content("text/plain", Body);
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sg = new SendGrid("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");
+        SendGrid sg = new SendGrid("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");
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
