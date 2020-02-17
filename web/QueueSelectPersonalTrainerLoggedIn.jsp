@@ -324,8 +324,9 @@
             
         <div id="header">
             
-            <cetnter><p> </p></cetnter>
-            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
+            <div style="text-align: center;"><p> </p>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
+            <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
         

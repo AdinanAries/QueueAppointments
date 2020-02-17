@@ -188,25 +188,37 @@
         String UserNameFrmList = "";
         String ControllerResult = "";
         
+        boolean isIndexAttribute = false;
+        boolean isUserNameAttribute = false;
+        
         try{
             ControllerResult = request.getParameter("result");
         }catch(Exception e){}
+        
         try{
             UserIndex = Integer.parseInt(request.getAttribute("UserIndex").toString());
+            isIndexAttribute = true;
             JustLogged = 1;
         }catch(Exception e){}
         
-        try{
-            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
-        }catch(Exception e){}
-        
-        try{
-            NewUserName = request.getParameter("User");
-        }catch(Exception e){}
+        if(!isIndexAttribute){
+            try{
+                UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+            }catch(Exception e){}
+        }
         
         try{
             NewUserName = request.getAttribute("UserName").toString();
+            isUserNameAttribute = true;
         }catch(Exception e){}
+        
+        if(!isUserNameAttribute){
+            try{
+                NewUserName = request.getParameter("User");
+            }catch(Exception e){}
+        }
+        
+        
         
         try{
          
@@ -3004,6 +3016,8 @@
                                         
                                     %>
                                     
+                                    <p id="PMargin" style="height: 40px; display: none;"></p>
+                                    
                                      <%
                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
                                     %>
@@ -3044,8 +3058,12 @@
                                     
                                         <!--p>Next Appointment: <%=NextAvailableTime%></p-->
                                     
-                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px;'>Today's Queue</p></center>
-                                    
+                                    <div style="text-align: center;"><p id="TodaysLineP" style='color: darkblue; font-weight: bold; padding-top: 10px;'>Today's Queue</p></div>
+                                    <script>
+                                        if($(document).width() < 1000){
+                                            document.getElementById("PMargin").style.display = "block";
+                                        }
+                                    </script>
                                     <center><div class="scrolldiv" style="width: 95%; max-width: 600px; overflow-x: auto;">
                                     
                                     <table style="width:100%; max-width: 600px;">
@@ -5041,19 +5059,23 @@
                                 
                                 <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
                                     
-                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
+                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>'); background-color: #eeeeee;">
                                         
                                     <%if(base64Cover == ""){%>
-                                        <p style="color: white; background-color: red; text-align: center; margin-top: -50px; margin-bottom: 30px;">Click here to add Cover Photo</p>
+                                        <p style="background-color: #eeeeee; text-align: center; margin-top: -70px; margin-bottom: 30px; color: black;">
+                                            <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px; border-radius: 0; background: none; border: none;" alt=""/>
+                                            <sup>Click here to add Cover Photo</sup>
+                                        </p>
                                     <%}%>
                                     
                             <%
                                 if(base64Image == ""){
                             %> 
                             
-                            <center><img style="border: #ccccff solid 5px;" src="icons/icons8-user-filled-100.png" width="150" height="150" alt="icons8-user-filled-100"/>
+                            <div stle="text-align: center;">
+                                <img style="border: #d8d8d8 solid 5px; background-color: #eeeeee;" src="icons/icons8-user-filled-100.png" width="150" height="150" alt="icons8-user-filled-100"/>
 
-                                </center>
+                                </div>
                                     
                             <%
                                 }else{
@@ -5449,7 +5471,11 @@
                                                     
                                         <%} else{%>
                                         
-                                        <a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; border: 1px solid #000099; color: #000099; cursor: pointer; text-align: center;">Create Photo Gallery</p></a>
+                                        <a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
+                                            <p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; border: 1px solid #000099; color: #000099; cursor: pointer; text-align: center;">
+                                                <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px;" alt=""/>
+                                                <sup>Create Photo Gallery</sup>
+                                            </p></a>
                                         
                                         <%}%>
                                       

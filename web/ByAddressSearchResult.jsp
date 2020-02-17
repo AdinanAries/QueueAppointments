@@ -54,6 +54,19 @@
     
     <% 
         
+        String PCity = "";
+        String PTown = "";
+        String PZipCode = "";
+        try{
+            PCity = session.getAttribute("UserCity").toString().trim();
+            PTown = session.getAttribute("UserTown").toString().trim();
+            PZipCode = session.getAttribute("UserZipCode").toString().trim();
+        }catch(Exception e){
+            PCity = "";
+            PTown = "";
+            PZipCode = "";
+        }
+        
         boolean isTypeChck = false;
         String SVCTypeAppend = " and ( ";
         

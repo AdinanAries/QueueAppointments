@@ -1,7 +1,6 @@
 
 
 import com.arieslab.queue.queue_model.ProcedureClass;
-import com.arieslab.queue.queue_model.ResendAppointmentData;
 import com.arieslab.queue.queue_model.StatusesClass;
 import com.arieslab.queue.queue_model.UserAccount;
 import java.io.IOException;

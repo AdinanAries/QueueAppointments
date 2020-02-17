@@ -153,25 +153,36 @@
         }catch(Exception e){}
         
         int UserIndex = -1;
+        boolean isIndexAttribute = false;
+        boolean isUserNameAttribute = false;
         
         try{
             
             UserIndex = Integer.parseInt(request.getAttribute("UserIndex").toString());
+            isIndexAttribute = true;
             JustLogged = 1;
             
         }catch(Exception e){}
         
-        try{
-            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
-        }catch(Exception e){}
+        if(!isIndexAttribute){
+            try{
+                UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+            }catch(Exception e){}
+        }
         
-        try{
-            NewUserName = request.getParameter("User");
-        }catch(Exception e){}
         
         try{
             NewUserName = request.getAttribute("UserName").toString();
+            isUserNameAttribute = true;
         }catch(Exception e){}
+        
+        if(!isUserNameAttribute){
+            try{
+                NewUserName = request.getParameter("User");
+            }catch(Exception e){}
+        }
+        
+        
        
         
         try{
@@ -2607,7 +2618,7 @@
                             $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
                             $("#FavoritesIframe").show("slide", { direction: "left" }, 100);
                             $("#SearchIframe").hide("slide", { direction: "right" }, 100);
-                            document.getElementById("ExploreDiv").style.display = "block";
+                            document.getElementById("FavoritesIframe").style.display = "block";
                         
                             /*document.querySelector(".UserProfileContainer").style.display = "none";
                             document.getElementById("FavoritesIframe").style.display = "block";
@@ -4144,7 +4155,11 @@
                                     } else{
                                 %>
                                 
-                                   <center><a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; border-radius: 4px; background-color: pink; color: black; padding: 5px; border: solid black 1px; width: 200px; text-align: center; margin-bottom: 5px;">Add Profile Picture<p></a></center>
+                                   <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                           <p style="cursor: pointer; color: black; padding: 5px; width: 98%; max-width: 700px; text-align: center; margin-bottom: 5px;">
+                                               <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px; border-radius: 0; background: none; border: none;" alt=""/>
+                                               <sup>Add Profile Picture</sup>
+                                           <p></a>
                                     
                                 <%
                                     }
@@ -4418,6 +4433,7 @@
                                                                     alert("Update Successful");
                                                                     
                                                                     document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
+                                                                    document.getElementById("UpdateUserAccountForm").style.display = "none";
                                                                     
                                                                     $.ajax({
                                                                         type: "POST",

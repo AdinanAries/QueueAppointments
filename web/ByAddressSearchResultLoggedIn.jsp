@@ -53,6 +53,19 @@
     </head>
     <% 
         
+        String PCity = "";
+        String PTown = "";
+        String PZipCode = "";
+        try{
+            PCity = session.getAttribute("UserCity").toString().trim();
+            PTown = session.getAttribute("UserTown").toString().trim();
+            PZipCode = session.getAttribute("UserZipCode").toString().trim();
+        }catch(Exception e){
+            PCity = "";
+            PTown = "";
+            PZipCode = "";
+        }
+        
         boolean isTypeChck = false;
         String SVCTypeAppend = " and ( ";
         
@@ -552,8 +565,9 @@
             
         <div id="header">
             
-            <cetnter><p> </p></cetnter>
-            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
+            <div style="text-align: center;"><p> </p>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
+            <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
             
@@ -2262,8 +2276,8 @@
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <p style="color: #000099;">Find services near you</p>
-                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
+                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
+                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value="<%=PTown%>"/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
                     <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>

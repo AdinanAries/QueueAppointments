@@ -775,10 +775,14 @@
                                     } else{
                                 %>
                                 
-                                   <div style="text-align: center"><a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                                           <p style="cursor: pointer; border-radius: 4px; background-color: pink; color: black; padding: 5px; border: solid black 1px; width: 200px; text-align: center; margin-bottom: 5px; margin-top: 5px;">
-                                               Add Profile Picture<p>
-                                       </a></div>
+                                
+                                <p style="height: 10px;"></p>
+                                <a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                           <div style="text-align: center;"><p style="cursor: pointer; color: black; padding: 5px; width: 98%; max-width: 700px; text-align: center; margin-bottom: 5px;">
+                                               <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px;" alt=""/>
+                                               <sup>Add Profile Picture</sup>
+                                            <p></div>
+                                       </a>
                                     
                                 <%
                                     }
@@ -803,8 +807,157 @@
                                         %>
                                         
                                         <form id="SetUserAddress" style="border-top: 1px solid darkblue; margin-top: 5px;
-                                              padding-top: 5px;" action="SetUserAddress" method="POST">
-                                            
+                                              padding-top: 5px;" action="SetAddressMobile" method="POST">
+                                            <script>
+
+                                                var GoogleReturnedZipCode;
+                                                var GoogleReturnedCity;
+                                                var GoogleReturnedTown;
+                                                var GoogleReturnedStreetName;
+                                                var GoogleReturnedStreetNo;
+                                                var GoogleReturnedCountry;
+                                                var GoogleReached = false;
+
+                                                var StateAbbrev = {
+                                                    "AL": "Alabama",
+                                                    "AK": "Alaska",
+                                                    "AZ": "Arizona",
+                                                    "AR": "Arkansas",
+                                                    "CA": "California",
+                                                    "CO": "Colorado",
+                                                    "CT": "Connecticut",
+                                                    "DE": "Delaware",
+                                                    "FL": "Florida",
+                                                    "GA": "Georgia",
+                                                    "HI": "Hawaii",
+                                                    "ID": "Idaho",
+                                                    "IL": "Illinois",
+                                                    "IN": "Indiana",
+                                                    "IA": "Iowa",
+                                                    "KS": "Kansas",
+                                                    "KY": "Kentucky",
+                                                    "LA": "Louisiana",
+                                                    "ME": "Maine",
+                                                    "MD": "Maryland",
+                                                    "MA": "Massachusetts",
+                                                    "MI": "Michigan",
+                                                    "MN": "Minnesota",
+                                                    "MS": "Mississippi",
+                                                    "MO": "Missouri",
+                                                    "MT": "Montana",
+                                                    "NE": "Nebraska",
+                                                    "NV": "Nevada",
+                                                    "NH": "New Hampshire",
+                                                    "NJ": "New Jersey",
+                                                    "NM": "New Mexico",
+                                                    "NY": "New York",
+                                                    "NC": "North Carolina",
+                                                    "ND": "North Dakota",
+                                                    "OH": "Ohio",
+                                                    "OK": "Oklahoma",
+                                                    "OR": "Oregon",
+                                                    "PA": "Pennsylvania",
+                                                    "RI": "Rhode Island",
+                                                    "SC": "South Carolina",
+                                                    'SD': "South Dakota",
+                                                    "TN": "Tennessee",
+                                                    "TX": "Texas",
+                                                    "UT": "Utah",
+                                                    "VT": "Vermont",
+                                                    "VA": "Virginia",
+                                                    "WA": "Washington",
+                                                    "WV": "West Virginia",
+                                                    "WI": "Wisconsin",
+                                                    "WY": "Wyoming"
+                                                };
+                                                /*if ("geolocation" in navigator) {
+                                                    alert("I'm you location navigator");
+                                                } else {
+                                                    alert("You don't have any location navigator");
+                                                }*/
+
+                                                function GetGoogleMapsJSON(lat, long){
+
+                                                        //alert(lat);
+                                                        //alert(long);
+                                                        $.ajax({
+                                                            type: "GET",
+                                                            data: 'latlng=' + lat + ',' + long + '&sensor=true&key=AIzaSyAoltHbe0FsMkNbMCAbY5dRYBjxwkdSVQQ',
+                                                            url: 'https://maps.googleapis.com/maps/api/geocode/json',
+                                                            success: function(result){
+
+                                                                //GoogleReturnedZipCode = result.results[0].address_components[8].long_name;
+                                                                //GoogleReturnedCity = result.results[0].address_components[4].long_name;
+                                                                //GoogleReturnedTown = result.results[0].address_components[3].long_name;
+
+                                                                let AddressParts = result.results[0].formatted_address.split(",");
+                                                                let CityZipCodeParts = AddressParts[2].split(" ");
+                                                                let StreetParts = AddressParts[0].split(" ");
+                                                                //alert(result.results[0].formatted_address);
+                                                                //alert(AddressParts[0]);
+                                                                let city = CityZipCodeParts[1].trim();
+                                                                GoogleReturnedTown = AddressParts[1].trim();
+                                                                if(GoogleReturnedTown === "The Bronx")
+                                                                    GoogleReturnedTown = "Bronx";
+                                                                GoogleReturnedCity = StateAbbrev[city].trim();
+                                                                GoogleReturnedZipCode = CityZipCodeParts[2].trim();
+                                                                GoogleReturnedStreetName = StreetParts.slice(1, (StreetParts.length));
+                                                                GoogleReturnedStreetName = GoogleReturnedStreetName.toString().replace("," , " ");
+                                                                GoogleReturnedStreetName = GoogleReturnedStreetName.trim();
+                                                                GoogleReturnedStreetNo = StreetParts[0].trim();
+                                                                GoogleReturnedCountry = AddressParts[3].trim();
+                                                                addLocationToWebContext();
+                                                                
+                                                                /*alert(result.results[0].address_components[5].long_name);
+                                                                alert(result.results[0].address_components[4].long_name);
+                                                                alert(result.results[0].address_components[3].long_name);
+                                                                alert(result.results[0].address_components[2].long_name);
+                                                                alert(result.results[0].address_components[1].long_name);
+                                                                alert(result.results[0].address_components[0].long_name);*/
+
+                                                            }
+                                                        });
+
+                                                        /*var mapLink = document.getElementById("mapLink");
+                                                        mapLink.href = "";
+                                                        mapLink.href = 'https://www.openstreetmap.org/#map=18/'+lat+'/'+long;*/
+
+                                                    }
+
+                                                function showPosition(position){
+                                                    GetGoogleMapsJSON(position.coords.latitude, position.coords.longitude);
+                                                    GoogleReached = true;
+                                                }
+
+                                                function locationErrorHandling(error){
+                                                    //alert("ERROR(" + error.code + "): " + error.message);
+                                                    //Will add error handling here;
+                                                }
+
+                                                var locationOptions = {
+
+                                                    enableHighAccuracy: true, 
+                                                    maximumAge        : 30000, 
+                                                    timeout           : 27000
+
+                                                };
+
+                                                function getLocation(){
+                                                    if (navigator.geolocation){
+
+                                                      var watchID = navigator.geolocation.watchPosition(showPosition, locationErrorHandling, locationOptions);
+                                                      //navigator.geolocation.getCurrentPosition(showPosition, locationErrorHandling, locationOptions);
+                                                      //alert(watchID);
+                                                      //navigator.geolocation.clearWatch(watchID);
+
+                                                    }else{ 
+                                                        alert("Location is not supported by this browser.");
+                                                    }
+                                                }
+
+                                                getLocation();
+
+                                            </script>
                                             <center><table>
                                                 <tbody>
                                                 <tr>
@@ -832,7 +985,29 @@
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
-                                            
+                                                
+                                            <script>
+                                                function setAddressToNewAddressForm(){
+                                                    document.getElementById("NewAddressHNumber").value = GoogleReturnedStreetNo;
+                                                    document.getElementById("NewAddressStreet").value = GoogleReturnedStreetName;
+                                                    document.getElementById("NewAddressTown").value = GoogleReturnedTown;
+                                                    document.getElementById("NewAddressCity").value = GoogleReturnedCity;
+                                                    document.getElementById("NewAddressCountry").value = GoogleReturnedCountry;
+                                                    document.getElementById("NewAddressZipcode").value = GoogleReturnedZipCode;
+                                                }
+                                                
+                                                //setAddressToNewAddressForm();
+                                                var LocIntvlID = setInterval(function(){
+                                                    
+                                                    if((GoogleReturnedStreetNo !== undefined || GoogleReturnedStreetName !== undefined) || (GoogleReturnedStreetNo !== "" || GoogleReturnedStreetName !== "")){
+                                                        setAddressToNewAddressForm();
+                                                        if(document.getElementById("NewAddressZipcode").value !== "" && document.getElementById("NewAddressZipcode").value !== "undefined"){
+                                                            clearInterval(LocIntvlID);
+                                                        }
+                                                    }
+                                                });
+                                            </script>
+                                                
                                                 <p id="NewAddressStatus" style="text-align: center; color: white;"></p>
                                                 <input type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
@@ -1029,6 +1204,8 @@
                                                                     
                                                                     alert("Update Successful");
                                                                     document.getElementById('PagePageLoader').style.display = 'none';
+                                                                    document.getElementById("UpdateUserAccountForm").style.display = "none";
+                                                                    
                                                                     $.ajax({
                                                                         type: "POST",
                                                                         url: "GetCustPerInfo",

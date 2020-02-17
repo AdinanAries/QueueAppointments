@@ -568,7 +568,7 @@
                                                 
                                                 $(document).ready(function(){
                                                     $("#CustSendverifyEmailBtn").click(function(event){
-                                                        document.getElementById('PageLoader').style.display = 'block';
+                                                        //document.getElementById('PageLoader').style.display = 'block';
                                                         CustVeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         CustVeriCode = CustVeriCode + "";
                                                         
@@ -584,7 +584,7 @@
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
-                                                                document.getElementById('PageLoader').style.display = 'none';
+                                                                //document.getElementById('PageLoader').style.display = 'none';
                                                             }
                                                         });
                                                         

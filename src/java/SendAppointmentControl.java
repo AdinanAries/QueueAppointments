@@ -1,6 +1,6 @@
 
 
-import com.arieslab.queue.queue_model.ResendAppointmentData;
+
 import com.arieslab.queue.queue_model.StatusesClass;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,16 +51,7 @@ public class SendAppointmentControl extends HttpServlet {
         String DebitCreditCardNumber = "0";
         int selectFlag = 0;
         
-        //putting neccessery data into
-        ResendAppointmentData.CustomerID = CustomerID;
-        ResendAppointmentData.ProviderID = ProviderID;
-        ResendAppointmentData.SelectedServices = OrderedServices;
-        ResendAppointmentData.AppointmentDate = AppointmentDate;
-        ResendAppointmentData.AppointmentTime = AppointmentTime;
-        ResendAppointmentData.PaymentMethod = PaymentMethod;
-        ResendAppointmentData.ServicesCost = ServicesCost;
-        ResendAppointmentData.CreditCardNumber = DebitCreditCardNumber;
-        
+       
         SimpleDateFormat DateForCompareSdf = null;
         
         boolean isTodayClosed = false;

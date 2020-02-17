@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="javax.swing.JOptionPane"%>
-<%@page import="com.arieslab.queue.queue_model.ResendAppointmentData"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -95,6 +94,9 @@
                         String ProviderID = request.getParameter("ProviderID");
                         int CustomerID = UserID;
                         String SpotsDate = request.getParameter("GetDate");
+                        
+                        String ServicesList = request.getParameter("ServicesList");
+                        String TaxedPrice = request.getParameter("TaxedPrice"); 
                          
                         int IntervalsValue = 30;
         
@@ -950,9 +952,12 @@
                                         <input type="hidden" name="AppointmentTime" value="<%=NextAvailableTimeForForm%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                        <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
+                                        <input type="hidden" name="ServicesList" value="<%=ServicesList%>" />
+                                        <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
                                         
                                         <%
-                                            ResendAppointmentData.AppointmentDate = SpotsDate;
+                                            //ResendAppointmentData.AppointmentDate = SpotsDate;
                                         %>
                                         
                                         

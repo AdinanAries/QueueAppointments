@@ -1206,6 +1206,9 @@
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to get spots</p>
                                         <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input type="hidden" name="ProviderID" value="<%=PID%>" />
+                                        <input type="hidden" name="ServicesList" value="<%=SelectedServicesList%>"/>
+                                        <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
+
                                         <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
@@ -1514,16 +1517,7 @@
                                                    padding: 5px;"
                                                    onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Confirm" /></center>
                                         
-                                         <%
-                                            //putting neccessery data into
-
-                                            ResendAppointmentData.ProviderID = Integer.toString(PID);
-                                            ResendAppointmentData.SelectedServices = SelectedServicesList;
-
-
-                                            ResendAppointmentData.ServicesCost = Double.toString(TaxedPrice);
-                                        %>
-                                        
+                                         
                                 </form>
                                 
                                         <center><div id="CreditDebitCardDetails" style="padding: 10px; background-color: darkgray;">

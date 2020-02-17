@@ -287,7 +287,7 @@ public class ProviderSignUpController extends HttpServlet {
                     
             if(UserID != 0){
                 
-                /*/Send Queue admin an email for newly created accounts
+                //Send Queue admin an email for newly created accounts
                 {
                     String to = "tech.arieslab@outlook.com";
                     String subject = "Provider Account Added";
@@ -301,7 +301,7 @@ public class ProviderSignUpController extends HttpServlet {
                     
                     QueueMailerUtil EmailObj = new QueueMailerUtil();
                     EmailObj.send(to, subject, msg);
-                }*/
+                }
                 
                 saveProvPassword (request.getSession(), userName, Password);
                 

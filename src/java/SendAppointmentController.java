@@ -47,16 +47,6 @@ public class SendAppointmentController extends HttpServlet {
         String DebitCreditCardNumber = "0";
         int selectFlag = 0;
         
-        //putting neccessery data into
-        ResendAppointmentData.CustomerID = CustomerID;
-        ResendAppointmentData.ProviderID = ProviderID;
-        ResendAppointmentData.SelectedServices = OrderedServices;
-        ResendAppointmentData.AppointmentDate = AppointmentDate;
-        ResendAppointmentData.AppointmentTime = AppointmentTime;
-        ResendAppointmentData.PaymentMethod = PaymentMethod;
-        ResendAppointmentData.ServicesCost = ServicesCost;
-        ResendAppointmentData.CreditCardNumber = DebitCreditCardNumber;
-        
         
         //calculate for the next and last 30 mins
             String TimeAfter30Mins = "";
@@ -120,9 +110,6 @@ public class SendAppointmentController extends HttpServlet {
         
         }
         
-        
-        
-        StatusesClass.AppointmentStatus = "";
         
 //getting the day for chosen date------------------------------------------------------------------------------------------
         String DayOfWeek = "";

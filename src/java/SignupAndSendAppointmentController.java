@@ -2,7 +2,6 @@
 
 import com.arieslab.queue.queue_model.ExistingProviderAccountsModel;
 import com.arieslab.queue.queue_model.ProcedureClass;
-import com.arieslab.queue.queue_model.ResendAppointmentData;
 import com.arieslab.queue.queue_model.StatusesClass;
 import com.arieslab.queue.queue_model.UserAccount;
 import java.io.IOException;
@@ -19,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet(urlPatterns = {"/SignupAndSendAppointmentController"})
@@ -62,15 +62,7 @@ public class SignupAndSendAppointmentController extends HttpServlet {
         String PaymentMethod = request.getParameter("PaymentMethod");
         String DebitCreditCardNumber = request.getParameter("DebitCreditCard");
         
-        //putting neccessery data into
-        ResendAppointmentData.CustomerID = CustomerID;
-        ResendAppointmentData.ProviderID = ProviderID;
-        ResendAppointmentData.SelectedServices = OrderedServices;
-        ResendAppointmentData.AppointmentDate = AppointmentDate;
-        ResendAppointmentData.AppointmentTime = AppointmentTime;
-        ResendAppointmentData.PaymentMethod = PaymentMethod;
-        ResendAppointmentData.ServicesCost = ServicesCost;
-        ResendAppointmentData.CreditCardNumber = DebitCreditCardNumber;
+        
         
         int UserIndex = ExistingProviderAccountsModel.getUserIndex();
         
@@ -210,6 +202,8 @@ public class SignupAndSendAppointmentController extends HttpServlet {
             createAccountPst.setString(3,Password);
             
             createAccountPst.executeUpdate();
+            
+            savePassword (request.getSession(), UserName, Password);
             
         }catch(Exception e){
             e.printStackTrace();
@@ -696,5 +690,14 @@ public class SignupAndSendAppointmentController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public void savePassword (HttpSession session, String username, String password){
+        if(session.getAttribute("ThisUserName") != null && session.getAttribute("ThisUserPassword") != null){
+            session.removeAttribute("ThisUserName");
+            session.removeAttribute("ThisUserPassword");
+        }
+        session.setAttribute("ThisUserName", username);
+        session.setAttribute("ThisUserPassword", password);
+    }
 
 }

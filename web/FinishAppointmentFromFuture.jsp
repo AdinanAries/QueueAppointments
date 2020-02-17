@@ -122,8 +122,8 @@
         
         <%
             
-            ResendAppointmentData.AppointmentTime = request.getParameter("AppointmentTime");
-            String AppointmentTime = ResendAppointmentData.AppointmentTime;
+            //ResendAppointmentData.AppointmentTime = request.getParameter("AppointmentTime");
+            String AppointmentTime = request.getParameter("AppointmentTime");
             String FormattedAppointmentTime = " ";
             
             try{
@@ -163,7 +163,7 @@
                 
             }
            
-            String ID = ResendAppointmentData.ProviderID;
+            String ID = request.getParameter("ProviderID");
             
             getUserDetails details = new getUserDetails();
             details.initializeDBParams(Driver, url, User, Password);
@@ -648,13 +648,8 @@
                             */
                             
                             //allways do this first to reset Cost
-                            Double TaxedPrice = Double.parseDouble(ResendAppointmentData.ServicesCost);
+                            Double TaxedPrice = Double.parseDouble(request.getParameter("TaxedPrice"));
                             
-                            ProcedureClass.Cost = 0;
-                            ProcedureClass.OrderedServices = "";
-                            
-                            ProcedureClass.Cost = Double.parseDouble(ResendAppointmentData.ServicesCost);
-                            ProcedureClass.OrderedServices = ResendAppointmentData.SelectedServices;
                             
                     %>
                     
@@ -1193,11 +1188,15 @@
                                 <form action="FinishAppointmentUnloggedIn.jsp" method="POST">
                                     
                                     <%
+                                        String[] FutureDateParts = request.getParameter("formsDateValue").split("-");
+                                        //JOptionPane.showMessageDialog(null,FutureDateParts);
+                                        String FutureDate = FutureDateParts[1] + "/" + FutureDateParts[2] + "/" +FutureDateParts[0];
+                                        
                                         if(FormattedAppointmentTime != " "){
                                             
                                     %>
                                     
-                                    <p id="ShowThisAppointmentTimeForFinishAppointmentWindow" style="color: red;">This line spot is for <%=ResendAppointmentData.AppointmentDate%> at <%=FormattedAppointmentTime%></p>
+                                    <p id="ShowThisAppointmentTimeForFinishAppointmentWindow" style="color: red;">This line spot is for <%=FutureDate%> at <%=FormattedAppointmentTime%></p>
                                     
                                     <%}%>
                                     
@@ -1210,7 +1209,7 @@
                                        <p style="color: tomato;">Select Date</p>
                                        <p>Click on date field below to set date</p>
                                        
-                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid black; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="<%=ResendAppointmentData.AppointmentDate%>" readonly></p>
+                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid black; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="<%=FutureDate%>" readonly></p>
                                        <p id="datepickerStatus" style="text-align: center; color: white; background-color: red;"></p>
                                        <p id="DateStatus" style="color: white; background-color: green; text-align: center;"></p>
                                     </div> 
@@ -1404,11 +1403,11 @@
                                         <p><input id="formsDateValue" type="hidden" name="formsDateValue" value="" /></p>
                                         <p> Time: <span id="displayTime" style="color: red; float: right;"><%=FormattedAppointmentTime%></span></p>
                                         <p><input id="formsTimeValue" type="hidden" name="formsTimeValue" value="<%=AppointmentTime%>" /></p>
-                                        <p> Reason: <span style="color: red; float: right;"><%=ResendAppointmentData.SelectedServices%></span>
-                                        <input id="formsOrderedServices" type="hidden" name="formsOrderedServices" value="<%=ResendAppointmentData.SelectedServices%>" />
+                                        <p> Reason: <span style="color: red; float: right;"><%=request.getParameter("ServicesList")%></span>
+                                        <input id="formsOrderedServices" type="hidden" name="formsOrderedServices" value="<%=request.getParameter("ServicesList")%>" />
                                             
                                             <%
-                                                if(ResendAppointmentData.SelectedServices == ""){
+                                                if(request.getParameter("ServicesList") == ""){
                                             
                                             %><span style="color: red; float: right;">None(Go to previous page)</span> 
                                             
@@ -1462,7 +1461,7 @@
                                               
                                                 <input type='hidden' name="ProviderID" value="<%=PID%>" />
                                                 <input type="hidden" name="CustomerID" value=""/>
-                                                <input type="hidden" name="OrderedServices" value="<%=ResendAppointmentData.SelectedServices%>" />
+                                                <input type="hidden" name="OrderedServices" value="<%=request.getParameter("ServicesList")%>" />
                                                 <input id="PayFormAppointmentDate" type="hidden" name="AppointmentDate" value="" />
                                                 <input id="PayFormAppointmentTime" type="hidden" name="AppointmentTime" value="" />
                                                 <input type="hidden" name="ServicesCost" value="<%=TaxedPrice%>" />

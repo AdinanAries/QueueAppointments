@@ -639,15 +639,15 @@
                                                         var to = document.getElementById("visibleEmail").value;
                                                         var Message = CustVeriCode + ' is your Queue verification code';
                                                         
-                                                        /*$.ajax({
+                                                        $.ajax({
                                                             type: "POST",
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
-                                                                document.getElementById('PageLoader').style.display = 'none';
+                                                                //document.getElementById('PageLoader').style.display = 'none';
                                                             }
-                                                        });*/
-                                                        document.getElementById("CustEmailConfirm").value = CustVeriCode;
+                                                        });
+                                                        
                                                     });
                                                 });
                                                 
@@ -858,15 +858,15 @@
                                                         var to = document.getElementById("visibleProvEmail").value;
                                                         var Message = VeriCode + ' is your Queue verification code';
                                                         
-                                                        /*$.ajax({
+                                                        $.ajax({
                                                             type: "POST",
                                                             url: "QueueMailer",
                                                             data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
                                                             success: function(result){
-                                                                document.getElementById('PageLoader').style.display = 'none';
+                                                                //document.getElementById('PageLoader').style.display = 'none';
                                                             }
-                                                        });*/
-                                                        document.getElementById("BizEmailConfirm").value = VeriCode;
+                                                        });
+                                                        
                                                     });
                                                 });
                                                 

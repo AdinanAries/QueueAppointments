@@ -232,8 +232,8 @@ public class CustomoerSignUpController extends HttpServlet {
 
     public void savePassword (HttpSession session, String username, String password){
         if(session.getAttribute("ThisUserName") != null && session.getAttribute("ThisUserPassword") != null){
-            session.removeAttribute("ThisProvUserName");
-            session.removeAttribute("ThisProvUserPassword");
+            session.removeAttribute("ThisUserName");
+            session.removeAttribute("ThisUserPassword");
         }
         session.setAttribute("ThisUserName", username);
         session.setAttribute("ThisUserPassword", password);

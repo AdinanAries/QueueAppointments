@@ -3,19 +3,15 @@
     <listener>
         <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
     </listener>
-    
     <appSettings>
-        <add key="aspnet:SuppressSameSiteNone" value="true" />
+        <add key="aspnet:SuppressSameSiteNone" value="true"/>
     </appSettings>
-
-        <system.web>
-            <authentication>
-                <forms cookieSameSite="None" />
-            </authentication>
-
-            <sessionState cookieSameSite="None" />
+    <system.web>
+        <authentication>
+            <forms cookieSameSite="None"/>
+        </authentication>
+        <sessionState cookieSameSite="None"/>
     </system.web>
-    
     <servlet>
         <servlet-name>LoginControllerMain</servlet-name>
         <servlet-class>LoginControllerMain</servlet-class>
@@ -435,6 +431,10 @@
         <servlet-name>isInSubscriptionDB</servlet-name>
         <servlet-class>isInSubscriptionDB</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SetAddressMobile</servlet-name>
+        <servlet-class>SetAddressMobile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -834,6 +834,10 @@
     <servlet-mapping>
         <servlet-name>isInSubscriptionDB</servlet-name>
         <url-pattern>/isInSubscriptionDB</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetAddressMobile</servlet-name>
+        <url-pattern>/SetAddressMobile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

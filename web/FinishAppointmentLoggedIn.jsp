@@ -519,8 +519,9 @@
             
         <div id="header">
             
-            <cetnter><p> </p></cetnter>
-            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
+            <div style="text-align: center;"><p> </p>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
+            <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
             
@@ -1629,6 +1630,9 @@
                                         <input type="hidden" name="ProviderID" value="<%=PID%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="ServicesList" value="<%=SelectedServicesList%>"/>
+                                        <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
+                                        
                                         <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>

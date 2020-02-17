@@ -933,7 +933,7 @@
             </div>
             
             <p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
-                style='margin-top: 40px; background-color: #334d81; color: white; border: 2px solid white; padding: 5px; cursor: pointer;'>
+                style='margin-top: 40px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 Show News Updates</p>
             

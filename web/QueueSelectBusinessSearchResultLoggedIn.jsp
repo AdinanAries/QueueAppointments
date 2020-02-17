@@ -43,12 +43,12 @@
         <script src="scripts/QueueLineDivBehavior.js"></script>
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-<meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
         
     </head>
     
@@ -352,8 +352,9 @@
             
         <div id="header">
             
-            <cetnter><p> </p></cetnter>
-            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a></center>
+            <div style="text-align: center;"><p> </p>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=Integer.toString(UserIndex)%>&User=<%=NewUserName%>" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
+            <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
             
