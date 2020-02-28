@@ -342,7 +342,7 @@
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+        <div id='QShowNews22' style='display: block; width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
             <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>

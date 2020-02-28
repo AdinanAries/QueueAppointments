@@ -1760,13 +1760,13 @@
         
         <!--script>
             setTimeout(function(){
-                window.location.replace("ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>");
+                window.location.replace("ServiceProviderPage.jsp?UserIndex=<=UserIndex%>&User=<=NewUserName%>");
             },60000);
         </script-->
         
         <div id="PermanentDiv" style="">
             
-            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/-->
+            <img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
             <script>
                 function showExtraDropDown(){
                     if(document.getElementById("ExtraDropDown").style.display === "none")
@@ -1805,11 +1805,11 @@
             </div>
             
             <ul>
-                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                     Notifications<sup style='color: red; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
-                <li id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                <li id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
-                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #254386;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
             </ul>
         
@@ -1819,23 +1819,36 @@
             <table id='ExtraDropDown' style='display: none; z-index: 120; background-color: white; margin-top: 40px; position: fixed;  box-shadow: 4px 4px 4px #2c3539;'>
                 <tbody>
                     <tr>
-                        <td onclick="showCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'>
-                            <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
-                            News
+                        <td onclick="showCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'>
+                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>
+                                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
+                                News
+                            </a>
                         </td>
                     </tr>
                     <tr>
-                        <td onclick="showCustExtraNotification2();" id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                            Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
+                        <td onclick="showCustExtraNotification2();" id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'>
+                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'>
+                                <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                                Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
+                            </a>
                         </td>
                     </tr>
                     <tr>
-                        <td onclick='showCustExtraCal2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                            Calender</td>
+                        <td onclick='showCustExtraCal2();' id='' style='cursor: pointer; background-color: #334d81; padding: 5px'>
+                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'>
+                                <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                                Calender
+                            </a>
+                        </td>
                     </tr>
                     <tr>
-                        <td onclick='showCustExtraUsrAcnt2();' id='' style='cursor: pointer; background-color: #334d81; border: 1px solid white; color: white; padding: 5px;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
-                            Account</td>
+                        <td onclick='showCustExtraUsrAcnt2();' id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'>
+                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'>
+                                <img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                            Account
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -2128,7 +2141,7 @@
             </div>
             
             <div id='Calender' style='display: none; margin-top: 5px;'>
-                <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
+                <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px; margin-top: -10px;">Your Calender</p></center>
             
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>

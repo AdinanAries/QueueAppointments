@@ -47,9 +47,9 @@ function checkInputFlds(){
 						formstatus.innerHTML = "Same Username as Password";
 						formstatus.style.backgroundColor = "red";
                     }else{
-						signupBtn.disabled = false;
-						signupBtn.style.backgroundColor = "pink";
-						signupBtn.style.cssText = '#SignUpAndBookBtn:hover{ background-color: red; }';
+						signupBtn.disabled = false; 
+						signupBtn.style.backgroundColor = "darkslateblue";
+						signupBtn.style.cssText = '#SignUpAndBookBtn:hover{ background-color: steelblue; }';
 						formstatus.innerHTML = "OK";
 						formstatus.style.backgroundColor = "green";
 					}

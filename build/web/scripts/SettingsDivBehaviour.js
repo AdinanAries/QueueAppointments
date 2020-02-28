@@ -85,7 +85,7 @@ function checkLogInFormFieldsStatus() {
     changeUserAccountStatus.innerHTML = "OK";
     changeUserAccountStatus.style.backgroundColor = "green";
     LoginFormBtn.disabled = false;
-    LoginFormBtn.style.backgroundColor = "pink";
+    LoginFormBtn.style.backgroundColor = "darkslateblue";
   }
 }
 if (document.getElementById("LoginFormBtn")) {
@@ -141,7 +141,7 @@ function checkExtraLogInFormFieldsStatus() {
     changeUserAccountStatus.innerHTML = "OK";
     changeUserAccountStatus.style.backgroundColor = "green";
     LoginFormBtn.disabled = false;
-    LoginFormBtn.style.backgroundColor = "pink";
+    LoginFormBtn.style.backgroundColor = "darkslateblue";
   }
 }
 if (document.getElementById("ExtraLoginFormBtn")) {
@@ -197,7 +197,7 @@ function checkExtraLogInFormFieldsStatus2() {
     changeUserAccountStatus.innerHTML = "OK";
     changeUserAccountStatus.style.backgroundColor = "green";
     LoginFormBtn.disabled = false;
-    LoginFormBtn.style.backgroundColor = "pink";
+    LoginFormBtn.style.backgroundColor = "darkslateblue";
   }
 }
 if (document.getElementById("ExtraLoginFormBtn2")) {
@@ -226,7 +226,7 @@ function PaymentsFormCheckInputs() {
     PaymentFormStatus.innerHTML = "OK";
     PaymentFormStatus.style.backgroundColor = "green";
     PaymentsUpdateBtn.disabled = false;
-    PaymentsUpdateBtn.style.backgroundColor = "pink";
+    PaymentsUpdateBtn.style.backgroundColor = "darkslateblue";
   }
 }
 

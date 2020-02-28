@@ -354,30 +354,37 @@
                 <cetnter><p> </p></cetnter>
                 
                 <center><div id ="logindetails" style="padding-top: 15px;">
-                <center><h4 style="margin-bottom: 30px;"><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
+                <center><div id="LoginHomeBtn" style="margin-bottom: 30px; color: white; background-color: #3d6999; padding: 5px 20px; border-radius: 4px; width: fit-content;"><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: white;">
+                            <img src="icons/icons8-home-50.png" alt="" style="width: 40px; height: 40px;"/>
+                            <p>Home</p>
+                        </a></div></center>
+                        
                 <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                 
                 <%if(Message != null){%>
                     <center><h4 style="color: white; margin-bottom: 15px; background-color: red; max-width: 350px;"><%=Message%></h4></center>
                 <%}%>
                     
-                <center><h2 style="margin-bottom: 20px;">Login Here</h2></center>
-                
-                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST"><table border="0"> 
-                        
+                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; max-width: 300px; min-height: 300px; border: #3d6999 1px solid;"><table border="0"> 
+                            <center><h2 style="margin-bottom: 40px;">Login here</h2></center>
+                        <table>
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder='enter your password here' type="password" name="password" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><input id="LoginPagePasswordFld" placeholder='enter your password here' type="password" name="password" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn" />
                         <input id="loginPageBtn" class="button" type="submit" onclick="document.getElementById('PageLoader').style.display = 'block';" value="Login" name="submitbtn" />
-                    </form>
+                            <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: #254386; cursor: pointer; margin: 10px; padding: 4px; margin-top: 50px;">forgot my password</h5></center>
+                
+                <h5  style = "margin: 10px;" ><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="SignUpPage.jsp" style="color: #254386; padding: 4px;">I don't have a user account</a></h5>
+                
+                </form>
                 
                 <center><div id="forgotPassDiv" style="display: none;">
                     
@@ -502,9 +509,6 @@
                         
                     </div></center>
                 
-                <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: white; cursor: pointer; margin: 10px; padding: 4px;">forgot my password</h5></center>
-                
-                <h5  style = "margin: 10px;" ><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="SignUpPage.jsp" style="color: white; padding: 4px;">I don't have a user account</a></h5>
                 </div></center>
                 <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
             

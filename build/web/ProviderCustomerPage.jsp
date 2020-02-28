@@ -1186,11 +1186,40 @@
                 </center>
             </div>
             
-        <div id="header" style="display: none;">
+        <div id="header" style="display: none;" class="CustomerPageHeader">
             
             <center><p> </p></center>
             <center><img id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;" /></center>
             
+        </div>
+                            
+        <div id="MobileHeader">
+            
+            <div style="width: 40px; height: 36px; float: left; margin-left: 3px;">
+                <div class='MenuIcon' style=''>
+                    <a id="nav-toggle" href="#"><span></span></a>
+                    <!--div id='firstMenuIconBar' style=''></div>
+                    <div id='secondMenuIconBar' style=''></div>
+                    <div id='thirdMenuIconBar' style=''></div-->
+                </div>
+            </div>
+            
+            <center><p> </p></center>
+            <%
+                if(Base64Pic != ""){
+            %>
+                <!--center><div id="custProPicDisplay" style="width: 100%; max-width: 340px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                <img class="fittedImg" style="border-radius: 100%; float: right; background-color: darkgray; width: 36px; height: 36px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;" src="data:image/jpg;base64,<%=Base64Pic%>"/>
+                <!--/div></center-->
+            <%
+                }else{
+            %>
+                    <img class="fittedImg" style="border-radius: 100%; float: right; width: 36px; height: 36px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px; background-color: #eeeeee;" src="icons/NoProPicAvatar.png" alt="No Proile Picture Avatar"/>
+            <%
+                }
+            %>
+            <center><img id="MobileDashboardLogo" src="QueueLogo.png" style="" /></center>
+            <p style="clear: both;"></p>
         </div>
                             
         <div id="Extras" style="margin-top: -10px;">
@@ -2411,18 +2440,67 @@
             
             
         <div class="DashboardContent" id="">
-            <center><div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px; width: 100%;'>
-                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
-                            <p style='margin-top: 0; font-size: 11px;'>News</p> </div></a>
-                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white; width: 25%; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
-                            <sub style='color: white; margin-left: -10px; background-color: red; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
-                            <p style='margin-top: -4px; font-size: 11px;'>Notification</p> </div></a>
-                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
-                            <p style='margin-top: 0; font-size: 11px;'>Calender</p></div></a>
-                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='width: 25%; color: white; float: left;'><img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
-                            <p style='margin-top: 0; font-size: 11px;'>Settings</p></div></a>
-                    <p style='clear: both;'></p>
-                    </div></center>
+            <div id='PhoneNotiBar' style='cursor: pointer; background-color: #6699ff; padding-top: 2px; width: 100%; position: relative;'>
+                
+                    <div class='MainMenu'>
+                        <div id='MainMenuCover'></div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="SettingIcon">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white;'>
+                                            <img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                                        </div></a>
+                                    </td>
+                                    <td class="SettingName">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white;'>
+                                            <p style='margin-top: 0;'>News</p> 
+                                        </div></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="SettingIcon">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white;'>
+                                            <img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
+                                            <sub style='color: white; background-color: red; margin-left: -20px; border: 2px solid red; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                                    </div></a>
+                                    </td>
+                                    <td class="SettingName">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white;'>
+                                            <p style='margin-top: -4px;'>Notification</p> 
+                                        </div></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="SettingIcon">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: white;'>
+                                            <img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                                        </div></a>
+                                    </td>
+                                    <td class="SettingName">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: white;'>
+                                        <p style='margin-top: 0;'>Calender</p>
+                                        </div></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="SettingIcon">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: white;'>
+                                                <img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
+                                                
+                                        </div></a>
+                                    </td>
+                                    <td class="SettingName">
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: white;'>
+                                            <p style='margin-top: 0;'>Settings</p>
+                                        </div></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    </div>
                         
             <center><div id="ExploreAndAccountButtons" style="background-color: white;">
                     <div onclick="showDashboardExplore();" id="exploreBtn">
@@ -2443,15 +2521,7 @@
                             <p id="FavoritesBtnTxt" style="padding: 0; font-size: 10px; margin-top: 1px; color: #7e7e7e;">Favorites</p>
                     </div>
                     <div onclick="showDashboardAccount();" id="accountBtn">
-                            <%
-                                if(Base64Pic != ""){
-                            %>
-                            <!--center><div id="custProPicDisplay" style="width: 100%; max-width: 340px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                             <img class="fittedImg" style="border-radius: 100%; border: #ccc 1px solid; margin-bottom: 0; margin-left: -5px; margin-top: -34px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="40" height="40"/>
-                                <!--/div></center-->
-                            <%
-                                }
-                            %>
+                            
                         <img style="display: none;" id="ActiveUserProfile" src="icons/UserProfileIcon.png" width="29" height="29" alt=""/>
                         <img style="display: none;" id="RegularUserProfile" src="icons/SecondUserProfileIcon.png" width="29" height="29" alt=""/>
                         <p id="AccountBtnTxt" style="padding: 0; font-size: 10px; margin-top: 1px; color: #7e7e7e;">Account</p>
@@ -2485,13 +2555,6 @@
                             //document.getElementById("FavoritesIframe").style.display = "none";
                             //document.getElementById("ExploreDiv").style.display = "none";
                             
-                            $("#SpotsIframe").show("slide", { direction: "left" }, 100);
-                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
-                            $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
-                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 100);
-                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
-                            document.getElementById("SpotsIframe").style.display = "block";
-                            
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
                             document.getElementById("RegularUserProfile").style.display = "block";
@@ -2504,6 +2567,13 @@
                             document.getElementById("ExploreBtnText").style.color = "#7e7e7e";
                             document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
                             document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
+                            
+                            $("#SpotsIframe").show("slide", { direction: "left" }, 10);
+                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 10);
+                            $("#ExploreDiv").hide("slide", { direction: "right" }, 10);
+                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 10);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 10);
+                            document.getElementById("SpotsIframe").style.display = "block";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2530,13 +2600,6 @@
                             document.getElementById("SpotsIframe").style.display = "none";
                             document.getElementById("SearchIframe").style.display = "none";*/
 
-                            $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
-                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
-                            $("#ExploreDiv").show("slide", { direction: "left" }, 100);
-                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 100);
-                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
-                            document.getElementById("ExploreDiv").style.display = "block";
-                            
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
                             document.getElementById("RegularUserProfile").style.display = "block";
@@ -2549,6 +2612,13 @@
                             document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
                             document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
                             document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
+                            
+                            $("#SpotsIframe").hide("slide", { direction: "right" }, 10);
+                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 10);
+                            $("#ExploreDiv").show("slide", { direction: "left" }, 10);
+                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 10);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 10);
+                            document.getElementById("ExploreDiv").style.display = "block";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2568,13 +2638,6 @@
                             document.getElementById("ActiveSpotsIcon").style.display = "none";
                             document.getElementById("SpotsIcon").style.display = "block";
                             
-                            $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
-                            $(".UserProfileContainer").show("slide", { direction: "left" }, 100);
-                            $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
-                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 100);
-                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
-                            document.querySelector(".UserProfileContainer").style.display = "block";
-                        
                             /*document.querySelector(".UserProfileContainer").style.display = "block";
                             document.getElementById("FavoritesIframe").style.display = "none";
                             document.getElementById("ExploreDiv").style.display = "none";
@@ -2593,6 +2656,13 @@
                             document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
                             document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
                             document.getElementById("ExploreBtnText").style.color = "#7e7e7e";
+                            
+                            $("#SpotsIframe").hide("slide", { direction: "right" }, 10);
+                            $(".UserProfileContainer").show("slide", { direction: "left" }, 10);
+                            $("#ExploreDiv").hide("slide", { direction: "right" }, 10);
+                            $("#FavoritesIframe").hide("slide", { direction: "right" }, 10);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 10);
+                            document.querySelector(".UserProfileContainer").style.display = "block";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2613,13 +2683,6 @@
                             document.getElementById("ActiveSpotsIcon").style.display = "none";
                             document.getElementById("SpotsIcon").style.display = "block";
                         
-                            $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
-                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
-                            $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
-                            $("#FavoritesIframe").show("slide", { direction: "left" }, 100);
-                            $("#SearchIframe").hide("slide", { direction: "right" }, 100);
-                            document.getElementById("FavoritesIframe").style.display = "block";
-                        
                             /*document.querySelector(".UserProfileContainer").style.display = "none";
                             document.getElementById("FavoritesIframe").style.display = "block";
                             document.getElementById("ExploreDiv").style.display = "none";
@@ -2638,6 +2701,13 @@
                             document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
                             document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
                             document.getElementById("ExploreBtnText").style.color = "#7e7e7e";
+                            
+                            $("#SpotsIframe").hide("slide", { direction: "right" }, 10);
+                            $(".UserProfileContainer").hide("slide", { direction: "right" }, 10);
+                            $("#ExploreDiv").hide("slide", { direction: "right" }, 10);
+                            $("#FavoritesIframe").show("slide", { direction: "left" }, 10);
+                            $("#SearchIframe").hide("slide", { direction: "right" }, 10);
+                            document.getElementById("FavoritesIframe").style.display = "block";
                             
                             document.body.scrollTop = 0;
                             document.documentElement.scrollTop = 0;
@@ -2674,8 +2744,8 @@
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p class="LocSearchP">City: <input id="city4Search" style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p class="LocSearchP">Town: <input id="town4Search" style="width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
+                    <p class="LocSearchP">City: <input id="city4Search" style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p class="LocSearchP">Town: <input id="town4Search" style="width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
                     <script>
                         var setLocation = setInterval(
                             function(){
@@ -2693,7 +2763,7 @@
                 
                     </script>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999;'>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 5px;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -2764,7 +2834,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="font-weight: bolder; background-color: #3d6999; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></p>
+                    <p><input type="submit" style="font-weight: bolder; background-color: #626b9e; color: white; padding: 7px; border-radius: 3px; width: 95%;" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                     
@@ -4185,31 +4255,26 @@
                                         
                                         <form id="SetUserAddress" style="border-top: 1px solid darkblue; margin-top: 5px;
                                               padding-top: 5px;" action="SetUserAddress" method="POST">
-                                            
-                                            <center><table>
+                                                <p style="padding: 5px; color: #ffffff; text-align: center;">Add Your Address</p>
+                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td style="padding-top: 10px; color: #ffffff;">
-                                                        <P>Add Your Address</P>
-                                                    </td>
+                                                    <td>House Number: </td><td><input id="NewAddressHNumber" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="houseNumberFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>House Number: </td><td><input id="NewAddressHNumber" placeholder="1234" style="background-color: cornflowerblue;" type="text" name="houseNumberFld" value="" /></td>
+                                                    <td>Street: </td><td><input id="NewAddressStreet" placeholder="Some St./Ave." style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="streetAddressFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Street: </td><td><input id="NewAddressStreet" placeholder="Some St./Ave." style="background-color: cornflowerblue;" type="text" name="streetAddressFld" value="" /></td>
+                                                    <td>Town: </td><td><input id="NewAddressTown" placeholder="Some Town" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="townFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Town: </td><td><input id="NewAddressTown" placeholder="Some Town" style="background-color: cornflowerblue;" type="text" name="townFld" value="" /></td>
+                                                    <td>City: </td><td><input id="NewAddressCity" placeholder="Some City " style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="cityFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>City: </td><td><input id="NewAddressCity" placeholder="Some City " style="background-color: cornflowerblue;" type="text" name="cityFld" value="" /></td>
+                                                    <td>Country: </td><td><input id="NewAddressCountry" placeholder="Some Country" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="countryFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Country: </td><td><input id="NewAddressCountry" placeholder="Some Country" style="background-color: cornflowerblue;" type="text" name="countryFld" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Zip Code: </td><td><input id="NewAddressZipcode" placeholder="1234" style="background-color: cornflowerblue;" type="text" name="zipCodeFld" value="" /></td>
+                                                    <td>Zip Code: </td><td><input id="NewAddressZipcode" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="zipCodeFld" value="" /></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
@@ -4218,7 +4283,7 @@
                                                 <input type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <center><input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" id="NewAddressBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="submit" value="Set Address" /></center>
+                                                <center><input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" id="NewAddressBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="submit" value="Set Address" /></center>
                                             
                                                 <script>
                                                     var setAddress = setInterval(
@@ -4253,25 +4318,29 @@
                                               padding-top: 5px;" >
                                             <center><p style="color: white; margin: 5px;">Change profile information</p></center>
                                             
-                                            <center><a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; background-color: pink; color: black; padding: 5px; border: 1px solid black; border-radius: 5px; text-align: center; width: 300px;">Change Your Profile Photo</p></a></center>
-                                            <center><table>
+                                            <center><a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                    <p style="cursor: pointer; color: black; padding: 5px; border-radius: 4px; text-align: center; width: 300px;"><img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px; border-radius: 0; background: none; border: none;" alt=""/>
+                                                        <sup>Change Profile Picture</sup></p>
+                                                </a></center>
+                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td>First Name: </td><td><input id="ChangeProfileFirstName" style="background-color: cornflowerblue;" type="text" name="firstNameFld" value="<%=FirstName%>" /></td>
+                                                    <td>First Name: </td><td><input id="ChangeProfileFirstName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="firstNameFld" value="<%=FirstName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Middle Name: </td><td><input id="ChangeProfileMiddleName" style="background-color: cornflowerblue;" type="text" name="middleNameFld" value="<%=MiddleName%>" /></td>
+                                                    <td>Middle Name: </td><td><input id="ChangeProfileMiddleName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="middleNameFld" value="<%=MiddleName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Last Name: </td><td><input id="ChangeProfileLastName" style="background-color: cornflowerblue;" type="text" name="lastNameFld" value="<%=LastName%>" /></td>
+                                                    <td>Last Name: </td><td><input id="ChangeProfileLastName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="lastNameFld" value="<%=LastName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Phone Number: </td><td><input onclick="checkMiddlePhoneNumberEdit();" onkeydown="checkMiddlePhoneNumberEdit();" id="ChangeProfilePhoneNumber" style="background-color: cornflowerblue;" type="text" name="phoneNumberFld" value="<%=PhoneNumber%>" /></td>
+                                                    <td>Phone Number: </td><td><input onclick="checkMiddlePhoneNumberEdit();" onkeydown="checkMiddlePhoneNumberEdit();" id="ChangeProfilePhoneNumber" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="phoneNumberFld" value="<%=PhoneNumber%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Email: </td><td><input id="ChangeProfileEmail" style="background-color: cornflowerblue;" type="text" name="emailFld" value="<%=Email%>" /></td>
+                                                    <td>Email: </td><td><input id="ChangeProfileEmail" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="emailFld" value="<%=Email%>" /></td>
                                                 </tr>
-                                                
+                                                </tbody>
+                                                </table>
                                                 <script>
                                                         var ChangeProfilePhoneNumber = document.getElementById("ChangeProfilePhoneNumber");
 
@@ -4303,29 +4372,27 @@
 
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
+                                                    <p style="padding-top: 10px; color: #ffffff;">Address Info Below</p>
+                                                    <table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
+                                                    <tbody>
                                                 
                                                 <tr>
-                                                    <td style="padding-top: 10px; color: #ffffff;">
-                                                        <P>Address Info Below</P>
-                                                    </td>
+                                                    <td>House Number: </td><td><input onclick="checkMiddleHouseNumberEdit();" onkeydown="checkMiddleHouseNumberEdit();" id="ChangeProfileHouseNumber" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="houseNumberFld" value="<%=H_Number%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>House Number: </td><td><input onclick="checkMiddleHouseNumberEdit();" onkeydown="checkMiddleHouseNumberEdit();" id="ChangeProfileHouseNumber" style="background-color: cornflowerblue;" type="text" name="houseNumberFld" value="<%=H_Number%>" /></td>
+                                                    <td>Street: </td><td><input id="ChangeProfileStreet" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="streetAddressFld" value="<%=Street%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Street: </td><td><input id="ChangeProfileStreet" style="background-color: cornflowerblue;" type="text" name="streetAddressFld" value="<%=Street%>" /></td>
+                                                    <td>Town: </td><td><input id="ChangeProfileTown" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="townFld" value="<%=Town%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Town: </td><td><input id="ChangeProfileTown" style="background-color: cornflowerblue;" type="text" name="townFld" value="<%=Town%>" /></td>
+                                                    <td>City: </td><td><input id="ChangeProfileCity" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="cityFld" value="<%=City%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>City: </td><td><input id="ChangeProfileCity" style="background-color: cornflowerblue;" type="text" name="cityFld" value="<%=City%>" /></td>
+                                                    <td>Country: </td><td><input id="ChangeProfileCountry" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="countryFld" value="<%=Country%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Country: </td><td><input id="ChangeProfileCountry" style="background-color: cornflowerblue;" type="text" name="countryFld" value="<%=Country%>" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Zip Code: </td><td><input onclick="checkMiddleZipCodeEdit();" onkeydown="checkMiddleZipCodeEdit();" id="ChangeProfileZipCode" style="background-color: cornflowerblue;" type="text" name="zipCodeFld" value="<%=ZipCode%>" /></td>
+                                                    <td>Zip Code: </td><td><input onclick="checkMiddleZipCodeEdit();" onkeydown="checkMiddleZipCodeEdit();" id="ChangeProfileZipCode" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="zipCodeFld" value="<%=ZipCode%>" /></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
@@ -4486,7 +4553,7 @@
                                                 <p id='LasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
                                                 <p id="FeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
                                                 </div></center>
-                                            <center><table>
+                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
                                                     <td>Compose feedback message below</td>
@@ -4599,17 +4666,18 @@
                                                     
                                                     <p style="cursor: pointer;" onclick="showLoginFormsDiv()"><img src="icons/icons8-admin-settings-male-20 (1).png" width="20" height="20" alt="icons8-admin-settings-male-20 (1)"/>
                                                     Account Settings</p>
-                                                    <form  id="UserAcountLoginForm" style="margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;" name="userAccountForm">
+                                                    <form  id="UserAcountLoginForm" style="margin: auto; margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;
+                                                           background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px;" name="userAccountForm">
                                                         <p>Change your login information:</p>
                                                         <p style="color: thistle; margin-top: 10px;">User Name:</p>
-                                                        <center><p><input id="UpdateLoginNameFld" style="padding: 3px; background-color: cornflowerblue; color: darkblue;" placeholder="Enter New User Name Here" type="text" name="userName" value="<%=thisUserName%>" size="35" /></p></center>
+                                                        <center><p><input id="UpdateLoginNameFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px; color: darkblue;" placeholder="Enter New User Name Here" type="text" name="userName" value="<%=thisUserName%>" size="35" /></p></center>
                                                         
                                                         <p style="color: thistle; margin-top: 10px;">Password:</p>
-                                                        <center><p><input id="CurrentPasswordFld" style="padding: 3px; background-color: cornflowerblue;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="36" /></p>
+                                                        <center><p><input id="CurrentPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="36" /></p>
                                                         
-                                                            <p><input id="NewPasswordFld" style="padding: 3px; background-color: cornflowerblue;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="36" /></p>
+                                                            <p><input id="NewPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="36" /></p>
                                                         
-                                                            <p><input id="ConfirmPasswordFld" style="padding: 3px; background-color: cornflowerblue;" placeholder="Confirm New Password" type="password" name="confirmNewPassword" value="" size="36" /></p>
+                                                            <p><input id="ConfirmPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Confirm New Password" type="password" name="confirmNewPassword" value="" size="36" /></p>
                                                         <p id="changeUserAccountStatus"></p>
                                                         <p id="WrongPassStatus" style="color: white; background-color: red; display: none;">Enter your current password correctly</p>
                                                         <input id='UserIDforLoginUpdate' name="CustomerID" type="hidden" value="<%=UserID%>" />
@@ -4711,20 +4779,22 @@
                                                     <p style="cursor: pointer;" onclick="showPaymentsForm()"><img src="icons/icons8-mastercard-credit-card-20 (1).png" width="20" height="20" alt="icons8-mastercard-credit-card-20 (1)"/>
                                                         Payments</p>
                                                     
-                                                    <form id="PaymentsCardForm" style="margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;" name="PaymentForm" action="notYet" method="POST">
+                                                    <div style=''>
+                                                        <form id="PaymentsCardForm" style="margin: auto; margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;
+                                                          background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px;" name="PaymentForm" action="notYet" method="POST">
                                                 
                                                         <p style="margin-bottom: 5px; ">Add new debit/credit card:</p>
                                                         <table id="paymentDetailsTable">
                                                     <tbody>
 
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Card Number: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input onclick="checkMiddleCardNumber();" onkeydown="checkMiddleCardNumber();" id="CardNumberFld" style="background-color: #eeeeee;" type="text" name="C/DcardNumber" value="" /></td></tr>
+                                                                    <input onclick="checkMiddleCardNumber();" onkeydown="checkMiddleCardNumber();" id="CardNumberFld" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="C/DcardNumber" value="" /></td></tr>
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Holder's Name: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input id="HoldersNameFld" style="background-color: #eeeeee;" type="text" name="holdersName" value="" /></td></tr>
+                                                                    <input id="HoldersNameFld" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="holdersName" value="" /></td></tr>
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Exp. Date: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input id="ExpDateFld" style="background-color: #eeeeee; max-width: 100px;" type="text" name="cardExpDate" value="" /></td></tr>
+                                                                    <input id="ExpDateFld" style="background-color: #d9e8e8; border-radius: 4px; max-width: 100px;" type="text" name="cardExpDate" value="" /></td></tr>
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Security Code: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input id="SecCodeFld" style="background-color: #eeeeee; max-width: 100px;" type="text" name="secCode" value="" /></td></tr>
+                                                                    <input id="SecCodeFld" style="background-color: #d9e8e8; border-radius: 4px; max-width: 100px;" type="text" name="secCode" value="" /></td></tr>
 
                                                     </tbody>
                                                     
@@ -4812,7 +4882,8 @@
                                                     <p id="PaymentFormStatus" style="text-align: center;" ></p>
                                                     <center><input id="PaymentsUpdateBtn" style="background-color: pink; border: 1px solid black; padding: 10px; color: black; border-radius: 4px;" type="submit" value="Update" name="paymentBtn" /></center>
                                                 
-                                            </form>
+                                                </form>
+                                            </div>
                                                 </li>
                                                 <li>
                                                     <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='ViewCustomerReviews.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>'><p style="cursor: pointer; color: white;"><img src="icons/icons8-popular-20 (1).png" width="20" height="20" alt="icons8-popular-20 (1)"/>

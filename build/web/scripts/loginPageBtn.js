@@ -8,9 +8,9 @@ function showLoginPageLoginBtn() {
 
   if (LoginPageUserNameFld.value !== "" && LoginPagePasswordFld.value !== "") {
     loginPageBtn.disabled = false;
-    loginPageBtn.style.backgroundColor = "pink";
+    loginPageBtn.style.backgroundColor = "darkslateblue";
     loginPageBtn.style.cssText =
-      "#loginPageBtn:hover{ background-color: red; }";
+      "#loginPageBtn:hover{ background-color: steelblue; }";
   } else {
     loginPageBtn.disabled = true;
     loginPageBtn.style.backgroundColor = "darkgrey";
@@ -38,9 +38,9 @@ function showLoginPageSignUpBtn() {
     signUpEmailFld.value !== ""
   ) {
     loginPageSignUpBtn.disabled = false;
-    loginPageSignUpBtn.style.backgroundColor = "pink";
+    loginPageSignUpBtn.style.backgroundColor = "darkslateblue";
     loginPageSignUpBtn.style.cssText =
-      "#loginPageSignUpBtn:hover{ background-color: red; }";
+      "#loginPageSignUpBtn:hover{ background-color: steelblue; }";
   } else {
     loginPageSignUpBtn.disabled = true;
     loginPageSignUpBtn.style.backgroundColor = "darkgrey";

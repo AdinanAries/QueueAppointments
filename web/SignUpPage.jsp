@@ -549,21 +549,21 @@
                 <form style="display: none;" name="customerForm" id="customerForm" action="CustomoerSignUpController" method="POST">
                     <p style="color: white; font-size: 20px;">Add Customer Account<p>
                     <center><h2 style="margin-bottom: 20px;">Provide your information below</h2></center>
-                    <table border="0">
+                    <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; min-height: 300px; border: #3d6999 1px solid; max-width: 300px;">
                             <tbody>
                                 <tr>
-                                    <td><p>First Name</p><input type="text" id="firstName" name="firstName" value="<%=fName%>" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>First Name</p><input type="text" id="firstName" name="firstName" value="<%=fName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Middle Name</p><input type="text" id="middleName" name="middleName" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Middle Name</p><input type="text" id="middleName" name="middleName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Last Name</p><input type="text" id="lastName" name="lastName" value="<%=lName%>" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Last Name</p><input type="text" id="lastName" name="lastName" value="<%=lName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                        <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="<%=email%>" size="37" style="background-color: #6699ff;"/>
+                                        <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="<%=email%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <input id='email' type='hidden' value=''/>
                                         <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
@@ -571,7 +571,7 @@
                                             </div>
                                             <div id='CustverifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
                                                 <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'>We will be sending a verification code to your email. You should enter the code below</p>
-                                                <p style='color: #ccc;'><input id="CustEmailConfirm" type="text" style="border: 1px solid black;" /></p>
+                                                <p style='color: #ccc;'><input id="CustEmailConfirm" type="text" style="background-color: #d9e8e8; border-radius: 4px;" /></p>
                                             </div>
                                             <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='Enter verification code and click here' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
                                             <script>
@@ -667,7 +667,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Phone Number</p><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" type="text" id="phoneNumber" name="phoneNumber" value="<%=telNumber%>" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Phone Number</p><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" type="text" id="phoneNumber" name="phoneNumber" value="<%=telNumber%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -706,17 +706,17 @@
                     
                     <h2 style="margin: 5px; margin-top: 30px; ">Add login information</h2>
                     
-                        <table border="0">
+                        <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px;">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="37" style="background-color: #6699ff;"/>
+                                    <td><p>User Name</p><input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <center><p id="CustUserNameStatus" style="color: white; background-color: red; text-align: center; max-width: 250px;"></p></center></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input type="password" id="firstPassword" name="firstPassword" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password</p><input type="password" id="firstPassword" name="firstPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password (Again)</p><input type="password" id="secondPassword" name="secondPassword" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password (Again)</p><input type="password" id="secondPassword" name="secondPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -770,21 +770,21 @@
                     <p style="color: white; font-size: 20px;">Add Business Account<p>
                     <center><h2 style="margin-bottom: 20px;">Provide your personal information below</h2></center>
                         
-                    <table border="0">
+                    <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; min-height: 300px; border: #3d6999 1px solid; max-width: 300px;">
                             <tbody>
                                 <tr>
-                                    <td><p>First Name</p><input id="firstProvName" type="text" name="firstProvName" value="<%=fName%>" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>First Name</p><input id="firstProvName" type="text" name="firstProvName" value="<%=fName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Middle Name</p><input id="middleProvName" type="text" name="middleProvName" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Middle Name</p><input id="middleProvName" type="text" name="middleProvName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Last Name</p><input id="lastProvName" type="text" name="lastProvName" value="<%=lName%>" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Last Name</p><input id="lastProvName" type="text" name="lastProvName" value="<%=lName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <center><p id='BizEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                        <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="visibleProvEmail" type="text" name="provEmail" value="<%=email%>" size="37" style="background-color: #6699ff;"/>
+                                        <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="visibleProvEmail" type="text" name="provEmail" value="<%=email%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <input id='provEmail' type='hidden' value='' />
                                         <div id='BizEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='sendVerifyDiv'>
@@ -792,7 +792,7 @@
                                             </div>
                                             <div id='verifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
                                                 <p id='vCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'>We will be sending a verification code to your email. You should enter the code below</p>
-                                                <p style='color: #ccc;'><input id="BizEmailConfirm" type="text" style="border: 1px solid black;" /></p>
+                                                <p style='color: #ccc;'><input id="BizEmailConfirm" type="text" style="background-color: #d9e8e8; border-radius: 4px;" /></p>
                                             </div>
                                             <center><input id='verifyEmailBtn' onclick="VerifyCode();" type='button' value='Enter verification code and click here' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
                                             <script>
@@ -887,7 +887,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>Phone Number</p><input onclick="checkMiddleNumberProPer();" onkeydown="checkMiddleNumberProPer();" id="provPhoneNumber" type="text" name="provPhoneNumber" value="<%=telNumber%>" size="37" style="background-color: #6699ff;"/>
+                                        <p>Phone Number</p><input onclick="checkMiddleNumberProPer();" onkeydown="checkMiddleNumberProPer();" id="provPhoneNumber" type="text" name="provPhoneNumber" value="<%=telNumber%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         
                                     </td>
                                 </tr>
@@ -928,10 +928,10 @@
                     
                     <center><h2 style="margin: 5px; margin-top: 30px;">Add your business information below</h2></center>
                         
-                    <center><table border="0">
+                    <center><table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; min-height: 300px; border: #3d6999 1px solid; max-width: 300px;">
                             <tbody>
                                 <tr>
-                                    <td style="padding-bottom: 10px;"><p>Business Name</p><input id="businessName" type="text" name="businessName" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td style="padding-bottom: 10px;"><p>Business Name</p><input id="businessName" type="text" name="businessName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 
                                 <tr>
@@ -943,14 +943,34 @@
                                         
                                         <h3 style="text-align: center; color: #000099;">Enter your address below</h3>      
                                         
-                                        <p> House<input onkeydown="checkMiddleNumberHNumber();" onclick="checkMiddleNumberHNumber();" id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="" size="4" style="background-color: #6699ff;"/>
-                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="" size="11" style="background-color: #6699ff;"/></p>
-                                        <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="" size="28" style="background-color: #6699ff;"/></p>
-                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="" size="10" style="background-color: #6699ff;"/>
-                                            Zip Code:<input onclick="checkMiddleNumberZCode();" onkeydown="checkMiddleNumberZCode();" id="ZCode" type="text" name="ZCode" placeholder='123...' value="" size="4" style="background-color: #6699ff;"/></p>
-                                        <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="" size="25" style="background-color: #6699ff;"/></p>
-                                        
-                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="37" style="background-color: #6699ff; border: 1px solid black;"/></p>
+                                        <table>
+                                            <tbody>
+                                            <tr> 
+                                                <td>House</td>
+                                                <td><input onkeydown="checkMiddleNumberHNumber();" onclick="checkMiddleNumberHNumber();" id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="" size="22" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Street:</td>
+                                                <td><input id="Street" type="text" name="Street" placeholder='street/avenue' value="" size="22" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Town:</td>
+                                                <td><input id="Town" type="text" name="Town" placeholder='town' value="" size="22" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>City:</td>
+                                                <td><input id="City" type="text" name="City" placeholder='city' value="" size="22" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                            <tr>
+                                                <td>Zip Code:</td>
+                                                <td><input onclick="checkMiddleNumberZCode();" onkeydown="checkMiddleNumberZCode();" id="ZCode" type="text" name="ZCode" placeholder='123...' value="" size="22" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Country:</td>
+                                                <td><input id="Country" type="text" name="Country" placeholder='country' value="" size="22" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="47" style="background-color: #6699ff; border: 1px solid black; font-size: 10px;"/></p>
                                        </td>
                                 </tr>
                                 
@@ -1038,10 +1058,10 @@
                                 </script>
                                 
                                 <tr>
-                                    <td style="padding-top: 10px;"><p>Business Email</p><input id="businessEmail" type="text" name="businessEmail" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td style="padding-top: 10px;"><p>Business Email</p><input id="businessEmail" type="text" name="businessEmail" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Business Telephone</p><input onclick="checkMiddleNumberProBiz();" onkeydown="checkMiddleNumberProBiz();" id="businessTel" type="text" name="businessTel" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Business Telephone</p><input onclick="checkMiddleNumberProBiz();" onkeydown="checkMiddleNumberProBiz();" id="businessTel" type="text" name="businessTel" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
                                     <td><select id="businessType" name="businessType">
@@ -1071,7 +1091,7 @@
                                         </select></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="otherBusinessType" type="text" name="otherBusinessType" value="Specify business type here if not in categories" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><input id="otherBusinessType" type="text" name="otherBusinessType" value="add business type if other" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table></center>
@@ -1110,17 +1130,17 @@
 
                     <h2 style="margin: 5px; margin-top: 30px; ">Add login information</h2>
                     
-                        <table border="0">
+                        <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px;">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="setProvPasswordsZero();" onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="37" style="background-color: #6699ff;"/>
+                                    <td><p>User Name</p><input onkeyup="setProvPasswordsZero();" onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <center><p id="provUserNameStatus" style="background-color: red; color: white; text-align: center; max-width: 250px;"></center></p></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input id="firstProvPassword" type="password" name="firstProvPassword" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password</p><input id="firstProvPassword" type="password" name="firstProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password (Again)</p><input id="secondProvPassword" type="password" name="secondProvPassword" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p>Password (Again)</p><input id="secondProvPassword" type="password" name="secondProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>

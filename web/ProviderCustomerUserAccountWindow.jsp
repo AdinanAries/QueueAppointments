@@ -958,30 +958,28 @@
                                                 getLocation();
 
                                             </script>
-                                            <center><table>
+                                            
+                                            <p style="padding: 5px; color: #ffffff; text-align: center;">Add Your Address</p>
+                                                
+                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td style="padding-top: 10px; color: #ffffff;">
-                                                        <P>Add Your Address</P>
-                                                    </td>
+                                                    <td>House Number: </td><td><input id="NewAddressHNumber" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="houseNumberFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>House Number: </td><td><input id="NewAddressHNumber" placeholder="1234" style="background-color: cornflowerblue;" type="text" name="houseNumberFld" value="" /></td>
+                                                    <td>Street: </td><td><input id="NewAddressStreet" placeholder="Some St./Ave." style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="streetAddressFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Street: </td><td><input id="NewAddressStreet" placeholder="Some St./Ave." style="background-color: cornflowerblue;" type="text" name="streetAddressFld" value="" /></td>
+                                                    <td>Town: </td><td><input id="NewAddressTown" placeholder="Some Town" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="townFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Town: </td><td><input id="NewAddressTown" placeholder="Some Town" style="background-color: cornflowerblue;" type="text" name="townFld" value="" /></td>
+                                                    <td>City: </td><td><input id="NewAddressCity" placeholder="Some City " style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="cityFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>City: </td><td><input id="NewAddressCity" placeholder="Some City " style="background-color: cornflowerblue;" type="text" name="cityFld" value="" /></td>
+                                                    <td>Country: </td><td><input id="NewAddressCountry" placeholder="Some Country" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="countryFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Country: </td><td><input id="NewAddressCountry" placeholder="Some Country" style="background-color: cornflowerblue;" type="text" name="countryFld" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Zip Code: </td><td><input id="NewAddressZipcode" placeholder="1234" style="background-color: cornflowerblue;" type="text" name="zipCodeFld" value="" /></td>
+                                                    <td>Zip Code: </td><td><input id="NewAddressZipcode" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="zipCodeFld" value="" /></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
@@ -1027,25 +1025,30 @@
                                               padding-top: 5px;" >
                                             <center><p style="color: white; margin: 5px;">Change profile information</p></center>
                                             
-                                            <center><a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="cursor: pointer; background-color: pink; color: black; padding: 5px; border: 1px solid black; border-radius: 5px; text-align: center; width: 300px;">Change Your Profile Photo</p></a></center>
-                                            <center><table>
+                                            <center><a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                    <p style="cursor: pointer; color: black; padding: 5px; border-radius: 5px; text-align: center; width: 300px;">
+                                                        <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px;" alt=""/>
+                                                        <sup>Add Profile Picture</sup>
+                                                    </p></a></center>
+                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td>First Name: </td><td><input id="ChangeProfileFirstName" style="background-color: cornflowerblue;" type="text" name="firstNameFld" value="<%=FirstName%>" /></td>
+                                                    <td>First Name: </td><td><input id="ChangeProfileFirstName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="firstNameFld" value="<%=FirstName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Middle Name: </td><td><input id="ChangeProfileMiddleName" style="background-color: cornflowerblue;" type="text" name="middleNameFld" value="<%=MiddleName%>" /></td>
+                                                    <td>Middle Name: </td><td><input id="ChangeProfileMiddleName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="middleNameFld" value="<%=MiddleName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Last Name: </td><td><input id="ChangeProfileLastName" style="background-color: cornflowerblue;" type="text" name="lastNameFld" value="<%=LastName%>" /></td>
+                                                    <td>Last Name: </td><td><input id="ChangeProfileLastName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="lastNameFld" value="<%=LastName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Phone Number: </td><td><input onclick="checkMiddlePhoneNumberEdit();" onkeydown="checkMiddlePhoneNumberEdit();" id="ChangeProfilePhoneNumber" style="background-color: cornflowerblue;" type="text" name="phoneNumberFld" value="<%=PhoneNumber%>" /></td>
+                                                    <td>Phone Number: </td><td><input onclick="checkMiddlePhoneNumberEdit();" onkeydown="checkMiddlePhoneNumberEdit();" id="ChangeProfilePhoneNumber" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="phoneNumberFld" value="<%=PhoneNumber%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Email: </td><td><input id="ChangeProfileEmail" style="background-color: cornflowerblue;" type="text" name="emailFld" value="<%=Email%>" /></td>
+                                                    <td>Email: </td><td><input id="ChangeProfileEmail" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="emailFld" value="<%=Email%>" /></td>
                                                 </tr>
-                                                
+                                                </tbody>
+                                                </table>
                                                 <script>
                                                         var ChangeProfilePhoneNumber = document.getElementById("ChangeProfilePhoneNumber");
 
@@ -1078,28 +1081,27 @@
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
                                                 
+                                                        <P style="padding-top: 10px; color: #ffffff;">Address Info Below</P>
+                                                
+                                                <table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
+                                                <tbody>
                                                 <tr>
-                                                    <td style="padding-top: 10px; color: #ffffff;">
-                                                        <P>Address Info Below</P>
-                                                    </td>
+                                                    <td>House Number: </td><td><input onclick="checkMiddleHouseNumberEdit();" onkeydown="checkMiddleHouseNumberEdit();" id="ChangeProfileHouseNumber" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="houseNumberFld" value="<%=H_Number%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>House Number: </td><td><input onclick="checkMiddleHouseNumberEdit();" onkeydown="checkMiddleHouseNumberEdit();" id="ChangeProfileHouseNumber" style="background-color: cornflowerblue;" type="text" name="houseNumberFld" value="<%=H_Number%>" /></td>
+                                                    <td>Street: </td><td><input id="ChangeProfileStreet" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="streetAddressFld" value="<%=Street%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Street: </td><td><input id="ChangeProfileStreet" style="background-color: cornflowerblue;" type="text" name="streetAddressFld" value="<%=Street%>" /></td>
+                                                    <td>Town: </td><td><input id="ChangeProfileTown" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="townFld" value="<%=Town%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Town: </td><td><input id="ChangeProfileTown" style="background-color: cornflowerblue;" type="text" name="townFld" value="<%=Town%>" /></td>
+                                                    <td>City: </td><td><input id="ChangeProfileCity" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="cityFld" value="<%=City%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>City: </td><td><input id="ChangeProfileCity" style="background-color: cornflowerblue;" type="text" name="cityFld" value="<%=City%>" /></td>
+                                                    <td>Country: </td><td><input id="ChangeProfileCountry" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="countryFld" value="<%=Country%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Country: </td><td><input id="ChangeProfileCountry" style="background-color: cornflowerblue;" type="text" name="countryFld" value="<%=Country%>" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Zip Code: </td><td><input onclick="checkMiddleZipCodeEdit();" onkeydown="checkMiddleZipCodeEdit();" id="ChangeProfileZipCode" style="background-color: cornflowerblue;" type="text" name="zipCodeFld" value="<%=ZipCode%>" /></td>
+                                                    <td>Zip Code: </td><td><input onclick="checkMiddleZipCodeEdit();" onkeydown="checkMiddleZipCodeEdit();" id="ChangeProfileZipCode" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="zipCodeFld" value="<%=ZipCode%>" /></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
@@ -1257,7 +1259,7 @@
                                                 <p id='LasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
                                                 <p id="FeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
                                                 </div></center>
-                                            <center><table>
+                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
                                                     <td>Compose feedback message below</td>
@@ -1366,17 +1368,18 @@
                                                     
                                                     <p style="cursor: pointer;" onclick="showLoginFormsDiv()"><img src="icons/icons8-admin-settings-male-20 (1).png" width="20" height="20" alt="icons8-admin-settings-male-20 (1)"/>
                                                     Account Settings</p>
-                                                    <form  id="UserAcountLoginForm" style="margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;" name="userAccountForm">
+                                                    <form  id="UserAcountLoginForm" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;
+                                                           margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;" name="userAccountForm">
                                                         <p>Change your login information:</p>
                                                         <p style="color: thistle; margin-top: 10px;">User Name:</p>
-                                                        <center><p><input id="UpdateLoginNameFld" style="padding: 3px; background-color: cornflowerblue; color: darkblue;" placeholder="Enter New User Name Here" type="text" name="userName" value="<%=thisUserName%>" size="32" /></p></center>
+                                                        <center><p><input id="UpdateLoginNameFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px; color: darkblue;" placeholder="Enter New User Name Here" type="text" name="userName" value="<%=thisUserName%>" size="32" /></p></center>
                                                         
                                                         <p style="color: thistle; margin-top: 10px;">Password:</p>
-                                                        <center><p><input id="CurrentPasswordFld" style="padding: 3px; background-color: cornflowerblue;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="33" /></p>
+                                                        <center><p><input id="CurrentPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="33" /></p>
                                                         
-                                                            <p><input id="NewPasswordFld" style="padding: 3px; background-color: cornflowerblue;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="33" /></p>
+                                                            <p><input id="NewPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="33" /></p>
                                                         
-                                                            <p><input id="ConfirmPasswordFld" style="padding: 3px; background-color: cornflowerblue;" placeholder="Confirm New Password" type="password" name="confirmNewPassword" value="" size="33" /></p>
+                                                            <p><input id="ConfirmPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Confirm New Password" type="password" name="confirmNewPassword" value="" size="33" /></p>
                                                         <p id="changeUserAccountStatus"></p>
                                                         <p id="WrongPassStatus" style="color: white; background-color: red; display: none;">Enter your current password correctly</p>
                                                         <input id='UserIDforLoginUpdate' name="CustomerID" type="hidden" value="<%=UserID%>" />
@@ -1474,20 +1477,21 @@
                                                     <p style="cursor: pointer;" onclick="showPaymentsForm()"><img src="icons/icons8-mastercard-credit-card-20 (1).png" width="20" height="20" alt="icons8-mastercard-credit-card-20 (1)"/>
                                                         Payments</p>
                                                     
-                                                    <form id="PaymentsCardForm" style="margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;" name="PaymentForm" action="notYet" method="POST">
+                                                    <form id="PaymentsCardForm" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;
+                                                          margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;" name="PaymentForm" action="notYet" method="POST">
                                                 
                                                         <p style="margin-bottom: 5px; ">Add new debit/credit card:</p>
-                                                        <table id="paymentDetailsTable">
+                                                        <table id="paymentDetailsTable" style=''>
                                                     <tbody>
 
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Card Number: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input onclick="checkMiddleCardNumber();" onkeydown="checkMiddleCardNumber();" id="CardNumberFld" style="background-color: #eeeeee;" type="text" name="C/DcardNumber" value="" /></td></tr>
+                                                                    <input onclick="checkMiddleCardNumber();" onkeydown="checkMiddleCardNumber();" id="CardNumberFld" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="C/DcardNumber" value="" /></td></tr>
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Holder's Name: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input id="HoldersNameFld" style="background-color: #eeeeee;" type="text" name="holdersName" value="" /></td></tr>
+                                                                    <input id="HoldersNameFld" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="holdersName" value="" /></td></tr>
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Exp. Date: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input id="ExpDateFld" style="background-color: #eeeeee; max-width: 100px;" type="text" name="cardExpDate" value="" /></td></tr>
+                                                                    <input id="ExpDateFld" style="background-color: #d9e8e8; border-radius: 4px; max-width: 100px;" type="text" name="cardExpDate" value="" /></td></tr>
                                                             <tr><td style="border-radius: 0; padding: 0; color: black;">Security Code: </td><td style="border-radius: 0; padding: 0;">
-                                                                    <input id="SecCodeFld" style="background-color: #eeeeee; max-width: 100px;" type="text" name="secCode" value="" /></td></tr>
+                                                                    <input id="SecCodeFld" style="background-color: #d9e8e8; border-radius: 4px; max-width: 100px;" type="text" name="secCode" value="" /></td></tr>
 
                                                     </tbody>
                                                     

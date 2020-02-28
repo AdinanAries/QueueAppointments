@@ -350,7 +350,7 @@
             </div>
         </div>
             
-            
+          
             
             <div id="Extras">
             
@@ -549,7 +549,7 @@
             </div>
             </div>
             
-        <div class="DashboardContent" id="">
+        <div class="DashboardContent" id="QueueJspContent">
             
             <div id="nav" style='display: block;'>
                 
@@ -572,8 +572,8 @@
                 <center><form id="DashboardLocationSearchForm" action="ByAddressSearchResult.jsp" method="POST" style="">
                     <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p class="LocSearchP">City: <input id="city4Search" style="width: 80%;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p class="LocSearchP">Town: <input id="town4Search" style=" width: 35%" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%;" type="text" name="zcode4Search" value="" /></p>
+                    <p class="LocSearchP">City: <input id="city4Search" style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p class="LocSearchP">Town: <input id="town4Search" style=" width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
                     <script>
                         var setLocation = setInterval(
                                 function(){
@@ -590,7 +590,7 @@
                         );
                     </script>
                     <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999;'>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 5px;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -661,7 +661,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" style="font-weight: bolder; background-color: #3d6999; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
+                    <p><input onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" style="font-weight: bolder; background-color: #626b9e; color: white; padding: 7px; border-radius: 3px; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                 
@@ -933,7 +933,7 @@
             </div>
             
             <p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
-                style='margin-top: 40px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
+                style='margin-top: 10px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 Show News Updates</p>
             

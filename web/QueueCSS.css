@@ -10,6 +10,117 @@ body {
   background-color: #2c3539;
   overflow-x: hidden;
 }
+#MobileHeader{
+    background-color: white;
+    border-bottom: #d8d8d8 1px solid;
+    display: none;
+}
+#MobileDashboardLogo{
+    padding: 3px 0;
+    display: block;
+    width: 80px;
+    height: 35px;
+}
+
+/*----------------------------------------------------------------------------------------*/
+    .MenuIcon{
+        margin-top: 8px;
+        float: left;
+        position: relative;
+    }
+
+    #nav-toggle { 
+        position: absolute; 
+        left: 50%; 
+        top: 50%; 
+    }
+
+    #nav-toggle {
+        cursor: pointer;
+        padding: 10px 35px 16px 0px; 
+    }
+    #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+      cursor: pointer;
+      border-radius: 50px;
+      height: 5px;
+      width: 30px;
+      background: black;
+      position: absolute;
+      display: block;
+      content: '';
+    }
+    #nav-toggle span:before {
+      top: -10px; 
+    }
+    #nav-toggle span:after {
+      bottom: -10px;
+    }
+
+    #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+      transition: all 300ms ease-in-out;
+    }
+    #nav-toggle.active span {
+      background-color: transparent;
+    }
+    #nav-toggle.active span:before, #nav-toggle.active span:after {
+      top: 0;
+    }
+    #nav-toggle.active span:before {
+      transform: rotate(45deg);
+    }
+    #nav-toggle.active span:after {
+      transform: rotate(-45deg);
+    }
+
+    #MainMenuCover{
+        /*padding: 10px;*/
+        position: absolute;
+        z-index: 102;
+        /*top: 43px;*/
+        height: 100%;
+        width: 100%;
+        /*background-color: beige;*/
+        background-color: black;
+        color: white;
+        /*display: none;*/
+        opacity: 0.8;
+    }
+    .MainMenu{
+        position: fixed;
+        top: 43px;
+        height:calc(100vh - 79px);
+        width: 300px;
+        z-index: 101;
+        /*background-color: beige;
+        background-color: black;*/
+        color: white;
+        display: none;
+        /*opacity: 0.9;*/
+    }
+    .MainMenu table{
+        width: 100%;
+        padding: 10px;
+        position: absolute;
+        z-index: 103;
+        
+    }
+    .MainMenu table tbody tr td{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .MainMenu table tbody tr td img{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+
+    .MainMenu .SettingIcon{
+        width: 50px;
+    }
+    .MainMenu .SettingName{
+        border-bottom: 1px solid white;
+    }
 .fittedImg{
     object-fit: cover;
 }
@@ -130,6 +241,17 @@ input {
   border-bottom: 1px solid black;
   text-align: center;
 }
+input[type="text"], input[type="password"]{
+    background-color: #9bb1d0;
+    border: #626b9e 1px solid;
+    padding: 5px; 
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+#miniNav input[type="text"]{
+    padding: 0;
+}
 select {
   background-color: brown;
   border: 1px solid black;
@@ -139,23 +261,23 @@ select {
   border-radius: 3px;
 }
 .button {
-  border: 1px solid black;
-  background-color: pink;
+  /*border: 1px solid black;
+  background-color: pink;*/
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  color: black;
+  /*color: black;*/
   border-radius: 3px;
 }
 .button:hover {
-  background-color: red;
+  background-color: steelblue;
 }
 #header {
   /*border-bottom: solid 3px black;*/
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #ccccff;
-  position: relative;
+  position: absolute;
   /*box-shadow: 4px 4px 10px #334d81;
 			margin-bottom: 1px;*/
 }
@@ -243,25 +365,28 @@ select {
 }
 
 .QueueLoader img{
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 6px;
+    margin-left: 6px;
     position: relative;
-    z-index: 1002;
-    opacity: 0.1;
-    height: 36px;
-    width: 36px;
+    z-index: 1001;
+    border-radius: 100%;
+    box-shadow: #000c3b 0 0 8px 1px;
+    /*opacity: 0.1;*/
+    height: 43px;
+    width: 43px;
+    animation: spin 10s linear infinite;
 }
 
 .QueueLoaderSpinner{
     position: fixed;
-    z-index: 1001;
+    z-index: 100;
     height: 50px;
     width: 50px;
-    background-color: #6699ff;
-    border: #eeeeee 3px solid;
-    border-top: #254386  3px solid;
+    background-color: #313DDC;
+    border: #313DDC 2px solid;
+    border-bottom: #ffffff 2px solid; 
     border-radius: 50%;
-    animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin{
@@ -403,7 +528,9 @@ select {
     background-color: #9bb1d0;
     border: 1px solid #626b9e;
 }
-
+#LoginHomeBtn{
+    display: none;
+}
 @media only screen and (max-width: 1000px) {
   .scrolldiv::-webkit-scrollbar {
     display: none;
@@ -412,7 +539,24 @@ select {
     overflow: -moz-scrollbars-none;
     -ms-overflow-style: none;
   }
-  
+  input[type="text"], input[type="password"]{
+    background: none;
+    border: #254386 1px solid;
+    padding: 2px; 
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.SearchObject input[type="text"]{
+    background: none;
+    border: 0;
+    padding: 0; 
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
   /*#appointmentsDiv{
       display: none;
   }
@@ -422,12 +566,14 @@ select {
 }
 
 #footer {
+  z-index: 2000;
   clear: both;
   background-color: #9bb1d0;
   text-align: right;
   padding-right: 7px;
   padding-top: 3px;
   padding-bottom: 4px;
+  display: block;
 }
 #footer p {
   margin: 0;
@@ -692,6 +838,9 @@ select {
 #PermanentDiv {
   display: none;
 }
+#PermanentDiv input[type="text"]{
+    padding: 0;
+}
 #Extras2Container {
   display: none;
 }
@@ -717,12 +866,16 @@ select {
   #ExtraDrpDwnBtn {
     display: block;
   }
+  
 }
 #ExtraDropDwnDiv {
   display: none;
 }
+
+/*--------------------------------------------------------------------------------------*/
+
 @media only screen and (min-width: 1000px) {
-    body{
+    /*body{
         position: fixed;
         width: 100%;
     }
@@ -731,7 +884,7 @@ select {
         left: 0;
         bottom: 0;
         width: 100%;
-    }
+    }*/
   #QShowNews2 {
     display: block;
   }
@@ -780,12 +933,11 @@ select {
   }
   #newbusiness {
     width: 33%;
-    position: fixed;
+    position: absolute;
     background: none;
-    margin-top: 70px;
-    height: 80%;
+    margin-top: 100px;
+    height: auto;
     overflow-y: auto;
-    border-bottom: 1px solid black;
     scrollbar-track-color: #ccccff;
   }
   #ExtrasTab {
@@ -843,7 +995,8 @@ select {
     margin-left: 0;
     float: right;
     padding-top: 0;
-    height: calc(100vh - 50px);
+    height: 100vh;
+    min-height: 736px;
     overflow-y: auto;
     scrollbar-track-color: #6699ff;
   }
@@ -853,15 +1006,17 @@ select {
     margin-left: 0;
     float: right;
     padding-top: 0;
-    height: calc(100vh - 50px);
+    height: 100vh;
+    min-height: 736px;
     scrollbar-track-color: #6699ff;
   }
   /*main contains just explore icons*/
   #main {
-    min-height: 675px;
+    min-height: 736px;
   }
   .Main {
-    height: 400px;
+    /*height: 400px;*/
+    height: auto;
   }
   #custProPicDisplay {
     position: relative;
@@ -871,14 +1026,14 @@ select {
     display: block;
   }
   #header {
-    position: fixed;
-    border-bottom: 1px solid black;
+    position: absolute;
+    /*border-bottom: 1px solid black;*/
     padding: 0;
     width: 34%;
   }
   #ProviderHeader {
-    position: fixed;
-    border-bottom: 1px solid black;
+    position: absolute;
+    /*border-bottom: 1px solid black;*/
     padding: 0;
     width: 34%;
   }
@@ -964,6 +1119,9 @@ select {
       margin: 0;
   }
 }
+
+/*---------------------------------------------------------------------------*/
+
 @media only screen and (min-width: 1400px) {
   #ProvPhoneNotiBar {
     display: none;
@@ -985,7 +1143,8 @@ select {
   }
   #newbusiness {
     width: 33.2%;
-    padding-top: 40px;
+    /*margin-top: 80px;*/
+    /*padding-top: 40px;*/
   }
   #content {
     width: 45%;
@@ -1046,6 +1205,9 @@ input[type=radio]:checked {
 }
 
 @media only screen and (max-width: 700px){
+    #LoginHomeBtn{
+        display: block;
+    }
     #HomeBtnCustUploadPhoto{
         display: none;
     }
@@ -1323,22 +1485,29 @@ input[type=radio]:checked {
     }
     body{
         position: absolute;
-        height: calc(100% - 81px);
+        height: calc(100% - 90px);
         width: 100%;
         background-color: #6699ff;
     }
-    /*#CustomerPageHtmlBody{
-        position: absolute;
-        width: 100%;
-        height: 100%;
+    #QueueJspContent{
+        padding-top: 80px;
     }
-    #container{
+    #header{
+        width: 100%;
+    }
+    /*#CustomerPageHtmlBody{
+        position: fixed;
+    }*/
+    /*#container{
         width: 100%;
         height: 100%;
     }
     #IframesDiv{
         height: calc(100% - 81px);
     }*/
+    #accountTypeOptions{
+        margin-top: 80px;
+    }
     #QueueIcon{
         opacity: 0.8;
         -moz-filter: grayscale(100%);
@@ -1346,6 +1515,19 @@ input[type=radio]:checked {
         -o-filter: grayscale(100%);
         filter: grayscale(100%);
     }
+    
+    #MobileHeader{
+        display: block;
+        background-color: white;
+        border-bottom: #d8d8d8 1px solid;
+    }
+    #MobileDashboardLogo{
+        padding: 3px 0;
+        display: block;
+        width: 80px;
+        height: 35px;
+    }
+    
 }
 
 @media only screen and (max-width: 320px){
@@ -1393,4 +1575,16 @@ input[type=radio]:checked {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+input[type="submit"]{
+    border: 0;
+    background-color: darkslateblue;
+    color: white;
+}
+
+input[type="reset"]{
+    border: 0;
+    background-color: darkslateblue;
+    color: white;
 }

@@ -1327,19 +1327,21 @@
         <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Account Settings</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%;' cellspacing="0">
                     <tbody>
-                        <tr style="background-color: #eeeeee">
+                        <tr style="">
                             <td>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 300px; margin: auto; margin-bottom: 5px;">
                                 <p id='UpdateStatusMsg' style='color: white; background-color: green; text-align: center;'></p>
                                 <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
-                                <p>First Name: <input id='fNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle Name: <input id='mNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last Name: <input id='lNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input id='EmailExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input id='UpdtPerInfExtraBtn' style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p style='margin-bottom: 5px; color: white;'>Edit Your Personal Info</p>
+                                <p>First Name: <input id='fNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle Name: <input id='mNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last Name: <input id='lNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input id='EmailExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id='UpdtPerInfExtraBtn' style='border-radius: 4px; width: 95%; background-color: darkslateblue; padding: 5px 0;' type="submit" value="Change" /></center>
+                                </div>
                             </td>
                             
                             <script>
@@ -1359,7 +1361,7 @@
                                         UpdtPerInfExtraBtn.style.backgroundColor = "darkgrey";   
                                         UpdtPerInfExtraBtn.disabled = true;
                                     }else{
-                                        UpdtPerInfExtraBtn.style.backgroundColor = "pink";
+                                        UpdtPerInfExtraBtn.style.backgroundColor = "darkslateblue";
                                         UpdtPerInfExtraBtn.disabled = false;
                                     }
                                     
@@ -1408,8 +1410,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <div id="ExtrasFeedbackDiv">
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Send Feedback</p>
+                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 300px; margin: auto; margin-bottom: 5px;">
+                                    <p style='margin-bottom: 5px; color: white;'>Send Feedback</p>
                                     <form id="ExtrasFeedBackForm" style="width: 95%;" >
                                             <center><div id='ExtLastReviewMessageDiv' style='display: none; background-color: white; width: 100%;'>
                                                 <p id='ExtLasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
@@ -1425,7 +1427,7 @@
                                                 </table></center>
                                                 
                                                 <input id='ExtFeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="ExtSendFeedBackBtn" style="width: 100%; border: 1px solid black; background-color: pink;" type="button" value="Send" /></center>
+                                                <center><input id="ExtSendFeedBackBtn" style="width: 100%; background-color: darkslateblue; padding: 5px 0; color: white; border-radius: 4px;" type="button" value="Send" /></center>
                                                 <script>
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn').click(function(event) {
@@ -1466,17 +1468,18 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr style="background-color: #eeeeee;">
+                        <tr style="">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Update Your Login</p>
-                                <P>User Name: <input id="ExtraUpdateLoginNameFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
-                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
-                                <P><input id="ExtraNewPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
-                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
-                                <center><input id="ExtraLoginFormBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 300px; margin: auto; margin-bottom: 5px;">
+                                <p style='margin-bottom: 5px; color: white;'>Update Your Login</p>
+                                <P>User Name: <input id="ExtraUpdateLoginNameFld" style='background-color: #d9e8e8; border-radius: 4px; text-align: left; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
+                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #d9e8e8; border-radius: 4px; text-align: left; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P><input id="ExtraNewPasswordFld" style='background-color: #d9e8e8; border-radius: 4px; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #d9e8e8; text-align: left; border-radius: 4px; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtraLoginFormBtn" style='background-color: darkslateblue; width: 95%; padding: 5px 0;' type="submit" value="Change" /></center>
                                 <p id="ExtraWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
                                 <p id='ExtrachangeUserAccountStatus' style='text-align: center; color: white;'></p>
-                            </td>
+                            
                             <input type='hidden' id='ExtraThisPass' value='' />
                             <input type="hidden" id="ExtraUserIDforLoginUpdate" value="<%=UserID%>" />
                             <input type="hidden" id="ExtraUserIndexforLoginUpdate" value="<%=UserIndex%>" />
@@ -1529,7 +1532,7 @@
                                       changeUserAccountStatus.innerHTML = "OK";
                                       changeUserAccountStatus.style.backgroundColor = "green";
                                       LoginFormBtn.disabled = false;
-                                      LoginFormBtn.style.backgroundColor = "pink";
+                                      LoginFormBtn.style.backgroundColor = "darkslateblue";
                                     }
                                   }
                                   if (document.getElementById("ExtraLoginFormBtn")) {
@@ -1600,7 +1603,8 @@
                                     });
                                 });
                             </script>
-                                                    
+                                </div>
+                           </td>                    
                         </tr>
                         <tr>
                             <td>
@@ -1615,7 +1619,7 @@
                                 
                                 <form style="margin-top: 10px;" action="LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input onclick="LogoutMethod();" style='width: 100%; background-color: red; color: white; border: 0; padding: 4px; border-radius: 0; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input onclick="LogoutMethod();" style='width: 100%; background-color: darkslateblue; color: white; border: 0; padding: 4px; border-radius: 4px; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
                                 </form>
                             </td>
                         </tr>

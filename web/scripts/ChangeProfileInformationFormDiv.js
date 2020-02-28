@@ -35,7 +35,7 @@ function checkChangeProfileInfoForm(){
 			userProfileFormStatus.innerHTML = "OK";
 			userProfileFormStatus.style.backgroundColor = "green";
 			ChangeProfileUpdateBtn.disabled = false;
-			ChangeProfileUpdateBtn.style.backgroundColor = "pink";
+			ChangeProfileUpdateBtn.style.backgroundColor = "darkslateblue";
 			
 		}
 }
@@ -70,7 +70,7 @@ function checkAddNewAddressForm(){
 			NewAddressStatus.innerHTML = "OK";
 			NewAddressStatus.style.backgroundColor = "green";
 			NewAddressBtn.disabled = false;
-			NewAddressBtn.style.backgroundColor = "pink";
+			NewAddressBtn.style.backgroundColor = "darkslateblue";
 		}
 	
 }
