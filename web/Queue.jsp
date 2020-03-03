@@ -285,8 +285,8 @@
             </div>
             
             <div style="float: right; width: 50px;">
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
+                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
                     </div></center>
             </div>
             
@@ -354,7 +354,7 @@
             
             <div id="Extras">
             
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
             
             <div style="max-height: 87vh; overflow-y: auto;">
                 <%
@@ -473,37 +473,37 @@
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                     <tbody>
-                        <tr style="background-color: #333333;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
                                         <!--div style="float: right; width: 65px;" -->
                                             <%
                                                 if(base64Profile != ""){
                                             %>
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 <!--/div></center-->
                                             <%
                                                 }else{
                                             %>
 
                                             <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                             <!--/div></center-->
 
                                             <%}%>
                                         <!--/div-->
                                         <div>
                                             <p><%=ProvFirstName%></p>
-                                            <p style='color: violet;'><%=ProvCompany%></p>
+                                            <p style='color: red;'><%=ProvCompany%></p>
                                         </div>
                                     </div>
                                     
                                     <%if(MsgPhoto.equals("")){%>
-                                    <div style="text-align: center;"><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></div>
+                                    <div style="text-align: center;"><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></div>
                                     <%} else{ %>
-                                    <div style="text-align: center;"><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></div>
+                                    <div style="text-align: center;"><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></div>
                                     <%}%>
                                     
                                 </div>
@@ -511,12 +511,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                 <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                     <%=ProvEmail%></p>
                                 <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -711,7 +710,9 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center>
+                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                    </p></center>
                 
                 </div>
                 
@@ -744,8 +745,12 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
-                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center>
+                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
                 
                 </div>
                 
@@ -768,7 +773,9 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center>
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
 
                 </div>
                 

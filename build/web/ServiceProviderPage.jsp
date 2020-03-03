@@ -1777,6 +1777,9 @@
                 
             </script>
             
+            <div style="float: left; width:fit-content; margin-left: 10px; padding-top: 1px;">
+                <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; background-color: white; padding: 4px; border-radius: 4px" />
+            </div>
             
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
@@ -1790,15 +1793,15 @@
                 <%
                     if(base64Image != ""){
                 %>
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img class="fittedImg" id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30"/>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
+                        <img class="fittedImg" id="" style="border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30"/>
                     </div></center>
                 <%
                     }else{
                 %>
                 
-                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
+                                <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
                             </div></center>
                 
                 <%}%>
@@ -1945,7 +1948,7 @@
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
-                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">
+                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%; border: 0;" rows="5">
                                 </textarea>
                                 
                             </td>
@@ -1955,7 +1958,7 @@
                                 <p style='margin-bottom: 4px;'>Add photo to this message</p>
                                 <div id="MsgPhotoDisplay"></div>
                                 
-                                <input id="NewsPhotoFld" style="width: 95%;" type="file" name="MsgformPhoto" />
+                                <input id="NewsPhotoFld" style="width: 95%; border: 0; background-color: #ffffff;" type="file" name="MsgformPhoto" />
                                 
                             </td>
                         </tr>
@@ -1966,7 +1969,7 @@
                                     <input id="VPublicRd" type="radio" name="NewsVisibility" value="Public" checked="checked" /><label for="VPublicRd">Public</label>
                                     <input id="VCustomersRd" type="radio" name="NewsVisibility" value="Customer" /><label  for="VCustomersRd">Only customers</label>
                                 
-                                <center><input id="SaveNewsBtn" style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
+                                <center><input id="SaveNewsBtn" style="border: 0; color: white; padding: 5px; background-color: darkslateblue; border-radius: 4px; width: 95%;" type="button" value="Save" /></center>
                             </td>
                             
                             <script>
@@ -1994,7 +1997,7 @@
                                         }
                                     }else{
                                         if(SaveNewsBtn){
-                                            SaveNewsBtn.style.backgroundColor = "pink";
+                                            SaveNewsBtn.style.backgroundColor = "darkslateblue";
                                             SaveNewsBtn.disabled = false;
                                         }
                                     }
@@ -2082,12 +2085,12 @@
                         
                         <tr style="">
                             <td>
-                                <div style='height: 360px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
-                                    <div style="background-color: #333333; padding: 4px;">
-                                        <p style='color: white; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
-                                        <center><img id="defaultPic" src="<%=NewsPicSrc%>" width="98%" alt="view-wallpaper-7"/></center>
+                                <div style='height: 360px; overflow-y: auto; padding: 2px;'>
+                                    <div style="background-color: white; padding: 4px;">
+                                        <p style='font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
+                                        <center><img id="defaultPic" src="<%=NewsPicSrc%>" width="100%" alt="view-wallpaper-7"/></center>
                                     </div>
-                                <p id="MessageP" style='border-top: 1px solid darkgrey;'><%=lastNewsMsg%></p>
+                                <p id="MessageP" style=''><%=lastNewsMsg%></p>
                                 <input id="RecentMessageID" type="hidden" value="<%=LastNewsID%>" />
                                 <img style="float: right;" id="DltRecentNewsBtn" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/>
                                 
@@ -2151,7 +2154,7 @@
                                     <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
                                     <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 1px solid white; background-color: #eeeeee; padding: 5px;' type="button" name="CalDateVal" 
+                                                                          font-weight: bolder; border: 0; background-color: #ccc; padding: 5px;' type="button" name="CalDateVal" 
                                                                           value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
@@ -2159,16 +2162,16 @@
                                       });
                                     </script>
                                 </div>
-                                    
-                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
-                                    <p style='clear: both;'></p>
-                                </div>
-                                    
                             </td>
                         </tr>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
+                            
+                            <div style='padding: 5px; background-color: white;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; padding: 5px; background-color: #eeeeee; width: 45%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; padding: 5px; background-color: #ccc; width: 45%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                            </div>
+                    
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
@@ -2351,9 +2354,9 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <p><input placeholder="add event time" id="DisplayedAddEvntTime" style='background-color: white; width: 92%;' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                         <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
-                                    <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
+                                        <p><input placeholder="add event date" id='EvntDatePicker' style='background-color: white; width: 92%;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -2361,8 +2364,8 @@
                                         });
                                       });
                                     </script>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
+                                    <p><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%; border: 0; background-color: #ccc;'>
                                         </textarea></p>
                                 </div>
                             </td>
@@ -2370,9 +2373,9 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
-                                <center><input id="CalSaveEvntBtn" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Change' /></center>
+                                <center><input id="CalSaveEvntBtn" style='border: 0; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; width: 95%;' type='button' value='Save' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn" style='border: 0; float: right; display: none; border-radius: 4px; padding: 5px; color: white;; background-color: darkslateblue; width: 44%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='border: 0; float: left; display: none; border-radius: 4px; padding: 5px; color: white; background-color: darkslateblue; width: 44%;' type='button' value='Change' /></center>
                             </td>
                             
                             <script>
@@ -2409,15 +2412,15 @@
                                         }
                                     }else{
                                         if(CalSaveEvntBtn){
-                                            CalSaveEvntBtn.style.backgroundColor = "pink";
+                                            CalSaveEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalSaveEvntBtn.disabled = false;
                                         }
                                         if(CalUpdateEvntBtn){
-                                            CalUpdateEvntBtn.style.backgroundColor = "pink";
+                                            CalUpdateEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalUpdateEvntBtn.disabled = false;
                                         }
                                         if(CalDltEvntBtn){
-                                            CalDltEvntBtn.style.backgroundColor = "pink";
+                                            CalDltEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalDltEvntBtn.disabled = false;
                                         }
                                     }
@@ -3445,9 +3448,8 @@
                                         Taken </span> <span style="color: green; border: 1px solid green; padding-right: 3px;"><img src="icons/icons8-standing-man-filled-50 (2).png" width="30" height="25" alt="icons8-standing-man-filled-50 (2)"/>
                                         Blocked Spot </span> </p>
                                     
-                                        <form style=" margin-top: 5px; border-top: 1px solid darkgray;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
-                                            <p style="text-align: center; color: #000099; margin: 5px; font-weight: bolder;">Change Your Spots Intervals</p>
-                                            <p style="text-align: center;">Set intervals time below</p>
+                                        <form style=" margin-top: 10px;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
+                                            <p style="text-align: center; color: #000099; margin: 5px; font-weight: bolder;">Change Your Spots Intervals Below</p>
                                             
                                             <center><div>
                                                 <p style="color: red;"><select style="border: 0; text-align: right; background-color: #eeeeee; color: #ff3333; font-weight: bold;" name="SpotsIntervals">
@@ -3928,7 +3930,7 @@
                     </tbody>
                     </table></center>
                 
-                <center><h4 style="margin: 10px; border-top: 1px solid darkblue; max-width: 500px;">Future Line</h4></center>
+                <center><h4 style="margin: 10px; max-width: 500px;">Future Line</h4></center>
                 <center><table id="ProviderAppointmentList" style="border-spacing: 0 5px; border: 0; width: 100%;">
                         <tbody>
                             
@@ -4627,16 +4629,16 @@
             </div>
                     
                 <div id='ReservationAndFutureSpots' style='overflow-y: auto;'>  
-                    <center><table style="width: 100%; border: 1px solid black;">
+                    <center><table style="width: 100%;">
                         <tbody>
                             <tr>
-                                <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; border: 1px solid black; width: 33.3%; background-color: pink; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
+                                <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; width: 33.3%; background-color: darkslateblue; color: white; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
                                     <p style="text-align: center;">Make Reservation</p>
                                 </td>
-                                <td onclick="toggleShowBlockFutureSpotsForm();" style="cursor: pointer; border: 1px solid black; width: 33.3%; background-color: pink; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
+                                <td onclick="toggleShowBlockFutureSpotsForm();" style="cursor: pointer; width: 33.3%; background-color: darkslateblue; color: white; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
                                     <p style="text-align: center;">View Future Spots</p>
                                 </td>
-                                <td onclick="toggleShowCloseFutureDysForm();" style="cursor: pointer; border: 1px solid black; background-color: pink; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
+                                <td onclick="toggleShowCloseFutureDysForm();" style="cursor: pointer; background-color: darkslateblue; color: white; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
                                     <p style="text-align: center;">Close Future Days</p>
                                 </td>
                             </tr>
@@ -5146,31 +5148,34 @@
                                     
                                 </div>
                                         
-                                        <center><p onclick="toggleShowEditPerInfoDiv();" style="cursor: pointer; background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 5px;">Edit Your Personal Information</p></center>
+                                        <center><p onclick="toggleShowEditPerInfoDiv();" style="cursor: pointer; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 5px;">
+                                                <img src="icons/icons8-pencil-20.png" alt=""/>
+                                                <sup style="color: #000099;">Edit Your Personal Information</sup>
+                                            </p></center>
                                         
-                                        <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px;">
+                                        <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid;">
                                                 <form name="UpdatePsnalInfor">
                                                 <table>
                                                     <tbody>
                                                         <tr>
                                                             <td style="text-align: left;">First Name: </td>
-                                                            <td><input id="ProvFNameFld" placeholder="First name here" type="text" name="FirstNameFld" value="<%=ThisProvider.getFirstName()%>" /></td>
+                                                            <td><input style="background-color: #d9e8e8;" id="ProvFNameFld" placeholder="First name here" type="text" name="FirstNameFld" value="<%=ThisProvider.getFirstName()%>" /></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Middle Name: </td>
-                                                            <td><input id="ProvMNameFld" placeholder="Middle name here" type="text" name="MiddleNameFld" value="<%=ThisProvider.getMiddleName()%>" /></td>
+                                                            <td><input style="background-color: #d9e8e8;" id="ProvMNameFld" placeholder="Middle name here" type="text" name="MiddleNameFld" value="<%=ThisProvider.getMiddleName()%>" /></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Last Name: </td>
-                                                            <td><input id="ProvLNameFld" placeholder="Last name here" type="text" name="LastNameFld" value="<%=ThisProvider.getLastName()%>" /></td>
+                                                            <td><input style="background-color: #d9e8e8;" id="ProvLNameFld" placeholder="Last name here" type="text" name="LastNameFld" value="<%=ThisProvider.getLastName()%>" /></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Mobile Number: </td>
-                                                            <td><input onclick="checkMiddlePhoneNumberEdit();"  onkeydown="checkMiddlePhoneNumberEdit();"id="ProvPhnNumberFld" placeholder="Phone number here" type="text" name="MobileNumberFld" value="<%=PhoneNumber%>"/></td>
+                                                            <td><input style="background-color: #d9e8e8;" onclick="checkMiddlePhoneNumberEdit();"  onkeydown="checkMiddlePhoneNumberEdit();"id="ProvPhnNumberFld" placeholder="Phone number here" type="text" name="MobileNumberFld" value="<%=PhoneNumber%>"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Email: </td>
-                                                            <td><input id="ProvEmailFld" placeholder="Email here" type="text" name="EmailFld" value="<%=Email%>"/></td>
+                                                            <td><input style="background-color: #d9e8e8;" id="ProvEmailFld" placeholder="Email here" type="text" name="EmailFld" value="<%=Email%>"/></td>
                                                         </tr>                                        
                                                 </tbody>
                                                 </table>
@@ -5485,7 +5490,7 @@
                                         <%} else{%>
                                         
                                         <a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
-                                            <p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; border: 1px solid #000099; color: #000099; cursor: pointer; text-align: center;">
+                                            <p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; color: #000099; cursor: pointer; text-align: center;">
                                                 <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px;" alt=""/>
                                                 <sup>Create Photo Gallery</sup>
                                             </p></a>

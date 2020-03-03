@@ -1010,6 +1010,8 @@
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to get spots</p>
                                         <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
+                                        <input type="hidden" name="ServicesList" value="<%=ServicesList%>" />
+                                        <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
                                         <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>

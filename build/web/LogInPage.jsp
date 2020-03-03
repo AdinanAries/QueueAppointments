@@ -117,8 +117,8 @@
             </div>
             
             <div style="float: right; width: 50px;">
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
+                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
                     </div></center>
             </div>
         
@@ -264,38 +264,38 @@
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                     <tbody>
-                        <tr style="background-color: #333333;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
                                 <div id="ProvMsgBxOne">
                                     
-                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
                                                     <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     <!--/div></center-->
                                                 <%
                                                     }else{
                                                 %>
 
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
 
                                                 <%}%>
                                             <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
-                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                             
                                     <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                     <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                     <%}%>
                                     
                                 </div>
@@ -303,12 +303,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                 <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                     <%=ProvEmail%></p>
                                 <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -360,13 +359,12 @@
                         </a></div></center>
                         
                 <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
-                
-                <%if(Message != null){%>
-                    <center><h4 style="color: white; margin-bottom: 15px; background-color: red; max-width: 350px;"><%=Message%></h4></center>
-                <%}%>
-                    
+                  
                 <form id="LoginForm" name="login" action="LoginControllerMain" method="POST" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; max-width: 300px; min-height: 300px; border: #3d6999 1px solid;"><table border="0"> 
                             <center><h2 style="margin-bottom: 40px;">Login here</h2></center>
+                            <%if(Message != null){%>
+                                <center><h4 style="color: brown; margin-bottom: 15px; max-width: 350px;"><%=Message%></h4></center>
+                            <%}%>
                         <table>
                             <tbody>
                                 <tr>
@@ -386,14 +384,21 @@
                 
                 </form>
                 
-                <center><div id="forgotPassDiv" style="display: none;">
+                <center><div id="forgotPassDiv" style="display: none; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; max-width: 300px; border: #3d6999 1px solid;">
                     
-                    <p id="FGPassDivStatusTxt" style="margin-bottom: 15px; font-weight: bolder;">Enter your email below</p>
+                    <h2 id="FGPassDivStatusTxt" style="margin-bottom: 15px; font-weight: bolder;">Enter your email below</h2>
                     
-                    <input id="forgotPassEmailFld" onmousemove="findAt();" type="email" value="" placeholder="enter you email address" size="45" style="background-color: #6699ff; margin: 10px;"/>
+                    <input id="forgotPassEmailFld" onmousemove="findAt();" type="text" value="" placeholder="enter you email address" size="30" style="background-color: #6699ff; background-color: #d9e8e8; border-radius: 4px;"/>
                     <p><input id="forgotPassBtn" style="background-color: pink; border: 1px solid black; padding: 10px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
                     
+                    <h2 style="text-align: center; margin-top: 15px; cursor: pointer" onclick="showLogin()">Click here to login</h2>
                         <script>
+                            
+                            function showLogin(){
+                                document.getElementById("forgotPassDiv").style.display = "none";
+                                document.getElementById("LoginForm").style.display = "block";
+                            }
+                            
                             $(document).ready(function(){
                                 
                                 $("#forgotPassBtn").click(function(event){
@@ -497,7 +502,6 @@
                                 if(document.getElementById("forgotPassDiv").style.display === "none"){
                                     document.getElementById("LoginForm").style.display = "none";
                                     document.getElementById("forgotPassDiv").style.display = "block";
-                                    document.getElementById("toggleShowFGPassDivLnk").innerHTML = "Show Login";
                                 }else{
                                     document.getElementById("LoginForm").style.display = "block";
                                     document.getElementById("forgotPassDiv").style.display = "none";

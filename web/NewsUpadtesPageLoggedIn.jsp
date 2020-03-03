@@ -93,7 +93,7 @@
        
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #ccccff; padding-bottom: 0; position: absolute;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #333333; padding-bottom: 0; position: absolute;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -106,7 +106,25 @@
             },6000);
         </script-->
         
-    <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
+        <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: white; padding: 5px;'>
+            <span style="width: fit-content; margin-left: 40px;">
+                <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; margin-top: 5px;" />
+            </span>
+            
+            <!--p style=''><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
+                <sup>News</sup-->
+            
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                    <span style='margin-right: 5px; cursor: pointer; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 3px; border-radius: 3px;'>
+                        <img style='' src="icons/icons8-home-50.png" width="25" height="25" alt="icons8-home-50"/>
+                   
+                    <p style='font-size: 11px; margin-top: -8px; color: black;'>Home</p>
+                    </span>
+            </a>
+             
+        </div></center>
+        
+    <!--center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
        
             <p style='color: white;'><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
                 Queue News Area
@@ -115,13 +133,13 @@
                     <span style='margin-right: 5px; cursor: pointer; color: white; float: right; border: 2px solid white; padding: 3px; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                         Home</span></a></p>
              
-        </div></center>
+        </div></center-->
         
     <center><div id="PhoneExtras">
             
-            <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 50px;' >
+            <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 60px;' >
             <div id='News' style=''>
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            <center><p style="color: white; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             
                 <div style="overflow-y: auto;">
                     
@@ -254,38 +272,38 @@
 
                     <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: white;">
                         <tbody>
-                            <tr style="background-color: #333333;">
+                            <tr style="background-color: #eeeeee;">
                                 <td>
                                     <div id="ProvMsgBxOne">
                                         
-                                        <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                        <div style='font-weight: bolder; margin-bottom: 4px;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
                                                     <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     <!--/div></center-->
                                                 <%
                                                     }else{
                                                 %>
 
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
 
                                                 <%}%>
                                             <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
-                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                         
                                         <%if(MsgPhoto.equals("")){%>
-                                        <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                         <%} else{ %>
-                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                         <%}%>
 
                                     </div>
@@ -293,12 +311,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                                 </td>
                             </tr>
                             <tr style="background-color: #eeeeee;">
                                 <td>
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                     <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                         <%=ProvEmail%></p>
                                     <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -450,36 +467,36 @@
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: white;">
                     <tbody>
-                        <tr style="background-color: #333333;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
                                         <!--div style="float: right; width: 65px;" -->
                                             <%
                                                 if(base64Profile != ""){
                                             %>
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 <!--/div></center-->
                                             <%
                                                 }else{
                                             %>
 
                                             <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                             <!--/div></center-->
 
                                             <%}%>
                                         <!--/div-->
                                         <div>
                                             <p><%=ProvFirstName%></p>
-                                            <p style='color: violet;'><%=ProvCompany%></p>
+                                            <p style='color: red;'><%=ProvCompany%></p>
                                         </div>
                                     </div>
                                     <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                     <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                     <%}%>
                                     
                                 </div>
@@ -487,12 +504,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                 <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                     <%=ProvEmail%></p>
                                 <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>

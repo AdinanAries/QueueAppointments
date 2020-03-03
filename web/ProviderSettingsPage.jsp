@@ -335,7 +335,7 @@
         }
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #ccccff; padding-bottom: 0;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #7e7e7e; padding-bottom: 0;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -460,14 +460,14 @@
              
             <form method="POST" enctype="multipart/form-data">
                 
-            <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 20px;">Update your clients on whats new</p>
+            <p style="color: white; font-weight: bolder; margin-bottom: 10px; font-size: 16px;">Update your clients on whats new</p>
                 
-                <table id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
-                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%;" rows="5">
+                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%; border: 0; background-color: #d8d8d8;" rows="5">
                                 </textarea>
                                 
                             </td>
@@ -477,7 +477,7 @@
                                 <p style='margin-bottom: 4px;'>Add photo to this message</p>
                                 <div id="MsgPhotoDisplay"></div>
                                 
-                                <input style="background-color: white; border: 1px solid darkgray; width: 95%;" id="NewsPhotoFld" style="width: 95%;" type="file" name="MsgformPhoto" />
+                                <input style="background-color: white; border: 0; width: 95%;" id="NewsPhotoFld" style="width: 95%;" type="file" name="MsgformPhoto" />
                                 
                             </td>
                         </tr>
@@ -488,7 +488,7 @@
                                     <input id="VPublicRd" type="radio" name="NewsVisibility" value="Public" checked="checked" /><label for="VPublicRd">Public</label>
                                     <input id="VCustomersRd" type="radio" name="NewsVisibility" value="Customer" /><label  for="VCustomersRd">Only customers</label>
                                 
-                                <center><input id="SaveNewsBtn" style="border: black 1px solid; background-color: pink; width: 95%;" type="button" value="Save" /></center>
+                                <center><input id="SaveNewsBtn" style="border-radius: 4px; border: 0; color: white; background-color: darkslateblue; padding: 5px; width: 95%;" type="button" value="Save" /></center>
                             </td>
                             
                             <script>
@@ -516,7 +516,7 @@
                                         }
                                     }else{
                                         if(SaveNewsBtn){
-                                            SaveNewsBtn.style.backgroundColor = "pink";
+                                            SaveNewsBtn.style.backgroundColor = "darkslateblue";
                                             SaveNewsBtn.disabled = false;
                                         }
                                     }
@@ -605,14 +605,14 @@
                         
                         <tr style="">
                             <td>
-                                <div style='height: 700px; margin-bottom: 10px; overflow-y: auto; border: 1px solid #d8d8d8; padding: 2px;'>
-                                    <div style="background-color: #333333; padding: 4px;">
-                                        <p style='color: white; font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
+                                <div style='margin-bottom: 10px; overflow-y: auto; padding: 2px;'>
+                                    <div style="background-color: white; padding: 4px;">
+                                        <p style='font-weight: bolder; margin-bottom: 3px;'>Recent News</p>
                                         
-                                        <center><img id="defaultPic" src="<%=NewsPicSrc%>" width="98%" alt="view-wallpaper-7"/></center>
+                                        <center><img id="defaultPic" src="<%=NewsPicSrc%>" width="100%" alt="view-wallpaper-7"/></center>
                                         
                                     </div>
-                                <p id="MessageP" style='border-top: 1px solid darkgrey;'><%=lastNewsMsg%></p>
+                                <p id="MessageP" style=''><%=lastNewsMsg%></p>
                                 
                                 <input id="RecentMessageID" type="hidden" value="<%=LastNewsID%>" />
                                 
@@ -669,9 +669,9 @@
             
                                 
             <div id='PhoneCalender' style='display: none; margin-top: 5px; width: 100%;'>
-                <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
+                <center><p style="color: white; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
@@ -679,7 +679,7 @@
                                     <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
                                     <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 1px solid white; background-color: #eeeeee; padding: 5px;' type="button" name="CalDateVal" 
+                                                                          font-weight: bolder; border: 0; background-color: #ccc; padding: 5px;' type="button" name="CalDateVal" 
                                                                           value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
@@ -688,15 +688,14 @@
                                     </script>
                                 </div>
                                     
-                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
-                                    <p style='clear: both;'></p>
-                                </div>
-                                    
                             </td>
                         </tr>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
+                            <div style='padding-bottom: 5px; background-color: white; padding: 5px;  max-width: 590px;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='padding: 5px; cursor: pointer; border-radius: 4px; border: 0; color: darkslateblue; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='padding: 5px; cursor: pointer; border-radius: 4px; border: 0; color: darkslateblue; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                                </div>
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
@@ -879,9 +878,9 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <p><input placeholder="pick event time" id="DisplayedAddEvntTime" style='background-color: white; width: 300px;' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                         <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
-                                    <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
+                                    <p><input placeholder="pick event date" id='EvntDatePicker' style='background-color: white; width: 300px;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -889,8 +888,8 @@
                                         });
                                       });
                                     </script>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 98%;'>Describe this event here
+                                    <p><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 300px;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="4" style='width: 99%; border: 0; background-color: #ccc;'>Describe this event here
                                         </textarea></p>
                                 </div>
                             </td>
@@ -898,9 +897,9 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
-                                <center><input id="CalSaveEvntBtn" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Change' /></center>
+                                <center><input id="CalSaveEvntBtn" style='border: 0; color: white; border-radius: 4px; padding: 5px; background-color: darkslateblue; width: 95%;' type='button' value='Save' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn" style='color: white; padding: 5px; border: 0; float: right; display: none; border-radius: 4px; background-color: darkslateblue; width: 46%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='border: 0; float: left; display: none; border-radius: 4px; padding: 5px; color: white; background-color: darkslateblue; width: 46%;' type='button' value='Change' /></center>
                             </td>
                             
                             <script>
@@ -937,15 +936,15 @@
                                         }
                                     }else{
                                         if(CalSaveEvntBtn){
-                                            CalSaveEvntBtn.style.backgroundColor = "pink";
+                                            CalSaveEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalSaveEvntBtn.disabled = false;
                                         }
                                         if(CalUpdateEvntBtn){
-                                            CalUpdateEvntBtn.style.backgroundColor = "pink";
+                                            CalUpdateEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalUpdateEvntBtn.disabled = false;
                                         }
                                         if(CalDltEvntBtn){
-                                            CalDltEvntBtn.style.backgroundColor = "pink";
+                                            CalDltEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalDltEvntBtn.disabled = false;
                                         }
                                     }
@@ -1168,20 +1167,22 @@
             </div>
                              
         <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
+            <center><p style="color: white; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 300px;' cellspacing="0">
                     <tbody>
-                        <tr style="background-color: #eeeeee">
+                        <tr style="">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
-                                <p>First Name: <input id="ExtProvFNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle Name: <input id="ExtProvMNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last Name: <input id="ExtProvLNameFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input id="ExtProvEmailFld" style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; width: 280px; border: #3d6999 1px solid; margin: auto;">
+                                <p style='margin-bottom: 5px; color: white;'>Edit Your Personal Info</p>
+                                <p>First Name: <input id="ExtProvFNameFld" style='background-color: #9bb1d0; border-radius: 4px; border: 0; text-align: left; color: white;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle Name: <input id="ExtProvMNameFld" style='background-color: #9bb1d0; border-radius: 4px; border: 0; text-align: left; color: white;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last Name: <input id="ExtProvLNameFld" style='background-color: #9bb1d0; border-radius: 4px; border: 0; text-align: left; color: white;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input id="ExtProvEmailFld" style='background-color: #9bb1d0; border-radius: 4px; border: 0; text-align: left; color: white;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
                                 <p>Phone: <input onclick="checkExtMiddlePhoneNumberEdit();"  onkeydown="checkExtMiddlePhoneNumberEdit();"id="ExtProvPhnNumberFld"
-                                        style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input id="ExtUpdateProvPerBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                        style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id="ExtUpdateProvPerBtn" style='background-color: darkslateblue; border-radius: 4px; width: 95%; padding: 5px;' type="submit" value="Change" /></center>
+                                </div>
                             </td>
                             <script>
                                                         var ExtProvPhnNumberFld = document.getElementById("ExtProvPhnNumberFld");
@@ -1287,7 +1288,7 @@
                                                             ExtUpdateProvPerBtn.style.backgroundColor = "darkgrey";
                                                             ExtUpdateProvPerBtn.disabled = true;
                                                         }else{
-                                                            ExtUpdateProvPerBtn.style.backgroundColor = "pink";
+                                                            ExtUpdateProvPerBtn.style.backgroundColor = "darkslateblue";
                                                             ExtUpdateProvPerBtn.disabled = false;
                                                         }
                                                             
@@ -1299,8 +1300,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <div id="ExtrasFeedbackDiv">
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Send Feedback</p>
+                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; width: 280px; border: #3d6999 1px solid; margin: auto; margin-top: 5px;">
+                                    <p style='margin-bottom: 5px; color: white;'>Send Feedback</p>
                                     <form id="ExtrasFeedBackForm" style="width: 95%;" >
                                             <center><div id='ExtLastReviewMessageDiv' style='display: none; background-color: white; width: 100%;'>
                                                 <p id='ExtLasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
@@ -1309,14 +1310,14 @@
                                             <center><table>
                                                 <tbody>
                                                 <tr>
-                                                    <td><textarea id="ExtFeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" style='width: 270px;'>Compose Feedback Message Here...
+                                                    <td><textarea id="ExtFeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" style='width: 270px; background-color: #d9e8e8; border-radius: 4px;'>Compose Feedback Message Here...
                                                         </textarea></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
                                                 
                                                 <input id='ExtFeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="ExtSendFeedBackBtn" style="width: 100%; border: 1px solid black; background-color: pink;" type="button" value="Send" /></center>
+                                                <center><input id="ExtSendFeedBackBtn" style="color: white; width: 100%; border-radius: 4px; padding: 5px; background-color: darkslateblue;" type="button" value="Send" /></center>
                                                 <script>
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn').click(function(event) {  
@@ -1355,16 +1356,18 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr style="background-color: #eeeeee;">
+                        <tr >
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Update Your Login</p>
-                                <P>User Name: <input id="ExtUsrNamefld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=UserName%>'/></p>
-                                <P><input id="ExtcompareOldPassfld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
-                                <P><input id="ExtnewPassfld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
-                                <P><input id="ExtcompareNewPassfld" style='background-color: white; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
-                                <center><input id="ExtupdateUsrAcntBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; width: 280px; border: #3d6999 1px solid; margin: auto; margin-top: 5px;">
+                                <p style='margin-bottom: 5px; color: white;'>Update Your Login</p>
+                                <P>User Name: <input id="ExtUsrNamefld" style='background-color: #d9e8e8; border-radius: 4px; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=UserName%>'/></p>
+                                <P><input id="ExtcompareOldPassfld" style='background-color: #d9e8e8; border-radius: 4px;; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P><input id="ExtnewPassfld" style='background-color: #d9e8e8; border-radius: 4px; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P><input id="ExtcompareNewPassfld" style='background-color: #d9e8e8; border-radius: 4px; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtupdateUsrAcntBtn" style='background-color: darkslateblue; border-radius: 4px; padding: 5px; width: 95%;' type="submit" value="Change" /></center>
                                 <p id="ExtWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
                                 <p id='ExtUpdatePassStatus' style='text-align: center; color: white;'></p>
+                                </div>
                             </td>
                             <input type='hidden' id='ExtoldPassfld' value='' />
                             <input type="hidden" id="ExtProviderIDforUpdateLogin" value="<%=UserID%>" />
@@ -1467,7 +1470,7 @@
 
                                                    ExtUpdatePassStatus.style.backgroundColor = "green";
                                                    ExtUpdatePassStatus.innerHTML = "OK";
-                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "pink";
+                                                   ExtupdateUsrAcntBtn.style.backgroundColor = "darkslateblue";
                                                    ExtupdateUsrAcntBtn.disabled = false;
                                                }
                                                
@@ -1480,9 +1483,18 @@
                         </tr>
                         <tr>
                             <td>
+                                
+                                <script>
+                                    function LogoutMethod(){
+                                        document.getElementById('PageLoader').style.display = 'block';
+                                        window.localStorage.removeItem("ProvQueueUserName");
+                                        window.localStorage.removeItem("ProvQueueUserPassword");
+                                    }
+                                </script>
+                                
                                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input onclick="document.getElementById('PageLoader').style.display = 'block';" style='width: 95%;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input onclick="LogoutMethod();" style='width: 95%;' type="submit" value="Logout" class="button" /></center>
                                 </form>
                             </td>
                         </tr>
@@ -1491,9 +1503,9 @@
             </div>
                                 
             <div id='PhoneExtrasNotificationDiv' style='width: 100%; display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
+            <center><p style="color: white; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         
                     <%
@@ -1508,7 +1520,7 @@
                     
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Notifications.get(notify)%></p>
+                                <p style='text-align: justify; padding: 3px;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
@@ -1520,7 +1532,7 @@
                     
                         <tr>
                             <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Notifications.get(notify)%></p>
+                                <p style='text-align: justify; padding: 3px;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         

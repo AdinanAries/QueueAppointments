@@ -1010,26 +1010,22 @@
                 
             </script>
                
-            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
-                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                    tech.arieslab@outlook.com | 
-                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                    (1) 732-799-9546
-                </p>
+            <div style="float: left; width: 350px; margin-left: 10px; padding-top: 1px;">
+                <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; background-color: white; padding: 4px; border-radius: 4px" />
             </div>
             
             <div style="float: right; width: 50px;">
                 <%
                     if(Base64Pic != ""){
                 %>
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img class="fittedImg" id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
+                        <img class="fittedImg" id="" style="border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
                     </div></center>
                 <%
                     }else{
                 %>
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
+                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
                     </div></center>
                 
                 <%}%>
@@ -1357,38 +1353,38 @@
 
                     <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                         <tbody>
-                            <tr style="background-color: #333333;">
+                            <tr style="background-color: #eeeeee;">
                                 <td>
                                     <div id="ProvMsgBxOne">
                                         
-                                        <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                        <div style='font-weight: bolder; margin-bottom: 4px;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
                                                     <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     <!--/div></center-->
                                                 <%
                                                     }else{
                                                 %>
 
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
 
                                                 <%}%>
                                             <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
-                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                         
                                         <%if(MsgPhoto.equals("")){%>
-                                        <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                         <%} else{ %>
-                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                         <%}%>
 
                                     </div>
@@ -1396,12 +1392,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                                 </td>
                             </tr>
                             <tr style="background-color: #eeeeee;">
                                 <td>
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                     <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                         <%=ProvEmail%></p>
                                     <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -1553,36 +1548,36 @@
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                     <tbody>
-                        <tr style="background-color: #333333;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
                                         <!--div style="float: right; width: 65px;" -->
                                             <%
                                                 if(base64Profile != ""){
                                             %>
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 <!--/div></center-->
                                             <%
                                                 }else{
                                             %>
 
                                             <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                             <!--/div></center-->
 
                                             <%}%>
                                         <!--/div-->
                                         <div>
                                             <p><%=ProvFirstName%></p>
-                                            <p style='color: violet;'><%=ProvCompany%></p>
+                                            <p style='color: red;'><%=ProvCompany%></p>
                                         </div>
                                     </div>
                                     <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                     <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                     <%}%>
                                     
                                 </div>
@@ -1590,12 +1585,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                 <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                     <%=ProvEmail%></p>
                                 <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -1641,7 +1635,7 @@
                                     <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
                                     <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 1px solid white; background-color: #eeeeee; padding: 5px;' type="button" name="CalDateVal" 
+                                                                          font-weight: bolder; border: 0; background-color: #ccc; padding: 5px;' type="button" name="CalDateVal" 
                                                                           value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
@@ -1650,16 +1644,14 @@
                                     </script>
                                 </div>
                                     
-                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
-                                    <p style='clear: both;'></p>
-                                </div>
-                                    
                             </td>
                         </tr>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
-                            
+                            <div style='padding: 5px; background-color: white;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                                </div>
                             <td style=''>
                                 
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
@@ -1846,9 +1838,9 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div style="height: auto; overflow-y: auto;">
-                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <p><input placeholder="add event time" id="DisplayedAddEvntTime" style='cursor: pointer; background-color: white; width: 92%;' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                     <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
-                                    <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
+                                    <p><input placeholder="add event date" id='EvntDatePicker' style='cursor: pointer; background-color: white; width: 92%;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -1856,7 +1848,7 @@
                                         });
                                       });
                                     </script>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
                                     <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
                                         </textarea></p>
                                 </div>
@@ -1940,15 +1932,15 @@
                                         }
                                     }else{
                                         if(CalSaveEvntBtn){
-                                            CalSaveEvntBtn.style.backgroundColor = "pink";
+                                            CalSaveEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalSaveEvntBtn.disabled = false;
                                         }
                                         if(CalUpdateEvntBtn){
-                                            CalUpdateEvntBtn.style.backgroundColor = "pink";
+                                            CalUpdateEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalUpdateEvntBtn.disabled = false;
                                         }
                                         if(CalDltEvntBtn){
-                                            CalDltEvntBtn.style.backgroundColor = "pink";
+                                            CalDltEvntBtn.style.backgroundColor = "darkslateblue";
                                             CalDltEvntBtn.disabled = false;
                                         }
                                     }
@@ -1962,9 +1954,9 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
-                                <input id="CalSaveEvntBtn" style='float: left; border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='display: none; border: 1px solid black; background-color: pink; width: 47%;' type='button' value='Change' />
+                                <input id="CalSaveEvntBtn" style='cursor: pointer; float: left; border: 0; color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; width: 95%;' type='button' value='Save' /></center>
+                                <input onclick="" id="CalDltEvntBtn" style='cursor: pointer; float: right; display: none; border: 0; color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; width: 47%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='cursor: pointer; display: none; border: 0; color: white; padding: 5px; background-color: darkslateblue; width: 47%;' type='button' value='Change' />
                             </td>
                         </tr>
                         
@@ -2147,18 +2139,21 @@
         <div id='ExtrasUserAccountDiv' style='display: none;'>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Account</p></center>
             
-                <table  id="ExtrasTab" cellspacing="0">
+                <table  id="ExtrasTab" style="" cellspacing="0">
                     <tbody>
-                        <tr style="background-color: #eeeeee"> <!--fNameExtraFld mNameExtraFld lNameExtraFld EmailExtraFld-->
+                        <tr style=""> <!--fNameExtraFld mNameExtraFld lNameExtraFld EmailExtraFld-->
                             <td>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
                                 <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Edit Your Personal Info</p>
-                                <p>First Name: <input id='fNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle Name: <input id='mNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last Name: <input id='lNameExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input id='EmailExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #eeeeee; border: 0; text-align: left; color: cadetblue; font-weight: bolder;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input id='UpdtPerInfExtraBtn' style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <p style='margin-bottom: 5px; color: white;'>Edit Your Personal Info</p>
+                                <p style='color: #d9e8e8; font-size: 11px;'>change your first, middle and last name below</p>
+                                <p>First: <input id='fNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle: <input id='mNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last: <input id='lNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input id='EmailExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id='UpdtPerInfExtraBtn' style='background-color: darkslateblue; border-radius: 4px; border:0; padding: 5px; color: white; width: 95%;' type="submit" value="Change" /></center>
+                                </div>
                             </td>
                             
                             <script>
@@ -2178,7 +2173,7 @@
                                         UpdtPerInfExtraBtn.style.backgroundColor = "darkgrey";   
                                         UpdtPerInfExtraBtn.disabled = true;
                                     }else{
-                                        UpdtPerInfExtraBtn.style.backgroundColor = "pink";
+                                        UpdtPerInfExtraBtn.style.backgroundColor = "darkslateblue";
                                         UpdtPerInfExtraBtn.disabled = false;
                                     }
                                     
@@ -2224,9 +2219,9 @@
                         </tr>
                         <tr>
                             <td>
-                                <div id="ExtrasFeedbackDiv">
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Send Feedback</p>
-                                    <form id="ExtrasFeedBackForm" style="width: 95%;" >
+                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                    <p style='margin-bottom: 5px; color: white;'>Send Feedback</p>
+                                    <form id="ExtrasFeedBackForm" style="width: 99%;" >
                                             <center><div id='ExtLastReviewMessageDiv' style='display: none; background-color: white; width: 100%;'>
                                                 <p id='ExtLasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
                                                 <p id="ExtFeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
@@ -2234,14 +2229,14 @@
                                             <center><table>
                                                 <tbody>
                                                 <tr>
-                                                    <td><textarea id="ExtFeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" style='width: 270px;'>Compose Feedback Message Here...
+                                                    <td><textarea id="ExtFeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" style='width: 200px; border-radius: 5px; background-color: #d9e8e8;'>Compose Feedback Message Here...
                                                         </textarea></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
                                                 
                                                 <input id='ExtFeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="ExtSendFeedBackBtn" style="width: 100%; border: 1px solid black; background-color: pink;" type="button" value="Send" /></center>
+                                                <center><input id="ExtSendFeedBackBtn" style="width: 98%; border: 0;padding: 5px; border-radius: 4px; background-color: darkslateblue; color: white;" type="button" value="Send" /></center>
                                                 <script>
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn').click(function(event) {  
@@ -2281,16 +2276,18 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr style="background-color: #eeeeee;">
+                        <tr style=''>
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Update Your Login</p>
-                                <P>User Name: <input id="ExtraUpdateLoginNameFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
-                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
-                                <P><input id="ExtraNewPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
-                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #eeeeee; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
-                                <center><input id="ExtraLoginFormBtn" style='background-color: pink; border: 1px solid black; width: 95%;' type="submit" value="Change" /></center>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                <p style='margin-bottom: 5px; color: white;'>Update Your Login</p>
+                                <P>User:<input id="ExtraUpdateLoginNameFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
+                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P><input id="ExtraNewPasswordFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtraLoginFormBtn" style='background-color: darkslateblue; padding: 5px; border-radius: 4px; color: white; border: 0; width: 95%;' type="submit" value="Change" /></center>
                                 <p id="ExtraWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
                                 <p id='ExtrachangeUserAccountStatus' style='text-align: center; color: white;'></p>
+                                </div>
                             </td>
                             <input type='hidden' id='ExtraThisPass' value='' />
                             <input type="hidden" id="ExtraUserIDforLoginUpdate" value="<%=UserID%>" />
@@ -2448,50 +2445,50 @@
                             <tbody>
                                 <tr>
                                     <td class="SettingIcon">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white;'>
-                                            <img style='background-color: white; border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black;'>
+                                                <img style='border-radius: 2px; background-color: #d3ffcf;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                                         </div></a>
                                     </td>
                                     <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: white;'>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black;'>
                                             <p style='margin-top: 0;'>News</p> 
                                         </div></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="SettingIcon">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white;'>
-                                            <img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
-                                            <sub style='color: white; background-color: red; margin-left: -20px; border: 2px solid red; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black;'>
+                                            <img style='background-color: cornsilk; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
+                                            <sub style='color: white; background-color: red; margin-left: -20px; font-size: 11px; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
                                     </div></a>
                                     </td>
                                     <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: white;'>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black;'>
                                             <p style='margin-top: -4px;'>Notification</p> 
                                         </div></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="SettingIcon">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: white;'>
-                                            <img style='background-color: white; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="24" height="21" alt="icons8-calendar-50"/>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: black;'>
+                                                <img style='background-color: #d4dcfe; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="22" height="21" alt="icons8-calendar-50"/>
                                         </div></a>
                                     </td>
                                     <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: white;'>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: black;'>
                                         <p style='margin-top: 0;'>Calender</p>
                                         </div></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="SettingIcon">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: white;'>
-                                                <img style='background-color: white; border-radius: 2px;' src="icons/icons8-settings-50.png" width="24" height="21" alt="icons8-settings-50"/>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: black;'>
+                                                <img style='background-color: #ffe8fd; border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="20" alt="icons8-settings-50"/>
                                                 
                                         </div></a>
                                     </td>
                                     <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: white;'>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: black;'>
                                             <p style='margin-top: 0;'>Settings</p>
                                         </div></a>
                                     </td>
@@ -2721,7 +2718,7 @@
                 
             <div id="nav" style='display: block;'>
                
-                <!--h3><a href="index.jsp?UserIndex=<%=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>
+                <!--h3><a href="index.jsp?UserIndex=<=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>
                 <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                 
                 <h4><a href="" style=" color: black;"></a></h4>
@@ -2878,7 +2875,9 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center>
+                    <center><p onclick="showSecondSetProvIcons()" style="padding: 5px; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                        <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
                 
                 </div>
                 
@@ -2911,8 +2910,12 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
-                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center>
+                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
                 
                 </div>
                 
@@ -2934,7 +2937,9 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center>
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                        <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
 
                 </div>
                 

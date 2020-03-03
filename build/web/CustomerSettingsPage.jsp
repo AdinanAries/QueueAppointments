@@ -545,9 +545,9 @@
                                                 }
                     %>
 
-                    <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 90%; background-color: white; max-width: 600px;">
+                    <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 100%; background-color: white; max-width: 600px;">
                         <tbody>
-                            <tr style="background-color: #333333;">
+                            <tr style="background-color: #eeeeee;">
                                 <td>
                                     <div id="ProvMsgBxOne">
                                         <p style='font-weight: bolder; margin-bottom: 4px;'>
@@ -556,25 +556,25 @@
                                                     if(base64Profile != ""){
                                                 %>
                                                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                                        <img class="fittedImg" id="" style="width:50px; height: 50px; border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="width:50px; height: 50px; border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     </div></center>
                                                 <%
                                                     }else{
                                                 %>
 
                                                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                                        <img style='width:50px; height: 50px; border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                        <img style='width:50px; height: 50px; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                     </div></center>
 
                                                 <%}%>
                                             </div>
-                                            <span style='color: #eeeeee;'><%=ProvFirstName%> - <%=ProvCompany%></span>
+                                            <span style=''><%=ProvFirstName%> - <%=ProvCompany%></span>
                                         </p>
 
                                         <%if(MsgPhoto.equals("")){%>
-                                        <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                         <%} else{ %>
-                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                         <%}%>
 
                                     </div>
@@ -582,12 +582,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                                 </td>
                             </tr>
                             <tr style="background-color: #eeeeee;">
                                 <td>
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                     <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                         <%=ProvEmail%></p>
                                     <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -736,9 +735,9 @@
                                     }
                 %>
                 
-                <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 90%; background-color: white; max-width: 600px;">
+                <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 100%; background-color: white; max-width: 600px;">
                     <tbody>
-                        <tr style="background-color: #333333;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
                                 <div id="ProvMsgBxOne">
                                     <p style='font-weight: bolder; margin-bottom: 4px;'>
@@ -747,25 +746,25 @@
                                                 if(base64Profile != ""){
                                             %>
                                                 <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                                    <img class="fittedImg" id="" style="width:50px; height: 50px; border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <img class="fittedImg" id="" style="width:50px; height: 50px; border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 </div></center>
                                             <%
                                                 }else{
                                             %>
 
                                             <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                                <img style='width:50px; height: 50px; border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <img style='width:50px; height: 50px; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                             </div></center>
 
                                             <%}%>
                                         </div>
-                                        <span style='color: #eeeeee;'><%=ProvFirstName%> - <%=ProvCompany%></span>
+                                        <span style=''><%=ProvFirstName%> - <%=ProvCompany%></span>
                                     </p>
                                     
                                     <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                     <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                     <%}%>
                                     
                                 </div>
@@ -773,12 +772,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                 <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                     <%=ProvEmail%></p>
                                 <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -816,7 +814,7 @@
             <div id='PhoneCalender' style='display: none; margin-top: 5px; width: 100%;'>
                 <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
@@ -824,7 +822,7 @@
                                     <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
                                     <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 1px solid white; background-color: #eeeeee; padding: 5px;' type="text" name="CalDateVal" 
+                                                                          font-weight: bolder; border: 0; background-color: #ccc; padding: 5px;' type="text" name="CalDateVal" 
                                                                           value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
@@ -833,14 +831,13 @@
                                     </script>
                                 </div>
                                     
-                                <div style='border-bottom: 1px #7e7e7e solid; padding-bottom: 4px;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #eeeeee; width: 49%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 1px solid black; background-color: #ccc; width: 49%; float: left;'>Appointments</div>
-                                    <p style='clear: both;'></p>
-                                </div>
-                                    
                             </td>
                         </tr>
+                        <div style='padding: 5px; background-color: white; max-width: 590px;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; padding: 5px; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                                </div>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
@@ -1030,9 +1027,9 @@
                             <td>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
                                 <div>
-                                    <p>Time: <input id="DisplayedAddEvntTime" style='background-color: white;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <p><input placeholder="add event time" id="DisplayedAddEvntTime" style='background-color: white; width: 92%' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                     <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
-                                    <p>Date: <input id='EvntDatePicker' style='background-color: white;' type="text" name="EvntDate" value="" /></p>
+                                    <p><input placeholder='add event date' id='EvntDatePicker' style='background-color: white; width: 92%' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -1040,8 +1037,8 @@
                                         });
                                       });
                                     </script>
-                                    <p>Title: <input id="AddEvntTtle" style='background-color: white;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea  onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
+                                    <p><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
+                                    <p><textarea  onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%; border: 0; background-color: #ccc;'>
                                         </textarea></p>
                                 </div>
                             </td>
@@ -1124,15 +1121,15 @@
                                 }
                             }else{
                                 if(CalSaveEvntBtn){
-                                    CalSaveEvntBtn.style.backgroundColor = "pink";
+                                    CalSaveEvntBtn.style.backgroundColor = "darkslateblue";
                                     CalSaveEvntBtn.disabled = false;
                                 }
                                 if(CalUpdateEvntBtn){
-                                    CalUpdateEvntBtn.style.backgroundColor = "pink";
+                                    CalUpdateEvntBtn.style.backgroundColor = "darkslateblue";
                                     CalUpdateEvntBtn.disabled = false;
                                 }
                                 if(CalDltEvntBtn){
-                                    CalDltEvntBtn.style.backgroundColor = "pink";
+                                    CalDltEvntBtn.style.backgroundColor = "darkslateblue";
                                     CalDltEvntBtn.disabled = false;
                                 }
                             }
@@ -1146,9 +1143,9 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
-                                <center><input id="CalSaveEvntBtn" style='border: 1px solid black; background-color: pink; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 1px solid black; background-color: pink; width: 46%;' type='button' value='Change' /></center>
+                                <center><input id="CalSaveEvntBtn" style='border: 0; background-color: darkslateblue; padding: 5px; color: white; border-radius: 4px; width: 95%;' type='button' value='Save' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 0; padding: 5px; color: white; background-color: darkslateblue; width: 44%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 0; padding: 5px; color: white; background-color: darkslateblue; width: 44%;' type='button' value='Change' /></center>
                             </td>
                         </tr>
                         
@@ -1630,7 +1627,7 @@
             <div id='PhoneExtrasNotificationDiv' style='width: 100%; display: none;'>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         
                     <%
@@ -1645,7 +1642,7 @@
                     
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='text-align: left; border: 1px solid #d8d8d8; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
+                                <p style='text-align: left; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
@@ -1659,7 +1656,7 @@
                     
                         <tr>
                             <td>
-                                <p style='text-align: left; border: 1px solid #d8d8d8; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
+                                <p style='text-align: left; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         

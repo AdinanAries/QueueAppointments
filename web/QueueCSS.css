@@ -57,7 +57,7 @@ body {
     }
 
     #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
-      transition: all 300ms ease-in-out;
+      transition: all 100ms ease-in-out;
     }
     #nav-toggle.active span {
       background-color: transparent;
@@ -80,10 +80,9 @@ body {
         height: 100%;
         width: 100%;
         /*background-color: beige;*/
-        background-color: black;
+        background-color: white;
         color: white;
         /*display: none;*/
-        opacity: 0.8;
     }
     .MainMenu{
         position: fixed;
@@ -93,7 +92,7 @@ body {
         z-index: 101;
         /*background-color: beige;
         background-color: black;*/
-        color: white;
+        color: black;
         display: none;
         /*opacity: 0.9;*/
     }
@@ -119,7 +118,7 @@ body {
         width: 50px;
     }
     .MainMenu .SettingName{
-        border-bottom: 1px solid white;
+        border-bottom: 1px solid #ccc;
     }
 .fittedImg{
     object-fit: cover;
@@ -189,7 +188,7 @@ h3 {
   width: 100%;
   z-index: 100;
   position: fixed;
-  box-shadow: 4px 4px 10px #334d81;
+  /*box-shadow: 4px 4px 10px #334d81;*/
   padding: 1px;
   padding-bottom: 0;
   opacity: 0.95;
@@ -199,7 +198,7 @@ h3 {
   width: 100%;
   z-index: 110;
   position: fixed;
-  box-shadow: 4px 4px 10px #334d81;
+  /*box-shadow: 4px 4px 10px #334d81;*/
   padding: 1px;
   padding-bottom: 0;
   opacity: 0.95;
@@ -453,7 +452,7 @@ select {
 }
 #providerdetails {
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   border-spacing: 10px;
 }
 #providerdetails tbody tr td {
@@ -461,7 +460,7 @@ select {
   background-color: white;
   padding: 2px;
   border-radius: 4px;
-  box-shadow: 4px 4px 10px #334d81;
+  /*box-shadow: 4px 4px 10px #334d81;*/
   width: auto;
 }
 #ProInfoTable tbody tr td {
@@ -482,7 +481,7 @@ select {
   border-radius: 4px;
 }
 #eachprov:hover {
-  box-shadow: 2px 2px 2px darkgrey;
+  /*box-shadow: 2px 2px 2px darkgrey;*/
 }
 #providerdetails p {
   text-align: left;
@@ -579,15 +578,19 @@ select {
   margin: 0;
   margin-right: 7px;
 }
+#providericons{
+    border-spacing: 1px;
+    
+}
 #providericons td {
-  /*background-color: pink;*/
-  box-shadow: 4px 4px 10px #334d81;
+    background-color: #d9e8e8;
+  /*box-shadow: 4px 4px 10px #334d81;*/
   /*border: solid #334d81 1px;*/
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 10px;
 }
 #providericons td:hover {
-  background-color: pink;
+  background-color: #eeeeee;
   transition: all 0.3s ease-in;
 }
 #providericons td a {
@@ -599,8 +602,8 @@ select {
   padding-right: 5px;
 }
 #QueuLineDiv {
-  border-top: 1px solid darkgrey;
-  border-bottom: 1px solid darkgrey;
+  /*border-top: 1px solid darkgrey;
+  border-bottom: 1px solid darkgrey;*/
   background-color: #eeeeee;
   padding-top: 5px;
   margin-bottom: 7px;
@@ -612,8 +615,8 @@ select {
   margin: 0px;
   cursor: pointer;
   padding: 2px;
-  border-bottom: 1px solid darkgrey;
-  border-top: 1px solid darkgrey;
+  /*border-bottom: 1px solid darkgrey;
+  border-top: 1px solid darkgrey;*/
 }
 .servicesList {
   background-color: #eeeeee;
@@ -622,7 +625,7 @@ select {
 }
 #QueuLineDiv table tbody tr td:hover {
   background-color: darkgrey;
-  border: 1px black solid;
+  /*border: 1px black solid;*/
 }
 #reviewsheet {
   background-color: white;
@@ -636,7 +639,7 @@ select {
   border-bottom: #6699ff 5px solid;
 }
 .SearchObject {
-  border: black solid 1px;
+  /*border: black solid 1px;*/
   border-radius: 4px;
   width: 330px;
   text-align: right;
@@ -645,7 +648,7 @@ select {
 }
 
 .SearchObject:hover {
-  box-shadow: 4px 4px 10px #334d81;
+  /*box-shadow: 4px 4px 10px #334d81;*/
 }
 
 .deleteFavProvider {
@@ -663,7 +666,7 @@ select {
 }
 
 #addServiceBtn:hover {
-  box-shadow: 2px 2px 2px purple;
+  /*box-shadow: 2px 2px 2px purple;*/
 }
 
 #addServiceDiv {
@@ -709,7 +712,7 @@ select {
 #accountTypeOptions {
   /*border: 1px solid black;*/
   width: 300px;
-  box-shadow: #334d81 4px 4px 10px;
+  /*box-shadow: #334d81 4px 4px 10px;*/
   padding: 5px;
   border-radius: 5px;
 }
