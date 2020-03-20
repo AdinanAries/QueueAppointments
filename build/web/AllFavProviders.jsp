@@ -49,7 +49,13 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+        
+        <!--script>
+        if($(window).width() > 1000){
+            window.stop();
+        }
+    </script-->
         
     </head>
     <% 

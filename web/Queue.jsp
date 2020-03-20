@@ -39,7 +39,7 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
     <script>
@@ -567,7 +567,10 @@
                     </div>
                 </center>
                 
+                <h4 style="padding: 5px;">Search By Location</h4>
+                
                 <div id="LocSearchDiv" style="margin-top: 5px;">
+                    
                 <center><form id="DashboardLocationSearchForm" action="ByAddressSearchResult.jsp" method="POST" style="">
                     <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
@@ -678,7 +681,8 @@
                 
                 
                 <h1>Beaty Services Appointments</h1-->
-                <h4 style="padding: 5px;">Select Service category</h4>
+                
+                <h4 style="padding: 5px;">Search By Category</h4>
                 
                  <div id="firstSetProvIcons">
                 <center><table id="providericons">

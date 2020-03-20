@@ -58,7 +58,7 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
     
@@ -803,6 +803,7 @@
             var GoogleReturnedStreetName;
             var GoogleReturnedStreetNo;
             var GoogleReturnedCountry;
+            var formatted_address;
             var GoogleReached = false;
             
             var StateAbbrev = {
@@ -894,6 +895,7 @@
                             GoogleReturnedStreetNo = StreetParts[0].trim();
                             GoogleReturnedCountry = AddressParts[3].trim();
                             addLocationToWebContext();
+                            formatted_address = result.results[0].formatted_address;
                             /*alert(result.results[0].address_components[5].long_name);
                             alert(result.results[0].address_components[4].long_name);
                             alert(result.results[0].address_components[3].long_name);
@@ -2441,60 +2443,86 @@
                 
                     <div class='MainMenu'>
                         <div id='MainMenuCover'></div>
+                        <div id="MainMenuItems">
                         <table>
                             <tbody>
                                 <tr>
-                                    <td class="SettingIcon">
+                                    <td>
                                         <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black;'>
-                                                <img style='border-radius: 2px; background-color: #d3ffcf;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                                            <img style='border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
+                                            <p style='margin-top: 0;'>News</p>
                                         </div></a>
                                     </td>
-                                    <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black;'>
-                                            <p style='margin-top: 0;'>News</p> 
-                                        </div></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="SettingIcon">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black;'>
-                                            <img style='background-color: cornsilk; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
-                                            <sub style='color: white; background-color: red; margin-left: -20px; font-size: 11px; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sub>
-                                    </div></a>
-                                    </td>
-                                    <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black;'>
-                                            <p style='margin-top: -4px;'>Notification</p> 
-                                        </div></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="SettingIcon">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: black;'>
-                                                <img style='background-color: #d4dcfe; border-radius: 2px;' src="icons/icons8-calendar-50.png" width="22" height="21" alt="icons8-calendar-50"/>
-                                        </div></a>
-                                    </td>
-                                    <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: black;'>
-                                        <p style='margin-top: 0;'>Calender</p>
-                                        </div></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="SettingIcon">
+                                    <td>
                                         <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: black;'>
-                                                <img style='background-color: #ffe8fd; border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="20" alt="icons8-settings-50"/>
-                                                
-                                        </div></a>
-                                    </td>
-                                    <td class="SettingName">
-                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: black;'>
+                                            <img style='border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="20" alt="icons8-settings-50"/>
                                             <p style='margin-top: 0;'>Settings</p>
                                         </div></a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black;'>
+                                            <img style='border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
+                                            <sup style='color: white; background-color: red; margin-left: -20px; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sup>
+                                            <p style='margin-top: 0;'>Notifications</p>
+                                        </div></a>
+                                    </td>
+                                    <td>
+                                       <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: black;'>
+                                            <img style='border-radius: 2px;' src="icons/icons8-calendar-50.png" width="22" height="21" alt="icons8-calendar-50"/>
+                                            <p style='margin-top: 0;'>Calender</p>
+                                        </div></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        
+                                    </td>
+                                    <td style="background: linear-gradient(-45deg, #ffe96b, #ff6b6b);">
+                                        <a onclick="LogoutMethod()" href="LogoutController?UserIndex=<%=UserIndex%>"><div style='color: black;'>
+                                            <img style='border-radius: 2px;' src="icons/icons8-sign-out-50.png" width="20" height="19" alt="icons8-sign-out-50"/>
+                                            <p style='margin-top: 0;'>Logout</p>
+                                        </div>
+                                        </a>
+                                        
+                                    </td>
+                                </tr>
+                                
                             </tbody>
                         </table>
+                        <div id="MenuSummaries">
+                            <h4 style="text-align: center; color: darkblue;">Summaries</h4>
+                            <div style='margin-top: 10px;'>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img src="icons/icons8-marker-filled-30_1.png" style='width: 20px; height: 20px;' alt=""/>
+                                            </td>
+                                            <td id='MainMenuAddressDisplay' style='font-size: 14px;'>
+                                            <script>
+                                                let MainMenuLocDisplay = setInterval(function(){
+                                                    document.getElementById("MainMenuAddressDisplay").innerHTML = formatted_address;
+                                                    if(formatted_address !== undefined){
+                                                        //alert("Menu Loc Disp Stopped");
+                                                        clearInterval(MainMenuLocDisplay);
+                                                    }
+                                                },1)
+                                            </script>
+                                            </td>
+                                            <td>
+                                                
+                                            </td>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                     
                     </div>
@@ -2735,6 +2763,8 @@
                         
                 </div></center>
                 
+                <h4 style="padding: 5px;">Search By Location</h4>
+                        
                 <div id="LocSearchDiv" style="margin-top: 5px;">
                 <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
@@ -2840,8 +2870,8 @@
             <div id="main" class="Main">
                 
                     
-                <center><p style="color: white; margin-bottom: 5px; padding-top: 10px; max-width: 300px">
-                        <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - Explore below </p></center>
+                <center><h4 style="margin-bottom: 5px; padding-top: 10px; max-width: 300px">
+                        <!--span style='color: white;' id="NameForLoginStatus"><=FirstName%></span--> Search By Category </h4></center>
                  
                 <!--cetnter><h4></h4></cetnter-->
                 
@@ -6763,7 +6793,7 @@
                 </form> 
                 
                 </div>
-                   
+                
                 <div id="IframesDiv">
                     
                    <script>

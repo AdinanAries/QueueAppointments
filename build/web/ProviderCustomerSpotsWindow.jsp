@@ -58,23 +58,13 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
     
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
     <%
-        
-        //resetting ResendAppointmentData data feilds
-        ResendAppointmentData.CustomerID = "";
-        ResendAppointmentData.ProviderID = "";
-        ResendAppointmentData.SelectedServices = "";
-        ResendAppointmentData.AppointmentDate = "";
-        ResendAppointmentData.AppointmentTime = "";
-        ResendAppointmentData.PaymentMethod = "";
-        ResendAppointmentData.ServicesCost = "";
-        ResendAppointmentData.CreditCardNumber = "";
         
         int notiCounter = 0;
         
@@ -518,32 +508,32 @@
         
     %>
     
-    <body style="background-color: #ccccff;">
+    <body style="background-color: #6699ff;">
         
         <div id="PagePageLoader" class="QueueLoader" style='display: none;'>
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <div style="background-color: #ccccff;">
+        <div style="background-color: #6699ff;">
                                         
-                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%;">
+                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; height: 40px; background-color: white; border-spacing: 20px 0;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding: 5px; cursor: pointer; border-top: 1px solid black; width: 33.3%;  background-color: #ccccff;">
+                                                    <td onclick="activateAppTabMobile()" id="AppointmentsTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkblue; font-weight: bolder; width: 33.3%;  background-color: white; border-bottom: 2px solid darkblue;">
                                                         Your Spots
                                                     </td>
-                                                    <td onclick="activateHistory()" id="HistoryTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td onclick="activateHistoryMobile()" id="HistoryTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkgrey; background-color: white; font-weight: bolder; width: 33.3%;">
                                                         History
                                                     </td>
-                                                    <td style="display: none;" onclick="activateFavTab()" id="FavoritesTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td style="display: none;" onclick="activateFavTabMobile()" id="FavoritesTab" style="text-align: center; padding: 5px; cursor: pointer; background-color: white; width: 33.3%;">
                                                        
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table></center>
                                         
-            <center><div class="scrolldiv" style=" height: 87%; overflow-y: auto;">
+            <center><div class="scrolldiv" style=" height: auto; overflow-y: auto;">
                                    
                                    <script>
                                         function showselectCustSpttabs(){
@@ -553,7 +543,7 @@
                                         
                                 <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
                                     
-                                    <p style="color: tomato; margin-top: 10px;">Today's Spots</p>
+                                    <p style="color: white; margin-top: 10px;">Today's Spots</p>
                                    
                                     <script>
                                     
@@ -753,7 +743,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; margin-left: 10px; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -798,7 +788,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -831,7 +821,7 @@
                                             <p id="timePickerStatus<%=JString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatus<%=JString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="ChangeAppointmentID<%=JString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
                                         
                                             <script>
                                                 
@@ -936,7 +926,7 @@
                                                                 
                                                                 document.getElementById("timePickerStatus<%=JString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtn<%=JString%>").disabled = false;
-                                                                document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "pink";
+                                                                document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                                 
                                                             }
                                                         
@@ -944,7 +934,7 @@
                                                             
                                                             document.getElementById("timePickerStatus<%=JString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=JString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                             
                                                         }
 
@@ -1031,7 +1021,7 @@
                                         <form style=" display: none;" id="addFavProvForm<%=JString%>" class="addFavProvForm" name="addFavProvForm" action="addFavProvController" method="POST">
                                             <input id="CustIDatAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDatAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
@@ -1183,7 +1173,7 @@
                                     
                                     <!--------------------------------------------------------------------------------------------------------------------------------------------->
                                     
-                                    <p style="color: tomato; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
+                                    <p style="color: white; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
                                     
                                     <%
                                         
@@ -1255,7 +1245,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; margin-left: 10px; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -1287,7 +1277,7 @@
                                             <p id="timePickerStatusFuture<%=QString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatusFuture<%=QString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="UpdateAppointmentID<%=QString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=QString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px;" name="<%=QString%>changeAppointment" type="button" value="Change" />
                                            
                                             <script>
                                                $(document).ready(function() {                        
@@ -1385,14 +1375,14 @@
                                                             }else{
                                                                 document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = false;
-                                                                document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "pink";
+                                                                document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkslateblue";
                                                             }
                                                             
                                                     }else{
                                                         
                                                         document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "";
                                                         document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = false;
-                                                        document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "pink";
+                                                        document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkslateblue";
                                                     }
                                                     
                                                     
@@ -1483,7 +1473,7 @@
                                         <form style=" display: none;" id="addFutureFavProvForm<%=QString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustIDforAddFav<%=QString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDforAddFav<%=QString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
@@ -1642,7 +1632,7 @@
                                         
                                 <div id="serviceslist" class="AppHistoryDiv" style="border-top: 0;">
                                     
-                                    <p style="color: tomato; margin: 10px;">Your Past Spots</p>
+                                    <p style="color: white; margin: 10px;">Your Past Spots</p>
                                     
                                     <% 
                                         
@@ -1712,7 +1702,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -1797,7 +1787,7 @@
                                                             <textarea id="ReviewTxtFld<%=JString%>" name="Review" rows="0" cols="0" style="width: 250px; height: 50px;" onfocus="if(this.innerHTML==='Compose review message...')this.innerHTML = ''; ">
                                                             </textarea>
                                                         </td>
-                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;"
+                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border-radius: 4px;"
                                                                            type="button" value="Send" />
                                                         </td>
                                                     </tr>
@@ -1871,7 +1861,7 @@
                                                                 
                                                     }else{
                                                         
-                                                        document.getElementById("submitReviewBtn<%=JString%>").style.backgroundColor = "pink";
+                                                        document.getElementById("submitReviewBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                         document.getElementById("submitReviewBtn<%=JString%>").disabled = false;
                                                         
                                                     }
@@ -1883,7 +1873,7 @@
                                         <form style=" display: none;" id="addFavProvFormFromRecent<%=JString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustomerIDforAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProviderIDforAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  
@@ -2030,297 +2020,11 @@
                                     <%} //end of if block%>     
                                     
                                 </div>
-                                    
-                            <%
-                                
-                                ArrayList<ProviderInfo> favProvidersList = new ArrayList<>();
-                                int FavProvID;
-                                
-                                try{
-                                    
-                                    Class.forName(Driver);
-                                    Connection favConn = DriverManager.getConnection(Url, user, password);
-                                    String favString = "Select top 5 * from ProviderCustomers.FavoriteProviders where CustomerId =? order by FavoritesId desc";
-                                    
-                                    PreparedStatement favPst = favConn.prepareStatement(favString);
-                                    favPst.setInt(1,UserID);
-                                    
-                                    ResultSet favRow = favPst.executeQuery();
-                                    
-                                    ProviderInfo eachFavProv = new ProviderInfo();
-                                    
-                                    while(favRow.next()){
-                                        
-                                        FavProvID = favRow.getInt("ProviderId");
-                                        
-                                        try{
-                                            
-                                         Class.forName(Driver);
-                                         Connection eachFavConn = DriverManager.getConnection(Url, user, password);
-                                         String eachFavString = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID =?";
-                                         
-                                         PreparedStatement eachFavPst = eachFavConn.prepareStatement(eachFavString);
-                                         eachFavPst.setInt(1, FavProvID);
-                                         
-                                         ResultSet eachFavProvRow = eachFavPst.executeQuery();
-                                         
-                                        while(eachFavProvRow.next()){
-                                         
-                                            eachFavProv = new ProviderInfo(eachFavProvRow.getInt("Provider_ID"), eachFavProvRow.getString("First_Name"), eachFavProvRow.getString("Middle_Name"), eachFavProvRow.getString("Last_Name"), 
-                                                    eachFavProvRow.getDate("Date_Of_Birth"), eachFavProvRow.getString("Phone_Number"), eachFavProvRow.getString("Company"), eachFavProvRow.getInt("Ratings"), eachFavProvRow.getString("Service_Type"),eachFavProvRow.getString("First_Name") + "-" + eachFavProvRow.getString("Company"),eachFavProvRow.getBlob("Profile_Pic"), eachFavProvRow.getString("Email"));
-                                            
-                                            favProvidersList.add(eachFavProv);
-                                        }
-                                        
-                                        }catch(Exception e){
-                                            e.printStackTrace();
-                                        }
-                                        
-                                    }
-                                }
-                                catch(Exception e){
-                                    e.printStackTrace();
-                                }
-                                
-                            %>
-                    
+                             
                                 <div style="display: none;" id="serviceslist" style="margin-top: 0; border-top: 0;" class="FavDiv">
                               
-                                     <p style="color: tomato; margin: 10px;">Your Favorite Providers</p>
-                                      
-                                <%
-                                    
-                                    if(favProvidersList.size() == 0){
-                                        
-                                 
-                                %>
-                                     
-                                     <p id="noFavProvStatus" style ="background-color: red; color: white; margin-top: 30px; margin-bottom: 30px;">You don't have any favorite providers</p>
-                                
-                                <%}
-                                    
-                                    else{ 
-
-                                        for(int s = 0; s < favProvidersList.size(); s++){
-                                        
-                                        
-                                        String SString = Integer.toString(s);
-                                        
-                                        FavProvID = favProvidersList.get(s).getID();
-                                        String FavProvFullName = favProvidersList.get(s).getFirstName() +
-                                                     " " + favProvidersList.get(s).getMiddleName() + " " + favProvidersList.get(s).getLastName();  
-                                                     
-                                        String FavProvTel = favProvidersList.get(s).getPhoneNumber();
-                                        String FavProvEmail = favProvidersList.get(s).getEmail();
-                                        String FavProvCompany = favProvidersList.get(s).getCompany();
-                                        String favProvAddress = "";
-                                        int FavRatings = favProvidersList.get(s).getRatings();
-
-
-                                        try{
-
-                                            Class.forName(Driver);
-                                            Connection favAddressConn = DriverManager.getConnection(Url, user, password);
-                                            String favAddressString = "Select * from QueueObjects.ProvidersAddress where ProviderID =?";
-                                            
-                                            PreparedStatement favAddressPst = favAddressConn.prepareStatement(favAddressString);
-                                            favAddressPst.setInt(1, FavProvID );
-                                            
-                                            ResultSet favAddressRow = favAddressPst.executeQuery();
-                                            
-                                            while(favAddressRow.next()){
-                                                
-                                                favProvidersList.get(s).setAddress(favAddressRow.getInt("House_Number"), favAddressRow.getString("Street_Name").trim(),
-                                                                        favAddressRow.getString("Town").trim(), favAddressRow.getString("City").trim(), favAddressRow.getString("Country").trim(), favAddressRow.getInt("Zipcode"));
-
-                                                favProvAddress = favProvidersList.get(s).Address.getHouseNumber() + " " + favProvidersList.get(s).Address.getStreet() +
-                                                        ", " + favProvidersList.get(s).Address.getTown() + ", " + favProvidersList.get(s).Address.getCity() + ", " + favProvidersList.get(s).Address.getCountry() + " " + favProvidersList.get(s).Address.getZipcode();
-                                                
-                                            }
-                                            
-                                        }
-                                        catch(Exception e){
-                                            e.printStackTrace();
-                                        }
-
-                                        String base64Image = "";
-
-                            try{    
-                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                Blob profilepic = favProvidersList.get(s).getProfilePicture(); 
-                                InputStream inputStream = profilepic.getBinaryStream();
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[4096];
-                                int bytesRead = -1;
-
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
-                                }
-
-                                byte[] imageBytes = outputStream.toByteArray();
-
-                                base64Image = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                            }
-                            catch(Exception e){
-
-                            }
-                                        
-                                %>
-                                
-                                                
-                            
-                    <%
-                        
-                        //getting coverdata
-                        String base64Cover = "";
-                        
-                        try{
-                            
-                            Class.forName(Driver);
-                            Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
-                            PreparedStatement coverPst = coverConn.prepareStatement(coverString);
-                            coverPst.setInt(1,FavProvID);
-                            ResultSet cover = coverPst.executeQuery();
-                            
-                            while(cover.next()){
-                                
-                                 try{    
-                                    //put this in a try catch block for incase getProfilePicture returns nothing
-                                    Blob profilepic = cover.getBlob("CoverPhoto"); 
-                                    InputStream inputStream = profilepic.getBinaryStream();
-                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                    byte[] buffer = new byte[4096];
-                                    int bytesRead = -1;
-
-                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                        outputStream.write(buffer, 0, bytesRead);
-                                    }
-
-                                    byte[] imageBytes = outputStream.toByteArray();
-
-                                    base64Cover = Base64.getEncoder().encodeToString(imageBytes);
-
-                                }
-                                catch(Exception e){
-
-                                }
-                                
-                                 if(!base64Cover.equals(""))
-                                     break;
-                                 
-                            }
-                            
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                    %>
-                    
-                                
-                                <div id="FavoriteProvDiv<%=SString%>" class="EacFavsDiv" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">
-                                    
-                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                            <img style="border: 5px solid white;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
-                                    </div>
-                                    
-                                    <div style="padding-top: 75px;">
-                                    <b><p style="font-size: 20px; margin-top: 15px;"><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
-                                          <%=FavProvFullName%></p></b>
-                                    <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-
-                                        <%=FavProvCompany%> <span style="color: blue;">
-                                            
-                                        <%
-                                            if(FavRatings ==5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(FavRatings == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(FavRatings == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(FavRatings == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(FavRatings == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%>
-                                        
-                                        </span></p>
-                                    
-                                    
-                                    <div style="width: 70%;">
-                                        
-                                        <form style=" display: none;" id="deleteFavProviderForm<%=SString%>" class="deleteFavProvider" name="deleteFavProvider">
-                                            
-                                            <p style="color: red; margin-top: 10px;">Are you sure you want to remove this Provider from your favorites</p>
-                                            <p><input id="DeleteFavProvBtn<%=SString%>" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="<%=s%>deleteFavProv" type="button" value="Yes" />
-                                                <span onclick = "hideDeleteFavProv(<%=SString%>)" style="background-color: blue; border: 1px solid black; color: white; padding: 1.9px; cursor: pointer;"> No</span></p>
-                                            <input id="ProvID<%=SString%>" type="hidden" name="UserID" value="<%=FavProvID%>" />
-                                            <script>
-                                               $(document).ready(function() {                        
-                                                    $('#DeleteFavProvBtn<%=SString%>').click(function(event) {  
-                                                        
-                                                        var ProvID = document.getElementById("ProvID<%=SString%>").value;
-                                                        
-                                                        $.ajax({  
-                                                            type: "POST",  
-                                                            url: "RemoveFavProvController",  
-                                                            data: "UserID="+ProvID,  
-                                                            success: function(result){  
-                                                              alert(result);
-                                                              document.getElementById("FavoriteProvDiv<%=SString%>").style.display = "none";
-                                                            }                
-                                                        });
-                                                        
-                                                    });
-                                                });
-                                            </script>
-                                            
-                                        </form>
-                                        
-                                            <div class="tooltip" style="max-width: 2px; float: right; padding-top: 15px;">
-                                                <p style="text-align: right; width: 5px; cursor: pointer;"><img onclick = "showDeleteFavProv(<%=SString%>)" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/></p>
-                                                <p class="tooltiptext" style="width: 50px;">delete this favorite</p>
-                                            </div>
-                                                
-                                    <center><form name="bookFromFavoritesForm" action="EachSelectedProviderLoggedIn.jsp" method="POST">
-                                        <input type="hidden" name="UserID" value="<%=FavProvID%>" />
-                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />
-                                        </form></center>
-                                        
-                                        
-                                    </div>
-                                            
-                                    </div>    
-                                        
-                                        <a href="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                                            <p style="border: 1px solid darkblue; color: darkblue; text-align: center; padding: 5px; max-width: 300px;">View all your favorite providers</p></a>
-                                </div>
-                                
-                                <%      }
-                                    }
-                                %>
-                                
-                                
-                                <div style="display: none;" id="LastFavDiv">
-                                    
-                                </div>
-                                
-                                </div>
                                </div>
-                                 </center>
+                </div></center>
                             </td> 
                         </tr>
                     </tbody>

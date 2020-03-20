@@ -59,7 +59,7 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
     
@@ -309,6 +309,8 @@
                 
                 <h4><a href="" style=" color: black;"></a></h4>
                 
+                <h4 style="color: darkblue; padding: 5px;">Search By Location</h4>
+                
                 <div id="LocSearchDiv" style="margin-top: 5px;">
                 <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
@@ -396,8 +398,8 @@
             </div>
                  
             <div id="main" class="Main">
-                <center><p style="color: white; margin-bottom: 5px; margin-top: 0; max-width: 300px">
-                        <span style='color: #ffc700;' id="NameForLoginStatus"><%=FirstName%></span> - Explore below </p></center>
+                <center><h4 style="color: darkblue; margin-bottom: 5px; padding-top: 5px; max-width: 300px">
+                        <!--span style='color: white;' id="NameForLoginStatus"><=FirstName%></span--> Search By Category </h4></center>
                  
                 <!--cetnter><h4></h4></cetnter-->
                 

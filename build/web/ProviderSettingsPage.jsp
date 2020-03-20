@@ -50,7 +50,7 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
     
@@ -335,7 +335,7 @@
         }
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #7e7e7e; padding-bottom: 0;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #6699ff; padding-bottom: 0;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -1169,7 +1169,7 @@
         <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
             <center><p style="color: white; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 300px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="">
                             <td>
@@ -1558,7 +1558,6 @@
                     
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
                             </td>
                         </tr>
                         

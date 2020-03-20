@@ -4,8 +4,8 @@
     "start_url" : "/Queue.jsp",
     "display" : "standalone",
     "orientation" : "portrait-primary",
-    "background_color": "#ccccff",
-    "theme_color": "#ccccff",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
     "description": "Find medical and beauty services.",
     "icons": [{
       "src": "./HomeIcons/Android/Icon1.png",

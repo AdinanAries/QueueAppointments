@@ -668,6 +668,93 @@ function activateFavTab() {
 
   $(".scrolldiv").animate({ scrollTop: 0 }, "fast");
 }
+//this is for mobile spots and user profile windows
+function activateFavTabMobile() {
+  var AppointmentsTab = document.getElementById("AppointmentsTab");
+  var HistoryTab = document.getElementById("HistoryTab");
+  var FavoritesTab = document.getElementById("FavoritesTab");
+
+  var AppListDiv = document.querySelector(".AppListDiv");
+  var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
+  var FavDiv = document.querySelector(".FavDiv");
+
+  //HistoryTab.style.backgroundColor = "cornflowerblue";
+  HistoryTab.style.color = "darkgrey";
+  HistoryTab.style.border = "none";
+
+  //AppointmentsTab.style.backgroundColor = "cornflowerblue";
+  AppointmentsTab.style.color = "darkgrey";
+  AppointmentsTab.style.border = "none";
+
+  //FavoritesTab.style.backgroundColor = "#ccccff";
+  //FavoritesTab.style.border = "none";
+  FavoritesTab.style.color = "darkblue";
+  FavoritesTab.style.borderBottom = "2px solid darkblue";
+
+  AppListDiv.style.display = "none";
+  AppHistoryDiv.style.display = "none";
+  FavDiv.style.display = "block";
+
+  $(".scrolldiv").animate({ scrollTop: 0 }, "fast");
+}
+
+function activateAppTabMobile() {
+  var AppointmentsTab = document.getElementById("AppointmentsTab");
+  var HistoryTab = document.getElementById("HistoryTab");
+  var FavoritesTab = document.getElementById("FavoritesTab");
+
+  var AppListDiv = document.querySelector(".AppListDiv");
+  var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
+  var FavDiv = document.querySelector(".FavDiv");
+
+  //HistoryTab.style.backgroundColor = "cornflowerblue";
+  HistoryTab.style.color = "darkgrey";
+  HistoryTab.style.border = "none";
+
+  //AppointmentsTab.style.backgroundColor = "#ccccff";
+  //AppointmentsTab.style.border = "none";
+  AppointmentsTab.style.color = "darkblue";
+  AppointmentsTab.style.borderBottom = "2px solid darkblue";
+
+  //FavoritesTab.style.backgroundColor = "cornflowerblue";
+  FavoritesTab.style.color = "darkgrey";
+  FavoritesTab.style.border = "none";
+
+  AppListDiv.style.display = "block";
+  AppHistoryDiv.style.display = "none";
+  FavDiv.style.display = "none";
+
+  $(".scrolldiv").animate({ scrollTop: 0 }, "fast");
+}
+
+function activateHistoryMobile() {
+  var AppointmentsTab = document.getElementById("AppointmentsTab");
+  var HistoryTab = document.getElementById("HistoryTab");
+  var FavoritesTab = document.getElementById("FavoritesTab");
+
+  var AppListDiv = document.querySelector(".AppListDiv");
+  var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
+  var FavDiv = document.querySelector(".FavDiv");
+
+  //HistoryTab.style.backgroundColor = "#ccccff";
+  //HistoryTab.style.border = "none";
+  HistoryTab.style.color = "darkblue";
+  HistoryTab.style.borderBottom = "2px solid darkblue";
+
+  //AppointmentsTab.style.backgroundColor = "cornflowerblue";
+  AppointmentsTab.style.color = "darkgrey";
+  AppointmentsTab.style.border = "none";
+
+  //FavoritesTab.style.backgroundColor = "cornflowerblue";
+  FavoritesTab.style.color = "darkgrey";
+  FavoritesTab.style.border = "none";
+
+  AppListDiv.style.display = "none";
+  AppHistoryDiv.style.display = "block";
+  FavDiv.style.display = "none";
+
+  $(".scrolldiv").animate({ scrollTop: 0 }, "fast");
+}
 
 //Services Provider page Tab Settings
 

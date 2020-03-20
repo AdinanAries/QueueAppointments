@@ -57,7 +57,7 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
     
     </head>
    
@@ -1884,7 +1884,7 @@
                     
                     <div style="float: right; width: 15%;" onclick="showProfile();">
                         <%if(base64Image != ""){%>
-                            <img class="fittedImg" style="border-radius: 100%; border: 1px solid green;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
+                            <img class="fittedImg" style="border-radius: 100%; margin-top: 2px;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
                         <%} else{%>
                             <img style="border-radius: 100%; border: 2px solid white; background-color: white;" src="icons/icons8-user-filled-100.png" width="30" height="30"/>
                         <%}%>
@@ -3448,11 +3448,11 @@
                                         Taken </span> <span style="color: green; border: 1px solid green; padding-right: 3px;"><img src="icons/icons8-standing-man-filled-50 (2).png" width="30" height="25" alt="icons8-standing-man-filled-50 (2)"/>
                                         Blocked Spot </span> </p>
                                     
-                                        <form style=" margin-top: 10px;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
+                                        <form style=" margin-top: 10px; padding: 5px; background-color: #d8d8d8;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
                                             <p style="text-align: center; color: #000099; margin: 5px; font-weight: bolder;">Change Your Spots Intervals Below</p>
                                             
                                             <center><div>
-                                                <p style="color: red;"><select style="border: 0; text-align: right; background-color: #eeeeee; color: #ff3333; font-weight: bold;" name="SpotsIntervals">
+                                                <p style="color: red;"><select style="border: 0; text-align: right; background-color: darkslateblue; color: white; padding: 5px;" name="SpotsIntervals">
                                                         <option value="<%=IntervalsValue%>"><%=IntervalsValue%> minutes</option>
                                                         <option value="15">15 minutes</option>
                                                         <option value="30">30 minutes</option>
@@ -3471,7 +3471,7 @@
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <input style="background-color: #ff3333; border: 0; color: white; padding: 5px;" type="submit" value="Change" name="SetSpotsIntervalBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                                <input style="background-color: #ff3333; border: 0; color: white; padding: 5px; border-radius: 4px;" type="submit" value="Change" name="SetSpotsIntervalBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                             </div></center>
                                                 
                                         </form>
@@ -4629,7 +4629,7 @@
             </div>
                     
                 <div id='ReservationAndFutureSpots' style='overflow-y: auto;'>  
-                    <center><table style="width: 100%;">
+                    <center><table style="width: 100%; padding-top: 5px;">
                         <tbody>
                             <tr>
                                 <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; width: 33.3%; background-color: darkslateblue; color: white; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
@@ -5159,23 +5159,23 @@
                                                     <tbody>
                                                         <tr>
                                                             <td style="text-align: left;">First Name: </td>
-                                                            <td><input style="background-color: #d9e8e8;" id="ProvFNameFld" placeholder="First name here" type="text" name="FirstNameFld" value="<%=ThisProvider.getFirstName()%>" /></td>
+                                                            <td><input style="border-radius: 4px; background-color: #d9e8e8;" id="ProvFNameFld" placeholder="First name here" type="text" name="FirstNameFld" value="<%=ThisProvider.getFirstName()%>" /></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Middle Name: </td>
-                                                            <td><input style="background-color: #d9e8e8;" id="ProvMNameFld" placeholder="Middle name here" type="text" name="MiddleNameFld" value="<%=ThisProvider.getMiddleName()%>" /></td>
+                                                            <td><input style="border-radius: 4px; background-color: #d9e8e8;" id="ProvMNameFld" placeholder="Middle name here" type="text" name="MiddleNameFld" value="<%=ThisProvider.getMiddleName()%>" /></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Last Name: </td>
-                                                            <td><input style="background-color: #d9e8e8;" id="ProvLNameFld" placeholder="Last name here" type="text" name="LastNameFld" value="<%=ThisProvider.getLastName()%>" /></td>
+                                                            <td><input style="border-radius: 4px; background-color: #d9e8e8;" id="ProvLNameFld" placeholder="Last name here" type="text" name="LastNameFld" value="<%=ThisProvider.getLastName()%>" /></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Mobile Number: </td>
-                                                            <td><input style="background-color: #d9e8e8;" onclick="checkMiddlePhoneNumberEdit();"  onkeydown="checkMiddlePhoneNumberEdit();"id="ProvPhnNumberFld" placeholder="Phone number here" type="text" name="MobileNumberFld" value="<%=PhoneNumber%>"/></td>
+                                                            <td><input style="border-radius: 4px; background-color: #d9e8e8;" onclick="checkMiddlePhoneNumberEdit();"  onkeydown="checkMiddlePhoneNumberEdit();"id="ProvPhnNumberFld" placeholder="Phone number here" type="text" name="MobileNumberFld" value="<%=PhoneNumber%>"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: left;">Email: </td>
-                                                            <td><input style="background-color: #d9e8e8;" id="ProvEmailFld" placeholder="Email here" type="text" name="EmailFld" value="<%=Email%>"/></td>
+                                                            <td><input style="border-radius: 4px; background-color: #d9e8e8;" id="ProvEmailFld" placeholder="Email here" type="text" name="EmailFld" value="<%=Email%>"/></td>
                                                         </tr>                                        
                                                 </tbody>
                                                 </table>
@@ -5212,7 +5212,7 @@
                                                     </script>
                                                        
                                                 <input id="ProvIDforPerDetails" type="hidden" name="ProviderID" value="<%=UserID%>"/>
-                                                <input id="UpdateProvPerBtn" style="padding: 5px; border: 1px solid black; border-radius: 4px; background-color: pink;" type="button" value="Update" name="UpdatePerInfoBtn" />
+                                                <input id="UpdateProvPerBtn" style="color: white; padding: 5px; border:0; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdatePerInfoBtn" />
                                                         
                                             </form>
                                                 
@@ -5286,7 +5286,7 @@
                                                             UpdateProvPerBtn.style.backgroundColor = "darkgrey";
                                                             UpdateProvPerBtn.disabled = true;
                                                         }else{
-                                                            UpdateProvPerBtn.style.backgroundColor = "pink";
+                                                            UpdateProvPerBtn.style.backgroundColor = "darkslateblue";
                                                             UpdateProvPerBtn.disabled = false;
                                                         }
                                                             
@@ -6069,8 +6069,8 @@
                                     <table style="width: 100%;">
                                         <tbody>
                                             <tr>
-                                                <td id="ShowHourBtn" onclick="toggleshowHoursOpen();" style="background-color: plum; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer; width: 50%;">Hours Open</td>
-                                                <td id="showOtherSettingsBtn" onclick="toggleshowOtherSettings();" style="background-color: pink; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer;">Other Settings</td>
+                                                <td id="ShowHourBtn" onclick="toggleshowHoursOpen();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;">Hours Open</td>
+                                                <td id="showOtherSettingsBtn" onclick="toggleshowOtherSettings();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;">Other Settings</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -6079,55 +6079,55 @@
                                     
                                     <div id="ShowHoursOpenDiv">
                                     
-                                    <div style="width: 100%;">
+                                    <div style="width: 100%; padding-top: 5px;">
                                     <form name="HoursOpen" action="SetProviderHoursController" method="POST">
                                     
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Sun:</span>
-                                        <input id="SundayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayStart" value="<%=ThisProvider.TimeOpen.SundayStart%>" readonly/> -
-                                        <input id="SundayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayClose" value="<%=ThisProvider.TimeOpen.SundayClose%>" readonly/>
+                                        <p style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; background-color: #eeeeee;"><span style="color: red;">Sun:</span>
+                                        <input id="SundayStart" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayStart" value="<%=ThisProvider.TimeOpen.SundayStart%>" readonly/> -
+                                        <input id="SundayClose" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SundayClose" value="<%=ThisProvider.TimeOpen.SundayClose%>" readonly/>
                                         <input id="SundayChck" type="checkbox" name="SundayChck" value="12:00 am" />
                                         <label for="SundayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Mon:</span>
+                                        <p style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white;"><span style="color: red;">Mon:</span>
                                         <input id="MondayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="MondayStart" value="<%=ThisProvider.TimeOpen.MondayStart%>" readonly/> -
                                         <input id="MondayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="MondayClose" value="<%=ThisProvider.TimeOpen.MondayClose%>" readonly/>
                                         <input id="MondayChck" type="checkbox" name="MondayChck" value="12:00 am" />
                                         <label for="MondayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Tue:</span>
-                                        <input id="TuesdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayStart" value="<%=ThisProvider.TimeOpen.TuesdayStart%>" readonly/> -
-                                        <input id="TuesdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayClose" value="<%=ThisProvider.TimeOpen.TuesdayClose%>" readonly/>
+                                        <p style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; background-color: #eeeeee;"><span style="color: red;">Tue:</span>
+                                        <input id="TuesdayStart" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayStart" value="<%=ThisProvider.TimeOpen.TuesdayStart%>" readonly/> -
+                                        <input id="TuesdayClose" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="TuesdayClose" value="<%=ThisProvider.TimeOpen.TuesdayClose%>" readonly/>
                                         <input id="TuesdayChck" type="checkbox" name="TuesdayChck" value="12:00 am" />
                                         <label for="TuesdayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Wed:</span>
+                                        <p style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white;"><span style="color: red;">Wed:</span>
                                         <input id="WednesdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="WednesdayStart" value="<%=ThisProvider.TimeOpen.WednessdayStart%>" readonly/> -
                                         <input id="WednesdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="WednesdayClose" value="<%=ThisProvider.TimeOpen.WednessdayClose%>" readonly/>
                                         <input id="WednesdayChck" type="checkbox" name="WednesdayChck" value="12:00 am" />
                                         <label for="WednesdayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Thu:</span>
-                                        <input id="ThursdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayStart" value="<%=ThisProvider.TimeOpen.ThursdayStart%>" readonly/> -
-                                        <input id="ThursdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayClose" value="<%=ThisProvider.TimeOpen.ThursdayClose%>" readonly/>
+                                        <p style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; background-color: #eeeeee;"><span style="color: red;">Thu:</span>
+                                        <input id="ThursdayStart" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayStart" value="<%=ThisProvider.TimeOpen.ThursdayStart%>" readonly/> -
+                                        <input id="ThursdayClose" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="ThursdayClose" value="<%=ThisProvider.TimeOpen.ThursdayClose%>" readonly/>
                                         <input id="ThursdayChck" type="checkbox" name="ThursdayChck" value="12:00 am" />
                                         <label for="ThursdayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Fri:</span>
+                                        <p style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white;"><span style="color: red;">Fri:</span>
                                         <input id="FridayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="FridayStart" value="<%=ThisProvider.TimeOpen.FridayStart%>" readonly/> -
                                         <input id="FridayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="FridayClose" value="<%=ThisProvider.TimeOpen.FridayClose%>" readonly/>
                                         <input id="FridayChck" type="checkbox" name="FridayChck" value="12:00 am" />
                                         <label for="FridayChck">Close</label></p>
                                         
-                                        <p style="padding-left: 5px; border: 1px solid black; margin: 5px; background-color: white;"><span style="color: red;">Sat:</span>
-                                        <input id="SaturdayStart" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayStart" value="<%=ThisProvider.TimeOpen.SaturdayStart%>" readonly/> -
-                                        <input id="SaturdayClose" style="background-color: white; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayClose" value="<%=ThisProvider.TimeOpen.SaturdayClose%>" readonly/>
+                                        <p style="padding-left: 5px; padding-top: 5px; padding-bottom: 5px; background-color: #eeeeee;"><span style="color: red;">Sat:</span>
+                                        <input id="SaturdayStart" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayStart" value="<%=ThisProvider.TimeOpen.SaturdayStart%>" readonly/> -
+                                        <input id="SaturdayClose" style="background-color: #eeeeee; border: 0; width: 60px;" placeholder="Not Set" type="text" name="SaturdayClose" value="<%=ThisProvider.TimeOpen.SaturdayClose%>" readonly/>
                                         <input id="SaturdayChck" type="checkbox" name="SaturdayChck" value="12:00 am" />
                                         <label for="SaturdayChck">Close</label></p>
                                         
                                         <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                         <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <center><input id="UpdateHoursBtn" style="border: 1px solid black; background-color: pink; padding: 5px; border-radius: 4px;" type="submit" value="Update Your Hours" name="UpdateHoursBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" /></center>
+                                        <center><input id="UpdateHoursBtn" style="background-color: darkslateblue; padding: 5px; border-radius: 4px;" type="submit" value="Update Your Hours" name="UpdateHoursBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" /></center>
                                         
                                     </form>
                                     </div>
@@ -6500,9 +6500,10 @@
                                     
                                     <div id="ShowOtherSettingsDiv" style="display: none;">
                                     
-                                    <div style="background-color: white; padding: 5px; margin: 5px; border: 1px solid black;">
+                                    <div style="background-color: white; padding: 5px; margin: 5px;">
                                     
-                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Cancellation Policy
+                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
+                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Cancellation Policy
                                             <span style="float: right;"><input style="background-color: white;" id="CnclPlcyChck" type="radio" name="CancellationPolicyChck" value="ON" />
                                             <label for="CnclPlcyChck">ON</label>
                                             <input style="background-color: white;" id="CnclPlcyChckOFF" type="radio" name="CancellationPolicyChck" value="OFF" />
@@ -6910,7 +6911,8 @@
                                        
                                    </script>
                                     
-                                    <center><p onclick="toggleShowSubscriptionDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Manage Your Subscription</p></center>
+                                    <center><p onclick="toggleShowSubscriptionDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
+                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Manage Your Subscription</p></center>
                                     
                                     <div id="SubscriptionDiv" style="text-align: center; background-color: #6699ff; padding: 5px; display: none;">
                                         
@@ -7203,7 +7205,8 @@
                                         
                                     </script>
                                     
-                                    <center><p onclick="toggleShowEditBizInfoDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Edit Your Business Info</p></center>
+                                    <center><p onclick="toggleShowEditBizInfoDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
+                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Edit Your Business Info</p></center>
                                     
                                     <div id="EditBizInfoDiv" style="text-align: center; background-color: #6699ff; display: none">
                                         <form name="UpdateBizInfoForm">
@@ -7373,7 +7376,8 @@
                                     
                                     <!--center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Your Queue Stats.</p></center-->
                                     
-                                    <center><p onclick="showUpdateLoginDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Edit Your Login Info.</p></center>
+                                    <center><p onclick="showUpdateLoginDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color:
+                                               #eeeeee; border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Edit Your Login Info.</p></center>
                                     
                                     <div id="UpdateLoginDiv" style="text-align: center; background-color: #6699ff; display: none;">
                                         
@@ -7532,11 +7536,11 @@
                                     
                                     <center><p style="color: tomato; margin: 5px;">Your Clients and Blocked People</p></center>
                                     
-                                    <table style="width: 100%;">
+                                    <table style="width: 100%; margin-bottom: 5px;">
                                         <tbody>
                                             <tr>
-                                                <td id="ShowClientsBtn" onclick="toggleshowClients();" style="background-color: plum; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer; width: 50%;">Your Clients</td>
-                                                <td id="ShowBlockedPeopleBtn" onclick="toggleshowBlockedPeople();" style="background-color: pink; padding: 5px; border-radius: 4px; border: 1px solid black; cursor: pointer;">Blocked People</td>
+                                                <td id="ShowClientsBtn" onclick="toggleshowClients();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;">Your Clients</td>
+                                                <td id="ShowBlockedPeopleBtn" onclick="toggleshowBlockedPeople();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;">Blocked People</td>
                                             </tr>
                                         </tbody>
                                     </table>

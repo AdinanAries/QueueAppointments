@@ -58,7 +58,7 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-        <meta name="apple-mobile-web-app-status-bar" content="#ccccff" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
     
@@ -278,7 +278,7 @@
             e.printStackTrace();
         }
     //------------------------------------------------------------------------------------------------------------------------------------------    
-        //Getting Notifications data
+        /*/Getting Notifications data
         ArrayList<String> Notifications = new ArrayList<>();
         String NotiIDs = "{\"Data\" : [ ";
         
@@ -319,7 +319,7 @@
             e.printStackTrace();
         }
         
-        NotiIDs += " ] }";
+        NotiIDs += " ] }";*/
         //JOptionPane.showMessageDialog(null, NotiIDs);
        
      //----------------------------------------------------------------------------------------------------------------------   
@@ -806,7 +806,7 @@
                                                 
                                         %>
                                         
-                                        <form id="SetUserAddress" style="border-top: 1px solid darkblue; margin-top: 5px;
+                                        <form id="SetUserAddress" style="margin-top: 5px;
                                               padding-top: 5px;" action="SetAddressMobile" method="POST">
                                             <script>
 
@@ -1021,14 +1021,14 @@
                                         %>
                                                     
                                         
-                                        <form id="UpdateUserAccountForm" style="border-top: 1px solid darkblue; margin-top: 5px; display: none;
+                                        <form id="UpdateUserAccountForm" style="margin-top: 5px; display: none;
                                               padding-top: 5px;" >
                                             <center><p style="color: white; margin: 5px;">Change profile information</p></center>
                                             
                                             <center><a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
                                                     <p style="cursor: pointer; color: black; padding: 5px; border-radius: 5px; text-align: center; width: 300px;">
                                                         <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px;" alt=""/>
-                                                        <sup>Add Profile Picture</sup>
+                                                        <sup>Change Profile Picture</sup>
                                                     </p></a></center>
                                             <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
@@ -1173,7 +1173,7 @@
                                                 <input id="CustomerIDforUpdateInfo" type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input id="UserIndexforUpdateInfo" type='hidden' name='UserIndex' value='<%=UserIndex%>'/>
                                                 <center><p id="userProfileFormStatus" style="color: white; text-align: center;"></p></center>
-                                                <center><input id="ChangeProfileUpdateBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Update" /></center>
+                                                <center><input id="ChangeProfileUpdateBtn" style="margin-top: 10px; color: white; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="button" value="Update" /></center>
                                             
                                                 <script>
                                                     $(document).ready(function(){
@@ -1253,7 +1253,7 @@
                                                 
                                         </form>
                                                 
-                                        <form id="SendFeedBackForm" style="border-top: 1px solid darkblue; margin-top: 5px; display: none;
+                                        <form id="SendFeedBackForm" style="margin-top: 5px; display: none;
                                               padding-top: 5px;" >
                                             <center><div id='LastReviewMessageDiv' style='display: none; background-color: white; width: 100%; max-width: 400px;'>
                                                 <p id='LasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
@@ -1612,23 +1612,23 @@
                                             
                                         </script>
                                         
-                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; margin-top: -5px;">
+                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; margin-top: -5px; background-color: white; border-top: #6699ff 10px solid; border-spacing: 10px 0;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding: 5px; cursor: pointer; border-top: 1px solid black; width: 33.3%;  background-color: #ccccff;">
+                                                    <td onclick="activateAppTabMobile()" id="AppointmentsTab" style="text-align: center; font-weight: bolder; padding: 5px; cursor: pointer; color: darkblue; width: 33.3%;  background: none; height: 40px; border-bottom: 2px solid darkblue;">
                                                         Your Spots
                                                     </td>
-                                                    <td onclick="activateHistory()" id="HistoryTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td onclick="activateHistoryMobile()" id="HistoryTab" style="text-align: center; font-weight: bolder; padding: 5px; cursor: pointer; color: darkgrey; background: none; width: 33.3%;">
                                                         History
                                                     </td>
-                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td onclick="activateFavTabMobile()" id="FavoritesTab" style="text-align: center; font-weight: bolder; padding: 5px; cursor: pointer; color: darkgrey; background: none; width: 33.3%;">
                                                         Favorites
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table></center>
                                         
-                                <div class="scrolldiv" style=" height: 600px; overflow-y: auto;">
+                                <div class="scrolldiv" style=" height: 600px; overflow-y: auto; background-color: #6699ff;">
                                    
                                    <script>
                                         function showselectCustSpttabs(){
@@ -1638,7 +1638,7 @@
                                         
                                 <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
                                     
-                                    <p style="color: tomato; margin-top: 10px;">Today's Spots</p>
+                                    <p style="color: white; margin-top: 10px;">Today's Spots</p>
                                    
                                     <script>
                                     
@@ -1838,7 +1838,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -1883,7 +1883,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -1916,7 +1916,7 @@
                                             <p id="timePickerStatus<%=JString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatus<%=JString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="ChangeAppointmentID<%=JString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
                                         
                                             <script>
                                                 
@@ -2021,7 +2021,7 @@
                                                                 
                                                                 document.getElementById("timePickerStatus<%=JString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtn<%=JString%>").disabled = false;
-                                                                document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "pink";
+                                                                document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                                 
                                                             }
                                                         
@@ -2029,7 +2029,7 @@
                                                             
                                                             document.getElementById("timePickerStatus<%=JString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=JString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                             
                                                         }
 
@@ -2116,7 +2116,7 @@
                                         <form style=" display: none;" id="addFavProvForm<%=JString%>" class="addFavProvForm" name="addFavProvForm" action="addFavProvController" method="POST">
                                             <input id="CustIDatAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDatAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
@@ -2203,7 +2203,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -2268,7 +2268,7 @@
                                     
                                     <!--------------------------------------------------------------------------------------------------------------------------------------------->
                                     
-                                    <p style="color: tomato; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
+                                    <p style="color: white; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
                                     
                                     <%
                                         
@@ -2340,7 +2340,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -2372,7 +2372,7 @@
                                             <p id="timePickerStatusFuture<%=QString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatusFuture<%=QString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="UpdateAppointmentID<%=QString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=QString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px;" name="<%=QString%>changeAppointment" type="button" value="Change" />
                                            
                                             <script>
                                                $(document).ready(function() {                        
@@ -2470,14 +2470,14 @@
                                                             }else{
                                                                 document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = false;
-                                                                document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "pink";
+                                                                document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkslateblue";
                                                             }
                                                             
                                                     }else{
                                                         
                                                         document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "";
                                                         document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = false;
-                                                        document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "pink";
+                                                        document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkslateblue";
                                                     }
                                                     
                                                     
@@ -2568,7 +2568,7 @@
                                         <form style=" display: none;" id="addFutureFavProvForm<%=QString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustIDforAddFav<%=QString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDforAddFav<%=QString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
@@ -2658,7 +2658,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -2727,7 +2727,7 @@
                                         
                                 <div id="serviceslist" class="AppHistoryDiv" style="border-top: 0;">
                                     
-                                    <p style="color: tomato; margin: 10px;">Your Past Spots</p>
+                                    <p style="color: white; margin: 10px;">Your Past Spots</p>
                                     
                                     <% 
                                         
@@ -2797,7 +2797,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -2882,7 +2882,7 @@
                                                             <textarea id="ReviewTxtFld<%=JString%>" name="Review" rows="0" cols="0" style="width: 250px; height: 50px;" onfocus="if(this.innerHTML==='Compose review message...')this.innerHTML = ''; ">
                                                             </textarea>
                                                         </td>
-                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;"
+                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: darkslateblue; color: white; padding: 5px; border-radius: 4px;"
                                                                            type="button" value="Send" />
                                                         </td>
                                                     </tr>
@@ -2956,7 +2956,7 @@
                                                                 
                                                     }else{
                                                         
-                                                        document.getElementById("submitReviewBtn<%=JString%>").style.backgroundColor = "pink";
+                                                        document.getElementById("submitReviewBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                         document.getElementById("submitReviewBtn<%=JString%>").disabled = false;
                                                         
                                                     }
@@ -2968,7 +2968,7 @@
                                         <form style=" display: none;" id="addFavProvFormFromRecent<%=JString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustomerIDforAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProviderIDforAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  
@@ -3057,7 +3057,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: darkslateblue; border-radius: 4px; padding: 5px; color: white;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -3171,7 +3171,7 @@
                     
                                 <div id="serviceslist" style="margin-top: 0; border-top: 0;" class="FavDiv">
                               
-                                     <p style="color: tomato; margin: 10px;">Your Favorite Providers</p>
+                                     <p style="color: white; margin: 10px;">Your Favorite Providers</p>
                                       
                                 <%
                                     
@@ -3383,7 +3383,7 @@
                                         <input type="hidden" name="UserID" value="<%=FavProvID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style=" background-color: pink; border: 1px solid black; padding: 5px;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Find a Spot" />
+                                        <input style=" background-color: darkslateblue; border-radius: 4px; padding: 5px;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Find a Spot" />
                                         </form></center>
                                         
                                         
@@ -3392,7 +3392,7 @@
                                     </div>    
                                         
                                         <a onclick="document.getElementById('PagePageLoader').style.display = 'block';" href="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                                            <p style="border: 1px solid darkblue; color: darkblue; text-align: center; padding: 5px; max-width: 300px;">View all your favorite providers</p></a>
+                                            <p style="color: darkblue; text-align: center; padding: 5px; max-width: 300px;">View all your favorite providers</p></a>
                                 </div>
                                 
                                 <%      }
