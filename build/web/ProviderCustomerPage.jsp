@@ -263,9 +263,11 @@
         <script>
             var tempUserName = window.localStorage.getItem("QueueUserName");
             var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
-            
-            document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
-            //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+            (function(){
+                document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+                return false;
+            })();
             
         </script>
     <%
@@ -4288,7 +4290,7 @@
                                                 
                                         %>
                                         
-                                        <form id="SetUserAddress" style="border-top: 1px solid darkblue; margin-top: 5px;
+                                        <form id="SetUserAddress" style="margin-top: 5px;
                                               padding-top: 5px;" action="SetUserAddress" method="POST">
                                                 <p style="padding: 5px; color: #ffffff; text-align: center;">Add Your Address</p>
                                             <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
@@ -4318,7 +4320,7 @@
                                                 <input type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <center><input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" id="NewAddressBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="submit" value="Set Address" /></center>
+                                                <center><input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" id="NewAddressBtn" style="margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="submit" value="Set Address" /></center>
                                             
                                                 <script>
                                                     var setAddress = setInterval(
@@ -4349,7 +4351,7 @@
                                         %>
                                                     
                                         
-                                        <form id="UpdateUserAccountForm" style="border-top: 1px solid darkblue; margin-top: 5px; display: none;
+                                        <form id="UpdateUserAccountForm" style="border-top: 0; margin-top: 5px; display: none;
                                               padding-top: 5px;" >
                                             <center><p style="color: white; margin: 5px;">Change profile information</p></center>
                                             
@@ -4499,7 +4501,7 @@
                                                 <input id="CustomerIDforUpdateInfo" type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input id="UserIndexforUpdateInfo" type='hidden' name='UserIndex' value='<%=UserIndex%>'/>
                                                 <center><p id="userProfileFormStatus" style="color: white; text-align: center;"></p></center>
-                                                <center><input id="ChangeProfileUpdateBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Update" /></center>
+                                                <center><input id="ChangeProfileUpdateBtn" style="color: white; margin-top: 10px; border: 0; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Update" /></center>
                                             
                                                 <script>
                                                     $(document).ready(function(){
@@ -4582,16 +4584,16 @@
                                                 
                                         </form>
                                                 
-                                        <form id="SendFeedBackForm" style="border-top: 1px solid darkblue; margin-top: 5px; display: none;
+                                        <form id="SendFeedBackForm" style="border-top: 0; margin-top: 5px; display: none;
                                               padding-top: 5px;" >
-                                            <center><div id='LastReviewMessageDiv' style='display: none; background-color: white; width: 100%; max-width: 400px;'>
+                                            <center><div id='LastReviewMessageDiv' style='display: none; background-color: white; width: 100%; max-width: 400px; margin-bottom: 5px;'>
                                                 <p id='LasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
                                                 <p id="FeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
                                                 </div></center>
                                             <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td>Compose feedback message below</td>
+                                                    <td style="color: white; text-align: center;">Send Your Feedback</td>
                                                 </tr>
                                                 <tr>
                                                     <td><textarea id="FeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" cols="35">
@@ -4601,7 +4603,7 @@
                                                 </table></center>
                                                 
                                                 <input id='FeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="SendFeedBackBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Send" /></center>
+                                                <center><input id="SendFeedBackBtn" style="color: white; padding: 5px; margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="button" value="Send" /></center>
                                             
                                         </form>
                                                 <script>
@@ -4663,7 +4665,7 @@
                                                         var SendFeedBackBtn = document.getElementById("SendFeedBackBtn");
                                                         
                                                         if(FeedBackTxtFld.innerHTML !== "Add your message here..."){
-                                                            SendFeedBackBtn.style.backgroundColor = "pink";
+                                                            SendFeedBackBtn.style.backgroundColor = "darkslateblue";
                                                             SendFeedBackBtn.disabled = false;
                                                         }else{
                                                             SendFeedBackBtn.style.backgroundColor = "darkgrey";
@@ -4718,7 +4720,7 @@
                                                         <input id='UserIDforLoginUpdate' name="CustomerID" type="hidden" value="<%=UserID%>" />
                                                         <input id="ThisPass" type="hidden" name="ThisPass" value="" />
                                                         <input id='UserIndexforLoginUpdate' type='hidden' name='UserIndex' value='<%=UserIndex%>'/>
-                                                        <input id="LoginFormBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Update" /></center>
+                                                        <input id="LoginFormBtn" style="margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Update" /></center>
                                                     </form>
                                                     <script>
                                                         $(document).ready(function(){
@@ -4756,7 +4758,7 @@
                                                                         if(result === "success"){
                                                                             document.getElementById("NewPasswordFld").value = "";
                                                                             document.getElementById("CurrentPasswordFld").value = "";
-                                                                            document.getElementById("CurrentPasswordFld").style.backgroundColor = "cornflowerblue";
+                                                                            document.getElementById("CurrentPasswordFld").style.backgroundColor = "#d9e8e8";
                                                                             document.getElementById("ConfirmPasswordFld").value = "";
                                                                             document.getElementById("WrongPassStatus").style.display = "none";
                                                                             
@@ -4915,7 +4917,7 @@
                                                     </table>
                                                 
                                                     <p id="PaymentFormStatus" style="text-align: center;" ></p>
-                                                    <center><input id="PaymentsUpdateBtn" style="background-color: pink; border: 1px solid black; padding: 10px; color: black; border-radius: 4px;" type="submit" value="Update" name="paymentBtn" /></center>
+                                                    <center><input id="PaymentsUpdateBtn" style="background-color: darkslateblue; border: 0; padding: 10px; color: white; border-radius: 4px;" type="submit" value="Update" name="paymentBtn" /></center>
                                                 
                                                 </form>
                                             </div>
@@ -5177,7 +5179,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -5222,7 +5224,7 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                         </div></center>
                                     <%
                                         }
@@ -5255,7 +5257,7 @@
                                             <p id="timePickerStatus<%=JString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatus<%=JString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="ChangeAppointmentID<%=JString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border: 0; color: white; padding: 3px; border-radius: 4px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
                                         
                                             <script>
                                                 
@@ -5364,7 +5366,7 @@
                                                                 
                                                                 document.getElementById("timePickerStatus<%=JString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtn<%=JString%>").disabled = false;
-                                                                document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "pink";
+                                                                document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                                 
                                                             }
                                                         
@@ -5372,7 +5374,7 @@
                                                             
                                                             document.getElementById("timePickerStatus<%=JString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=JString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                             
                                                         }
 
@@ -5463,7 +5465,7 @@
                                         <form style=" display: none;" id="addFavProvForm<%=JString%>" class="addFavProvForm" name="addFavProvForm" action="addFavProvController" method="POST">
                                             <input id="CustIDatAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDatAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addProvtoFavBtn<%=JString%>" style="color: white; margin: 10px; background-color: darkslateblue; border: 0; padding: 5px; border-radius: 4px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
@@ -5554,7 +5556,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
+                                                                                        '<input style=" background-color: darkslateblue; border: 0; padding: 5px; color: white; border-radius: 4px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -5691,7 +5693,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -5723,7 +5725,7 @@
                                             <p id="timePickerStatusFuture<%=QString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatusFuture<%=QString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="UpdateAppointmentID<%=QString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=QString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: darkslateblue; border: 0; color: white; padding: 3px; border-radius: 4px;" name="<%=QString%>changeAppointment" type="button" value="Change" />
                                            
                                             <script>
                                                $(document).ready(function() {                        
@@ -5825,14 +5827,14 @@
                                                             }else{
                                                                 document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = false;
-                                                                document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "pink";
+                                                                document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkslateblue";
                                                             }
                                                             
                                                     }else{
                                                         
                                                         document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "";
                                                         document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = false;
-                                                        document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "pink";
+                                                        document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkslateblue";
                                                     }
                                                     
                                                     
@@ -5925,7 +5927,7 @@
                                         <form style=" display: none;" id="addFutureFavProvForm<%=QString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustIDforAddFav<%=QString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDforAddFav<%=QString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; border: 0; border-radius: 4px; color: white; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
@@ -6015,7 +6017,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
+                                                                                        '<input style=" background-color: darkslateblue; color: white; border: 0; border-radius: 4px; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -6154,7 +6156,7 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
                                             </div></center>
                                         <%
                                             }
@@ -6241,7 +6243,7 @@
                                                             <textarea id="ReviewTxtFld<%=JString%>" name="Review" rows="0" cols="0" style="width: 250px; height: 50px;" onfocus="if(this.innerHTML==='Compose review message...')this.innerHTML = ''; ">
                                                             </textarea>
                                                         </td>
-                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;"
+                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: darkslateblue; color: white; border: 0; padding: 5px; border-radius: 4px;"
                                                                            type="button" value="Send" />
                                                         </td>
                                                     </tr>
@@ -6317,7 +6319,7 @@
                                                                 
                                                     }else{
                                                         
-                                                        document.getElementById("submitReviewBtn<%=JString%>").style.backgroundColor = "pink";
+                                                        document.getElementById("submitReviewBtn<%=JString%>").style.backgroundColor = "darkslateblue";
                                                         document.getElementById("submitReviewBtn<%=JString%>").disabled = false;
                                                         
                                                     }
@@ -6329,7 +6331,7 @@
                                         <form style=" display: none;" id="addFavProvFormFromRecent<%=JString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustomerIDforAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProviderIDforAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: pink; border: 1px solid black; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border: 0; color: white; padding: 5px; border-radius: 4px;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  
@@ -6420,7 +6422,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
+                                                                                        '<input style=" background-color: darkslateblue; border: 0; padding: 5px; border-radius: 4px; color: white;" type="submit" value="Find a Spot" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -6748,7 +6750,7 @@
                                         <input type="hidden" name="UserID" value="<%=FavProvID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
+                                        <input style=" background-color: darkslateblue; border: 0; padding: 5px; border-radius: 4px; color: white;" type="submit" value="Find a Spot" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
                                         </form></center>
                                         
                                         
@@ -6757,7 +6759,7 @@
                                     </div>    
                                         
                                         <a href="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
-                                            <p style="border: 1px solid darkblue; color: darkblue; text-align: center; padding: 5px; max-width: 300px;">View all your favorite providers</p></a>
+                                            <p style="color: darkblue; text-align: center; padding: 5px; max-width: 300px;">View all your favorite providers</p></a>
                                 </div>
                                 
                                 <%      }

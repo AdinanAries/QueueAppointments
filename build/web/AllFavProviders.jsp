@@ -302,14 +302,14 @@
                     if(Base64Pic != ""){
                 %>
                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img class="fittedImg" id="" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
+                        <img class="fittedImg" id="" style="border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
                     </div></center>
                 <%
                     }else{
                 %>
                 
                         <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                                <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
                             </div></center>
                 
                 <%}%>
@@ -529,7 +529,7 @@
                                             <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
-                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                             
@@ -724,7 +724,7 @@
                                             <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
-                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                             
@@ -2004,7 +2004,7 @@
                                         <input type="hidden" name="UserID" value="<%=SID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="" type="submit" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                         <p style="margin-top: 5px; color: red; text-align: center;">OR</p>
                                     </form>
                                         
@@ -2025,7 +2025,7 @@
                                             <p class="tooltiptext" style="width: 50px;">delete this favorite</p>
                                     </div>
                                 </div-->
-                                            <p style="text-align: center;"><input id="DeleteFavProvBtn<%=SString%>" style="background-color: red; color: white; text-align: center; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" 
+                                            <p style="text-align: center;"><input id="DeleteFavProvBtn<%=SString%>" style="background-color: red; text-align: center; border: 0; color: white; border-radius: 4px; padding: 5px; cursor: pointer;" 
                                                                                   type="button" value="Delete <%=providersList.get(i).getFirstName()%> from your favorites" /></p>
                                             <input id="ProvID<%=SString%>" type="hidden" name="UserID" value="<%=FavProvID%>" />
                                             <script>
@@ -2066,7 +2066,7 @@
                             
         <div id="newbusiness">
             
-            <div id="ExtraproviderIcons" style="margin-top: -13px;">
+            <div id="ExtraproviderIcons" style="">
              
                 <div id="SearchDivNB">
                 <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
@@ -2085,7 +2085,7 @@
                 <center><table id="providericons">
                         <tbody>
                         <tr>
-                            <td style="width: 33.3%; background-color: pink;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
                             </a></center></td>
                             <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
                             </a></center></td>

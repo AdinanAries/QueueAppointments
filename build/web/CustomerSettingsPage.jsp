@@ -120,10 +120,12 @@
                 //alert(window.localStorage.getItem("QueueUserName"));
                 var tempUserName = window.localStorage.getItem("QueueUserName");
                 var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
-
-                //This coinsidentally takes you to login page incase of unavailable login information.
-                document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
-                //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+                (function(){
+                    //This coinsidentally takes you to login page incase of unavailable login information.
+                    document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                    //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+                    return false;
+                })();
                  
 
             </script>

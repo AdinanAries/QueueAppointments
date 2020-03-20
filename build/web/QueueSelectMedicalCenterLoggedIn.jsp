@@ -1856,7 +1856,7 @@
                                         <input type="hidden" name="UserID" value="<%=SID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>"/>
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                         <p style="margin-top: 5px; color: red; text-align: center;">OR</p>
                                     </form>
                                         

@@ -157,9 +157,11 @@
 
                     var tempUserName = window.localStorage.getItem("QueueUserName");
                     var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
-
-                    //This coinsidentally takes you to login page incase of unavailable login information.
-                    document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                    (function(){
+                        //This coinsidentally takes you to login page incase of unavailable login information.
+                        document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                        return false;
+                    })();
 
                 }
             </script>
@@ -1552,7 +1554,7 @@
                                     
                                     <%}%>
                                     
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 1px solid black; background-color: pink; padding: 5px; cursor: pointer;">Customize Your Spot</p>
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; color: white; border-radius: 4px; background-color: darkslateblue; padding: 5px; cursor: pointer;">Customize Your Spot</p>
                                     
                                     <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
                                         

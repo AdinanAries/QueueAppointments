@@ -1658,3 +1658,11 @@ input[type="reset"]{
     background-color: darkslateblue;
     color: white;
 }
+
+#QueuLineDiv input{
+    border: 0;
+    border-radius: 4px;
+    padding: 5px;
+    color: white;
+    background-color: darkslateblue;
+}

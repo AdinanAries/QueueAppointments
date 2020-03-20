@@ -1199,7 +1199,7 @@
                                     
                                     <%}%>
                                     
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 1px solid black; background-color: pink; padding: 5px; cursor: pointer;">Customize Your Spot</p>
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border-radius: 4px; background-color: darkslateblue; color: white; padding: 5px; cursor: pointer;">Customize Your Spot</p>
                                     
                                     <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
                                         

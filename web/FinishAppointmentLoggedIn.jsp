@@ -159,9 +159,11 @@
 
                     var tempUserName = window.localStorage.getItem("QueueUserName");
                     var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
-
-                    //This coinsidentally takes you to login page incase of unavailable login information.
-                    document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                    (function(){
+                        //This coinsidentally takes you to login page incase of unavailable login information.
+                        document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                        return false;
+                    })();
 
                 }
             </script>
@@ -1619,7 +1621,7 @@
                                 </div>
                                 
                                 <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray; border-bottom: 1px solid darkgray;">
-                                <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="text-align: center; border: 1px solid black; background-color: pink; padding: 5px; cursor: pointer;">Find Future Spots</p>
+                                <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="text-align: center; border: 0; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Find Future Spots</p>
                                     
                                     <center><div>
                                     <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpots.jsp">
@@ -1631,7 +1633,7 @@
                                         <input type="hidden" name="ServicesList" value="<%=SelectedServicesList%>"/>
                                         <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
                                         
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; color: white; border: 0; background-color: darkslateblue; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                                         
@@ -1655,7 +1657,7 @@
                                             GenerateSpotsBtn.disabled = true;
                                         }
                                         else{
-                                            GenerateSpotsBtn.style.backgroundColor = "pink";
+                                            GenerateSpotsBtn.style.backgroundColor = "darkslateblue";
                                             GenerateSpotsBtn.disabled = false;
                                             
                                         }
@@ -1680,7 +1682,7 @@
                                     
                                     <%}%>
                                     
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 1px solid black; background-color: pink; padding: 5px; cursor: pointer;">Customize Your Spot</p>
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 0; color: white; border-radius: 4px; background-color: darkslateblue; padding: 5px; cursor: pointer;">Customize Your Spot</p>
                                     
                                     <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
                                         
@@ -1799,7 +1801,7 @@
                                       
                                         <center><p>You may also choose a spot from suggested list below</p></center>
                                         
-                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border: 1px solid black; background-color: pink; padding: 5px; cursor: pointer;">Show Suggested Spots For Today</p>
+                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Show Suggested Spots For Today</p>
                                         
                                         <center><p id="SuggestedTimeDivStatus" style="color: white; background-color: green; text-align: center;"></p></center>
                                    

@@ -35,7 +35,8 @@ public class UserAccount {
     
     //create new user object
     public static int newUser(int id,String name,String type){
-        
+        //add new user to the remote LinkedList here 
+        //and get the remote data to add to this local LinkedList;
         LoggedInUsers.add(new UserAccount(id, name, type));
         AllUsers++;
         

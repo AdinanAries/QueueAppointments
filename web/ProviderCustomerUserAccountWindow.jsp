@@ -1006,11 +1006,11 @@
                                                 });
                                             </script>
                                                 
-                                                <p id="NewAddressStatus" style="text-align: center; color: white;"></p>
+                                                <p id="NewAddressStatus" style="text-align: center; color: white; margin-top: 5px;"></p>
                                                 <input type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <center><input id="NewAddressBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Set Address" /></center>
+                                                <center><input id="NewAddressBtn" style="margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; color: white; border-radius: 4px;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Set Address" /></center>
                                             
                                         </form>
                                                 
@@ -1173,7 +1173,7 @@
                                                 <input id="CustomerIDforUpdateInfo" type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input id="UserIndexforUpdateInfo" type='hidden' name='UserIndex' value='<%=UserIndex%>'/>
                                                 <center><p id="userProfileFormStatus" style="color: white; text-align: center;"></p></center>
-                                                <center><input id="ChangeProfileUpdateBtn" style="margin-top: 10px; color: white; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="button" value="Update" /></center>
+                                                <center><input id="ChangeProfileUpdateBtn" style="border: 0; margin-top: 10px; color: white; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="button" value="Update" /></center>
                                             
                                                 <script>
                                                     $(document).ready(function(){
@@ -1272,7 +1272,7 @@
                                                 </table></center>
                                                 
                                                 <input id='FeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="SendFeedBackBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Send" /></center>
+                                                <center><input id="SendFeedBackBtn" style="margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Send" /></center>
                                             
                                         </form>
                                                 <script>
@@ -1330,7 +1330,7 @@
                                                         var SendFeedBackBtn = document.getElementById("SendFeedBackBtn");
                                                         
                                                         if(FeedBackTxtFld.innerHTML !== "Add your message here..."){
-                                                            SendFeedBackBtn.style.backgroundColor = "pink";
+                                                            SendFeedBackBtn.style.backgroundColor = "darkslateblue";
                                                             SendFeedBackBtn.disabled = false;
                                                         }else{
                                                             SendFeedBackBtn.style.backgroundColor = "darkgrey";
@@ -1371,10 +1371,10 @@
                                                     <form  id="UserAcountLoginForm" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;
                                                            margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;" name="userAccountForm">
                                                         <p>Change your login information:</p>
-                                                        <p style="color: thistle; margin-top: 10px;">User Name:</p>
+                                                        <p style="margin-top: 10px;">User Name:</p>
                                                         <center><p><input id="UpdateLoginNameFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px; color: darkblue;" placeholder="Enter New User Name Here" type="text" name="userName" value="<%=thisUserName%>" size="32" /></p></center>
                                                         
-                                                        <p style="color: thistle; margin-top: 10px;">Password:</p>
+                                                        <p style="margin-top: 10px;">Password:</p>
                                                         <center><p><input id="CurrentPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="33" /></p>
                                                         
                                                             <p><input id="NewPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="33" /></p>
@@ -1385,7 +1385,7 @@
                                                         <input id='UserIDforLoginUpdate' name="CustomerID" type="hidden" value="<%=UserID%>" />
                                                         <input id="ThisPass" type="hidden" name="ThisPass" value="" />
                                                         <input id='UserIndexforLoginUpdate' type='hidden' name='UserIndex' value='<%=UserIndex%>'/>
-                                                        <input id="LoginFormBtn" style="margin-top: 10px; border: 1px solid black; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Update" /></center>
+                                                        <input id="LoginFormBtn" style="margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Update" /></center>
                                                     </form>
                                                     <script>
                                                         $(document).ready(function(){
@@ -1419,7 +1419,7 @@
                                                                         if(result === "success"){
                                                                             document.getElementById("NewPasswordFld").value = "";
                                                                             document.getElementById("CurrentPasswordFld").value = "";
-                                                                            document.getElementById("CurrentPasswordFld").style.backgroundColor = "cornflowerblue";
+                                                                            document.getElementById("CurrentPasswordFld").style.backgroundColor = "#d9e8e8";
                                                                             document.getElementById("ConfirmPasswordFld").value = "";
                                                                             document.getElementById("WrongPassStatus").style.display = "none";
                                                                             
@@ -1577,7 +1577,7 @@
                                                     </table>
                                                 
                                                     <p id="PaymentFormStatus" style="text-align: center;" ></p>
-                                                    <center><input id="PaymentsUpdateBtn" style="background-color: pink; border: 1px solid black; padding: 10px; color: black; border-radius: 4px;" type="submit" value="Update" name="paymentBtn" /></center>
+                                                    <center><input id="PaymentsUpdateBtn" style="background-color: darkslateblue; border: 0; color: white; padding: 10px; border-radius: 4px;" type="submit" value="Update" name="paymentBtn" /></center>
                                                 
                                             </form>
                                                 </li>
@@ -1916,7 +1916,7 @@
                                             <p id="timePickerStatus<%=JString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatus<%=JString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="ChangeAppointmentID<%=JString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px; border: 0;" name="<%=JString%>changeAppointment" type="button" value="Change" />
                                         
                                             <script>
                                                 
@@ -2116,7 +2116,7 @@
                                         <form style=" display: none;" id="addFavProvForm<%=JString%>" class="addFavProvForm" name="addFavProvForm" action="addFavProvController" method="POST">
                                             <input id="CustIDatAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDatAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
@@ -2203,7 +2203,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -2568,7 +2568,7 @@
                                         <form style=" display: none;" id="addFutureFavProvForm<%=QString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustIDforAddFav<%=QString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDforAddFav<%=QString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
@@ -2658,7 +2658,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -2882,7 +2882,7 @@
                                                             <textarea id="ReviewTxtFld<%=JString%>" name="Review" rows="0" cols="0" style="width: 250px; height: 50px;" onfocus="if(this.innerHTML==='Compose review message...')this.innerHTML = ''; ">
                                                             </textarea>
                                                         </td>
-                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: darkslateblue; color: white; padding: 5px; border-radius: 4px;"
+                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: darkslateblue; color: white; padding: 5px; border-radius: 4px; border: 0;"
                                                                            type="button" value="Send" />
                                                         </td>
                                                     </tr>
@@ -2968,7 +2968,7 @@
                                         <form style=" display: none;" id="addFavProvFormFromRecent<%=JString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustomerIDforAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProviderIDforAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  
@@ -3057,7 +3057,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: darkslateblue; border-radius: 4px; padding: 5px; color: white;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style=" background-color: darkslateblue; border-radius: 4px; padding: 5px; color: white; border: 0;" type="submit" value="Find a Spot" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -3383,7 +3383,7 @@
                                         <input type="hidden" name="UserID" value="<%=FavProvID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style=" background-color: darkslateblue; border-radius: 4px; padding: 5px;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Find a Spot" />
+                                        <input style=" background-color: darkslateblue; border-radius: 4px; padding: 5px; border: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Find a Spot" />
                                         </form></center>
                                         
                                         

@@ -52,9 +52,12 @@
             //alert(window.localStorage.getItem("QueueUserName"));
             var tempUserName = window.localStorage.getItem("QueueUserName");
             var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
-            
-            document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
-            //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+            (function(){
+                //alert("here");
+                document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
+                return false;
+            })();
         } 
         
         if((window.localStorage.getItem("ProvQueueUserName") === null || window.localStorage.getItem("ProvQueueUserPassword") === null) 
@@ -63,9 +66,11 @@
         }else{
             var tempProvUserName = window.localStorage.getItem("ProvQueueUserName");
             var tempProvUserPassword = window.localStorage.getItem("ProvQueueUserPassword");
-            
-            document.location.href="LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword;
-            //window.location.replace("LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword);
+            (function(){
+                document.location.href="LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword;
+                //window.location.replace("LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword);
+                return false;
+            })();
         }
     </script>
     
