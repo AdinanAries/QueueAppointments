@@ -1905,15 +1905,15 @@
             <div id="ExtraproviderIcons" style="">
              
                 <div id="SearchDivNB">
-                <center><form action="ByAddressAndTypeSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
+                <center><form action="ByAddressAndTypeSearchResultLoggedIn.jsp" method="POST" style="background-color: #9bb1d0; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="ServiceType" value="Day Spa" />
-                    <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                    <p style="color: #000099; margin: 4px;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find day spas at location below</p>
-                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 40%;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
-                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: #626b9e; color: white; padding: 7px; border-radius: 4px; width: 95%;" value="Search" /></p>
+                    <p>City: <input style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
+                    <p>Town: <input style="background-color: #d9e8e8; width: 40%;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
+                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: darkslateblue; color: white; padding: 7px; border-radius: 4px; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 
