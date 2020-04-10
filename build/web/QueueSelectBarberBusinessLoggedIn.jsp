@@ -255,9 +255,9 @@
         
         <div id="PermanentDiv" style="">
             
-                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 80px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
-                        <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
-                            Home</p></a>
+                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 80px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: cadetblue; color: white; border-radius: 4px;'>
+                        <p><img style='background-color: white; padding: 4px; border-radius: 4px;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                            <sup>Home</sup></p></a>
                         
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
