@@ -15,6 +15,10 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+//document.cookie = "SameSite=None;Secure";
+document.cookie = "SameSite=None;";
+//alert(document.cookie);
+
 function QueueClock() {
   var date = new Date();
   var hours = date.getHours() + "";

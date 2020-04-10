@@ -796,8 +796,8 @@
             
             <div id="Extras2" style="display: none; height: 565px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 110; background-color: #ccccff; text-align: left;">
             
-                <p onclick='document.getElementById("Extras2").style.display = "none";' style='width: 50px; float: right; margin-right: 5px; margin-top:5px;
-                   border-radius: 5px;  color: white; cursor: pointer; border: 1px solid white; text-align: center; background-color: red;'>hide
+                <p onclick='document.getElementById("Extras2").style.display = "none";' style='width: 50px; margin-right: 5px; margin-top: -5px;
+                   border-radius: 5px; position: fixed; z-index: 1100;  color: white; cursor: pointer; border: 1px solid white; text-align: center; background-color: red; padding: 4px;'>hide
                 </p>
                 
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Updates from service providers</p></center>
@@ -951,7 +951,7 @@
             <p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
                 style='margin-top: 10px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
                 <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
-                Show News Updates</p>
+                <sup>Show News Updates</sup></p>
             
             
             
