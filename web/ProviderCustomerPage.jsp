@@ -1036,17 +1036,17 @@
             </div>
             
             <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='width: 40px; height: 27px; margin-top: 6.2px; float: right; margin-right: 5px;'>
-                    <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+                    <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
                 </div></a>
             
             <ul style="margin-right: 5px;">
                 <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
                 </textarea>
-                <li onclick="showCustExtraNotification();" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                    Notifications<sup id="notiCounterSup" style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup></li>
-                <li onclick='showCustExtraCal();' id='PermDivCalBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                <li class="active" onclick="showCustExtraNotification();" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                    Notifications<sup id="notiCounterSup" style='color: lawngreen; padding-right: 2px;'> <%=notiCounter%></sup></li>
+                <li class="active" onclick='showCustExtraCal();' id='PermDivCalBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
-                <li onclick='showCustExtraUsrAcnt();' id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                <li class="active" onclick='showCustExtraUsrAcnt();' id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li>
             </ul>
                 
@@ -1074,11 +1074,11 @@
                     });
                 </script>
                 
-            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; max-width: 590px; float: right; margin-right: 5px; border-radius: 4px;'>
+            <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; max-width: 590px; float: right; margin-top: 1.2px; margin-right: 5px; border-radius: 4px;'>
                 <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; font-weight: bolder; border-radius: 4px;"
+                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; font-weight: bolder; border-radius: 4px;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
-                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; border-radius: 4px; background-color: navy; color: white; padding: 7px; font-size: 15px;" 
+                    <input style="font-weight: bolder; margin: 0; border-radius: 4px; background-color: cadetblue; color: white; padding: 5px 7px; font-size: 15px;" 
                             type="submit" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type='hidden' name='User' value='<%=NewUserName%>' />

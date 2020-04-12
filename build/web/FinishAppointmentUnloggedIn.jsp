@@ -134,7 +134,7 @@
         
             <ul>
                 <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp">
-                    <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                    <li class="active" onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
@@ -142,11 +142,11 @@
                     Account</li>
             </ul>
         
-            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+            <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; margin-top: 1.2px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
                 <form action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
-                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                    <input style="font-weight: bolder; margin: 0; background-color: cadetblue; color: white; border-radius: 4px; padding: 5px 7px; font-size: 15px;" 
                             type="submit" value="Search" />
                 </form>
             </div>
@@ -363,7 +363,7 @@
             
             <div id="main">
                 
-                <cetnter><h4 style="padding: 10px; color: white; background-color: red; margin-bottom: 10px;"><%=Message%></h4></cetnter>
+                <cetnter><h4 style="padding: 10px; color: white; margin-bottom: 10px;"><%=Message%></h4></cetnter>
                 <h3 style="margin-top: 20px; margin-bottom: 5px;">Your Spot Details Provided Below</h3>
                 <p style="color: seashell;"><span><%=ProviderFullName%> from <%=ProviderCompany%></span></p>
                 <center><table border="0">
@@ -377,17 +377,6 @@
                 
                 </tbody>
                 </table></center>
-            </div>
-                
-        </div>
-                
-        <div id="newbusiness">
-            
-            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">
-                </h2></center>
-            
-            <div id="businessdetails">
-                
                 <center><div id ="logindetails"> <!--style="border-bottom: solid darkblue 1px; padding-bottom: 20px;"-->
                         
                         <center><h2 style="margin-top: 30px; margin-bottom: 10px; color: #000099">Login to finish.</h2></center>
@@ -421,54 +410,62 @@
                         
                         <!--script>
                                              
-                                               $(document).ready(function() {                        
-                                                    $('#loginPageBtn').click(function(event) {  
+                            $(document).ready(function() {                        
+                                $('#loginPageBtn').click(function(event) {  
                                                         
-                                                        var ProviderID = document.getElementById("SendApptPID").value;
-                                                        var CardNumberr = document.getElementById("cardNBR").value;
-                                                        var PayMeth = document.getElementById("Payment").value;
-                                                        var TotalPrice = document.getElementById("TaxedPrice").value;
-                                                        var ApptDate = document.getElementById("formsDateValue").value;
-                                                        var ApptTime = document.getElementById("formsTimeValue").value;
-                                                        var ApptReason = document.getElementById("formsOrderedServices").value;
-                                                        var UserName = document.getElementById("LoginPageUserNameFld").value;
-                                                        var Password = document.getElementById("LoginPagePasswordFld").value;
-                                                        //var PayMeth = $("input:radio[name=payment]:checked").val();
+                                    var ProviderID = document.getElementById("SendApptPID").value;
+                                    var CardNumberr = document.getElementById("cardNBR").value;
+                                    var PayMeth = document.getElementById("Payment").value;
+                                    var TotalPrice = document.getElementById("TaxedPrice").value;
+                                    var ApptDate = document.getElementById("formsDateValue").value;
+                                    var ApptTime = document.getElementById("formsTimeValue").value;
+                                    var ApptReason = document.getElementById("formsOrderedServices").value;
+                                    var UserName = document.getElementById("LoginPageUserNameFld").value;
+                                    var Password = document.getElementById("LoginPagePasswordFld").value;
+                                    //var PayMeth = $("input:radio[name=payment]:checked").val();
                                                         
-                                                        alert("ProviderID: "+ProviderID);
-                                                        alert("CardNumber: "+CardNumberr);
-                                                        alert("UserName: "+UserName);
-                                                        alert("Password: "+Password);
-                                                        alert("TotalPrice: "+TotalPrice);
-                                                        alert("ApptDate: "+ApptDate);
-                                                        alert("ApptTime: "+ApptTime);
-                                                        alert("ApptReason: "+ApptReason);
-                                                        alert("Payment Method: "+PayMeth);
+                                    alert("ProviderID: "+ProviderID);
+                                    alert("CardNumber: "+CardNumberr);
+                                    alert("UserName: "+UserName);
+                                    alert("Password: "+Password);
+                                    alert("TotalPrice: "+TotalPrice);
+                                    alert("ApptDate: "+ApptDate);
+                                    alert("ApptTime: "+ApptTime);
+                                    alert("ApptReason: "+ApptReason);
+                                    alert("Payment Method: "+PayMeth);
                                                         
                                                         
-                                                        $.ajax({  
-                                                        type: "POST",  
-                                                        url: "LoginAndSendAppointmentController",  
-                                                        data: "ProviderID="+ProviderID+"&DebitCreditCard="+CardNumberr+"&ServiceCost="+TotalPrice+"&AppointmentDate="+ApptDate+"&AppointmentTime="+ApptTime+"&OrderedServices="+ApptReason+"&PaymentMethod="+PayMeth+"&username="+UserName+"&password="+Password,  
-                                                        success: function(result){  
-                                                          //alert(result);
-                                                          if(result === "Success"){
-                                                              window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex);
-                                                          }
-                                                          //document.getElementById("eachClosedDate<>").style.display = "none";
-                                                        }                
-                                                      });
+                                    $.ajax({  
+                                        type: "POST",  
+                                        url: "LoginAndSendAppointmentController",  
+                                        data: "ProviderID="+ProviderID+"&DebitCreditCard="+CardNumberr+"&ServiceCost="+TotalPrice+"&AppointmentDate="+ApptDate+"&AppointmentTime="+ApptTime+"&OrderedServices="+ApptReason+"&PaymentMethod="+PayMeth+"&username="+UserName+"&password="+Password,  
+                                        success: function(result){  
+                                            //alert(result);
+                                            if(result === "Success"){
+                                                window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex);
+                                            }
+                                            //document.getElementById("eachClosedDate<>").style.display = "none";
+                                        }                
+                                    });
                                                         
-                                                    });
-                                                });
-                                            </script-->
+                                });
+                            });
+                        </script-->
                         
                     </form>
                     
                 </div></center>
-                        <center><h1 style="margin-top: 15px;">OR</h1></center>
+            </div>
                 
-                <center><h2 style="margin-top: 20px; color: white; background-color: red;">Don't have user account</h2></center>
+        </div>
+                
+        <div id="newbusiness">
+            
+            <center><h2 style="margin-top: 10px; margin-bottom: 20px; color: #000099">
+                </h2></center>
+            
+            <div id="businessdetails">
+                <center><h2 style="margin-top: 10px; margin-bottom: 10px; color: red;">Don't have user account</h2></center>
                 <center><h2 style="color: #000099; margin-bottom: 10px; ">Sign up to finish.</h2></center>
 
                 

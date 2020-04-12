@@ -1044,15 +1044,18 @@ select {
     display: inline-block;
     /*border: 2px solid white;*/
     padding: 5px;
-    color: white;
-    background-color: darkgrey;
+    /*color: white;*/
+    color: darkgray;
     /*background-color: #334d81;*/
     margin-left: 5px;
     min-width: 100px;
     /*border-radius: 4px;*/
     text-align: center;
   }
-  #PermanentDiv ul li:hover{
+  #PermanentDiv ul .active{
+      color: white;
+  }
+  #PermanentDiv ul .active:hover{
       color: moccasin;
   }
   #container {
@@ -1345,6 +1348,7 @@ input[type=radio]:checked {
         border: 0;
     }
     #newbusiness{
+        background-color: #6699ff;
         padding: 0;
     }
     #providericons tr td img{

@@ -100,7 +100,7 @@
         
             <ul>
                 <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp">
-                    <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                    <li class="active" onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
@@ -108,11 +108,11 @@
                     Account</li>
             </ul>
         
-            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+            <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; margin-top: 1.2px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
                 <form action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
-                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                    <input style="font-weight: bolder; margin: 0; background-color: cadetblue; color: white; border-radius: 4px; padding: 5px 7px; font-size: 15px;" 
                            onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" />
                 </form>
             </div>
@@ -329,8 +329,8 @@
             <div id="main" style="min-height: 100%;">
                 
                 <center><div style="margin-right:3px; max-width: 700px;">
-                <h1 style="text-align: center;">User Account(s) Already Exist</h1>
-                <h3 style="color: black; padding-top: 10px; padding-bottom: 20px;">Not Finished. Please login with your account if it is listed below or go back to previous page to finish creating new account</h3>
+                <h1 style="text-align: center; padding-top: 10px">User Account(s) Already Exist</h1>
+                <h3 style="color: black; padding-top: 10px; padding-bottom: 20px;">Please login to your account below</h3>
                 
                 <%
                     
@@ -437,23 +437,21 @@
                    
                 %>
                 
-                <div style="background-color: white; width: 100%; max-height: 600px; margin: 2px; margin-bottom: 10px; padding-top: 5px;">
+                <div style="background-color: white; height: 230px; margin: 2px; margin-bottom: 5px; padding-top: 5px; padding: 5px; display: flex; flex-direction: column; justify-content: center;">
                     <%
                         if(base64Image != ""){
                     %>
-                    <img class="fittedImg" style="float: left;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                    <img class="fittedImg" style="width: 100px; height: 100px; margin-bottom: 10px;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                 
                     <%}%>
                 <p><%=FullName%></p>
                 <p><%=Tel%></p>
                 <p><%=Email%></p>
                 
-                <p style="margin-top: 10px; color: tomato;">Login</p>
-                
                 <form name="login" action="LoginControllerMain" method="POST">
-                    <input style="background-color: white; border: 1px solid black; padding: 2px;" placeholder="enter user name here" type="hidden" name="username" value="<%=UserName%>" />
-                    <input style="background-color: white; border: 1px solid black; padding: 2px; width: 50%;" placeholder="enter password here" type="password" name="password" value="" />
-                    <input style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" />
+                    <input style="background-color: #d9e8e8; padding: 5px;" placeholder="enter user name here" type="hidden" name="username" value="<%=UserName%>" />
+                    <input style="background-color: #d9e8e8; padding: 5px; width: 50%;" placeholder="enter password here" type="password" name="password" value="" />
+                    <input style="background-color: darkslateblue;  padding: 5px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" />
                 </form>
                 
                 <p style="clear: both;"></p>
