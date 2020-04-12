@@ -461,11 +461,11 @@
                 
         <div id="newbusiness">
             
-            <center><h2 style="margin-top: 10px; margin-bottom: 20px; color: #000099">
+            <center><h2 style="padding-top: 10px; margin-bottom: 20px; color: #000099">
                 </h2></center>
             
             <div id="businessdetails">
-                <center><h2 style="margin-top: 10px; margin-bottom: 10px; color: red;">Don't have user account</h2></center>
+                <center><h2 style="padding-top: 10px; margin-bottom: 10px; color: white;">Don't have user account</h2></center>
                 <center><h2 style="color: #000099; margin-bottom: 10px; ">Sign up to finish.</h2></center>
 
                 

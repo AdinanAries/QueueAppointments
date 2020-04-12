@@ -1390,9 +1390,11 @@ input[type=radio]:checked {
     }
     input[type="text"]{
         border-radius: 0;
+        background-color: white;
     }
     input[type="password"]{
         border-radius: 0;
+        background-color: white;
     }
     .SearchObject{
         background-color: #3d6999;

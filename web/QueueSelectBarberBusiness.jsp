@@ -1621,7 +1621,7 @@
         <div id="newbusiness" style="">
             
             
-            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to book appointment</h2></center>
+            <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to book appointment</h2></center>
             
             <div id="businessdetails">
                 

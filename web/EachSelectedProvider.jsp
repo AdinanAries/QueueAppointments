@@ -1300,7 +1300,7 @@
             </div>
         </div>
         <div id="newbusiness">
-            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to find a line spot</h2></center>
+            <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to find a line spot</h2></center>
             <div id="businessdetails">
             <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST"><table border="0">
                         <tbody>
