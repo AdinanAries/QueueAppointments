@@ -68,15 +68,11 @@
         String GlobalUserName = "";
         String GlobalUserPassword = "";
         
-        //I asumed that if session is expired, then this block of code won't succeed, leaving GlobalUserName and GlobalUserPassword with null values
-        //or maybe empty Strings.
         if(session.getAttribute("ThisProvUserName") != null && session.getAttribute("ThisProvUserPassword") != null){
             GlobalUserName = session.getAttribute("ThisProvUserName").toString();
             GlobalUserPassword = session.getAttribute("ThisProvUserPassword").toString();
         }
         
-        //JOptionPane.showMessageDialog(null, GlobalUserName);
-        //JOptionPane.showMessageDialog(null, GlobalUserPassword);
     %>
     
     <script>
@@ -89,25 +85,12 @@
             if(window.localStorage.getItem("ProvQueueUserName") === null && window.localStorage.getItem("ProvQueueUserPassword") === null){
                 window.localStorage.setItem("ProvQueueUserName", GlobalUserName);
                 window.localStorage.setItem("ProvQueueUserPassword", GlobalUserPassword);
-                //alert("just got set");
             }
-            //alert("already there");
-            //alert(window.localStorage.getItem("ProvQueueUserName"));
-            //alert(window.localStorage.getItem("ProvQueueUserPassword"));
         }
     </script>
     
     <%
         
-        /*
-        Calendar cal = Calendar.getInstance(); 
-        SimpleDateFormat calSdf = new SimpleDateFormat("MMMMMMMMMMMMM dd, yyyy");
-        String calDate = calSdf.format(cal.getTime());
-        JOptionPane.showMessageDialog(null, calDate);
-        cal.add(Calendar.MONTH, 12); //12 for yearly subscriptions, 6 for half yearly subscriptions and 1 for monthly subscriptions
-        String calMDate = calSdf.format(cal.getTime());
-        JOptionPane.showMessageDialog(null, calMDate);
-        */
         
         config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
         config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
@@ -233,25 +216,15 @@
             //incase of array flush
             if(!NewUserName.equals(UserNameFrmList)){
                 isSameUserName = false;
-                //response.sendRedirect("LogInPage.jsp");
             }
 
-            /*if(tempAccountType.equals("CustomerAccount")){
-                request.setAttribute("UserIndex", UserIndex);
-                request.getRequestDispatcher("ProviderCustomerPage.jsp").forward(request, response);
-            }
-
-            if(UserID == 0)
-                response.sendRedirect("LogInPage.jsp");*/
 
         }catch(Exception e){
             isTrySuccess = false;
-            //response.sendRedirect("LogInPage.jsp");
         }
         
         String SessionID = request.getRequestedSessionId();
         String DatabaseSession = "";
-        //JOptionPane.showMessageDialog(null, SessionID);
         
         //getting session data from database
         try{
@@ -269,11 +242,6 @@
             
         }catch(Exception e){}
         
-        //JOptionPane.showMessageDialog(null, DatabaseSession);
-        //the next six lines of code is an ettempt to fix login exceptions that occur for as user try to login after a long Idle page
-        //This may have resulted from SessionID being 'null' instead of an actual string value, therefore making it incompatible with String.equals() function of the string class
-        //JOptionPane.showMessageDialog(null, DatabaseSession);
-        //JOptionPane.showMessageDialog(null, SessionID);
         
         if(SessionID == null){
             SessionID = "";
@@ -292,11 +260,9 @@
             catch(Exception e){}
             
             isSameSessionNumber = false;
-            //response.sendRedirect("LogInPage.jsp");
         }
         
         if(!isSameSessionNumber || UserID == 0 || !isSameUserName || !isTrySuccess){
-            //response.sendRedirect("LogInPage.jsp");
     %>
             <script>
                 var tempUserName = window.localStorage.getItem("ProvQueueUserName");
@@ -864,9 +830,6 @@
         if(DailyOffTime == "")
             DailyOffTime = "23:00";
         
-        //JOptionPane.showMessageDialog(null, DailyOpenTime);
-        //JOptionPane.showMessageDialog(null, DailyOffTime);
-        
         if(DailyOpenTime.length() <5)
             DailyOpenTime = "0" + DailyOpenTime;
         if(DailyOffTime.length() < 5)
@@ -1195,17 +1158,7 @@
             TempMinute2 -= IntervalsValue;
             
             while(TempMinute2 >= 60){
-                                
-                /*Avoid incrementing the hour hand as it will skip the start of the day
-                if(DailyOpenTime != ""){
-                                                
-                    if(TempHour2 == openHour){
-                        break;
-                    }
-                                                    
-                }else if(TempHour2 == 1){
-                    break;
-                }*/
+             
 
                 TempHour2++;
 
@@ -1758,12 +1711,6 @@
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <!--script>
-            setTimeout(function(){
-                window.location.replace("ServiceProviderPage.jsp?UserIndex=<=UserIndex%>&User=<=NewUserName%>");
-            },60000);
-        </script-->
-        
         <div id="PermanentDiv" style="">
             
             <img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
@@ -1808,11 +1755,11 @@
             </div>
             
             <ul>
-                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                    Notifications<sup style='color: red; background-color: white; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
-                <li id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li class="active" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
+                    Notifications<sup style='color: lawngreen; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
+                <li class="active" id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
-                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li class="active" id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
             </ul>
         
@@ -1864,12 +1811,10 @@
                     <script>
                         function showDropDown(){
                             $("#DropDown").slideDown("fast");
-                            //document.getElementById("DropDown").style.display = "block";
                         }
                         
                         function hideDropDown(){
                             $("#DropDown").slideUp("fast");
-                            //document.getElementById("DropDown").style.display = "none";
                         }
                         
                         function hideDropDownBtnclick(){
@@ -2189,8 +2134,7 @@
                                             int AptID = AppointmentListExtra.get(aptNum).getAppointmentID();
                                             String ProvName = AppointmentListExtra.get(aptNum).getProviderName();
                                             String ApptReason = AppointmentListExtra.get(aptNum).getReason().trim();
-                                            //if(ApptReason.length() > 13)
-                                                //ApptReason = ApptReason.substring(0, 12) + "...";
+                                            
                                             String AptTime = AppointmentListExtra.get(aptNum).getTimeOfAppointment();
                                             if(AptTime.length() > 5)
                                                 AptTime = AptTime.substring(0,5);
@@ -2212,16 +2156,13 @@
                                                 document.getElementById('ProviderPageLoader').style.display = 'block';
                                                 var date = document.getElementById("CalDatePicker").value;
                                                 var ProviderID = document.getElementById("CalApptUserID").value;
-                                                //alert(ProviderID);
-                                                //alert(date);
+                                                
                                                 
                                                 $.ajax({
                                                     type: "POST",
                                                     url: "GetProvApptForExtra",
                                                     data: "Date="+date+"&ProviderID="+ProviderID,
                                                     success: function(result){
-                                                        
-                                                        //alert(result);
                                                         
                                                         var ApptData = JSON.parse(result);
                                                         
@@ -2233,8 +2174,6 @@
                                                             
                                                             var name = ApptData.Data[i].CustName;
                                                             var service = ApptData.Data[i].Service;
-                                                            //if(comp.length > 13)
-                                                                //comp = comp.substring(0,12) + "...";
                                                             
                                                             var time = ApptData.Data[i].ApptTime;
                                                             
@@ -2253,7 +2192,6 @@
                                                     url: "GetProvEvntAjax",
                                                     data: "Date="+date+"&ProviderID="+ProviderID,
                                                     success: function(result){
-                                                        //alert(result);
                                                         
                                                         var EvntsData = JSON.parse(result);
                                                         
@@ -2433,7 +2371,6 @@
                                     
                             if(EventTime.length < 8){
                                 EventTime = "0" + EventTime;
-                                //alert(EventTime);
                             }
                                     
                             if(EventTime.substring(6,8) === "PM"){
@@ -2451,7 +2388,6 @@
                             }
                                     
                             document.getElementById("AddEvntTime").value = EventTime;
-                            //alert(document.getElementById("AddEvntTime").value);
                         }
                                 
                         $('#DisplayedAddEvntTime').timepicker({
@@ -2536,8 +2472,6 @@
                                 
                                 var CalDate = document.getElementById("CalDatePicker").value;
                                     
-                                    //alert(CalDate);
-                                    
                                     $.ajax({
                                         type: "POST",
                                         url: "UpdateProvEvent",
@@ -2547,10 +2481,6 @@
                                             alert("Event Updated Successfully");
                                             
                                             var Evnt = JSON.parse(result);
-                                            
-                                            //alert(Evnt.EvntID);
-                                            //alert(Evnt.JQDate);
-                                            
                                             
                                             if(Evnt.JQDate === EvntDate){
                                                 updateCounter = parseInt(updateCounter, 10) + 1;
@@ -2662,22 +2592,8 @@
             <div id="content"  onclick="hideDropDown();">
             <div id="nav" style='padding: 0;'>
                 
-                <!--h4><a href="https://adinanaries.wixsite.com/arieslab" style ="color: blanchedalmond">AriesLab.com</a></h4>
-                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
-               
             </div>
             <div id="main" style="">
-                <!--%
-                    if(base64Image != ""){
-                %>
-                <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                 <img id="photoStatus" style="border-radius: 100%; border: 2px solid green; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<=base64Image%>" width="40" height="40"/>
-                    </div></center>
-                <
-                    }
-                %>
-                   
-                <center><p id="LoginNameDisplay" style="color: white; background-color: green; margin-bottom: 20px; padding-left: 15px; max-width: 300px"><=FirstNameAndCompany%> </p></center-->
                
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                 
@@ -3604,7 +3520,7 @@
                             if(Base64CustPic != ""){
                         %>
                                 <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                    <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                                    <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                                 </div></center>
                         <%
                             }
@@ -3619,8 +3535,8 @@
                                     <center>
                                         <input id="PIDCAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
                                         <input id="CCustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
-                                        <input type="button" id="AddClientsFromCurBtn<%=WString%>" style="cursor: pointer; background: 0; text-align: center; border: #7e7e7e 1px solid; width: 300px; color: darkblue; margin-top: 5px; padding: 5px;"
-                                           value="Add <%=Name%> to your clients" />
+                                        <input type="button" id="AddClientsFromCurBtn<%=WString%>" style="cursor: pointer; background: 0; text-align: center; border: none; background-color: darkslateblue; border-radius: 4px;  width: 300px; color: white; margin-top: 5px; padding: 5px;"
+                                           value="Add <%=Name.split(" ")[0]%> to your clients" />
                                         <script>
                                                 
                                             $(document).ready(function(){
@@ -3628,11 +3544,6 @@
                                                     document.getElementById('ProviderPageLoader').style.display = 'block';
                                                     var CustomerID = document.getElementById("CCustIDAddClient<%=WString%>").value;
                                                     var ProviderID = document.getElementById("PIDCAddClient<%=WString%>").value;
-                                                        
-                                                        
-                                                        //alert("CustomerID: "+CustomerID);
-                                                        //alert("ProviderID: "+ProviderID);
-                                                        
                                                         
                                                         $.ajax({  
                                                         type: "POST",  
@@ -3649,7 +3560,6 @@
                                                                   url: "getLastAddedClientAjax",
                                                                   data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
                                                                   success: function(result){
-                                                                      //alert(result);
                                                                       var Customer = JSON.parse(result);
                                                                       var CustName = Customer.Name;
                                                                       var CustEmail = Customer.Email;
@@ -3707,7 +3617,7 @@
                                         <p id="timePickerStatus<%=WString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                         <p id="datePickerStatus<%=WString%>" style="background-color: red; color: white; text-align: center;"></p>
                                         <input id="ChangeAppointmentID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                        <input id="changeAppointmentBtn<%=WString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
+                                        <input id="changeAppointmentBtn<%=WString%>" style="background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: none;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
                                         <script>
                                                
                                                $(document).ready(function() {                        
@@ -3804,7 +3714,7 @@
 
                                                                 document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkslateblue";
 
                                                             }
                                                         
@@ -3812,7 +3722,7 @@
                                                             
                                                             document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkslateblue";
                                                             
                                                         }
 
@@ -3827,12 +3737,7 @@
                                                             $(function(){
                                                                 $( "#datepicker<%=WString%>" ).datepicker();
                                                             });
-                                                            
-                                                        //---------------------------------------------
-                                                         //var datepicker = document.getElementById("datepicker<%=WString%>");
-                                                         //var datePickerStatus = document.getElementById("datePickerStatus<%=WString%>");
-
-                                                         
+                                                          
                                                          document.getElementById("datePickerStatus<%=WString%>").innerHTML = "";
 
 
@@ -3857,8 +3762,6 @@
                                                                  else{
 
                                                                     document.getElementById("datePickerStatus<%=WString%>").innerHTML = "";
-                                                                    //datePickerStatus.innerHTML = "Chosen Date: " + datepicker.value;
-                                                                    //datePickerStatus.style.backgroundColor = "green";
                                                                  }
 
                                                          }
@@ -3885,11 +3788,6 @@
                                                     $('#DeleteApptBtn<%=WString%>').click(function(event) {  
                                                         document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("DeleteApptID<%=WString%>").value;
-                                                        
-                                                        
-                                                        //alert("AppointmentID "+AppointmentID);
-                                                        //alert("ProviderID: "+ProviderID);
-                                                        
                                                         
                                                         $.ajax({  
                                                         type: "POST",  
@@ -4002,7 +3900,7 @@
                             if(Base64CustPic != ""){
                         %>
                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                         <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                         <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                             </div></center>
                         <%
                             }
@@ -4017,8 +3915,8 @@
                                     <center>
                                         <input id="PIDFAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
                                         <input id="FCustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
-                                        <input type="button" id="AddClientsFromFutBtn<%=WString%>" style="cursor: pointer; background: 0; text-align: center; border: #7e7e7e 1px solid; width: 300px; color: darkblue; margin-top: 5px; padding: 5px;"
-                                           value="Add <%=Name%> to your clients" />
+                                        <input type="button" id="AddClientsFromFutBtn<%=WString%>" style="cursor: pointer; background-color: darkslateblue; text-align: center; width: 300px; border: none; border-radius: 4px; color: white; margin-top: 5px; padding: 5px;"
+                                           value="Add <%=Name.split(" ")[0]%> to your clients" />
                                         <script>
                                                 
                                             $(document).ready(function(){
@@ -4026,11 +3924,6 @@
                                                     document.getElementById('ProviderPageLoader').style.display = 'block';
                                                     var CustomerID = document.getElementById("FCustIDAddClient<%=WString%>").value;
                                                     var ProviderID = document.getElementById("PIDFAddClient<%=WString%>").value;
-                                                        
-                                                        
-                                                        //alert("CustomerID: "+CustomerID);
-                                                        //alert("ProviderID: "+ProviderID);
-                                                        
                                                         
                                                         $.ajax({  
                                                         type: "POST",  
@@ -4103,7 +3996,7 @@
                                         <p id="timePickerStatusFuture<%=WString%>" style="background-color: red; margin-bottom: 3px; color: white; text-align: center;"></p>
                                         <p id="datePickerStatusFuture<%=WString%>" style="background-color: red; color: white; text-align: center;"></p>
                                         <input id="ChangeFutureAppointmentID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                        <input id="changeAppointmentBtnFuture<%=WString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
+                                        <input id="changeAppointmentBtnFuture<%=WString%>" style="background-color: darkslateblue; border: none; border-radius: 4px; color: white; padding: 5px;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
                                         <script>
                                                
                                                $(document).ready(function() {                        
@@ -4204,14 +4097,14 @@
                                                             }else{
                                                                 document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = false;
-                                                                document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "pink";
+                                                                document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "darkslateblue";
                                                             }
                                                     }   
                                                     else{
                                                             
                                                             document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "darkslateblue";
                                                             
                                                         }
                                                     
@@ -4227,11 +4120,6 @@
                                                             $(function(){
                                                                 $( "#datepickerFuture<%=WString%>" ).datepicker();
                                                             });
-                                                            
-                                                        //---------------------------------------------
-                                                        // var datepicker = document.getElementById("datepicker<%=WString%>");
-                                                         //var datePickerStatus = document.getElementById("datePickerStatus<%=WString%>");
-
                                                          
                                                          document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "";
 
@@ -4257,8 +4145,7 @@
                                                                  else{
 
                                                                          document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "";
-                                                                         //datePickerStatus.innerHTML = "Chosen Date: " + datepicker.value;
-                                                                         //datePickerStatus.style.backgroundColor = "green";
+                                                                         
                                                                  }
 
                                                          }
@@ -4284,11 +4171,6 @@
                                                     $('#DeleteFutureApptBtn<%=WString%>').click(function(event) {  
                                                         document.getElementById('ProviderPageLoader').style.display = 'block';
                                                         var AppointmentID = document.getElementById("DeleteFutureApptID<%=WString%>").value;
-                                                        
-                                                        
-                                                        //alert("AppointmentID "+AppointmentID);
-                                                        //alert("ProviderID: "+ProviderID);
-                                                        
                                                         
                                                         $.ajax({  
                                                         type: "POST",  
@@ -4401,7 +4283,7 @@
                             if(Base64CustPic != ""){
                         %>
                              <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                            <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                            <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                             </div></center>
                         <%
                             }
@@ -4416,7 +4298,7 @@
                                 <form name="BlockThisCustomer" >
                                     <input id="CustIDforBlockCustomer<%=w%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
                                     <input id="PIDforBlockCustomer<%=w%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
-                                    <center><input id="BlockCustBtn<%=w%>" style="background-color: white; border: 1px solid darkgrey; padding: 5px;" type="button" value="Block This Person" /></center>
+                                    <center><input id="BlockCustBtn<%=w%>" style="background-color: crimson; color: white; border-radius: 4px; border: none; padding: 5px;" type="button" value="Block This Person" /></center>
                                     
                                     <script>
                                              
@@ -4469,7 +4351,7 @@
                                                                                      '<input id="BlockedID" type="hidden" name="BlockedID" value="'+BlockedID+'" />' +
                                                                                      '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                      '<input name="User" type="hidden" value="'+UserName+'" />' +
-                                                                                     '<input id="UnblockCleintBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Unblock This Person" name="Unblock" />' +
+                                                                                     '<input id="UnblockCleintBtn" style="background-color: crimson; border: none; color: white; border-radius: 4px; padding: 5px;" type="submit" value="Unblock This Person" name="Unblock" />' +
                                                                                      '</form>' +
                                                                                      '</div>' ;
                                                                           
@@ -4500,7 +4382,7 @@
                                     <center><form id="AddClientForm<%=WString%>" style="display: none" name="AddClient">
                                         <input id="PIDAddClient<%=WString%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
                                         <input id="CustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
-                                        <input id="addClientBtn<%=WString%>" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Add this client to contacts list " name="addfavclient" />
+                                        <input id="addClientBtn<%=WString%>" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Add this client to contacts list " name="addfavclient" />
                                     
                                         <script>
                                              
@@ -4553,7 +4435,7 @@
                                                                                             '<input id="ClientIDDltClnt" type="hidden" name="EachClientID" value="'+CustomerID+'"/>' +
                                                                                             '<input name="UserIndex" type="hidden" value="'+UserIndex+'" />' +
                                                                                             '<input name="User" type="hidden" value="'+UserName+'" />' +
-                                                                                            '<input id="DeleteClientBtn" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="submit" value="Delete this client" />'+
+                                                                                            '<input id="DeleteClientBtn" style="background-color: crimson; color: white; border-radius: 4px; border: none; padding: 5px;" type="submit" value="Delete this client" />'+
                                                                                         '</form>';
                                     
                                                                       
@@ -4652,7 +4534,7 @@
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                     
@@ -4661,7 +4543,7 @@
                             <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date when to close</p>
                             <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Ddatepicker" type="text" name="GetDate" value="" readonly/><br/>
                             <input id="provIDforClosedDate" type="hidden" name="ProviderID" value="<%=UserID%>" />
-                            <input id="CloseDayBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Close this day" name="BlockDay" />
+                            <input id="CloseDayBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Close this day" name="BlockDay" />
                             <script>
                                              
                                 $(document).ready(function() {                        
@@ -4701,7 +4583,7 @@
                                                                 '<input id="closedID'+ClosedID+'" type="hidden" name="ClosedID" value="'+ClosedID+'" />'+
                                                                 '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                 '<input name="User" type="hidden" value="'+UserName+'" />' +
-                                                                '<input onclick="document.getElementById(\'ProviderPageLoader\').style.display = \'block\';" id="openDayBtn'+ClosedID+'" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Open this day" />' +
+                                                                '<input onclick="document.getElementById(\'ProviderPageLoader\').style.display = \'block\';" id="openDayBtn'+ClosedID+'" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="submit" value="Open this day" />' +
                                                             '</form>';
                                                         
 
@@ -4748,7 +4630,7 @@
                             <form id="eachClosedDate<%=ij%>" style="margin-bottom: 5px; max-width: 300px; padding: 5px; background-color: white; border-right: 1px solid darkgray; border-bottom: 1px solid darkgray;" name="OpenClosedDay">
                                 <p style=""><%=whatDay%>, <%=eachClosedDate%></p>
                                 <input id="closedID<%=ij%>" type="hidden" name="ClosedID" value="<%=ClosedID%>" />
-                                <input id="openDayBtn<%=ij%>" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Open this day" />
+                                <input id="openDayBtn<%=ij%>" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Open this day" />
                                 <script>
                                              
                                                $(document).ready(function() {                        
@@ -4792,7 +4674,7 @@
                                     
                                     <p>Date: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/></p>
                                     <p>Time: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/></p>
-                                    <p>Service: <select id="reserveService" name="formsOrderedServices">
+                                    <p>Service: <select style="padding: 2px; background-color: white; color: black;" id="reserveService" name="formsOrderedServices">
                                             <%
                                                 for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
                                                     
@@ -4804,9 +4686,9 @@
                                             <%}%>
                                         </select></p>
                                     
-                                    <p style="color: white;">Choose client who to make reservation for</p>
+                                    <p style="color: white; padding: 5px;">Who is this reservation for?</p>
                                     
-                                    <div class="scrolldiv" style="max-height: 200px; width:310px; overflow-y: auto; border-bottom: 1px solid darkblue; margin-bottom: 10px; border-top: 1px solid darkblue;">
+                                    <div class="scrolldiv" style="max-height: 200px; width:310px; overflow-y: auto; margin-bottom: 10px; padding-top: 5px;">
                                         
                                         <ul style="list-style-type: none;">
                                             
@@ -4842,7 +4724,7 @@
                                                     catch(Exception e){}
         
                                             %>
-                                            <li style="background-color: white; margin-bottom: 5px; max-width: 300px; padding: 5px; border-radius: 10px;">
+                                            <li style="background-color: white; margin-bottom: 5px; max-width: 300px; padding: 5px; border-radius: 5px;">
                                                 
                                                 <input class="reserveCustID" id="eachClientID<%=cl%>" style=" float: left; background-color: white;" type="radio" name="CustomerID" value="<%=ClientID%>" />
                                                 
@@ -4898,7 +4780,7 @@
                                             
                                         }else{
                                             
-                                            MkReservationBtn.style.backgroundColor = "pink";
+                                            MkReservationBtn.style.backgroundColor = "darkslateblue";
                                             MkReservationBtn.disabled = false;
                                          
                                         }
@@ -4926,7 +4808,7 @@
                                       
                                     <br/>
                                     <input id="reservePID" name="ProviderID" type="hidden" value="<%=UserID%>"/>
-                                    <input id="MkReservationBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                    <input id="MkReservationBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                 </form>
                                     
                                     <script>
@@ -5008,7 +4890,7 @@
                                             GenerateSpotsBtn.disabled = true;
                                         }
                                         else{
-                                            GenerateSpotsBtn.style.backgroundColor = "pink";
+                                            GenerateSpotsBtn.style.backgroundColor = "darkslateblue";
                                             GenerateSpotsBtn.disabled = false;
                                             
                                         }
@@ -5029,7 +4911,7 @@
                                             CloseDayBtn.disabled = true;
                                         }
                                         else{
-                                            CloseDayBtn.style.backgroundColor = "pink";
+                                            CloseDayBtn.style.backgroundColor = "darkslateblue";
                                             CloseDayBtn.disabled = false;
                                             
                                         }
@@ -5051,7 +4933,7 @@
                 }
             </script>
          
-        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px; margin-top: 1px;">
+        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px; margin-top: 1px; background-color: #ccccff;">
             <script>
                 if($(window).width() > 1000){
                     document.getElementById("newbusiness").style.height = "88.5%";
@@ -5664,7 +5546,7 @@
                                                     </script>
                                                      
                                                  <input id="ServiceID<%=i%>" type="hidden" name="ServiceID" value="<%=ServiceID%>" />
-                                                 <p style="text-align: center;"><input id="EditServiceBtn<%=i%>" style="background-color: pink; border: 1px solid black; border-radius: 4px; padding: 5px;" type="button" value="change" name="<%=IString%>editService" /></p>
+                                                 <p style="text-align: center;"><input id="EditServiceBtn<%=i%>" style="background-color: darkslateblue; border: none; color: white; border-radius: 4px; padding: 5px;" type="button" value="change" name="<%=IString%>editService" /></p>
                                                  
                                                <script>
                                              
@@ -5730,7 +5612,7 @@
                                                             document.getElementById("EditServiceBtn<%=i%>").style.backgroundColor = "darkgrey";
                                                             document.getElementById("EditServiceBtn<%=i%>").disabled = true;
                                                         }else{
-                                                            document.getElementById("EditServiceBtn<%=i%>").style.backgroundColor = "pink";
+                                                            document.getElementById("EditServiceBtn<%=i%>").style.backgroundColor = "darkslateblue";
                                                             document.getElementById("EditServiceBtn<%=i%>").disabled = false;
                                                         }
 
@@ -5741,7 +5623,7 @@
                                      
                                                 <form name="DeleteServiceForm" >
                                                     <input id="SVCIDforDelete<%=i%>" type="hidden" name="ServiceID" value="<%=ServiceID%>" />
-                                                    <input id="deleteSVRBtn<%=i%>" style="color: darkblue; font-weight: bolder; border: 1px solid darkgrey; background-color: white; padding: 5px;" type="button" value="Delete this service" name="DeleteSVCBtn" />
+                                                    <input id="deleteSVRBtn<%=i%>" style="color: white; border: none; background-color: crimson; border-radius: 4px; padding: 5px;" type="button" value="Delete this service" name="DeleteSVCBtn" />
                                                 
                                             <script>
                                              
@@ -5805,8 +5687,8 @@
                                         </tbody>
                                      </table></center>
                                      
-                                     <center><P><img style="cursor: pointer; border: 1px solid black; background-color: white; border-radius: 4px;" onclick = "toggleHideAddServiceDiv()" src="icons/icons8-add-new-40.png" width="40" height="40" alt="icons8-add-new-40"/>
-                                     </P></center>
+                                     <center><p style="color: white; width: fit-content; padding: 5px; background-color: darkslateblue; border-radius: 4px; margin: auto; margin-top: 5px; margin-bottom: 5px;"><img style="cursor: pointer; background-color: white; border-radius: 4px;" onclick = "toggleHideAddServiceDiv()" src="icons/icons8-add-new-40.png" width="25" height="25" alt="icons8-add-new-40"/>
+                                             <sup>Add Service</sup></p></center>
                                      
                                      <center><div style=" display: none; margin-bottom: 5px;" id="addServiceDiv">
                                              
@@ -5910,7 +5792,7 @@
                                                      <p style="text-align: left; max-width: 500px;"><textarea id="ServiceDescForAdd" onfocus="if(this.innerHTML === 'Add service description here')this.innerHTML = '';" name="DescriptionFld" rows="4" cols="40">Add service description here</textarea>
                                                      </p></center>
                                                  <input id="AddSVCPID" type="hidden" name="ProviderID" value="<%=UserID%>" />
-                                         <center><input style="background-color: pink; border-radius: 4px; color: black;" id ="addServiceBtn" type="button" value="Add Service" name="addNewService" />
+                                         <center><input style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" id ="addServiceBtn" type="button" value="Add Service" name="addNewService" />
                                          </center>
                                          
                                          <script>
@@ -5970,7 +5852,7 @@
                                                                               '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />'+
                                                                               '<input name="User" type="hidden" value="'+UserName+'" />' +
                                                                               '<input type="hidden" name="ServiceID" value="'+ServiceID+'" />'+
-                                                                              '<input type="submit" style="color: darkblue; font-weight: bolder; border: 1px solid darkgrey; padding: 5px; background-color: white;" value="Delete this service" />'+
+                                                                              '<input type="submit" style="color: white; border: none; padding: 5px; background-color: crimson; border-radius: 4px;" value="Delete this service" />'+
                                                                            '</form>'+
                                                                           '</div>';
                                                                   
@@ -5994,7 +5876,7 @@
                                                      document.getElementById("addServiceBtn").style.backgroundColor = "darkgrey";
                                                      document.getElementById("addServiceBtn").disabled = true;
                                                  }else{
-                                                     document.getElementById("addServiceBtn").style.backgroundColor = "pink";
+                                                     document.getElementById("addServiceBtn").style.backgroundColor = "darkslateblue";
                                                      document.getElementById("addServiceBtn").disabled = false;
                                                  }
                                                  
@@ -6516,11 +6398,11 @@
                                    <div id="CnclPlcyInfo" style="display: none; padding: 5px;">       
                                     <p>Charge: <span id="TimeSpan" style="color: #eeeeee;">at <%=TimeElapseValue%> to spot due time</span></p>
                                     <p>Penalty: <span id="PercentSpan" style="color: #eeeeee;"><%=ChargePercentValue%> of service cost</span></p>
-                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: #6699ff; width: 200px; border: 1px solid black; margin: 5px;">Change Policy</p></center>
+                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: darkslateblue; width: 200px; margin: 5px; border-radius: 4px; color: white;">Change Policy</p></center>
                                     <center><p  id="bizBankforCancelStatus" style="color: white; background-color: red; text-align: center;"></p></center>
                                    </div>
                                    
-                                    <form id="CnclPlcyForm" style="border-top: 1px solid black; display: none; margin-top: 10px; padding: 5px;" name="CancelationPolicyForm">
+                                    <form id="CnclPlcyForm" style="display: none; margin-top: 10px; padding: 5px;" name="CancelationPolicyForm">
                                         
                                         <input id="PIDforCnclPlcy" type="hidden" name="ProviderID" value="<%=UserID%>">
                                         <!--Settings names used to identify these settings everywhere in this app-->
@@ -6529,7 +6411,7 @@
                                         
                                         <p style="text-align: center; margin-bottom: 10px; color: white;">Change Cancellation Policy</p>
                                         
-                                        <center><p id="percentPar" style="text-align: left; max-width: 500px;">Charge Percentage: <select id="ChargePercent" name="ChargePercent">
+                                        <center><p id="percentPar" style="text-align: left; max-width: 500px;">Charge Percentage: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="ChargePercent" name="ChargePercent">
                                                     <option>100%</option>
                                                     <option>75%</option>
                                                     <option>50%</option>
@@ -6537,7 +6419,7 @@
                                                     <option>10%</option>
                                                 </select></p></center>
                                         
-                                        <center><p id="timePar" style="text-align: left; max-width: 500px;">Elapse Time: <select id="HHforCancellation" name="DurationFldHH">
+                                        <center><p id="timePar" style="text-align: left; max-width: 500px;">Elapse Time: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="HHforCancellation" name="DurationFldHH">
                                                      <option>0</option>
                                                      <option>1</option>
                                                      <option>2</option>
@@ -6545,7 +6427,7 @@
                                                      <option>4</option>
                                                      <option>5</option>
                                                  </select> hour(s) -
-                                                 <select id="MMforCancellation" name="DurationFldMM">
+                                                 <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="MMforCancellation" name="DurationFldMM">
                                                      <option>15</option>
                                                      <option>20</option>
                                                      <option>25</option>
@@ -6561,27 +6443,27 @@
                                         <p style="color: white; text-align: center; margin: 5px;">Add Your Business Bank Card</p>
                                         <p style="text-align: center;">add bank account where to receive online payments from customers</p>
 
-                                        <table>
+                                        <table style="max-width: 350px; margin: auto; background-color: #9bb1d0; border-radius: 5px; padding: 5px; margin-top: 5px; margin-bottom: 5px; border: #3d6999 1px solid;">
                                             <tbody>
                                                 <tr>
                                                     <td style="text-align: left;">Card Number: </td>
-                                                    <td><input  id="CnclPlcyBizCardNumber" onclick="checkMiddlenumberCnclPlcyBizCardNumber();" onkeydown="checkMiddlenumberCnclPlcyBizCardNumber();" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                                    <td><input  id="CnclPlcyBizCardNumber" onclick="checkMiddlenumberCnclPlcyBizCardNumber();" onkeydown="checkMiddlenumberCnclPlcyBizCardNumber();" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Card Name: </td>
-                                                    <td><input id="CnclPlcyCardName" style="background-color: #6699ff" type="text" name="CardNameForSubscription" value="" /></td>
+                                                    <td><input id="CnclPlcyCardName" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNameForSubscription" value="" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Routing Number: </td>
-                                                    <td><input id="CnclPlcyRoutingNumber" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                                    <td><input id="CnclPlcyRoutingNumber" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Sec. Code: </td>
-                                                    <td><input id="CnclPlcySecCode" style="background-color: #6699ff" type="text" name="CardCodeForSubscription" value="" /></td>
+                                                    <td><input id="CnclPlcySecCode" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardCodeForSubscription" value="" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Exp. Date: </td>
-                                                    <td><input id="CnclPlcyExpDate" style="background-color: #6699ff" type="text" name="CardExpForSubscription" value="" /></td>
+                                                    <td><input id="CnclPlcyExpDate" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardExpForSubscription" value="" /></td>
                                                 </tr>
                                             </tbody>
                                         </table> 
@@ -6664,12 +6546,12 @@
 
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
-                                                    <p id="validateCnclPlcyCardBtn" style="cursor: pointer; color: black; background-color: pink; width: 270px; padding: 5px; border: 1px solid black; text-align: center;">Validate this card</p>
+                                                    <p id="validateCnclPlcyCardBtn" style="cursor: pointer; color: white; background-color: initial; width: 270px; padding: 5px; border-radius: 4px; text-align: center; margin: auto;">Validate this card</p>
                                         
-                                        <p style="text-align: left; color: white; background-color: red; border: 1px solid black; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation Policy</label>
+                                        <p style="text-align: left; color: white; background-color: crimson; padding: 5px; border-radius: 4px; width: fit-content; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation Policy</label>
                                             </p>
                                         <p id='BankCardValidStatus' style='color: white; text-align: center;'></p>
-                                        <center><input id="submitCnclPlcyBtn" style="padding: 5px; border: 1px solid black; border-radius: 4px; background-color: pink;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
+                                        <center><input id="submitCnclPlcyBtn" style="padding: 5px; color: white; border: none; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
                                     </form>
                                    </div>
                                         
@@ -6690,15 +6572,15 @@
                                                         document.getElementById("validateCnclPlcyCardBtn").innerHTML = "uncompleted form";
                                                         document.getElementById("validateCnclPlcyCardBtn").style.color = "white";
                                                         document.getElementById("validateCnclPlcyCardBtn").disabled = true;
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "red";
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "initial";
                                                         document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "darkgrey";
                                                         document.getElementById("submitCnclPlcyBtn").disabled = true;
                                                     }else{
                                                         document.getElementById("validateCnclPlcyCardBtn").innerHTML = "Validate this card";
                                                         document.getElementById("validateCnclPlcyCardBtn").disabled = false;
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.color = "black";
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "pink";
-                                                        document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "pink";
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.color = "white";
+                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "darkslateblue";
+                                                        document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "darkslateblue";
                                                         document.getElementById("submitCnclPlcyBtn").disabled = false;
                                                     }
                                             }, 1);
@@ -6706,7 +6588,7 @@
                                             setInterval(function(){
                                                 if(document.getElementById("RmvCnclPlcy").checked === true){
                                                     isCardAdded = true;
-                                                    document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "pink";
+                                                    document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "darkslateblue";
                                                     document.getElementById("submitCnclPlcyBtn").disabled = false;
                                                 }
                                             }
@@ -6922,7 +6804,7 @@
                                     <p style="text-align: center; color: white; margin-bottom: 10px;">Your Queue Subscription</p>
                                     <input type="hidden" name="SubscStatusValue" value="" />
                                     <p style="background-color: red; color: white; text-align: center; margin: 5px;">You have not subscribed</p>
-                                    <p style="text-align: left;">Subscription Plan: <select name="SubscPlan">
+                                    <p style="text-align: left;">Subscription Plan: <select style="background-color: #d9e8e8; border: none; padding: 0 5px; min-width: 50px;" name="SubscPlan">
                                             <%
                                                 int number = 0;
                                                 try{
@@ -6953,24 +6835,24 @@
                                             %>
                                         </select></p>
                                         
-                                    <p style="text-align: center; color: white;">Payment Information</p>
-                                    <table>
+                                    <p style="text-align: center; color: white;">Payment Card Information</p>
+                                    <table style="max-width: 350px; margin: auto; background-color: #9bb1d0; border-radius: 5px; padding: 5px; margin-top: 5px; margin-bottom: 5px; border: #3d6999 1px solid;">
                                         <tbody>
                                             <tr>
                                                 <td style="text-align: left;">Card Number: </td>
-                                                <td><input onclick="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" onkeydown="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" id="SubscriptionPayCardNumber" style="background-color: #6699ff" type="text" name="CardNumber" value="" /></td>
+                                                <td><input onclick="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" onkeydown="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" id="SubscriptionPayCardNumber" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumber" value="" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">Holder's Name: </td>
-                                                <td><input style="background-color: #6699ff" type="text" name="CardName" value="" /></td>
+                                                <td><input style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardName" value="" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">Sec. Code: </td>
-                                                <td><input style="background-color: #6699ff" type="text" name="CardSecCode" value="" /></td>
+                                                <td><input style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardSecCode" value="" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">Exp. Date: </td>
-                                                <td><input id="cardDateSPC" style="background-color: #6699ff" type="text" name="CardExpDate" value="" /></td>
+                                                <td><input id="cardDateSPC" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardExpDate" value="" /></td>
                                             </tr>
                                         </tbody>
                                     </table>  
@@ -7054,33 +6936,33 @@
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
                                     
-                                                    <p onclick="toggleShowBizBankCard();"  style="text-align: center; border: 1px solid darkblue; padding: 5px; margin: 5px; cursor: pointer">Show Business Bank Info. (<span style="font-weight: bolder;">Optional</span>)</p>
+                                                    <p onclick="toggleShowBizBankCard();"  style="width: fit-content; margin: auto; color: white; background-color: darkslateblue; text-align: center; border-radius: 4px; padding: 5px; margin-top: 5px; margin-bottom: 5px; cursor: pointer">Show Business Bank Info. (<span style="font-weight: bolder;">Optional</span>)</p>
                                     
                                     <div id="BizBankCard" style="display: none;">
                                     <p style="color: white; text-align: center; margin: 5px;">Your Business Bank Card</p>
                                     <p>your bank account where to receive online payments from customers</p>
                                     
-                                    <table>
+                                    <table style="max-width: 350px; margin: auto; background-color: #9bb1d0; border-radius: 5px; padding: 5px; margin-top: 5px; margin-bottom: 5px; border: #3d6999 1px solid;">
                                         <tbody>
                                             <tr>
                                                 <td style="text-align: left;">Card Number: </td>
-                                                <td><input placeholder="not added" onclick="checkMiddlenumberFuncSubscriptionBizCardNumber()" onkeydown="checkMiddlenumberFuncSubscriptionBizCardNumber();" id="SubscriptionBizCardNumber" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                                <td><input placeholder="not added" onclick="checkMiddlenumberFuncSubscriptionBizCardNumber()" onkeydown="checkMiddlenumberFuncSubscriptionBizCardNumber();" id="SubscriptionBizCardNumber" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">Card Name: </td>
-                                                <td><input placeholder="not added" style="background-color: #6699ff" type="text" name="CardNameForSubscription" value="" /></td>
+                                                <td><input placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNameForSubscription" value="" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">Routing Number: </td>
-                                                <td><input placeholder="not added" style="background-color: #6699ff" type="text" name="CardNumberForSubscription" value="" /></td>
+                                                <td><input placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">Sec. Code: </td>
-                                                <td><input placeholder="not added" style="background-color: #6699ff" type="text" name="CardCodeForSubscription" value="" /></td>
+                                                <td><input placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardCodeForSubscription" value="" /></td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left;">Exp. Date: </td>
-                                                <td><input id="cardDateSBB" placeholder="not added" style="background-color: #6699ff" type="text" name="CardExpForSubscription" value="" /></td>
+                                                <td><input id="cardDateSBB" placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardExpForSubscription" value="" /></td>
                                             </tr>
                                         </tbody>
                                     </table> 
@@ -7167,10 +7049,10 @@
                                     
                                     </div>
                                     
-                                    <p style="background-color: peachpuff; border: 1px solid black; text-align: left;"><input id="autoPay" type="checkbox" name="AutoPay" value="ON" />
-                                        <label style="color: black;" for="autoPay">Allow Automatic Payment</label></p>
+                                    <p style="background-color: crimson; border-radius: 4px; width: fit-content; padding: 5px; color: white; margin: auto; margin-bottom: 5px;"><input id="autoPay" type="checkbox" name="AutoPay" value="ON" />
+                                        <label style="" for="autoPay">Allow Automatic Payment</label></p>
                                     
-                                    <input id="ChngSubscBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" type="submit" value="Update" />
+                                    <input id="ChngSubscBtn" style="padding: 5px; border: none; background-color: darkslateblue; border-radius: 4px; color: white;" type="submit" value="Update" />
                                     
                                     </form>
                                         
@@ -7210,24 +7092,24 @@
                                     
                                     <div id="EditBizInfoDiv" style="text-align: center; background-color: #6699ff; display: none">
                                         <form name="UpdateBizInfoForm">
-                                        <p style="color: white;">Your Business Information</p>
-                                        <table>
+                                        <p style="color: white; padding: 5px;">Your Business Information</p>
+                                        <table style="width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin: auto; margin-bottom: 5px; margin-bottom: 5px;">
                                             <tbody>
                                                 <tr>
                                                     <td style="text-align: left;">Business Name: </td>
-                                                    <td><input id="ProvBNameFld" style="background-color: #6699ff;" type="text" name="BusinessNameFld" value="<%=BusinessName%>" /></td>
+                                                    <td><input id="ProvBNameFld" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="BusinessNameFld" value="<%=BusinessName%>" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Business Email: </td>
-                                                    <td><input id="ProvBEmailFld" style="background-color: #6699ff;" type="text" name="BusinessEmailFld" value="<%=BusinessEmail%>" /></td>
+                                                    <td><input id="ProvBEmailFld" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="BusinessEmailFld" value="<%=BusinessEmail%>" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Business Tel. Number: </td>
-                                                    <td><input id="ProvBTelFld" style="background-color: #6699ff;" type="text" name="BusinessTelephoneNumberFld" value="<%=BusinessTel%>" /></td>
+                                                    <td><input id="ProvBTelFld" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="BusinessTelephoneNumberFld" value="<%=BusinessTel%>" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: left;">Business Type: </td>
-                                                    <td><select id="businessType" name="BusinessType">
+                                                    <td><select style="background-color: #d9e8e8; border: #3d6999 1px solid; padding: 5px; color: black;" id="businessType" name="BusinessType">
                                             <option><%=BusinessType%></option>
                                             <option>Barber Shop</option>
                                             <option>Beauty Salon</option>
@@ -7257,17 +7139,61 @@
                                         </table>
                                         <p style="color: white;">Your Business Location (Address)</p>
                                         <p style="margin: 5px; text-align: center;">Providing accurate address information<br/>will help customers locate your business</p>
-                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="35" style="background-color: #6699ff; border: 1px solid black;"/></p>
-                                        
-                                        <p> House<input id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="<%=HouseNumber%>" size="4" style="background-color: #6699ff;"/>
-                                           Street:<input id="Street" type="text" name="Street" placeholder='street/avenue' value="<%=StreetName%>" size="11" style="background-color: #6699ff;"/></p>
-                                        <p>Town:<input id="Town" type="text" name="Town" placeholder='town' value="<%=Town%>" size="28" style="background-color: #6699ff;"/></p>
-                                        <p>City:<input id="City" type="text" name="City" placeholder='city' value="<%=City%>" size="10" style="background-color: #6699ff;"/>
-                                        Zip Code:<input id="ZCode" type="text" name="ZCode" placeholder='123...' value="<%=ZipCode%>" size="4" style="background-color: #6699ff;"/></p>
-                                        <p>Country:<input id="Country" type="text" name="Country" placeholder='country' value="<%=Country%>" size="25" style="background-color: #6699ff;"/></p>
-                                        
+                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly style="width: 300px; background-color: #6699ff; border: 1px solid black; font-size: 10px"/></p>
+                                        <table style="width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin: auto; margin-top: 5px; margin-top: 5px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td> 
+                                                        House:
+                                                    </td>
+                                                    <td>
+                                                        <input id="HouseNumber" type="text" name="HouseNumber" placeholder='123...' value="<%=HouseNumber%>" style="background-color: #d9e8e8;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Street:
+                                                    </td>
+                                                    <td>
+                                                        <input id="Street" type="text" name="Street" placeholder='street/avenue' value="<%=StreetName%>" style="background-color: #d9e8e8;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Town:
+                                                    </td>
+                                                    <td>
+                                                        <input id="Town" type="text" name="Town" placeholder='town' value="<%=Town%>" style="background-color: #d9e8e8;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        City:
+                                                    </td>
+                                                    <td>
+                                                        <input id="City" type="text" name="City" placeholder='city' value="<%=City%>" style="background-color: #d9e8e8;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Zip Code:
+                                                    </td>
+                                                    <td>
+                                                        <input id="ZCode" type="text" name="ZCode" placeholder='123...' value="<%=ZipCode%>" style="background-color: #d9e8e8;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Country:
+                                                    </td>
+                                                    <td>
+                                                        <input id="Country" type="text" name="Country" placeholder='country' value="<%=Country%>" style="background-color: #d9e8e8;"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                         <input id="ProvIDforUpdateBiz" type="hidden" name="ProviderID" value="<%=UserID%>"/>
-                                        <input id="UpdateProvBizBtn" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="button" value="Update" name="updateBizInfoBtn" />
+                                        <input id="UpdateProvBizBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px; color: white; margin: auto; margin-top: 5px; margin-bottom: 5px;" type="button" value="Update" name="updateBizInfoBtn" />
                                         </form>
                                         
                                         <script>
@@ -7362,7 +7288,7 @@
                                                             UpdateProvBizBtn.style.backgroundColor = "darkgrey";
                                                             UpdateProvBizBtn.disabled = true;
                                                         }else{
-                                                            UpdateProvBizBtn.style.backgroundColor = "pink";
+                                                            UpdateProvBizBtn.style.backgroundColor = "darkslateblue";
                                                             UpdateProvBizBtn.disabled = false;
                                                         }
                                                             
@@ -7381,36 +7307,36 @@
                                     
                                     <div id="UpdateLoginDiv" style="text-align: center; background-color: #6699ff; display: none;">
                                         
-                                        <p style="color: white; margin: 5px;">Your Login Information</p>
+                                        <p style="color: white; padding: 5px;">Your Login Information</p>
                                         
                                         <form name="UpdateLoginInfo" >
                                             
-                                            <center><table>
+                                            <table style="width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin: auto; margin-bottom: 5px; margin-bottom: 5px;">
                                                         <tbody> 
                                                             <tr>
                                                                 <td style="text-align: left;">Username: </td>
-                                                                <td><input id="UsrNamefld" style="background-color: #6699ff;" type="text" name="UserNameFld" value="<%=UserName%>" /></td>
+                                                                <td><input id="UsrNamefld" style="background-color: #d9e8e8;" type="text" name="UserNameFld" value="<%=UserName%>" /></td>
                                                             </tr>
                                                             <tr>
                                                                 <input id="oldPassfld" type="hidden" name="oldpass" value=""/>
                                                                 <td style="text-align: left;">Old Password: </td>
-                                                                <td><input id="compareOldPassfld" id="" style="background-color: #6699ff;" type="password" name="OldPasswordFld" value="" /></td>
+                                                                <td><input id="compareOldPassfld" id="" style="background-color: #d9e8e8;" type="password" name="OldPasswordFld" value="" /></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="text-align: left;">New Password: </td>
-                                                                <td><input id="newPassfld" style="background-color: #6699ff;" type="password" name="NewPasswordFld" value="" /></td>
+                                                                <td><input id="newPassfld" style="background-color: #d9e8e8;" type="password" name="NewPasswordFld" value="" /></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="text-align: left;">Confirm Password: </td>
-                                                                <td><input id="compareNewPassfld" style="background-color: #6699ff;" type="password" name="ConfirmPasswordFld" value="" /></td>
+                                                                <td><input id="compareNewPassfld" style="background-color: #d9e8e8;" type="password" name="ConfirmPasswordFld" value="" /></td>
                                                             </tr>
                                                         </tbody>
-                                                </table></center>
+                                                </table>
                                                 <p style="color: white;" id="UpdatePassStatus"></p>    
                                                 <p id="WrongPassStatus" style="background-color: red; color: white; display: none;">Your current password is wrong </p>
                                                <input id="ProviderIDforUpdateLogin" type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                                <input id="UserIndexforUpdateLogin" type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                               <input id="updateUsrAcntBtn" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="button" value="Update" />
+                                               <input id="updateUsrAcntBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px; color: white;" type="button" value="Update" />
                                         </form>
                                     </div>
                                     <script>
@@ -7444,7 +7370,7 @@
                                                                             alert("Update Successful");
                                                                             document.getElementById("newPassfld").value = "";
                                                                             document.getElementById("compareOldPassfld").value = "";
-                                                                            document.getElementById("compareOldPassfld").style.backgroundColor = "#6699ff";
+                                                                            document.getElementById("compareOldPassfld").style.backgroundColor = "#d9e8e8";
                                                                             document.getElementById("compareNewPassfld").value = "";
                                                                             document.getElementById("WrongPassStatus").style.display = "none";
                                                                             
@@ -7500,7 +7426,7 @@
 
                                                    UpdatePassStatus.style.backgroundColor = "green";
                                                    UpdatePassStatus.innerHTML = "OK";
-                                                   updateUsrAcntBtn.style.backgroundColor = "pink";
+                                                   updateUsrAcntBtn.style.backgroundColor = "darkslateblue";
                                                    updateUsrAcntBtn.disabled = false;
                                                }
                                                
@@ -7612,7 +7538,7 @@
                                     <form name="DeleteThisClient">
                                         <input id="PIDDltClnt<%=c%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
                                         <input id="ClientIDDltClnt<%=c%>" type="hidden" name="EachClientID" value="<%=ClientID%>"/>
-                                        <input id="DeleteClientBtn<%=c%>" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="button" value="Delete this client" />
+                                        <input id="DeleteClientBtn<%=c%>" style="background-color: crimson; border: none; border-radius: 4px; color: white; padding: 5px;" type="button" value="Delete this client" />
                                     
                                         <script>
                                              
@@ -7747,7 +7673,7 @@
                                     
                                     <form name="UnblockPerson" >
                                         <input id="BlockedID<%=eachBlocked%>" type="hidden" name="BlockedID" value="<%=BlockedID%>" />
-                                        <input id="UnblockCleintBtn<%=eachBlocked%>" style="background-color: #6699ff; border: 1px solid darkblue; padding: 5px;" type="button" value="Unblock This Person" name="Unblock" />
+                                        <input id="UnblockCleintBtn<%=eachBlocked%>" style="background-color: crimson; border: none; border-radius: 4px; color: white; padding: 5px;" type="button" value="Unblock This Person" name="Unblock" />
                                         <script>
                                              
                                                $(document).ready(function() {                        
