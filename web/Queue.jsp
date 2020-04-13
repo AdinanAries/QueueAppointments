@@ -326,14 +326,12 @@
             <div id="miniNav" style="display: none;">
                 <div style="text-align: center">
                     <ul id="miniNavIcons" style="float: left;">
-                        <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
+                        <li onclick="scrollToTop()" style=""><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
                         </li>
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                            <input style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
-                                   placeholder="Search provider" name="SearchFld" type="text"  value=""/>
-                            <input style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
-                                  onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Search" />
+                            <input style="padding: 5px;" placeholder="Search provider" name="SearchFld" type="text"  value=""/>
+                            <input style="" onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Search" />
                     </form>
                 </div>
             </div>
@@ -580,7 +578,7 @@
                     <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
                     <p class="LocSearchP">City: <input id="city4Search" style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p class="LocSearchP">Town: <input id="town4Search" style=" width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
+                    <p class="LocSearchP">Town: <input id="town4Search" style=" width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
                     <script>
                         var setLocation = setInterval(
                                 function(){

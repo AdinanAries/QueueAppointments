@@ -198,6 +198,11 @@ body {
 #GalleryThumnail img{
     object-fit: cover;
 }
+/*#miniNav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}*/
 
 a {
   text-decoration: none;
@@ -249,15 +254,13 @@ h3 {
         display: none;
 }
 #miniNav {
-  /*background-color: pink;*/
   width: 100%;
   z-index: 100;
   position: fixed;
-  /*box-shadow: 4px 4px 10px #334d81;*/
-  padding: 1px;
   padding-bottom: 0;
   opacity: 0.95;
 }
+
 #miniNavPov {
   /*background-color: pink;*/
   width: 100%;
@@ -271,17 +274,17 @@ h3 {
 #SmallscreenProfilePic{
     display: none;
 }
+#miniNav input{
+    padding: 5px;
+    border-radius: 4px;
+}
+
 #miniNav #miniNavIcons li {
   display: inline-block;
   text-decoration: none;
   list-style-type: none;
-  border-radius: 100%;
-  background-color: #6699ff;
-  border: 1px solid black;
-  padding: 1px;
-  padding-top: 4px;
-  width: 30px;
-  height: 30px;
+  background-color: #ff6b6b;
+  padding: 5px;
   cursor: pointer;
 }
 #CustomerprofileTable {
@@ -1389,12 +1392,12 @@ input[type=radio]:checked {
         
     }
     input[type="text"]{
-        border-radius: 0;
         background-color: white;
+        padding: 5px;
     }
     input[type="password"]{
-        border-radius: 0;
         background-color: white;
+        padding: 5px;
     }
     .SearchObject{
         background-color: #3d6999;
@@ -1562,6 +1565,7 @@ input[type=radio]:checked {
         height: calc(100% - 90px);
         width: 100%;
         background-color: #6699ff;
+        overflow-x: hidden;
     }
     #QueueJspContent{
         padding-top: 80px;
@@ -1602,6 +1606,10 @@ input[type=radio]:checked {
         display: block;
         width: 80px;
         height: 35px;
+    }
+    #addBizTxt{
+        padding-top: 20px;
+        margin-top: 0;
     }
     
 }

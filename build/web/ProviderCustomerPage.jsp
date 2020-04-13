@@ -1143,16 +1143,14 @@
             <div id="miniNav" style="display: none;">
                 <center>
                     <ul id="miniNavIcons" style="float: left;">
-                        <li onclick="scrollToTop()" style="padding-left: 2px; padding-right: 2px;"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
+                        <li onclick="scrollToTop()"><img src="icons/icons8-up-24.png" width="24" height="24" alt="icons8-up-24"/>
                         </li>
                     </ul>
                     <div>
-                            <input id="MiniNavSearchBox" style="margin-right: 0; background-color: pink; height: 30px; font-size: 13px; border: 1px solid red; border-radius: 4px;"
-                                   placeholder="Search provider" name="SearchFld" type="text"  value=""/>
-                            <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                            <input type='hidden' name='User' value='<%=NewUserName%>' />
-                            <input onclick="SearchFromMiniNav();" style="margin-left: 0; border: 1px solid black; background-color: red; border-radius: 4px; padding: 5px; font-size: 15px;" 
-                                   type="button" value="Search" />
+                        <input id="MiniNavSearchBox" style="padding: 5px;" placeholder="Search provider" name="SearchFld" type="text"  value=""/>
+                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                        <input type='hidden' name='User' value='<%=NewUserName%>' />
+                        <input type="button" value="Search" />
                     </div>
                     <script>
                         function SearchFromMiniNav(){
