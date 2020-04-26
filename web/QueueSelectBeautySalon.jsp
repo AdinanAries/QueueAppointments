@@ -642,7 +642,7 @@
                                 <div>
                                     <img style="float: left; margin-right: 3px;" src="icons/icons8-hair-dryer-50.png" width="30" height2="30" alt="icons8-hair-dryer-50"/>
                                 </div>
-                                            <p style=""><span><%=Company%></span><span style="color: blue; font-size: 22px;">
+                                            <p style=""><span><%=Company%></span><span style="color: goldenrod; font-size: 18px;">
                                                     
                                 
                                         <%

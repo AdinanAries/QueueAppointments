@@ -925,7 +925,7 @@
                                     <img style="float: left; margin-right: 3px;" src="icons/icons8-spa-50.png" width="25" height2="30" alt="icons8-spa-50"/>
                                 </div>
                                                 
-                                    <p style=""><span><%=Company%></span><span style="color: blue; font-size: 22px;">
+                                    <p style=""><span><%=Company%></span><span style="color: goldenrod; font-size: 18px;">
                                 
                                         <%
                                             if(ratings ==5){
@@ -1911,7 +1911,7 @@
                         Find day spas at location below</p>
                     <p>City: <input style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
                     <p>Town: <input style="background-color: #d9e8e8; width: 40%;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
-                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: darkslateblue; color: white; padding: 7px; border-radius: 4px; width: 95%;" value="Search" /></p>
+                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: #626b9e; color: white; padding: 7px; border-radius: 4px; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 
@@ -1947,7 +1947,12 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center>
+                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                    </p></center>
+                    
+                            
+                    <!--center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center-->
                 
                 </div>
                 

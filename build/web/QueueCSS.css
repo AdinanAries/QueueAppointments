@@ -1277,7 +1277,11 @@ input[type=radio]:checked {
     border-color: #4ED164;
     box-shadow: inset 20px 0 0 0 #4ED164;
 }
-
+input[type="file"]{
+    background-color: #eee !important;
+    border: none !important;
+    border-radius: 4px;
+}
 @media only screen and (max-width: 700px){
     #LoginHomeBtn{
         display: block;
@@ -1306,11 +1310,20 @@ input[type=radio]:checked {
         left: 37%;
     }
     #QueuLineDiv table tbody tr td:hover {
-        background: none;
+        /*background: none;
         border: 0;
         border-top: 1px solid darkgray;
-        border-bottom: 1px solid darkgray;
+        border-bottom: 1px solid darkgray;*/
     }
+    #QueuLineDiv table tbody tr td img {
+        width: 40px !important;
+        height: 40px !important;
+        /*background: none;
+        border: 0;
+        border-top: 1px solid darkgray;
+        border-bottom: 1px solid darkgray;*/
+    }
+    
     #DesktopExplore{
         display: none;
     }

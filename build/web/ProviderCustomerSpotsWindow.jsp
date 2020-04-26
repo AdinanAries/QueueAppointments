@@ -821,7 +821,7 @@
                                             <p id="timePickerStatus<%=JString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatus<%=JString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="ChangeAppointmentID<%=JString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px;" name="<%=JString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px; border: none;" name="<%=JString%>changeAppointment" type="button" value="Change" />
                                         
                                             <script>
                                                 
@@ -1021,7 +1021,7 @@
                                         <form style=" display: none;" id="addFavProvForm<%=JString%>" class="addFavProvForm" name="addFavProvForm" action="addFavProvController" method="POST">
                                             <input id="CustIDatAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDatAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
@@ -1277,7 +1277,7 @@
                                             <p id="timePickerStatusFuture<%=QString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
                                             <p id="datePickerStatusFuture<%=QString%>" style="background-color: red; color: white; text-align: center;"></p>
                                             <input id="UpdateAppointmentID<%=QString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
-                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px;" name="<%=QString%>changeAppointment" type="button" value="Change" />
+                                            <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px; border: none;" name="<%=QString%>changeAppointment" type="button" value="Change" />
                                            
                                             <script>
                                                $(document).ready(function() {                        
@@ -1473,7 +1473,7 @@
                                         <form style=" display: none;" id="addFutureFavProvForm<%=QString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustIDforAddFav<%=QString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDforAddFav<%=QString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: none" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
@@ -1787,7 +1787,7 @@
                                                             <textarea id="ReviewTxtFld<%=JString%>" name="Review" rows="0" cols="0" style="width: 250px; height: 50px;" onfocus="if(this.innerHTML==='Compose review message...')this.innerHTML = ''; ">
                                                             </textarea>
                                                         </td>
-                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border-radius: 4px;"
+                                                        <td><input id="submitReviewBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border-radius: 4px; border: none;"
                                                                            type="button" value="Send" />
                                                         </td>
                                                     </tr>
@@ -1873,7 +1873,7 @@
                                         <form style=" display: none;" id="addFavProvFormFromRecent<%=JString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustomerIDforAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProviderIDforAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" type="button" value="Add this provider to your favorite providers" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  

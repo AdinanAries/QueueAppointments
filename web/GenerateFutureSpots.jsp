@@ -1040,7 +1040,7 @@
                                         <input type="hidden" name="ServicesList" value="<%=ServicesList%>" />
                                         <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
                                         
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: none; background-color: darkslateblue; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                                         
@@ -1064,7 +1064,7 @@
                                             GenerateSpotsBtn.disabled = true;
                                         }
                                         else{
-                                            GenerateSpotsBtn.style.backgroundColor = "pink";
+                                            GenerateSpotsBtn.style.backgroundColor = "darkslateblue";
                                             GenerateSpotsBtn.disabled = false;
                                             
                                         }

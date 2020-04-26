@@ -28,7 +28,7 @@ function toggleEnableFinalApntmntBtn(){
 	
 	if((Cash === true || CreditDebit === true) && (formsTimeValue !== " " && formsDateValue !== "")){
 		
-		submitAppointment.style.backgroundColor = "red";
+		submitAppointment.style.backgroundColor = "darkslateblue";
 		submitAppointment.disabled = false;
 		ConfirmAppointmentStatusTxt.innerHTML = "";
 		ConfirmAppointmentStatusTxt.style.backgroundColor = "green";

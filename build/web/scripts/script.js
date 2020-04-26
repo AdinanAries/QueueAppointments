@@ -122,7 +122,7 @@ function toggleEnableFinalApntmntBtn() {
     (Cash === true || CreditDebit === true) &&
     formsTimeValue !== " " && formsDateValue !== ""
   ) {
-    submitAppointment.style.backgroundColor = "red";
+    submitAppointment.style.backgroundColor = "darkslateblue";
     submitAppointment.disabled = false;
     ConfirmAppointmentStatusTxt.innerHTML = "";
     ConfirmAppointmentStatusTxt.style.backgroundColor = "green";
@@ -606,13 +606,13 @@ function activateHistory() {
 
   HistoryTab.style.backgroundColor = "#ccccff";
   HistoryTab.style.border = "none";
-  HistoryTab.style.borderTop = "black 1px solid";
+  /*HistoryTab.style.borderTop = "black 1px solid";*/
 
   AppointmentsTab.style.backgroundColor = "cornflowerblue";
-  AppointmentsTab.style.border = "1px solid black";
+  /*AppointmentsTab.style.border = "1px solid black";*/
 
   FavoritesTab.style.backgroundColor = "cornflowerblue";
-  FavoritesTab.style.border = "black 1px solid";
+  /*FavoritesTab.style.border = "black 1px solid";*/
 
   AppListDiv.style.display = "none";
   AppHistoryDiv.style.display = "block";
@@ -631,14 +631,14 @@ function activateAppTab() {
   var FavDiv = document.querySelector(".FavDiv");
 
   HistoryTab.style.backgroundColor = "cornflowerblue";
-  HistoryTab.style.border = "black 1px solid";
+  /*HistoryTab.style.border = "black 1px solid";*/
 
   AppointmentsTab.style.backgroundColor = "#ccccff";
   AppointmentsTab.style.border = "none";
-  AppointmentsTab.style.borderTop = "1px solid black";
+  /*AppointmentsTab.style.borderTop = "1px solid black";*/
 
   FavoritesTab.style.backgroundColor = "cornflowerblue";
-  FavoritesTab.style.border = "black 1px solid";
+  /*FavoritesTab.style.border = "black 1px solid";*/
 
   AppListDiv.style.display = "block";
   AppHistoryDiv.style.display = "none";
@@ -657,14 +657,14 @@ function activateFavTab() {
   var FavDiv = document.querySelector(".FavDiv");
 
   HistoryTab.style.backgroundColor = "cornflowerblue";
-  HistoryTab.style.border = "black 1px solid";
+  /*HistoryTab.style.border = "black 1px solid";*/
 
   AppointmentsTab.style.backgroundColor = "cornflowerblue";
-  AppointmentsTab.style.border = "1px solid black";
+  /*AppointmentsTab.style.border = "1px solid black";*/
 
   FavoritesTab.style.backgroundColor = "#ccccff";
   FavoritesTab.style.border = "none";
-  FavoritesTab.style.borderTop = "1px solid black";
+  /*FavoritesTab.style.borderTop = "1px solid black";*/
 
   AppListDiv.style.display = "none";
   AppHistoryDiv.style.display = "none";
@@ -773,12 +773,12 @@ function activateProvAppointmentsTab() {
     "ProviderAppointmentHistoryDiv"
   );
 
-  ProvHistoryTab.style.backgroundColor = "cornflowerblue";
-  ProvHistoryTab.style.border = "1px solid black";
+  ProvHistoryTab.style.backgroundColor = "#d8d8d8";
+  /*ProvHistoryTab.style.border = "1px solid darkblue";*/
 
   ProvAppointmentsTab.style.backgroundColor = "#6699ff";
   ProvAppointmentsTab.style.border = "none";
-  ProvAppointmentsTab.style.borderTop = "1px solid black";
+  /*ProvAppointmentsTab.style.borderTop = "1px solid darkblue";*/
 
   CurrentProvAppointmentsDiv.style.display = "block";
   ProviderAppointmentHistoryDiv.style.display = "none";
@@ -795,12 +795,12 @@ function activateProvHistoryTab() {
     "ProviderAppointmentHistoryDiv"
   );
 
-  ProvAppointmentsTab.style.backgroundColor = "cornflowerblue";
-  ProvAppointmentsTab.style.border = "black 1px solid";
+  ProvAppointmentsTab.style.backgroundColor = "#d8d8d8";
+  /*ProvAppointmentsTab.style.border = "black 1px solid";*/
 
   ProvHistoryTab.style.backgroundColor = "#6699ff";
   ProvHistoryTab.style.border = "none";
-  ProvHistoryTab.style.borderTop = "1px solid black";
+  /*ProvHistoryTab.style.borderTop = "1px solid black";*/
 
   CurrentProvAppointmentsDiv.style.display = "none";
   ProviderAppointmentHistoryDiv.style.display = "block";
@@ -815,15 +815,17 @@ function activateServicesTab() {
   var hoursOpenDiv = document.getElementById("hoursOpenDiv");
   var clientsListDiv = document.getElementById("clientsListDiv");
 
-  Clients.style.backgroundColor = "cornflowerblue";
-  Clients.style.border = "black 1px solid";
+  Clients.style.color = "darkgrey";
+  /*Clients.style.border = "black 1px solid";*/
 
-  HoursOpen.style.backgroundColor = "cornflowerblue";
-  HoursOpen.style.border = "1px solid black";
+  HoursOpen.style.color = "darkgrey";
+  HoursOpen.style.fontWeight = "initial";
+  /*HoursOpen.style.border = "1px solid black";*/
 
-  Services.style.backgroundColor = "#ccccff";
-  Services.style.border = "none";
-  Services.style.borderTop = "1px solid black";
+  Services.style.color = "black";
+  Services.style.fontWeight = "bolder";
+  /*Services.style.border = "none";
+  Services.style.borderTop = "1px solid black";*/
 
   ServiceListDiv.style.display = "block";
   hoursOpenDiv.style.display = "none";
@@ -839,15 +841,18 @@ function activateHourOpenTab() {
   var hoursOpenDiv = document.getElementById("hoursOpenDiv");
   var clientsListDiv = document.getElementById("clientsListDiv");
 
-  Services.style.backgroundColor = "cornflowerblue";
-  Services.style.border = "black 1px solid";
+  Services.style.color = "darkgrey";
+  Services.style.fontWeight = "initial";
+  /*Services.style.border = "black 1px solid";*/
 
-  Clients.style.backgroundColor = "cornflowerblue";
-  Clients.style.border = "1px solid black";
+  Clients.style.color = "darkgrey";
+  Clients.style.fontWeight = "initial";
+  /*Clients.style.border = "1px solid black";*/
 
-  HoursOpen.style.backgroundColor = "#ccccff";
-  HoursOpen.style.border = "none";
-  HoursOpen.style.borderTop = "1px solid black";
+  HoursOpen.style.color = "black";
+  HoursOpen.style.fontWeight = "bolder";
+  /*HoursOpen.style.border = "none";
+  HoursOpen.style.borderTop = "1px solid black";*/
 
   ServiceListDiv.style.display = "none";
   hoursOpenDiv.style.display = "block";
@@ -863,15 +868,18 @@ function activateClientsTab() {
   var hoursOpenDiv = document.getElementById("hoursOpenDiv");
   var clientsListDiv = document.getElementById("clientsListDiv");
 
-  HoursOpen.style.backgroundColor = "cornflowerblue";
-  HoursOpen.style.border = "black 1px solid";
+  HoursOpen.style.color = "darkgrey";
+  HoursOpen.style.fontWeight = "initial";
+  /*HoursOpen.style.border = "black 1px solid";*/
 
-  Services.style.backgroundColor = "cornflowerblue";
-  Services.style.border = "1px solid black";
+  Services.style.color = "darkgrey";
+  Services.style.fontWeight = "initial";
+  /*Services.style.border = "1px solid black";*/
 
-  Clients.style.backgroundColor = "#ccccff";
-  Clients.style.border = "none";
-  Clients.style.borderTop = "1px solid black";
+  Clients.style.color = "black";
+  Clients.style.fontWeight = "bolder";
+  /*Clients.style.border = "none";
+  Clients.style.borderTop = "1px solid black";*/
 
   ServiceListDiv.style.display = "none";
   hoursOpenDiv.style.display = "none";

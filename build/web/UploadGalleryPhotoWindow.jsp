@@ -158,7 +158,7 @@
             <input type="hidden" name="ProviderID" value="<%=ID%>" />
             
             <input id="GalPhotoFld" style="width: 90%; background-color: white; border: #d8d8d8 1px solid;" type="file" name="file" value="" /><br />
-            <input id="GalUploadBtn" style="width: 90%; background-color: pink; padding: 5px; border: solid black 1px; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" onclick="document.getElementById('PageLoader').style.display = 'block';"/>
+            <input id="GalUploadBtn" style="width: 90%; background-color: darkslateblue; padding: 5px; border: none; border-radius: 4px; margin: 5px;" type="submit" value="Upload Photo" onclick="document.getElementById('PageLoader').style.display = 'block';"/>
         
             <script>
                 setInterval(function(){
@@ -174,7 +174,7 @@
             
         </form>
         <p style="border-top: 1px solid darkgrey; margin-top: 10px;"></p>
-        <a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="background-color: pink; color: white; padding: 5px; margin-top: 10px;">Your Dashboard</p></a>
+        <a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" style="text-decoration: none;" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="font-weight: bolder; color: white; padding: 5px; margin-top: 10px;">Click here to go to dashboard</p></a>
         
     </body>
 </html>

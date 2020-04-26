@@ -985,7 +985,7 @@
                                 </tr>
                                 <tr>
                                     <td><p style="margin-left: 0;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                        <%=Company%> <span style="color: blue; font-size: 25px;">
+                                        <%=Company%> <span style="color: goldenrod; font-size: 18px;;">
                                        
                                         <%
                                             if(ratings ==5){
@@ -1116,7 +1116,7 @@
                             <center><div style='float: right; width: 82%;'>                 
                             <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
 
-                            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: blue; font-size: 20px;">
+                            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: gold; font-size: 18px;">
 
 
                                                         <%
@@ -1284,7 +1284,7 @@
                                             <input type="hidden" id="totallist" name="totallist" value="<%=listcounter%>" />
                                             <input type="hidden" name="UserID" value="<%=PID%>" />
                                             <input type="hidden" name="AppointmentTime" value="<%=AppointmentTime%>" />
-                                            <center><input style="border: black solid 1px; background-color: red; border-radius: 5px; color: white;
+                                            <center><input style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
                                                    padding: 5px;" id="BookAppointmentBtn"
                                                   onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Continue" name="BookAppointmentBtn" /></center>
                                             </form>

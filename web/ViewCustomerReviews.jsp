@@ -114,7 +114,7 @@
     </div></center-->
     <center><div style=""> 
             
-        <center><h3 style='color: white; text-align: center; margin-bottom: 0; margin-top: 0; width: 120px;'>Your Reviews</h3></center>
+        <center><h3 style='color: white; text-align: center; margin-bottom: 0; margin-top: 0; width: 120px; padding: 10px;'>Your Reviews</h3></center>
         
         <%
             for(int i = 0; i < ReviewsList.size(); i++){
@@ -208,7 +208,7 @@
             <center><div style='float: right; width: 84%;'>                 
             <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=ProviderFullName%></p>
             <p style='color: white; text-align: left; margin: 0;'><%=Company%> - <%=ServiceType%></p>
-            <p style='color: darkgray; text-align: left; margin: 0;'>You Rated: <span style="color: blue; font-size: 25px;">
+            <p style='color: darkgray; text-align: left; margin: 0;'>You Rated: <span style="color: goldenrod; font-size: 18px;">
                                                     
                                 
                                         <%

@@ -15,7 +15,7 @@ function tryEnableBkAppBtn(){
 		if(checkBoxValue === true){
 			
 			BookAppointmentBtn.disabled = false;
-			BookAppointmentBtn.style.backgroundColor = "red";
+			BookAppointmentBtn.style.backgroundColor = "darkslateblue";
 			SVCSelectStatus.innerHTML = "";
 			break;
 			
@@ -38,7 +38,7 @@ function enableBkAppBtn(number){
 	
 	if(thisCheckBox.checked === true)
 		BookAppointmentBtn.disabled = false;
-		BookAppointmentBtn.style.backgroundColor = "red";
+		BookAppointmentBtn.style.backgroundColor = "darkslateblue";
 		SVCSelectStatus.innerHTML = "";
 }
 

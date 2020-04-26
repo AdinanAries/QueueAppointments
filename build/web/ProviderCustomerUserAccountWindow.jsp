@@ -2183,7 +2183,7 @@
                                                                                      provName + '</p></b>' +
                                                                                     '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
                                                                                      provCompany +
-                                                                                    '<span style="color: blue;">'+
+                                                                                    '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
                                                                                     '</span></p>' +
 
@@ -2637,7 +2637,7 @@
                                                                                      provName + '</p></b>' +
                                                                                     '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
                                                                                      provCompany +
-                                                                                    '<span style="color: blue;">'+
+                                                                                    '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
                                                                                     '</span></p>' +
 
@@ -3036,7 +3036,7 @@
                                                                                      provName + '</p></b>' +
                                                                                     '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
                                                                                      provCompany +
-                                                                                    '<span style="color: blue;">'+
+                                                                                    '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
                                                                                     '</span></p>' +
 
@@ -3315,7 +3315,7 @@
                                           <%=FavProvFullName%></p></b>
                                     <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
 
-                                        <%=FavProvCompany%> <span style="color: blue;">
+                                        <%=FavProvCompany%> <span style="color: goldenrod; font-size: 18px;">
                                             
                                         <%
                                             if(FavRatings ==5){

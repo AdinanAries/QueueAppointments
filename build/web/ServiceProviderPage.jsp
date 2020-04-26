@@ -3396,16 +3396,16 @@
             
                 
                 <div style=" display: block;" id="appointmentsDiv" style="">
-                <center><div style=" width: 100%;">
-                             
+                <center><div style=" width: 100%; background-color: #d8d8d8;">
+                                        <h style="color: #000099; font-weight: bolder; text-align: center; padding-top: 20px;">See Your Bookings Below</p>
                                     
-                                        <table cellspacing="0" style="width: 100%;">
+                                        <table cellspacing="0" style="width: 100%; margin-top: 10px; border-top: darkgray 1px solid;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px;  border-top: 1px solid black; cursor: pointer; width: 50%;">
+                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; cursor: pointer; width: 50%; color: darkblue; font-weight: bolder; text-align: center; background-color: #6699ff; padding-top: 10px;">
                                                         Current Line
                                                     </td>
-                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
+                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; cursor: pointer;  color: darkblue; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
                                                         History
                                                     </td>
                                                 </tr>
@@ -3415,7 +3415,7 @@
                                 
                     </div></center>
                     
-                    <div class="scrolldiv" style=" height: 400px; overflow-y: auto; min-width: 100%;">
+                    <div class="scrolldiv" style=" height: 400px; overflow-y: auto; min-width: 100%; padding-top: 10px;">
                         
                         <script>
                                     
@@ -5035,7 +5035,7 @@
                                                 <sup style="color: #000099;">Edit Your Personal Information</sup>
                                             </p></center>
                                         
-                                        <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid;">
+                                        <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin-bottom: 10px;">
                                                 <form name="UpdatePsnalInfor">
                                                 <table>
                                                     <tbody>
@@ -5180,7 +5180,7 @@
                                         </div></center>
                                                 
                                             
-                                        <p style='text-align: center;'>Recent Customer Review</p>
+                                        <p style='text-align: center; margin-bottom: 5px;'>Recent Customer Review</p>
                 
     <%
                                         for(int x = 0; x < ReviewsList.size(); x++){
@@ -5270,7 +5270,7 @@
                                             <center><div style='float: right; width: 84%;'>                 
                                             <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=ClientFullName%></p>
 
-                                            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: blue; font-size: 20px;">
+                                            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: gold; font-size: 18px;">
 
 
                                                 <%
@@ -5379,16 +5379,16 @@
                                         
                                         <%}%>
                                       
-                                        <table cellspacing="0" style="width: 100%;">
+                                        <table cellspacing="0" style="width: 100%; padding-bottom: 5px;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateServicesTab()" id="Services" style="padding: 5px; border-radius: 4px; border-top: 1px solid black; cursor: pointer;">
+                                                    <td onclick="activateServicesTab()" id="Services" style="text-align: center; padding: 10px; cursor: pointer; font-weight: bolder;">
                                                         Services
                                                     </td>
-                                                    <td onclick="activateHourOpenTab()()" id="HoursOpen" style="padding: 5px; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
+                                                    <td onclick="activateHourOpenTab()()" id="HoursOpen" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
                                                         Settings
                                                     </td>
-                                                    <td onclick="activateClientsTab()" id="Clients" style="padding: 5px; border-radius: 4px; border: 1px solid black; background-color: cornflowerblue; cursor: pointer;">
+                                                    <td onclick="activateClientsTab()" id="Clients" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
                                                         Clients
                                                     </td>
                                                 </tr>
@@ -5400,7 +5400,7 @@
                                 <div id="ServiceListDiv">
                                 <div id="serviceslist">
                                     
-                                     <center><p style="color: tomato; margin: 5px;">Services</p></center>
+                                     <!--center><p style="color: tomato; margin: 5px;">Services</p></center-->
                                      
                                      <div>
                                          
@@ -5947,7 +5947,7 @@
                                         
                                     %>
                                     
-                                    <p style="color: tomato; margin: 5px; text-align: center;">Hours Open and Other Settings</p>
+                                    <!--p style="color: tomato; margin: 5px; text-align: center;">Hours Open and Other Settings</p-->
                                     <table style="width: 100%;">
                                         <tbody>
                                             <tr>
@@ -7460,7 +7460,7 @@
                                 <div id="clientsListDiv" style="display: none;">
                                 <div id="serviceslist">
                                     
-                                    <center><p style="color: tomato; margin: 5px;">Your Clients and Blocked People</p></center>
+                                    <!--center><p style="color: tomato; margin: 5px;">Your Clients and Blocked People</p></center-->
                                     
                                     <table style="width: 100%; margin-bottom: 5px;">
                                         <tbody>

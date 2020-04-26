@@ -116,7 +116,7 @@
         }catch(Exception e){
             isTrySuccess = false;
         }
-        
+        //JOptionPane.showMessageDialog(null, request.getParameterNames());
         if(!isTrySuccess  || UserID == 0){
             //response.sendRedirect("LogInPage.jsp");
             
@@ -184,7 +184,7 @@
         
         <%
             
-            String AppointmentTime = ;
+            String AppointmentTime = request.getParameter("AppointmentTime");
             String FormattedAppointmentTime = " ";
             
             try{
@@ -372,7 +372,7 @@
             
             <ul>
                 <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                    <li onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                    <li class="active" onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                     Home</li></a>
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
@@ -380,11 +380,11 @@
                     Account</li>
             </ul>
         
-            <div id="ExtraDivSearch" style='background-color: #334d81; padding: 3px; padding-right: 5px; padding-left: 5px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+            <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; margin-top: 1.2px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
                 <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                    <input style="width: 450px; margin: 0; background-color: #3d6999; color: #eeeeee; height: 30px; border: 1px solid darkblue; border-radius: 4px; font-weight: bolder;"
+                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
-                    <input style="font-weight: bolder; margin: 0; border: 1px solid white; background-color: navy; color: white; border-radius: 4px; padding: 7px; font-size: 15px;" 
+                    <input style="font-weight: bolder; margin: 0; background-color: cadetblue; color: white; border-radius: 4px; padding: 5px 7px; font-size: 15px;" 
                            onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type='hidden' name='User' value='<%=NewUserName%>' />
@@ -963,13 +963,13 @@
                             */
                             
                             //allways do this first to reset Cost
-                            Double TaxedPrice = Double.parseDouble(ResendAppointmentData.ServicesCost);
+                            Double TaxedPrice = Double.parseDouble(request.getParameter("ServiceCost"));
                             
-                            ProcedureClass.Cost = 0;
+                            /*ProcedureClass.Cost = 0;
                             ProcedureClass.OrderedServices = "";
                             
-                            ProcedureClass.Cost = Double.parseDouble(ResendAppointmentData.ServicesCost);
-                            ProcedureClass.OrderedServices = ResendAppointmentData.SelectedServices;
+                            ProcedureClass.Cost = Double.parseDouble(request.getParameter("ServiceCost"));
+                            ProcedureClass.OrderedServices = ResendAppointmentData.SelectedServices;*/
                             
                     %>
                     
@@ -1429,7 +1429,7 @@
                                 </tr>
                                 <tr>
                                     <td><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                        <%=Company%> <span style="color: blue; font-size: 25px;">
+                                        <%=Company%> <span style="color: goldenrod; font-size: 18px;">
                                         <%
                                             if(ratings ==5){
                                         
@@ -1486,7 +1486,7 @@
                                     
                                     <%}%>
                                     
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 1px solid black; background-color: pink; padding: 5px; cursor: pointer;">Customize Your Spot</p>
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Customize Your Spot</p>
                                     
                                     <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
                                         
@@ -1689,11 +1689,11 @@
                                         <p><input id="formsDateValue" type="hidden" name="formsDateValue" value="" /></p>
                                         <p> Time: <span id="displayTime" style="color: red; float: right;"><%=FormattedAppointmentTime%></span></p>
                                         <p><input id="formsTimeValue" type="hidden" name="formsTimeValue" value="<%=AppointmentTime%>" /></p>
-                                        <p> Reason: <span style="color: red; float: right;"><%=ResendAppointmentData.SelectedServices%></span>
-                                        <input id="formsOrderedServices" type="hidden" name="formsOrderedServices" value="<%=ResendAppointmentData.SelectedServices%>" />
+                                        <p> Reason: <span style="color: red; float: right;"><%=request.getParameter("Services")%></span>
+                                        <input id="formsOrderedServices" type="hidden" name="formsOrderedServices" value="<%=request.getParameter("Services")%>" />
                                             
                                             <%
-                                                if(ResendAppointmentData.SelectedServices == ""){
+                                                if(request.getParameter("Services") == ""){
                                             
                                             %><span style="color: red; float: right;">None(Go to previous page)</span> 
                                             
@@ -1739,7 +1739,7 @@
                                         <%}%>
                                         
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; background-color: red; color: white;"></p>
-                                        <input id="submitAppointment" style="border: black solid 1px; background-color: red; border-radius: 5px; color: white;
+                                        <input id="submitAppointment" style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
                                                    padding: 5px;"
                                                    type="button" value="Confirm" />
                                     </center>
@@ -1778,7 +1778,14 @@
                                                           //alert(result);
                                                           if(result === "Success"){
                                                               //document.getElementById("PageLoader").style.display = "block";
-                                                              window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              //window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              alert("You've been enqueued successfully!");
+                                                              if($(window).width() > 1000){
+                                                                  //document.getElementById("PageLoader").style.display = "none";
+                                                                window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              }else{
+                                                                window.location.replace("ProviderCustomerSpotsWindow.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              }
                                                           }else{
                                                               alert(result);
                                                               document.getElementById("PageLoader").style.display = "none";
@@ -1939,14 +1946,14 @@
             <div id="ExtraproviderIcons" style="padding-top: 10px;"> 
              
                 <div id="SearchDivNB">
-                <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #6699ff; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
+                <center><form action="ByAddressSearchResultLoggedIn.jsp" method="POST" style="background-color: #9bb1d0; border: 1px solid buttonshadow; padding: 5px; border-radius: 5px; width: 90%;">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <p style="color: #000099;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
                         Find services at location below</p>
-                    <p>City: <input style="width: 80%; background-color: #6699ff;" type="text" name="city4Search" placeholder="" value=""/></p> 
-                    <p>Town: <input style="background-color: #6699ff; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #6699ff;" type="text" name="zcode4Search" value="" /></p>
-                    <p><input type="submit" style="background-color: #6699ff; color: white; padding: 5px; border-radius: 5px; border: 1px solid white; width: 95%;" value="Search" /></p>
+                    <p>City: <input style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
+                    <p>Town: <input style="background-color: #d9e8e8; width: 40%" type="text" name="town4Search" value=""/> Zip Code: <input style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
+                    <p><input type="submit" style="background-color: #626b9e; color: white; padding: 5px; border-radius: 5px; border: none; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 
@@ -1982,8 +1989,10 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center>
-                
+                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                    </p></center>
+                            
                 </div>
                 
                 <div id="secondSetProvIcons" style="display: none;">
@@ -2015,9 +2024,13 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
-                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center>
-                
+                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
+                            
                 </div>
                 
                 <div id="thirdSetProvIcons" style="display: none;">
@@ -2038,8 +2051,10 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center>
-
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
+                                
                 </div>
             </div>
             

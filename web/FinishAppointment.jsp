@@ -1148,7 +1148,7 @@
                                 </tr>
                                 <tr>
                                     <td><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                        <%=Company%> <span style="color: blue; font-size: 25px;">
+                                        <%=Company%> <span style="color: goldenrod; font-size: 18px;">
                                         <%
                                             if(ratings ==5){
                                         
@@ -1510,7 +1510,7 @@
                                         <%}%>
                                         
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; background-color: red; color: white;"></p>
-                                    <center><input id="submitAppointment" style="border: black solid 1px; background-color: red; border-radius: 5px; color: white;
+                                    <center><input id="submitAppointment" style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
                                                    padding: 5px;"
                                                    onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Confirm" /></center>
                                         

@@ -182,7 +182,7 @@
             
             <form name="deletePhoto">
                 <input id="selectedPhID" type="hidden" value="<%=FirstID%>" />
-                <input id="deleteBtn" type="button" value="Delete This Photo" style="padding: 5px; background-color: black; color: red; border: 1px solid red; width: 98%; margin-top: 3px; font-weight: bolder; cursor: pointer;" onclick="document.getElementById('PageLoader').style.display = 'block';"/>
+                <input id="deleteBtn" type="button" value="Delete This Photo" style="padding: 5px; background-color: crimson; border-radius: 4px; color: white; border: none; width: 98%; margin-top: 3px; font-weight: bolder; cursor: pointer;" onclick="document.getElementById('PageLoader').style.display = 'block';"/>
                 
                 <script>
                     var ThisCell;
@@ -228,8 +228,8 @@
             </script>
             </form>
                         
-            <center><a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="background-color:#7e7e7e; border:1px solid darkgray; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: right;">Add New Photo</p></a></center>
-            <center><a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="background-color: pink; border:1px solid darkgray; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: left;" >Your Dashboard</p></a></center>
+            <center><a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="font-weight: bolder; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: right;">Add New Photo</p></a></center>
+            <center><a href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PageLoader').style.display = 'block';"><p style="font-weight: bolder; color: white; cursor: pointer; width: 46%; max-width: 590px; text-align: center; padding: 5px; margin-top: 2px; float: left;" >Your Dashboard</p></a></center>
             
             <p style="clear: both;"></p>
             </div></center>

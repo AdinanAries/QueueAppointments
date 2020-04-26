@@ -1150,7 +1150,7 @@
                         <input id="MiniNavSearchBox" style="padding: 5px;" placeholder="Search provider" name="SearchFld" type="text"  value=""/>
                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                         <input type='hidden' name='User' value='<%=NewUserName%>' />
-                        <input type="button" value="Search" />
+                        <input style="background-color: darkslateblue; color: white; border: none;" type="button" value="Search" />
                     </div>
                     <script>
                         function SearchFromMiniNav(){
@@ -4951,16 +4951,16 @@
                                             
                                         </script>
                                         
-                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; margin-top: -5px;">
+                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; border-top: #3d6999 1px solid">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding: 5px; cursor: pointer; border-top: 1px solid black; width: 33.3%;  background-color: #ccccff;">
+                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding-top: 20px; text-align: center; color: darkblue; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;  background-color: #ccccff;">
                                                         Your Spots
                                                     </td>
-                                                    <td onclick="activateHistory()" id="HistoryTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td onclick="activateHistory()" id="HistoryTab" style="text-align: center; color: darkblue; font-weight: bolder; padding: 5px; cursor: pointer; background-color: cornflowerblue; width: 33.3%;">
                                                         History
                                                     </td>
-                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="padding: 5px; cursor: pointer; border: 1px solid black; background-color: cornflowerblue; width: 33.3%;">
+                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="text-align: center; color: darkblue; font-weight: bolder; padding: 5px; cursor: pointer; background-color: cornflowerblue; width: 33.3%;">
                                                         Favorites
                                                     </td>
                                                 </tr>
@@ -5534,7 +5534,7 @@
                                                                                      provName + '</p></b>' +
                                                                                     '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
                                                                                      provCompany +
-                                                                                    '<span style="color: blue;">'+
+                                                                                    '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
                                                                                     '</span></p>' +
 
@@ -5543,7 +5543,7 @@
 
                                                                                     '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: crimson; border: none; color: white; padding: 5px; border-radius: 4px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -5994,7 +5994,7 @@
                                                                                      provName + '</p></b>' +
                                                                                     '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
                                                                                      provCompany +
-                                                                                    '<span style="color: blue;">'+
+                                                                                    '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
                                                                                     '</span></p>' +
 
@@ -6003,7 +6003,7 @@
 
                                                                                     '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: crimson; border: none; color: white; padding: 5px; border-radius: 4px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -6399,7 +6399,7 @@
                                                                                      provName + '</p></b>' +
                                                                                     '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
                                                                                      provCompany +
-                                                                                    '<span style="color: blue;">'+
+                                                                                    '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
                                                                                     '</span></p>' +
 
@@ -6408,7 +6408,7 @@
 
                                                                                     '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: crimson; border: none; color: white; padding: 5px; border-radius: 4px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'MainProviderCustomerPagePageLoader\').style.display = \'block\';"/>' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -6678,7 +6678,7 @@
                                           <%=FavProvFullName%></p></b>
                                     <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
 
-                                        <%=FavProvCompany%> <span style="color: blue;">
+                                        <%=FavProvCompany%> <span style="color: goldenrod; font-size: 18px;">
                                             
                                         <%
                                             if(FavRatings ==5){

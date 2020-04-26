@@ -925,7 +925,7 @@
                                     <img style="float: left; margin-right: 3px;" src="icons/icons8-dairy-50.png" width="30" height2="30" alt="icons8-dairy-50"/>
                                 </div>
                                                 
-                                    <p style=""><span><%=Company%></span><span style="color: blue; font-size: 22px;">
+                                    <p style=""><span><%=Company%></span><span style="color: goldenrod; font-size: 18px;">
                                 
                                         <%
                                             if(ratings ==5){
@@ -1911,7 +1911,7 @@
                         Find dieticians at location below</p>
                     <p>City: <input style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
                     <p>Town: <input style="background-color: #d9e8e8; width: 40%;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
-                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: darkslateblue; color: white; padding: 7px; border-radius: 4px; width: 95%;" value="Search" /></p>
+                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: #626b9e; color: white; padding: 7px; border-radius: 4px; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 
@@ -1947,7 +1947,11 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center>
+                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                    </p></center>
+                    
+                    <!--center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center-->
                 
                 </div>
                 
@@ -1980,8 +1984,15 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
-                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center>
+                            <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
+                    
+                    <!--center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
+                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center-->
                 
                 </div>
                 
@@ -2003,7 +2014,11 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center>
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
+                                
+                    <!--center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center-->
 
                 </div>
             </div>

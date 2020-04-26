@@ -642,7 +642,7 @@
                                 <div>
                                     <img style="float: left;" src="icons/icons8-barber-pole-50.png" width="30" height="30" alt="icons8-barber-pole-50"/>
                                 </div>
-                                            <p style=""><span><%=Company%></span><span style="color: blue; font-size: 22px;">
+                                            <p style=""><span><%=Company%></span><span style="color: goldenrod; font-size: 18px;">
                                                     
                                 
                                         <%

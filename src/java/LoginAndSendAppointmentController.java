@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 
 public class LoginAndSendAppointmentController extends HttpServlet {
@@ -202,7 +203,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
 
                         if(StringDateForCompare.equals(ClosedRec.getString("DateToClose").trim())){
                             isTodayClosed = true;
-                            response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Login successful.\nProvider is closed on chosen date");
+                            response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Login successful.\nProvider is closed on chosen date");
                             //JOptionPane.showMessageDialog(null, "Logged in successfully");
                             //JOptionPane.showMessageDialog(null, "Provider is closed on chosen date");
                         }
@@ -326,15 +327,16 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                         }
                     }catch(Exception e){}
                     
-                    if(DailyStartTime.length() < 5)
-            DailyStartTime = "0" + DailyStartTime;
-        if(DailyClosingTime.length() < 5)
-            DailyClosingTime = "0" + DailyClosingTime;
         
         if(DailyStartTime == "")
             DailyStartTime = "01:00";
         if(DailyClosingTime == "")
             DailyClosingTime = "23:00";
+        
+        if(DailyStartTime.length() < 5)
+            DailyStartTime = "0" + DailyStartTime;
+        if(DailyClosingTime.length() < 5)
+            DailyClosingTime = "0" + DailyClosingTime;
         
         int startHour = Integer.parseInt(DailyStartTime.substring(0,2));
         int startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
@@ -372,7 +374,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                     if(Integer.parseInt(CompareTime.substring(0,2)) < Integer.parseInt(DailyStartTime.substring(0,2))){
                         selectFlag = 2;
                         if(blockedYou == false){
-                            response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Login successful.\nAppointment not finished; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
+                            response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Login successful.\nAppointment not finished; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
                             //JOptionPane.showMessageDialog(null, "Logged in successfully");
                             //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
                         }
@@ -382,7 +384,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                         if(Integer.parseInt(CompareTime.substring(3,5)) < Integer.parseInt(DailyStartTime.substring(3,5))){
                             selectFlag = 2;
                             if(blockedYou == false){
-                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Login successful.\nAppointment not finished; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
+                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Login successful.\nAppointment not finished; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
                                 //JOptionPane.showMessageDialog(null, "Logged in successfully");
                                 //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is earlier than providers opening time\nProvider opens at " + DailyStartTime);
                             }
@@ -392,7 +394,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                     if(Integer.parseInt(CompareTime.substring(0,2)) > Integer.parseInt(DailyClosingTime.substring(0,2))){
                         selectFlag = 2;
                         if(blockedYou == false){
-                            response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Login successful.\nAppointment not finished; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
+                            response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Login successful.\nAppointment not finished; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
                             //JOptionPane.showMessageDialog(null, "Logged in successfully");
                             //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
                         }
@@ -402,7 +404,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                         if(Integer.parseInt(CompareTime.substring(3,5)) > Integer.parseInt(DailyClosingTime.substring(3,5))){
                             selectFlag = 2;
                             if(blockedYou == false){
-                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Login successful.\nAppointment not finished; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
+                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Login successful.\nAppointment not finished; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
                                 //JOptionPane.showMessageDialog(null, "Logged in successfully");
                                 //JOptionPane.showMessageDialog(null,"Not Successful; time chosen is later than providers closing time\nProvider closes at " + DailyClosingTime);
                             }
@@ -533,7 +535,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                                 StatusesClass.AppointmentStatus = "Unavailable Appointment time: " + AppointmentTime + 
                                             ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time";
                                 //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
-                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Unavailable Appointment time: " + AppointmentTime + 
+                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Unavailable Appointment time: " + AppointmentTime + 
                                             ", " + AppointmentDate + ".\nYou've alreay taken a spot for this same time");
                             }
 
@@ -563,7 +565,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                                             ", " + AppointmentDate + ".\nThe spot you selected is already taken";
                                     //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
                                 }
-                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Unavailable Appointment time: " + AppointmentTime + 
+                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Unavailable Appointment time: " + AppointmentTime + 
                                             ", " + AppointmentDate + ".\nThe spot you selected is already taken");
                             }
 
@@ -599,7 +601,7 @@ public class LoginAndSendAppointmentController extends HttpServlet {
                                             ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot.";
                                     //JOptionPane.showMessageDialog(null, StatusesClass.AppointmentStatus);
                                 }
-                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&result=Unavailable Appointment time: " + AppointmentTime + 
+                                response.sendRedirect("ResetAppointmentParameters.jsp?ProviderID="+ProviderID+"&UserIndex="+yourIndex+"&User="+VerifiedName+"&ServiceCost="+ServicesCost+"&Services="+OrderedServices+"&AppointmentTime="+AppointmentTime+"&result=Unavailable Appointment time: " + AppointmentTime + 
                                             ", " + AppointmentDate + ".\nThe spot you've chosen overlaps with another spot.");
                                 break;
 
