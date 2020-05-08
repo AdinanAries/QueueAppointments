@@ -12,9 +12,39 @@ body {
   max-width: 1600px;
   margin: auto;
 }
+.loginInputFld {
+  text-align: left;
+  font-weight: bolder;
+  font-size: 17px;
+  color: #254386;
+  /*background-color: #9bb1d0;*/
+  background-color: #d9e8e8;
+  border-radius: 4px;
+  border: 1px solid #626b9e;
+  padding: 5px;
+  padding-left: 10px;
+  max-width: 300px;
+}
+.loginInputFld input[type="text"], .loginInputFld input[type="email"], .loginInputFld input[type="password"]{
+    padding: 0;
+    border: none;
+    text-align: left;
+    background-color: #d9e8e8;
+    width: 250px !important;
+}
 #PermanentDiv{
     max-width: 1600px;
     margin: auto;
+}
+#PermanentDiv ul li img{
+    background-color: darkgrey !important;
+    border-radius: 5px !important;
+    padding: 2px !important;
+}
+#PermanentDiv ul li.active img{
+    background-color: darksalmon !important;
+    border-radius: 5px !important;
+    padding: 2px !important;
 }
 #MobileHeader{
     background-color: white;
@@ -1283,6 +1313,13 @@ input[type="file"]{
     border-radius: 4px;
 }
 @media only screen and (max-width: 700px){
+    .loginInputFld {
+        background-color: white;
+        color: #334d81;
+    }
+    .loginInputFld input[type="text"], .loginInputFld input[type="email"], .loginInputFld input[type="password"]{
+        background-color: white;
+    }
     #LoginHomeBtn{
         display: block;
     }
@@ -1693,3 +1730,6 @@ input[type="reset"]{
     color: white;
     background-color: darkslateblue;
 }
+
+
+

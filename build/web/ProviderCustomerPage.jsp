@@ -2476,8 +2476,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        
+                                    <td id="MenuGoBackBtn">
+                                        <div style='color: black;'>
+                                            <img style='border-radius: 2px;' src="icons/icons8-arrow-pointing-left-100.png" width="20" height="19" alt="icons8-sign-out-50"/>
+                                            <p style='margin-top: 0;'>Dashboard</p>
+                                        </div>
                                     </td>
                                     <td style="background: linear-gradient(-45deg, #ffe96b, #ff6b6b);">
                                         <a onclick="LogoutMethod()" href="LogoutController?UserIndex=<%=UserIndex%>"><div style='color: black;'>

@@ -38,6 +38,8 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="scripts/QueueLineDivBehavior.js"></script>
@@ -1792,28 +1794,52 @@
             <div id="businessdetails">
                 
             <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST"><table border="0">
-                        
                         <tbody>   
                             <tr>
-                                <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
+                                <td><p style="color: white; text-align: center; padding-bottom: 10px;">Provide your information below<p></td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="firstName" value="enter your first name" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your first name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="signUpFirtNameFld" placeholder="firstname" type="text" name="firstName" value="" size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="lastName" value="enter your last name" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your last name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="sigUpLastNameFld" placeholder="lastname" type="text" name="lastName" value="" size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="telNumber" value="enter your telephone/mobile number here" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your mobile</legend>
+                                        <i class="fa fa-mobile" style="font-size: 24px"></i>
+                                        <input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="mobile" type="text" name="telNumber" value="" size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input onfocus="this.value=''" type="text" name="email" value="enter your email address here" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your email</legend>
+                                        <span class="fa fa-envelope"></span>
+                                        <input id="signUpEmailFld" placeholder="email" type="text" name="email" value="" size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
+                        </tbody>
                         </tbody>
                     </table>
                     
                     <input class="button" type="reset" value="Reset" name="resetBtn" />
-                    <input class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Submit" name="submitBtn" />
+                    <input class="button" type="submit" onclick="document.getElementById('PageLoader').style.display = 'block';" value="Submit" name="submitBtn" />
                 </form></center>
                 
             </div>
@@ -1827,14 +1853,25 @@
                         <table border="0"> 
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your user name</legend>
+                                            <span class="fa fa-user"></span>
+                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password here" type="password" name="password" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your password</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                        
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
                         <input id="loginPageBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>

@@ -1261,6 +1261,9 @@ $(".MenuIcon").click(function(event){
     ToggleMenuDisplay();
     
 });
+$("#MenuGoBackBtn").click(function(event){
+    ToggleMenuDisplay();
+});
 
 /*var HeightFirstAttemp = false;
 var pageHeight = 0;

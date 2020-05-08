@@ -30,6 +30,8 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <title>Queue</title>
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
@@ -360,7 +362,7 @@
                         
                 <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                   
-                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; max-width: 300px; min-height: 300px; border: #3d6999 1px solid;"><table border="0"> 
+                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; padding-left: 5px; padding-right: 5px; max-width: 310px; min-height: 300px; border: #3d6999 1px solid;"><table border="0"> 
                             <center><h2 style="margin-bottom: 40px;">Login here</h2></center>
                             <%if(Message != null){%>
                                 <center><h4 style="color: brown; margin-bottom: 15px; max-width: 350px;"><%=Message%></h4></center>
@@ -368,10 +370,22 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your user name</legend>
+                                            <span class="fa fa-user"></span>
+                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="29" style=" border-radius: 4px;"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder='enter your password here' type="password" name="password" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your password</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input id="LoginPagePasswordFld" placeholder='password' type="password" name="password" value="" size="28" style=" border-radius: 4px;"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -384,12 +398,16 @@
                 
                 </form>
                 
-                <center><div id="forgotPassDiv" style="display: none; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; max-width: 300px; border: #3d6999 1px solid;">
+                <center><div id="forgotPassDiv" style="display: none; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; padding-left: 5px; padding-right: 5px; max-width: 310px; border: #3d6999 1px solid;">
                     
                     <h2 id="FGPassDivStatusTxt" style="margin-bottom: 15px; font-weight: bolder;">Enter your email below</h2>
                     
-                    <input id="forgotPassEmailFld" onmousemove="findAt();" type="text" value="" placeholder="enter you email address" size="30" style="background-color: #6699ff; background-color: #d9e8e8; border-radius: 4px;"/>
-                    <p><input id="forgotPassBtn" style="background-color: pink; border: 1px solid black; padding: 10px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
+                    <fieldset class="loginInputFld">
+                        <legend>Enter your email</legend>
+                        <span class="fa fa-envelope"></span>
+                        <input id="forgotPassEmailFld" onmousemove="findAt();" type="text" value="" placeholder="email" size="30" style="background: none; border-radius: 4px;"/>
+                    </fieldset>
+                    <p><input id="forgotPassBtn" style="background-color: darkslateblue; color: white; border: none; padding: 5px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
                     
                     <h2 style="text-align: center; margin-top: 15px; cursor: pointer" onclick="showLogin()">Click here to login</h2>
                         <script>
@@ -485,7 +503,7 @@
                                     DotFound = false;
                                 }else{
                                     if(AtFound && DotFound){
-                                        document.getElementById("forgotPassBtn").style.backgroundColor = "pink";
+                                        document.getElementById("forgotPassBtn").style.backgroundColor = "darkslateblue";
                                         document.getElementById("forgotPassBtn").disabled = false;
                                         //document.getElementById("FGPassDivStatusTxt").innerHTML = "you may send verification code";
                                     }else{
@@ -530,19 +548,43 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
+                                <td><h3 style="color: white; text-align: center; margin-bottom: 10px;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your first name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="signUpFirtNameFld" placeholder="firstname" type="text" name="firstName" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your last name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="sigUpLastNameFld" placeholder="lastname" type="text" name="lastName" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your mobile</legend>
+                                        <span class="fa fa-mobile" style="font-size: 25px;"></span>
+                                        <input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="mobile" type="text" name="telNumber" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your email</legend>
+                                        <span class="fa fa-envelope"></span>
+                                        <input id="signUpEmailFld" placeholder="email" type="text" name="email" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

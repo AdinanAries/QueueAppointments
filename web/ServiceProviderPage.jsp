@@ -1838,26 +1838,30 @@
                     
                     <div style='width: 85%; float: left; margin-left: 0;'>
                         <div onclick="toggleHideAppointmentsDiv()" style="width: 25%; color: white; float: left; cursor: pointer; border-radius: 4px;">
-                            <img style="background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;" src="icons/ProviderApptIcon.png" alt="" width="24" height="24"/>
-                            <p style="font-size: 11px; margin-top: -5px;" id="hideAppointments">Hide Spots</p>
+                            <!--img style="background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;" src="icons/ProviderApptIcon.png" alt="" width="24" height="24"/-->
+                            <i style="font-size: 25px;" class="fa fa-users"></i>
+                            <p style="font-size: 11px;" id="hideAppointments">Hide Spots</p>
                         </div>
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'>  
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
-                                <img style="background-color: white; border-radius: 2px;" src="icons/icons8-google-news-50.png" alt="" height="25" width="25"/>
-                                <p style="font-size: 11px; margin-top: -5px;">Add News</p>
+                                <!--img style="background-color: white; border-radius: 2px;" src="icons/icons8-google-news-50.png" alt="" height="25" width="30"/-->
+                                <i style="font-size: 25px;" class="fa fa-newspaper-o"></i>
+                                <p style="font-size: 11px;">Add News</p>
                             </div>
                         </a>
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3' style='color: white;'>
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
-                                <img style="background-color: white; border-radius: 2px;" src="icons/icons8-calendar-50.png" alt="" height="25" width="25"/>
-                                <p style="font-size: 11px; margin-top: -5px;">Calender</p>
+                                <!img style="background-color: white; border-radius: 2px;" src="icons/icons8-calendar-50.png" alt="" height="25" width="25"/>
+                                <i style="font-size: 25px;" class="fa fa-calendar"></i>
+                                <p style="font-size: 11px;">Calender</p>
                             </div>
                         </a>
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'>
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
                                 <p style=' width: 13px; position: absolute; z-index: 1000; font-size: 11px; color: red; margin-left: 11%; border: #334d81 1px solid; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;'><%=notiCounter%></p>
-                                <img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="25" alt="icons8-notification-50"/>
-                                <p style="font-size: 11px; margin-top: -5px;">Notifications</p>
+                                <!--img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="25" alt="icons8-notification-50"/-->
+                                <i style="font-size: 25px;" class="fa fa-bell"></i>
+                                <p style="font-size: 11px;">Notifications</p>
                             </div>
                         </a>
                     </div>
@@ -4988,18 +4992,8 @@
                             
                                 <div class="proinfo" style="padding-top:5px; margin-top:5px; padding-bottom: 5px; margin-bottom:5px;">
                             
-                                    <center><p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; margin-bottom: 10px; padding-top: 75px;"><%=FullName%></p></center>
-                                    <center><table style="border-spacing: 0;">
-                                        
-                                            <tr><td><p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span id="CompanyDetail"><%=Company%></span></p></td></tr>
-                                            <tr><td><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
-                                                        <span id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
-                                            <tr><td><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                                        <span id="EmailDetail"><%=Email%></span></p></td></tr>
-                                        <tr><td><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                                <span id="AddressDetail"><%=Address%></span></p></td></tr>
-                                        <tr><td>Your Ratings: 
+                                    <p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; padding-top: 75px; text-align: center;"><%=FullName%></p>
+                                    <p style="font-size: 20px; color: goldenrod; font-weight: bolder; text-align: center; margin-bottom: 10px;">
                                        
                                         <%
                                             if(Ratings ==5){
@@ -5023,15 +5017,24 @@
                                         %>
                                         ★☆☆☆☆
                                         <%}%>
+                                                </p>
+                                    <center><table style="border-spacing: 0;">
                                         
-                                    </td></tr>
+                                            <tr><td><p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                                    <span id="CompanyDetail"><%=Company%></span></p></td></tr>
+                                            <tr><td><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
+                                                        <span id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
+                                            <tr><td><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                                        <span id="EmailDetail"><%=Email%></span></p></td></tr>
+                                        <tr><td><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                <span id="AddressDetail"><%=Address%></span></p></td></tr>
                                     
                                         </table></center>
                                     
                                 </div>
                                         
                                         <center><p onclick="toggleShowEditPerInfoDiv();" style="cursor: pointer; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 5px;">
-                                                <img src="icons/icons8-pencil-20.png" alt=""/>
+                                                <img src="icons/icons8-pencil-20.png" width="20" height="20" alt=""/>
                                                 <sup style="color: #000099;">Edit Your Personal Information</sup>
                                             </p></center>
                                         

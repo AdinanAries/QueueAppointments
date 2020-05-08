@@ -40,6 +40,8 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
         <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
          
     </head>
     
@@ -274,9 +276,9 @@
         
         <div id="PermanentDiv" style="">
             
-            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: #334d81; color: white; border: 2px solid white; border-radius: 4px;'>
-                        <p><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
-                            Home</p></a>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 70px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: cadetblue; color: white; border-radius: 4px;'>
+                        <p><img style='background-color: white; padding: 4px; border-radius: 4px;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                            <sup>Home</sup></p></a>
             
             <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
@@ -288,7 +290,7 @@
             
             <div style="float: right; width: 50px;">
                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                        <img style='border: 2px solid black; background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
                     </div></center>
             </div>
         
@@ -529,10 +531,16 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td id="ShowBizForm" onclick="toggleHideAddBusinessForm()" style="padding-right: 45px; border-right: 1px solid black; cursor: pointer;"><center><img src="icons/icons8-business-50.png" width="50" height="50" alt="icons8-business-50"/><p>Business</p>
+                            <td id="ShowBizForm" onclick="toggleHideAddBusinessForm()" style="padding-right: 45px; border-right: 1px solid black; cursor: pointer;">
+                        <center>
+                            <!--img src="icons/icons8-business-50.png" width="50" height="50" alt="icons8-business-50"/-->
+                            <i class='fa fa-address-book' style='font-size:48px;color: #334d81;'></i><p>Business</p>
                                 </center></td>
                         
-                            <td id="ShowCustForm" onclick="toggleHideAddCustomerForm()" style="padding-left: 45px; cursor: pointer;" ><center><img src="icons/icons8-user-50 (1).png" width="50" height="50" alt="icons8-user-50 (1)"/><p>Customer</p>
+                            <td id="ShowCustForm" onclick="toggleHideAddCustomerForm()" style="padding-left: 45px; cursor: pointer;" >
+                            <center>
+                                <!--img src="icons/icons8-user-50 (1).png" width="50" height="50" alt="icons8-user-50 (1)"/-->
+                                <i class="fa fa-users" style='font-size:48px;color: #334d81;'></i><p>Customer</p>
 
                                 </center></td>
                         </tr>
@@ -540,7 +548,7 @@
                 </table>
                 </div><center>
                     
-                <div class="scrolldiv" style=" height: 450px; overflow-y: auto; width: auto;">
+                <div class="scrolldiv" style="overflow-y: auto; width: auto;">
                     
                 <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                 
@@ -554,8 +562,8 @@
                                 <tr>
                                     <td><p>First Name</p><input type="text" id="firstName" name="firstName" value="<%=fName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
-                                <tr>
-                                    <td><p>Middle Name</p><input type="text" id="middleName" name="middleName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                <tr style='display: none;'>
+                                    <td><p>Middle Name</p><input type="text" id="middleName" name="middleName" value=" " size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
                                     <td><p>Last Name</p><input type="text" id="lastName" name="lastName" value="<%=lName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
@@ -709,19 +717,19 @@
                         <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px;">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
+                                    <td style="padding-top: 10px;"><p>User Name</p><input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <center><p id="CustUserNameStatus" style="color: white; background-color: red; text-align: center; max-width: 250px;"></p></center></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input type="password" id="firstPassword" name="firstPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password</p><input type="password" id="firstPassword" name="firstPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password (Again)</p><input type="password" id="secondPassword" name="secondPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password (Again)</p><input type="password" id="secondPassword" name="secondPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <center><p style="width: 180px; background-color: red; color: white;" id="passwordStatus"></p></center>
-                        <center><p style="width: 180px; background-color: green; color: white;" id="formStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; background-color: red; color: white;" id="passwordStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; background-color: green; color: white;" id="formStatus"></p></center>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
                         <input class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" id="AddUserSignUpBtn" type="submit" value="Signup" name="submitbtn" />
@@ -775,8 +783,8 @@
                                 <tr>
                                     <td><p>First Name</p><input id="firstProvName" type="text" name="firstProvName" value="<%=fName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
-                                <tr>
-                                    <td><p>Middle Name</p><input id="middleProvName" type="text" name="middleProvName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                <tr style='display: none;'>
+                                    <td><p>Middle Name</p><input id="middleProvName" type="text" name="middleProvName" value=" " size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
                                     <td><p>Last Name</p><input id="lastProvName" type="text" name="lastProvName" value="<%=lName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
@@ -850,6 +858,7 @@
                                                         //document.getElementById('PageLoader').style.display = 'block'
                                                         VeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         VeriCode = VeriCode + "";
+                                                        //document.getElementById("BizEmailConfirm").value = VeriCode;
                                                         
                                                         document.getElementById("vCodeStatus").innerHTML = "Verification Code has been sent to your Email";
                                                         document.getElementById("vCodeStatus").style.backgroundColor = "green";
@@ -1057,15 +1066,15 @@
                                     //setInterval(checkMiddleNumber, 1000);
                                 </script>
                                 
-                                <tr>
-                                    <td style="padding-top: 10px;"><p>Business Email</p><input id="businessEmail" type="text" name="businessEmail" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                <tr style='display: none;'>
+                                    <td style="padding-top: 10px;"><p>Business Email</p><input id="businessEmail" type="text" name="businessEmail" value=" " size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Business Telephone</p><input onclick="checkMiddleNumberProBiz();" onkeydown="checkMiddleNumberProBiz();" id="businessTel" type="text" name="businessTel" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding: 10px;"><p style="">Business Telephone</p><input onclick="checkMiddleNumberProBiz();" onkeydown="checkMiddleNumberProBiz();" id="businessTel" type="text" name="businessTel" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><select id="businessType" name="businessType">
-                                            <option>Business Type</option>
+                                    <td style="padding: 10px; padding-bottom: 0;"><p>Business Type</p><select id="businessType" style="padding: 5px; background-color: #d9e8e8; color: black; border: #3d6999 1px solid; margin: 5px" name="businessType">
+                                            <option>Select Business Type</option>
                                             <option>Barber Shop</option>
                                             <option>Beauty Salon</option>
                                             <option>Day Spa</option>
@@ -1091,7 +1100,7 @@
                                         </select></td>
                                 </tr>
                                 <tr>
-                                    <td><input id="otherBusinessType" type="text" name="otherBusinessType" value="add business type if other" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td><input id="otherBusinessType" type="text" name="otherBusinessType" placeholder="name your business type here" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table></center>
@@ -1133,19 +1142,19 @@
                         <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px;">
                             <tbody>
                                 <tr>
-                                    <td><p>User Name</p><input onkeyup="setProvPasswordsZero();" onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
+                                    <td style="padding-top: 10px;"><p>User Name</p><input onkeyup="setProvPasswordsZero();" onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <center><p id="provUserNameStatus" style="background-color: red; color: white; text-align: center; max-width: 250px;"></center></p></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input id="firstProvPassword" type="password" name="firstProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password</p><input id="firstProvPassword" type="password" name="firstProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password (Again)</p><input id="secondProvPassword" type="password" name="secondProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password (Again)</p><input id="secondProvPassword" type="password" name="secondProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <center><p style="width: 180px; background-color: red; color: white;" id="provPasswordStatus"></p></center>
-                        <center><p style="width: 180px; background-color: green; color: white;" id="provFormStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; background-color: red; color: white;" id="provPasswordStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; background-color: green; color: white;" id="provFormStatus"></p></center>
                         
                         <p style='min-width: 350px;'><input class="button" type="reset" value="Reset" name="resetbtn"/>
                             <input id="provSignUpBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Sign up" name="provSignUpBtn" /></p>
@@ -1206,7 +1215,8 @@
         <center><div id ="logindetailsSignUP" style="padding-top: 60px;">
                 <center><h1 style='color: darkblue; margin-bottom: 40px;'>Already have an account</h1></center>
                 
-                <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: white; background-color: blue; border: 1px solid black; padding: 4px;">Click here to go to Queue home page</a></h2></center>
+                <center><h4 style="margin-bottom: 30px;"><a href="LoginPageToQueue" style=" color: #334d81; padding: 4px;">
+                            <i class="fa fa-home" style="font-size: 30px;"></i> Click here to go to Queue home page</a></h2></center>
                 
                 <center><h4 style = "margin-top: 15px; margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                   
@@ -1216,10 +1226,22 @@
                         
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="40" style="background-color: #ccccff;"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your user name</legend>
+                                            <span class="fa fa-user"></span>
+                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="34" style=""/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder='enter your password here' type="password" name="password" value="" size="40" style="background-color: #ccccff;"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your password</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input id="LoginPagePasswordFld" placeholder='password' type="password" name="password" value="" size="34" style=""/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

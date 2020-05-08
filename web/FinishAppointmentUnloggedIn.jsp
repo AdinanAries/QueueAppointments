@@ -35,6 +35,8 @@
         <!--script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
@@ -358,10 +360,16 @@
             </div>
             </div>
          
-        <div id="content">
+        <div id="content" style="min-height: 880px;">
         
             
-            <div id="main">
+            <div id="main" style="min-height: 880px;">
+                <script>
+                    if($(document).width() < 1000){
+                        document.getElementById("main").style.minHeight = "initial";
+                        document.getElementById("content").style.minHeight = "initial";
+                    }
+                    </script>
                 
                 <cetnter><h4 style="padding: 10px; color: white; margin-bottom: 10px;"><%=Message%></h4></cetnter>
                 <h3 style="margin-top: 20px; margin-bottom: 5px;">Your Spot Details Provided Below</h3>
@@ -397,10 +405,22 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder='enter your Queue user name here' type="text" name="username" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your user name</legend>
+                                            <span class="fa fa-user"></span>
+                                            <input id="LoginPageUserNameFld" placeholder='user' type="text" name="username" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="Password" type="password" name="password" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your password</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -465,8 +485,7 @@
                 </h2></center>
             
             <div id="businessdetails">
-                <center><h2 style="padding-top: 10px; margin-bottom: 10px; color: white;">Don't have user account</h2></center>
-                <center><h2 style="color: #000099; margin-bottom: 10px; ">Sign up to finish.</h2></center>
+                <center><h2 style="color: #000099; margin-bottom: 10px; ">Or sign up to finish.</h2></center>
 
                 
             <center><form name="AddBusiness" action="SignupAndSendAppointmentController" method="POST">
@@ -481,26 +500,50 @@
                         <input type="hidden" name="ServicesCost" value="<%=Price%>" />
                         
                     <table border="0">
-                        <tbody>
-                            <tr>
-                                <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
+                        <tr>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your first name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="SUPfirstName" placeholder='firstname' type="text" name="firstName" value="" size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="SUPfirstName" placeholder='enter your first name' type="text" name="firstName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your middle name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="SUPmiddleName" placeholder='middlename'  type="text" name="middleName" value=" " size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="SUPmiddleName" placeholder='enter your middle name'  type="text" name="middleName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your last name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="SUPlastName" placeholder='lastname'  type="text" name="lastName" value="" size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="SUPlastName" placeholder='enter your last name'  type="text" name="lastName" value="" size="37"/></td>
-                            </tr>
-                            <tr>
-                                <td><input id="SUPtelephone" placeholder='enter your telephone/mobile number here'  type="text" name="telNumber" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your mobile</legend>
+                                        <i class="fa fa-mobile" style="font-size: 24px"></i>
+                                        <input id="SUPtelephone" placeholder='mobile'  type="text" name="telNumber" value="" size="34"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
                                     <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
-                                    <input onchange='CustSetVerifyFalse();' placeholder='enter your email address here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="37"/>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your email</legend>
+                                        <span class="fa fa-envelope"></span>
+                                        <input onchange='CustSetVerifyFalse();' placeholder='email' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="34" />
+                                    </fieldset>
                                     <input id="SUPemail"  type="hidden" name="email" value="" size="37"/>
                                     <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
@@ -611,13 +654,31 @@
                             <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input id="SUPuserName" placeholder='enter login user name here' type="text" name="username" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your user name</legend>
+                                            <span class="fa fa-user"></span>
+                                            <input id="SUPuserName" placeholder='username' type="text" name="username" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Password</p><input id="SUPpassword" placeholder='Password' type="password" name="password" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your password</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input id="SUPpassword" placeholder='Password' type="password" name="password" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Confirm Password</p><input id="SUPconfirm" placeholder='Re-enter Password' type="password" name="confirm" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Confirm your password</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input id="SUPconfirm" placeholder='Password' type="password" name="confirm" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                             </tbody>
                             </table>

@@ -31,6 +31,8 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <title>Queue</title>
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
@@ -295,8 +297,9 @@
                     </div></center>
             </div>
             
-            <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href='NewsUpadtesPage.jsp'><div style='width: 40px; height: 27px; margin-top: 5px; float: right; margin-right: 5px;'>
-                    <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+            <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href='NewsUpadtesPage.jsp'>
+                <div style='width: 40px; height: 27px; margin-top: 5px; float: right; margin-right: 5px;'>
+                    <i style='color: indianred; font-size: 35px;' class="fa fa-newspaper-o"></i>
                 </div></a>
         
             <ul style="margin-right: 5px;">
@@ -346,9 +349,10 @@
                  box-shadow: 0 0 5px 1px black;'>
                 <div style="text-align: center;"><a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="NewsUpadtesPage.jsp"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
-                        <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+                        <!--img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/-->
+                        <i style='color: white; font-size: 25px;' class="fa fa-newspaper-o"></i>
                 </p>
-                <p style='font-size: 15px; color: white; margin-top: -5px;'>News</p>
+                <p style='font-size: 15px; color: white; margin-top: -2px;'>News</p>
                 </a></div>
             </div>
         </div>
@@ -790,7 +794,7 @@
                 
         </div>
                 
-        <div id="newbusiness" style="height: 525px;">
+        <div id="newbusiness" style="height: 600px;">
             
             <div id="Extras2" style="display: none; height: 565px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 110; background-color: #ccccff; text-align: left;">
             
@@ -948,8 +952,8 @@
             
             <p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
                 style='margin-top: 10px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
-                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
-                <sup>Show News Updates</sup></p>
+                <i style='color: white; font-size: 35px;' class="fa fa-newspaper-o" width="28" height="25" ></i>
+                <sup> Show News Updates</sup></p>
             
             
             
@@ -962,19 +966,43 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td><p style="color: white; text-align: center;">Provide your information below<p></td>
+                                <td><p style="color: white; text-align: center; padding-bottom: 10px;">Provide your information below<p></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your first name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="signUpFirtNameFld" placeholder="firstname" type="text" name="firstName" value="" size="30"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your last name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="sigUpLastNameFld" placeholder="lastname" type="text" name="lastName" value="" size="30"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your mobile</legend>
+                                        <i class="fa fa-mobile" style="font-size: 24px"></i>
+                                        <input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="mobile" type="text" name="telNumber" value="" size="30"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your email</legend>
+                                        <span class="fa fa-envelope"></span>
+                                        <input id="signUpEmailFld" placeholder="email" type="text" name="email" value="" size="30"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -1026,10 +1054,22 @@
                         <table border="0">
                             <tbody>
                                 <tr>
-                                    <td><input id="LoginPageUserNameFld" placeholder="enter your Queue user name here" type="text" name="username" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your user name</legend>
+                                            <span class="fa fa-user"></span>
+                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="30"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><input id="LoginPagePasswordFld" placeholder="enter your password" type="password" name="password" value="" size="37"/></td>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your password</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="30"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
