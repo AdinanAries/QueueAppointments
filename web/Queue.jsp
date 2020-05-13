@@ -298,8 +298,9 @@
             </div>
             
             <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href='NewsUpadtesPage.jsp'>
-                <div style='width: 40px; height: 27px; margin-top: 5px; float: right; margin-right: 5px;'>
-                    <i style='color: indianred; font-size: 35px;' class="fa fa-newspaper-o"></i>
+                <div style='border-radius: 4px; width: 40px; height: 40px; margin-top: 0.2px; float: right; margin-right: 5px; background-color: #d9e8e8;'>
+                    <p style="text-align: center; padding: 5px;"><i style='color: #334d81;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
+                    </p><p style="text-align: center; margin-top: -10px;"><span style="color: #334d81; font-size: 11px;">News</span></p>
                 </div></a>
         
             <ul style="margin-right: 5px;">

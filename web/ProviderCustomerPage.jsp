@@ -1035,8 +1035,9 @@
                 <%}%>
             </div>
             
-            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='width: 40px; height: 27px; margin-top: 6.2px; float: right; margin-right: 5px;'>
-                    <img style='background-color:white; width: 40px; height: 27px; padding: 1.5px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/>
+            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='border-radius: 4px; width: 40px; height: 40px; margin-top: 0.2px; float: right; margin-right: 5px; background-color: #d9e8e8;'>
+                    <p style="text-align: center; padding: 5px;"><i style='color: #334d81;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
+                    </p><p style="text-align: center; margin-top: -10px;"><span style="color: #334d81; font-size: 11px;">News</span></p>
                 </div></a>
             
             <ul style="margin-right: 5px;">
@@ -4683,17 +4684,17 @@
                                         
                                         <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
                                             <div class="tooltip">
-                                            <img style="margin-right: 10px; cursor: pointer;" onclick="showUserFeedBackForm()" src="icons/icons8-feedback-20.png" width="20" height="20" alt="icons8-feedback-20"/>
+                                            <img style="margin-right: 10px; cursor: pointer; background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick="showUserFeedBackForm()" src="icons/icons8-feedback-20.png" width="20" height="20" alt="icons8-feedback-20"/>
                                             
                                             </div>
                                             
                                             <div class="tooltip">
-                                                <p><img style="margin-right: 10px; cursor: pointer;" onclick = "showUserProfileForm()" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/><p>
+                                                <p><img style="margin-right: 10px; cursor: pointer;  background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick = "showUserProfileForm()" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/><p>
                                                 <!--p class="tooltiptext"><br></p-->
                                             </div>
                                             
                                             <div class="tooltip">
-                                                <p><img style="cursor: pointer;" onclick = "showSettingsDiv()" src="icons/icons8-settings-20.png" width="20" height="20" alt="icons8-settings-20"/></p>
+                                                <p><img style="cursor: pointer;  background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick = "showSettingsDiv()" src="icons/icons8-settings-20.png" width="20" height="20" alt="icons8-settings-20"/></p>
                                                 
                                             </div>
                                         </div>

@@ -1347,17 +1347,17 @@
                                         
                                         <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
                                             <div class="tooltip">
-                                            <img style="margin-right: 10px; cursor: pointer;" onclick="showUserFeedBackForm()" src="icons/icons8-feedback-20.png" width="20" height="20" alt="icons8-feedback-20"/>
+                                            <img style="margin-right: 10px; cursor: pointer; background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick="showUserFeedBackForm()" src="icons/icons8-feedback-20.png" width="20" height="20" alt="icons8-feedback-20"/>
                                             
                                             </div>
                                             
                                             <div class="tooltip">
-                                                <p><img style="margin-right: 10px; cursor: pointer;" onclick = "showUserProfileForm()" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/><p>
+                                                <p><img style="margin-right: 10px; cursor: pointer; background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick = "showUserProfileForm()" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/><p>
                                                 <!--p class="tooltiptext"><br></p-->
                                             </div>
                                             
                                             <div class="tooltip">
-                                                <p><img style="cursor: pointer;" onclick = "showSettingsDiv()" src="icons/icons8-settings-20.png" width="20" height="20" alt="icons8-settings-20"/></p>
+                                                <p><img style="cursor: pointer; background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick = "showSettingsDiv()" src="icons/icons8-settings-20.png" width="20" height="20" alt="icons8-settings-20"/></p>
                                                 
                                             </div>
                                         </div>
