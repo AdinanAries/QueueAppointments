@@ -543,13 +543,13 @@
                                     <input id="SUPemail" type="hidden" name="email" value="" size="37"/>
                                     <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
-                                                <center><input id='CustSendverifyEmailBtn' type='button' value='Click here to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                                <center><input id='CustSendverifyEmailBtn' type='button' value='1. Click to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
                                             </div>
                                             <div id='CustverifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
-                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'>We will be sending a verification code to your email. You should enter the code below</p>
-                                                <p style='color: #ccc;'><input id="CustEmailConfirm" type="text" style="border: 1px solid black;" /></p>
+                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
+                                                <p style='color: #ccc;'><input placeholder="Enter 6-digit code here" id="CustEmailConfirm" type="text" /></p>
                                             </div>
-                                            <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='Enter verification code and click here' style='color: white; background-color: #334d81; border: 0; width: 95%; height: 20px;'/></center>
+                                            <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='3. Click to verify entered code ' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
                                             <script>
                                                 
                                                 var CustEmailVerified = false; //main controller for all verification related operations. This flag switches to true or false in order to determine what actions to be taken by the verification algorithm
