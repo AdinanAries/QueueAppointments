@@ -135,9 +135,9 @@
              
         </div></center-->
         
-    <center><div id="PhoneExtras">
+    <center><div id="PhoneExtras" style='width: 100vw;'>
             
-            <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 60px;' >
+            <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 60px; margin: auto;' >
             <div id='News' style=''>
             <center><p style="color: white; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             

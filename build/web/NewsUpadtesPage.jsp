@@ -105,7 +105,7 @@
              
         </div></center>
         
-    <div id="PhoneExtras">
+    <div id="PhoneExtras" style='width: 100vw;'>
             
         <center><div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 60px; margin: auto;' >
             <center><p style="color: white; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">Updates from services providers</p></center>
