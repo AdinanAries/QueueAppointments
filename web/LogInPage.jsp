@@ -383,7 +383,8 @@
                                         <fieldset class="loginInputFld">
                                             <legend>Enter your password</legend>
                                             <span class="fa fa-key"></span>
-                                            <input id="LoginPagePasswordFld" placeholder='password' type="password" name="password" value="" size="28" style=" border-radius: 4px;"/>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder='password' type="password" name="password" value="" size="28" style=" border-radius: 4px;"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>

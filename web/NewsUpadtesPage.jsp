@@ -80,14 +80,14 @@
        
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #333333; padding-bottom: 0; position: absolute;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; padding-bottom: 0; position: absolute;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-    <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: white; padding: 5px;'>
+    <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #eeeeee solid 1px;'>
             <span style="width: fit-content; margin-left: 40px;">
                 <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; margin-top: 5px;" />
             </span>
@@ -108,7 +108,7 @@
     <div id="PhoneExtras" style='width: 100vw;'>
             
         <center><div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 60px; margin: auto;' >
-            <center><p style="color: white; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">Updates from services providers</p></center>
+            <center><p style="color: darkblue; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">Updates from services providers</p></center>
             
             <div style="overflow-y: auto;">
                   
@@ -224,7 +224,7 @@
                                 }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: white;">
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: #d8d8d8;">
                     <tbody>
                         <tr style="background-color: #eeeeee;">
                             <td>

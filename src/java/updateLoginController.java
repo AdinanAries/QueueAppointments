@@ -1,5 +1,6 @@
 
 
+import com.arieslab.queue.queue_model.QueuePWHash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -42,6 +43,11 @@ public class updateLoginController extends HttpServlet {
         String CustomerID = request.getParameter("CustomerID");
         String UserIndex = request.getParameter("UserIndex");
         String oldPassword = request.getParameter("currentPassword");
+        
+        //hashing old password
+        oldPassword = QueuePWHash.GetHash(oldPassword);
+        //hashing new password
+        NewPassword = QueuePWHash.GetHash(NewPassword);
         
         String result = "fail";
         boolean isPasswordCorrect = false;

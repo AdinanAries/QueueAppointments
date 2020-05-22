@@ -335,7 +335,7 @@
         }
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #6699ff; padding-bottom: 0;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #e1e1e1 !important; padding-bottom: 0;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -460,14 +460,14 @@
              
             <form method="POST" enctype="multipart/form-data">
                 
-            <p style="color: white; font-weight: bolder; margin-bottom: 10px; font-size: 16px;">Update your clients on whats new</p>
+            <p style="color: darkblue; font-weight: bolder; margin-bottom: 10px; font-size: 16px;">Update your clients on whats new</p>
                 
                 <table id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
-                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%; border: 0; background-color: #d8d8d8;" rows="5">
+                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%; border: 0; background-color: #bce9fc;" rows="5">
                                 </textarea>
                                 
                             </td>
@@ -669,7 +669,7 @@
             
                                 
             <div id='PhoneCalender' style='display: none; margin-top: 5px; width: 100%;'>
-                <center><p style="color: white; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
+                <center><p style="color: darkblue; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
             
                 <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
@@ -1167,7 +1167,7 @@
             </div>
                              
         <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
-            <center><p style="color: white; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
+            <center><p style="color: darkblue; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
             
                 <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; max-width: 600px;' cellspacing="0">
                     <tbody>
@@ -1494,7 +1494,7 @@
                                 
                                 <form action = "LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input onclick="LogoutMethod();" style='width: 95%;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input onclick="LogoutMethod();" style='width: 95%; max-width: 300px; margin: auto;' type="submit" value="Logout" class="button" /></center>
                                 </form>
                             </td>
                         </tr>
@@ -1503,7 +1503,7 @@
             </div>
                                 
             <div id='PhoneExtrasNotificationDiv' style='width: 100%; display: none;'>
-            <center><p style="color: white; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
+            <center><p style="color: darkblue; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Notifications</p></center>
             
                 <table  id="PhoneExtrasTab" style='width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>

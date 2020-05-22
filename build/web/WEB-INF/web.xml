@@ -17,8 +17,8 @@
         <servlet-class>LoginControllerMain</servlet-class>
         <init-param>
             <param-name>databaseUrl</param-name>
-            <param-value>jdbc:sqlserver://queuedatasvr.database.windows.net:1433;database=Queue</param-value>
-            <!--param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value-->
+            <!--param-value>jdbc:sqlserver://queuedatasvr.database.windows.net:1433;database=Queue</param-value-->
+            <param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value>
         </init-param>
         <init-param>
             <param-name>databaseDriver</param-name>
@@ -26,8 +26,30 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <!--param-value>sa</param-value-->
-            <param-value>QueueAdmin@queuedatasvr</param-value>
+            <param-value>sa</param-value>
+            <!--param-value>QueueAdmin@queuedatasvr</param-value-->
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>Password@2014</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginControllerMainRedirect</servlet-name>
+        <servlet-class>LoginControllerMainRedirect</servlet-class>
+        <init-param>
+            <param-name>databaseUrl</param-name>
+            <!--param-value>jdbc:sqlserver://queuedatasvr.database.windows.net:1433;database=Queue</param-value-->
+            <param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value>
+        </init-param>
+        <init-param>
+            <param-name>databaseDriver</param-name>
+            <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>user</param-name>
+            <param-value>sa</param-value>
+            <!--param-value>QueueAdmin@queuedatasvr</param-value-->
         </init-param>
         <init-param>
             <param-name>password</param-name>
@@ -452,6 +474,10 @@
         <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>LoginControllerMainRedirect</servlet-name>
+        <url-pattern>/LoginControllerMainRedirect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>LoginPageToQueue</servlet-name>
         <url-pattern>/LoginPageToQueue</url-pattern>
     </servlet-mapping>
@@ -857,8 +883,8 @@
         <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
         <init-param>
             <param-name>databaseUrl</param-name>
-            <param-value>jdbc:sqlserver://queuedatasvr.database.windows.net:1433;database=Queue</param-value>
-            <!--param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value-->
+            <!--param-value>jdbc:sqlserver://queuedatasvr.database.windows.net:1433;database=Queue</param-value-->
+            <param-value>jdbc:sqlserver://DESKTOP-8LC73JA:1433;databaseName=Queue</param-value>
         </init-param>
         <init-param>
             <param-name>databaseDriver</param-name>
@@ -866,8 +892,8 @@
         </init-param>
         <init-param>
             <param-name>user</param-name>
-            <!--param-value>sa</param-value-->
-            <param-value>QueueAdmin@queuedatasvr</param-value>
+            <param-value>sa</param-value>
+            <!--param-value>QueueAdmin@queuedatasvr</param-value-->
         </init-param>
         <init-param>
             <param-name>password</param-name>

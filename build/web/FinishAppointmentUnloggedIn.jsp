@@ -418,7 +418,8 @@
                                         <fieldset class="loginInputFld">
                                             <legend>Enter your password</legend>
                                             <span class="fa fa-key"></span>
-                                            <input id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="34"/>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="34"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>
@@ -667,7 +668,8 @@
                                         <fieldset class="loginInputFld">
                                             <legend>Enter your password</legend>
                                             <span class="fa fa-key"></span>
-                                            <input id="SUPpassword" placeholder='Password' type="password" name="password" value="" size="34"/>
+                                            <input class="passwordFld" id="SUPpassword" placeholder='Password' type="password" name="password" value="" size="34"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>
@@ -676,7 +678,7 @@
                                         <fieldset class="loginInputFld">
                                             <legend>Confirm your password</legend>
                                             <span class="fa fa-key"></span>
-                                            <input id="SUPconfirm" placeholder='Password' type="password" name="confirm" value="" size="34"/>
+                                            <input class="passwordFld" id="SUPconfirm" placeholder='Password' type="password" name="confirm" value="" size="34"/>
                                         </fieldset>
                                     </td>
                                 </tr>

@@ -118,7 +118,7 @@
         }
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style='background-color: #7e7e7e;'>
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style='background: none !important; background-color: #7e7e7e !important;'>
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>

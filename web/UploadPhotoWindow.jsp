@@ -131,7 +131,7 @@
         
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #7e7e7e;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #7e7e7e !important;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -139,7 +139,7 @@
         </div>
     
     <center><div style='width: 100%; max-width: 500px;'>
-    <center><h3 style='color: white;'>Upload Photo</h3></center>
+    <center><h3 style='color: white; margin: 10px;'>Upload Photo</h3></center>
     
         <!--div style="background-color: black; width:100%; max-width: 600px; height: 00px; background-size: cover; background-image: url('data:image/jpg;base64,<=base64Image%>')"></div-->
         

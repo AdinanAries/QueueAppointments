@@ -1,5 +1,6 @@
 
 import com.arieslab.queue.queue_model.ProcedureClass;
+import com.arieslab.queue.queue_model.QueuePWHash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -56,6 +57,9 @@ public class LoginControllerMain extends HttpServlet {
            if(Password == null || Password.equalsIgnoreCase("")){
                Password = " ";
            }
+           
+           //hashing Password
+           Password = QueuePWHash.GetHash(Password);
            
            //resetting UserAccount fields
            //UserAccount.UserID = 0;

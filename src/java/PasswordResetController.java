@@ -1,5 +1,6 @@
 
 
+import com.arieslab.queue.queue_model.QueuePWHash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -38,6 +39,9 @@ public class PasswordResetController extends HttpServlet {
         String UserID = request.getParameter("UserID");
         String AccountType = request.getParameter("AccountType");
         String Password = request.getParameter("Password");
+        
+        //hashing Password
+        Password = QueuePWHash.GetHash(Password);
         
         if(AccountType.equals("Business")){
             try{

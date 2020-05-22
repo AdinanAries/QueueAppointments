@@ -147,6 +147,9 @@ public class ProviderSignUpController extends HttpServlet {
         String userName = request.getParameter("provUserName");
         String Password = request.getParameter("firstProvPassword");
         
+        //hashing Password
+        Password = QueuePWHash.GetHash(Password);
+        
         //UserAccount.UserID = 0;
         //UserAccount.AccountType = "";
         

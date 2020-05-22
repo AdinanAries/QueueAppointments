@@ -1,5 +1,6 @@
 
 
+import com.arieslab.queue.queue_model.QueuePWHash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -37,6 +38,11 @@ public class updateProvLoginInfo extends HttpServlet {
         String Password = request.getParameter("NewPasswordFld");
         String ProviderID = request.getParameter("ProviderID");
         String UserIndex = request.getParameter("UserIndex");
+        
+        //hashing current password
+        CurrentPassword = QueuePWHash.GetHash(CurrentPassword);
+        //hashing new password
+        Password = QueuePWHash.GetHash(Password);
         
         //JOptionPane.showMessageDialog(null, CurrentPassword);
         

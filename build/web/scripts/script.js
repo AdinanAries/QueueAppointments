@@ -604,14 +604,14 @@ function activateHistory() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  HistoryTab.style.backgroundColor = "#ccccff";
+  HistoryTab.style.color = "white";
   HistoryTab.style.border = "none";
   /*HistoryTab.style.borderTop = "black 1px solid";*/
 
-  AppointmentsTab.style.backgroundColor = "cornflowerblue";
+  AppointmentsTab.style.color = "darkblue";
   /*AppointmentsTab.style.border = "1px solid black";*/
 
-  FavoritesTab.style.backgroundColor = "cornflowerblue";
+  FavoritesTab.style.color = "darkblue";
   /*FavoritesTab.style.border = "black 1px solid";*/
 
   AppListDiv.style.display = "none";
@@ -630,14 +630,14 @@ function activateAppTab() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  HistoryTab.style.backgroundColor = "cornflowerblue";
+  HistoryTab.style.color = "darkblue";
   /*HistoryTab.style.border = "black 1px solid";*/
 
-  AppointmentsTab.style.backgroundColor = "#ccccff";
+  AppointmentsTab.style.color = "white";
   AppointmentsTab.style.border = "none";
   /*AppointmentsTab.style.borderTop = "1px solid black";*/
 
-  FavoritesTab.style.backgroundColor = "cornflowerblue";
+  FavoritesTab.style.color = "darkblue";
   /*FavoritesTab.style.border = "black 1px solid";*/
 
   AppListDiv.style.display = "block";
@@ -656,13 +656,13 @@ function activateFavTab() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  HistoryTab.style.backgroundColor = "cornflowerblue";
+  HistoryTab.style.color = "darkblue";
   /*HistoryTab.style.border = "black 1px solid";*/
 
-  AppointmentsTab.style.backgroundColor = "cornflowerblue";
+  AppointmentsTab.style.color = "darkblue";
   /*AppointmentsTab.style.border = "1px solid black";*/
 
-  FavoritesTab.style.backgroundColor = "#ccccff";
+  FavoritesTab.style.color = "white";
   FavoritesTab.style.border = "none";
   /*FavoritesTab.style.borderTop = "1px solid black";*/
 
@@ -773,10 +773,10 @@ function activateProvAppointmentsTab() {
     "ProviderAppointmentHistoryDiv"
   );
 
-  ProvHistoryTab.style.backgroundColor = "#d8d8d8";
+  ProvHistoryTab.style.color = "#8b8b8b";
   /*ProvHistoryTab.style.border = "1px solid darkblue";*/
 
-  ProvAppointmentsTab.style.backgroundColor = "#6699ff";
+  ProvAppointmentsTab.style.color = "darkblue";
   ProvAppointmentsTab.style.border = "none";
   /*ProvAppointmentsTab.style.borderTop = "1px solid darkblue";*/
 
@@ -795,10 +795,10 @@ function activateProvHistoryTab() {
     "ProviderAppointmentHistoryDiv"
   );
 
-  ProvAppointmentsTab.style.backgroundColor = "#d8d8d8";
+  ProvAppointmentsTab.style.color = "#8b8b8b";
   /*ProvAppointmentsTab.style.border = "black 1px solid";*/
 
-  ProvHistoryTab.style.backgroundColor = "#6699ff";
+  ProvHistoryTab.style.color = "darkblue";
   ProvHistoryTab.style.border = "none";
   /*ProvHistoryTab.style.borderTop = "1px solid black";*/
 
@@ -1323,3 +1323,29 @@ $(document).ready(function() {
   //$("body").slideDown("fast");
     //$("#News2").slideDown("fast");
 });*/
+
+
+function showPassword(){
+    
+    document.querySelectorAll(".showPassword").forEach((showPasswordBtn) => {
+        
+        if(showPasswordBtn.classList.contains("fa-eye")){
+            showPasswordBtn.classList.remove("fa-eye");
+            showPasswordBtn.classList.add("fa-eye-slash");
+        }else{
+            showPasswordBtn.classList.remove("fa-eye-slash");
+            showPasswordBtn.classList.add("fa-eye");
+        }
+    });
+    document.querySelectorAll(".passwordFld").forEach((passwordFld) =>{
+        if(passwordFld.type === "password"){
+            passwordFld.type = "text";
+        }else{
+            passwordFld.type = "password";
+        }
+    });
+}
+
+$(".showPassword").click(()=>{
+    showPassword();
+});

@@ -93,7 +93,7 @@
        
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #333333; padding-bottom: 0; position: absolute;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #333333; padding-bottom: 0; position: absolute;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -106,7 +106,7 @@
             },6000);
         </script-->
         
-        <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: white; padding: 5px;'>
+        <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #eeeeee solid 1px;'>
             <span style="width: fit-content; margin-left: 40px;">
                 <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; margin-top: 5px;" />
             </span>
@@ -121,6 +121,11 @@
                     <p style='font-size: 11px; margin-top: -8px; color: black;'>Home</p>
                     </span>
             </a>
+            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'>
+                    <span style='margin-right: 5px; cursor: pointer; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 3px; border-radius: 3px;'>
+                        <img style='border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="22" alt="icons8-settings-50"/>
+                        <p style='font-size: 11px; margin-top: -5px; color: black;'>Settings</p>
+                    </span></a>
              
         </div></center>
         
@@ -139,7 +144,7 @@
             
             <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 60px; margin: auto;' >
             <div id='News' style=''>
-            <center><p style="color: white; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
+            <center><p style="color: darkblue; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             
                 <div style="overflow-y: auto;">
                     
@@ -270,7 +275,7 @@
                                                 }
                     %>
 
-                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: white;">
+                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: #d8d8d8;">
                         <tbody>
                             <tr style="background-color: #eeeeee;">
                                 <td>
@@ -465,7 +470,7 @@
                                     }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: white;">
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px; background-color: #d8d8d8;">
                     <tbody>
                         <tr style="background-color: #eeeeee;">
                             <td>

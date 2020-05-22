@@ -321,7 +321,6 @@
             
             <div style="max-height: 87vh; overflow-y: auto;">
                 <%
-                    String base64Profile = "";
                     
                     try{
                         Class.forName(Driver);
@@ -332,6 +331,8 @@
                         int newsItems = 0;
                         
                         while(newsRec.next()){
+                            
+                            String base64Profile = "";
                             
                             newsItems++;
                             
@@ -399,8 +400,11 @@
 
                                             base64Profile = Base64.getEncoder().encodeToString(imageBytes);
 
-                                        }catch(Exception e){}
-                                        
+
+                                        }
+                                        catch(Exception e){
+
+                                        }
                                     }
                                     
                                 }catch(Exception e){
@@ -432,38 +436,37 @@
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                     <tbody>
-                        <tr style="background-color: #333333;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    
-                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
-                                            <!--div style="float: right; width: 65px;" -->
-                                                <%
-                                                    if(base64Profile != ""){
-                                                %>
-                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                    <!--/div></center-->
-                                                <%
-                                                    }else{
-                                                %>
-
+                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
+                                        <!--div style="float: right; width: 65px;" -->
+                                            <%
+                                                if(base64Profile != ""){
+                                            %>
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 <!--/div></center-->
+                                            <%
+                                                }else{
+                                            %>
 
-                                                <%}%>
-                                            <!--/div-->
-                                            <div>
-                                                <p><%=ProvFirstName%></p>
-                                                <p style='color: violet;'><%=ProvCompany%></p>
-                                            </div>
+                                            <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                            <!--/div></center-->
+
+                                            <%}%>
+                                        <!--/div-->
+                                        <div>
+                                            <p><%=ProvFirstName%></p>
+                                            <p style='color: red;'><%=ProvCompany%></p>
                                         </div>
+                                    </div>
                                     
                                     <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <div style="text-align: center;"><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></div>
                                     <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <div style="text-align: center;"><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></div>
                                     <%}%>
                                     
                                 </div>
@@ -471,12 +474,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                 <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                     <%=ProvEmail%></p>
                                 <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -527,11 +529,11 @@
                 <center><h2 style="margin-bottom: 20px;">Sign-up Here</h2></center>
                 
                 <center><div id="accountTypeOptions">
-                <center><h3 style="color: white; margin-bottom: 10px; ">Choose account type</h3></center>
+                <center><h3 style="color: darkblue; margin-bottom: 10px; ">Choose account type</h3></center>
                 <table>
                     <tbody>
                         <tr>
-                            <td id="ShowBizForm" onclick="toggleHideAddBusinessForm()" style="padding-right: 45px; border-right: 1px solid black; cursor: pointer;">
+                            <td id="ShowBizForm" onclick="toggleHideAddBusinessForm()" style="padding-right: 45px; cursor: pointer;">
                         <center>
                             <!--img src="icons/icons8-business-50.png" width="50" height="50" alt="icons8-business-50"/-->
                             <i class='fa fa-address-book' style='font-size:48px;color: #334d81;'></i><p>Business</p>
@@ -733,10 +735,12 @@
                                         <center><p id="CustUserNameStatus" style="color: white; background-color: red; text-align: center; max-width: 250px;"></p></center></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top: 10px;"><p>Password</p><input type="password" id="firstPassword" name="firstPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password</p><input class="passwordFld" type="password" id="firstPassword" name="firstPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
+                                        <p style="text-align: right; margin-top: -25px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top: 10px;"><p>Password (Again)</p><input type="password" id="secondPassword" name="secondPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password (Again)</p><input class="passwordFld" type="password" id="secondPassword" name="secondPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1171,10 +1175,11 @@
                                         <center><p id="provUserNameStatus" style="background-color: red; color: white; text-align: center; max-width: 250px;"></center></p></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top: 10px;"><p>Password</p><input id="firstProvPassword" type="password" name="firstProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password</p><input class="passwordFld" id="firstProvPassword" type="password" name="firstProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
+                                    <p style="text-align: right; margin-top: -25px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top: 10px;"><p>Password (Again)</p><input id="secondProvPassword" type="password" name="secondProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
+                                    <td style="padding-top: 10px;"><p>Password (Again)</p><input class="passwordFld" id="secondProvPassword" type="password" name="secondProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
                                 </tr>
                             </tbody>
                         </table>

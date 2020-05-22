@@ -56,7 +56,7 @@
             var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
             (function(){
                 //alert("here");
-                document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                document.location.href="LoginControllerMainRedirect?username="+tempUserName+"&password="+tempUserPassword;
                 //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
                 return false;
             })();
@@ -69,7 +69,7 @@
             var tempProvUserName = window.localStorage.getItem("ProvQueueUserName");
             var tempProvUserPassword = window.localStorage.getItem("ProvQueueUserPassword");
             (function(){
-                document.location.href="LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword;
+                document.location.href="LoginControllerMainRedirect?username="+tempProvUserName+"&password="+tempProvUserPassword;
                 //window.location.replace("LoginControllerMain?username="+tempProvUserName+"&password="+tempProvUserPassword);
                 return false;
             })();
@@ -797,164 +797,12 @@
                 
         <div id="newbusiness" style="height: 600px;">
             
-            <div id="Extras2" style="display: none; height: 565px; overflow-y: auto; position: fixed; width: 33.5%; z-index: 110; background-color: #ccccff; text-align: left;">
             
-                <p onclick='document.getElementById("Extras2").style.display = "none";' style='width: 50px; margin-right: 5px; margin-top: -5px;
-                   border-radius: 5px; position: fixed; z-index: 1100;  color: white; cursor: pointer; border: 1px solid white; text-align: center; background-color: red; padding: 4px;'>hide
-                </p>
-                
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Updates from service providers</p></center>
             
-            <div style="max-height: 600px; overflow-y: auto;">
-                <%
-                    try{
-                        Class.forName(Driver);
-                        Connection newsConn = DriverManager.getConnection(url, User, Password);
-                        String newsQuery = "Select * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
-                        PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
-                        ResultSet newsRec = newsPst.executeQuery();
-                        int newsItems = 0;
-                        
-                        while(newsRec.next()){
-                            
-                            newsItems++;
-                            
-                            String ProvID = newsRec.getString("ProvID");
-                            String ProvFirstName = "";
-                            String ProvCompany = "";
-                            String ProvAddress = "";
-                            String ProvTel = "";
-                            String ProvEmail = "";
-                            
-                            String Msg = newsRec.getString("Msg").trim();
-                            String MsgPhoto = "";
-                            
-                            try{    
-                                    //put this in a try catch block for incase getProfilePicture returns nothing
-                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
-                                    InputStream inputStream = Pic.getBinaryStream();
-                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                    byte[] buffer = new byte[4096];
-                                    int bytesRead = -1;
-
-                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                        outputStream.write(buffer, 0, bytesRead);
-                                    }
-
-                                    byte[] imageBytes = outputStream.toByteArray();
-
-                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                }
-                                catch(Exception e){
-
-                                }
-                            
-
-                                try{
-                                    Class.forName(Driver);
-                                    Connection ProvConn = DriverManager.getConnection(url, User, Password);
-                                    String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
-                                    PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
-                                    ProvPst.setString(1, ProvID);
-                                    
-                                    ResultSet ProvRec = ProvPst.executeQuery();
-                                    
-                                    while(ProvRec.next()){
-                                        ProvFirstName = ProvRec.getString("First_Name").trim();
-                                        ProvCompany = ProvRec.getString("Company").trim();
-                                        ProvTel = ProvRec.getString("Phone_Number").trim();
-                                        ProvEmail = ProvRec.getString("Email").trim();
-                                    }
-                                    
-                                }catch(Exception e){
-                                    e.printStackTrace();
-                                }
-                                
-                                try{
-                                    Class.forName(Driver);
-                                    Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
-                                    String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
-                                    PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
-                                    ProvLocPst.setString(1, ProvID);
-                                    
-                                    ResultSet ProvLocRec = ProvLocPst.executeQuery();
-                                    
-                                    while(ProvLocRec.next()){
-                                        String HouseNumber = ProvLocRec.getString("House_Number").trim();
-                                        String Street = ProvLocRec.getString("Street_Name").trim();
-                                        String Town = ProvLocRec.getString("Town").trim();
-                                        String City = ProvLocRec.getString("City").trim();
-                                        String ZipCode = ProvLocRec.getString("Zipcode").trim();
-                                        
-                                        ProvAddress = HouseNumber + " " + Street + ", " + Town + ", " + City + " " + ZipCode;
-                                    }
-                                }catch(Exception e){
-                                    e.printStackTrace();
-                                }
-                %>
-                
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
-                    <tbody>
-                        <tr style="background-color: #333333;">
-                            <td>
-                                <div id="ProvMsgBxOne">
-                                    <p style='font-weight: bolder; margin-bottom: 4px;'><span style='color: #eeeeee;'><%=ProvFirstName%> - <%=ProvCompany%></p></p>
-                                    
-                                    <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
-                                    <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
-                                    <%}%>
-                                    
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
-                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    <%=ProvEmail%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    <%=ProvTel%></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            <%
-                        if(newsItems > 10)
-                            break;
-                    }
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            %>
-            </div>
-            </div>
-            
-            <p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
+            <!--p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
                 style='margin-top: 10px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
                 <i style='color: white; font-size: 35px;' class="fa fa-newspaper-o" width="28" height="25" ></i>
-                <sup> Show News Updates</sup></p>
+                <sup> Show News Updates</sup></p-->
             
             
             
@@ -1068,7 +916,8 @@
                                         <fieldset class="loginInputFld">
                                             <legend>Enter your password</legend>
                                             <span class="fa fa-key"></span>
-                                            <input id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="30"/>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="20"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>

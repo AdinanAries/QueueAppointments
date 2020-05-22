@@ -159,7 +159,7 @@
                     var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
                     (function(){
                         //This coinsidentally takes you to login page incase of unavailable login information.
-                        document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                        document.location.href="LoginControllerMainRedirect?username="+tempUserName+"&password="+tempUserPassword;
                         return false;
                     })();
 

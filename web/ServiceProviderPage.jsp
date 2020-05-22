@@ -268,7 +268,7 @@
                 var tempUserName = window.localStorage.getItem("ProvQueueUserName");
                 var tempUserPassword = window.localStorage.getItem("ProvQueueUserPassword");
                 
-                document.location.href="LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword;
+                document.location.href="LoginControllerMainRedirect?username="+tempUserName+"&password="+tempUserPassword;
                 //window.location.replace("LoginControllerMain?username="+tempUserName+"&password="+tempUserPassword);
 
             </script>
@@ -3403,13 +3403,13 @@
                 <center><div style=" width: 100%; background-color: #d8d8d8;">
                                         <h style="color: #000099; font-weight: bolder; text-align: center; padding-top: 20px;">See Your Bookings Below</p>
                                     
-                                        <table cellspacing="0" style="width: 100%; margin-top: 10px; border-top: darkgray 1px solid;">
+                                        <table cellspacing="0" style="width: 100%; margin-top: 10px; padding: 10px; background-color: #d8d8d8;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; cursor: pointer; width: 50%; color: darkblue; font-weight: bolder; text-align: center; background-color: #6699ff; padding-top: 10px;">
+                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; cursor: pointer; width: 50%; color: darkblue; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
                                                         Current Line
                                                     </td>
-                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; cursor: pointer;  color: darkblue; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
+                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; cursor: pointer;  color: #8b8b8b; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
                                                         History
                                                     </td>
                                                 </tr>
@@ -4937,10 +4937,10 @@
                 }
             </script>
          
-        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px; margin-top: 1px; background-color: #ccccff;">
+        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px; margin-top: 1px; background-color: #ccccff !important;">
             <script>
                 if($(window).width() > 1000){
-                    document.getElementById("newbusiness").style.height = "88.5%";
+                    document.getElementById("newbusiness").style.height = "100%";
                 }
             </script>
             <!------------------------------------------------------------------------------------------------------------------------------------------->
@@ -4948,7 +4948,7 @@
             <!------------------------------------------------------------------------------------------------------------------>
         
             
-            <center><div id="Providerprofile" style="border-bottom: 10px solid cornflowerblue;  width: 100%; max-width: 700px;">
+            <center><div id="Providerprofile" style="width: 100%; max-width: 700px;">
                  
                 <h4 style="color: black; margin-bottom: 10px;">Your Business Profile</h4>
                 

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.arieslab.queue.queue_model.QueuePWHash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -41,6 +42,9 @@ public class UpdatePassword extends HttpServlet {
         String UserName = request.getParameter("UserName");
         String Password = request.getParameter("Password");
         String Email = request.getParameter("Email");
+        
+        //hashing Password
+        Password = QueuePWHash.GetHash(Password);
         
         try{
             Class.forName(Driver);

@@ -40,7 +40,7 @@
 
     </head>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #7e7e7e; position: absolute; width: 100%;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #7e7e7e !important; position: absolute; width: 100%;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>

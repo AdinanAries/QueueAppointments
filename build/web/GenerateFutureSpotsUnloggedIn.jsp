@@ -40,7 +40,7 @@
         
     </head>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #7e7e7e; position: absolute; width: 100%;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #7e7e7e !important; position: absolute; width: 100%;">
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
                 <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  

@@ -2,6 +2,7 @@
 
 import com.arieslab.queue.queue_model.ExistingProviderAccountsModel;
 import com.arieslab.queue.queue_model.QueueMailerUtil;
+import com.arieslab.queue.queue_model.QueuePWHash;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -50,6 +51,9 @@ public class CustomoerSignUpController extends HttpServlet {
         String phoneNumber = request.getParameter("phoneNumber").trim().replaceAll("( )+", " ");
         String userName = request.getParameter("userName");
         String Password = request.getParameter("firstPassword");
+        
+        //hashing Password
+        Password = QueuePWHash.GetHash(Password);
         
         
         //UserAccount.UserID = 0;

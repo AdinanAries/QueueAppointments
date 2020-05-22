@@ -49,7 +49,7 @@
    
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
-    <body style="background-color: #7e7e7e;" onload="document.getElementById('PageLoader').style.display = 'none';">
+    <body style="background: none !important; background-color: #7e7e7e !important;" onload="document.getElementById('PageLoader').style.display = 'none';">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>

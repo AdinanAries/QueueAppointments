@@ -162,7 +162,7 @@
     %>
     
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #333333; margin:0; padding:0; position: absolute; width: 100%;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #333333 !important; margin:0; padding:0; position: absolute; width: 100%;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>

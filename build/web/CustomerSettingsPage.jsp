@@ -304,14 +304,14 @@
      //----------------------------------------------------------------------------------------------------------------------   
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background-color: #6699ff;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+        <div id='QShowNews22' style='display: block; width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
             <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
@@ -410,7 +410,7 @@
     <p style="padding-top: 60px;"></p>
     <center><div id="PhoneExtras" style="padding-bottom: 50px;">
             
-            <div id='PhoneNews' style='width: 100%;' >
+            <div id='PhoneNews' style='width: 100%;'>
                 <script>
                     document.getElementById("PhoneNews").style.display = "none";
                 </script>
@@ -547,7 +547,7 @@
                                                 }
                     %>
 
-                    <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 100%; background-color: white; max-width: 600px;">
+                    <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 100%; background-color: #f2f2f2; max-width: 600px;">
                         <tbody>
                             <tr style="background-color: #eeeeee;">
                                 <td>
@@ -737,7 +737,7 @@
                                     }
                 %>
                 
-                <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 100%; background-color: white; max-width: 600px;">
+                <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 3px; padding: 4px; width: 100%; background-color: #f2f2f2; max-width: 600px;">
                     <tbody>
                         <tr style="background-color: #eeeeee;">
                             <td>
@@ -818,14 +818,14 @@
             
                 <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
                     <tbody>
-                        <tr style="background-color: #eeeeee">
-                            <td>
-                                <div id="DateChooserDiv" style=''>
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
+                        <tr>
+                            <td style="border-bottom: 1px solid #eee;">
+                                <div id="DateChooserDiv" style=' margin: 10px;'>
+                                    <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
                                     <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 0; background-color: #ccc; padding: 5px;' type="text" name="CalDateVal" 
-                                                                          value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
+                                                                          font-weight: bolder; border: 0; background-color: darkslateblue; color: white; padding: 5px;' type="text" name="CalDateVal" 
+                                                                          value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
                                         $("#CalDatePicker").datepicker();
@@ -842,7 +842,7 @@
                                 </div>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
+                                <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
@@ -966,7 +966,7 @@
                         <tr id='EventsTr' style="background-color: #eeeeee;">
                             <td>
                                 
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
+                                <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Events</p>
                                 
                                 <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
                                     
@@ -1027,11 +1027,13 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
+                                <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Add/Change Event</p>
                                 <div>
-                                    <p><input placeholder="add event time" id="DisplayedAddEvntTime" style='background-color: white; width: 92%' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <small style="margin: 10px; color: #ffc700;">Event Time:</small>
+                                    <p style="text-align: center;"><input placeholder="add event time" id="DisplayedAddEvntTime" style='background-color: white; width: 92%' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                     <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
-                                    <p><input placeholder='add event date' id='EvntDatePicker' style='background-color: white; width: 92%' type="text" name="EvntDate" value="" /></p>
+                                    <small style="margin: 10px; color: #ffc700;">Event Date:</small>
+                                    <p style="text-align: center;"><input placeholder='add event date' id='EvntDatePicker' style='background-color: white; width: 92%' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -1039,8 +1041,10 @@
                                         });
                                       });
                                     </script>
-                                    <p><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea  onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%; border: 0; background-color: #ccc;'>
+                                    <small style="margin: 10px; color: #ffc700;">Event Title: </small>
+                                    <p style="text-align: center;"><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
+                                    <small style="margin: 10px; color: #ffc700;">Event Description: </small>
+                                    <p style="text-align: center;"><textarea  onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 95%; padding: 5px; border: #d9e8e8 1px solid; border-radius: 4px; margin: auto;'>
                                         </textarea></p>
                                 </div>
                             </td>
@@ -1142,7 +1146,7 @@
                     </script>
                             
                         </tr>
-                        <tr style="background-color: #eeeeee;">
+                        <tr>
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
                                 <center><input id="CalSaveEvntBtn" style='border: 0; background-color: darkslateblue; padding: 5px; color: white; border-radius: 4px; width: 95%;' type='button' value='Save' /></center>
@@ -1618,7 +1622,7 @@
                                 
                                 <form style="margin-top: 10px;" action="LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input onclick="LogoutMethod();" style='width: 100%; background-color: darkslateblue; color: white; border: 0; padding: 4px; border-radius: 4px; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input onclick="LogoutMethod();" style='width: 100%; max-width: 300px; margin: auto; background-color: darkslateblue; color: white; border: 0; padding: 4px; border-radius: 4px; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
                                 </form>
                             </td>
                         </tr>

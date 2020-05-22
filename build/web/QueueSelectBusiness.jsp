@@ -2081,8 +2081,10 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center>
-                
+                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                    </p></center>
+                    
                 </div>
                 
                 <div id="secondSetProvIcons" style="display: none;">
@@ -2114,9 +2116,13 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
-                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center>
-                
+                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
+                    
                 </div>
                 
                 <div id="thirdSetProvIcons" style="display: none;">
@@ -2137,8 +2143,9 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center>
-
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
                 </div>
             </div>
             
