@@ -3490,15 +3490,16 @@
                                                     <form  id="UserAcountLoginForm" style="margin: auto; margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;
                                                            background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px;" name="userAccountForm">
                                                         <p>Change your login information:</p>
-                                                        <p style="color: thistle; margin-top: 10px;">User Name:</p>
+                                                        <p style="color: darkblue; margin-top: 10px;">User Name:</p>
                                                         <center><p><input id="UpdateLoginNameFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px; color: darkblue;" placeholder="Enter New User Name Here" type="text" name="userName" value="<%=thisUserName%>" size="35" /></p></center>
                                                         
-                                                        <p style="color: thistle; margin-top: 10px;">Password:</p>
-                                                        <center><p><input id="CurrentPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="36" /></p>
+                                                        <p style="color: darkblue; margin-top: 10px;">Password:</p>
+                                                        <center><p><input class="passwordFld" id="CurrentPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="36" /></p>
+                                                            <p style="text-align: right; margin-top: -25px; margin-bottom: 10px; padding-right: 10px;"><i class="fa fa-eye showPassword" style="color: red;" aria-hidden="true"></i></p>
                                                         
-                                                            <p><input id="NewPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="36" /></p>
+                                                            <p><input class="passwordFld" id="NewPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="36" /></p>
                                                         
-                                                            <p><input id="ConfirmPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Confirm New Password" type="password" name="confirmNewPassword" value="" size="36" /></p>
+                                                            <p><input class="passwordFld" id="ConfirmPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Confirm New Password" type="password" name="confirmNewPassword" value="" size="36" /></p>
                                                         <p id="changeUserAccountStatus"></p>
                                                         <p id="WrongPassStatus" style="color: white; background-color: red; display: none;">Enter your current password correctly</p>
                                                         <input id='UserIDforLoginUpdate' name="CustomerID" type="hidden" value="<%=UserID%>" />

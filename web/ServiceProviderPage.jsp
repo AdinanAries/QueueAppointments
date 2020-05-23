@@ -3238,12 +3238,12 @@
                                     %>     
                                             
                                     
-                                    <form name="ReleaseSpot" style='background-color: green; display: none; margin-bottom: 5px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotController" method="POST">
+                                    <form name="ReleaseSpot" style='display: none; margin: 3px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotController" method="POST">
                                         
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                   <p style="color: white; text-align: center;" id="">You blocked <%=NextThisAvailableTimeForDisplay%></p>
+                                   <!--p style="color: white; text-align: center;" id="">You blocked <=NextThisAvailableTimeForDisplay%></p-->
                                         
                                     <%
                                         if(thisTime.length() == 4)
@@ -3266,14 +3266,14 @@
                                     %>
                                         
                                         <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
-                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                        <input type="submit" style="background-color: crimson; padding: 5px; border-radius: 5px;" value="Unblock <%=NextThisAvailableTimeForDisplay%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                     
                                     <%      }
                                         }else if(TempThisHour < AppointmentHour) {
                                     %>
                                     
                                         <input type="hidden" name="BlockedAppointmentID" value="<%=AppointmentID%>" />
-                                        <input type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                        <input type="submit" style="background-color: crimson; padding: 5px; border-radius: 5px;" value="Unblock <%=NextThisAvailableTimeForDisplay%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                     
                                     <%}%>
                                     
@@ -3347,13 +3347,13 @@
                                     %>
                                     
                                         
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                        <input style="background-color: darkslateblue; padding: 5px;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                        
                                     <%      }
                                         }else if(TempThisHour < AppointmentHour) {
                                     %>
                                     
-                                        <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                        <input style="background-color: darkslateblue; padding: 5px;" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                     
                                     <%}%>
                                     
@@ -6807,7 +6807,7 @@
                                     <p style="text-align: center; color: white; margin-bottom: 10px;">Your Queue Subscription</p>
                                     <input type="hidden" name="SubscStatusValue" value="" />
                                     <p style="background-color: red; color: white; text-align: center; margin: 5px;">You have not subscribed</p>
-                                    <p style="text-align: left;">Subscription Plan: <select style="background-color: #d9e8e8; border: none; padding: 0 5px; min-width: 50px;" name="SubscPlan">
+                                    <p style="text-align: left;">Subscription Plan: <select style="color: black; background-color: #d9e8e8; border: none; padding: 5px 0; min-width: 50px;" name="SubscPlan">
                                             <%
                                                 int number = 0;
                                                 try{
@@ -7323,15 +7323,16 @@
                                                             <tr>
                                                                 <input id="oldPassfld" type="hidden" name="oldpass" value=""/>
                                                                 <td style="text-align: left;">Old Password: </td>
-                                                                <td><input id="compareOldPassfld" id="" style="background-color: #d9e8e8;" type="password" name="OldPasswordFld" value="" /></td>
+                                                                <td><input class="passwordFld" id="compareOldPassfld" id="" style="background-color: #d9e8e8;" type="password" name="OldPasswordFld" value="" />
+                                                                <p style="text-align: right; margin-top: -25px; margin-bottom: 10px; padding-right: 10px;"><i class="fa fa-eye showPassword" style="color: red;" aria-hidden="true"></i></p></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="text-align: left;">New Password: </td>
-                                                                <td><input id="newPassfld" style="background-color: #d9e8e8;" type="password" name="NewPasswordFld" value="" /></td>
+                                                                <td><input class="passwordFld" id="newPassfld" style="background-color: #d9e8e8;" type="password" name="NewPasswordFld" value="" /></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="text-align: left;">Confirm Password: </td>
-                                                                <td><input id="compareNewPassfld" style="background-color: #d9e8e8;" type="password" name="ConfirmPasswordFld" value="" /></td>
+                                                                <td><input class="passwordFld" id="compareNewPassfld" style="background-color: #d9e8e8;" type="password" name="ConfirmPasswordFld" value="" /></td>
                                                             </tr>
                                                         </tbody>
                                                 </table>

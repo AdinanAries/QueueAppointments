@@ -8,9 +8,11 @@
 }
 body {
   overflow-x: hidden;
-  /*max-width: 1600px;*/
+  /*max-width: 1600px;
   background: linear-gradient(rgba(255, 255, 255, 0.747), #00a6f3c5),
-    url("salonBg3.jpg") !important;
+    url("salonBg3.jpg") !important;*/
+  background: linear-gradient(rgba(255, 186, 186, 0.712), #00a2ffaf),
+    url("stetoscopeBg.jpg") !important;
   margin: auto;
   background-size: cover !important;
   background-position: right !important;
