@@ -461,6 +461,10 @@
         <servlet-name>InjectLoginUser</servlet-name>
         <servlet-class>InjectLoginUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StripePaymentControl</servlet-name>
+        <servlet-class>StripePaymentControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -872,6 +876,10 @@
     <servlet-mapping>
         <servlet-name>InjectLoginUser</servlet-name>
         <url-pattern>/InjectLoginUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripePaymentControl</servlet-name>
+        <url-pattern>/StripePaymentControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

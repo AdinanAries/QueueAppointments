@@ -3597,7 +3597,7 @@
                                                         
                                                     </div>
                                                 </li>
-                                                <li> 
+                                                <li style='display: none;'> 
                                                     <p style="cursor: pointer;" onclick="showPaymentsForm()"><img src="icons/icons8-mastercard-credit-card-20 (1).png" width="20" height="20" alt="icons8-mastercard-credit-card-20 (1)"/>
                                                         Payments</p>
                                                     

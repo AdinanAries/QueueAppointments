@@ -1766,11 +1766,11 @@
                                             <%  }   //end of condition%>
                                             
                                             </p>
-                                        <p> Payment:<span style="color: red; float: right;">
+                                        <p style='display: none;'> Payment:<span style="color: red; float: right;">
                                                 <%
                                                     if(!hasCancellation){
                                                 %>
-                                                <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" value="Cash" style="background-color: white;"/><label for="Cash" style="margin-right: 5px">Later</label></span>
+                                                <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" value="Cash" checked="true" style="background-color: white;"/><label for="Cash" style="margin-right: 5px">Later</label></span>
                                                 /<%}%> <span onclick="toggleShowCardDetailsDiv()"><input onclick="toggleShowCardDetailsDiv()" id="Credit/Debit" type="radio" name="payment" value="Debit/Credit Card" style="background-color: white;"/><label for="Credit/Debit">Now</label></span></span></p>
                                        <p style="clear: both;"></p>
                                         <p> Total: <span style="color: red; float: right;">$<%=TaxedPrice%></span></p>

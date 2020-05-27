@@ -6387,63 +6387,20 @@
                                     
                                     <div style="background-color: white; padding: 5px; margin: 5px;">
                                     
-                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
-                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Cancellation Policy
+                                    <!--center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee; text-align: left;
+                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Accept Payments
                                             <span style="float: right;"><input style="background-color: white;" id="CnclPlcyChck" type="radio" name="CancellationPolicyChck" value="ON" />
                                             <label for="CnclPlcyChck">ON</label>
                                             <input style="background-color: white;" id="CnclPlcyChckOFF" type="radio" name="CancellationPolicyChck" value="OFF" />
-                                            <label for="CnclPlcyChckOFF">OFF</label></span></p></center>
+                                            <label for="CnclPlcyChckOFF">OFF</label></span></p></center-->
                                             <p style="clear: both;"></p>
                                             
                                         <input id="EnabledCnclPlcy" type="hidden" name="CancelationPolicyEnabled" value="<%=isSettingAllowed%>" />
                                     
                                    <div style="background-color: #6699ff;">
-                                   <div id="CnclPlcyInfo" style="display: none; padding: 5px;">       
-                                    <p>Charge: <span id="TimeSpan" style="color: #eeeeee;">at <%=TimeElapseValue%> to spot due time</span></p>
-                                    <p>Penalty: <span id="PercentSpan" style="color: #eeeeee;"><%=ChargePercentValue%> of service cost</span></p>
-                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: darkslateblue; width: 200px; margin: 5px; border-radius: 4px; color: white;">Change Policy</p></center>
-                                    <center><p  id="bizBankforCancelStatus" style="color: white; background-color: red; text-align: center;"></p></center>
-                                   </div>
-                                   
-                                    <form id="CnclPlcyForm" style="display: none; margin-top: 10px; padding: 5px;" name="CancelationPolicyForm">
-                                        
-                                        <input id="PIDforCnclPlcy" type="hidden" name="ProviderID" value="<%=UserID%>">
-                                        <!--Settings names used to identify these settings everywhere in this app-->
-                                        <input id="timeElapse" type="hidden" name="TimeElapse" value="CnclPlcyTimeElapse"/>
-                                        <input id="ChargeCost" type="hidden" name="ChargeCost" value="CnclPlcyChargeCost"/>
-                                        
-                                        <p style="text-align: center; margin-bottom: 10px; color: white;">Change Cancellation Policy</p>
-                                        
-                                        <center><p id="percentPar" style="text-align: left; max-width: 500px;">Charge Percentage: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="ChargePercent" name="ChargePercent">
-                                                    <option>100%</option>
-                                                    <option>75%</option>
-                                                    <option>50%</option>
-                                                    <option>25%</option>
-                                                    <option>10%</option>
-                                                </select></p></center>
-                                        
-                                        <center><p id="timePar" style="text-align: left; max-width: 500px;">Elapse Time: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="HHforCancellation" name="DurationFldHH">
-                                                     <option>0</option>
-                                                     <option>1</option>
-                                                     <option>2</option>
-                                                     <option>3</option>
-                                                     <option>4</option>
-                                                     <option>5</option>
-                                                 </select> hour(s) -
-                                                 <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="MMforCancellation" name="DurationFldMM">
-                                                     <option>15</option>
-                                                     <option>20</option>
-                                                     <option>25</option>
-                                                     <option>30</option>
-                                                     <option>35</option>
-                                                     <option>40</option>
-                                                     <option>45</option>
-                                                     <option>50</option>
-                                                     <option>55</option>
-                                                     <option>0</option>
-                                                 </select> minute(s)</p></center>
-                                        
-                                        <p style="color: white; text-align: center; margin: 5px;">Add Your Business Bank Card</p>
+                                   <div id="CnclPlcyInfo" style="display: none; padding: 5px;">
+                                    
+                                   <p style="color: white; text-align: center; margin: 5px;">Add Your Business Bank Card</p>
                                         <p style="text-align: center;">add bank account where to receive online payments from customers</p>
 
                                         <table style="max-width: 350px; margin: auto; background-color: #9bb1d0; border-radius: 5px; padding: 5px; margin-top: 5px; margin-bottom: 5px; border: #3d6999 1px solid;">
@@ -6470,6 +6427,63 @@
                                                 </tr>
                                             </tbody>
                                         </table> 
+                                        
+                                        <p id="validateCnclPlcyCardBtn" style="cursor: pointer; color: white; 
+                                           background-color: initial; width: 270px; padding: 5px; border-radius: 4px; text-align: center; margin: auto;">
+                                            Validate this card</p>
+                                        
+                                        <p id='BankCardValidStatus' style='color: white; text-align: center;'></p>
+                                        <center><p  id="bizBankforCancelStatus" style="color: white; background-color: red; text-align: center;"></p></center>
+                                        <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: darkslateblue; width: 200px; margin: 5px; margin-bottom: 20px; border-radius: 4px; color: white;">Save Card Information</p></center>
+                                       
+                                    <p style='color: darkblue; font-weight: bolder; margin: 5px 0;'>Cancellation Policy Information</p>
+                                    
+                                    <small style='color: aqua;'>The settings below indicates at what time your customers should be charged cancellation fee if they cancel their appointment.</small>
+                                    <p style='margin-bottom: 10px; margin-top: 5px;'>Charge when: <span id="TimeSpan" style="color: #eeeeee;"> <%=TimeElapseValue%> to appointment time</span></p>
+                                    <small style='color: aqua'>The settings below indicates how much your customers get charged for cancellation policy</small>
+                                    <p style='margin-top: 5px; margin-bottom: 10px;'>Penalty of: <span id="PercentSpan" style="color: #eeeeee;"><%=ChargePercentValue%> of total cost</span></p>
+                                     
+                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: darkslateblue; width: 200px; margin: 5px; border-radius: 4px; color: white;">Change Cancellation Policy</p></center>
+                                       
+                                    <form id="CnclPlcyForm" style="display: none; margin-top: 10px; padding: 5px;" name="CancelationPolicyForm">
+                                        
+                                        <input id="PIDforCnclPlcy" type="hidden" name="ProviderID" value="<%=UserID%>">
+                                        <!--Settings names used to identify these settings everywhere in this app-->
+                                        <input id="timeElapse" type="hidden" name="TimeElapse" value="CnclPlcyTimeElapse"/>
+                                        <input id="ChargeCost" type="hidden" name="ChargeCost" value="CnclPlcyChargeCost"/>
+                                        
+                                        <p style="text-align: center; margin-bottom: 10px; color: white;">Change Cancellation Policy</p>
+                                        
+                                        <small style='color: honeydew'>What percentage of the service cost should your customers be charged as cancellation fee</small>
+                                        <center><p id="percentPar" style="text-align: left; max-width: 500px;">Charge Percentage: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="ChargePercent" name="ChargePercent">
+                                                    <option>100%</option>
+                                                    <option>75%</option>
+                                                    <option>50%</option>
+                                                    <option>25%</option>
+                                                    <option>10%</option>
+                                                </select></p></center>
+                                        
+                                        <small style='color: honeydew'>How many minutes or hours before appointment time should your customers be charged cancellation fee if they cancel their appointment</small>
+                                        <center><p id="timePar" style="text-align: left; max-width: 500px;">Due Time: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="HHforCancellation" name="DurationFldHH">
+                                                     <option>0</option>
+                                                     <option>1</option>
+                                                     <option>2</option>
+                                                     <option>3</option>
+                                                     <option>4</option>
+                                                     <option>5</option>
+                                                 </select> hour(s) -
+                                                 <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="MMforCancellation" name="DurationFldMM">
+                                                     <option>15</option>
+                                                     <option>20</option>
+                                                     <option>25</option>
+                                                     <option>30</option>
+                                                     <option>35</option>
+                                                     <option>40</option>
+                                                     <option>45</option>
+                                                     <option>50</option>
+                                                     <option>55</option>
+                                                     <option>0</option>
+                                                 </select> minute(s)</p></center>
                                         
                                         <script>
                                                     var CnclPlcyExpDate = document.getElementById("CnclPlcyExpDate");
@@ -6549,13 +6563,16 @@
 
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
-                                                    <p id="validateCnclPlcyCardBtn" style="cursor: pointer; color: white; background-color: initial; width: 270px; padding: 5px; border-radius: 4px; text-align: center; margin: auto;">Validate this card</p>
-                                        
-                                        <p style="text-align: left; color: white; background-color: crimson; padding: 5px; border-radius: 4px; width: fit-content; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation Policy</label>
+                                               
+                                        <p style="margin: auto; text-align: left; color: white; background-color: crimson; padding: 5px; border-radius: 4px; width: fit-content; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation Policy</label>
                                             </p>
-                                        <p id='BankCardValidStatus' style='color: white; text-align: center;'></p>
+                                        
                                         <center><input id="submitCnclPlcyBtn" style="padding: 5px; color: white; border: none; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
                                     </form>
+                                    
+                                   </div>
+                                   
+                                    
                                    </div>
                                         
                                         <script>
@@ -6796,8 +6813,8 @@
                                        
                                    </script>
                                     
-                                    <center><p onclick="toggleShowSubscriptionDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
-                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Manage Your Subscription</p></center>
+                                    <center><p onclick="toggleShowSubscriptionDiv();" style="text-align: left; cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
+                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Manage Your Subscription <span style='color: red; margin-left: 10px;'><i class="fa fa-exclamation-triangle"></i></span></p></center>
                                     
                                     <div id="SubscriptionDiv" style="text-align: center; background-color: #6699ff; padding: 5px; display: none;">
                                         
@@ -6939,123 +6956,12 @@
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
                                     
-                                                    <p onclick="toggleShowBizBankCard();"  style="width: fit-content; margin: auto; color: white; background-color: darkslateblue; text-align: center; border-radius: 4px; padding: 5px; margin-top: 5px; margin-bottom: 5px; cursor: pointer">Show Business Bank Info. (<span style="font-weight: bolder;">Optional</span>)</p>
-                                    
-                                    <div id="BizBankCard" style="display: none;">
-                                    <p style="color: white; text-align: center; margin: 5px;">Your Business Bank Card</p>
-                                    <p>your bank account where to receive online payments from customers</p>
-                                    
-                                    <table style="max-width: 350px; margin: auto; background-color: #9bb1d0; border-radius: 5px; padding: 5px; margin-top: 5px; margin-bottom: 5px; border: #3d6999 1px solid;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="text-align: left;">Card Number: </td>
-                                                <td><input placeholder="not added" onclick="checkMiddlenumberFuncSubscriptionBizCardNumber()" onkeydown="checkMiddlenumberFuncSubscriptionBizCardNumber();" id="SubscriptionBizCardNumber" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Card Name: </td>
-                                                <td><input placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNameForSubscription" value="" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Routing Number: </td>
-                                                <td><input placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Sec. Code: </td>
-                                                <td><input placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardCodeForSubscription" value="" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Exp. Date: </td>
-                                                <td><input id="cardDateSBB" placeholder="not added" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardExpForSubscription" value="" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table> 
-                                        <script>
-                                                    var ExpDateSBBFld = document.getElementById("cardDateSBB");
-                                                         
-                                                         setInterval(function(){
-                                                             
-                                                            if(ExpDateSBBFld.value !== ""){
-                                                                
-                                                               if(ExpDateSBBFld.value.length === 2){
-                                                                   
-                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,2) + "/" + ExpDateSBBFld.value.substring(2);
-                                                                  
-                                                                   if(ExpDateSBBFld.value === "///" || ExpDateSBBFld.value.substring(1,3) === "//" || ExpDateSBBFld.value.substring(0,1) === "/"){
-                                                                       ExpDateSBBFld.value = "";
-                                                                   }
-                                                                   
-                                                               }
-                                                               //checking if month is greater than 12
-                                                               var month = parseInt((ExpDateSBBFld.value.substring(0,2)), 10);
-                                                               var month1 = parseInt((ExpDateSBBFld.value.substring(0,1)), 10);
-                                                               var month2 = parseInt((ExpDateSBBFld.value.substring(1,2)), 10);
-                                                               var year = parseInt((ExpDateSBBFld.value.substring(3,5)), 10);
-                                                               var year1 = parseInt((ExpDateSBBFld.value.substring(3,4)), 10);
-                                                               var year2 = parseInt((ExpDateSBBFld.value.substring(4,5)), 10);
-                                                               
-                                                               if(month !== null){
-                                                                    if(month > 12){
-                                                                        ExpDateSBBFld.value = "12" + ExpDateSBBFld.value.substring(2,5);
-                                                                    }
-                                                                }
-                                                                //checking if entered date is more than 5 characters
-                                                               if(ExpDateSBBFld.value.length > 5){
-                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,5);
-                                                               }
-                                                               //checking is what's entered is is not a number 
-                                                               if(isNaN(month1))
-                                                                   ExpDateSBBFld.value = "";
-                                                               if(isNaN(month2))
-                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,1) + "";
-                                                               if(isNaN(year1))
-                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,3) + "";
-                                                               if(isNaN(year2))
-                                                                   ExpDateSBBFld.value = ExpDateSBBFld.value.substring(0,4) + "";
-                                                              
-                                                            }
-                                                         },1);
-                                                </script>
-                                    
-                                    
-                                    
-                                    <script>
-                                                        var SubscriptionBizCardNumber = document.getElementById("SubscriptionBizCardNumber");
-
-                                                        function numberFuncSubscriptionBizCardNumber(){
-
-                                                            var number = parseInt((SubscriptionBizCardNumber.value.substring(SubscriptionBizCardNumber.value.length - 1)), 10);
-
-                                                            if(isNaN(number)){
-                                                                SubscriptionBizCardNumber.value = SubscriptionBizCardNumber.value.substring(0, (SubscriptionBizCardNumber.value.length - 1));
-                                                            }
-
-                                                        }
-
-                                                        setInterval(numberFuncSubscriptionBizCardNumber, 1);
-
-                                                        function checkMiddlenumberFuncSubscriptionBizCardNumber(){
-
-                                                            for(var i = 0; i < SubscriptionBizCardNumber.value.length; i++){
-
-                                                                var middleString = SubscriptionBizCardNumber.value.substring(i, (i+1));
-                                                                //window.alert(middleString);
-                                                                var middleNumber = parseInt(middleString, 10);
-                                                                //window.alert(middleNumber);
-                                                                if(isNaN(middleNumber)){
-                                                                    SubscriptionBizCardNumber.value = SubscriptionBizCardNumber.value.substring(0, i);
-                                                                }
-                                                            }
-                                                        }
-
-                                                        //setInterval(checkMiddleNumber, 1000);
-                                                    </script>
-                                    
-                                    </div>
-                                    
                                     <p style="background-color: crimson; border-radius: 4px; width: fit-content; padding: 5px; color: white; margin: auto; margin-bottom: 5px;"><input id="autoPay" type="checkbox" name="AutoPay" value="ON" />
                                         <label style="" for="autoPay">Allow Automatic Payment</label></p>
                                     
-                                    <input id="ChngSubscBtn" style="padding: 5px; border: none; background-color: darkslateblue; border-radius: 4px; color: white;" type="submit" value="Update" />
+                                    <input id="ChngSubscBtn" style="padding: 5px; border: none; background-color: darkslateblue;
+                                           border-radius: 4px; color: white;" type="submit" value="Update" 
+                                           onclick="this.form.target='_blank';return true;"/>
                                     
                                     </form>
                                         
@@ -7090,7 +6996,7 @@
                                         
                                     </script>
                                     
-                                    <center><p onclick="toggleShowEditBizInfoDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
+                                    <center><p onclick="toggleShowEditBizInfoDiv();" style="text-align: left; cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
                                                border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Edit Your Business Info</p></center>
                                     
                                     <div id="EditBizInfoDiv" style="text-align: center; background-color: #6699ff; display: none">
@@ -7305,7 +7211,7 @@
                                     
                                     <!--center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; border: 1px solid darkgrey;">Your Queue Stats.</p></center-->
                                     
-                                    <center><p onclick="showUpdateLoginDiv();" style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color:
+                                    <center><p onclick="showUpdateLoginDiv();" style="text-align: left; cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color:
                                                #eeeeee; border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Edit Your Login Info.</p></center>
                                     
                                     <div id="UpdateLoginDiv" style="text-align: center; background-color: #6699ff; display: none;">
