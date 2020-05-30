@@ -11,6 +11,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SaveProviderBizBankCard.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/QueueMailer.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/American_Express_card_logo.png</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/stripe-payment-view.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/com/arieslab/queue/queue_model/BookedAppointment.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdateProvBizInfoController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectHolisticMedicineLoggedIn.jsp</file>
@@ -21,6 +22,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/DeleteClient.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/QueueSelectDieticianLoggedIn.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SetProviderHoursController.java</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/sw.js</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/LogoutController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UpdateProvEvent.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/NotSuccessfulPageFinishAppointment.jsp</file>
@@ -174,6 +176,7 @@
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/AllFavProviders.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/AddEvent.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/ProviderStats.jsp</file>
+            <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/StripePaymentControl.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/SendAppointmentController.java</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/web/UploadGalleryPhotoWindow.jsp</file>
             <file>file:/C:/Users/aries/OneDrive/Documents/NetBeansProjects/QueueWebAppPrototype/src/java/UnblockCustomerController.java</file>

@@ -1,5 +1,7 @@
 var cacheName = 'Queue Cache';
 
+
+//on application istall_to-home-screen event handler
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(cacheName).then(function(cache) {
@@ -25,4 +27,17 @@ self.addEventListener('install', function(event) {
       );
     })
   );
+});
+
+
+//another event listener
+self.addEventListener('', event => {
+    console.log(event);
+    
+});
+
+
+//another event listener 
+self.addEventListener('', event => {
+    console.log(event);
 });

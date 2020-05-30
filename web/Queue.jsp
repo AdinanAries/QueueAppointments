@@ -23,6 +23,12 @@
     
     <head>
         
+        <script>
+            document.cookie = "SameSite=None";
+            document.cookie = "SameSite=None; Secure";
+            //alert(document.cookie);
+        </script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
@@ -77,7 +83,37 @@
     </script>
     
     <%
+        //Deleting cookie if it exists
+        Cookie cookie = null;
+         Cookie[] cookies = null;
+         
+         // Get an array of Cookies associated with the this domain
+         cookies = request.getCookies();
+         
+         if( cookies != null ) {
+            
+            for (int i = 0; i < cookies.length; i++) {
+                
+               cookie = cookies[i];
+               
+               if((cookie.getName()).compareTo("SameSite") == 0 ) {
+                  cookie.setHttpOnly(false);
+                  cookie.setSecure(true);
+                  cookie.setMaxAge(60*60*999999999);
+                  response.addCookie(cookie);
+                  //JOptionPane.showMessageDialog(null, cookie.getValue());
+                  
+               }
+            }
+         } else {
+             //JOptionPane.showMessageDialog(null, "no cookies found");
+         }
         
+        /*Cookie newCookie = new Cookie("SameSite", "None");
+        newCookie.setSecure(true);
+        newCookie.setHttpOnly(false);
+        response.addCookie(newCookie);*/
+         
         //resetting ResendAppointmentData data feilds
         ResendAppointmentData.CustomerID = "";
         ResendAppointmentData.ProviderID = "";

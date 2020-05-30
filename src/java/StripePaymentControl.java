@@ -42,6 +42,7 @@ public class StripePaymentControl extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         
         try{
+            
             Stripe.apiKey = "sk_test_EC7e1f7iodwPa8U1GTIECHsR00zWDKWZdD";
             
             /*Map<String, Object> params = new HashMap<String, Object>();
@@ -70,34 +71,38 @@ public class StripePaymentControl extends HttpServlet {
             Session session = Session.create(params);*/
             
             // Set your secret key. Remember to switch to your live secret key in production!
-// See your keys here: https://dashboard.stripe.com/account/apikeys
+            // See your keys here: https://dashboard.stripe.com/account/apikeys
 
 
-Map<String, Object> params = new HashMap<String, Object>();
+            Map<String, Object> params = new HashMap<String, Object>();
 
-ArrayList<String> paymentMethodTypes = new ArrayList<>();
-paymentMethodTypes.add("card");
-params.put("payment_method_types", paymentMethodTypes);
+            ArrayList<String> paymentMethodTypes = new ArrayList<>();
+            paymentMethodTypes.add("card");
+            params.put("payment_method_types", paymentMethodTypes);
 
-HashMap<String, Object> subscriptionData = new HashMap<String, Object>();
-ArrayList<HashMap<String, Object>> lineItems = new ArrayList<>();
-HashMap<String, Object> lineItem = new HashMap<String, Object>();
+            HashMap<String, Object> subscriptionData = new HashMap<String, Object>();
+            ArrayList<HashMap<String, Object>> lineItems = new ArrayList<>();
+            HashMap<String, Object> lineItem = new HashMap<String, Object>();
 
-lineItem.put("price", "price_HM3ZrFMxbmVBcP");
-lineItem.put("quantity", 1);
-lineItems.add(lineItem);
-params.put("line_items", lineItems);
-params.put("mode", "subscription");
+            lineItem.put("price", "price_HM3ZrFMxbmVBcP");
+            lineItem.put("quantity", 1);
+            lineItems.add(lineItem);
+            params.put("line_items", lineItems);
+            params.put("mode", "subscription");
 
-subscriptionData.put("trial_period_days", 30);
-params.put("subscription_data", subscriptionData);
+            subscriptionData.put("trial_period_days", 30);
+            params.put("subscription_data", subscriptionData);
 
-params.put("success_url", "https://example.com/success");
-params.put("cancel_url", "https://example.com/cancel");
+            params.put("success_url", "https://example.com/success");
+            params.put("cancel_url", "https://example.com/cancel");
 
-Session session = Session.create(params);
+            Session session = Session.create(params);
             
             JOptionPane.showMessageDialog(null, "session created");
+            
+            //sending sessionId to client
+            response.getWriter().print(session.getId());
+            
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
             

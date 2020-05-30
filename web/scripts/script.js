@@ -16,7 +16,7 @@ if ('serviceWorker' in navigator) {
 }
 
 //document.cookie = "SameSite=None;Secure";
-document.cookie = "SameSite=None;";
+//document.cookie = "UserID=1;SameSite=None;Secure";
 //alert(document.cookie);
 
 function QueueClock() {

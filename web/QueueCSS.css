@@ -1364,6 +1364,9 @@ input[type="file"] {
   border-radius: 4px;
 }
 @media only screen and (max-width: 1000px) {
+    #logindetails{
+        padding-top: 110px !important;
+    }
   .loginInputFld {
     background-color: white;
     color: #334d81;

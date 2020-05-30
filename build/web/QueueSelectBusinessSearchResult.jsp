@@ -29,6 +29,11 @@
     
     <head>  
         
+        <script>
+            //document.cookie = "SameSite=None; Secure";
+            //alert(document.cookie);
+        </script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>

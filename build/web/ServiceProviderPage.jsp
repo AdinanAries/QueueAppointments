@@ -30,6 +30,12 @@
 <html lang="en-US">
     <head>                         
         
+        <script>
+            document.cookie = "SameSite=None";
+            document.cookie = "SameSite=None; Secure";
+            //alert(document.cookie);
+        </script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue | Business</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
@@ -64,6 +70,32 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
     <%
+        
+        //Deleting cookie if it exists
+        Cookie cookie = null;
+         Cookie[] cookies = null;
+         
+         // Get an array of Cookies associated with the this domain
+         cookies = request.getCookies();
+         
+         if( cookies != null ) {
+            
+            for (int i = 0; i < cookies.length; i++) {
+                
+               cookie = cookies[i];
+               
+               if((cookie.getName()).compareTo("SameSite") == 0 ) {
+                  cookie.setHttpOnly(false);
+                  cookie.setSecure(true);
+                  cookie.setMaxAge(60*60*999999999);
+                  response.addCookie(cookie);
+                  //JOptionPane.showMessageDialog(null, cookie.getValue());
+                  
+               }
+            }
+         } else {
+             //JOptionPane.showMessageDialog(null, "no cookies found");
+         }
         
         String GlobalUserName = "";
         String GlobalUserPassword = "";

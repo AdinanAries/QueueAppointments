@@ -12,6 +12,12 @@
     
     <head>
         
+        <script>
+            document.cookie = "SameSite=None";
+            document.cookie = "SameSite=None; Secure";
+            //alert(document.cookie);
+        </script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="indexCSS.css" media="screen" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>

@@ -6,7 +6,7 @@
     "orientation" : "portrait-primary",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
-    "description": "Find medical and beauty services.",
+    "description": "Find medical and beauty places",
     "icons": [{
       "src": "./HomeIcons/Android/Icon1.png",
       "sizes": "48x48",
