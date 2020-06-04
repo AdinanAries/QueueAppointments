@@ -22,6 +22,7 @@
         <link href="indexCSS.css" media="screen" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <title>AriesLab</title>
@@ -37,6 +38,41 @@
     </head>
     
     <%
+        
+        /*Cookie myName = new Cookie("Name","Mohammed");
+        myName.setMaxAge(60*60*24); 
+        response.addCookie(myName);*/
+        
+        //Changing some domain cookie properties
+        Cookie cookie = null;
+         Cookie[] cookies = null;
+         
+         // Get an array of Cookies associated with the this domain
+         cookies = request.getCookies();
+         
+         String CookieText = "";
+         
+         if( cookies != null ) {
+            
+            for (int i = 0; i < cookies.length; i++) {
+                
+               cookie = cookies[i];
+               CookieText += cookie.getName()+"="+cookie.getValue();
+               
+               /*if((cookie.getName()).compareTo("JSESSIONID") == 0 ) {
+                  //cookie.setHttpOnly(false);
+                  //cookie.setSecure(false);
+                  //cookie.setMaxAge(60*60*999999999);
+                  //response.addCookie(cookie);
+                  
+               }*/
+            }
+         } else {
+             //JOptionPane.showMessageDialog(null, "no cookies found");
+         }
+         //JOptionPane.showMessageDialog(null, CookieText);
+         response.setHeader("Set-Cookie", "Name=Mohammed;"+CookieText+"; HttpOnly; SameSite=None; Secure");
+         //JOptionPane.showMessageDialog(null, response.getHeader("Set-Cookie"));
         
         config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
         config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));

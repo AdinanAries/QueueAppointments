@@ -23,6 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <title>Photos</title>
         

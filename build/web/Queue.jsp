@@ -41,6 +41,9 @@
         
         <title>Queue</title>
         
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+        <!--link rel="shortcut icon" type="image/png" href="http://localhost/QueueWebAppPrototype/favicon.png"/-->
+        
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
@@ -83,31 +86,40 @@
     </script>
     
     <%
-        //Deleting cookie if it exists
+       /*Cookie myName = new Cookie("Name","Mohammed");
+        myName.setMaxAge(60*60*24); 
+        response.addCookie(myName);*/
+        
+        //Changing some domain cookie properties
         Cookie cookie = null;
          Cookie[] cookies = null;
          
          // Get an array of Cookies associated with the this domain
          cookies = request.getCookies();
          
+         String CookieText = "";
+         
          if( cookies != null ) {
             
             for (int i = 0; i < cookies.length; i++) {
                 
                cookie = cookies[i];
+               CookieText += cookie.getName()+"="+cookie.getValue();
                
-               if((cookie.getName()).compareTo("SameSite") == 0 ) {
-                  cookie.setHttpOnly(false);
-                  cookie.setSecure(true);
-                  cookie.setMaxAge(60*60*999999999);
-                  response.addCookie(cookie);
-                  //JOptionPane.showMessageDialog(null, cookie.getValue());
+               /*if((cookie.getName()).compareTo("JSESSIONID") == 0 ) {
+                  //cookie.setHttpOnly(false);
+                  //cookie.setSecure(false);
+                  //cookie.setMaxAge(60*60*999999999);
+                  //response.addCookie(cookie);
                   
-               }
+               }*/
             }
          } else {
              //JOptionPane.showMessageDialog(null, "no cookies found");
          }
+         //JOptionPane.showMessageDialog(null, CookieText);
+         response.setHeader("Set-Cookie", "Name=Mohammed;"+CookieText+"; HttpOnly; SameSite=None; Secure");
+         //JOptionPane.showMessageDialog(null, response.getHeader("Set-Cookie"));
         
         /*Cookie newCookie = new Cookie("SameSite", "None");
         newCookie.setSecure(true);
@@ -570,8 +582,8 @@
                             <td>
                                 <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
                                     <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
+                                <p style="color: seagreen; margin-top: 10px;"><a style="color: seagreen;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                        <%=ProvAddress.split(",")[0]%><i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darksalmon; color: black; padding: 5px; border-radius: 4px;"></i></a></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">

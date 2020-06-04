@@ -28,6 +28,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Queue | Settings</title>
         
@@ -331,8 +332,9 @@
                                 <td>
                                     <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
                                         <%=ProvCompany%></p>
-                                    <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                        <%=ProvAddress%></p>
+                                    <p style="color: seagreen; margin-top: 10px; margin-bottom: 10px;"><a style="color: seagreen;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                        <%=ProvAddress.split(",")[0]%><i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darksalmon; color: black; padding: 5px; border-radius: 4px;"></i></a></p>
+                            
                                 </td>
                             </tr>
                             <tr style="background-color: #eeeeee;">
@@ -524,8 +526,9 @@
                             <td>
                                 <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
                                     <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
+                                <p style="color: seagreen; margin-top: 10px; margin-bottom: 10px;"><a style="color: seagreen;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                        <%=ProvAddress.split(",")[0]%><i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darksalmon; color: black; padding: 5px; border-radius: 4px;"></i></a></p>
+                            
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">

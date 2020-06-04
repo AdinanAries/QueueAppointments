@@ -41,6 +41,8 @@
         <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
         <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
          
     </head>
@@ -526,7 +528,7 @@
                 
                 <center><div id ="logindetails" style="padding-top: 10px;">
                         
-                <center><h2 style="margin-bottom: 20px;">Sign-up Here</h2></center>
+                <center><h2 id="SignUpHereTxt" style="margin-bottom: 20px;">Sign-up Here</h2></center>
                 
                 <center><div id="accountTypeOptions">
                 <center><h3 style="color: darkblue; margin-bottom: 10px; ">Choose account type</h3></center>

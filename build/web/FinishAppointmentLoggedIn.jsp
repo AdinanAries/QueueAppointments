@@ -34,6 +34,7 @@
         <title>Queue</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -1873,8 +1874,10 @@
                                         tempdouble = decformat.format(TotalPrice);
                                         TotalPrice = Double.parseDouble(tempdouble);
                                         
+                                        String DisplaySelectedServicesList = "";
+                                        
                                         if(SelectedServicesList.length() > 35)
-                                            SelectedServicesList = SelectedServicesList.substring(0, 32) + "...";
+                                            DisplaySelectedServicesList = SelectedServicesList.substring(0, 32) + "...";
                                         
                                     %>
                                     
@@ -1890,7 +1893,7 @@
                                         <p><input id="formsDateValue" type="hidden" name="formsDateValue" value="" /></p>
                                         <p> Time: <span id="displayTime" style="color: red; float: right;"><%=FormattedAppointmentTime%></span></p>
                                         <p><input id="formsTimeValue" type="hidden" name="formsTimeValue" value="<%=AppointmentTime%>" /></p>
-                                        <p> Reason: <span style="color: red; float: right;"><%=SelectedServicesList%></span>
+                                        <p> Reason: <span style="color: red; float: right;"><%=DisplaySelectedServicesList%></span>
                                         <input id="formsOrderedServices" type="hidden" name="formsOrderedServices" value="<%=SelectedServicesList%>" />
                                             
                                             <%

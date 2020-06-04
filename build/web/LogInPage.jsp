@@ -30,6 +30,8 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
         <title>Queue</title>
@@ -406,7 +408,7 @@
                     <fieldset class="loginInputFld">
                         <legend>Enter your email</legend>
                         <span class="fa fa-envelope"></span>
-                        <input id="forgotPassEmailFld" onmousemove="findAt();" type="text" value="" placeholder="email" size="30" style="background: none; border-radius: 4px;"/>
+                        <input id="forgotPassEmailFld" onkeyup="findAt();" type="text" value="" placeholder="email" size="30" style="background: none; border-radius: 4px;"/>
                     </fieldset>
                     <p><input id="forgotPassBtn" style="background-color: darkslateblue; color: white; border: none; padding: 5px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
                     
@@ -442,8 +444,8 @@
                                                 
                                                 var ReportLink = "http://localhost/QueueSpamReport.jsp?UserEmail="+Email;
                                                 
-                                                var emailMessage = `Warning: This email is sent from your Queue account due to a request to reset your password. If you haven't requested a password update, then click on the following link, ( `+ ReportLink +`) to report this insident as it may be resulting from malicious activities.
-                                                                    \n\nImportant Notice: Please delete this email immediately after resetting your password.
+                                                var emailMessage = `Warning: This email is sent from your Queue account due to a request to reset your password. If you haven't requested a password update, click on the following link, ( `+ ReportLink +`) to report this insident as it may be resulting from malicious activities.
+                                                                    \n\nImportant Notice: It is recommended that you delete this email immediately after resetting your password.
                                                                     \n\nClick on the following link to reset your password: `+ URLLink;
                                                 
                                                 $.ajax({

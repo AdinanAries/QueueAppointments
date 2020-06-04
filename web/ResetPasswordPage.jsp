@@ -26,10 +26,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
         <title>Queue</title>
         
@@ -307,7 +310,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
@@ -348,8 +351,7 @@
             
             <div id="nav">
                 
-                <h3><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h3>
-                <center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center>
+                <!--h3><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h3-->
             </div>
             
             <div id="main">
@@ -361,13 +363,13 @@
                 <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center-->
                 
                 <%if(Message != null){%>
-                    <center><h4 style="color: white; margin-bottom: 15px; background-color: green; max-width: 350px;"><%=Message%></h4></center>
+                    <center><h4 style="color: white; margin-bottom: 15px; max-width: 350px;"><%=Message%></h4></center>
                 <%}%>
                     
                 <center><h2 style="margin-bottom: 20px;">Reset Your Password</h2></center>
                 
                 <%if(AccountType.equals("Both")){%>
-                    <p style="color: white; margin-bottom: 10px; max-width: 350px; background-color: red;">Your email is associated with a business and a customer account.
+                    <p style="color: white; margin-bottom: 10px; max-width: 350px; margin: 20px 0;"><i style="color: orange;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> Your email is associated with a business and a customer account.
                         Choose which account-type to update
                     </p>
                     <div style="margin-bottom: 10px;">
@@ -382,26 +384,49 @@
                 <input id="ResetUserEmail" type="hidden" value="<%=Email%>" />
                 <form id="LoginForm" name="login" method="POST">
                     
-                    <table border="0" style="border-top: 1px solid darkblue; border-bottom: 1px solid darkblue; padding: 10px;"> 
+                    <table border="0" style="border-top: 1px solid darkblue; border-bottom: 1px solid darkblue; max-width: 300px; padding: 10px 0;"> 
                             <tbody>
                                 <tr>
                                     <center><p id="nameStatus" style="display: none; background-color: red; color: white; margin-bottom: 10px; max-width: 350px;"></p></center>
-                                    <td><p>Enter your existing username below</p>
-                                        <input id="LoginPageUserNameFld" placeholder="enter your current username here" type="text" name="username" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td><p style="margin-top: 10px;"></p>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your existing username below</legend>
+                                            <span class="fa fa-user"></span>
+                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="32"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <center><p id="telStatus" style="display: none; background-color: red; color: white; margin-bottom: 10px; max-width: 350px;"></p></center>
-                                        <p>Enter your mobile number below</p>
-                                        <input id="LoginPageMobileFld" placeholder='enter your mobile number here' type="text" name="mobileFld" value="" size="37" style="background-color: #6699ff;"/></td>
+                                        <p style="margin-top: 10px;"></p>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your mobile number below</legend>
+                                            <span class="fa fa-phone"></span>
+                                            <input id="LoginPageMobileFld" placeholder='mobile' type="text" name="mobileFld" value="" size="32"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Enter your new password below</p>
-                                        <input id="LoginPagePasswordFld" placeholder='enter your new password here' type="password" name="password" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td>
+                                        <p style="margin-top: 10px;"></p>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Enter your new password below</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" style="margin: 0;"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><p>Confirm your new password below</p>
-                                        <input id="LoginConfirmPasswordFld" placeholder='confirm your new password here' type="password" name="confirmPassword" value="" size="37" style="background-color: #6699ff;"/></td>
+                                    <td>
+                                        <p style="margin-top: 10px;"></p>
+                                        <fieldset class="loginInputFld">
+                                            <legend>Confirm your new password below</legend>
+                                            <span class="fa fa-key"></span>
+                                            <input class="passwordFld" id="LoginConfirmPasswordFld" placeholder="password"  type="password" name="confirmPassword" value="" style="margin: 0;"/>
+                                        </fieldset>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -418,7 +443,7 @@
                                     document.getElementById("ResetLoginBtn").style.backgroundColor = "darkgrey";
                                     document.getElementById("ResetLoginBtn").style.disabled = true;
                                 }else {
-                                    document.getElementById("ResetLoginBtn").style.backgroundColor = "pink";
+                                    document.getElementById("ResetLoginBtn").style.backgroundColor = "darkslateblue";
                                     document.getElementById("ResetLoginBtn").style.disabled = false;
                                 }
                                 
@@ -426,7 +451,7 @@
                         </script>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn" />
-                        <input id="ResetLoginBtn" class="button" type="button" value="Update" name="submitbtn" />
+                        <input id="ResetLoginBtn" class="button" type="button" value="Update" name="submitbtn" style="color: white; border: none;"/>
                     </form>
                 
                 <script>
@@ -548,16 +573,40 @@
                                 <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
                             </tr>
                             <tr>
-                                <td><input id="signUpFirtNameFld" placeholder="enter your first name" type="text" name="firstName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your first name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="signUpFirtNameFld" placeholder="firstname" type="text" name="firstName" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="sigUpLastNameFld" placeholder="enter your last name" type="text" name="lastName" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your last name</legend>
+                                        <span class="fa fa-user"></span>
+                                        <input id="sigUpLastNameFld" placeholder="lastname" type="text" name="lastName" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="enter your telephone/mobile number here" type="text" name="telNumber" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your mobile</legend>
+                                        <span class="fa fa-mobile" style="font-size: 25px;"></span>
+                                        <input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="mobile" type="text" name="telNumber" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                             <tr>
-                                <td><input id="signUpEmailFld" placeholder="enter your email address here" type="text" name="email" value="" size="37"/></td>
+                                <td>
+                                    <fieldset class="loginInputFld">
+                                        <legend>Enter your email</legend>
+                                        <span class="fa fa-envelope"></span>
+                                        <input id="signUpEmailFld" placeholder="email" type="text" name="email" value="" size="32"/>
+                                    </fieldset>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

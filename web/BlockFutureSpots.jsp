@@ -32,6 +32,7 @@
         <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     

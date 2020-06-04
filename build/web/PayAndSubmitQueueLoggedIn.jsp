@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <title>Queue: Payment</title>
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />

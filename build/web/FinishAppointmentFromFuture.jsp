@@ -34,6 +34,7 @@
         <title>Queue</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1388,6 +1389,11 @@
                                         tempdouble = decformat.format(TaxedPrice);
                                         TaxedPrice = Double.parseDouble(tempdouble);
                                         
+                                        String SelectedServicesList = request.getParameter("ServicesList");
+                                        
+                                        if(SelectedServicesList.length() > 35)
+                                            SelectedServicesList = SelectedServicesList.substring(0, 32) + "...";
+                                        
                                     %>
                                     
                                     <div id="serviceslist" style="clear: both;">
@@ -1402,7 +1408,7 @@
                                         <p><input id="formsDateValue" type="hidden" name="formsDateValue" value="" /></p>
                                         <p> Time: <span id="displayTime" style="color: red; float: right;"><%=FormattedAppointmentTime%></span></p>
                                         <p><input id="formsTimeValue" type="hidden" name="formsTimeValue" value="<%=AppointmentTime%>" /></p>
-                                        <p> Reason: <span style="color: red; float: right;"><%=request.getParameter("ServicesList")%></span>
+                                        <p> Reason: <span style="color: red; float: right;"><%=SelectedServicesList%></span>
                                         <input id="formsOrderedServices" type="hidden" name="formsOrderedServices" value="<%=request.getParameter("ServicesList")%>" />
                                             
                                             <%

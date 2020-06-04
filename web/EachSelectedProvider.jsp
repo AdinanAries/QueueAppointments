@@ -32,6 +32,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -327,6 +328,9 @@
             
             <div style="max-height: 87vh; overflow-y: auto;">
                 <%
+                    int newsItems = 0;
+                    int CurrentProvID = 0;
+                    
                     try{
                         Class.forName(Driver);
                         Connection newsConn = DriverManager.getConnection(url, User, Password);
@@ -334,13 +338,13 @@
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         newsPst.setString(1, ID);
                         ResultSet newsRec = newsPst.executeQuery();
-                        int newsItems = 0;
                         
                         while(newsRec.next()){
                             
                             newsItems++;
                             
                             String ProvID = newsRec.getString("ProvID");
+                            CurrentProvID = Integer.parseInt(ProvID);
                             String ProvFirstName = "";
                             String ProvCompany = "";
                             String ProvAddress = "";
@@ -458,6 +462,211 @@
                     }
                 }catch(Exception e){
                     e.printStackTrace();
+                }
+
+                
+                if(newsItems < 10){
+
+                    if(newsItems == 0){
+
+                %>
+                
+                        <p style="color: white; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=CurrentProvsName%> has not posted any news updates</p>
+                    <%}%>
+                    
+                <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin: 20px 0;">Others updates</p></center>
+                
+                <%
+               
+                        try{
+                            Class.forName(Driver);
+                            Connection newsConn = DriverManager.getConnection(url, User, Password);
+                            String newsQuery2 = "Select * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                            PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
+                            ResultSet newsRec = newsPst.executeQuery();
+
+                            while(newsRec.next()){
+
+                                if(CurrentProvID == Integer.parseInt(newsRec.getString("ProvID")))
+                                    continue;
+                                
+                                newsItems++;
+                                String base64Profile = "";
+
+                                String ProvID = newsRec.getString("ProvID");
+                                String ProvFirstName = "";
+                                String ProvCompany = "";
+                                String ProvAddress = "";
+                                String ProvTel = "";
+                                String ProvEmail = "";
+
+                                String Msg = newsRec.getString("Msg").trim();
+                                String MsgPhoto = "";
+
+                                try{    
+                                        //put this in a try catch block for incase getProfilePicture returns nothing
+                                        Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                        InputStream inputStream = Pic.getBinaryStream();
+                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                        byte[] buffer = new byte[4096];
+                                        int bytesRead = -1;
+
+                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                            outputStream.write(buffer, 0, bytesRead);
+                                        }
+
+                                        byte[] imageBytes = outputStream.toByteArray();
+
+                                        MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                    }
+                                    catch(Exception e){
+
+                                    }
+
+
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection ProvConn = DriverManager.getConnection(url, User, Password);
+                                        String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                                        PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
+                                        ProvPst.setString(1, ProvID);
+
+                                        ResultSet ProvRec = ProvPst.executeQuery();
+
+                                        while(ProvRec.next()){
+                                            ProvFirstName = ProvRec.getString("First_Name").trim();
+                                            ProvCompany = ProvRec.getString("Company").trim();
+                                            ProvTel = ProvRec.getString("Phone_Number").trim();
+                                            ProvEmail = ProvRec.getString("Email").trim();
+
+                                            try{    
+                                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                                Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                                InputStream inputStream = Pic.getBinaryStream();
+                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                byte[] buffer = new byte[4096];
+                                                int bytesRead = -1;
+
+                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                    outputStream.write(buffer, 0, bytesRead);
+                                                }
+
+                                                byte[] imageBytes = outputStream.toByteArray();
+
+                                                base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                            }
+                                            catch(Exception e){
+
+                                            }
+
+                                        }
+
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
+                                        String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
+                                        PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
+                                        ProvLocPst.setString(1, ProvID);
+
+                                        ResultSet ProvLocRec = ProvLocPst.executeQuery();
+
+                                        while(ProvLocRec.next()){
+                                            String NHouseNumber = ProvLocRec.getString("House_Number").trim();
+                                            String NStreet = ProvLocRec.getString("Street_Name").trim();
+                                            String NTown = ProvLocRec.getString("Town").trim();
+                                            String NCity = ProvLocRec.getString("City").trim();
+                                            String NZipCode = ProvLocRec.getString("Zipcode").trim();
+
+                                            ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
+                                        }
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                %>
+                
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
+                    <tbody>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <div id="ProvMsgBxOne">
+                                    
+                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
+                                            <!--div style="float: right; width: 65px;" -->
+                                                <%
+                                                    if(base64Profile != ""){
+                                                %>
+                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <!--/div></center-->
+                                                <%
+                                                    }else{
+                                                %>
+
+                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <!--/div></center-->
+
+                                                <%}%>
+                                            <!--/div-->
+                                            <div>
+                                                <p><%=ProvFirstName%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
+                                            </div>
+                                        </div>
+                                            
+                                    <%if(MsgPhoto.equals("")){%>
+                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
+                                    <%} else{ %>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
+                                    <%}%>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                    <%=ProvEmail%></p>
+                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                    <%=ProvTel%></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                    <%=ProvCompany%></p>
+                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                    <%=ProvAddress%></p>
+                            </td>
+                        </tr>
+                        <tr style="background-color: #eeeeee;">
+                            <td>
+                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            <%
+                            if(newsItems > 10)
+                                break;
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+            
                 }
             %>
             </div>
@@ -982,49 +1191,109 @@
                                 <table id="ProInfoTable" style="width: 100%; border-spacing: 0; box-shadow: 0; margin-left: 0; margin-bottom: 10px;">
                                 <tbody>
                                 <tr>
-                                    <td><b><p style="font-size: 20px; text-align: center;"><span><!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
-                                            <%=fullName%></span></p></b></td>
+                                    <td>
+                                        <b>
+                                            <p style="font-size: 20px; text-align: center;">
+                                                <span><!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
+                                                    <%=fullName%>
+                                                </span>
+                                            </p>
+                                            <p style="text-align: center;"><!--img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/-->
+                                                <%=Company%> 
+                                            </p>
+                                        </b>
+                                            <p style="text-align: center;">
+                                            <span style="color: goldenrod; font-size: 18px;">
+                                            <%
+                                                if(ratings ==5){
+
+                                            %> 
+                                            ★★★★★
+                                            <%
+                                                 }else if(ratings == 4){
+                                            %>
+                                            ★★★★☆
+                                            <%
+                                                 }else if(ratings == 3){
+                                            %>
+                                            ★★★☆☆
+                                            <%
+                                                 }else if(ratings == 2){
+                                            %>
+                                            ★★☆☆☆
+                                            <%
+                                                 }else if(ratings == 1){
+                                            %>
+                                            ★☆☆☆☆
+                                            <%}%></span>
+                                            </p>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><p style="margin-left: 0;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                        <%=Company%> <span style="color: goldenrod; font-size: 18px;;">
-                                       
-                                        <%
-                                            if(ratings ==5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(ratings == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(ratings == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(ratings == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(ratings == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%></span></p>
-                                         </td>
+                                    <td>
+                                        <div style="width: 95%; display: flex; flex-direction: row; justify-content: center;">
+                                            <div>
+                                                <a style="color: seagreen;" href="https://maps.google.com/?q=<%=fullAddress%>" target="_blank">
+                                                    <i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                   font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">map</span></i>
+                                                </a>
+                                                <!--img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                <=fullAddress-->
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="tel:<%=phoneNumber%>">
+                                                    <i class="fa fa-phone" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">call</span></i>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="mailto:<%=Email%>">
+                                                    <i class="fa fa-envelope" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">email</span></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!--tr>
+                                    <td>
+                                        <div style="width: 95%; display: flex; flex-direction: row; justify-content: space-between; max-width: 400px;">
+                                            <p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                                <=Email%>
+                                            </p>
+                                            <a style="color: seagreen;" href="mailto:<=Email%>">
+                                                <i class="fa fa-envelope" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">email</span></i>
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                        <%=Email%>, <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                        <%=phoneNumber %> </td>
+                                    <td>
+                                        <div style="width: 95%; display: flex; flex-direction: row; justify-content: space-between; max-width: 400px;">
+                                            <p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                                <=phoneNumber%>
+                                            </p>
+                                            <a style="color: seagreen;" href="tel:<=phoneNumber%>">
+                                                <i class="fa fa-phone" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">call</span></i>
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                        <%=fullAddress%> </td>
-                                </tr>
+                                    <td>
+                                        <div style="width: 95%; display: flex; flex-direction: row; justify-content: space-between; max-width: 400px;">
+                                            <p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                <=fullAddress.split(",")[0]%>
+                                            </p>
+                                            <a style="color: seagreen;" href="https://maps.google.com/?q=<=fullAddress%>" target="_blank">
+                                                <i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                               font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">map</span></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr-->
                                 <tr>
                                     <td>
                                         <%if(ReviewsList.size() != 0){%>
@@ -1222,23 +1491,80 @@
                                     <center><p style="color: tomato; text-align: center;">Hours Open</p>
                                     <table id="hoursTable" style="border-spacing: 0; box-shadow: 0; margin-left: 0;  width: 100%;">
                                         <tbody>
-                                        <tr><td style="padding: 0; background-color: #eeeeee;"><p style="color: blue;">Sunday: </p><%= SundayTime%></td>
-                                            <td style="padding: 0; background-color: #eeeeee;"><p style="color: blue;">Thursday: </p><%= ThursdayTime%></td></tr>
-                                        <tr><td style=""><p style="color: blue;">Monday: </p><%= MondayTime%></td>
-                                            <td style=""><p style="color: blue;">Friday: </p><%= FridayTime%></td></tr>
-                                        <tr><td style="background-color: #eeeeee;"><p style="color: blue;">Tuesday: </p><%= TuesdayTime%></td>
-                                            <td style="background-color: #eeeeee;"><p style="color: blue;">Saturday: </p><%= SaturdayTime%></td></tr>
-                                        <tr><td style=""><p style="color: blue;">Wednesday: </p><%= WednessdayTime%></td>
-                                            <td style=""></td></tr>
+                                        <tr>
+                                            <td style="padding: 0; background-color: #eeeeee;">
+                                                <p id="SunTime" style="color: blue;">Sunday: </p><%= SundayTime%>
+                                            </td>
+                                            <td style="padding: 0; background-color: #eeeeee;">
+                                                <p id="ThuTime" style="color: blue;">Thursday: </p><%= ThursdayTime%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="">
+                                                <p id="MonTime" style="color: blue;">Monday: </p><%= MondayTime%>
+                                            </td>
+                                            <td style="">
+                                                <p id="FriTime" style="color: blue;">Friday: </p><%= FridayTime%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color: #eeeeee;">
+                                                <p id="TueTime" style="color: blue;">Tuesday: </p><%= TuesdayTime%>
+                                            </td>
+                                            <td style="background-color: #eeeeee;">
+                                                <p id="SatTime" style="color: blue;">Saturday: </p><%= SaturdayTime%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="">
+                                                <p id="WedTime" style="color: blue;">Wednesday: </p><%= WednessdayTime%>
+                                            </td>
+                                            <td style="">
+                                            </td>
+                                        </tr>
                                         </tbody></center>
                                     </table>
+                                            
+                                    <script>
+                                            var todate_for_hours_open = new Date();
+                                            TodaySpan = document.createElement("span");
+                                            TodaySpan.innerHTML = '<i style="margin-left: 10px;" class="fa fa-long-arrow-left" aria-hidden="true"></i>';
+                                            //alert(todate_for_hours_open);
+                                                
+                                            var this_day_for_hours_open = todate_for_hours_open.getDay();;
+                                                
+                                            if(this_day_for_hours_open === 0){
+                                                document.getElementById("SunTime").style.color = "Red";
+                                                document.getElementById("SunTime").appendChild(TodaySpan);
+                                            }else if(this_day_for_hours_open === 1){
+                                                document.getElementById("MonTime").style.color = "Red";
+                                                document.getElementById("MonTime").appendChild(TodaySpan);
+                                            }else if(this_day_for_hours_open === 2){
+                                                document.getElementById("TueTime").style.color = "Red";
+                                                document.getElementById("TueTime").appendChild(TodaySpan);
+                                            }else if(this_day_for_hours_open === 3){
+                                                document.getElementById("WedTime").style.color = "Red";
+                                                document.getElementById("WedTime").appendChild(TodaySpan);
+                                            }else if(this_day_for_hours_open === 4){
+                                                document.getElementById("ThuTime").style.color = "Red";
+                                                document.getElementById("ThuTime").appendChild(TodaySpan);
+                                            }else if(this_day_for_hours_open === 5){
+                                                document.getElementById("FriTime").style.color = "Red";
+                                                document.getElementById("FriTime").appendChild(TodaySpan);
+                                            }else if(this_day_for_hours_open === 6){
+                                                document.getElementById("SatTime").style.color = "Red";
+                                                document.getElementById("SatTime").appendChild(TodaySpan);
+                                            }
+                                                
+                                                
+                                    </script>
                                         
                                 </div> 
                                         
                                      <div id="serviceslist" class="servicesList">
                                          
                                         <form action="FinishAppointment.jsp" method="POST">
-                                        <p style="color: tomato;">Select service(s) to continue<%=For%><%=FormattedAppointmentTime%></p>
+                                        <p style="color: tomato; text-align: center;">Select service(s) to continue<%=For%><%=FormattedAppointmentTime%></p>
                                      
                                         <% 
                                             
@@ -1263,10 +1589,16 @@
                                         
                                         %>
                                         
-                                            <p style="border-radius: 4px;; text-align: center; background-color: pink; padding: 5px;"><input style="float: left; " onclick="enableBkAppBtn(<%=Number%>)" type="checkbox" id="<%=CheckboxName%>" name="<%=CheckboxName%>" value="Checked" />
-                                                <label for="<%=CheckboxName%>"> <%=ServiceAndPrice%>,<span style="color: #000099;"> <%=Description%></span></label></p>
+                                            <p style="border-radius: 4px; text-align: center; background-color: bisque; padding: 5px;
+                                               display: flex; flex-direction: row; justify-content: space-between;">
+                                                <input style="min-width: 17px;" onclick="enableBkAppBtn(<%=Number%>)" type="checkbox" id="<%=CheckboxName%>" name="<%=CheckboxName%>" value="Checked" />
+                                                <label for="<%=CheckboxName%>"> <%=ServiceAndPrice%> - <span style="color: #000099;"> <%=Description%></span></label>
+                                                <label for="<%=CheckboxName%>"><i id="AddonPlus<%=Number%>" style="font-size: 30px; color: darkslateblue; margin-left: 10px;" class="fa fa-plus-square" aria-hidden="true"></i>
+                                                    <i id="AddonMinus<%=Number%>" style="font-size: 30px; color: red; margin-left: 10px; display: none;" class="fa fa-minus-square" aria-hidden="true"></i></label>
+                                            </p>
                                             <input type="hidden" name="<%=NameOfService%>" value="<%=providersList.get(i).SVCPRC.getService(j).trim()%>" />
                                             <input type="hidden" name="<%=PriceOfService%>" value="<%=providersList.get(i).SVCPRC.getPrice(j)%>" />
+                                            
                                             
                                         <%} //end of for loop for services and prices list items %>
                                         

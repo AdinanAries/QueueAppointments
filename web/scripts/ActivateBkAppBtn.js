@@ -28,14 +28,35 @@ function tryEnableBkAppBtn(){
 	}
 
 	
-}
+    }
+
+    function toggleAddon(number){
+                                                    
+        let AddonPlusElem = "AddonPlus" + number;
+        let AddonMinusElem = "AddonMinus" + number;
+        let AddonPlus = document.getElementById(AddonPlusElem);
+        let AddonMinus = document.getElementById(AddonMinusElem);
+                                        
+        if(AddonMinus.style.display === "none"){
+                                                        
+            AddonMinus.style.display = "block";
+            AddonPlus.style.display = "none";
+                                                        
+        }else if(AddonMinus.style.display === "block"){
+                                                        
+            AddonPlus.style.display = "block";
+            AddonMinus.style.display = "none";
+                                                        
+        }
+                                                    
+    }
 
 function enableBkAppBtn(number){
-	
+	toggleAddon(number);
 	thisCheckBoxName = "CheckboxOfServiceNo" + number;
 	
 	thisCheckBox = document.getElementById(thisCheckBoxName);
-	
+        
 	if(thisCheckBox.checked === true)
 		BookAppointmentBtn.disabled = false;
 		BookAppointmentBtn.style.backgroundColor = "darkslateblue";

@@ -33,6 +33,7 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -275,8 +276,9 @@
                             <td>
                                 <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
                                     <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
+                                <p style="color: seagreen; margin-top: 10px; margin-bottom: 10px;"><a style="color: seagreen;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                                        <%=ProvAddress.split(",")[0]%><i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darksalmon; color: black; padding: 5px; border-radius: 4px;"></i></a></p>
+                            
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">

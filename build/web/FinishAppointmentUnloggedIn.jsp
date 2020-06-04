@@ -24,6 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
@@ -371,7 +372,7 @@
                     }
                     </script>
                 
-                <cetnter><h4 style="padding: 10px; color: white; margin-bottom: 10px;"><%=Message%></h4></cetnter>
+                    <cetnter><h4 style="padding: 10px; color: white; margin-bottom: 10px;"><i style="color: orange;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=Message%></h4></cetnter>
                 <h3 style="margin-top: 20px; margin-bottom: 5px;">Your Spot Details Provided Below</h3>
                 <p style="color: seashell;"><span><%=ProviderFullName%> from <%=ProviderCompany%></span></p>
                 <center><table border="0">

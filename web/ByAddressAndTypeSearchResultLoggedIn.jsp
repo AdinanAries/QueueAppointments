@@ -37,6 +37,7 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <!-- ios support -->
         <!--link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" /-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
