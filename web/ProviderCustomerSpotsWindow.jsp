@@ -557,10 +557,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateAppTabMobile()" id="AppointmentsTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkblue; font-weight: bolder; width: 33.3%;  background-color: white; border-bottom: 2px solid darkblue;">
-                                                        Your Spots
+                                                        <i class="fa fa-list" aria-hidden="true"></i> Your Spots
                                                     </td>
                                                     <td onclick="activateHistoryMobile()" id="HistoryTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkgrey; background-color: white; font-weight: bolder; width: 33.3%;">
-                                                        History
+                                                        <i class="fa fa-history" aria-hidden="true"></i> History
                                                     </td>
                                                     <td style="display: none;" onclick="activateFavTabMobile()" id="FavoritesTab" style="text-align: center; padding: 5px; cursor: pointer; background-color: white; width: 33.3%;">
                                                        
@@ -579,7 +579,7 @@
                                         
                                 <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
                                     
-                                    <p style="color: white; margin-top: 10px;">Today's Spots</p>
+                                    <p style="color: darkblue; margin-top: 10px;">Today's Spots</p>
                                    
                                     <script>
                                     
@@ -773,7 +773,7 @@
                                             
                                     %>
                                     
-                                    <div style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: #ffc700; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
+                                    <div style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
                                      
                                     <%
                                         if(Base64ProvPic != ""){
@@ -785,21 +785,39 @@
                                         }
                                     %>
                                        
+                                        <p style='display: flex; flex-direction: row; justify-content: space-between; padding: 5px 10px; margin-bottom: 5px; font-weight: bolder;'>
+                                        <span></span>
+                                        <span><i style='color: orange;' class="fa fa-info-circle" aria-hidden="true"> </i> 
+                                        its your turn</span> 
+                                        <i style='color: #4ed164;' class="fa fa-check" aria-hidden="true"></i>
+                                    </p>
+                                    
                                         <form action="EachSelectedProviderLoggedIn.jsp" method="POST">
                                                 <input type='hidden' name='UserID' value='<%=ProviderID%>'/>
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
-                                                <P>This spot with <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>"/>
-                                                </span><span> started at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
+                                                <p style='color: darkblue; font-weight: bolder;'>This spot with <span style = "color: blue;">
+                                                    <input style="background-color: darkslateblue; padding: 5px; border-radius: 5px; margin: 5px; font-weight: bolder;  color: white; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>"/>
+                                                    </span> started at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
-                                                <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span style = "color: blue;"><input style="background-color: #ffc700; color: blue; border: 0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
+                                                
                                             
                                         </form>
-                                        <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                            <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
-                                        <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
+                                        
+                                        <p style='margin-top: 10px;'>
+                                            <img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                            <span><%= ProviderCompany%></span>
+                                        </p>
+                                        
+                                        <p>
+                                            <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                            <%= ProviderEmail %>
+                                        </p>
+                                        <p>
+                                            <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %>
+                                        </p>
+                                        <p style="color: darkgray; text-align: center; margin-top: 10px;">- <%=AppointmentReason%> -</p>
                                         <p></P>
                                         
                                     </div>
@@ -831,22 +849,37 @@
                                     %>
                                         
                                         
+                                        <p style='display: flex; flex-direction: row; justify-content: space-between; padding: 5px 10px; font-weight: bolder;'>
+                                        <span></span>
+                                        <span><i style='color: orange;' class="fa fa-info-circle" aria-hidden="true"> </i> 
+                                        waiting on line</span> 
+                                        <i style='color: green;' class="fa fa-spinner" aria-hidden="true"></i>
+                                    </p>
+                                    
                                         <form action="EachSelectedProviderLoggedIn.jsp" method="POST">
                                                 <input type='hidden' name='UserID' value='<%=ProviderID%>'/>
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
-                                                <P>You are on <span style = "color: blue;"><input style="background-color: white; color: blue; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>'s"/>
-                                                </span><span> line at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
-                                        
-                                                <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span style = "color: blue;"><input style="background-color: white; color: blue; border: 0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderCompany%>"/></span></span></p>
-                                            
+                                                <p style="font-weight: bolder; color: darkblue;">You are on <span style = "color: blue;">
+                                                    <input style="color: white; padding: 5px; border-radius: 5px; border:0; font-weight: bolder; margin: 5px; background-color: darkslateblue;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>'s"/> <i class='fa fa-arrow-right' aria-hidden='true'></i>
+                                                    </span> line at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span>
+                                                </p>
                                         </form>
-                                        <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                            <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
-                                        <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
-                                        <p></P>
+                                                
+                                        <p style="padding-top: 10px;">
+                                            <img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                            <%=ProviderCompany%>
+                                        </p>
+                                        <p>
+                                            <img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                            <%= ProviderEmail.trim() %>
+                                        </p>
+                                        <p>
+                                            <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
+                                            <%= ProviderTel %>
+                                        </p>
+                                        <p style="color: darkgray; text-align: center; margin-top: 10px;">- <%=AppointmentReason%> -</p>
                                         
                                         <form style=" display: none;" id="changeBookedAppointmetForm<%=JString%>" class="changeBookedAppointmentForm" name="changeAppointment">
                                             
@@ -1203,13 +1236,13 @@
                                     
                                     %>
                                     
-                                    <center><p style="background-color: red; color: white; margin-top: 30px; margin-bottom: 30px;">You don't have any current spots</p></center>
+                                    <center><p style="color: white; margin-top: 30px; margin-bottom: 30px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> You don't have any current spots</p></center>
                                     
                                     <%} //end of if block%>
                                     
                                     <!--------------------------------------------------------------------------------------------------------------------------------------------->
                                     
-                                    <p style="color: white; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
+                                    <p style="color: darkblue; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
                                     
                                     <%
                                         
@@ -1287,22 +1320,42 @@
                                             }
                                         %>
                                         
+                                        <p style='display: flex; flex-direction: row; justify-content: space-between; padding: 5px 10px; font-weight: bolder;'>
+                                            <span></span>
+                                            <span><i style='color: orange;' class="fa fa-info-circle" aria-hidden="true"> </i> 
+                                            not a today appointment</span> 
+                                            <i style='color: green;' class="fa fa-bed" aria-hidden="true"></i>
+                                        </p>
+                                        
                                         <form action="EachSelectedProviderLoggedIn.jsp" method="POST">
                                             
                                             <input type='hidden' name='UserID' value='<%=ProviderID%>'/>
                                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                            <P>You will be on <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit"  value="<%= ProviderName%>'s" /></span><span> line</p>
-                                            <p>on <span id="FutureDateSpan<%=QString%>" style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span id="FutureTimeSpan<%=QString%>" style = "color: red;"> <%= TimeToUse%></span></p>
-                                            <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                <span style = "color: blue;"><input style="background-color: white; border: 0; margin: 0; font-weight: bolder; color: blue;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="<%= ProviderCompany%>" /></span></span></p>
-                                        
+                                            <P style='font-weight: bolder; color: darkblue;'>
+                                                You will be on <span style = "color: blue;">
+                                                    <input style="background-color: darkslateblue; border: 0; border-radius: 4px; margin: 5px; font-weight: bolder; color: white; padding: 5px;" type="submit"  value="<%= ProviderName%>'s" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
+                                                </span> line
+                                            </p>
+                                            <p style='color: blue; font-weight: bolder; text-align: center;'><i class="fa fa-calendar" aria-hidden="true"></i> <span id="FutureDateSpan<%=QString%>" style ="color: red;"> <%= AppointmentFormattedDate%></span> <i class="fa fa-clock-o" aria-hidden="true"></i> <span id="FutureTimeSpan<%=QString%>" style = "color: red;"> <%= TimeToUse%></span></p>
+                                            
                                         </form>
+                                            
+                                        <p style='margin-top: 15px;'>
+                                            <img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                            <span><%= ProviderCompany%></span>
+                                        </p>
                                                 
-                                        <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                            <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
-                                        <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
+                                        <p>
+                                            <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
+                                            <%= ProviderEmail %>
+                                        </p>
+                                        <p>
+                                            <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %>
+                                        </p>
+                                        <p style="color: darkgray; text-align: center; margin-top: 10px;">- <%=AppointmentReason%> -
+                                        </p>
                                         
                                         <form style=" display: none;" id="changeFutureAppointmetForm<%=QString%>" class="changeBookedAppointmentForm" name="changeAppointment">
                                             
@@ -1659,7 +1712,7 @@
                                     
                                     %>
                                     
-                                    <center><p style="background-color: red; color: white; margin-top: 30px; margin-bottom: 30px;">You don't have any future spots</p></center>
+                                    <center><p style="color: white; margin-top: 30px; margin-bottom: 30px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> You don't have any future spots</p></center>
                                     
                                     <%} //end of if block%>
                                    
@@ -1668,7 +1721,7 @@
                                         
                                 <div id="serviceslist" class="AppHistoryDiv" style="border-top: 0;">
                                     
-                                    <p style="color: white; margin: 10px;">Your Past Spots</p>
+                                    <!--p style="color: white; margin: 10px;">Your Past Spots</p-->
                                     
                                     <% 
                                         
@@ -2051,7 +2104,7 @@
                                     
                                     %>
                                     
-                                    <center><p style="background-color: red; color: white; margin-top: 30px; margin-bottom: 30px;">Your history is empty</p></center>
+                                    <center><p style="color: white; margin-top: 30px; margin-bottom: 30px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> Your history is empty</p></center>
                                     
                                     <%} //end of if block%>     
                                     

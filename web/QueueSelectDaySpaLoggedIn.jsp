@@ -1880,7 +1880,7 @@
                 <form name="GetMoreRecords" action="QueueSelectDaySpaLoggedIn.jsp">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
-                    <input style="border: 0; color: white; background-color: #6699ff;" type="submit" onclick="document.getElementById('PageLoader').style.display = 'block';" value="See More..." name="MoreRecBtn" />
+                    <input style="border: 0; color: white; background: none;" type="submit" onclick="document.getElementById('PageLoader').style.display = 'block';" value="See More..." name="MoreRecBtn" />
                 </form>
                     
                 <%}%>

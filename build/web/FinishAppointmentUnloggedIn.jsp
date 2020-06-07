@@ -32,6 +32,13 @@
         <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        
+        <!-- Zebra Dialog CSS -->
+        <link rel="stylesheet" href="dialog_dist/css/flat/zebra_dialog.min.css" type="text/css">
+
+        <!-- Zebra Dialog JS -->
+        <script src="dialog_dist/zebra_dialog.min.js"></script>
         
         <!--script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
@@ -372,7 +379,7 @@
                     }
                     </script>
                 
-                    <cetnter><h4 style="padding: 10px; color: white; margin-bottom: 10px;"><i style="color: orange;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=Message%></h4></cetnter>
+                    <cetnter><h4 style="padding: 10px; color: white; margin-bottom: 10px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=Message%></h4></cetnter>
                 <h3 style="margin-top: 20px; margin-bottom: 5px;">Your Spot Details Provided Below</h3>
                 <p style="color: seashell;"><span><%=ProviderFullName%> from <%=ProviderCompany%></span></p>
                 <center><table border="0">
@@ -513,11 +520,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <fieldset class="loginInputFld">
+                                    <!--fieldset class="loginInputFld">
                                         <legend>Enter your middle name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="SUPmiddleName" placeholder='middlename'  type="text" name="middleName" value=" " size="34"/>
-                                    </fieldset>
+                                        <span class="fa fa-user"></span-->
+                                        <input id="SUPmiddleName" placeholder='middlename'  type="hidden" name="middleName" value=" " size="34"/>
+                                    <!--/fieldset-->
                                 </td>
                             </tr>
                             <tr>
@@ -702,7 +709,34 @@
         </div>
                 
     </div>
-                
+    <script>
+        $(document).ready(function() {
+            new $.Zebra_Dialog(
+                "We are not responsible for any unsatisfied service from a business on our platform. " +
+                "<br/><br/>However, we are committed to making sure that you get the best service through our platform. " +
+                "<br/><br/>Rating businesses on our platform will help us disassociate with bad businesses.",
+                {
+                    type: "warning",
+                    title: "Disclaimer",
+                    //buttons: ["Yes", "No", "Help"],
+                    buttons: ["Continue"],
+                    onClose: function(caption) {
+
+                        // notice that we use the button's label to determine which button was clicked
+                        // "caption" will be empty when the dialog box is closed by pressing ESC, by clicking the
+                        // dialog box's close button, or by clicking the overlay
+                        /*new $.Zebra_Dialog((caption !== "" ? "\"" + caption + "\"" : "nothing") + " was clicked", {
+                            auto_close: 2000,
+                            buttons: false,
+                            modal: false,
+                            position: ["center", "center"]
+                        });*/
+
+                    }
+                }
+            );
+        });
+    </script>
     </body>
     
     <script src="scripts/script.js"></script>

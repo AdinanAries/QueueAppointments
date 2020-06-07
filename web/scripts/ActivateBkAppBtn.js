@@ -22,7 +22,7 @@ function tryEnableBkAppBtn(){
 		}else{
 			BookAppointmentBtn.disabled = true;
 			BookAppointmentBtn.style.backgroundColor = "darkgrey";
-			SVCSelectStatus.innerHTML = "You must select a service to continue";
+			SVCSelectStatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle' style='color: red;'></i> You must select a service to continue";
 		}
 	
 	}

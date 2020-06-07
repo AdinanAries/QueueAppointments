@@ -3416,7 +3416,8 @@
                                             <p style="text-align: center; color: #000099; margin: 5px; font-weight: bolder;">Change Your Spots Intervals Below</p>
                                             
                                             <center><div>
-                                                <p style="color: red;"><select style="border: 0; text-align: right; background-color: darkslateblue; color: white; padding: 5px;" name="SpotsIntervals">
+                                                <p style="margin: auto; width: fit-content; text-align: right; background-color: darkslateblue; color: white; padding: 5px; padding-bottom: 0; border-radius: 5px;">
+                                                    <select style="border: 0; background-color: darkslateblue; color: white;" name="SpotsIntervals">
                                                         <option value="<%=IntervalsValue%>"><%=IntervalsValue%> minutes</option>
                                                         <option value="15">15 minutes</option>
                                                         <option value="30">30 minutes</option>
@@ -3430,7 +3431,9 @@
                                                         <option value="240">4 hours</option>
                                                         <option value="270">4 hours, 30 minutes</option>
                                                         <option value="300">5 hours</option>
-                                                    </select></p>
+                                                    </select>
+                                                    <i style="" class="fa fa-caret-down" aria-hidden="true"></i>
+                                                </p>
 
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
@@ -3451,10 +3454,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; cursor: pointer; width: 50%; color: darkblue; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
-                                                        Current Line
+                                                        <i class="fa fa-list" aria-hidden="true"></i> Current Line
                                                     </td>
                                                     <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; cursor: pointer;  color: #8b8b8b; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
-                                                        History
+                                                        <i class="fa fa-history" aria-hidden="true"></i> History
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -3572,13 +3575,44 @@
                                 </div></center>
                         <%
                             }
+                            
+                            if(w == 0){
+                            
                         %>
                    
-                                <center><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
-                                <span style="color: red;"><%=Name%></span> at <span id="ApptTimeSpan<%=WString%>" style="color: red;"><%=TimeToUse%></span></p></center>
-                                <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
-                                    <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
-                                    <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
+                                <p style='display: flex; flex-direction: row; justify-content: space-between; padding: 5px 10px; margin-bottom: 5px; font-weight: bolder;'>
+                                        <span></span>
+                                        <span><i style='color: orange;' class="fa fa-info-circle" aria-hidden="true"> </i> 
+                                        your current customer</span> 
+                                        <i style='color: #4ed164;' class="fa fa-check" aria-hidden="true"></i>
+                                </p>
+                                
+                        <%
+                            } else {
+                        %>
+                        
+                                <p style='display: flex; flex-direction: row; justify-content: space-between; padding: 5px 10px; margin-bottom: 5px; font-weight: bolder;'>
+                                        <span></span>
+                                        <span><i style='color: orange;' class="fa fa-info-circle" aria-hidden="true"> </i> 
+                                        customer waiting on line</span> 
+                                        <i style='color: green;' class="fa fa-spinner" aria-hidden="true"></i>
+                                </p>
+                        <%
+                            }
+                        %>
+                        
+                                <p style='text-align: center;'>
+                                    <img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                    <span style="color: red;"><%=Name%></span> at <span id="ApptTimeSpan<%=WString%>" style="color: red;"><%=TimeToUse%></span>
+                                </p>
+                                <p style='text-align: center;'>
+                                    <img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>
+                                </p>
+                                <p style='text-align: center;'>
+                                   <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%>
+                                </p>
+                                <p style="text-align: center; color: darkgrey; margin: 10px;">- <%=AppointmentReason%> -
+                                </p>
                               
                                     <center>
                                         <input id="PIDCAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
@@ -3861,8 +3895,8 @@
                         </tr>
                         
                         <script>
-                            if(document.getElementById("ApptTD0"))
-                                document.getElementById("ApptTD0").style.backgroundColor = "#ffc700";
+                            //if(document.getElementById("ApptTD0"))
+                                //document.getElementById("ApptTD0").style.backgroundColor = "#ffc700";
                         </script>
                         
                         <%} //end of for loop
@@ -3871,7 +3905,7 @@
                         
                         %>
                         
-                        <center><p style="color: white; background-color: red; margin-bottom: 30px; margin-top: 30px; max-width: 600px;">No Current Line</p></center>
+                        <center><p style="color: white; margin-bottom: 30px; margin-top: 30px; max-width: 600px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Current Line</p></center>
                         <%} //end of if block%>
                     </tbody>
                     </table></center>
@@ -3953,12 +3987,31 @@
                         <%
                             }
                         %>
-                            <center><p>Date: <span id="FutureDateSpan<%=WString%>" style="color: red;"><%=DateOfAppointment%></span>
-                            <center><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
-                                <span style="color: red;"><%=Name%></span> at <span id="FutureTimeSpan<%=WString%>" style="color: red;"><%=TimeToUse%></span></p></center>
-                                <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
-                                    <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
-                                    <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
+                        
+                        <p style='display: flex; flex-direction: row; justify-content: space-between; padding: 5px 10px; font-weight: bolder;'>
+                            <span></span>
+                            <span><i style='color: orange;' class="fa fa-info-circle" aria-hidden="true"> </i> 
+                                not a today appointment</span> 
+                            <i style='color: green;' class="fa fa-bed" aria-hidden="true"></i>
+                        </p>
+                                        
+                        <p style='text-align: center; margin-top: 10px;'>
+                            <i class="fa fa-calendar" aria-hidden="true"> </i>
+                            <span id="FutureDateSpan<%=WString%>" style="color: red;"><%=DateOfAppointment%> </span>
+                            <i class="fa fa-clock-o" aria-hidden="true"> </i>
+                            <span id="FutureTimeSpan<%=WString%>" style="color: red;"><%=TimeToUse%></span>
+                        </p>
+                            <p style='text-align: center; margin-top: 10px;'>
+                                <img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                <span style="color: red;"><%=Name%></span> 
+                            </p>
+                            <p style='text-align: center;'>
+                                <img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>
+                            </p>
+                            <p style='text-align: center;'>
+                                <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%>
+                            </p>
+                                    <p style="text-align: center; color: darkgrey; margin: 10px;">- <%=AppointmentReason%> -</p>
                                     
                                     <center>
                                         <input id="PIDFAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
@@ -4249,7 +4302,7 @@
                         
                         %>
                         
-                        <center><p style="color: white; background-color: red; margin-bottom: 30px; margin-top: 30px; max-width: 600px;">No Future Line Spots</p></center>
+                        <center><p style="color: white; margin-bottom: 30px; margin-top: 30px; max-width: 600px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Future Line Spots</p></center>
                         <%} //end of if block%>
                     </tbody>
                     </table></center>
@@ -4549,7 +4602,7 @@
                         
                         %>
                         
-                        <center><p style="color: white; background-color: red; margin-bottom: 30px; margin-top: 30px; max-width: 600px;">You have no history</p></center>
+                        <center><p style="color: white; margin-bottom: 30px; margin-top: 30px; max-width: 600px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> You have no history</p></center>
                         <%} //end of if block%>
                     </tbody>
                     </table></center>
@@ -5037,31 +5090,7 @@
                                 <div class="proinfo" style="padding-top:5px; margin-top:5px; padding-bottom: 5px; margin-bottom:5px;">
                             
                                     <p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; padding-top: 75px; text-align: center;"><%=FullName%></p>
-                                    <p style="font-size: 20px; color: goldenrod; font-weight: bolder; text-align: center; margin-bottom: 10px;">
-                                       
-                                        <%
-                                            if(Ratings ==5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(Ratings == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(Ratings == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(Ratings == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(Ratings == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%>
-                                                </p>
+                                    
                                     <center><table style="border-spacing: 0;">
                                         
                                             <tr><td><p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
@@ -5077,9 +5106,9 @@
                                     
                                 </div>
                                         
-                                        <center><p onclick="toggleShowEditPerInfoDiv();" style="cursor: pointer; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 5px;">
-                                                <img src="icons/icons8-pencil-20.png" width="20" height="20" alt=""/>
-                                                <sup style="color: #000099;">Edit Your Personal Information</sup>
+                                        <center><p onclick="toggleShowEditPerInfoDiv();" style="color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; cursor: pointer; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 10px; margin-top: 10px;">
+                                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                                <small style="color: white;">Edit Your Personal Information</small>
                                             </p></center>
                                         
                                         <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin-bottom: 10px;">
@@ -5225,10 +5254,7 @@
                                                     
                                                 </script>
                                         </div></center>
-                                                
-                                            
-                                        <p style='text-align: center; margin-bottom: 5px;'>Recent Customer Review</p>
-                
+                                         
     <%
                                         for(int x = 0; x < ReviewsList.size(); x++){
 
@@ -5293,28 +5319,62 @@
                                             }catch(Exception e){
                                                 e.printStackTrace();
                                             }
-
+                                            
     %>
 
-                                            <center><div style='background-color: black; padding: 1px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 5px; width: 98%; max-width: 452px; margin-left: 0;'>
+                                            <center><div style='background-color: black; padding: 1px; padding-bottom: 10px; margin-bottom: 5px; width: 98%; max-width: 452px; margin-left: 0; margin-bottom: 5px;'>
+                                                    
+                                                    <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
+                                                        <span style="color: tomato;">Overall Rating: </span>
+                                                        <span style="font-size: 20px; margin-left: 10px;">
+                                                        <%
+                                                            if(Ratings ==5){
 
+                                                        %> 
+                                                        ★★★★★ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Great job</span></i>
+                                                        <%
+                                                             }else if(Ratings == 4){
+                                                        %>
+                                                        ★★★★☆ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Good job</span></i>
+                                                        <%
+                                                             }else if(Ratings == 3){
+                                                        %>
+                                                        ★★★☆☆ 
+                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Average rating</span></i>
+                                                        <%
+                                                             }else if(Ratings == 2){
+                                                        %>
+                                                        ★★☆☆☆ 
+                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Bad rating</span></i>
+                                                        <%
+                                                             }else if(Ratings == 1){
+                                                        %>
+                                                        ★☆☆☆☆   
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Worst rating</span></i>
+                                                        <%}%>
+                                                        </span>
+                                                        
+                                                    </p>
+                                                    
+                                                    <p style='text-align: center; color: #8b8b8b; margin: 10px 0; margin-top: 20px;'>Recent Customer Review</p>
+                                                <div style="display: flex; flex-direction: row;"> 
                                                 <%
                                                     if(Base64Image == ""){
                                                 %> 
 
-                                                <center><img style="border-radius: 5px; float: left; width: 15%;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
-
-                                                    </center>
+                                                    <img style="border-radius: 100%; margin-left: 5px; width: 50px; height: 50px;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
 
                                                 <%
                                                     }else{
                                                 %>
-                                                        <img  class="fittedImg" style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+                                                    <img  class="fittedImg" style="border-radius: 100%; margin-left: 5px; width: 50px; height: 50px;" src="data:image/jpg;base64,<%=Base64Image%>"/>
 
                                                 <%
                                                     }
                                                 %>
-                                            <center><div style='float: right; width: 84%;'>                 
+                                            <center><div style="margin-left: 10px;">                 
                                             <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=ClientFullName%></p>
 
                                             <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: gold; font-size: 18px;">
@@ -5348,14 +5408,12 @@
                             <%
                                 if(!ReviewMessage.equals("")){
                             %>
-                            <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
+                                <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
 
-                            <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
+                                <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
                             <%}%>
-                            </div></center>
-
-                            <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>' onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
-
+                                <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>' onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer; padding-top: 10px;'>See More...</p></a>
+                            </div>
                         </div></center>
 
                         <%}%>
@@ -5430,13 +5488,13 @@
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateServicesTab()" id="Services" style="text-align: center; padding: 10px; cursor: pointer; font-weight: bolder;">
-                                                        Services
+                                                        <i class="fa fa-bars" aria-hidden="true"></i> Services
                                                     </td>
                                                     <td onclick="activateHourOpenTab()()" id="HoursOpen" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
-                                                        Settings
+                                                        <i class="fa fa-sliders" aria-hidden="true"></i> Settings
                                                     </td>
                                                     <td onclick="activateClientsTab()" id="Clients" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
-                                                        Clients
+                                                        <i class="fa fa-address-card" aria-hidden="true"></i> Clients
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -5486,39 +5544,51 @@
                                                  
                                                 <center><form style=" display: none; border-top: 1px solid darkgray; margin-top: 5px; width: 100%; max-width: 600px;" id="changeServiceForm<%=IString%>" class="changeServiceForm" name="EditService">
                                                  
-                                                        <p style="color: red; margin: 5px;">Change this service</p>
-                                                        
-                                                 <center><p style="text-align: left; max-width: 500px;">Service Name: <input id="EditServiceName<%=i%>" style="background-color: white;" type="text" name="SerivceNameFld" value="<%=ServiceName%>" /></p></center>
+                                                <p style="color: red; margin: 5px;">Change this service</p>
+                                                     
+                                                <div style="width: fit-content; margin: auto;">
+                                                    
+                                                    <p style="text-align: left; max-width: 500px;">
+                                                        <span style="color: darkblue;">Service Name:</span> 
+                                                        <input id="EditServiceName<%=i%>" style="background-color: white;" type="text" name="SerivceNameFld" value="<%=ServiceName%>" />
+                                                    </p>
                                                  
-                                                 <center><p style="text-align: left; max-width: 500px;">Price:
-                                                         $<input id="EditPriceDD<%=i%>" onclick="checkMiddlenumberFuncEditPriceDD();" onkeydown="checkMiddlenumberFuncEditPriceDD();" type="text" style="width: 35px; border: 0; background-color: white; text-align: right; margin-right: 0; margin-left: 0;" placeholder="00" name="ServicePriceFldDD" value="" />.<input id="EditPriceCC<%=i%>" onclick="checkMiddleEditPriceCC();" onkeydown="checkMiddleEditPriceCC();" type="text" style="text-align: left; margin-left: 0; width: 35px; border:0; background-color: white;" placeholder="00" name="ServicePriceFldCC" value="" />
-                                                         </p></center>
-                                                 <center><p style="text-align: left; max-width: 500px;">Duration: <select id="DurationFldHH<%=i%>" name="DurationFldHH">
-                                                     <option>0</option>
-                                                     <option>1</option>
-                                                     <option>2</option>
-                                                     <option>3</option>
-                                                     <option>4</option>
-                                                     <option>5</option>
-                                                 </select> hour(s) -
-                                                 <select id="DurationFldMM<%=i%>" name="DurationFldMM">
-                                                     <option>15</option>
-                                                     <option>20</option>
-                                                     <option>25</option>
-                                                     <option>30</option>
-                                                     <option>35</option>
-                                                     <option>40</option>
-                                                     <option>45</option>
-                                                     <option>50</option>
-                                                     <option>55</option>
-                                                     <option>0</option>
-                                                 </select> minute(s)</p></center>
+                                                    <p style="text-align: left; max-width: 500px;">
+                                                        <span style="color: darkblue;">Price:</span>
+                                                        $<input id="EditPriceDD<%=i%>" onclick="checkMiddlenumberFuncEditPriceDD();" onkeydown="checkMiddlenumberFuncEditPriceDD();" type="text" style="width: 35px; border: 0; background-color: white; text-align: right; margin-right: 0; margin-left: 0;" placeholder="00" name="ServicePriceFldDD" value="" />.<input id="EditPriceCC<%=i%>" onclick="checkMiddleEditPriceCC();" onkeydown="checkMiddleEditPriceCC();" type="text" style="text-align: left; margin-left: 0; width: 35px; border:0; background-color: white;" placeholder="00" name="ServicePriceFldCC" value="" />
+                                                    </p>
+                                                 
+                                                    <p style="text-align: left; max-width: 500px;">
+                                                        <span style="color: darkblue;">Duration:</span> 
+                                                        <select style="background-color: #d9e8e8; color: black; border: none; padding: 5px;" id="DurationFldHH<%=i%>" name="DurationFldHH">
+                                                            <option value="0">0 hour(s)</option>
+                                                            <option value="1">1 hour(s)</option>
+                                                            <option value="2">2 hour(s)</option>
+                                                            <option value="3">3 hour(s)</option>
+                                                            <option value="4">4 hour(s)</option>
+                                                            <option value="5">5 hour(s)</option>
+                                                        </select> 
+                                                            -
+                                                        <select style="background-color: #d9e8e8; color: black; border: none; padding: 5px;" id="DurationFldMM<%=i%>" name="DurationFldMM">
+                                                            <option value="15">15 minute(s)</option>
+                                                            <option value="20">20 minute(s)</option>
+                                                            <option value="25">25 minute(s)</option>
+                                                            <option value="30">30 minute(s)</option>
+                                                            <option value="35">35 minute(s)</option>
+                                                            <option value="40">40 minute(s)</option>
+                                                            <option value="45">45 minute(s)</option>
+                                                            <option value="50">50 minute(s)</option>
+                                                            <option value="55">55 minute(s)</option>
+                                                            <option value="0">0 minute(s)</option>
+                                                        </select> 
+                                                    </p>
                                                  
                                                  <!--center><input style="background-color: white; margin: 5px;" type="text" name="" value="<=ServiceDuration%>" /-->
-                                                 <center>
-                                                     <p style="text-align: left; max-width: 500px;"><textarea id="ServiceNotes<%=i%>" name="DescriptionFld" rows="4" cols="40"><%=ServiceDescription%>
-                                                     </textarea>
-                                                     </p></center>
+                                                 
+                                                    <p style="text-align: left; max-width: 500px;">
+                                                        <textarea id="ServiceNotes<%=i%>" name="DescriptionFld" rows="4" cols="40"><%=ServiceDescription%>
+                                                        </textarea>
+                                                     </p>
                                                      
                                                      <script>
                                                         
@@ -5594,7 +5664,7 @@
                                                      
                                                  <input id="ServiceID<%=i%>" type="hidden" name="ServiceID" value="<%=ServiceID%>" />
                                                  <p style="text-align: center;"><input id="EditServiceBtn<%=i%>" style="background-color: darkslateblue; border: none; color: white; border-radius: 4px; padding: 5px;" type="button" value="change" name="<%=IString%>editService" /></p>
-                                                 
+                                        </div>
                                                <script>
                                              
                                                $(document).ready(function() {                        
@@ -5605,8 +5675,8 @@
                                                         var PriceCC = document.getElementById("EditPriceCC<%=i%>").value;
                                                         var DurationHHFld = document.getElementById("DurationFldHH<%=i%>");
                                                         var DurationMMFld = document.getElementById("DurationFldMM<%=i%>");
-                                                        var DurationHH = DurationHHFld.options[DurationHHFld.selectedIndex].text;
-                                                        var DurationMM = DurationMMFld.options[DurationMMFld.selectedIndex].text;
+                                                        var DurationHH = DurationHHFld.options[DurationHHFld.selectedIndex].value;
+                                                        var DurationMM = DurationMMFld.options[DurationMMFld.selectedIndex].value;
                                                         var ServiceNotes = document.getElementById("ServiceNotes<%=i%>").innerHTML;
                                                         var ServiceID = document.getElementById("ServiceID<%=i%>").value;
                                                         
@@ -5704,8 +5774,8 @@
 
                                 %>
                                 
-                                <p id='noServStatus1'>Your Customers cannot book appointment with you if you don't have any service(s) in your services list</p>
-                                <p id='noServStatus2'>Click add service sign below to add new service</p>
+                                <p id='noServStatus1' style="padding: 5px; color: darkblue;"><i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> Your Customers cannot book appointment with you if you don't have any service(s) in your services list</p>
+                                <p id='noServStatus2' style="padding: 10px;">Click add service sign below to add new service</p>
                                 
                                 
                                 
@@ -5734,40 +5804,49 @@
                                         </tbody>
                                      </table></center>
                                      
-                                     <center><p style="color: white; width: fit-content; padding: 5px; background-color: darkslateblue; border-radius: 4px; margin: auto; margin-top: 5px; margin-bottom: 5px;"><img style="cursor: pointer; background-color: white; border-radius: 4px;" onclick = "toggleHideAddServiceDiv()" src="icons/icons8-add-new-40.png" width="25" height="25" alt="icons8-add-new-40"/>
+                                     <center><p onclick = "toggleHideAddServiceDiv()" style="color: white; cursor: pointer; width: fit-content; padding: 5px; background-color: darkslateblue; border-radius: 4px; margin: auto; margin-top: 5px; margin-bottom: 5px;"><img style="background-color: white; border-radius: 4px;" src="icons/icons8-add-new-40.png" width="25" height="25" alt="icons8-add-new-40"/>
                                              <sup>Add Service</sup></p></center>
                                      
                                      <center><div style=" display: none; margin-bottom: 5px;" id="addServiceDiv">
                                              
-                                     <form name="addServices" style="padding-top: 5px; margin-left: 5px;">
+                                     <form name="addServices" style="padding-top: 5px; margin-left: 5px; text-align: center;">
                                          
                                          <p style="color: tomato; padding: 5px;">Add new service</p>
                                          
-                                                 <center><p style="text-align: left; max-width: 500px;">Service Name: <input id="AddServiceName" style="background-color: white;" type="text" name="SerivceNameFld" value="" /></p></center>
+                                            <div style="width: fit-content; margin: auto;">
+                                                <p style="text-align: left; max-width: 500px;">
+                                                    <span style="color: darkblue;">Service Name:</span> 
+                                                    <input id="AddServiceName" style="background-color: white;" type="text" name="SerivceNameFld" value="" />
+                                                 </p>
                                                  
-                                                 <center><p style="text-align: left; max-width: 500px;">Price:
-                                                         $<input onclick="checkMiddlenumberFuncNewPriceDD();" onkeydown="checkMiddlenumberFuncNewPriceDD();" id="NewPriceDD" type="text" style="width: 35px; border: 0; background-color: white; text-align: right; margin-right: 0; margin-left: 0;" placeholder="00" name="ServicePriceFldDD" value="" />.<input onclick="checkMiddlenumberFunctionNewPriceCC();" onkeydown="checkMiddlenumberFunctionNewPriceCC();" id="NewPriceCC" type="text" style="text-align: left; margin-left: 0; width: 35px; border:0; background-color: white;" placeholder="00" name="ServicePriceFldCC" value="" />
-                                                         </p></center>
-                                                 <center><p style="text-align: left; max-width: 500px;">Duration: <select id="DurationFldHHAddSVC" name="DurationFldHH">
-                                                     <option>0</option>
-                                                     <option>1</option>
-                                                     <option>2</option>
-                                                     <option>3</option>
-                                                     <option>4</option>
-                                                     <option>5</option>
-                                                 </select> hour(s) -
-                                                 <select id="DurationFldMMAddSVC" name="DurationFldMM">
-                                                     <option>15</option>
-                                                     <option>20</option>
-                                                     <option>25</option>
-                                                     <option>30</option>
-                                                     <option>35</option>
-                                                     <option>40</option>
-                                                     <option>45</option>
-                                                     <option>50</option>
-                                                     <option>55</option>
-                                                     <option>0</option>
-                                                 </select> minute(s)</p></center>
+                                                 <p style="text-align: left; max-width: 500px;">
+                                                    <span style="color: darkblue;">Price:</span> 
+                                                    $<input onclick="checkMiddlenumberFuncNewPriceDD();" onkeydown="checkMiddlenumberFuncNewPriceDD();" id="NewPriceDD" type="text" style="width: 35px; border: 0; background-color: white; text-align: right; margin-right: 0; margin-left: 0;" placeholder="00" name="ServicePriceFldDD" value="" />.<input onclick="checkMiddlenumberFunctionNewPriceCC();" onkeydown="checkMiddlenumberFunctionNewPriceCC();" id="NewPriceCC" type="text" style="text-align: left; margin-left: 0; width: 35px; border:0; background-color: white;" placeholder="00" name="ServicePriceFldCC" value="" />
+                                                 </p>
+                                                 <p style="text-align: left; max-width: 500px;">
+                                                    <span style="color: darkblue;">Duration:</span> 
+                                                    <select style="background-color: #d9e8e8; color: black; border: none; padding: 5px;" id="DurationFldHHAddSVC" name="DurationFldHH">
+                                                        <option value="0">0 hour(s)</option>
+                                                        <option value="1">1 hour(s)</option>
+                                                        <option value="2">2 hour(s)</option>
+                                                        <option value="3">3 hour(s)</option>
+                                                        <option value="4">4 hour(s)</option>
+                                                        <option value="5">5 hour(s)</option>
+                                                    </select> 
+                                                      -
+                                                    <select style="background-color: #d9e8e8; color: black; border: none; padding: 5px;" id="DurationFldMMAddSVC" name="DurationFldMM">
+                                                        <option value="15">15 minute(s)</option>
+                                                        <option value="20">20 minute(s)</option>
+                                                        <option value="25">25 minute(s)</option>
+                                                        <option value="30">30 minute(s)</option>
+                                                        <option value="35">35 minute(s)</option>
+                                                        <option value="40">40 minute(s)</option>
+                                                        <option value="45">45 minute(s)</option>
+                                                        <option value="50">50 minute(s)</option>
+                                                        <option value="55">55 minute(s)</option>
+                                                        <option value="0">0 minute(s)</option>
+                                                    </select> 
+                                                </p>
                                                  
                                                  <!--center><input style="background-color: white; margin: 5px;" type="text" name="" value="<=ServiceDuration%>" /-->
                                                  
@@ -5835,12 +5914,12 @@
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
                                                  
-                                                 <center>
-                                                     <p style="text-align: left; max-width: 500px;"><textarea id="ServiceDescForAdd" onfocus="if(this.innerHTML === 'Add service description here')this.innerHTML = '';" name="DescriptionFld" rows="4" cols="40">Add service description here</textarea>
-                                                     </p></center>
-                                                 <input id="AddSVCPID" type="hidden" name="ProviderID" value="<%=UserID%>" />
-                                         <center><input style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" id ="addServiceBtn" type="button" value="Add Service" name="addNewService" />
-                                         </center>
+                                                <p style="text-align: left; max-width: 500px;">
+                                                    <textarea id="ServiceDescForAdd" onfocus="if(this.innerHTML === 'Add service description here')this.innerHTML = '';" name="DescriptionFld" rows="4" cols="40">Add service description here</textarea>
+                                                </p>
+                                                <input id="AddSVCPID" type="hidden" name="ProviderID" value="<%=UserID%>" />
+                                                <input style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" id ="addServiceBtn" type="button" value="Add Service" name="addNewService" />
+                                            </div>
                                          
                                          <script>
                                              
@@ -5852,8 +5931,10 @@
                                                         var PriceCC = document.getElementById("NewPriceCC").value;
                                                         var DurationHHFld = document.getElementById("DurationFldHHAddSVC");
                                                         var DurationMMFld = document.getElementById("DurationFldMMAddSVC");
-                                                        var DurationHH = DurationHHFld.options[DurationHHFld.selectedIndex].text;
-                                                        var DurationMM = DurationMMFld.options[DurationMMFld.selectedIndex].text;
+                                                        var DurationHH = DurationHHFld.options[DurationHHFld.selectedIndex].value;
+                                                        //var DurationHH = DurationHHFld.value;
+                                                        var DurationMM = DurationMMFld.options[DurationMMFld.selectedIndex].value;
+                                                        //var DurationMM = DurationMMFld.value;
                                                         var ServiceNotes = document.getElementById("ServiceDescForAdd").value;
                                                         var ProviderID = document.getElementById("AddSVCPID").value;
                                                         
@@ -5998,8 +6079,8 @@
                                     <table style="width: 100%;">
                                         <tbody>
                                             <tr>
-                                                <td id="ShowHourBtn" onclick="toggleshowHoursOpen();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;">Hours Open</td>
-                                                <td id="showOtherSettingsBtn" onclick="toggleshowOtherSettings();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;">Other Settings</td>
+                                                <td id="ShowHourBtn" onclick="toggleshowHoursOpen();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;"><i style="margin-right: 5px;" class="fa fa-clock-o" aria-hidden="true"></i> Hours Open</td>
+                                                <td id="showOtherSettingsBtn" onclick="toggleshowOtherSettings();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;"><i style="margin-right: 5px;" class="fa fa-cogs" aria-hidden="true"></i> Other Settings</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -6867,7 +6948,7 @@
                                         
                                     <p style="text-align: center; color: white; margin-bottom: 10px;">Your Queue Subscription</p>
                                     <input type="hidden" name="SubscStatusValue" value="" />
-                                    <p style="background-color: red; color: white; text-align: center; margin: 5px;">You have not subscribed</p>
+                                    <p style="color: white; text-align: center; margin: 5px;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> You have not subscribed</p>
                                     <p style="text-align: left;">Subscription Plan: <select style="color: black; background-color: #d9e8e8; border: none; padding: 5px 0; min-width: 50px;" name="SubscPlan">
                                             <%
                                                 int number = 0;
@@ -7000,7 +7081,8 @@
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
                                     
-                                    <p style="background-color: crimson; border-radius: 4px; width: fit-content; padding: 5px; color: white; margin: auto; margin-bottom: 5px;"><input id="autoPay" type="checkbox" name="AutoPay" value="ON" />
+                                    <p style="display: none; background-color: crimson; border-radius: 4px; width: fit-content; padding: 5px; color: white; margin: auto; margin-bottom: 5px;">
+                                        <input id="autoPay" type="checkbox" name="AutoPay" value="ON" checked="true" />
                                         <label style="" for="autoPay">Allow Automatic Payment</label></p>
                                     
                                     <input id="ChngSubscBtn" style="padding: 5px; border: none; background-color: darkslateblue;
@@ -7419,8 +7501,8 @@
                                     <table style="width: 100%; margin-bottom: 5px;">
                                         <tbody>
                                             <tr>
-                                                <td id="ShowClientsBtn" onclick="toggleshowClients();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;">Your Clients</td>
-                                                <td id="ShowBlockedPeopleBtn" onclick="toggleshowBlockedPeople();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;">Blocked People</td>
+                                                <td id="ShowClientsBtn" onclick="toggleshowClients();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;"><i style="" class="fa fa-address-book" aria-hidden="true"></i> Your Clients</td>
+                                                <td id="ShowBlockedPeopleBtn" onclick="toggleshowBlockedPeople();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;"><i style="" class="fa fa-ban" aria-hidden="true"></i> Blocked People</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -7522,7 +7604,7 @@
                                 if(ClientsList.size() == 0){
                             %>
                             
-                            <p id="EmptyStatus" style="background-color: red; text-align: center; color: white; margin-top: 30px">Your clients list is empty</p>
+                            <p id="EmptyStatus" style="text-align: center; color: darkblue; margin-top: 30px"><i class="fa fa-exclamation-triangle" style="color: yellow;"></i> Your clients list is empty</p>
                             
                             <%}%>
                             </div>
@@ -7662,7 +7744,7 @@
                                     if(isBlockedEmpty){
                                 %>
                                 
-                                <p id="NoBlockedClientStatus" style="color: white; background-color: red; text-align: center; margin-top: 30px;">You haven't blocked any person</p>
+                                <p id="NoBlockedClientStatus" style="color: darkblue; text-align: center; margin-top: 30px;"><i class="fa fa-exclamation-triangle" style="color: yellow;"></i> You haven't blocked any person</p>
                                 
                                 <%}%>
                             </div>

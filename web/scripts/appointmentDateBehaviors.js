@@ -111,8 +111,8 @@ function checkDate(){
 		
 		if(dateElementValue > (new Date())){
 			
-			HideSuggestedTimeDivStatus.style.backgroundColor = "red";
-			HideSuggestedTimeDivStatus.innerHTML = "Set date to today to see time suggestions";
+			//HideSuggestedTimeDivStatus.style.backgroundColor = "red";
+			HideSuggestedTimeDivStatus.innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> Set date to today to see time suggestions";
 			QueuLineDiv.style.display = "none";
 		
 		}
@@ -131,13 +131,13 @@ function checkDate(){
 			
 			if(dateElement.value == currentDate){
 				document.getElementById("dateDisplay").innerHTML = formattedDateValue;
-				document.getElementById("DateStatus").innerHTML = formattedDateValue;
+				document.getElementById("DateStatus").innerHTML = "<i style='color: green' class='fa fa-check'></i> appointment date set to " + formattedDateValue;
 				
 				finalDate.value = datevalue;
 			}
 				
 			else{
-				dateStatus.innerHTML = " choose current date or future date only";
+				dateStatus.innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> choose current date or future date only";
 				
 				dateElement.value = currentDate;
 				document.getElementById("dateDisplay").innerHTML = formattedDateValue;
@@ -149,7 +149,7 @@ function checkDate(){
 		else{
 			dateStatus.innerHTML = "";
 			document.getElementById("dateDisplay").innerHTML = formattedDateValue;
-			document.getElementById("DateStatus").innerHTML = formattedDateValue;
+			document.getElementById("DateStatus").innerHTML = "<i style='color: green' class='fa fa-check'></i> appointment date set to " + formattedDateValue;
 			
 			finalDate.value = datevalue;
 		}
@@ -178,8 +178,8 @@ function showTime(){
 				 
 			//timeFld.value = "";
 			//document.getElementById("displayTime").innerHTML = "";
-			document.getElementById("timeStatus").innerHTML = "Selected time is in the past";
-			document.getElementById("timeStatus").style.backgroundColor = "red";
+			document.getElementById("timeStatus").innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> Selected time is in the past";
+			//document.getElementById("timeStatus").style.backgroundColor = "red";
 		
 		}
 		
@@ -188,8 +188,8 @@ function showTime(){
 			
 			//timeFld.value = "";
 			//document.getElementById("displayTime").innerHTML = "";
-			document.getElementById("timeStatus").innerHTML = "Selected time is in the past";
-			document.getElementById("timeStatus").style.backgroundColor = "red";
+			document.getElementById("timeStatus").innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> Selected time is in the past";
+			//document.getElementById("timeStatus").style.backgroundColor = "red";
 			
 		}
 		
@@ -198,8 +198,8 @@ function showTime(){
 			
 			timeFld.value = "";
 			document.getElementById("displayTime").innerHTML = "";
-			document.getElementById("timeStatus").innerHTML = "Selected time is in the past";
-			document.getElementById("timeStatus").style.backgroundColor = "red";
+			document.getElementById("timeStatus").innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> Selected time is in the past";
+			//document.getElementById("timeStatus").style.backgroundColor = "red";
 		
 		}
 			
@@ -212,8 +212,8 @@ function showTime(){
 			SelectedTime = HHValue + ":" + MMValue + " " + AmPmValue;
 			
 			document.getElementById("displayTime").innerHTML = SelectedTime;
-			document.getElementById("timeStatus").innerHTML = SelectedTime;
-			document.getElementById("timeStatus").style.backgroundColor = "green";
+			document.getElementById("timeStatus").innerHTML = "<i style='color: green' class='fa fa-check'></i> appointment time set to " + SelectedTime;
+			//document.getElementById("timeStatus").style.backgroundColor = "green";
 			
 			HHValue = parseInt(HHValue, 10);
 			

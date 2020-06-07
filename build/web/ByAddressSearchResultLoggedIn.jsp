@@ -2241,7 +2241,7 @@
                                 <input type='hidden' name='SVCTypeAppend' value='<%=SVCTypeAppend%>'/>
                                 <input type='hidden' name='User' value='<%=NewUserName%>' />
                                 <input type='hidden' name='UserIndex' value='<%=UserIndex%>' />
-                                <input style='background-color: #6699ff; color: white; border: none;' onclick="document.getElementById('PageLoader').style.display = 'block';" type='submit' value='See More...' />
+                                <input style='background: none; color: white; border: none;' onclick="document.getElementById('PageLoader').style.display = 'block';" type='submit' value='See More...' />
                             </form>
                             
                             <%

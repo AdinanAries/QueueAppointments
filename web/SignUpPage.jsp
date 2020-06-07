@@ -32,6 +32,13 @@
         <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        
+        <!-- Zebra Dialog CSS -->
+        <link rel="stylesheet" href="dialog_dist/css/flat/zebra_dialog.min.css" type="text/css">
+
+        <!-- Zebra Dialog JS -->
+        <script src="dialog_dist/zebra_dialog.min.js"></script>
        
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
@@ -1306,7 +1313,34 @@
         </div>
                 
     </div>
-                
+    <script>
+        $(document).ready(function() {
+            new $.Zebra_Dialog(
+                "We are not responsible for any unsatisfied service from a business on our platform. " +
+                "<br/><br/>However, we are committed to making sure that you get the best service through our platform. " +
+                "<br/><br/>Rating businesses on our platform will help us disassociate with bad businesses.",
+                {
+                    type: "warning",
+                    title: "Disclaimer",
+                    //buttons: ["Yes", "No", "Help"],
+                    buttons: ["Continue"],
+                    onClose: function(caption) {
+
+                        // notice that we use the button's label to determine which button was clicked
+                        // "caption" will be empty when the dialog box is closed by pressing ESC, by clicking the
+                        // dialog box's close button, or by clicking the overlay
+                        /*new $.Zebra_Dialog((caption !== "" ? "\"" + caption + "\"" : "nothing") + " was clicked", {
+                            auto_close: 2000,
+                            buttons: false,
+                            modal: false,
+                            position: ["center", "center"]
+                        });*/
+
+                    }
+                }
+            );
+        });
+    </script>
     </body>
     
     <script src="scripts/signUpPageScript.js"></script>

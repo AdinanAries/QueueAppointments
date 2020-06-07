@@ -408,7 +408,7 @@
                     }
                     </script>
                 
-                <cetnter><h4 style="color: white; margin-bottom: 10px; padding: 10px;"><i style="color: orange;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=Message%></h4></cetnter>
+                <cetnter><h4 style="color: white; margin-bottom: 10px; padding: 10px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=Message%></h4></cetnter>
                 <h3 style="margin-top: 20px; margin-bottom: 5px;">Your Spot Details Provided Below</h3>
                 <p style="color: seashell;"><span><%=ProviderFullName%> from <%=ProviderCompany%></span></p>
                 <center><table border="0">
@@ -509,11 +509,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <fieldset class="loginInputFld">
+                                    <!--fieldset class="loginInputFld">
                                         <legend>Enter your middle name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="SUPmiddleName" placeholder='middlename'  type="text" name="middleName" value=" " size="34"/>
-                                    </fieldset>
+                                        <span class="fa fa-user"></span-->
+                                        <input id="SUPmiddleName" placeholder='middlename'  type="hidden" name="middleName" value=" " size="34"/>
+                                    <!--/fieldset-->
                                 </td>
                             </tr>
                             <tr>

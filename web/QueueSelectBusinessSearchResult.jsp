@@ -1772,7 +1772,7 @@
                             <form method="POST"  action='QueueSelectBusinessSearchResult.jsp'>
                                 <input type='hidden' name='SearchFld' value='<%=Search%>'/>
                                 <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>
-                                <input style='background-color: #6699ff; color: white; border: none;' onclick="document.getElementById('PageLoader').style.display = 'block';" type='submit' value='See More...' />
+                                <input style='background: none; color: white; border: none;' onclick="document.getElementById('PageLoader').style.display = 'block';" type='submit' value='See More...' />
                             </form>
                             
                             <%}%>

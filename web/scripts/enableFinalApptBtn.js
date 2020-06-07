@@ -12,18 +12,15 @@ function toggleEnableFinalApntmntBtn(){
 	var ConfirmAppointmentStatusTxt = document.getElementById("ConfirmAppointmentStatusTxt");
 	
 	if(Cash === false || CreditDebit === false){
-		ConfirmAppointmentStatusTxt.innerHTML = "Choose payment";
-		ConfirmAppointmentStatusTxt.style.backgroundColor = "red";
+		ConfirmAppointmentStatusTxt.innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> Choose payment";
 	}
 	
 	if(formsTimeValue === " "){
-		ConfirmAppointmentStatusTxt.innerHTML = "Choose appointment time";
-		ConfirmAppointmentStatusTxt.style.backgroundColor = "red";
+            ConfirmAppointmentStatusTxt.innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> Choose appointment time";
 	}
 	
 	if(formsDateValue === ""){
-		ConfirmAppointmentStatusTxt.innerHTML = "Choose appointment date";
-		ConfirmAppointmentStatusTxt.style.backgroundColor = "red";
+            ConfirmAppointmentStatusTxt.innerHTML = "<i style='color: red' class='fa fa-exclamation-triangle'></i> Choose appointment date";
 	}
 	
 	if((Cash === true || CreditDebit === true) && (formsTimeValue !== " " && formsDateValue !== "")){
@@ -31,7 +28,6 @@ function toggleEnableFinalApntmntBtn(){
 		submitAppointment.style.backgroundColor = "darkslateblue";
 		submitAppointment.disabled = false;
 		ConfirmAppointmentStatusTxt.innerHTML = "";
-		ConfirmAppointmentStatusTxt.style.backgroundColor = "green";
 	}
 	else{
 		

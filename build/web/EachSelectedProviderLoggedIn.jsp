@@ -740,7 +740,7 @@
 
                 %>
                 
-                        <p style="color: white; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=NewsProvName%> has not posted any news updates</p>
+                        <p style="color: white; text-align: center;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=NewsProvName%> has not posted any news updates</p>
                     <%}%>
                 
                 <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin: 20px 0;">Others updates</p></center>
@@ -1460,36 +1460,12 @@
                                                 <%=Company%> 
                                             </p>
                                         </b>
-                                            <p style="text-align: center;">
-                                            <span style="color: goldenrod; font-size: 18px;">
-                                            <%
-                                                if(ratings ==5){
-
-                                            %> 
-                                            ★★★★★
-                                            <%
-                                                 }else if(ratings == 4){
-                                            %>
-                                            ★★★★☆
-                                            <%
-                                                 }else if(ratings == 3){
-                                            %>
-                                            ★★★☆☆
-                                            <%
-                                                 }else if(ratings == 2){
-                                            %>
-                                            ★★☆☆☆
-                                            <%
-                                                 }else if(ratings == 1){
-                                            %>
-                                            ★☆☆☆☆
-                                            <%}%></span>
-                                            </p>
+                                            
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div style="width: 95%; display: flex; flex-direction: row; justify-content: center;">
+                                        <div style="width: 100%; display: flex; flex-direction: row; justify-content: center;">
                                             <div>
                                                 <a style="color: seagreen;" href="https://maps.google.com/?q=<%=fullAddress%>" target="_blank">
                                                     <i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
@@ -1516,7 +1492,7 @@
                                 <tr>
                                     <td>
                                         <%if(ReviewsList.size() != 0){%>
-                                        <p style="text-align: center; color: tomato;">Last Review</p>
+                                        <!--p style="text-align: center; color: tomato;">Last Review</p-->
                                         <%}%>
                 <%
                     for(int x = 0; x < ReviewsList.size(); x++){
@@ -1585,29 +1561,65 @@
 
         %>
         
-                         <center><div style='background-color: black; padding: 1px; padding-top: 10px; padding-bottom: 10px; margin-bottom: 1px; width: 99%; margin-left: 0;'>
+                         <center><div style='background-color: black; padding: 1px; margin-top: 5px; padding-bottom: 10px; margin-bottom: 1px; width: 99%; margin-left: 0;'>
                     
-                            <%
-                                if(Base64Image == ""){
-                            %> 
-                            
-                            <center><img style="border-radius: 5px; float: left; width: 15%;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
+                            <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
+                                                        <span style="color: tomato;">Overall Rating: </span>
+                                                        <span style="font-size: 20px; margin-left: 10px;">
+                                                        <%
+                                                            if(ratings ==5){
 
-                                </center>
-                                    
-                            <%
-                                }else{
-                            %>
-                            
-                                <img class="fittedImg" style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/>
-                                    
-                            <%
-                                }
-                            %>
-            <center><div style='float: right; width: 82%;'>                 
-            <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
-            
-            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: gold; font-size: 18px;">
+                                                        %> 
+                                                        ★★★★★ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 4){
+                                                        %>
+                                                        ★★★★☆ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 3){
+                                                        %>
+                                                        ★★★☆☆ 
+                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Average</span></i>
+                                                        <%
+                                                             }else if(ratings == 2){
+                                                        %>
+                                                        ★★☆☆☆ 
+                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Bad rating</span></i>
+                                                        <%
+                                                             }else if(ratings == 1){
+                                                        %>
+                                                        ★☆☆☆☆   
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Worst rating</span></i>
+                                                        <%}%>
+                                                        </span>
+                                                        
+                                                    </p>
+                                                    
+                                 
+                            <p style="text-align: center; color: #8b8b8b; margin: 10px; margin-top: 20px;">Last Review</p>
+                            <div style="display: flex; flex-direction: row;">
+                                
+                                <%
+                                    if(Base64Image == ""){
+                                %> 
+
+                                    <img style="border-radius: 100%; width: 50px; height: 50px;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
+
+                                <%
+                                    }else{
+                                %>
+
+                                    <img class="fittedImg" style="border-radius: 100%; margin-left: 5px; width: 50px; height: 50px;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+
+                                <%
+                                    }
+                                %>
+                                <div style='margin-left: 10px;'>                 
+                                    <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
+
+                                    <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: gold; font-size: 18px;">
                                                     
                                 
                                         <%
@@ -1633,19 +1645,18 @@
                                         ★☆☆☆☆
                                         <%}%>
                                         </span>
-            </p>
-            
-            <%
-                if(!ReviewMessage.equals("")){
-            %>
-            <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
-            
-            <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
-            <%}%>
-            </div></center>
-            
-            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=ProviderID%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer;'>See More...</p></a>
-            
+                                    </p>
+
+                        <%
+                            if(!ReviewMessage.equals("")){
+                        %>
+                                    <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
+
+                                    <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
+                        <%}%>
+                                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=ProviderID%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer; padding-top: 10px;'>See More...</p></a>
+                        </div>
+                    </div>
         </div></center>
         
         <%}%>
@@ -1828,11 +1839,11 @@
                                              
                                         %>
                                         
-                                        <p style="background-color: red; color: white; text-align: center;">This provider has no service to select. You cannot continue.</p>
+                                        <p style="color: darkblue; font-weight: bolder; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: red;"></i> This provider has no service to select. You cannot continue.</p>
                                         
                                         <%}%>
                                             
-                                        <p id="SVCSelectStatus" style="background-color: red; color: white; text-align: center;"></p>
+                                        <p style="text-align: center;"><span style="color: darkblue; font-weight: bolder;" id="SVCSelectStatus"></span></p>
                                         
                                             <input type="hidden" id="totallist" name="totallist" value="<%=listcounter%>" />
                                             <input type="hidden" name="UserID" value="<%=PID%>" />
@@ -1844,7 +1855,7 @@
                                                        if(blockedYou){
                                                    %>
                                                    
-                                                   <p style="text-align: center; color: white; background-color: red;">You're not allowed to schedule with <%=fullName%></p>
+                                                   <p style="text-align: center; color: darkblue; font-weight: bolder; margin: 5px;"><i class="fa fa-exclamation-triangle" style="color: red;"></i> You're not allowed to schedule with <%=fullName%></p>
                                                    <%}%>
                                             
                                             <center><input style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;

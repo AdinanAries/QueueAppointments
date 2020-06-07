@@ -1714,7 +1714,7 @@
                             
                 </div></center>
                 <form name="GetMoreRecords" action="QueueSelectBusiness.jsp">
-                    <input style="border: 0; color: white; background-color: #6699ff;" type="submit" value="See More..." name="MoreRecBtn" />
+                    <input style="border: 0; color: white; background: none;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="See More..." name="MoreRecBtn" />
                 </form>
             </div>
                             
