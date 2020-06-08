@@ -5,6 +5,7 @@
     Created on : Feb 10, 2019, 8:05:36 PM
     Author     : aries
 --%>
+
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.util.Base64"%>
 <%@page import="java.io.File"%>
@@ -23,9 +24,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+
 <html>
     
-    <head>                         
+    <head>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue</title>
@@ -33,13 +35,15 @@
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="scripts/QueueLineDivBehavior.js"></script>
         
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
@@ -183,8 +187,9 @@
             }
             
         %>
+          
+    <body onload="document.getElementById('PageLoader').style.display = 'none';">
         
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
                 <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
@@ -464,11 +469,10 @@
             %>
             </div>
             </div>
-            
+        
         <div id="content">
-          
+            
             <div id="nav">
-                
                 <!--h4><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h4>
                 <h4><a href="LoginPageToQueue" style=" color: #000099;">Queue</a></h4-->
                 <!--h3>Your Dashboard</a></h3-->
@@ -484,20 +488,16 @@
                 </div></center>
                 
             </div>
-            
             <div id="main">
                 
                 <cetnter><p> </p></cetnter>
-                
                 <center><div id="providerlist">
                 
                 <center><table id="providerdetails" style="">
                         
                     <%
-                        //for loop gets individual provider details
                         for(int i = 0; i < providersList.size(); i++){ 
                             
-                            //getting individual provider data components( from class fields)
                             String fullName = providersList.get(i).getFirstName() + " " + providersList.get(i).getMiddleName() + " " + providersList.get(i).getLastName();
                             String Company = providersList.get(i).getCompany();
                             String Email = providersList.get(i).getEmail();
@@ -528,56 +528,54 @@
 
                             }
                             
-                            int ID = providersList.get(i).getID(); //UserID of current Provider
-                            String SID = Integer.toString(ID); //String ID for hidden input field (request.getParameter() would use this information to get data for currently selected provider
+                            int ID = providersList.get(i).getID();
+                            String SID = Integer.toString(ID);
                             
-                            //getting Address data from the database 
                             try{
                                 
-                                Class.forName(details.Driver); //registering driver class to this class
+                                Class.forName(details.Driver);
                                 Connection conn = DriverManager.getConnection(details.url, details.User, details.Password);
                                 String selectAddress = "Select * from QueueObjects.ProvidersAddress where ProviderID =?";
                                 PreparedStatement pst = conn.prepareStatement(selectAddress);
                                 pst.setInt(1,ID);
                                 ResultSet address = pst.executeQuery();
-                                //Setting addrress data into data structure
                                 
                                 while(address.next()){
                                     providersList.get(i).setAddress(address.getInt("House_Number"), address.getString("Street_Name"), address.getString("Town"),address.getString("City"),address.getString("Country"),address.getInt("Zipcode"));
                                 }
-                            }catch(Exception e){
+                            }
+                            catch(Exception e){
                                 e.printStackTrace();
                             }
                             
                             int hNumber = 0;
-                                String sName = ""; //always trim Database values to remove all extra empty string spaces
-                                String tName = "";  
-                                String cName = "";
-                                String coName = ""; //trimming the string value
-                                int zCode = 0;
-                                String fullAddress = "";
-
-                                int ratings = providersList.get(i).getRatings();
+                            String sName = "";
+                            String tName = "";
+                            String cName = "";
+                            String coName = "";
+                            int zCode = 0;
+                            String fullAddress = "";
+                            
+                            int ratings = 0;
                             
                             try{
                                 
-                                //collecting provider address data into local variables 
                                 hNumber = providersList.get(i).Address.getHouseNumber();
-                                sName = providersList.get(i).Address.getStreet().trim(); //always trim Database values to remove all extra empty string spaces
-                                tName = providersList.get(i).Address.getTown().trim();  
+                                sName = providersList.get(i).Address.getStreet().trim();
+                                tName = providersList.get(i).Address.getTown().trim();
                                 cName = providersList.get(i).Address.getCity().trim();
-                                coName = providersList.get(i).Address.getCountry().trim(); //trimming the string value
+                                coName = providersList.get(i).Address.getCountry().trim();
                                 zCode = providersList.get(i).Address.getZipcode();
-                                //concatenating individual address components into a full address string
                                 fullAddress = Integer.toString(hNumber) + " " + sName + ", " + tName + ", " + cName + ", " + coName + " " + Integer.toString(zCode);
 
-                                ratings = providersList.get(i).getRatings(); //ratings data here
-                            
+                                ratings = providersList.get(i).getRatings();
+                                
                             }catch(Exception e){}
                             
                     %>
                     
-                                
+                    
+                    
                     <%
                         /*/getting coverdata
                         
@@ -623,62 +621,117 @@
                             e.printStackTrace();
                         }*/
                     %>
-                            
+                    
                             <tbody>
                             <tr>
                             <td>
                                 
-                            
-                            <center>       
-                            <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                               
-                                <img class="fittedImg" style="border-radius: 100%;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
-                               
-                            </div>
-                            
-                            <div class="proinfo">
-                                
-                                <b><p style="font-size: 20px; text-align: center; margin: 0;"><span><!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
-                                            <%=fullName%></span></p></b>
-                                    <p style='text-align: center; color:#7e7e7e; margin: 0; padding: 0;'><small><%=fullAddress%></small></p>
-                                
+                            <center><div style="display: flex; flex-direction: row;">
                                 <div>
-                                    <img style="float: left;" src="icons/icons8-piercing-80.png" width="30" height="30" alt="icons8-barber-pole-50"/>
+                                    <%
+                                        if(base64Image == ""){
+                                    %>
+                                    <i style="font-size: 50px; border-radius: 100%; margin-left: 10px; margin-top: 5px;" class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <%
+                                        }else{
+                                    %>
+                                    <img class="fittedImg" style="width: 50px; height: 50px; border-radius: 100%; margin-left: 10px; margin-top: 5px;" src="data:image/jpg;base64,<%=base64Image%>"/>
+                                    <%
+                                        }
+                                    %>
                                 </div>
-                                            <p style=""><span><%=Company%></span><span style="color: goldenrod; font-size: 18px;">
-                                                    
+                                <div class="proinfo" style="margin-top: 0; padding-top: 0; margin-left: 10px;">
+                                    
+                                 <table id="ProInfoTable" style="width: 100%; border-spacing: 0; box-shadow: 0; margin-left: 0;">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <p style="">
+                                                <%=fullName%>
+                                            </p>
+                                        </b>
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <img style="float: left; margin-right: 3px;" src="icons/icons8-piercing-80.png" width="30" height2="30" alt="icons8-hair-dryer-50"/>
+                                                </div>
+                                                <div style="margin-left: 2px; margin-top: 10px;"><%=Company%></div>
+                                            </div>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
+                                                        <span style="color: tomato;">Overall Rating: </span>
+                                                        <span style="font-size: 20px; margin-left: 10px;">
+                                                        <%
+                                                            if(ratings ==5){
+
+                                                        %> 
+                                                        ★★★★★ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 4){
+                                                        %>
+                                                        ★★★★☆ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 3){
+                                                        %>
+                                                        ★★★☆☆ 
+                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Average</span></i>
+                                                        <%
+                                                             }else if(ratings == 2){
+                                                        %>
+                                                        ★★☆☆☆ 
+                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Bad rating</span></i>
+                                                        <%
+                                                             }else if(ratings == 1){
+                                                        %>
+                                                        ★☆☆☆☆   
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Worst rating</span></i>
+                                                        <%}%>
+                                                        </span>
+                                                        
+                                                    </p> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="width: 100%; display: flex; flex-direction: row; justify-content: center; margin-bottom: 10px;">
+                                            <div>
+                                                <a style="color: seagreen;" href="https://maps.google.com/?q=<%=fullAddress%>" target="_blank">
+                                                    <i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                   font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">map</span></i>
+                                                </a>
+                                                <!--img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                <=fullAddress-->
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="tel:<%=phoneNumber%>">
+                                                    <i class="fa fa-phone" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">call</span></i>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="mailto:<%=Email%>">
+                                                    <i class="fa fa-envelope" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">email</span></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                </table>
                                 
-                                        <%
-                                            if(ratings ==5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(ratings == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(ratings == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(ratings == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(ratings == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%>
-                                        </span>
-                                </p>
-                                
-                            </div>   
-                                        
-                            <div id="QueuLineDiv">
+                                </div>
+                                </div>
+                               
+                                <div id="QueuLineDiv" style="clear: both;">
                                         
                                     <%
-                                        
                                         int IntervalsValue = 30;
         
                                         try{
@@ -698,6 +751,7 @@
                                         }catch(Exception e){
                                             e.printStackTrace();
                                         }
+                                        
                                         Date currentDate = new Date();//default date constructor returns current date 
                                         String CurrentTime = currentDate.toString().substring(11,16);
                                         String DayOfWeek = currentDate.toString().substring(0,3);
@@ -913,7 +967,7 @@
                                         if(DailyStartTime != ""){
                                             
                                             if(CurrentHour < startHour){
-                                            
+                                                
                                                 CurrentHour = startHour;
                                                 CurrentMinute = startMinute;
                                                 
@@ -953,9 +1007,9 @@
                                                     else if(closeHour == 0)
                                                         NextHour = 23;
 
-                                                }else if(NextHour > 23){
-                                                    NextHour = 23;
-                                                }
+                                                    }else if(NextHour > 23){
+                                                        NextHour = 23;
+                                                    }
                                             
                                             if(NextThirtyMinutes > 60)
                                                 NextThirtyMinutes -= 60;
@@ -973,7 +1027,7 @@
                                         LATHour -= 5;
                                         
                                         LATMinute -= IntervalsValue;
-                                           
+                                            
                                         while(LATMinute >= 60){
                                             
                                             /*Avoid incrementing the hour hand as it will skip the start of the day
@@ -1036,16 +1090,16 @@
                                             
                                             if(DailyClosingTime != ""){
                                                 
-                                                if(NextHour > closeHour && closeHour != 0){
+                                                if(Hourfor30Mins > closeHour && closeHour != 0){
 
-                                                    NextHour = closeHour - 1;
+                                                    Hourfor30Mins = closeHour - 1;
 
                                                 }
                                                 else if(closeHour == 0)
-                                                    NextHour = 23;
+                                                    Hourfor30Mins = 23;
 
-                                            }else if(NextHour > 23){
-                                                NextHour = 23;
+                                            }else if(Hourfor30Mins > 23){
+                                                Hourfor30Mins = 23;
                                             }
                                             
                                             if(ActualThirtyMinutesAfter > 60)
@@ -1109,12 +1163,12 @@
 
                                                             TempHour = closeHour - 1;
 
-                                                            }
-                                                            else if(closeHour == 0)
-                                                                TempHour = 23;
+                                                        }
+                                                        else if(closeHour == 0)
+                                                            TempHour = 23;
 
                                                     }else if(TempHour > 23){
-                                                            TempHour = 23;
+                                                        TempHour = 23;
                                                     }
 
                                                     if(TempMinute > 60)
@@ -1141,6 +1195,7 @@
                                                 
                                                 CurrentHour = Integer.parseInt(TimeWith30Mins.substring(0,2));
                                                 CurrentMinute = Integer.parseInt(TimeWith30Mins.substring(3,5));
+                                                
                                                 String thisMinute = Integer.toString(CurrentMinute);
                                                         
                                                 if(thisMinute.length() < 2){
@@ -1162,7 +1217,7 @@
                                             
                                             if(twoHours > closeHour && closeHour != 0){
 
-                                                    twoHours = closeHour - 1;
+                                                twoHours = closeHour - 1;
 
                                                 }
                                             else if(closeHour == 0)
@@ -1171,14 +1226,14 @@
                                         }else if(twoHours > 23){
                                                 twoHours = 23;
                                             }
-                                        
-                                        if(isTodayClosed == true){
+                                            
+                                            if(isTodayClosed == true){
                                                 
                                                 DailyStartTime = "00:00";
                                                 DailyClosingTime = "00:00";
                                                 
                                             }
-                                        
+
                                     %>
                                       
                                     <%
@@ -1230,7 +1285,7 @@
                                             <%
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
-                                                boolean broken = true;
+                                                boolean broken = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -1383,7 +1438,7 @@
                                             %>
                                             
                                             <td onclick="showLineTakenMessage(<%=t%><%=TotalUnavailableList%>)">
-                                                <p style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
+                                                <p  style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
                                                 <img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
                                             </td>
                                                 
@@ -1504,9 +1559,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                        
-                                    </div>
                                             
+                                    </div>
+                                        
                                      <%
                                         
                                         for(int z = 0; z < AllThisCustomerTakenFormattedTakenTime.size(); z++){
@@ -1518,7 +1573,7 @@
                                             
                                     %>     
                                             
-                                    <p style="background-color: green; color: white; display: none; text-align: center;" id="YourLinePositionMessage<%=t%><%=q%>">Position at <%=NextThisAvailableTimeForDisplay%> is your spot on <%=fullName%>'s line</p>
+                                    <p style="background-color: green; color: white; display: none; text-align: center;" id="YourLinePositionMessage<%=t%><%=q%>">Position at <%=NextThisAvailableTimeForDisplay%> is your spot on <%=fullName%>'s line.</p>
                                     
                                     <%}%>
                                     
@@ -1547,7 +1602,8 @@
                                     
                                     <p style=""><span style="color: blue; border: 1px solid blue;"><img src="icons/icons8-standing-man-filled-50 (1).png" width="30" height="25" alt="icons8-standing-man-filled-50 (1)"/>
                                         Available </span> <span style="color: red; border: 1px solid red;"><img src="icons/icons8-standing-man-filled-50.png" width="30" height="25" alt="icons8-standing-man-filled-50"/>
-                                        Taken </span> </p>
+                                        Taken </span> <span style="color: green; border: 1px solid green; padding-right: 3px;"><img src="icons/icons8-standing-man-filled-50 (2).png" width="30" height="25" alt="icons8-standing-man-filled-50 (2)"/>
+                                        Your Spot </span> </p>
                                       
                                     <%
                                         
@@ -1572,7 +1628,7 @@
                                 
                                 </div></center>
                                                 
-                            <center><form action="EachSelectedProvider.jsp" method="POST" id="<%=SID%>">   
+                            <center><form action="EachSelectedProvider.jsp" method="POST" id="SID">   
                             <input type="hidden" name="UserID" value="<%=SID%>" />
                             <input id="eachprov" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="I will choose a different spot" name="submit" />
                             </form></center>
@@ -1586,12 +1642,11 @@
                             </table></center>
                             
                 </div></center>
-                            
                 <%
                     if(providersList.size() > 9){
                 %>
                             
-                <form name="GetMoreRecords" action="QueueSelectPiercing.jsp">
+                <form name="GetMoreRecords" action="QueueSelectMedAesthet.jsp">
                     <input style="border: 0; color: white; background: none;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="See More..." name="MoreRecBtn" />
                 </form>
                 
@@ -1602,19 +1657,18 @@
                 <%
                     if(providersList.size() == 0){
                 %>
-                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; margin-bottom: 200px; width: fit-content; padding: 5px;">
-                        No Piercing services found at this time. Use search box above to explore more
+                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; width: fit-content; padding: 5px;">
+                        No Medical Aestheticians found at this time. Use search box above to explore more
                     </p></center>
                 <%
                     }
                 %>
-                
+                    
             </div>
                             
         </div>
                             
         <div id="newbusiness">
-            
             <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to book appointment</h2></center>
             
             <div id="businessdetails">
@@ -1713,7 +1767,6 @@
     </div>
                             
     </body>
-    
     
     
 </html>

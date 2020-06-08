@@ -938,7 +938,7 @@
                                         </b>
                                             <div style="display: flex; flex-direction: row;">
                                                 <div>
-                                                    <img style="float: left; margin-right: 3px;" src="icons/icons8-hospital-3-50.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
+                                                    <img style="float: left; margin-right: 3px;" src="icons/icons8-mortar-and-pestle-96.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
                                                 </div>
                                                 <div style="margin-left: 2px; margin-top: 10px;"><%=Company%></div>
                                             </div>
@@ -1985,7 +1985,7 @@
                         <tr>
                             <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
                             </a></center></td>
-                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-mortar-and-pestle-100.png" width="70" height="70" alt="icons8-pill-filled-70"/>
                             </a></center></td>
                             <td style="width: 33.3%;"><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectMakeUpArtistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
                             </a></center></td>

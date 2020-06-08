@@ -792,7 +792,7 @@
                                             %>
 
                                             <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-hospital-3-50.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
+                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-mortar-and-pestle-96.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
                                             </div>
 
                                             <%}%>

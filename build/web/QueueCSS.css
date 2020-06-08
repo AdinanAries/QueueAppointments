@@ -240,6 +240,14 @@ MainMenuItems {
 #GalleryThumnail img {
   object-fit: cover;
 }
+#QueuLineDiv table tbody tr td img {
+    width: 35px !important;
+    height: 35px !important;
+    /*background: none;
+        border: 0;
+        border-top: 1px solid darkgray;
+        border-bottom: 1px solid darkgray;*/
+  }
 /*#miniNav{
     display: flex;
     flex-direction: row;
@@ -737,6 +745,7 @@ select {
   margin-bottom: 7px;
 }
 #QueuLineDiv table tbody tr td {
+  text-align: center;
   box-shadow: 0 0 0;
   background-color: #eeeeee;
   width: 5px;
@@ -1405,15 +1414,16 @@ input[type="file"] {
     top: 200px;
     left: 37%;
   }
-  #QueuLineDiv table tbody tr td:hover {
+  #QueuLineDiv table tbody tr td {
+      text-align: center;
     /*background: none;
         border: 0;
         border-top: 1px solid darkgray;
         border-bottom: 1px solid darkgray;*/
   }
   #QueuLineDiv table tbody tr td img {
-    width: 40px !important;
-    height: 40px !important;
+    width: 35px !important;
+    height: 35px !important;
     /*background: none;
         border: 0;
         border-top: 1px solid darkgray;

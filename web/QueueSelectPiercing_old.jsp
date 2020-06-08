@@ -5,7 +5,6 @@
     Created on : Feb 10, 2019, 8:05:36 PM
     Author     : aries
 --%>
-
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.util.Base64"%>
 <%@page import="java.io.File"%>
@@ -24,23 +23,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-
 <html>
     
-    <head>  
+    <head>                         
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="scripts/QueueLineDivBehavior.js"></script>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -57,6 +53,21 @@
     
     <% 
         
+        int UserID = 0;
+        
+        //if(UserAccount.AccountType.equals("BusinessAccount"))
+            //response.sendRedirect("ServiceProviderPage.jsp");
+        
+        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
+        
         String PCity = "";
         String PTown = "";
         String PZipCode = "";
@@ -70,187 +81,6 @@
             PZipCode = "";
         }
         
-        boolean isTypeChck = false;
-        String SVCTypeAppend = " and ( ";
-        
-        
-        //put this in try block for incase its not called from homepage but from more button where params within the try doesn't exist
-        try{
-        
-            String Barber = request.getParameter("Barber");
-            if(Barber != null){
-                SVCTypeAppend += "Service_Type like '%Barber Shop%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Barber is: " + Barber);
-
-            String Beauty = request.getParameter("Beauty");
-            if(Beauty != null){
-                SVCTypeAppend += "Service_Type like '%Beauty Salon%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Beauty is: " + Beauty);
-
-            String DaySpa = request.getParameter("DaySpa");
-            if(DaySpa != null){
-                SVCTypeAppend += "Service_Type like '%Day Spa%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "DaySpa is: " + DaySpa);
-
-            String Dentist = request.getParameter("Dentist");
-            if(Dentist != null){
-                SVCTypeAppend += "Service_Type like '%Dentist%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Dentist is: " + Dentist);
-
-            String Dietician = request.getParameter("Dietician");
-            if(Dietician != null){
-                SVCTypeAppend += "Service_Type like '%Dietician%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Dietician is: " + Dietician);
-
-            String EyeBrows = request.getParameter("EyeBrows");
-            if(EyeBrows != null){
-                SVCTypeAppend += "Service_Type like '%Eyebrows and Eyelashes%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "EyeBrows is: " + EyeBrows);
-
-            String HairRemoval = request.getParameter("HairRemoval");
-            if(HairRemoval != null){
-                SVCTypeAppend += "Service_Type like '%Hair Removal%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "HairRemoval is: " + HairRemoval);
-
-            String TattooShop = request.getParameter("TattooShop");
-            if(TattooShop != null){
-                SVCTypeAppend += "Service_Type like '%Tattoo Shop%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "TattooShop is: " + TattooShop);
-
-            String Podiatry = request.getParameter("Podiatry");
-            if(Podiatry != null){
-                SVCTypeAppend += "Service_Type like '%Podiatry%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Podiatry is: " + Podiatry);
-
-            String Piercing = request.getParameter("Piercing");
-            if(Piercing != null){
-                SVCTypeAppend += "Service_Type like '%Piercing%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Piercing is: " + Piercing);
-
-            String PhysicalTherapy = request.getParameter("PhysicalTherapy");
-            if(PhysicalTherapy != null){
-                SVCTypeAppend += "Service_Type like '%Physical Therapy%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "PhysicalTherapy is: " + PhysicalTherapy);
-
-            String PetServices = request.getParameter("PetServices");
-            if(PetServices != null){
-                SVCTypeAppend += "Service_Type like '%Pet Services%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "PetServices is: " + PetServices);
-
-            String PersonalTrainer = request.getParameter("PersonalTrainer");
-            if(PersonalTrainer != null){
-                SVCTypeAppend += "Service_Type like '%Personal Trainer%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "PersonalTrainer is: " + PersonalTrainer);
-
-            String NailSalon = request.getParameter("NailSalon");
-            if(NailSalon != null){
-                SVCTypeAppend += "Service_Type like '%Nail Salon%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "NailSalon is: " + NailSalon);
-
-            String MedCenter = request.getParameter("MedCenter");
-            if(MedCenter != null){
-                SVCTypeAppend += "Service_Type like '%Medical Center%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "MedCenter is: " + MedCenter);
-
-            String Aethetician = request.getParameter("Aethetician");
-            if(Aethetician != null){
-                SVCTypeAppend += "Service_Type like '%Medical Aesthetician%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Aethetician is: " + Aethetician);
-
-            String Massage = request.getParameter("Massage");
-            if(Massage != null){
-                SVCTypeAppend += "Service_Type like '%Massage%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "Massage is: " + Massage);
-
-            String MakeUpArtist = request.getParameter("MakeUpArtist");
-            if(MakeUpArtist != null){
-                SVCTypeAppend += "Service_Type like '%Makeup Artist%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "MakeUpArtist is: " + MakeUpArtist);
-
-            String HomeService = request.getParameter("HomeService");
-            if(HomeService != null){
-                SVCTypeAppend += "Service_Type like '%Home Services%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "HomeService is: " + HomeService);
-
-            String HolisticMedicine = request.getParameter("HolisticMedicine");
-            if(HolisticMedicine != null){
-                SVCTypeAppend += "Service_Type like '%Holistic Medicine%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "HolisticMedicine is: " + HolisticMedicine);
-
-            String HairSalon = request.getParameter("HairSalon");
-            if(HairSalon != null){
-                SVCTypeAppend += "Service_Type like '%Hair Salon%' or ";
-                isTypeChck = true;
-            }
-            //JOptionPane.showMessageDialog(null, "HairSalon is: " + HairSalon);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        SVCTypeAppend += "Service_Type = '')";
-        
-
-        if(isTypeChck == false){
-            SVCTypeAppend = "";
-        }
-        
-        //JOptionPane.showMessageDialog(null, SVCTypeAppend);
-        
-        //JOptionPane.showMessageDialog(null, SVCTypeAppend);
-        
-        int UserID = 0;
-        
-        String ServiceType = "";
-        
-        //if(UserAccount.AccountType.equals("BusinessAccount"))
-            //response.sendRedirect("ServiceProviderPage.jsp");
-        
-        //connection arguments
-        String url = "";
-        String Driver = "";
-        String User = "";
-        String Password = "";
-        
         try{
             url = config.getServletContext().getAttribute("DBUrl").toString();
             Driver = config.getServletContext().getAttribute("DBDriver").toString();
@@ -259,78 +89,6 @@
         }catch(Exception e){
             response.sendRedirect("Queue.jsp");
         }
-        
-        //getting search parameters for search query
-        String City = request.getParameter("city4Search").trim();
-        String Town = request.getParameter("town4Search").trim();
-        String ZipCode = request.getParameter("zcode4Search").trim();
-        
-        int LastProviderID = 0;
-        String ProvIDAppend = "";
-        
-        try{
-            LastProviderID = Integer.parseInt(request.getParameter("LastProviderID"));
-            ProvIDAppend = " and ProviderID > " + LastProviderID;
-        }catch(Exception e){}
-        
-        //JOptionPane.showMessageDialog(null, ProvIDAppend);
-        if(SVCTypeAppend.equals("")){
-            try{
-                SVCTypeAppend = request.getParameter("SVCTypeAppend");
-                SVCTypeAppend = SVCTypeAppend.replaceAll("4","%");
-                SVCTypeAppend = SVCTypeAppend.replaceAll("3","=");
-                SVCTypeAppend = SVCTypeAppend.replaceAll("2","'");
-                
-            }catch(Exception e){}
-        }
-        
-        //JOptionPane.showMessageDialog(null, SVCTypeAppend);
-        
-        if(SVCTypeAppend == null)
-            SVCTypeAppend = "";
-        
-        if(City.equals("")){
-            if(isTypeChck)
-                City = "";
-        }
-        
-        if(Town.equals("")){
-            if(isTypeChck)
-                Town = "";
-        }
-        
-        if(ZipCode.equals("")){
-            if(isTypeChck)
-                ZipCode = "";
-        }
-        
-         
-        /*JOptionPane.showMessageDialog(null, City);
-        JOptionPane.showMessageDialog(null, Town);
-        JOptionPane.showMessageDialog(null, ZipCode);*/
-        
-        ArrayList<Integer> ProviderIDList = new ArrayList<>();
-        
-        try{
-            Class.forName(Driver);
-            Connection Conn = DriverManager.getConnection(url, User, Password);
-            String AddressQuery = "Select * from QueueObjects.ProvidersAddress where (City like '%"+City+"%' and Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")"; //If for instance only ZipCode is provided, then that particular record should be an empty string for City and an empty string for Town but ZipCode be the value Provided; all three arguments must hold true;
-                    //+ "or (Town like '%"+Town+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (City like '%"+City+"%' and Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +") or (Zipcode like '%"+ZipCode+"%'"+ ProvIDAppend +")";
-            
-            PreparedStatement AddressPst = Conn.prepareStatement(AddressQuery);
-            
-            ResultSet AddressRec = AddressPst.executeQuery();
-            
-            while(AddressRec.next()){
-                ProviderIDList.add(AddressRec.getInt("ProviderID"));
-                
-            }
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        
     %>
     
     <%!
@@ -340,12 +98,11 @@
            private Connection conn; //connection object variable
            private ResultSet records; //Resultset object variable
            private Statement st;
-           
-           //connection parameters
            private String Driver;
            private String url;
            private String User;
            private String Password;
+           private String IDList = "(";
            
            public void initializeDBParams(String driver, String url, String user, String password){
                
@@ -355,75 +112,80 @@
                this.Password = password;
            }
            
-           public ResultSet getRecords(int ProvID, String SVCTypeAppend){
-              
+           public void getIDsFromAddress(String city, String town, String zipCode){
+               
                try{
                    
+                   Class.forName(Driver);
+                   conn = DriverManager.getConnection(url, User, Password);
+                   String AddressQuery = "Select ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%'";// and Zipcode = "+zipCode;//+" ORDER BY NEWID()";
+                   PreparedStatement AddressPst = conn.prepareStatement(AddressQuery);
+                   ResultSet ProvAddressRec = AddressPst.executeQuery();
+                   
+                   boolean isFirst = true;
+                   while(ProvAddressRec.next()){
+                       
+                       if(!isFirst)
+                           IDList += ",";
+                       
+                       IDList += ProvAddressRec.getString("ProviderID");
+                       //JOptionPane.showMessageDialog(null, ProvAddressRec.getInt("ProviderID"));
+                       //ProviderIDsFromAddress.add(ProvAddressRec.getInt("ProviderID"));
+                       isFirst = false;
+                   }
+                   IDList += ")";
+                   //JOptionPane.showMessageDialog(null, IDList);
+                   
+               }catch(Exception e){}
+               
+           }
+           
+           public ResultSet getRecords(){
+               try{
                     Class.forName(Driver); //registering driver class
-                    conn = DriverManager.getConnection(url,User,Password);
-                    //Search Query String
-                    String  select = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?" + SVCTypeAppend; 
-                    
-                    PreparedStatement pst = conn.prepareStatement(select);
-                    pst.setInt(1, ProvID);
-                    
-                    
-                    records = pst.executeQuery();
-                    
+                    conn = DriverManager.getConnection(url,User,Password); //creating a connection object
+                    String  select = "Select top 10 * from QueueServiceProviders.ProviderInfo where Service_Type like 'Piercing%' and Provider_ID in "+ IDList + " ORDER BY NEWID()"; //SQL query string
+                    st = conn.createStatement();  //Creating a statement object
+                    records = st.executeQuery(select); //execute Query
+
                }
                catch(Exception e){
                   e.printStackTrace();
                 }
                
-                 return records;
+                return records;
             }
-                
        }
         %>
         
         <%
-            //instantiating getUserDetails class
-            getUserDetails details = new getUserDetails();
+            getUserDetails details = new getUserDetails(); //instantiating getUserDetails Class
             details.initializeDBParams(Driver, url, User, Password);
+            details.getIDsFromAddress(PCity, PTown, PZipCode);
+            ArrayList <ProviderInfo> providersList = new ArrayList<>(); //ArrayList to store all providerInfo
             
-            ArrayList <ProviderInfo> providersList = new ArrayList<>(); //ArrayList of ProviderInfo that models the providerInfo table data
+            ResultSet rows = details.getRecords(); //getRecords() of getUserDetials class returns its records variable of ResultSet type
             
-            for(int q = 0; q < ProviderIDList.size(); q++){
+            try{
+                ProviderInfo eachrecord; //variable for each provider object
                 
-                ResultSet rows = details.getRecords(ProviderIDList.get(q), SVCTypeAppend); //calling search function
-                
-                try{
-
-                    ProviderInfo eachrecord; //try block not needed for this declaration
-
-                    while(rows.next()){
-                        
-                        //try block needed for this operation (while(rows.next())
-                        eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
-                                                        rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
-
-                        providersList.add(eachrecord);
-                        
-                    }
+                while(rows.next()){
+                    //creating ProviderInfo Object with ResultSet values as constructor parameters
+                    eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
+                                                    rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
                     
+                    //add each new providerInfo to ArrayList (providerList of generic type ProviderInfo)
+                    providersList.add(eachrecord);
                 }
-                catch(Exception e){
-                    e.printStackTrace();
-                }
-                
-                if(providersList.size() > 4){
-                    
-                    LastProviderID = providersList.get(providersList.size() - 1).getID();
-                    break;
-                    
-                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
             }
             
         %>
         
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
-        
-            <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+        <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
                 <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
                     style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
@@ -432,7 +194,6 @@
                 <p style='font-size: 15px; color: white; margin-top: -5px;'>Home</p>
                 </a></center>
             </div>
-        
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
@@ -467,7 +228,7 @@
                 <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li>
             </ul>
-            
+        
             <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; margin-top: 1.2px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
                 <form action="QueueSelectBusinessSearchResult.jsp" method="POST">
                     <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; border-radius: 4px; font-weight: bolder;"
@@ -477,11 +238,11 @@
                 </form>
             </div>
                 <p style='clear: both;'></p>
-        
+            
         </div>
 
         <div id="container">
-            
+              
             <div id="miniNav" style="display: none;">
                 <center>
                     <ul id="miniNavIcons" style="float: left;">
@@ -492,20 +253,18 @@
                     </ul>
                     <form name="miniDivSearch" action="QueueSelectBusinessSearchResult.jsp" method="POST">
                             <input style="padding: 5px;" placeholder="Search provider" name="SearchFld" type="text"  value=""/>
-                            <input onclick="document.getElementById('PageLoader').style.display = 'block';"  type="submit" value="Search" />
+                            <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" />
                     </form>
                 </center>
             </div>
             
         <div id="header">
-            
             <div style="text-align: center;"><p> </p>
             <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
-            
         </div>
             
-            <div id="Extras">
+        <div id="Extras">
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
             
@@ -522,8 +281,8 @@
                         
                         while(newsRec.next()){
                             
-                            String base64Profile = "";
                             newsItems++;
+                            String base64Profile = "";
                             
                             String ProvID = newsRec.getString("ProvID");
                             String ProvFirstName = "";
@@ -531,6 +290,7 @@
                             String ProvAddress = "";
                             String ProvTel = "";
                             String ProvEmail = "";
+                            String ServiceType = "";
                             
                             String Msg = newsRec.getString("Msg").trim();
                             String MsgPhoto = "";
@@ -568,6 +328,9 @@
                                     ResultSet ProvRec = ProvPst.executeQuery();
                                     
                                     while(ProvRec.next()){
+                                        
+                                        ServiceType = ProvRec.getString("Service_Type").trim();
+                                            
                                         ProvFirstName = ProvRec.getString("First_Name").trim();
                                         ProvCompany = ProvRec.getString("Company").trim();
                                         ProvTel = ProvRec.getString("Phone_Number").trim();
@@ -589,9 +352,7 @@
 
                                             base64Profile = Base64.getEncoder().encodeToString(imageBytes);
 
-
                                         }catch(Exception e){}
-                                        
                                     }
                                     
                                 }catch(Exception e){
@@ -608,16 +369,21 @@
                                     ResultSet ProvLocRec = ProvLocPst.executeQuery();
                                     
                                     while(ProvLocRec.next()){
-                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
-                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
-                                        String NTown = ProvLocRec.getString("Town").trim();
-                                        String NCity = ProvLocRec.getString("City").trim();
-                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
+                                        String HouseNumber = ProvLocRec.getString("House_Number").trim();
+                                        String Street = ProvLocRec.getString("Street_Name").trim();
+                                        String Town = ProvLocRec.getString("Town").trim();
+                                        String City = ProvLocRec.getString("City").trim();
+                                        String ZipCode = ProvLocRec.getString("Zipcode").trim();
                                         
-                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
+                                        ProvAddress = HouseNumber + " " + Street + ", " + Town + ", " + City + " " + ZipCode;
                                     }
                                 }catch(Exception e){
                                     e.printStackTrace();
+                                }
+                                
+                                if(!ServiceType.contains("Piercing")){
+                                    newsItems -= 1;
+                                    continue;
                                 }
                 %>
                 
@@ -699,13 +465,15 @@
             </div>
             </div>
             
-            
         <div id="content">
-            
+          
             <div id="nav">
                 
+                <!--h4><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h4>
+                <h4><a href="LoginPageToQueue" style=" color: #000099;">Queue</a></h4-->
                 <!--h3>Your Dashboard</a></h3-->
                 <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
+                <script src="scripts/script.js"></script>
                 
                 <center><div class =" SearchObject">
                         
@@ -726,16 +494,15 @@
                 <center><table id="providerdetails" style="">
                         
                     <%
-                        
+                        //for loop gets individual provider details
                         for(int i = 0; i < providersList.size(); i++){ 
                             
-                        String fullName = providersList.get(i).getFirstName() + " " + providersList.get(i).getMiddleName() + " " + providersList.get(i).getLastName();
-                        String Company = providersList.get(i).getCompany();
-                        String Email = providersList.get(i).getEmail();
-                        String phoneNumber = providersList.get(i).getPhoneNumber();
-                        ServiceType = providersList.get(i).getServiceType().trim();
-                        
-                                                
+                            //getting individual provider data components( from class fields)
+                            String fullName = providersList.get(i).getFirstName() + " " + providersList.get(i).getMiddleName() + " " + providersList.get(i).getLastName();
+                            String Company = providersList.get(i).getCompany();
+                            String Email = providersList.get(i).getEmail();
+                            String phoneNumber = providersList.get(i).getPhoneNumber();
+                                                    
                             String base64Image = "";
                             String base64Cover = "";
 
@@ -761,45 +528,55 @@
 
                             }
                             
-                        int ID = providersList.get(i).getID();
-                        String SID = Integer.toString(ID);
-                        
-                        try{
+                            int ID = providersList.get(i).getID(); //UserID of current Provider
+                            String SID = Integer.toString(ID); //String ID for hidden input field (request.getParameter() would use this information to get data for currently selected provider
                             
-                            Class.forName(details.Driver);
-                            Connection conn = DriverManager.getConnection(details.url, details.User, details.Password);
-                            String selectAddress = "Select * from QueueObjects.ProvidersAddress where ProviderID =?";
-                            PreparedStatement pst = conn.prepareStatement(selectAddress);
-                            pst.setInt(1,ID);
-                            ResultSet address = pst.executeQuery();
-                            
-                            while(address.next()){
+                            //getting Address data from the database 
+                            try{
                                 
-                                providersList.get(i).setAddress(address.getInt("House_Number"), address.getString("Street_Name"), address.getString("Town"),address.getString("City"),address.getString("Country"),address.getInt("Zipcode"));
+                                Class.forName(details.Driver); //registering driver class to this class
+                                Connection conn = DriverManager.getConnection(details.url, details.User, details.Password);
+                                String selectAddress = "Select * from QueueObjects.ProvidersAddress where ProviderID =?";
+                                PreparedStatement pst = conn.prepareStatement(selectAddress);
+                                pst.setInt(1,ID);
+                                ResultSet address = pst.executeQuery();
+                                //Setting addrress data into data structure
+                                
+                                while(address.next()){
+                                    providersList.get(i).setAddress(address.getInt("House_Number"), address.getString("Street_Name"), address.getString("Town"),address.getString("City"),address.getString("Country"),address.getInt("Zipcode"));
+                                }
+                            }catch(Exception e){
+                                e.printStackTrace();
                             }
                             
-                        }
-                        catch(Exception e){
-                            e.printStackTrace();
-                        }
-                        
-                        String fullAddress = "address information not found";
-                        
-                        try{
-                            int hNumber = providersList.get(i).Address.getHouseNumber();
-                            String sName = providersList.get(i).Address.getStreet().trim(); //trimming text data to get rid of all extra spaces
-                            String tName = providersList.get(i).Address.getTown().trim();
-                            String cName = providersList.get(i).Address.getCity().trim();
-                            String coName = providersList.get(i).Address.getCountry().trim();
-                            int zCode = providersList.get(i).Address.getZipcode();
-                            fullAddress = Integer.toString(hNumber) + " " + sName + ", " + tName + ", " + cName + ", " + coName + " " + Integer.toString(zCode);
-                        }catch(Exception e){}
-                        
-                        int ratings = providersList.get(i).getRatings();
-                        
+                            int hNumber = 0;
+                                String sName = ""; //always trim Database values to remove all extra empty string spaces
+                                String tName = "";  
+                                String cName = "";
+                                String coName = ""; //trimming the string value
+                                int zCode = 0;
+                                String fullAddress = "";
+
+                                int ratings = providersList.get(i).getRatings();
+                            
+                            try{
+                                
+                                //collecting provider address data into local variables 
+                                hNumber = providersList.get(i).Address.getHouseNumber();
+                                sName = providersList.get(i).Address.getStreet().trim(); //always trim Database values to remove all extra empty string spaces
+                                tName = providersList.get(i).Address.getTown().trim();  
+                                cName = providersList.get(i).Address.getCity().trim();
+                                coName = providersList.get(i).Address.getCountry().trim(); //trimming the string value
+                                zCode = providersList.get(i).Address.getZipcode();
+                                //concatenating individual address components into a full address string
+                                fullAddress = Integer.toString(hNumber) + " " + sName + ", " + tName + ", " + cName + ", " + coName + " " + Integer.toString(zCode);
+
+                                ratings = providersList.get(i).getRatings(); //ratings data here
+                            
+                            }catch(Exception e){}
+                            
                     %>
                     
-                        
                                 
                     <%
                         /*/getting coverdata
@@ -808,7 +585,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(url, User, Password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID = ?";
+                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,ID);
                             ResultSet cover = coverPst.executeQuery();
@@ -837,8 +614,8 @@
 
                                 }
                                  
-                                 if(!base64Cover.equals(""))
-                                     break;
+                                if(!base64Cover.equals(""))
+                                    break;
                                 
                             }
                             
@@ -850,7 +627,7 @@
                             <tbody>
                             <tr>
                             <td>
-                            
+                                
                             <center><div style="display: flex; flex-direction: row;">
                                 <div>
                                     <%
@@ -876,238 +653,10 @@
                                                 <%=fullName%>
                                             </p>
                                         </b>
-                                        <div style="display: flex; flex-direction: row;">
-                                            <%
-                                                if(ServiceType.equals("Barber Shop")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left;" src="icons/icons8-barber-pole-50.png" width="30" height="30" alt="icons8-barber-pole-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Day Spa")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-spa-50.png" width="25" height2="30" alt="icons8-spa-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                             <%
-                                                if(ServiceType.equals("Beauty Salon")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-hair-dryer-50.png" width="30" height2="30" alt="icons8-hair-dryer-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Dentist")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-tooth-50.png" width="30" height2="30" alt="icons8-tooth-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Dietician")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-dairy-50.png" width="30" height2="30" alt="icons8-dairy-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Eyebrows and Eyelashes")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-eye-50.png" width="30" height2="30" alt="icons8-eye-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Hair Salon")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-woman's-hair-50.png" width="30" height2="30" alt="icons8-woman's-hair-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Hair Removal")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-skin-50.png" width="30" height2="30" alt="icons8-skin-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Tattoo Shop")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-tattoo-machine-50.png" width="30" height2="30" alt="icons8-tattoo-machine-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Home Services")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-home-50 (1).png" width="30" height2="30" alt="icons8-home-50 (1)"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Holistic Medicine")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-mortar-and-pestle-96.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Medical Center")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-hospital-3-50.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(ServiceType.equals("Medical Aesthetician")){
-                                            %>
-
-                                            <div>
-                                                <i style="float: left; margin-right: 3px; font-size: 25px; margin-top: 5px; color: orangered;" class="fa fa-briefcase" aria-hidden="true"></i>
-                                            </div>
-
-                                            <%}%>
-
-                                            <% 
-
-                                                if(ServiceType.equals("Physical Therapy")){
-
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-physical-therapy-96.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
-                                            </div>
-
-                                            <%}%>
-                                            
-                                            <%
-                                                if(ServiceType.equals("Makeup Artist")){
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-cosmetic-brush-96.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
-                                            </div>
-
-                                            <%}%>
-                                            
-                                            <% 
-
-                                                if(ServiceType.equals("Massage")){
-
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-massage-96.png" width="30" height="30" alt="icons8-business-50"/>
-                                            </div>
-
-                                            <%}%>
-                                            
-                                            <% 
-
-                                                if(ServiceType.equals("Nail Salon")){
-
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-nails-96.png" width="30" height="30" alt="icons8-business-50"/>
-                                            </div>
-
-                                            <%}%>
-                                            
-                                            <% 
-
-                                                if(ServiceType.equals("Personal Trainer")){
-
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-workout-96.png" width="30" height="30" alt="icons8-business-50"/>
-                                            </div>
-
-                                            <%}%>
-                                            
-                                            <% 
-
-                                                if(ServiceType.equals("Pet Services")){
-
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-german-shepherd-96.png" width="30" height="30" alt="icons8-business-50"/>
-                                            </div>
-
-                                            <%}%>
-                                            
-                                            <% 
-
-                                                if(ServiceType.equals("Piercing")){
-
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-piercing-80.png" width="30" height="30" alt="icons8-business-50"/>
-                                            </div>
-
-                                            <%}%>
-                                            
-                                            <% 
-
-                                                if(ServiceType.equals("Podiatry")){
-
-                                            %>
-
-                                            <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-foot-96.png" width="30" height="30" alt="icons8-business-50"/>
-                                            </div>
-
-                                            <%}%>
-
-                                            <%
-                                                if(!ServiceType.equals("Podiatry") && !ServiceType.equals("Piercing") && !ServiceType.equals("Pet Services") && !ServiceType.equals("Personal Trainer") && !ServiceType.equals("Nail Salon") && !ServiceType.equals("Massage") && !ServiceType.equals("Makeup Artist") && !ServiceType.equals("Barber Shop") && !ServiceType.equals("Day Spa") && !ServiceType.equals("Beauty Salon") && !ServiceType.equals("Dentist") && !ServiceType.equals("Dietician") && !ServiceType.equals("Eyebrows and Eyelashes") && !ServiceType.equals("Hair Salon") && !ServiceType.equals("Hair Removal") && !ServiceType.equals("Tattoo Shop") && !ServiceType.equals("Home Services") && !ServiceType.equals("Holistic Medicine") && !ServiceType.equals("Medical Center") && !ServiceType.equals("Medical Aesthetician") && !ServiceType.equals("Physical Therapy")){
-                                            %>
-                                                    <i style="float: left; margin-right: 3px; font-size: 25px; margin-top: 5px; color: orangered;" class="fa fa-briefcase" aria-hidden="true"></i>
-
-                                            <%}%>
-                                            
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <img style="float: left; margin-right: 3px;" src="icons/icons8-piercing-80.png" width="30" height2="30" alt="icons8-hair-dryer-50"/>
+                                                </div>
                                                 <div style="margin-left: 2px; margin-top: 10px;"><%=Company%></div>
                                             </div>
                                         </p>
@@ -1180,14 +729,11 @@
                                 </table>
                                 
                                 </div>
-                                </div>
+                                </div>   
                                         
-                                    <div id="QueuLineDiv">
+                            <div id="QueuLineDiv">
                                         
                                     <%
-                                        
-                                        //getting intervals from database for use to set spot intervals
-                                        //use a default value of 30mins
                                         
                                         int IntervalsValue = 30;
         
@@ -1208,21 +754,14 @@
                                         }catch(Exception e){
                                             e.printStackTrace();
                                         }
-                        
-                                        Date currentDate = new Date(); //default date constructor returns current date 
+                                        Date currentDate = new Date();//default date constructor returns current date 
                                         String CurrentTime = currentDate.toString().substring(11,16);
                                         String DayOfWeek = currentDate.toString().substring(0,3);
-                                        
-                                        //getting date to be displayed along hours open
-                                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd");
-                                        String stringDate = formattedDate.format(currentDate);
-                                        
-                                        //use this Date formatter for SQL date
+                                        SimpleDateFormat formattedDate = new SimpleDateFormat("MMM dd"); //formatting date to a string value of month day, year
+                                        String stringDate = formattedDate.format(currentDate); //calling format function to format date object
                                         SimpleDateFormat QuerySdf = new SimpleDateFormat("yyyy-MM-dd");
                                         String QueryDate = QuerySdf.format(currentDate);
                                         
-                                        
-                                        //Use these ArrayList to keep track of spot variations as to whether taken, available or this customer's spot
                                         ArrayList<String> AllAvailableTimeList = new ArrayList<>();
                                         ArrayList<String> AllAvailableFormattedTimeList = new ArrayList<>();
                                         ArrayList<String> AllUnavailableTimeList = new ArrayList<>();
@@ -1230,26 +769,22 @@
                                         ArrayList<String> AllThisCustomerTakenTime = new ArrayList<>();
                                         ArrayList<String> AllThisCustomerTakenFormattedTakenTime = new ArrayList<>();
                                         
-                                        //start and closing times - raw and formatted - of each provider displayed
                                         String DailyStartTime = "";
                                         String DailyClosingTime = "";
                                         String FormattedStartTime = "";
                                         String FormattedClosingTime = "";
-                                        
                                         
                                         int startHour = 0;
                                         int startMinute = 0;
                                         int closeHour = 0;
                                         int closeMinute = 0;
                                         
-                                        //Keeping counts of various lists
                                         int TotalAvailableList = 0;
                                         int TotalUnavailableList = 0;
                                         int TotalThisCustomerTakenList = 0;
                                     %>
                                     
                                     <%
-                                        //use these variables to keep each day of the week start and close times for providers displayed
                                         String MonDailyStartTime = "";
                                         String MonDailyClosingTime = "";
                                         String TueDailyStartTime = "";
@@ -1307,8 +842,6 @@
                                             e.printStackTrace();
                                         }
                                         
-                                        
-                                        //A switch statement would've been ideal, but hey, lets assign days of week based on what actual day is returned by new date() object 
                                         try{
                                                 if(DayOfWeek.equalsIgnoreCase("Mon")){
                                                     DailyStartTime = MonDailyStartTime.substring(0,5);
@@ -1341,11 +874,11 @@
                                                 }
                                                 
                                                 
-                                                //need to format day of the week from raw 24 hour database format to 12 hour ampm type of time
+                                                
                                                 startHour = Integer.parseInt(DailyStartTime.substring(0,2));
                                                 startMinute = Integer.parseInt(DailyStartTime.substring(3,5));
                                                         
-                                                        //formatting the time to improve user experience
+                                                        //formatting the time for user convenience
                                                         if( startHour > 12)
                                                         {
                                                              int TempHour = startHour - 12;
@@ -1387,7 +920,7 @@
                                         
                                         
                                     %>
-                                     
+                                    
                                     <%
                                         //getting the closed days data
                                         ArrayList<String> ClosedDates = new ArrayList<>();
@@ -1426,10 +959,8 @@
                                             e.printStackTrace();
                                         }
                                     %>
-                                   
+                                    
                                     <%
-                                        
-                                        //computing the spots starting from current time
                                         int CurrentHour = Integer.parseInt(CurrentTime.substring(0,2));
                                         int CurrentMinute = Integer.parseInt(CurrentTime.substring(3,5));
                                         
@@ -1438,7 +969,7 @@
                                         if(DailyStartTime != ""){
                                             
                                             if(CurrentHour < startHour){
-                                                
+                                            
                                                 CurrentHour = startHour;
                                                 CurrentMinute = startMinute;
                                                 
@@ -1470,17 +1001,17 @@
                                             
                                             if(DailyClosingTime != ""){
                                                 
-                                                if(NextHour > closeHour && closeHour != 0){
+                                                    if(NextHour > closeHour && closeHour != 0){
 
-                                                    NextHour = closeHour - 1;
+                                                        NextHour = closeHour - 1;
 
-                                                }
-                                                else if(closeHour == 0)
+                                                    }
+                                                    else if(closeHour == 0)
+                                                        NextHour = 23;
+
+                                                }else if(NextHour > 23){
                                                     NextHour = 23;
-                                                    
-                                            }else if(NextHour > 23){
-                                                NextHour = 23;
-                                            }
+                                                }
                                             
                                             if(NextThirtyMinutes > 60)
                                                 NextThirtyMinutes -= 60;
@@ -1498,7 +1029,7 @@
                                         LATHour -= 5;
                                         
                                         LATMinute -= IntervalsValue;
-                                            
+                                           
                                         while(LATMinute >= 60){
                                             
                                             /*Avoid incrementing the hour hand as it will skip the start of the day
@@ -1561,16 +1092,16 @@
                                             
                                             if(DailyClosingTime != ""){
                                                 
-                                                if(Hourfor30Mins > closeHour && closeHour != 0){
+                                                if(NextHour > closeHour && closeHour != 0){
 
-                                                    Hourfor30Mins = closeHour - 1;
+                                                    NextHour = closeHour - 1;
 
                                                 }
                                                 else if(closeHour == 0)
-                                                    Hourfor30Mins = 23;
-                                                    
-                                            }else if(Hourfor30Mins > 23){
-                                                Hourfor30Mins = 23;
+                                                    NextHour = 23;
+
+                                            }else if(NextHour > 23){
+                                                NextHour = 23;
                                             }
                                             
                                             if(ActualThirtyMinutesAfter > 60)
@@ -1634,12 +1165,12 @@
 
                                                             TempHour = closeHour - 1;
 
-                                                        }
-                                                        else if(closeHour == 0)
-                                                            TempHour = 23;
+                                                            }
+                                                            else if(closeHour == 0)
+                                                                TempHour = 23;
 
                                                     }else if(TempHour > 23){
-                                                        TempHour = 23;
+                                                            TempHour = 23;
                                                     }
 
                                                     if(TempMinute > 60)
@@ -1697,9 +1228,7 @@
                                                 twoHours = 23;
                                             }
                                         
-
-                                            //this lets you calculate spots from 12am to 12pm..
-                                            if(isTodayClosed == true){
+                                        if(isTodayClosed == true){
                                                 
                                                 DailyStartTime = "00:00";
                                                 DailyClosingTime = "00:00";
@@ -1707,7 +1236,7 @@
                                             }
                                         
                                     %>
-                                     
+                                      
                                     <%
                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
                                     %>
@@ -1748,17 +1277,16 @@
                                     
                                         <!--p>Next Appointment: <%=NextAvailableTime%></p-->
                                         <center><p>Select any <span style="color: blue;">blue</span> spot to take position on this line</p></center>
-                                      
-                                    <div class="scrolldiv" style="width: 280px; max-width: 500px; overflow-x: auto;">    
+                                     
+                                    <div class="scrolldiv" style="width: 280px; max-width: 500px; overflow-x: auto;">
                                     <table>
                                         <tbody>
                                             <tr>
                                                 
                                             <%
-                                                
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
-                                                boolean broken = false;
+                                                boolean broken = true;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -2032,9 +1560,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                            
-                                    </div>
                                         
+                                    </div>
+                                            
                                      <%
                                         
                                         for(int z = 0; z < AllThisCustomerTakenFormattedTakenTime.size(); z++){
@@ -2046,7 +1574,7 @@
                                             
                                     %>     
                                             
-                                    <p style="background-color: green; color: white; display: none; text-align: center;" id="YourLinePositionMessage<%=t%><%=q%>">Position at <%=NextThisAvailableTimeForDisplay%> is your spot on <%=fullName%>'s line.</p>
+                                    <p style="background-color: green; color: white; display: none; text-align: center;" id="YourLinePositionMessage<%=t%><%=q%>">Position at <%=NextThisAvailableTimeForDisplay%> is your spot on <%=fullName%>'s line</p>
                                     
                                     <%}%>
                                     
@@ -2092,7 +1620,7 @@
                                     <form style="display: none;" id="bookAppointmentFromLineDiv<%=t%><%=q%>" name="bookAppointmentFromLineDiv" action="EachSelectedProvider.jsp" method="POST">
                                         <input type="hidden" name="AppointmentTime" value="<%=NextAvailableTimeForForm%>" />
                                         <input type="hidden" name="UserID" value="<%=SID%>" />
-                                        <input style="background-color: darkslateblue; padding: 5px; border: none;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                        <input style="" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Take this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                         <p style="margin-top: 5px; color: red; text-align: center;">OR</p>
                                     </form>
                                         
@@ -2100,7 +1628,7 @@
                                 
                                 </div></center>
                                                 
-                            <center><form action="EachSelectedProvider.jsp" method="POST" id="SID">   
+                            <center><form action="EachSelectedProvider.jsp" method="POST" id="<%=SID%>">   
                             <input type="hidden" name="UserID" value="<%=SID%>" />
                             <input id="eachprov" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="I will choose a different spot" name="submit" />
                             </form></center>
@@ -2112,41 +1640,30 @@
                             <%}//end of for loop%>
                             
                             </table></center>
-                             <%
-                                 SVCTypeAppend = SVCTypeAppend.replaceAll("%","4");
-                                 SVCTypeAppend = SVCTypeAppend.replaceAll("=","3");
-                                 SVCTypeAppend = SVCTypeAppend.replaceAll("'","2");
-                                 //JOptionPane.showMessageDialog(null, SVCTypeAppend);
-                             %>
-                            
-                             <%
-                                 if(providersList.size() > 4){
-                             %>
-                             
-                             <form method="POST"  action='ByAddressSearchResult.jsp'>
-                                <input type='hidden' name='city4Search' value='<%=City%>'/>
-                                <input type='hidden' name='town4Search' value='<%=Town%>'/>
-                                <input type='hidden' name='zcode4Search' value='<%=ZipCode%>'/>
-                                <input type='hidden' name='LastProviderID' value='<%=LastProviderID%>'/>
-                                <input type='hidden' name='SVCTypeAppend' value='<%=SVCTypeAppend%>'/>
-                                <input style='background: none; color: white; border: none;' onclick="document.getElementById('PageLoader').style.display = 'block';" type='submit' value='See More...' />
-                            </form>
-                            
-                            <%
-                                }
-                            %>
-                            
-                            <%
-                                if(providersList.size() == 0){
-                            %>
-                            <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; margin-bottom: 200px; width: fit-content; padding: 5px;">
-                                    No services found at provided address
-                                </p></center>
-                            <%
-                                }
-                            %>
                             
                 </div></center>
+                            
+                <%
+                    if(providersList.size() > 9){
+                %>
+                            
+                <form name="GetMoreRecords" action="QueueSelectPiercing.jsp">
+                    <input style="border: 0; color: white; background: none;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="See More..." name="MoreRecBtn" />
+                </form>
+                
+                <%
+                    }
+                %>
+                
+                <%
+                    if(providersList.size() == 0){
+                %>
+                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; margin-bottom: 200px; width: fit-content; padding: 5px;">
+                        No Piercing services found at this time. Use search box above to explore more
+                    </p></center>
+                <%
+                    }
+                %>
                 
             </div>
                             
@@ -2159,7 +1676,6 @@
             <div id="businessdetails">
                 
             <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST"><table border="0">
-                        
                         <tbody>   
                             <tr>
                                 <td><p style="color: white; text-align: center; padding-bottom: 10px;">Provide your information below<p></td>
@@ -2238,13 +1754,12 @@
                                 </tr>
                             </tbody>
                         </table>
-                        
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input id="loginPageBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
+                        <input class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
                 </div></center>
-            
+                    
                 </div>
                             
         <div id="footer">
@@ -2255,7 +1770,6 @@
                             
     </body>
     
-    <script src="scripts/script.js"></script>
-    <script src="scripts/loginPageBtn.js"></script>
+    
     
 </html>

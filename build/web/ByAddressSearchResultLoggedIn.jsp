@@ -1263,7 +1263,7 @@
                                             %>
 
                                             <div>
-                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-hospital-3-50.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
+                                                <img style="float: left; margin-right: 3px;" src="icons/icons8-mortar-and-pestle-96.png" width="30" height2="30" alt="icons8-hospital-3-50"/>
                                             </div>
 
                                             <%}%>
@@ -2440,7 +2440,7 @@
                             </a></center></td>
                         </tr>
                         <tr>
-                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-pill-filled-70.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-mortar-and-pestle-100.png" width="70" height="70" alt="icons8-pill-filled-70"/>
                             </a></center></td>
                             <td><center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>"><p style="margin:0;" name="MedEsthSelect">Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
                             </a></center></td>

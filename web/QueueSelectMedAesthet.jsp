@@ -5,6 +5,7 @@
     Created on : Feb 10, 2019, 8:05:36 PM
     Author     : aries
 --%>
+
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.util.Base64"%>
 <%@page import="java.io.File"%>
@@ -23,9 +24,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
+
 <html>
     
-    <head>                         
+    <head>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue</title>
@@ -33,13 +35,15 @@
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="scripts/QueueLineDivBehavior.js"></script>
         
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
@@ -89,6 +93,7 @@
     <%!
         
        class getUserDetails{
+           
            //class instance fields
            private Connection conn; //connection object variable
            private ResultSet records; //Resultset object variable
@@ -136,11 +141,12 @@
            }
            
            public ResultSet getRecords(){
+               
                try{
                     Class.forName(Driver); //registering driver class
                     conn = DriverManager.getConnection(url,User,Password); //creating a connection object
-                    String  select = "Select top 10 * from QueueServiceProviders.ProviderInfo where Service_Type like 'Medical Aesthetician%' and Provider_ID in "+ IDList + " ORDER BY NEWID()"; //SQL query string
                     st = conn.createStatement();  //Creating a statement object
+                    String  select = "Select top 10 * from QueueServiceProviders.ProviderInfo where Service_Type like 'Medical Aesthetician%' and Provider_ID in "+ IDList + " ORDER BY NEWID()"; //SQL query string
                     records = st.executeQuery(select); //execute Query
 
                }
@@ -151,25 +157,22 @@
                 return records;
             }
        }
-        %>
+       
+    %>
         
         <%
-            getUserDetails details = new getUserDetails(); //instantiating getUserDetails Class
+            
+            getUserDetails details = new getUserDetails();
             details.initializeDBParams(Driver, url, User, Password);
             details.getIDsFromAddress(PCity, PTown, PZipCode);
-            ArrayList <ProviderInfo> providersList = new ArrayList<>(); //ArrayList to store all providerInfo
-            
-            ResultSet rows = details.getRecords(); //getRecords() of getUserDetials class returns its records variable of ResultSet type
+            ArrayList <ProviderInfo> providersList = new ArrayList<>();
+            ResultSet rows = details.getRecords();
             
             try{
-                ProviderInfo eachrecord; //variable for each provider object
-                
+                ProviderInfo eachrecord;
                 while(rows.next()){
-                    //creating ProviderInfo Object with ResultSet values as constructor parameters
                     eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
                                                     rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
-                    
-                    //add each new providerInfo to ArrayList (providerList of generic type ProviderInfo)
                     providersList.add(eachrecord);
                 }
             }
@@ -179,7 +182,8 @@
             
         %>
         
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';">
+        
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
                 <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
@@ -460,11 +464,10 @@
             %>
             </div>
             </div>
-            
+        
         <div id="content">
-          
+            
             <div id="nav">
-                
                 <!--h4><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h4>
                 <h4><a href="LoginPageToQueue" style=" color: #000099;">Queue</a></h4-->
                 <!--h3>Your Dashboard</a></h3-->
@@ -480,20 +483,16 @@
                 </div></center>
                 
             </div>
-            
             <div id="main">
                 
                 <cetnter><p> </p></cetnter>
-                
                 <center><div id="providerlist">
                 
                 <center><table id="providerdetails" style="">
                         
                     <%
-                        //for loop gets individual provider details
                         for(int i = 0; i < providersList.size(); i++){ 
                             
-                            //getting individual provider data components( from class fields)
                             String fullName = providersList.get(i).getFirstName() + " " + providersList.get(i).getMiddleName() + " " + providersList.get(i).getLastName();
                             String Company = providersList.get(i).getCompany();
                             String Email = providersList.get(i).getEmail();
@@ -524,56 +523,54 @@
 
                             }
                             
-                            int ID = providersList.get(i).getID(); //UserID of current Provider
-                            String SID = Integer.toString(ID); //String ID for hidden input field (request.getParameter() would use this information to get data for currently selected provider
+                            int ID = providersList.get(i).getID();
+                            String SID = Integer.toString(ID);
                             
-                            //getting Address data from the database 
                             try{
                                 
-                                Class.forName(details.Driver); //registering driver class to this class
+                                Class.forName(details.Driver);
                                 Connection conn = DriverManager.getConnection(details.url, details.User, details.Password);
                                 String selectAddress = "Select * from QueueObjects.ProvidersAddress where ProviderID =?";
                                 PreparedStatement pst = conn.prepareStatement(selectAddress);
                                 pst.setInt(1,ID);
                                 ResultSet address = pst.executeQuery();
-                                //Setting addrress data into data structure
                                 
                                 while(address.next()){
                                     providersList.get(i).setAddress(address.getInt("House_Number"), address.getString("Street_Name"), address.getString("Town"),address.getString("City"),address.getString("Country"),address.getInt("Zipcode"));
                                 }
-                            }catch(Exception e){
+                            }
+                            catch(Exception e){
                                 e.printStackTrace();
                             }
                             
                             int hNumber = 0;
-                                String sName = ""; //always trim Database values to remove all extra empty string spaces
-                                String tName = "";  
-                                String cName = "";
-                                String coName = ""; //trimming the string value
-                                int zCode = 0;
-                                String fullAddress = "";
-
-                                int ratings = providersList.get(i).getRatings();
+                            String sName = "";
+                            String tName = "";
+                            String cName = "";
+                            String coName = "";
+                            int zCode = 0;
+                            String fullAddress = "";
+                            
+                            int ratings = 0;
                             
                             try{
                                 
-                                //collecting provider address data into local variables 
                                 hNumber = providersList.get(i).Address.getHouseNumber();
-                                sName = providersList.get(i).Address.getStreet().trim(); //always trim Database values to remove all extra empty string spaces
-                                tName = providersList.get(i).Address.getTown().trim();  
+                                sName = providersList.get(i).Address.getStreet().trim();
+                                tName = providersList.get(i).Address.getTown().trim();
                                 cName = providersList.get(i).Address.getCity().trim();
-                                coName = providersList.get(i).Address.getCountry().trim(); //trimming the string value
+                                coName = providersList.get(i).Address.getCountry().trim();
                                 zCode = providersList.get(i).Address.getZipcode();
-                                //concatenating individual address components into a full address string
                                 fullAddress = Integer.toString(hNumber) + " " + sName + ", " + tName + ", " + cName + ", " + coName + " " + Integer.toString(zCode);
 
-                                ratings = providersList.get(i).getRatings(); //ratings data here
-                            
+                                ratings = providersList.get(i).getRatings();
+                                
                             }catch(Exception e){}
                             
                     %>
                     
-                                
+                    
+                    
                     <%
                         /*/getting coverdata
                         
@@ -619,10 +616,11 @@
                             e.printStackTrace();
                         }*/
                     %>
-                            
+                    
                             <tbody>
                             <tr>
                             <td>
+                                
                             <center><div style="display: flex; flex-direction: row;">
                                 <div>
                                     <%
@@ -725,11 +723,10 @@
                                 
                                 </div>
                                 </div>
-                                        
-                            <div id="QueuLineDiv">
+                               
+                                <div id="QueuLineDiv" style="clear: both;">
                                         
                                     <%
-                                        
                                         int IntervalsValue = 30;
         
                                         try{
@@ -749,6 +746,7 @@
                                         }catch(Exception e){
                                             e.printStackTrace();
                                         }
+                                        
                                         Date currentDate = new Date();//default date constructor returns current date 
                                         String CurrentTime = currentDate.toString().substring(11,16);
                                         String DayOfWeek = currentDate.toString().substring(0,3);
@@ -964,7 +962,7 @@
                                         if(DailyStartTime != ""){
                                             
                                             if(CurrentHour < startHour){
-                                            
+                                                
                                                 CurrentHour = startHour;
                                                 CurrentMinute = startMinute;
                                                 
@@ -1004,9 +1002,9 @@
                                                     else if(closeHour == 0)
                                                         NextHour = 23;
 
-                                                }else if(NextHour > 23){
-                                                    NextHour = 23;
-                                                }
+                                                    }else if(NextHour > 23){
+                                                        NextHour = 23;
+                                                    }
                                             
                                             if(NextThirtyMinutes > 60)
                                                 NextThirtyMinutes -= 60;
@@ -1087,16 +1085,16 @@
                                             
                                             if(DailyClosingTime != ""){
                                                 
-                                                if(NextHour > closeHour && closeHour != 0){
+                                                if(Hourfor30Mins > closeHour && closeHour != 0){
 
-                                                    NextHour = closeHour - 1;
+                                                    Hourfor30Mins = closeHour - 1;
 
                                                 }
                                                 else if(closeHour == 0)
-                                                    NextHour = 23;
+                                                    Hourfor30Mins = 23;
 
-                                            }else if(NextHour > 23){
-                                                NextHour = 23;
+                                            }else if(Hourfor30Mins > 23){
+                                                Hourfor30Mins = 23;
                                             }
                                             
                                             if(ActualThirtyMinutesAfter > 60)
@@ -1160,12 +1158,12 @@
 
                                                             TempHour = closeHour - 1;
 
-                                                            }
-                                                            else if(closeHour == 0)
-                                                                TempHour = 23;
+                                                        }
+                                                        else if(closeHour == 0)
+                                                            TempHour = 23;
 
                                                     }else if(TempHour > 23){
-                                                            TempHour = 23;
+                                                        TempHour = 23;
                                                     }
 
                                                     if(TempMinute > 60)
@@ -1192,6 +1190,7 @@
                                                 
                                                 CurrentHour = Integer.parseInt(TimeWith30Mins.substring(0,2));
                                                 CurrentMinute = Integer.parseInt(TimeWith30Mins.substring(3,5));
+                                                
                                                 String thisMinute = Integer.toString(CurrentMinute);
                                                         
                                                 if(thisMinute.length() < 2){
@@ -1213,7 +1212,7 @@
                                             
                                             if(twoHours > closeHour && closeHour != 0){
 
-                                                    twoHours = closeHour - 1;
+                                                twoHours = closeHour - 1;
 
                                                 }
                                             else if(closeHour == 0)
@@ -1222,14 +1221,14 @@
                                         }else if(twoHours > 23){
                                                 twoHours = 23;
                                             }
-                                        
-                                        if(isTodayClosed == true){
+                                            
+                                            if(isTodayClosed == true){
                                                 
                                                 DailyStartTime = "00:00";
                                                 DailyClosingTime = "00:00";
                                                 
                                             }
-                                        
+
                                     %>
                                       
                                     <%
@@ -1281,7 +1280,7 @@
                                             <%
                                                 int HowManyColums = 0;
                                                 boolean isLineAvailable = false;
-                                                boolean broken = true;
+                                                boolean broken = false;
                                                 
                                                 for(int x = CurrentHour; x < twoHours;){
                                                     
@@ -1290,8 +1289,6 @@
                                                    
                                                     for(y = CurrentMinute; y <= 60;){
                                                         
-                                                        //This  makes sure that whenever there isnt any curreent appointment then 
-                                                        //Spots don't start from 30mins after;
                                                         //use current time when no appointment no appointment exists in the range of current time spot
                                                         //----------------------------------------------------------------------------------------
                                                         //Hour Setting
@@ -1436,7 +1433,7 @@
                                             %>
                                             
                                             <td onclick="showLineTakenMessage(<%=t%><%=TotalUnavailableList%>)">
-                                                <p style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
+                                                <p  style="font-size: 12px; font-weight: bold; color: red;"><%=NextAvailableFormattedTime%></p>
                                                 <img src="icons/icons8-standing-man-filled-50.png" width="50" height="50" alt="icons8-standing-man-filled-50"/>
                                             </td>
                                                 
@@ -1557,9 +1554,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                        
-                                    </div>
                                             
+                                    </div>
+                                        
                                      <%
                                         
                                         for(int z = 0; z < AllThisCustomerTakenFormattedTakenTime.size(); z++){
@@ -1571,7 +1568,7 @@
                                             
                                     %>     
                                             
-                                    <p style="background-color: green; color: white; display: none; text-align: center;" id="YourLinePositionMessage<%=t%><%=q%>">Position at <%=NextThisAvailableTimeForDisplay%> is your spot on <%=fullName%>'s line</p>
+                                    <p style="background-color: green; color: white; display: none; text-align: center;" id="YourLinePositionMessage<%=t%><%=q%>">Position at <%=NextThisAvailableTimeForDisplay%> is your spot on <%=fullName%>'s line.</p>
                                     
                                     <%}%>
                                     
@@ -1600,7 +1597,8 @@
                                     
                                     <p style=""><span style="color: blue; border: 1px solid blue;"><img src="icons/icons8-standing-man-filled-50 (1).png" width="30" height="25" alt="icons8-standing-man-filled-50 (1)"/>
                                         Available </span> <span style="color: red; border: 1px solid red;"><img src="icons/icons8-standing-man-filled-50.png" width="30" height="25" alt="icons8-standing-man-filled-50"/>
-                                        Taken </span> </p>
+                                        Taken </span> <span style="color: green; border: 1px solid green; padding-right: 3px;"><img src="icons/icons8-standing-man-filled-50 (2).png" width="30" height="25" alt="icons8-standing-man-filled-50 (2)"/>
+                                        Your Spot </span> </p>
                                       
                                     <%
                                         
@@ -1639,7 +1637,6 @@
                             </table></center>
                             
                 </div></center>
-                            
                 <%
                     if(providersList.size() > 9){
                 %>
@@ -1655,19 +1652,18 @@
                 <%
                     if(providersList.size() == 0){
                 %>
-                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; margin-bottom: 200px; width: fit-content; padding: 5px;">
-                        No Medical Aestheticains found at this time. Use search box above to explore more
+                    <center><p style="font-size: 16px; background-color: red; color: white; margin-top: 200px; width: fit-content; padding: 5px;">
+                        No Medical Aestheticians found at this time. Use search box above to explore more
                     </p></center>
                 <%
                     }
                 %>
-                
+                    
             </div>
                             
         </div>
                             
         <div id="newbusiness">
-            
             <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to book appointment</h2></center>
             
             <div id="businessdetails">
@@ -1766,7 +1762,6 @@
     </div>
                             
     </body>
-    
     
     
 </html>
