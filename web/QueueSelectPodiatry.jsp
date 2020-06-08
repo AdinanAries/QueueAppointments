@@ -579,7 +579,7 @@
                     
                                 
                     <%
-                        //getting coverdata
+                        /*/getting coverdata
                         
                         try{
                             
@@ -621,7 +621,7 @@
                             
                         }catch(Exception e){
                             e.printStackTrace();
-                        }
+                        }*/
                     %>
                             
                             <tbody>
@@ -643,7 +643,7 @@
                                     <p style='text-align: center; color:#7e7e7e; margin: 0; padding: 0;'><small><%=fullAddress%></small></p>
                                 
                                 <div>
-                                    <img style="float: left;" src="icons/icons8-barber-pole-50.png" width="30" height="30" alt="icons8-barber-pole-50"/>
+                                    <img style="float: left;" src="icons/icons8-foot-96.png" width="30" height="30" alt="icons8-barber-pole-50"/>
                                 </div>
                                             <p style=""><span><%=Company%></span><span style="color: goldenrod; font-size: 18px;">
                                                     

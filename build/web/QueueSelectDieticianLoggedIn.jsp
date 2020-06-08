@@ -43,6 +43,8 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="scripts/QueueLineDivBehavior.js"></script>
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
@@ -860,7 +862,7 @@
                     
                     
                     <%
-                        //getting coverdata
+                        /*/getting coverdata
                         
                         try{
                             
@@ -902,58 +904,115 @@
                             
                         }catch(Exception e){
                             e.printStackTrace();
-                        }
+                        }*/
                     %>
                     
                             <tbody>
                             <tr>
                             <td>
                                 
-                            <center>
-                            <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
-                            </div>
-                            
-                            <div class="proinfo">
-                                
-                                
-                                <b><p style="font-size: 20px; text-align: center; margin: 0;"><span><!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
-                                                <%=fullName%></span></p></b>
-                                    <p style='text-align: center; color:#7e7e7e; margin: 0; padding: 0;'><small><%=fullAddress%></small></p>
-                                
-                                          
+                            <center><div style="display: flex; flex-direction: row;">
                                 <div>
-                                    <img style="float: left; margin-right: 3px;" src="icons/icons8-dairy-50.png" width="30" height2="30" alt="icons8-dairy-50"/>
+                                    <%
+                                        if(base64Image == ""){
+                                    %>
+                                    <i style="font-size: 50px; border-radius: 100%; margin-left: 10px; margin-top: 5px;" class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <%
+                                        }else{
+                                    %>
+                                    <img class="fittedImg" style="width: 50px; height: 50px; border-radius: 100%; margin-left: 10px; margin-top: 5px;" src="data:image/jpg;base64,<%=base64Image%>"/>
+                                    <%
+                                        }
+                                    %>
                                 </div>
-                                                
-                                    <p style=""><span><%=Company%></span><span style="color: goldenrod; font-size: 18px;">
+                                <div class="proinfo" style="margin-top: 0; padding-top: 0; margin-left: 10px;">
+                                    
+                                 <table id="ProInfoTable" style="width: 100%; border-spacing: 0; box-shadow: 0; margin-left: 0;">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <p style="">
+                                                <%=fullName%>
+                                            </p>
+                                        </b>
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <img style="float: left; margin-right: 3px;" src="icons/icons8-dairy-50.png" width="30" height2="30" alt="icons8-dairy-50"/>
+                                                </div>
+                                                <div style="margin-left: 2px; margin-top: 10px;"><%=Company%></div>
+                                            </div>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
+                                                        <span style="color: tomato;">Overall Rating: </span>
+                                                        <span style="font-size: 20px; margin-left: 10px;">
+                                                        <%
+                                                            if(ratings ==5){
+
+                                                        %> 
+                                                        ★★★★★ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 4){
+                                                        %>
+                                                        ★★★★☆ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 3){
+                                                        %>
+                                                        ★★★☆☆ 
+                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Average</span></i>
+                                                        <%
+                                                             }else if(ratings == 2){
+                                                        %>
+                                                        ★★☆☆☆ 
+                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Bad rating</span></i>
+                                                        <%
+                                                             }else if(ratings == 1){
+                                                        %>
+                                                        ★☆☆☆☆   
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Worst rating</span></i>
+                                                        <%}%>
+                                                        </span>
+                                                        
+                                                    </p> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="width: 100%; display: flex; flex-direction: row; justify-content: center; margin-bottom: 10px;">
+                                            <div>
+                                                <a style="color: seagreen;" href="https://maps.google.com/?q=<%=fullAddress%>" target="_blank">
+                                                    <i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                   font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">map</span></i>
+                                                </a>
+                                                <!--img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                <=fullAddress-->
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="tel:<%=phoneNumber%>">
+                                                    <i class="fa fa-phone" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">call</span></i>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="mailto:<%=Email%>">
+                                                    <i class="fa fa-envelope" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">email</span></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                </table>
                                 
-                                        <%
-                                            if(ratings ==5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(ratings == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(ratings == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(ratings == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(ratings == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%>
-                                        </span>
-                                </p>
-                                
-                            </div>
+                                </div>
+                                </div>
                                
                                 <div id="QueuLineDiv" style="clear: both;">
                                         

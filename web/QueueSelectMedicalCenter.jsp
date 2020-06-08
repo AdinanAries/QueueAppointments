@@ -574,7 +574,7 @@
                     
                                 
                     <%
-                        //getting coverdata
+                        /*/getting coverdata
                         
                         try{
                             
@@ -616,7 +616,7 @@
                             
                         }catch(Exception e){
                             e.printStackTrace();
-                        }
+                        }*/
                     %>
                             
                             <tbody>
