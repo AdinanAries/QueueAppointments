@@ -40,6 +40,8 @@
         
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -1978,7 +1980,7 @@
                                         if(!isLineAvailable){
                                     %>
                                     
-                                    <p style="background-color: red; color: white; text-align: center;">There is no line currently available for this service provider</p>
+                                    <p style="margin: 20px 0; color: darkblue; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> <%=fullName.split(" ")[0]%> has no available spots for today</p>
                                     
                                     <%}%>
                                     

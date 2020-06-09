@@ -41,6 +41,8 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <!--script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
@@ -421,8 +423,9 @@
             
         </div>
             
-            <div id='Extras' style=''>
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News updates from your providers</p></center>
+            <div id="Extras">
+            
+            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from your providers</p></center>
             
                 <div style="max-height: 87vh; overflow-y: auto;">
                     
@@ -454,8 +457,8 @@
 
                                         while(newsRec.next()){
 
-                                            newsItems++;
                                             String base64Profile = "";
+                                            newsItems++;
                                             
                                             String ProvID = newsRec.getString("ProvID");
                                             String ProvFirstName = "";
@@ -557,38 +560,38 @@
 
                     <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                         <tbody>
-                            <tr style="background-color: #333333;">
+                            <tr style="background-color: #eeeeee;">
                                 <td>
                                     <div id="ProvMsgBxOne">
                                         
-                                        <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
+                                        <div style='font-weight: bolder; margin-bottom: 4px;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
                                                     <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                     <!--/div></center-->
                                                 <%
                                                     }else{
                                                 %>
 
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
 
                                                 <%}%>
                                             <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
-                                                <p style='color: violet;'><%=ProvCompany%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                         
                                         <%if(MsgPhoto.equals("")){%>
-                                        <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                         <%} else{ %>
-                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                         <%}%>
 
                                     </div>
@@ -596,12 +599,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                                 </td>
                             </tr>
                             <tr style="background-color: #eeeeee;">
                                 <td>
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                     <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                         <%=ProvEmail%></p>
                                     <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -649,8 +651,8 @@
 
                             while(newsRec.next()){
 
-                                newsItems++;
                                 String base64Profile = "";
+                                newsItems++;
 
                                 String ProvID = newsRec.getString("ProvID");
                                 String ProvFirstName = "";
@@ -700,8 +702,7 @@
                                             ProvTel = ProvRec.getString("Phone_Number").trim();
                                             ProvEmail = ProvRec.getString("Email").trim();
 
-                                            try{
-
+                                            try{    
                                                 //put this in a try catch block for incase getProfilePicture returns nothing
                                                 Blob Pic = ProvRec.getBlob("Profile_Pic"); 
                                                 InputStream inputStream = Pic.getBinaryStream();
@@ -753,36 +754,38 @@
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
                     <tbody>
-                        <tr style="background-color: #333333;">
+                        <tr style="background-color: #eeeeee;">
                             <td>
                                 <div id="ProvMsgBxOne">
-                                    <div style='font-weight: bolder; margin-bottom: 4px; color: #eeeeee;'>
-                                        <!--div style="float: right; width: 65px;" -->
-                                            <%
-                                                if(base64Profile != ""){
-                                            %>
+                                    
+                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
+                                            <!--div style="float: right; width: 65px;" -->
+                                                <%
+                                                    if(base64Profile != ""){
+                                                %>
+                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
+                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <!--/div></center-->
+                                                <%
+                                                    }else{
+                                                %>
+
                                                 <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; border: 1px solid green; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <!--/div></center-->
-                                            <%
-                                                }else{
-                                            %>
 
-                                            <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                <img style='margin: 4px; width:35px; height: 35px; border: 1px solid black; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                            <!--/div></center-->
-
-                                            <%}%>
-                                        <!--/div-->
-                                        <div>
-                                            <p><%=ProvFirstName%></p>
-                                            <p style='color: violet;'><%=ProvCompany%></p>
+                                                <%}%>
+                                            <!--/div-->
+                                            <div>
+                                                <p><%=ProvFirstName%></p>
+                                                <p style='color: red;'><%=ProvCompany%></p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    
                                     <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="98%" alt="view-wallpaper-7"/></center>
+                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
                                     <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="98%" alt="NewsImage"/></center>
+                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
                                     <%}%>
                                     
                                 </div>
@@ -790,12 +793,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='font-family: helvetica; text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'><%=Msg%></p>
+                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                             </td>
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Contact:</p>
                                 <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                     <%=ProvEmail%></p>
                                 <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
@@ -827,7 +829,7 @@
             
                 }
             %>
-               </div> 
+               </div>
             </div>
             
         <div id="content">
@@ -1370,7 +1372,7 @@
                     %>
                     
                     <%
-                        //getting coverdata
+                        /*/getting coverdata
                         
                         try{
                             
@@ -1409,71 +1411,105 @@
                             
                         }catch(Exception e){
                             e.printStackTrace();
-                        }
+                        }*/
                     %>
                     
                     
                     <tbody>
                         <tr>
                             <td>
-                                <center><div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
+                                <div style="display: flex; flex-direction: row;">
+                                <!--center><div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
                                     <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
-                                </div></center>
-                    
-                                <div class="proinfo">
+                                </div></center-->
+                                <div>
+                                    <img class="fittedImg" style="width: 50px; height: 50px; border-radius: 100%; margin-left: 10px; margin-top: 5px;" src="data:image/jpg;base64,<%=base64Image%>"/>
+                                </div>
+                                <div class="proinfo" style="margin-top: 0; padding-top: 0; margin-left: 10px;">
                                     
                                  <table id="ProInfoTable" style="width: 100%; border-spacing: 0; box-shadow: 0; margin-left: 0;">
                                 <tbody>
                                 <tr>
-                                    <td><b><p style="font-size: 20px; text-align: center;"><span><!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
-                                            <%=fullName%></span></p></b></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                        <%=Company%> <span style="color: goldenrod; font-size: 18px;">
-                                        <%
-                                            if(ratings ==5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(ratings == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(ratings == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(ratings == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(ratings == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%></span>
-                                        </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                        <%=Email%>, <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                        <%=phoneNumber %> </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                        <%=fullAddress%> </td>
+                                    <td>
+                                        <b>
+                                            <p style="">
+                                                <img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                                <%=fullName%>
+                                            </p>
+                                        </b>
+                                        <p>
+                                            <img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
+                                            <%=Company%>
+                                        </p>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
+                                       <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
+                                                        <span style="color: tomato;">Overall Rating: </span>
+                                                        <span style="font-size: 20px; margin-left: 10px;">
+                                                        <%
+                                                            if(ratings ==5){
+
+                                                        %> 
+                                                        ★★★★★ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 4){
+                                                        %>
+                                                        ★★★★☆ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 3){
+                                                        %>
+                                                        ★★★☆☆ 
+                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Average</span></i>
+                                                        <%
+                                                             }else if(ratings == 2){
+                                                        %>
+                                                        ★★☆☆☆ 
+                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Bad rating</span></i>
+                                                        <%
+                                                             }else if(ratings == 1){
+                                                        %>
+                                                        ★☆☆☆☆   
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Worst rating</span></i>
+                                                        <%}%>
+                                                        </span>
+                                                        
+                                                    </p> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="width: 100%; display: flex; flex-direction: row; justify-content: center; margin-bottom: 10px;">
+                                            <div>
+                                                <a style="color: seagreen;" href="https://maps.google.com/?q=<%=fullAddress%>" target="_blank">
+                                                    <i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                   font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">map</span></i>
+                                                </a>
+                                                <!--img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                <=fullAddress-->
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="tel:<%=phoneNumber%>">
+                                                    <i class="fa fa-phone" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">call</span></i>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a style="color: seagreen;" href="mailto:<%=Email%>">
+                                                    <i class="fa fa-envelope" aria-hidden="true" style="margin-left: 10px; background-color: darkslateblue; color: navajowhite;
+                                                    font-size: 20px; padding: 10px 0; border-radius: 4px; width: 70px; text-align: center;"> <span style="color: white;">email</span></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
                                 </table>
                                 
+                                </div>
                                 </div>
                                     
                                 <form >
@@ -1497,8 +1533,8 @@
                                        <p>Click on date field below to set date</p>
                                        
                                        <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid black; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="click here to choose date" readonly></p>
-                                       <p id="datepickerStatus" style="text-align: center; color: white; background-color: red;"></p>
-                                       <p id="DateStatus" style="color: white; background-color: green; text-align: center;"></p>
+                                       <p id="datepickerStatus" style="text-align: center; color: darkblue; font-weight: bolder;"></p>
+                                       <p id="DateStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
                                     </div> 
                                         
                                     <div id="serviceslist">
@@ -1593,8 +1629,8 @@
                                                                  </select></span>
                                                                  
                                             </p></center>
-                                        <p id="timeStatus" style="color: white; background-color: green; text-align: center;"></p>
-                                        <p id="HideSuggestedTimeDivStatus" style="color: white; background-color: green; text-align: center;"></p>
+                                        <p id="timeStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
+                                        <p id="HideSuggestedTimeDivStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
                                     
                                     </div>
                                         
@@ -1606,7 +1642,7 @@
                                       
                                         <center><p>You may also choose a spot from suggested list below</p></center>
                                         
-                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border: 1px solid black; background-color: pink; padding: 5px; cursor: pointer;">Show All Suggested Spots</p>
+                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Show All Suggested Spots</p>
                                         
                                         <center><p id="SuggestedTimeDivStatus" style="color: white; background-color: green; text-align: center;"></p></center>
                                    
@@ -1658,7 +1694,8 @@
                                         if(AllAvailableTimeList.size() == 0){
                                     %>
                                     
-                                        <p style="background-color: red; color: white; text-align: center;">No available spot suggestions at this time</p>
+                                        <p style="font-weight: bolder; color: darkblue; text-align: center;">
+                                            <i style='color: red;' class='fa fa-exclamation-triangle'></i> No available spot suggestions at this time</p>
                                     
                                     <%}%>
                                     <p style="clear: both;"></p>     
@@ -1701,9 +1738,9 @@
                                             <%  }   //end of condition%>
                                             
                                             </p>
-                                        <p> Payment:<span style="color: red; float: right;">
+                                        <p style='display: none;'> Payment:<span style="color: red; float: right;">
                                                 
-                                                <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" value="Cash" style="background-color: white;"/><label id="cashLabel" for="Cash" style="margin-right: 5px">Later</label></span>
+                                                <span onclick="toggleHideCardDetailsDiv()"><input checked='true' id="Cash" type="radio" name="payment" value="Cash" style="background-color: white;"/><label id="cashLabel" for="Cash" style="margin-right: 5px">Later</label></span>
                                                 / <span onclick="toggleShowCardDetailsDiv()"><input onclick="toggleShowCardDetailsDiv()" id="Credit/Debit" type="radio" name="payment" value="Debit/Credit Card" style="background-color: white;"/><label id="cardLabel" for="Credit/Debit">Now</label></span>
                                             <%
                                                 if(hasCancellation){
@@ -1739,7 +1776,7 @@
                                         <p style="background-color: green; text-align: center; color: white;">Your payment has already been processed</p>
                                         <%}%>
                                         
-                                        <p id="ConfirmAppointmentStatusTxt" style="text-align: center; background-color: red; color: white;"></p>
+                                        <p style="text-align: center; font-weight: bolder; color: darkblue;"><span id="ConfirmAppointmentStatusTxt"></span></p>
                                         <input id="submitAppointment" style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
                                                    padding: 5px;"
                                                    type="button" value="Confirm" />

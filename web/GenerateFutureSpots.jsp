@@ -25,6 +25,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Available Future Spots</title>
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
@@ -868,9 +870,9 @@
                                     %>     
                                             
                                     
-                                    <form name="ReleaseSpot" style='background-color: green; display: none; margin-bottom: 5px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotController" method="POST">
+                                    <form name="ReleaseSpot" style='display: none; margin-bottom: 5px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotController" method="POST">
                                         
-                                   <p style="background-color: green; color: white; text-align: center;">Position at <%=NextThisAvailableTimeForDisplay%> is your spot.</p>
+                                        <p style="margin: 10px; font-weight: bolder; color: darkblue; text-align: center;"><i style='color: green;' class='fa fa-check'></i> <%=NextThisAvailableTimeForDisplay%> is your spot.</p>
                                         
                                     <%
                                         if(thisTime.length() == 4)
@@ -921,7 +923,7 @@
                                             
                                     %>
                                    
-                                    <p style="background-color: red; margin-bottom: 5px; color: white; text-align: center; display: none;" id="LineTakenMessage<%=t%><%=q%>"><%=NextUnavailableTimeForMessage%> is unavailable. This and every red spot has been taken.</p>
+                                    <p style="margin: 10px; color: darkblue; font-weight: bolder; text-align: center; display: none;" id="LineTakenMessage<%=t%><%=q%>"><i style='color: red;' class='fa fa-exclamation-triangle'></i> <%=NextUnavailableTimeForMessage%> has been taken.</p>
                                     
                                     <%}%>
                                     
@@ -929,7 +931,7 @@
                                         if(!isLineAvailable){
                                     %>
                                     
-                                    <p style="background-color: red; color: white; text-align: center;">There is no line currently available for this service provider</p>
+                                    <p style="color: darkblue; font-weight: bolder; text-align: center; margin: 20px;"><i style='color: red;' class='fa fa-exclamation-triangle'></i> no available spots</p>
                                     
                                     <%}%>
                                     
@@ -978,7 +980,7 @@
                                         if(TempThisHour > AppointmentHour && (QueueDate.equals(Today))){
                                         %>
                                         
-                                        <p style="text-align: center; background-color: red; color: white; margin-bottom: 5px;"><%=NextAvailableTimeForFormDisplay%> is past. You cannot take this spot</p>
+                                        <p style="margin: 10px; color: darkblue; font-weight: bolder; text-align: center; text-align: center;"><i style='color: red;' class='fa fa-exclamation-triangle'></i> <%=NextAvailableTimeForFormDisplay%> is past</p>
                                         
                                         <%}
                                         
@@ -994,8 +996,8 @@
                                        
                                     <%      }else{   %>
 
-                                        <p style="text-align: center; background-color: red; color: white; margin-bottom: 5px;"><%=NextAvailableTimeForFormDisplay%> is past. You cannot take this spot</p>
-
+                                        <p style="margin: 10px; color: darkblue; font-weight: bolder; text-align: center; text-align: center;"><i style='color: red;' class='fa fa-exclamation-triangle'></i> <%=NextAvailableTimeForFormDisplay%> is past</p>
+                                        
                                     <%       }
                                         }else if(TempThisHour < AppointmentHour && (QueueDate.equals(Today))) {
                                     %>
@@ -1024,12 +1026,12 @@
                             
                 <center><div style="width: 100%; max-width: 600px;">
                             <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray; border-bottom: 1px solid darkgray;">
-                                <p id="showFutureSpotsBtn" style="text-align: center; cursor: pointer;">Find More Spots</p>
+                                <p id="showFutureSpotsBtn" style="font-weight: bolder; color: darkblue; text-align: center; cursor: pointer;">Find More Spots</p>
                                     
                                     <center><div>
                                     <form style="" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpots.jsp">
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to get spots</p>
-                                        <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                                        <input style="border: 1px solid darkgray; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         
                                         <!--input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
@@ -1079,7 +1081,10 @@
                                 </script>
                                 
                             </div>
-                            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="padding: 5px; background-color: pink; text-align: center; ">Go to your dashboard</p></a>
+                            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                <p style="background-color: darkslateblue; padding: 10px; text-align: center; color: white;">
+                                    <i style='color: #4ed164; font-size: 22px;' class="fa fa-home" aria-hidden="true"></i>
+                                    Go to your dashboard</p></a>
     
                     </div></center>
     </body>

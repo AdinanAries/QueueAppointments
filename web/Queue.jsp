@@ -572,23 +572,23 @@
                         </tr>
                         <tr style="background-color: #eeeeee;">
                             <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    <%=ProvEmail%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    <%=ProvTel%></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    <%=ProvCompany%></p>
-                                <p style="color: seagreen; margin-top: 10px;"><a style="color: seagreen;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                        <%=ProvAddress.split(",")[0]%><i class="fa fa-location-arrow" aria-hidden="true" style="margin-left: 10px; background-color: darksalmon; color: black; padding: 5px; border-radius: 4px;"></i></a></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
+                                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px;">
+                                    <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                        <a style="color: white;" href="mailto:<%=ProvEmail%>">
+                                            <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
+                                        </a>  
+                                    </p>
+                                    <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                        <a style="color: white;" href="tel:<%=ProvTel%>">
+                                            <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
+                                        </a>
+                                    </p>
+                                    <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                        <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
+                                            <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
+                                        </a>
+                                    </p>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

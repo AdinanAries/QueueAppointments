@@ -1888,7 +1888,7 @@
                                         if(!isLineAvailable){
                                     %>
                                     
-                                    <p style="background-color: red; color: white; text-align: center;">There is no line currently available for this service provider</p>
+                                    <p style="margin: 20px 0; color: darkblue; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> <%=fullName.split(" ")[0]%> has no available spots for today</p>
                                     
                                     <%}%>
                                     

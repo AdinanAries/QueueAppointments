@@ -3696,8 +3696,8 @@
                                         <input id="datepicker<%=WString%>" style="background-color: white;" type="text" name="AppointmentDate" value="<%=date%>"/>
                                         <input id="timeFld<%=WString%>" style="background-color: white;" type="hidden" name="ApointmentTime" value="<%=Time%>"/>
                                         <input id="timePicker<%=WString%>" style="background-color: white;" type="text" name="ApointmentTimePicker" value="<%=Time%>"/>
-                                        <p id="timePickerStatus<%=WString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
-                                        <p id="datePickerStatus<%=WString%>" style="background-color: red; color: white; text-align: center;"></p>
+                                        <p id="timePickerStatus<%=WString%>" style="margin-bottom: 3px; font-weight: bolder; color: darkblue; text-align: center;"></p>
+                                        <p id="datePickerStatus<%=WString%>" style="font-weight: bolder; color: darkblue; text-align: center;"></p>
                                         <input id="ChangeAppointmentID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
                                         <input id="changeAppointmentBtn<%=WString%>" style="background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: none;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
                                         <script>
@@ -3784,14 +3784,14 @@
                                                                 document.getElementById("timeFld<%=WString%>").value = currentTime;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = true;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkgrey";
-                                                                document.getElementById("timePickerStatus<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                                document.getElementById("timePickerStatus<%=WString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }
                                                             else if( (parseInt(document.getElementById("timeFld<%=WString%>").value.substring(0,2), 10)) === (parseInt(currentHour, 10)) &&
                                                                      (parseInt(document.getElementById("timeFld<%=WString%>").value.substring(3,5), 10)) < (parseInt(currentMinute, 10)) ){
                                                                         document.getElementById("timeFld<%=WString%>").value = currentTime;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = true;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkgrey";
-                                                                        document.getElementById("timePickerStatus<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                                        document.getElementById("timePickerStatus<%=WString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }else{
 
                                                                 document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
@@ -3830,14 +3830,12 @@
                                                                     if(document.getElementById("datepicker<%=WString%>").value === currentDate){
 
                                                                         if(document.getElementById("datePickerStatus<%=WString%>").innerHTML === ""){
-                                                                            document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Today's Date: " + currentDate;
-                                                                            document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "green";
+                                                                            document.getElementById("datePickerStatus<%=WString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Today's Date: " + currentDate;
                                                                         }
 
                                                                     }
                                                                     else{
-                                                                        document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Only today's date or future date allowed";
-                                                                        document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "red";
+                                                                        document.getElementById("datePickerStatus<%=WString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Only today's date or future date allowed";
                                                                         document.getElementById("datepicker<%=WString%>").value = currentDate;
                                                                     }
                                                                  }
@@ -4094,8 +4092,8 @@
                                         <input id="datepickerFuture<%=WString%>" style="background-color: white;" type="text" name="AppointmentDate" value="<%=date%>"/>
                                         <input id="timeFldFuture<%=WString%>" style="background-color: white;" type="hidden" name="ApointmentTime" value="<%=Time%>"/>
                                         <input id="timePickerFuture<%=WString%>" style="background-color: white;" type="text" name="ApointmentTimePicker" value="<%=Time%>"/>
-                                        <p id="timePickerStatusFuture<%=WString%>" style="background-color: red; margin-bottom: 3px; color: white; text-align: center;"></p>
-                                        <p id="datePickerStatusFuture<%=WString%>" style="background-color: red; color: white; text-align: center;"></p>
+                                        <p id="timePickerStatusFuture<%=WString%>" style="font-weight: bolder; margin-bottom: 3px; color: darkblue; text-align: center;"></p>
+                                        <p id="datePickerStatusFuture<%=WString%>" style="font-weight: bolder; color: darkblue; text-align: center;"></p>
                                         <input id="ChangeFutureAppointmentID<%=WString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
                                         <input id="changeAppointmentBtnFuture<%=WString%>" style="background-color: darkslateblue; border: none; border-radius: 4px; color: white; padding: 5px;" name="<%=WString%>changeAppointment" type="button" value="Reschedule" />
                                         <script>
@@ -4187,14 +4185,14 @@
                                                                 document.getElementById("timeFldFuture<%=WString%>").value = currentTime;
                                                                 document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = true;
                                                             document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "darkgrey";
-                                                                document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                                document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }
                                                             else if( (parseInt(document.getElementById("timeFldFuture<%=WString%>").value.substring(0,2), 10)) === (parseInt(currentHour, 10)) &&
                                                                      (parseInt(document.getElementById("timeFldFuture<%=WString%>").value.substring(3,5), 10)) < (parseInt(currentMinute, 10)) ){
                                                                         document.getElementById("timeFldFuture<%=WString%>").value = currentTime;
                                                                         document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = true;
                                                             document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "darkgrey";
-                                                                        document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                                        document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }else{
                                                                 document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = false;
@@ -4232,14 +4230,12 @@
                                                                                  if(document.getElementById("datepickerFuture<%=WString%>").value === currentDate){
 
                                                                                          if(document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML === ""){
-                                                                                                 document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "Today's Date: " + currentDate;
-                                                                                                 document.getElementById("datePickerStatusFuture<%=WString%>").style.backgroundColor = "green";
+                                                                                                 document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Today's Date: " + currentDate;
                                                                                          }
 
                                                                                  }
                                                                                  else{
-                                                                                         document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "Only today's date or future date allowed";
-                                                                                         document.getElementById("datePickerStatusFuture<%=WString%>").style.backgroundColor = "red";
+                                                                                         document.getElementById("datePickerStatusFuture<%=WString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Only today's date or future date allowed";
                                                                                          document.getElementById("datepickerFuture<%=WString%>").value = currentDate;
                                                                                  }
                                                                  }

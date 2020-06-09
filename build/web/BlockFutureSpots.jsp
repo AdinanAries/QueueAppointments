@@ -38,6 +38,8 @@
     
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
@@ -873,9 +875,9 @@
                                     %>     
                                             
                                     
-                                    <form name="ReleaseSpot" style='background-color: green; display: none; margin-bottom: 5px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotControllerforBlockSpotsPage" method="POST">
+                                    <form name="ReleaseSpot" style='display: none; margin-bottom: 5px; padding: 10px;' id='YourLinePositionMessage<%=t%><%=q%>' action="UnblockSpotControllerforBlockSpotsPage" method="POST">
                                         
-                                   <p style="color: white; text-align: center;" id="">You blocked <%=NextThisAvailableTimeForDisplay%></p>
+                                        <p style="color: darkblue; text-align: center;" id=""><i style="color: orange;" class='fa fa-info-circle'></i> You blocked <%=NextThisAvailableTimeForDisplay%></p>
                                         
                                     <%
                                         if(thisTime.length() == 4)
@@ -901,7 +903,7 @@
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
-                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 5px;" value="Unblock <%=NextThisAvailableTimeForDisplay%>" />
                                     
                                     <%      }
                                         }else if(TempThisHour < AppointmentHour && QueueDate.equals(Today)) {
@@ -911,7 +913,7 @@
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
-                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 5px;" value="Unblock <%=NextThisAvailableTimeForDisplay%>" />
                                     
                                     <%} else if(!QueueDate.equals(Today)){%>
                                     
@@ -919,7 +921,7 @@
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>"/>
-                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 5px;" value="Unblock this spot" />
+                                        <input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 5px;" value="Unblock <%=NextThisAvailableTimeForDisplay%>" />
                                     
                                     <%}%>
                                     
@@ -945,8 +947,8 @@
                                         if(!isLineAvailable){
                                     %>
                                     
-                                        <p style="background-color: red; color: white; text-align: center;">There is no line available on <%=DayOfWeek%>, <%=stringDate%></p>
-                                    
+                                        <p style="margin: 20px 0; color: darkblue; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> There is no line available on <%=DayOfWeek%>, <%=stringDate%></p>
+                                        
                                     <%}%>
                                     
                                     <%
@@ -1002,17 +1004,17 @@
                                     %>
                                     
                                         
-                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: darkslateblue; padding: 5px; border: none;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                        
                                     <%          }
                                             }else if(TempThisHour < AppointmentHour && (QueueDate.equals(Today))) {
                                     %>
                                     
-                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: darkslateblue; padding: 5px; border: none;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
                                     <%      }else if(!QueueDate.equals(Today)){%>
                                     
-                                                    <input style="background-color: lightblue; padding: 5px; border: 1px solid black;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
+                                                    <input style="background-color: darkslateblue; padding: 5px; border: none;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Block this spot - [ <%=NextAvailableTimeForFormDisplay%> ]" name="QueueLineDivBookAppointment" />
                                     
                                     <%}%>
                                     
@@ -1032,12 +1034,12 @@
                                 
                                 <center><div style="width: 100%; max-width: 600px; background-color: #eeeeee;">
                                     <form style="" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="BlockFutureSpots.jsp">
-                                        <p style="text-align: center;">Get More Spots</p>
+                                        <p style="text-align: center; font-weight: bolder; color: darkblue;">Get More Spots</p>
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to block future spots</p>
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: 1px solid black; background-color: pink; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input style="border: 1px solid darkgray; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: none; background-color: darkslateblue; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                     
@@ -1060,7 +1062,7 @@
                                             GenerateSpotsBtn.disabled = true;
                                         }
                                         else{
-                                            GenerateSpotsBtn.style.backgroundColor = "pink";
+                                            GenerateSpotsBtn.style.backgroundColor = "darkslateblue";
                                             GenerateSpotsBtn.disabled = false;
 
                                         }
@@ -1072,7 +1074,9 @@
 
                                 </script>
 
-                                <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="width: 100%; max-width: 590px; padding: 5px; background-color: pink; color: white; text-align:center; ">Go to your dashboard</p></a></center>
+                                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                        <p style="margin: auto; width: 100%; max-width: 580px; padding: 10px; background-color: darkslateblue; color: white; text-align:center; ">
+                                            <i style='color: #4ed164; font-size: 22px;' class="fa fa-home" aria-hidden="true"></i> Go to your dashboard</p></a>
 
                 <%
                         
@@ -1287,31 +1291,44 @@
                     if(Base64CustPic != ""){
                 %>
                 <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                 <img class="fittedImg" style="border-radius: 100%; border: 2px solid green; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
+                 <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>" width="40" height="40"/>
                     </div></center>
                 <%
                     }
                 %>
                    
-                        <center><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
-                                <span style="color: red;"><%=Name%></span> at <span style="color: red;"><%=TimeToUse%></span></p></center>
-                                <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
-                                    <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
-                                    <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
+                        <center>
+                            <p style='display: flex; flex-direction: row; justify-content: space-between; padding: 5px 10px; margin-bottom: 5px; font-weight: bolder;'>
+                                <span></span>
+                                <span>
+                                    <i style='color: darkblue;' class="fa fa-calendar" aria-hidden="true"> </i> 
+                                    <span style="color: red;"><%=TKStringDate%> </span> 
+                                    <i style='font-size: 18px; color: darkblue; margin-left: 10px;' class="fa fa-clock-o" aria-hidden="true"> </i>
+                                    <span style="color: red;"><%=TimeToUse%></span>
+                                </span> 
+                                <span><!--i style='color: green;' class="fa fa-spinner" aria-hidden="true"></i--></span>
+                            </p>
+                        </center>
+                                <center>
+                                    <p style='margin-top: 20px;'><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                        <span style="color: red;"><%=Name%></span></p>
+                                    <p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%></p> 
+                                    <p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
+                                    <p style="text-align: center; color: darkgrey; margin: 10px 0;">- <%=AppointmentReason%> -</p>
                               
                                 <center>
                                     <form style=" display: none;" id="changeBookedAppointmetForm<%=WString%>" class="changeBookedAppointmentForm" name="changeAppointment" action="BlkSptUpdateAppointment" method="POST">
-                                        <p style ="margin-top: 10px;">Reschedule This Customer</p>
+                                        <p style ="margin-top: 10px; color: darkblue; font-weight: bolder;">Reschedule This Customer</p>
                                         <input id="datepicker<%=WString%>" style="background-color: white;" type="text" name="AppointmentDate" value="<%=date%>"/>
                                         <input id="timeFld<%=WString%>" style="background-color: white;" type="hidden" name="ApointmentTime" value="<%=Time%>"/>
                                         <input id="timePicker<%=WString%>" style="background-color: white;" type="text" name="ApointmentTimePicker" value="<%=Time%>"/>
-                                        <p id="timePickerStatus<%=WString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
-                                        <p id="datePickerStatus<%=WString%>" style="background-color: red; color: white; text-align: center;"></p>
+                                        <p id="timePickerStatus<%=WString%>" style="margin-bottom: 3px; color: darkblue; font-weight: bolder; text-align: center;"></p>
+                                        <p id="datePickerStatus<%=WString%>" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
                                         <input type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="GetDate" value="<%=SpotsDate%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input id="changeAppointmentBtn<%=WString%>" style="background-color: pink; border: 1px solid black; color: black; padding: 3px;" name="<%=WString%>changeAppointment" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Reschedule" />
+                                        <input id="changeAppointmentBtn<%=WString%>" style="background-color: darkslateblue; border: none; color: white; border-radius: 4px; padding: 5px;" name="<%=WString%>changeAppointment" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Reschedule" />
                                         
                                         <script>
                                                
@@ -1361,19 +1378,19 @@
                                                                 document.getElementById("timeFld<%=WString%>").value = currentTime;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = true;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkgrey";
-                                                                document.getElementById("timePickerStatus<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                                document.getElementById("timePickerStatus<%=WString%>").innerHTML = "<i style='color: orange;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }
                                                             else if( (parseInt(document.getElementById("timeFld<%=WString%>").value.substring(0,2), 10)) === (parseInt(currentHour, 10)) &&
                                                                      (parseInt(document.getElementById("timeFld<%=WString%>").value.substring(3,5), 10)) < (parseInt(currentMinute, 10)) ){
                                                                         document.getElementById("timeFld<%=WString%>").value = currentTime;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = true;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkgrey";
-                                                                        document.getElementById("timePickerStatus<%=WString%>").innerHTML = "Time cannot be in the past";
+                                                                        document.getElementById("timePickerStatus<%=WString%>").innerHTML = "<i style='color: orange;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }else{
 
                                                                 document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkslateblue";
 
                                                             }
                                                         
@@ -1381,7 +1398,7 @@
                                                             
                                                             document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = false;
-                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "pink";
+                                                            document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkslateblue";
                                                             
                                                         }
 
@@ -1416,8 +1433,8 @@
                                                                                  if(document.getElementById("datepicker<%=WString%>").value === currentDate){
 
                                                                                          if(document.getElementById("datePickerStatus<%=WString%>").innerHTML === ""){
-                                                                                                 document.getElementById("datePickerStatus<%=WString%>").innerHTML = "Today's Date: " + currentDate;
-                                                                                                 document.getElementById("datePickerStatus<%=WString%>").style.backgroundColor = "green";
+                                                                                                 document.getElementById("datePickerStatus<%=WString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Today's Date: " + currentDate;
+                                                                                                 //document.getElementById("datePickerStatus<=WString%>").style.backgroundColor = "green";
                                                                                          }
 
                                                                                  }
@@ -1468,7 +1485,7 @@
                         
                         %>
                         
-                        <center><p style="color: white; background-color: red; margin-bottom: 30px; margin-top: 30px;">No line for selected date</p></center>
+                        <center><p style="margin: 20px 0; color: white; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> You have no bookings for <%=DayOfWeek%>, <%=stringDate%></p></center>
                         <%} //end of if block%>
                     </tbody>
                     </table></center>
