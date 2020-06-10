@@ -322,13 +322,13 @@
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
             
-            <div style="max-height: 87vh; overflow-y: auto;">
+            <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
                 <%
                     
                     try{
                         Class.forName(Driver);
                         Connection newsConn = DriverManager.getConnection(url, User, Password);
-                        String newsQuery = "Select * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                        String newsQuery = "Select top 10 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         ResultSet newsRec = newsPst.executeQuery();
                         int newsItems = 0;
@@ -436,13 +436,13 @@
                                 }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
-                    <tbody>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <div id="ProvMsgBxOne">
-                                    
-                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
+                        <tbody>
+                            <tr style="background-color: #eeeeee;">
+                                <td>
+                                    <div id="ProvMsgBxOne">
+                                        
+                                        <div style='font-weight: bolder;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
@@ -465,44 +465,49 @@
                                                 <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
-                                    
-                                    <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
-                                    <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
-                                    <%}%>
-                                    
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    <%=ProvEmail%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    <%=ProvTel%></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    </div>      
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td style="padding: 0;">
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="mailto:<%=ProvEmail%>">
+                                                <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
+                                            </a>  
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="tel:<%=ProvTel%>">
+                                                <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
+                                            </a>
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
+                                                <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
+                                            </a>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;">
+                                    <div>
+                                        <%if(MsgPhoto.equals("")){%>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
+                                        <%} else{ %>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
+                                        <%}%>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
             <%
                         if(newsItems > 10)
                             break;
@@ -1234,7 +1239,7 @@
                                     <center><div>
                                     <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpotsUnloggedIn.jsp">
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to get spots</p>
-                                        <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                                        <input style="border: 1px solid darkgrey; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input type="hidden" name="ProviderID" value="<%=PID%>" />
                                         <input type="hidden" name="ServicesList" value="<%=SelectedServicesList%>"/>
                                         <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
@@ -1301,7 +1306,7 @@
                                        <p style="color: tomato;">Select Date</p>
                                        <p>Click on date field below to set date</p>
                                        
-                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid black; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="click here to choose date" readonly></p>
+                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid darkgrey; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="click here to choose date" readonly></p>
                                        <p id="datepickerStatus" style="text-align: center; color: darkblue; font-weight: bolder;"></p>
                                        <p id="DateStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
                                     </div> 
@@ -1310,7 +1315,7 @@
                                         
                                         <p style="color: tomato;">Select Time</p>
                                         
-                                        <center><p><span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid black; color: black;" onclick ="showTime()" id="HHSelector" name="hourOptions" 
+                                        <center><p><span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick ="showTime()" id="HHSelector" name="hourOptions" 
                                                                          >
                                                                  <option>HH</option>
                                                                  <option>01</option>
@@ -1326,7 +1331,7 @@
                                                                  <option>11</option>
                                                                  <option>12</option>
                                                                  </select> : </span>
-                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid black; color: black;" onclick ="showTime()" id="MMSelector" name="minuteOptions" 
+                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick ="showTime()" id="MMSelector" name="minuteOptions" 
                                                                          >
                                                                  <option>MM</option>
                                                                  <option>01</option>
@@ -1391,7 +1396,7 @@
                                                                  <option>00</option>
                                                                  <option></option>
                                                                  </select></span>
-                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid black; color: black;" onclick ="showTime()" id="AmPmSelector" name="AmPmOptions" 
+                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick ="showTime()" id="AmPmSelector" name="AmPmOptions" 
                                                                          >
                                                                  <option>am</option>
                                                                  <option>pm</option>
@@ -1543,7 +1548,7 @@
                                         <%
                                             if(hasCancellation == true){
                                         %>
-                                        <p style="font-weight: bolder; padding: 5px; text-align: center; color: darkblue;"><i style="color: red" class="fa fa-exclamation-triangle"></i> <%=fullName%> has a cancellation policy.</p>
+                                        <p style="font-weight: bolder; padding: 5px; text-align: center; color: darkblue;"><i style="color: red" class="fa fa-exclamation-triangle"></i> <%=fullName.split(" ")[0]%> has a cancellation policy.</p>
                                         <%}%>
                                         
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; font-weight: bolder;  color: darkblue; padding: 5px;"></p>
@@ -1554,8 +1559,8 @@
                                          
                                 </form>
                                 
-                                        <center><div id="CreditDebitCardDetails" style="padding: 10px; background-color: darkgray;">
-                                            <p style="color: white; text-align: center;">Add Your Debit/Credit Card</p>
+                                        <center><div id="CreditDebitCardDetails" style="padding: 10px; background-color: #eeeeee;">
+                                            <p style="color: crimson; text-align: center; font-weight: bolder;">Add Your Debit/Credit Card</p>
                                               
                                             <form name="PaymentForm" action="PayAndSubmitQueue.jsp" method="POST">
                                                 
@@ -1587,8 +1592,8 @@
                                             <%
                                                 if(hasCancellation){
                                             %>
-                                            <p style="color: #ffffff; background-color: red; text-align: center; padding: 5px;">This service provider has a cancellation policy of <span style=""><%=ChargePercent%>%</span> of total service cost</p>
-                                            <p style="color: #ffffff; background-color: red; text-align: center; padding: 5px;">You may cancel your spot <%=CancelElapse%> minutes before spot due time to avoid cancellation charges</p>
+                                            <p style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;"><i style="color: orange;" class="fa fa-info-circle"></i> <%=fullName.split(" ")[0]%> charges <span style=""><%=ChargePercent%>%</span> cancellation fee</p>
+                                            <!--p style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;">cancell at <=CancelElapse%> </p-->
                                             <%}%>
                                                 
                                                 <table id="paymentDetailsTable">
@@ -1681,8 +1686,8 @@
                                                          },1);
                                                 </script>
                                             
-                                                <p id="paymentBtnStatus" style="background-color: green; text-align: center; color: white;"></p>
-                                                <input id="submitPaymentBtn" style="background-color: pink; border: 1px solid black; padding: 5px; border-radius: 4px;" type="submit" value="Submit Payment" name="paymentBtn" />
+                                                <p  style="font-weight: bolder; text-align: center; color: darkblue;"><i style="color: red;" class="fa fa-exclamation-triangle"></i> <span id="paymentBtnStatus"></span></p>
+                                                <input id="submitPaymentBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px;" type="submit" value="Submit Payment" name="paymentBtn" />
                                                 
                                             </form>
                                                
@@ -1716,7 +1721,7 @@
                                                                 submitPaymentBtn.disabled = true;
                                                                 paymentBtnStatus.innerHTML = "Please set date or time. Or enter all card information in form above";
                                                             }else{
-                                                                submitPaymentBtn.style.backgroundColor = "pink";
+                                                                submitPaymentBtn.style.backgroundColor = "darkslateblue";
                                                                 submitPaymentBtn.disabled = false;
                                                                 paymentBtnStatus.innerHTML = "";
                                                             }

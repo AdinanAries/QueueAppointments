@@ -995,7 +995,6 @@ select {
 #PhoneSettingsPgNav ul li {
   display: inline-block;
 }
-
 #MakeReservationForm {
   display: none;
 }
@@ -1003,11 +1002,19 @@ select {
 #QShowNews2 {
   display: none;
 }
-
+#middleScreenSettingsBtn{
+    display: none;
+}
 @media only screen and (max-width: 1400px) {
   /*.SearchObject {
     display: block;
   }*/
+  #middleScreenSettingsBtn{
+      display: block;
+  }
+  #PermanentDiv ul li:nth-child(2){
+    display: none;
+  }
   #PermanentDiv ul {
     display: none;
   }
@@ -1276,6 +1283,9 @@ select {
 /*---------------------------------------------------------------------------*/
 
 @media only screen and (min-width: 1400px) {
+  .middleScreenWidthLogoutBtn{
+    display: none;
+  }
   #ProvPhoneNotiBar {
     display: none;
   }

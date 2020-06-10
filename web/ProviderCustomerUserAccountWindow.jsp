@@ -789,16 +789,15 @@
                                     }
                                 %>
                                 
-                                <center><p style='font-weight: bolder;'><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                <center><p style='font-weight: bolder;'>
                                         <span id="FullNameDetail"><%=FullName%></span></p></center>
                                 
                                 <center><table style="border-spacing: 1px; width: 100%; text-align: center;" border="0">
                                             <tr><td style="padding-bottom: 2px;"></td></tr>
-                                            <tr><td style="padding-bottom: 2px;"><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                                        <span id="PhoneNumberDetail"><%=PhoneNumber%></span>, 
-                                                        <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <span id="EmailDetail"><%=Email%></span></p></td></tr>
-                                            <tr><td style="padding-bottom: 2px;"><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                                        <span id="AddressDetail"><%=thisUserAddress%></span></p></td></tr>
+                                            <tr><td style="padding-bottom: 2px;"><p>
+                                                        <span id="PhoneNumberDetail"><%=PhoneNumber%></span>, <span id="EmailDetail"><%=Email%></span></p></td></tr>
+                                            <!--tr><td style="padding-bottom: 2px;"><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
+                                                        <span id="AddressDetail"><=thisUserAddress%></span></p></td></tr-->
                                         </table></center>
                                         
                                         <%
@@ -1263,7 +1262,7 @@
                                             <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td>Compose feedback message below</td>
+                                                    <td style='padding: 10px;'>Feedback</td>
                                                 </tr>
                                                 <tr>
                                                     <td><textarea id="FeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" cols="35">
@@ -1346,20 +1345,27 @@
                                         
                                         <p style=""></p>
                                         
-                                        <div style="text-align: right; margin-right: 5px; margin-top: 10px;">
+                                        <div style="text-align: center; margin-right: 5px; margin-top: 10px;">
                                             <div class="tooltip">
-                                            <img style="margin-right: 10px; cursor: pointer; background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick="showUserFeedBackForm()" src="icons/icons8-feedback-20.png" width="20" height="20" alt="icons8-feedback-20"/>
-                                            
+                                                <p style="margin-left: 10px; cursor: pointer; background-color: oldlace; padding: 5px; border-radius: 4px;" onclick="showUserFeedBackForm()">
+                                                    <img style="" src="icons/icons8-comments-96.png" width="20" height="20" alt="icons8-feedback-20"/>
+                                                    <small style="color: darkblue;">feedback</small>
+                                                </p>
                                             </div>
                                             
                                             <div class="tooltip">
-                                                <p><img style="margin-right: 10px; cursor: pointer; background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick = "showUserProfileForm()" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/><p>
+                                                <p style="margin-left: 10px; cursor: pointer;  background-color: oldlace; padding: 5px; border-radius: 4px;" onclick = "showUserProfileForm();">
+                                                    <img style="" src="icons/icons8-edit-96.png" width="20" height="20" alt="icons8-pencil-20"/>
+                                                    <small style="color: darkblue;">Edit info</small>
+                                                <p>
                                                 <!--p class="tooltiptext"><br></p-->
                                             </div>
                                             
                                             <div class="tooltip">
-                                                <p><img style="cursor: pointer; background-color: #d9e8e8; padding: 5px; border-radius: 4px;" onclick = "showSettingsDiv()" src="icons/icons8-settings-20.png" width="20" height="20" alt="icons8-settings-20"/></p>
-                                                
+                                                <p style="cursor: pointer; margin-left: 10px;  background-color: oldlace; padding: 5px; border-radius: 4px;" onclick = "showSettingsDiv();">
+                                                    <img style="" src="icons/icons8-settings-96.png" width="20" height="20" alt="icons8-settings-20"/>
+                                                    <small style="color: darkblue;">Settings</small>
+                                                </p>
                                             </div>
                                         </div>
                                                 
@@ -2267,7 +2273,9 @@
                                         <div style="text-align: right;  margin-right: 39px; margin-top: 10px;">
                                            
                                             <div class="tooltip">
-                                                <p><img style="margin-right: 10px; cursor: pointer;" onclick="showAddFavProvFromCurrentAppointment(<%=JString%>)" src="icons/icons8-heart-20.png" width="20" height="20" alt="icons8-heart-20"/></p>
+                                                <p>
+                                                    <img style="margin-right: 10px; cursor: pointer;" onclick="showAddFavProvFromCurrentAppointment(<%=JString%>)" src="icons/icons8-heart-20.png" width="20" height="20" alt="icons8-heart-20"/>
+                                                </p>
                                                 <p class="tooltiptext">add provider to favorites<br></p>
                                             </div>
                                             

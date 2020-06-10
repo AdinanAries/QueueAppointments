@@ -268,13 +268,13 @@
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
             
-            <div style="max-height: 87vh; overflow-y: auto;">
+            <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
                 <%
                     
                     try{
                         Class.forName(Driver);
                         Connection newsConn = DriverManager.getConnection(url, User, Password);
-                        String newsQuery = "Select * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                        String newsQuery = "Select top 10 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         ResultSet newsRec = newsPst.executeQuery();
                         int newsItems = 0;
@@ -387,13 +387,13 @@
                                 }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
-                    <tbody>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <div id="ProvMsgBxOne">
-                                    
-                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
+                        <tbody>
+                            <tr style="background-color: #eeeeee;">
+                                <td>
+                                    <div id="ProvMsgBxOne">
+                                        
+                                        <div style='font-weight: bolder;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
@@ -416,44 +416,49 @@
                                                 <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
-                                    
-                                    <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
-                                    <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
-                                    <%}%>
-                                    
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    <%=ProvEmail%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    <%=ProvTel%></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    </div>      
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td style="padding: 0;">
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="mailto:<%=ProvEmail%>">
+                                                <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
+                                            </a>  
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="tel:<%=ProvTel%>">
+                                                <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
+                                            </a>
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
+                                                <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
+                                            </a>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;">
+                                    <div>
+                                        <%if(MsgPhoto.equals("")){%>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
+                                        <%} else{ %>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
+                                        <%}%>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
             <%
                         if(newsItems > 10)
                             break;

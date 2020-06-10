@@ -427,7 +427,7 @@
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from your providers</p></center>
             
-                <div style="max-height: 87vh; overflow-y: auto;">
+                <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
                     
                     <%
                         int newsItems = 0;
@@ -438,7 +438,7 @@
                             try{
                                 Class.forName(Driver);
                                 Connection CustConn = DriverManager.getConnection(url, User, Password);
-                                String CustQuery = "select * from ProviderCustomers.ProvNewsForClients where CustID = ? order by ID desc";
+                                String CustQuery = "select top 10 * from ProviderCustomers.ProvNewsForClients where CustID = ? order by ID desc";
                                 PreparedStatement CustPst = CustConn.prepareStatement(CustQuery);
                                 CustPst.setInt(1, UserID);
                                 ResultSet CustRec = CustPst.executeQuery();
@@ -558,13 +558,13 @@
                                                 }
                     %>
 
-                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
+                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
                         <tbody>
                             <tr style="background-color: #eeeeee;">
                                 <td>
                                     <div id="ProvMsgBxOne">
                                         
-                                        <div style='font-weight: bolder; margin-bottom: 4px;'>
+                                        <div style='font-weight: bolder;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
@@ -587,13 +587,27 @@
                                                 <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
-                                        
-                                        <%if(MsgPhoto.equals("")){%>
-                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
-                                        <%} else{ %>
-                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
-                                        <%}%>
-
+                                    </div>      
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td style="padding: 0;">
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="mailto:<%=ProvEmail%>">
+                                                <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
+                                            </a>  
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="tel:<%=ProvTel%>">
+                                                <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
+                                            </a>
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
+                                                <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
+                                            </a>
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
@@ -602,25 +616,16 @@
                                     <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                                 </td>
                             </tr>
-                            <tr style="background-color: #eeeeee;">
-                                <td>
-                                    <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                        <%=ProvEmail%></p>
-                                    <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                        <%=ProvTel%></p>
-                                </td>
-                            </tr>
                             <tr>
-                                <td>
-                                    <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                        <%=ProvCompany%></p>
-                                    <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                        <%=ProvAddress%></p>
-                                </td>
-                            </tr>
-                            <tr style="background-color: #eeeeee;">
-                                <td>
-                                    <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
+                                <td style="padding: 0;">
+                                    <div>
+                                        <%if(MsgPhoto.equals("")){%>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
+                                        <%} else{ %>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
+                                        <%}%>
+
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -645,7 +650,7 @@
                         try{
                             Class.forName(Driver);
                             Connection newsConn = DriverManager.getConnection(url, User, Password);
-                            String newsQuery2 = "Select * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                            String newsQuery2 = "Select top 10 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
                             PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
                             ResultSet newsRec = newsPst.executeQuery();
 
@@ -752,13 +757,13 @@
                                     }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
-                    <tbody>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <div id="ProvMsgBxOne">
-                                    
-                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
+                        <tbody>
+                            <tr style="background-color: #eeeeee;">
+                                <td>
+                                    <div id="ProvMsgBxOne">
+                                        
+                                        <div style='font-weight: bolder;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
@@ -781,44 +786,49 @@
                                                 <p style='color: red;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
-                                    
-                                    <%if(MsgPhoto.equals("")){%>
-                                    <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
-                                    <%} else{ %>
-                                    <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
-                                    <%}%>
-                                    
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    <%=ProvEmail%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    <%=ProvTel%></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    </div>      
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td style="padding: 0;">
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="mailto:<%=ProvEmail%>">
+                                                <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
+                                            </a>  
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="tel:<%=ProvTel%>">
+                                                <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
+                                            </a>
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
+                                                <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
+                                            </a>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;">
+                                    <div>
+                                        <%if(MsgPhoto.equals("")){%>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
+                                        <%} else{ %>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
+                                        <%}%>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
             <%
                             if(newsItems > 10)
                                 break;
@@ -1532,7 +1542,7 @@
                                        <p style="color: tomato;">Select Date</p>
                                        <p>Click on date field below to set date</p>
                                        
-                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid black; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="click here to choose date" readonly></p>
+                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid darkgray; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="click here to choose date" readonly></p>
                                        <p id="datepickerStatus" style="text-align: center; color: darkblue; font-weight: bolder;"></p>
                                        <p id="DateStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
                                     </div> 
@@ -1541,8 +1551,9 @@
                                         
                                         <p style="color: tomato;">Select Time</p>
                                     
-                                        <center><p><span><select onclick ="showTime()" id="HHSelector" name="hourOptions" 
-                                                                         style="">
+                                        <center><p><span>
+                                                    <select style="color: black; border: 1px solid darkgray; padding: 5px; background-color: white; width: 50px;" onclick ="showTime()" id="HHSelector" name="hourOptions" 
+                                                                         >
                                                                  <option>HH</option>
                                                                  <option>01</option>
                                                                  <option>02</option>
@@ -1557,8 +1568,9 @@
                                                                  <option>11</option>
                                                                  <option>12</option>
                                                                  </select></span>
-                                                <span><select onclick="showTime()" id="MMSelector" name="minuteOptions" 
-                                                                         style="">
+                                                <span> : 
+                                                    <select style="color: black; border: 1px solid darkgray; padding: 5px; background-color: white; width: 50px;" onclick="showTime()" id="MMSelector" name="minuteOptions" 
+                                                                         >
                                                                  <option>MM</option>
                                                                  <option>01</option>
                                                                  <option>02</option>
@@ -1622,7 +1634,7 @@
                                                                  <option>00</option>
                                                                  <option></option>
                                                                  </select></span>
-                                                <span><select onclick="showTime()" id="AmPmSelector" name="AmPmOptions" 
+                                                <span><select style="color: black; border: 1px solid darkgray; padding: 5px; background-color: white; width: 50px;" onclick="showTime()" id="AmPmSelector" name="AmPmOptions" 
                                                                          style="">
                                                                  <option>am</option>
                                                                  <option>pm</option>

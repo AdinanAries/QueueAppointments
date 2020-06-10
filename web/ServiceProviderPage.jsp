@@ -1757,7 +1757,7 @@
         
         <div id="PermanentDiv" style="">
             
-            <img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
+            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/-->
             <script>
                 function showExtraDropDown(){
                     if(document.getElementById("ExtraDropDown").style.display === "none")
@@ -1791,17 +1791,17 @@
                     }else{
                 %>
                 
-                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
-                                <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
-                            </div></center>
+                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
+                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                    </div></center>
                 
                 <%}%>
             </div>
             
-            <ul>
+            <ul style="display: block;">
                 <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li class="active" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                     Notifications<sup style='color: lawngreen; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
-                <li class="active" id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
+                <li class="active calender_li" id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
                     Calender</li>
                 <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li class="active" id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
@@ -4585,7 +4585,7 @@
                                     </form></center>
                                 
                                 <p style="text-align: right; padding-right: 20px; margin-top: 10px;"> 
-                                    <a><img style="margin-right: 7px; cursor: pointer;" onclick="togglehideAddClientForm(<%=WString%>)" src="icons/icons8-user-account-20.png" width="20" height="20" alt="icons8-user-account-20"/>
+                                    <a><img style="margin-right: 7px; cursor: pointer;" onclick="togglehideAddClientForm(<%=WString%>)" src="icons/icons8-user-account-20.png" width="24" height="22" alt="icons8-user-account-20"/>
                                     </a>
                                     <a><img style="cursor: pointer;" onclick = "toggleHideDeleteHistory(<%=WString%>)" src="icons/icons8-trash-20.png" width="20" height="20" alt="icons8-trash-20"/></a>
                                 </p>
@@ -7763,7 +7763,7 @@
                     }
                 </script>
                             
-                <form action = "LogoutController" name="LogoutForm" method="POST">
+                <form style="display: none;" class="middleScreenWidthLogoutBtn" action = "LogoutController" name="LogoutForm" method="POST">
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <center><input style="width: 97%;" type="submit" value="Logout" class="button" onclick="LogoutMethod();"/></center>
                 </form>
