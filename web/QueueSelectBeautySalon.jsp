@@ -688,7 +688,7 @@
                                                              }else if(ratings == 3){
                                                         %>
                                                         ★★★☆☆ 
-                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Average</span></i>
+                                                        <i class="fa fa-thumbs-up" style="color: orange; font-size: 16px; margin-left: 20px;"><span style="color: #8b8b8b; font-size: 10px;"> Average</span></i>
                                                         <%
                                                              }else if(ratings == 2){
                                                         %>
