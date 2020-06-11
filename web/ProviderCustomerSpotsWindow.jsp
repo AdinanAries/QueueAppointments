@@ -887,8 +887,8 @@
                                             <input  id="datepicker<%=JString%>" class="datepicker<%=JString%>" style="background-color: white;" type="text" name="AppointmentDate" value="<%=AppointmentDate%>" />
                                             <input id="timeFld<%=JString%>" style="background-color: white;" type="hidden" name="ApointmentTime" value="<%=AppointmentTime%>" />
                                             <input id="timePicker<%=JString%>" style="background-color: white;" type="text" name="ApointmentTimePicker" value="<%=AppointmentTime%>" />
-                                            <p id="timePickerStatus<%=JString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
-                                            <p id="datePickerStatus<%=JString%>" style="background-color: red; color: white; text-align: center;"></p>
+                                            <p id="timePickerStatus<%=JString%>" style="margin-bottom: 3px; font-weight: bolder; color: darkblue; text-align: center;"></p>
+                                            <p id="datePickerStatus<%=JString%>" style="font-weight: bolder; color: darkblue; text-align: center;"></p>
                                             <input id="ChangeAppointmentID<%=JString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
                                             <input id="changeAppointmentBtn<%=JString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px; border: none;" name="<%=JString%>changeAppointment" type="button" value="Change" />
                                         
@@ -911,21 +911,25 @@
                                                         type: "POST",  
                                                         url: "UpdateAppointmentController",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
-                                                        success: function(result){  
-                                                          alert(result);
-                                                          document.getElementById('PagePageLoader').style.display = 'none';
-                                                          document.getElementById("changeBookedAppointmetForm<%=JString%>").style.display = "none";
-                                                          
-                                                          $.ajax({
-                                                              type: "POST",
-                                                              url: "GetUpdateSpotInfo",
-                                                              data: "AppointmentID="+AppointmentID,
-                                                              success: function(result){
-                                                                  //alert(result);
-                                                                  var AppointmentData = JSON.parse(result);
-                                                                  document.getElementById("ApptTimeSpan<%=JString%>").innerHTML = AppointmentData.AppointmentTime;
-                                                                  //document.getElementById("ApptDateSpan").innerHTML = AppointmentData.AppointmentDate;
-                                                              }
+                                                        success: function(result){
+                                                            if(result === ""){
+                                                                alert("Not Successful. Time chosen may have violated this service providers booking time settings");
+                                                            }else{
+                                                                alert(result);
+                                                            }
+                                                            document.getElementById('PagePageLoader').style.display = 'none';
+                                                            document.getElementById("changeBookedAppointmetForm<%=JString%>").style.display = "none";
+
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "GetUpdateSpotInfo",
+                                                                data: "AppointmentID="+AppointmentID,
+                                                                success: function(result){
+                                                                    //alert(result);
+                                                                    var AppointmentData = JSON.parse(result);
+                                                                    document.getElementById("ApptTimeSpan<%=JString%>").innerHTML = AppointmentData.AppointmentTime;
+                                                                    //document.getElementById("ApptDateSpan").innerHTML = AppointmentData.AppointmentDate;
+                                                                }
                                                           });
                                                           
                                                         }                
@@ -983,19 +987,20 @@
                                                                 document.getElementById("timeFld<%=JString%>").value = currentTime;
                                                                 document.getElementById("changeAppointmentBtn<%=JString%>").disabled = true;
                                                                 document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkgrey";
-                                                                document.getElementById("timePickerStatus<%=JString%>").innerHTML = "Time cannot be in the past";
+                                                                document.getElementById("timePickerStatus<%=JString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }
                                                             else if( (parseInt(document.getElementById("timeFld<%=JString%>").value.substring(0,2), 10)) === (parseInt(currentHour, 10)) &&
                                                                      (parseInt(document.getElementById("timeFld<%=JString%>").value.substring(3,5), 10)) < (parseInt(currentMinute, 10)) ){
                                                                         document.getElementById("timeFld<%=JString%>").value = currentTime;
                                                                         document.getElementById("changeAppointmentBtn<%=JString%>").disabled = true;
                                                                         document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkgrey";
-                                                                        document.getElementById("timePickerStatus<%=JString%>").innerHTML = "Time cannot be in the past";
+                                                                        document.getElementById("timePickerStatus<%=JString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }else{
                                                                 
                                                                 document.getElementById("timePickerStatus<%=JString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtn<%=JString%>").disabled = false;
                                                                 document.getElementById("changeAppointmentBtn<%=JString%>").style.backgroundColor = "darkslateblue";
+                                                                document.getElementById("timePickerStatus<%=JString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Time has been set to " + document.getElementById("timePicker<%=JString%>").value;
                                                                 
                                                             }
                                                         
@@ -1033,14 +1038,14 @@
                                                                                  if(document.getElementById("datepicker<%=JString%>").value === currentDate){
 
                                                                                          if(document.getElementById("datePickerStatus<%=JString%>").innerHTML === ""){
-                                                                                                 document.getElementById("datePickerStatus<%=JString%>").innerHTML = "Today's Date: " + currentDate;
-                                                                                                 document.getElementById("datePickerStatus<%=JString%>").style.backgroundColor = "green";
+                                                                                                 document.getElementById("datePickerStatus<%=JString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Today's Date: " + currentDate;
+                                                                                                 //document.getElementById("datePickerStatus<=JString%>").style.backgroundColor = "green";
                                                                                          }
 
                                                                                  }
                                                                                  else{
-                                                                                         document.getElementById("datePickerStatus<%=JString%>").innerHTML = "Only today's date or future date allowed";
-                                                                                         document.getElementById("datePickerStatus<%=JString%>").style.backgroundColor = "red";
+                                                                                         document.getElementById("datePickerStatus<%=JString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Only today's date or future date allowed";
+                                                                                         //document.getElementById("datePickerStatus<=JString%>").style.backgroundColor = "red";
                                                                                          document.getElementById("datepicker<%=JString%>").value = currentDate;
                                                                                  }
                                                                  }
@@ -1363,8 +1368,8 @@
                                             <input  id="datepickerFuture<%=QString%>" style="background-color: white;" type="text" name="AppointmentDate" value="<%=AppointmentDate%>" />
                                             <input id="timeFldFuture<%=QString%>" style="background-color: white;" type="hidden" name="ApointmentTime" value="<%=AppointmentTime%>" />
                                             <input id="timePickerFuture<%=QString%>"  style="background-color: white;" type="text" name="ApointmentTimePicker" value="" />
-                                            <p id="timePickerStatusFuture<%=QString%>" style="margin-bottom: 3px; background-color: red; color: white; text-align: center;"></p>
-                                            <p id="datePickerStatusFuture<%=QString%>" style="background-color: red; color: white; text-align: center;"></p>
+                                            <p id="timePickerStatusFuture<%=QString%>" style="margin-bottom: 3px; font-weight: bolder; color: darkblue; text-align: center;"></p>
+                                            <p id="datePickerStatusFuture<%=QString%>" style="font-weight: bolder; color: darkblue; text-align: center;"></p>
                                             <input id="UpdateAppointmentID<%=QString%>" type="hidden" name="AppointmentID" value="<%=AppointmentID%>" />
                                             <input id="changeAppointmentBtnFuture<%=QString%>" style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 3px; border: none;" name="<%=QString%>changeAppointment" type="button" value="Change" />
                                            
@@ -1380,21 +1385,25 @@
                                                         type: "POST",  
                                                         url: "UpdateAppointmentController",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
-                                                        success: function(result){  
-                                                          alert(result);
-                                                          document.getElementById('PagePageLoader').style.display = 'none';
-                                                          document.getElementById("changeFutureAppointmetForm<%=QString%>").style.display = "none";
-                                                          
-                                                          $.ajax({
-                                                              type: "POST",
-                                                              url: "GetUpdateSpotInfo",
-                                                              data: "AppointmentID="+AppointmentID,
-                                                              success: function(result){
-                                                                  //alert(result);
-                                                                  var AppointmentData = JSON.parse(result);
-                                                                  document.getElementById("FutureTimeSpan<%=QString%>").innerHTML = AppointmentData.AppointmentTime;
-                                                                  document.getElementById("FutureDateSpan<%=QString%>").innerHTML = AppointmentData.AppointmentDate;
-                                                              }
+                                                        success: function(result){ 
+                                                            if(result === ""){
+                                                                alert("Not Successful. Time chosen may have violated this service providers booking time settings");
+                                                            }else{
+                                                                alert(result);
+                                                            }
+                                                            document.getElementById('PagePageLoader').style.display = 'none';
+                                                            document.getElementById("changeFutureAppointmetForm<%=QString%>").style.display = "none";
+
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "GetUpdateSpotInfo",
+                                                                data: "AppointmentID="+AppointmentID,
+                                                                success: function(result){
+                                                                    //alert(result);
+                                                                    var AppointmentData = JSON.parse(result);
+                                                                    document.getElementById("FutureTimeSpan<%=QString%>").innerHTML = AppointmentData.AppointmentTime;
+                                                                    document.getElementById("FutureDateSpan<%=QString%>").innerHTML = AppointmentData.AppointmentDate;
+                                                                }
                                                           });
                                                         }                
                                                       });
@@ -1453,18 +1462,19 @@
                                                                 document.getElementById("timeFldFuture<%=QString%>").value = currentTime;
                                                                 document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = true;
                                                                 document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkgrey";
-                                                                document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "Time cannot be in the past";
+                                                                document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }
                                                             else if( (parseInt(document.getElementById("timeFldFuture<%=QString%>").value.substring(0,2), 10)) === (parseInt(currentHour, 10)) &&
                                                                      (parseInt(document.getElementById("timeFldFuture<%=QString%>").value.substring(3,5), 10)) < (parseInt(currentMinute, 10)) ){
                                                                         document.getElementById("timeFldFutureFuture<%=QString%>").value = currentTime;
                                                                         document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = true;
                                                                         document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkgrey";
-                                                                        document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "Time cannot be in the past";
+                                                                        document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Time cannot be in the past";
                                                             }else{
                                                                 document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtnFuture<%=QString%>").disabled = false;
                                                                 document.getElementById("changeAppointmentBtnFuture<%=QString%>").style.backgroundColor = "darkslateblue";
+                                                                document.getElementById("timePickerStatusFuture<%=QString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Time has been set to " + document.getElementById("timePickerFuture<%=QString%>").value;
                                                             }
                                                             
                                                     }else{
@@ -1505,14 +1515,14 @@
                                                                                  if(document.getElementById("datepickerFuture<%=QString%>").value === currentDate){
 
                                                                                          if(document.getElementById("datePickerStatusFuture<%=QString%>").innerHTML === ""){
-                                                                                                 document.getElementById("datePickerStatusFuture<%=QString%>").innerHTML = "Today's Date: " + currentDate;
-                                                                                                 document.getElementById("datePickerStatusFuture<%=QString%>").style.backgroundColor = "green";
+                                                                                                 document.getElementById("datePickerStatusFuture<%=QString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Today's Date: " + currentDate;
+                                                                                                 //document.getElementById("datePickerStatusFuture<=QString%>").style.backgroundColor = "green";
                                                                                          }
 
                                                                                  }
                                                                                  else{
-                                                                                         document.getElementById("datePickerStatusFuture<%=QString%>").innerHTML = "Only today's date or future date allowed";
-                                                                                         document.getElementById("datePickerStatusFuture<%=QString%>").style.backgroundColor = "red";
+                                                                                         document.getElementById("datePickerStatusFuture<%=QString%>").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Only today's date or future date allowed";
+                                                                                         //document.getElementById("datePickerStatusFuture<=QString%>").style.backgroundColor = "red";
                                                                                          document.getElementById("datepickerFuture<%=QString%>").value = currentDate;
                                                                                  }
                                                                  }

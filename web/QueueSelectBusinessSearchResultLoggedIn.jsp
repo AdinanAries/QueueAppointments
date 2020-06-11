@@ -1197,6 +1197,10 @@
                                                 <div style="margin-left: 2px; margin-top: 10px;"><%=Company%></div>
                                             </div>
                                         </p>
+                                        <p style="color: #8b8b8b; font-size: 12px; margin: 0; padding-left: 50px; margin-top: -7px;">
+                                            <!--i class="fa fa-at" aria-hidden="true"></i--> 
+                                            - <%=ServiceType%> -
+                                        </p>
                                     </td>
                                 </tr>
                                 <tr>

@@ -3713,8 +3713,12 @@
                                                         type: "POST",  
                                                         url: "ProvidersUpdateAppointment",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
-                                                        success: function(result){  
-                                                          alert(result);
+                                                        success: function(result){
+                                                            if(result === ""){
+                                                                alert("Not Successful. You provided unacceptable date and time values");
+                                                            }else{
+                                                                alert(result);
+                                                            }
                                                           document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("changeBookedAppointmetForm<%=WString%>").style.display = "none";
                                                           
@@ -3797,7 +3801,8 @@
                                                                 document.getElementById("timePickerStatus<%=WString%>").innerHTML = "";
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").disabled = false;
                                                             document.getElementById("changeAppointmentBtn<%=WString%>").style.backgroundColor = "darkslateblue";
-
+                                                            document.getElementById("timePickerStatus<%=WString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Time has been set to " + document.getElementById("timePicker<%=WString%>").value;
+                        
                                                             }
                                                         
                                                         }else{
@@ -4109,8 +4114,12 @@
                                                         type: "POST",  
                                                         url: "ProvidersUpdateAppointment",  
                                                         data: "AppointmentID="+AppointmentID+"&ApointmentTime="+AppointmentTime+"&AppointmentDate="+AppointmentDate,  
-                                                        success: function(result){  
-                                                          alert(result);
+                                                        success: function(result){
+                                                            if(result === ""){
+                                                                alert("Not Successful. You provided unacceptable date and time values");
+                                                            }else{
+                                                                alert(result);
+                                                            }
                                                           document.getElementById('ProviderPageLoader').style.display = 'none';
                                                           document.getElementById("changeFutureAppointmetForm<%=WString%>").style.display = "none";
                                                           
@@ -4197,6 +4206,8 @@
                                                                 document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "";
                                                                 document.getElementById("changeAppointmentBtnFuture<%=WString%>").disabled = false;
                                                                 document.getElementById("changeAppointmentBtnFuture<%=WString%>").style.backgroundColor = "darkslateblue";
+                                                                document.getElementById("timePickerStatusFuture<%=WString%>").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Time has been set to " + document.getElementById("timePickerFuture<%=WString%>").value;
+                        
                                                             }
                                                     }   
                                                     else{
