@@ -155,8 +155,11 @@
             ProvIDAppend = " and Provider_ID > " + LastProviderID;
         }catch(Exception e){}
         
-        Search = Search.trim().replaceAll("( )+", " ");
-        
+        try{
+            Search = Search.trim().replaceAll("( )+", " ");
+        }catch(Exception e){
+            Search = " ";
+        }
         
         String Tel = Search;
         

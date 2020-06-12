@@ -109,8 +109,11 @@
         //JOptionPane.showMessageDialog(null, Search);
         //JOptionPane.showMessageDialog(null, ProvIDAppend);
         
-        
-        Search = Search.trim().replaceAll("( )+", " ");
+        try{
+            Search = Search.trim().replaceAll("( )+", " ");
+        }catch(Exception e){
+            Search = " ";
+        }
         
         String Tel = Search;
         

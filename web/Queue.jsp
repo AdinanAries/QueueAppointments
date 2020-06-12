@@ -629,7 +629,7 @@
                     </div>
                 </center>
                 
-                <h4 style="padding: 5px;">Search By Location</h4>
+                <h4 style="padding: 5px 0;">Search By Location</h4>
                 
                 <div id="LocSearchDiv" style="margin-top: 5px;">
                     
@@ -744,7 +744,7 @@
                 
                 <h1>Beaty Services Appointments</h1-->
                 
-                <h4 style="padding: 5px;">Search By Category</h4>
+                <h4 style="padding: 5px 0;">Search By Category</h4>
                 
                  <div id="firstSetProvIcons">
                 <center><table id="providericons">

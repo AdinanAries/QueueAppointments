@@ -674,6 +674,7 @@ select {
   .SearchObject input[type="text"] {
     background: none;
     background-color: white !important;
+    color: black !important;
     border: 0;
     padding: 0;
     border-top-left-radius: 10px !important;
@@ -761,7 +762,7 @@ select {
   margin-bottom: 10px;
 }
 #QueuLineDiv table tbody tr td:hover {
-  background-color: darkgrey;
+  background-color: powderblue;
   /*border: 1px black solid;*/
 }
 #reviewsheet {
@@ -1431,6 +1432,9 @@ input[type="file"] {
         border-top: 1px solid darkgray;
         border-bottom: 1px solid darkgray;*/
   }
+  #QueuLineDiv table tbody tr td:hover {
+    background: none;
+  }
   #QueuLineDiv table tbody tr td img {
     width: 35px !important;
     height: 35px !important;
@@ -1588,7 +1592,7 @@ input[type="file"] {
     padding-top: 150px;
   }
   #header {
-    padding: 1px;
+    padding-top: 1px;
     display: none;
   }
   #DashboardLogo {

@@ -68,6 +68,41 @@
     
     <%
         
+        /*Cookie myName = new Cookie("Name","Mohammed");
+        myName.setMaxAge(60*60*24); 
+        response.addCookie(myName);*/
+        
+        //Changing some domain cookie properties
+        Cookie cookie = null;
+         Cookie[] cookies = null;
+         
+         // Get an array of Cookies associated with the this domain
+         cookies = request.getCookies();
+         
+         String CookieText = "";
+         
+         if( cookies != null ) {
+            
+            for (int i = 0; i < cookies.length; i++) {
+                
+               cookie = cookies[i];
+               CookieText += cookie.getName()+"="+cookie.getValue();
+               
+               /*if((cookie.getName()).compareTo("JSESSIONID") == 0 ) {
+                  //cookie.setHttpOnly(false);
+                  //cookie.setSecure(false);
+                  //cookie.setMaxAge(60*60*999999999);
+                  //response.addCookie(cookie);
+                  
+               }*/
+            }
+         } else {
+             //JOptionPane.showMessageDialog(null, "no cookies found");
+         }
+         //JOptionPane.showMessageDialog(null, CookieText);
+         response.setHeader("Set-Cookie", "Name=Mohammed;"+CookieText+"; HttpOnly; SameSite=None; Secure");
+         //JOptionPane.showMessageDialog(null, response.getHeader("Set-Cookie"));
+        
         //resetting ResendAppointmentData data feilds
         ResendAppointmentData.CustomerID = "";
         ResendAppointmentData.ProviderID = "";
