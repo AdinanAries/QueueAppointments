@@ -36,8 +36,39 @@
             document.cookie = "SameSite=None";
             document.cookie = "SameSite=None; Secure";
             //alert(document.cookie);
+            
+            var count = 0;
+            var myInterval;
+            
+            function timerHandler() {
+                count++;
+           }
+
+           // Start timer
+           function startTimer() {
+                myInterval = window.setInterval(timerHandler, 1000);
+                //alert("started");
+           }
+
+           // Stop timer
+           function stopTimer() {
+               count = 0;
+               window.clearInterval(myInterval);
+           }
+            
+            window.addEventListener('focus', () => {
+                if(count < 3600){
+                    stopTimer();
+                }else{
+                    window.location.reload(true);
+                    stopTimer();
+                }
+            });
+            window.addEventListener('blur', startTimer);
+            
         </script>
         
+        <!--meta http-equiv="refresh" content="30"-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue  | Customer</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
@@ -185,7 +216,7 @@
         String CurrentTime = ThisDate.toString().substring(11,16);
         
         //UserAccount.UserID stores UserID after Login Successfully
-        ProviderCustomerData.eachCustomer = null;
+        //ProviderCustomerData.eachCustomer = null;
         int JustLogged = 0;
         boolean isSameUserName = true;
         boolean isSameSessionData = true;
@@ -217,7 +248,7 @@
             }catch(Exception e){}
         }
         
-        
+        //JOptionPane.showMessageDialog(null, UserIndex);
         try{
             NewUserName = request.getAttribute("UserName").toString();
             isUserNameAttribute = true;
@@ -290,7 +321,7 @@
         
         if(!SessionID.equals(DatabaseSession)){
             
-            try{
+            /*try{
                 Class.forName(Driver);
                 Connection DltSesConn = DriverManager.getConnection(Url, user, password);
                 String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
@@ -298,7 +329,7 @@
                 DltSesPst.setInt(1, UserIndex);
                 DltSesPst.executeUpdate();
             }
-            catch(Exception e){}
+            catch(Exception e){}*/
             
             isSameSessionData = false;
             //response.sendRedirect("LogInPage.jsp");
@@ -5931,6 +5962,17 @@
         
         if(ControllerResult !== "null")
             alert(ControllerResult);
+        
+        /*var iframes = Array.prototype.slice.call(document.getElementsByTagName("iframe"));
+            iframes.forEach(iframe => {
+                //console.log(iframe);
+                iframe.onclick = function(){
+                    alert("clicked");
+                    if(count < 10){
+                        stopTimer();
+                    }
+                };
+            });*/
     </script>
     
     <script src="scripts/script.js"></script>

@@ -137,7 +137,7 @@
         //JOptionPane.showMessageDialog(null, DatabaseSession);
         if(!SessionID.equals(DatabaseSession)){
             
-            try{
+            /*try{
                 Class.forName(Driver);
                 Connection DltSesConn = DriverManager.getConnection(url, User, Password);
                 String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
@@ -146,7 +146,7 @@
                 DltSesPst.executeUpdate();
                 
             }
-            catch(Exception e){}
+            catch(Exception e){}*/
             
             isSameSessionData = false;
             //response.sendRedirect("LogInPage.jsp");
@@ -156,18 +156,23 @@
 %>
 
             <script>
-                if($(window).width() > 1000){
+            if($(window).width() > 1000){
 
-                    var tempUserName = window.localStorage.getItem("QueueUserName");
-                    var tempUserPassword = window.localStorage.getItem("QueueUserPassword");
+                    let UserName = window.localStorage.getItem("QueueUserName");
+                    let UserPassword = window.localStorage.getItem("QueueUserPassword");
                     (function(){
                         //This coinsidentally takes you to login page incase of unavailable login information.
-                        document.location.href="LoginControllerMainRedirect?username="+tempUserName+"&password="+tempUserPassword;
+                        document.location.href="LoginControllerMainRedirect?username="+UserName+"&password="+UserPassword;
                         return false;
                     })();
 
+                }else{
+                    
+                    let UserName2 = window.localStorage.getItem("QueueUserName");
+                    let UserPassword2 = window.localStorage.getItem("QueueUserPassword");
+                    parent.window.document.location = "LoginControllerMainRedirect?username="+UserName2+"&password="+UserPassword2;
                 }
-            </script>
+        </script>
     
 <%
             //response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);

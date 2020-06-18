@@ -465,6 +465,10 @@
         <servlet-name>StripePaymentControl</servlet-name>
         <servlet-class>StripePaymentControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createCustomer</servlet-name>
+        <servlet-class>createCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -880,6 +884,10 @@
     <servlet-mapping>
         <servlet-name>StripePaymentControl</servlet-name>
         <url-pattern>/StripePaymentControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createCustomer</servlet-name>
+        <url-pattern>/createCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

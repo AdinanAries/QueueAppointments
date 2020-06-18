@@ -28,7 +28,7 @@ public class ProviderCustomerData{
     public P_Address CustomerAddress;
     
     //variable of class this same class type
-    public static ProviderCustomerData eachCustomer;
+    //public static ProviderCustomerData eachCustomer;
     
     public ProviderCustomerData(int id, String fname, String mname, String lname, Blob pic, String mobile, Date dob, String email){
         CustomerID = id;

@@ -15,6 +15,16 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw2.js')
+  .then(function(registration) {
+    console.log('Registration successful, scope of sw2 is:', registration.scope);
+  })
+  .catch(function(error) {
+    console.log('Service worker registration failed, error:', error);
+  });
+}
+
 //document.cookie = "SameSite=None;Secure";
 //document.cookie = "UserID=1;SameSite=None;Secure";
 //alert(document.cookie);

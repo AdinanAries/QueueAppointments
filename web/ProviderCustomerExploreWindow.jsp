@@ -144,7 +144,7 @@
         String CurrentTime = ThisDate.toString().substring(11,16);
         
         //UserAccount.UserID stores UserID after Login Successfully
-        ProviderCustomerData.eachCustomer = null;
+        //ProviderCustomerData.eachCustomer = null;
         int JustLogged = 0;
         boolean isSameUserName = true;
         boolean isSameSessionData = true;

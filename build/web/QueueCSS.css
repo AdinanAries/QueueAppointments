@@ -18,6 +18,16 @@ body {
   background-position: right !important;
   background-repeat: no-repeat !important;
 }
+#notSubscribedCover{
+    display: none;
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+}
 .loginInputFld {
   text-align: left;
   font-weight: bolder;
@@ -1741,6 +1751,9 @@ input[type="file"] {
   #addBizTxt {
     padding-top: 20px;
     margin-top: 0;
+  }
+  .GotoDashboardBtn{
+    display: none;
   }
 }
 

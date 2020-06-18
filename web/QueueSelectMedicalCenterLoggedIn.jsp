@@ -89,6 +89,9 @@
         //JOptionPane.showMessageDialog(null, PTown);
         //JOptionPane.showMessageDialog(null, PZipCode);
         
+        boolean isSameSessionData = true;
+        boolean isTrySuccess = true;
+        
         try{
             NewUserName = request.getParameter("User");
         
@@ -113,7 +116,73 @@
             User = config.getServletContext().getAttribute("DBUser").toString();
             Password = config.getServletContext().getAttribute("DBPassword").toString();
         }catch(Exception e){
-            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+            isTrySuccess = false;
+        }
+        
+        String SessionID = request.getRequestedSessionId();
+        String DatabaseSession = "";
+        //getting session data from database
+        try{
+            Class.forName(Driver);
+            Connection SessionConn = DriverManager.getConnection(url, User, Password);
+            String SessionString = "Select * from QueueObjects.UserSessions where UserIndex = ?";
+            PreparedStatement SessionPst = SessionConn.prepareStatement(SessionString);
+            SessionPst.setInt(1, UserIndex);
+            ResultSet SessionRec = SessionPst.executeQuery();
+            
+            while(SessionRec.next()){
+                
+                DatabaseSession = SessionRec.getString("SessionNo").trim();
+            }
+            
+        }catch(Exception e){}
+        
+        if(SessionID == null){
+            SessionID = "";
+        }
+        
+        if(!SessionID.equals(DatabaseSession)){
+            
+            /*try{
+                Class.forName(Driver);
+                Connection DltSesConn = DriverManager.getConnection(url, User, Password);
+                String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
+                PreparedStatement DltSesPst = DltSesConn.prepareStatement(DltSesString);
+                DltSesPst.setInt(1, UserIndex);
+                DltSesPst.executeUpdate();
+            }
+            catch(Exception e){}*/
+            
+            isSameSessionData = false;
+            //response.sendRedirect("LogInPage.jsp");
+        }
+        
+        if(!isSameSessionData || !isTrySuccess){
+            //response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+            
+    %>
+    
+        <script>
+            if($(window).width() > 1000){
+
+                    let UserName = window.localStorage.getItem("QueueUserName");
+                    let UserPassword = window.localStorage.getItem("QueueUserPassword");
+                    (function(){
+                        //This coinsidentally takes you to login page incase of unavailable login information.
+                        document.location.href="LoginControllerMainRedirect?username="+UserName+"&password="+UserPassword;
+                        return false;
+                    })();
+
+                }else{
+                    
+                    let UserName2 = window.localStorage.getItem("QueueUserName");
+                    let UserPassword2 = window.localStorage.getItem("QueueUserPassword");
+                    parent.window.document.location = "LoginControllerMainRedirect?username="+UserName2+"&password="+UserPassword2;
+                }
+        </script>
+    
+    <%
+        
         }
         
         try{

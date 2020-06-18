@@ -1,10 +1,9 @@
-var cacheName = 'Queue Cache';
+const staticCacheName = 'site-static-v1';
 
-
-//on application istall_to-home-screen event handler
+//install service worker
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(cacheName).then(function(cache) {
+    caches.open(staticCacheName).then(function(cache) {
       return cache.addAll(
         [
           '/Queue.jsp',
@@ -22,7 +21,10 @@ self.addEventListener('install', function(event) {
           'scripts/updateUserProfile.js',
           'scripts/customerReviewsAndRatings.js',
           'scripts/SettingsDivBehaviour.js',
-          'scripts/ChangeProfileInformationFormDiv.js'
+          'scripts/ChangeProfileInformationFormDiv.js',
+	  'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
+	  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0',
+	  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0'
         ]
       );
     })
@@ -30,14 +32,26 @@ self.addEventListener('install', function(event) {
 });
 
 
-//another event listener
-self.addEventListener('', event => {
-    console.log(event);
-    
+//activate service worker
+self.addEventListener('activate', evt => {
+  //console.log('service worker activated');
+  evt.waitUntil(
+    caches.keys().then(keys => {
+      //console.log(keys);
+      return Promise.all(keys
+        .filter(key => key !== staticCacheName)
+        .map(key => caches.delete(key))
+      );
+    })
+  );
 });
 
-
-//another event listener 
-self.addEventListener('', event => {
-    console.log(event);
+//fecth event listener
+self.addEventListener('fetch', event => {
+    //console.log("fetch event handler called", event);
+    event.respondWith(
+        caches.match(event.request).then(cacheRes => {
+          return cacheRes || fetch(event.request);
+        })
+    );
 });

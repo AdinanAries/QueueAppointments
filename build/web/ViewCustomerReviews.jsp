@@ -50,8 +50,31 @@
         String Password = config.getServletContext().getAttribute("DBPassword").toString();
         
         int UserID = 0;
+        String NewUserName = "";
+        String tempAccountType = "";
+        int UserIndex = 0;
         
-        String NewUserName = request.getParameter("User");
+        try{
+            NewUserName = request.getParameter("User");
+        
+            UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
+            //JOptionPane.showMessageDialog(null, UserIndex);
+        
+            tempAccountType = UserAccount.LoggedInUsers.get(UserIndex).getAccountType();
+        
+            if(tempAccountType.equals("CustomerAccount"))
+                UserID = UserAccount.LoggedInUsers.get(UserIndex).getUserID();
+
+            if(tempAccountType.equals("BusinessAccount")){
+                request.setAttribute("UserIndex", UserIndex);
+                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
+            }
+
+        }catch(Exception e){
+            //response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+        }
+        
+        /*String NewUserName = request.getParameter("User");
         
         int UserIndex = Integer.parseInt(request.getParameter("UserIndex"));
        
@@ -67,6 +90,7 @@
         
         else if(UserID == 0)
             response.sendRedirect("LogInPage.jsp");
+        */
         
         int CustomerID = UserID;
         ArrayList<ReviewsDataModel> ReviewsList = new ArrayList<>();

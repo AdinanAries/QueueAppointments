@@ -293,7 +293,7 @@
         
         if(!SessionID.equals(DatabaseSession)){
             
-            try{
+            /*try{
                 Class.forName(Driver);
                 Connection DltSesConn = DriverManager.getConnection(Url, user, password);
                 String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
@@ -301,7 +301,7 @@
                 DltSesPst.setInt(1, UserIndex);
                 DltSesPst.executeUpdate();
             }
-            catch(Exception e){}
+            catch(Exception e){}*/
             
             isSameSessionNumber = false;
         }
@@ -323,7 +323,6 @@
         }
       
         try{
-            
             
             Class.forName(Driver);
             Connection conn = DriverManager.getConnection(Url, user, password);
@@ -1749,6 +1748,34 @@
         }
     %>
     <body onload="document.getElementById('ProviderPageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
+        
+        <div id='notSubscribedCover'>
+            <div style='display: flex; flex-direction: column; justify-content: center; height: 100vh;'>
+                <div style="margin-bottom: 30px;">
+                    <p style="text-align: center; padding: 5px;">
+                        <img src="QueueLogo.png" style="height: 50px; width: 120px;"/>
+                    </p>
+                </div>
+                <p style="color: darkblue; font-weight: bolder; text-align: center; margin-bottom: 30px;">
+                    <i class="fa fa-exclamation-triangle" style="color: orange;"></i> You have not subscribed
+                    <br/>
+                    <span style='font-size: 14px; color: #636363;'>your customers won't be able to book any appointments</span>
+                </p>
+                <a href='stripe-payment-view.jsp?providerEmail=<%=Email%>' target='_blank'>
+                    <p style='padding: 10px; text-align: center; color: white; background-color: darkslateblue; border-radius: 4px; margin: auto; max-width: 400px;'>Click here to subscribe now</p>
+                </a>
+                    <p onclick="document.getElementById('notSubscribedCover').style.display = 'none'" style='font-size: 16px; margin-top: 10px; color: crimson; text-align: center;'>
+                        <i style='color: green' class='fa fa-home'></i> go to home screen</p>
+            </div>
+        </div>
+        <script>
+            subscribedFlag = false;
+            if(subscribedFlag === false){
+                document.getElementById('notSubscribedCover').style.display = "block";
+            }else{
+                document.getElementById('notSubscribedCover').style.display = "none";
+            }
+        </script>
         
         <div id="ProviderPageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -5098,16 +5125,16 @@
                             
                                     <p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; padding-top: 75px; text-align: center;"><%=FullName%></p>
                                     
-                                    <center><table style="border-spacing: 0;">
+                                    <center><table style="border-spacing: 0; text-align: center;">
                                         
-                                            <tr><td><p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                                    <span id="CompanyDetail"><%=Company%></span></p></td></tr>
+                                            <tr><td><p style='margin-bottom: 10px;'>
+                                                    <span style='font-weight: bolder;' id="CompanyDetail"><%=Company%></span></p></td></tr>
                                             <tr><td><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
                                                         <span id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
                                             <tr><td><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
                                                         <span id="EmailDetail"><%=Email%></span></p></td></tr>
                                         <tr><td><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                                <span id="AddressDetail"><%=Address%></span></p></td></tr>
+                                                <span id="AddressDetail"><%=Address.split(",")[0]%></span></p></td></tr>
                                     
                                         </table></center>
                                     
@@ -6946,159 +6973,38 @@
                                    </script>
                                     
                                     <center><p onclick="toggleShowSubscriptionDiv();" style="text-align: left; cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
-                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Manage Your Subscription <span style='color: red; margin-left: 10px;'><i class="fa fa-exclamation-triangle"></i></span></p></center>
+                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Manage Your Subscription <span style='margin-left: 10px;'><i id="SubscriptionSettingsStatus" class="fa"></i></span></p></center>
                                     
                                     <div id="SubscriptionDiv" style="text-align: center; background-color: #6699ff; padding: 5px; display: none;">
                                         
                                     <form action="ProviderSubscriptionLoggedIn.jsp" method="POST">
                                         
                                         
-                                    <p style="text-align: center; color: white; margin-bottom: 10px;">Your Queue Subscription</p>
+                                    <!--p style="text-align: center; color: white; margin-bottom: 10px;">Your Queue Subscription</p-->
                                     <input type="hidden" name="SubscStatusValue" value="" />
-                                    <p style="color: white; text-align: center; margin: 5px;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> You have not subscribed</p>
-                                    <p style="text-align: left;">Subscription Plan: <select style="color: black; background-color: #d9e8e8; border: none; padding: 5px 0; min-width: 50px;" name="SubscPlan">
-                                            <%
-                                                int number = 0;
-                                                try{
-                                                    
-                                                    Class.forName(Driver);
-                                                    Connection SConn = DriverManager.getConnection(Url, user, password);
-                                                    String SQuery = "select * from QueueObjects.SubcriptionsInfo";
-                                                    PreparedStatement SPst = SConn.prepareStatement(SQuery);
-                                                    ResultSet SRec = SPst.executeQuery();
-                                                    
-                                                    while(SRec.next()){
-                                                        
-                                                        number++;
-                                                        
-                                                        DecimalFormat df = new DecimalFormat("#.##");
-                                                        String Cost = df.format(Double.parseDouble(SRec.getString("Cost").trim()));
-                                                        
-                                                        String Subscription = SRec.getString("_Type").trim() + "($" + Cost + ")";
-                                                        
-                                            %>
-                                            
-                                                        <option value="<%=Cost%>"><%=Subscription%></option>
-                                                        
-                                            <%      }
-                                                }catch(Exception e){
-                                                    e.printStackTrace();
-                                                }
-                                            %>
-                                        </select></p>
+                                    <p style="color: white; text-align: center; margin: 5px;">
+                                        <span id='SubscriptionSettingsTextStatus' style="color: white; text-align: center;"></span>
+                                        <br/>
+                                        <span id='SubscriptionSettingsTextStatusSpan' style='font-size: 14px; color: #d8d8d8;'>your customers won't be able to book any appointments</span>
+                                    </p>
+                                    <a href='stripe-payment-view.jsp?providerEmail=<%=Email%>' target='_blank'>
+                                        <p id='SubscribeFromSettingsBtn' style='padding: 5px; color: white; background-color: darkslateblue; border-radius: 4px;'>Click here to subscribe</p>
+                                    </a>
                                         
-                                    <p style="text-align: center; color: white;">Payment Card Information</p>
-                                    <table style="max-width: 350px; margin: auto; background-color: #9bb1d0; border-radius: 5px; padding: 5px; margin-top: 5px; margin-bottom: 5px; border: #3d6999 1px solid;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="text-align: left;">Card Number: </td>
-                                                <td><input onclick="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" onkeydown="checkMiddlenumbernumberFuncSubscriptionPayCardNumber();" id="SubscriptionPayCardNumber" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumber" value="" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Holder's Name: </td>
-                                                <td><input style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardName" value="" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Sec. Code: </td>
-                                                <td><input style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardSecCode" value="" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Exp. Date: </td>
-                                                <td><input id="cardDateSPC" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardExpDate" value="" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>  
-                                    
-                                    <script>
-                                                    var ExpDateSPCFld = document.getElementById("cardDateSPC");
-                                                         
-                                                         setInterval(function(){
-                                                             
-                                                            if(ExpDateSPCFld.value !== ""){
-                                                                
-                                                               if(ExpDateSPCFld.value.length === 2){
-                                                                   
-                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,2) + "/" + ExpDateSPCFld.value.substring(2);
-                                                                  
-                                                                   if(ExpDateSPCFld.value === "///" || ExpDateSPCFld.value.substring(1,3) === "//" || ExpDateSPCFld.value.substring(0,1) === "/"){
-                                                                       ExpDateSPCFld.value = "";
-                                                                   }
-                                                                   
-                                                               }
-                                                               //checking if month is greater than 12
-                                                               var month = parseInt((ExpDateSPCFld.value.substring(0,2)), 10);
-                                                               var month1 = parseInt((ExpDateSPCFld.value.substring(0,1)), 10);
-                                                               var month2 = parseInt((ExpDateSPCFld.value.substring(1,2)), 10);
-                                                               var year = parseInt((ExpDateSPCFld.value.substring(3,5)), 10);
-                                                               var year1 = parseInt((ExpDateSPCFld.value.substring(3,4)), 10);
-                                                               var year2 = parseInt((ExpDateSPCFld.value.substring(4,5)), 10);
-                                                               
-                                                               if(month !== null){
-                                                                    if(month > 12){
-                                                                        ExpDateSPCFld.value = "12" + ExpDateSPCFld.value.substring(2,5);
-                                                                    }
-                                                                }
-                                                                //checking if entered date is more than 5 characters
-                                                               if(ExpDateSPCFld.value.length > 5){
-                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,5);
-                                                               }
-                                                               //checking is what's entered is is not a number 
-                                                               if(isNaN(month1))
-                                                                   ExpDateSPCFld.value = "";
-                                                               if(isNaN(month2))
-                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,1) + "";
-                                                               if(isNaN(year1))
-                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,3) + "";
-                                                               if(isNaN(year2))
-                                                                   ExpDateSPCFld.value = ExpDateSPCFld.value.substring(0,4) + "";
-                                                              
-                                                            }
-                                                         },1);
-                                                </script>
-                                    
-                                                    <script>
-                                                        var SubscriptionPayCardNumber = document.getElementById("SubscriptionPayCardNumber");
-
-                                                        function numberFuncSubscriptionPayCardNumber(){
-
-                                                            var number = parseInt((SubscriptionPayCardNumber.value.substring(SubscriptionPayCardNumber.value.length - 1)), 10);
-
-                                                            if(isNaN(number)){
-                                                                SubscriptionPayCardNumber.value = SubscriptionPayCardNumber.value.substring(0, (SubscriptionPayCardNumber.value.length - 1));
-                                                            }
-
-                                                        }
-
-                                                        setInterval(numberFuncSubscriptionPayCardNumber, 1);
-
-                                                        function checkMiddlenumbernumberFuncSubscriptionPayCardNumber(){
-
-                                                            for(var i = 0; i < SubscriptionPayCardNumber.value.length; i++){
-
-                                                                var middleString = SubscriptionPayCardNumber.value.substring(i, (i+1));
-                                                                //window.alert(middleString);
-                                                                var middleNumber = parseInt(middleString, 10);
-                                                                //window.alert(middleNumber);
-                                                                if(isNaN(middleNumber)){
-                                                                    SubscriptionPayCardNumber.value = SubscriptionPayCardNumber.value.substring(0, i);
-                                                                }
-                                                            }
-                                                        }
-
-                                                        //setInterval(checkMiddleNumber, 1000);
-                                                    </script>
-                                    
-                                    <p style="display: none; background-color: crimson; border-radius: 4px; width: fit-content; padding: 5px; color: white; margin: auto; margin-bottom: 5px;">
-                                        <input id="autoPay" type="checkbox" name="AutoPay" value="ON" checked="true" />
-                                        <label style="" for="autoPay">Allow Automatic Payment</label></p>
-                                    
-                                    <input id="ChngSubscBtn" style="padding: 5px; border: none; background-color: darkslateblue;
-                                           border-radius: 4px; color: white;" type="submit" value="Update" 
-                                           onclick="this.form.target='_blank';return true;"/>
-                                    
-                                    </form>
-                                        
-                                        
+                                    <script>if(subscribedFlag === false){
+                                        document.getElementById('SubscriptionSettingsTextStatus').innerHTML = "<i class='fa fa-exclamation-triangle' style='color: orange;'></i> You have not subscribed";
+                                        document.getElementById('SubscriptionSettingsStatus').classList.add('fa-exclamation-triangle');
+                                        document.getElementById('SubscriptionSettingsStatus').style.color = "red";
+                                        document.getElementById('SubscriptionSettingsTextStatusSpan').style.display = "block";
+                                        document.getElementById('SubscribeFromSettingsBtn').style.display = "block";
+                                    }else{
+                                        document.getElementById('SubscriptionSettingsTextStatus').innerHTML = "<i class='fa fa-check' style='color: green;'></i> You have a valid subscription";
+                                        document.getElementById('SubscriptionSettingsStatus').classList.add('fa-check');
+                                        document.getElementById('SubscriptionSettingsStatus').style.color = "green";
+                                        document.getElementById('SubscriptionSettingsTextStatusSpan').style.display = "none";
+                                        document.getElementById('SubscribeFromSettingsBtn').style.display = "none";
+                                    }
+                                </script>    
                                     </div>
                                     <script>
                                         var SubscriptionDiv = document.getElementById("SubscriptionDiv");
@@ -7127,8 +7033,7 @@
                                             
                                         }
                                         
-                                    </script>
-                                    
+                                    </script>                                    
                                     <center><p onclick="toggleShowEditBizInfoDiv();" style="text-align: left; cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee;
                                                border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Edit Your Business Info</p></center>
                                     
@@ -7799,5 +7704,6 @@
     <script src="scripts/checkAppointmentDateUpdate.js"></script>
     <script src="scripts/QueueLineDivBehavior.js"></script>
     <script src="scripts/CollectAddressInfo.js"></script>
+    <script src="scripts/stripe-scripts.js"></script>
     
 </html>
