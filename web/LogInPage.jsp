@@ -142,7 +142,7 @@
             
         <div id="header" style='display: block;'>
             <div style="text-align: center;"><p> </p>
-            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: black;"><image src="QueueLogo.png" style="margin-top: 5px;"/></a>
+            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: black;"><image class='mobileLogo' src="QueueLogo.png" style="margin-top: 5px;"/></a>
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
             <!--cetnter><p> </p></cetnter>
@@ -357,17 +357,19 @@
                 <cetnter><p> </p></cetnter>
                 
                 <center><div id ="logindetails" style="padding-top: 15px;">
-                <center><div id="LoginHomeBtn" style="margin-bottom: 30px; color: white; background-color: #3d6999; padding: 5px 20px; border-radius: 4px; width: fit-content;"><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: white;">
-                            <img src="icons/icons8-home-50.png" alt="" style="width: 40px; height: 40px;"/>
-                            <p>Home</p>
-                        </a></div></center>
+                <div style="text-align: center;"><div id="LoginHomeBtn" style="margin: auto; margin-bottom: 30px; color: white; padding: 5px 20px; border-radius: 4px; width: fit-content;"><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="LoginPageToQueue" style=" color: white;">
+                            <p style="color: white;">
+                                <i class="fa fa-home" style="font-size: 20px; color: green;"></i>
+                                Go to home page
+                            </p>
+                        </a></div></div>
                         
                 <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                   
                 <form id="LoginForm" name="login" action="LoginControllerMain" method="POST" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; padding-left: 5px; padding-right: 5px; max-width: 310px; min-height: 300px; border: #3d6999 1px solid;"><table border="0"> 
                             <center><h2 style="margin-bottom: 40px;">Login here</h2></center>
                             <%if(Message != null){%>
-                                <center><h4 style="color: brown; margin-bottom: 15px; max-width: 350px;"><%=Message%></h4></center>
+                            <p style="margin: auto; max-width: 350px; margin-bottom: 15px;"><i class="fa fa-exclamation-triangle" style="color: yellow;"></i> <span style="color: white; margin: auto;"><%=Message%></span></p>
                             <%}%>
                         <table>
                             <tbody>

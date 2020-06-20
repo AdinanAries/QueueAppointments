@@ -119,7 +119,7 @@
         }
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style='background: none !important; background-color: #7e7e7e !important;'>
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style='background: none !important; background-color: #333333 !important;'>
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -210,65 +210,71 @@
             }
         %>
      
-        <div style="position: fixed;  width: 96.5%;padding: 0;">
-    <center><div id='ProviderReviewSummary' style="z-index: 100; background-color: #333333; width: 100%; box-shadow: 3px 3px 3px darkslategrey; max-width: 420px; margin-bottom: 5px; padding: 3px; padding-top: 10px; padding-bottom: 10px; border-radius: 10px; border: 1px solid white;">
-           
+        <div style="position: fixed;  width: 100%;padding: 0;">
+            
+            <center><div id='ProviderReviewSummary' style="z-index: 100; background-color: black; width: 100%; max-width: 500px; margin-bottom: 5px; padding-top: 10px; padding-bottom: 10px;">
+                    <p style="color: skyblue; margin: 5px; margin-bottom: 10px; font-weight: bolder; text-align: center;">Ratings & Reviews</p>
             
                             <%
                                 if(Base64ProvImage == ""){
                             %> 
                             
-                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
+                            <center><img style="margin-left: 5px; border-radius: 5px; float: left; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
 
                                 </center>
                                     
                             <%
                                 }else{
                             %>
-                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64ProvImage%>" height="50" width="50" /></center>
+                            <center><img class="fittedImg" style="margin-left: 5px; border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64ProvImage%>" height="50" width="50" /></center>
                                     
                             <%
                                 }
                             %>
                             
-                            <div style="width: 81%; float: right;">
+                            <div style="width: 78%; float: right; margin: 0 5px;">
                                 <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=ProvFullName%></p>
-            <p style='color: white; text-align: left; margin: 0;'><%=ProvCompany%> - <%=ServiceType%></p>
-            <p style='color: darkgray; text-align: left; margin: 0;'>Total Rating: <span style="color: orange; font-size: 25px;">
+                                <p style='color: darkgray; text-align: left; margin: 0;'><%=ProvCompany%></p>
+                                <p style='color: lightseagreen; text-align: left; margin: 0;'>Rating: 
                                                     
-                                
-                                        <%
-                                            if(ProvRating == 5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(ProvRating == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(ProvRating == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(ProvRating == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(ProvRating == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%>
-                                        </span>
-            </p>
+                                <span style="font-size: 20px; margin-left: 10px; color: gold;">
+                                <%
+                                    if(ProvRating ==5){
+
+                                %> 
+                                        ★★★★★ 
+                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Great job</span></i>
+                                <%
+                                    }else if(ProvRating == 4){
+                                %>
+                                        ★★★★☆ 
+                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Good job</span></i>
+                                <%
+                                    }else if(ProvRating == 3){
+                                %>
+                                        ★★★☆☆ 
+                                        <i class="fa fa-thumbs-up" style="color: orange; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Average rating</span></i>
+                                <%
+                                    }else if(ProvRating == 2){
+                                %>
+                                        ★★☆☆☆ 
+                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Bad rating</span></i>
+                                <%
+                                    }else if(ProvRating == 1){
+                                %>
+                                        ★☆☆☆☆   
+                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Worst rating</span></i>
+                                <%}%>
+                            </span>
+                        </p>
             <p id='summeryBtn' onclick='showSummery();' style="text-align: center; color: tomato; margin: 0;border-top: 1px solid darkgray; padding: 5px; width: 96%; margin-top: 5px;">Summary</p>
             <div id='providerReviewSummery'>
-            <p style="color: darkgray; margin: 0; text-align: left;">Total Reviews: <span style="color:#6699ff ;"> <%if(NumberOfRatings == 1){%>Review<%} else{%> Reviews<%}%> from
+            <p style="color: darkgray; margin: 0; text-align: left;">Total Reviews: <span style="color:#6699ff ;"> <!--%if(NumberOfRatings == 1){>Review<} else{> Reviews<}-->
                     <%=NumberOfRatings%> <%if(NumberOfRatings == 1){%>person.<%} else{%> people.<%}%></span></p>
             
-            <p style="color: darkgray; margin: 0; text-align: left;">Rating Score: <span style="color:#6699ff ;">Scores <%=TotalRatings%>/<%=FullRating%> points.</span></p>
-            <p style="color: darkgray; margin: 0; text-align: left;">Exact Rating: <span style="color:#6699ff ;">Gets <%=CalculatedRating%>/5 stars.</span></p>
-            <p style="color: darkgray; margin: 0; text-align: left;">Approximated Rating: <span style="color:#6699ff ;">Rated as <%=RatingsAvg%><%if(RatingsAvg == 1){%> star.<%} else{%> stars.<%}%></span></p>
+            <p style="color: darkgray; margin: 0; text-align: left;">Rating Score: <span style="color:#6699ff ;"><%=TotalRatings%>/<%=FullRating%> points.</span></p>
+            <p style="color: darkgray; margin: 0; text-align: left;">Exact Rating: <span style="color:#6699ff ;"><%=CalculatedRating%> of 5 stars.</span></p>
+            <!--p style="color: darkgray; margin: 0; text-align: left;">Approximated Rating: <span style="color:#6699ff ;">Rated as <%=RatingsAvg%><%if(RatingsAvg == 1){%> star.<%} else{%> stars.<%}%></span></p-->
             </div>
             </div>
             <script>
@@ -299,7 +305,7 @@
         
         <div id='ProviderReviewsListDiv' style="">
             
-        <h3 style='color: white; text-align: center; margin: 0;'>Reviews</h3>
+            <h3 style='color: #5e97ff; text-align: center; margin: 0; margin-bottom: 10px;'>What customers are saying</h3>
         
            <%
                     for(int x = 0; x < ReviewsList.size(); x++){
@@ -374,14 +380,14 @@
                                 if(Base64Image == ""){
                             %> 
                             
-                            <center><img style="border-radius: 5px; float: left; width: 15%;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
+                            <center><img style="border-radius: 3px; float: left; width: 15%;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
 
                                 </center>
                                     
                             <%
                                 }else{
                             %>
-                            <center><img style="border-radius: 5px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/></center>
+                            <center><img class="fittedImg" style="border-radius: 3px; float: left; width: 15%;" src="data:image/jpg;base64,<%=Base64Image%>"/></center>
                                     
                             <%
                                 }
@@ -390,38 +396,43 @@
             <center><div style='float: right; width: 84%;'>                 
             <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
             
-            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: blue; font-size: 25px;">
+            <p style='color: darkgray; text-align: left; margin: 0;'>Rated: 
                                                     
-                                
-                                        <%
-                                            if(CustomerRating == 5){
-                                        
-                                        %> 
-                                        ★★★★★
-                                        <%
-                                             }else if(CustomerRating == 4){
-                                        %>
-                                        ★★★★☆
-                                        <%
-                                             }else if(CustomerRating == 3){
-                                        %>
-                                        ★★★☆☆
-                                        <%
-                                             }else if(CustomerRating == 2){
-                                        %>
-                                        ★★☆☆☆
-                                        <%
-                                             }else if(CustomerRating == 1){
-                                        %>
-                                        ★☆☆☆☆
-                                        <%}%>
-                                        </span>
+                <span style="font-size: 20px; margin-left: 10px;">
+                    <%
+                        if(CustomerRating == 5){
+
+                    %> 
+                            ★★★★★ 
+                            <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Great job</span></i>
+                    <%
+                        }else if(CustomerRating == 4){
+                    %>
+                            ★★★★☆ 
+                            <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Good job</span></i>
+                    <%
+                        }else if(CustomerRating == 3){
+                    %>
+                            ★★★☆☆ 
+                            <i class="fa fa-thumbs-up" style="color: orange; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Average job</span></i>
+                    <%
+                        }else if(CustomerRating == 2){
+                    %>
+                            ★★☆☆☆ 
+                            <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Bad job</span></i>
+                    <%
+                        }else if(CustomerRating == 1){
+                    %>
+                            ★☆☆☆☆   
+                            <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Worst job</span></i>
+                    <%}%>
+                </span>
             </p>
             
             <%
                 if(!ReviewMessage.equals("")){
             %>
-            <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
+            <p style='color: darkgray; text-align: left; margin: 5px 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
             
             <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
             <%}%>

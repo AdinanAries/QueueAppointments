@@ -1761,10 +1761,10 @@
                     <br/>
                     <span style='font-size: 14px; color: #636363;'>your customers won't be able to book any appointments</span>
                 </p>
-                <a href='stripe-payment-view.jsp?providerEmail=<%=Email%>' target='_blank'>
+                <a href='stripe-payment-view.jsp?providerEmail=<%=Email%>&ProviderId=<%=UserID%>' target='_blank'>
                     <p style='padding: 10px; text-align: center; color: white; background-color: darkslateblue; border-radius: 4px; margin: auto; max-width: 400px;'>Click here to subscribe now</p>
                 </a>
-                    <p onclick="document.getElementById('notSubscribedCover').style.display = 'none'" style='font-size: 16px; margin-top: 10px; color: crimson; text-align: center;'>
+                    <p onclick="document.getElementById('notSubscribedCover').style.display = 'none'" style='cursor: pointer; font-size: 16px; margin-top: 10px; color: crimson; text-align: center;'>
                         <i style='color: green' class='fa fa-home'></i> go to home screen</p>
             </div>
         </div>
@@ -4517,7 +4517,7 @@
                                     <center><form id="AddClientForm<%=WString%>" style="display: none" name="AddClient">
                                         <input id="PIDAddClient<%=WString%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
                                         <input id="CustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
-                                        <input id="addClientBtn<%=WString%>" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Add this client to contacts list " name="addfavclient" />
+                                        <input id="addClientBtn<%=WString%>" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Add <%=Name.split(" ")[0]%> to your clients" name="addfavclient" />
                                     
                                         <script>
                                              
@@ -4665,18 +4665,18 @@
                     
                             <center><div>
                                     <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="BlockFutureSpots.jsp">
-                                        <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to block future spots</p>
+                                        <p style="font-weight: bolder; text-align: center; color: #000099; margin-top: 5px;">Choose date to block future spots</p>
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                                        <input style="border: 1px solid #3d6999;; background-color: white; padding: 5px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input id="GenerateSpotsBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
                                 </div></center>
                     
                     <center><div id="CloseFutureDaysForm" style="display: none;">
                         <form style="width: 100%; max-width: 600px;" >
-                            <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date when to close</p>
-                            <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Ddatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                            <p style="font-weight: bolder; text-align: center; color: #000099; margin-top: 5px;">Choose date when to close</p>
+                            <input style="border: 1px solid #3d6999; background-color: white; padding: 5px;" id="Ddatepicker" type="text" name="GetDate" value="" readonly/><br/>
                             <input id="provIDforClosedDate" type="hidden" name="ProviderID" value="<%=UserID%>" />
                             <input id="CloseDayBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Close this day" name="BlockDay" />
                             <script>
@@ -4739,7 +4739,7 @@
                         </form>
                             
                             <div id="NewClosedDays" class="scrolldiv" style="max-height: 300px; overflow-y: auto; width: 100%; max-width: 500px;">
-                            <p style="color: darkblue; margin: 5px;">Days Closed</p>
+                            <p style="font-weight: bolder; color: darkblue; margin: 5px;">Days Closed</p>
                             
                         <%
                             
@@ -4794,7 +4794,7 @@
                         <%}
                             if(ClosedDayID.size() == 0){
                         %>
-                                <p id="NoClosedDayStatus" style="background-color: red; color: white;">No specific days are closed</p>
+                                <p id="NoClosedDayStatus" style="color: white;"><i style="color: yellow;" class="fa fa-exclamation-triangle"></i> No specific days are closed</p>
                         <%}%>
                         
                         </div>
@@ -4807,9 +4807,9 @@
                                 <form style="" name="makeReservationForm">
                                     <p style="text-align: center; color: #000099; margin-top: 5px; margin-bottom: 10px; font-weight: bolder;">Add reservation details below</p>
                                     
-                                    <p>Date: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/></p>
-                                    <p>Time: <input style="border: 1px solid black; background-color: white; padding: 2px;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/></p>
-                                    <p>Service: <select style="padding: 2px; background-color: white; color: black;" id="reserveService" name="formsOrderedServices">
+                                    <p>Date: <input style="border: #3d6999 1px solid; background-color: white; padding: 5px;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/></p>
+                                    <p>Time: <input style="border: 1px solid #3d6999; background-color: white; padding: 5px;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/></p>
+                                    <p>Service: <select style="border: 1px solid #3d6999; padding: 5px; background-color: white; color: black;" id="reserveService" name="formsOrderedServices">
                                             <%
                                                 for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
                                                     
@@ -4821,7 +4821,7 @@
                                             <%}%>
                                         </select></p>
                                     
-                                    <p style="color: white; padding: 5px;">Who is this reservation for?</p>
+                                    <p style="font-weight: bolder; color: darkblue; padding: 5px;">Who is this reservation for?</p>
                                     
                                     <div class="scrolldiv" style="max-height: 200px; width:310px; overflow-y: auto; margin-bottom: 10px; padding-top: 5px;">
                                         
@@ -4861,26 +4861,28 @@
                                             %>
                                             <li style="background-color: white; margin-bottom: 5px; max-width: 300px; padding: 5px; border-radius: 5px;">
                                                 
-                                                <input class="reserveCustID" id="eachClientID<%=cl%>" style=" float: left; background-color: white;" type="radio" name="CustomerID" value="<%=ClientID%>" />
+                                                <input class="reserveCustID" id="eachClientID<%=cl%>" style="margin-top: 10px; float: left; background-color: white;" type="radio" name="CustomerID" value="<%=ClientID%>" />
                                                 
-                                                <label style="" for="eachClientID<%=cl%>">
+                                                <label for="eachClientID<%=cl%>"><p style="padding-top: 8px;">
                                                 <%
                                                     if(Base64CustPic == ""){
                                                 %> 
 
-                                                <center><img style="border-radius: 5px; float: right; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
-
-                                                    </center>
+                                                    <span>
+                                                        <img style="border-radius: 5px; margin-top: -8px; float: right; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="30" width="30" alt="icons8-user-filled-50"/>
+                                                    </span>
 
                                                 <%
                                                     }else{
                                                 %>
-                                                <center><img class="fittedImg" style="border-radius: 5px; float: right; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="50" width="50" /></center>
+                                                    <span>
+                                                        <img class="fittedImg" style="border-radius: 5px; margin-top: -8px; float: right; border-radius: 100%;" src="data:image/jpg;base64,<%=Base64CustPic%>" height="30" width="30" />
+                                                    </span>
 
                                                 <%
                                                     }
                                                 %>
-                                                <span><%=CustomerFullName%></span></label>
+                                                    <span><%=CustomerFullName%></span></p></label>
                                                 
                                                 <p style="clear: both;"></p>
                                                 
@@ -4930,7 +4932,11 @@
                                         if(ClientsList.size() == 0){
                                     %>
                                     
-                                    <p style="background-color: red; color: white;">You don't have any clients in your clients list. To add clients, go to your current or future line or your history to add customers from your bookings</p>
+                                    <p style="color: white;">
+                                        <span><i style="color: yellow;" class="fa fa-exclamation-triangle"></i> You don't have any clients in your clients list.</span>
+                                        <br/><br/>
+                                        <span style="">To add a client, go to your current line or your appointment history to add a customer from your bookings.</span>
+                                    </p>
                                     <script>
                                         document.getElementById("MkReservationBtn").style.backgroundColor = "darkgrey";
                                         document.getElementById("MkReservationBtn").disabled = true;
@@ -5068,7 +5074,7 @@
                 }
             </script>
          
-        <div  onclick='hideAllDropDowns();' id="newbusiness" style="padding-top: 15px; margin-top: 1px; background-color: #ccccff !important;">
+        <div  onclick='hideAllDropDowns();' id="newbusiness" style="margin-top: 1px; background-color: #ccccff !important;">
             <script>
                 if($(window).width() > 1000){
                     document.getElementById("newbusiness").style.height = "100%";
@@ -5081,7 +5087,7 @@
             
             <center><div id="Providerprofile" style="width: 100%; max-width: 700px;">
                  
-                <h4 style="color: black; margin-bottom: 10px;">Your Business Profile</h4>
+                <h4 id="ProviderYourBusinessTxt" style="color: darkblue; padding: 15px 0; background-color: #6699ff;">Your Business Profile</h4>
                 
                 <table id="ProviderprofileTable" style="border-spacing: 0; width: 100%; max-width: 600px;">
                     
@@ -5130,20 +5136,20 @@
                                             <tr><td><p style='margin-bottom: 10px;'>
                                                     <span style='font-weight: bolder;' id="CompanyDetail"><%=Company%></span></p></td></tr>
                                             <tr><td><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
-                                                        <span id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
+                                                        <span style="color: #636363;" id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
                                             <tr><td><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                                        <span id="EmailDetail"><%=Email%></span></p></td></tr>
+                                                        <span style="color: #636363;" id="EmailDetail"><%=Email%></span></p></td></tr>
                                         <tr><td><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                                <span id="AddressDetail"><%=Address.split(",")[0]%></span></p></td></tr>
+                                                <span style="color: #636363;" id="AddressDetail"><%=Address.split(",")[0]%></span></p></td></tr>
                                     
                                         </table></center>
                                     
                                 </div>
                                         
-                                        <center><p onclick="toggleShowEditPerInfoDiv();" style="color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; cursor: pointer; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 10px; margin-top: 10px;">
-                                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                                                <small style="color: white;">Edit Your Personal Information</small>
-                                            </p></center>
+                                        <p onclick="toggleShowEditPerInfoDiv();" style="text-align: center; margin: auto; color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; cursor: pointer; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 10px; margin-top: 10px;">
+                                                <i style="color: #4ed164;;" class="fa fa-pencil-square" aria-hidden="true"></i>
+                                                <span style="color: white;">Edit Your Personal Information</span>
+                                            </p>
                                         
                                         <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin-bottom: 10px;">
                                                 <form name="UpdatePsnalInfor">
@@ -6987,7 +6993,7 @@
                                         <br/>
                                         <span id='SubscriptionSettingsTextStatusSpan' style='font-size: 14px; color: #d8d8d8;'>your customers won't be able to book any appointments</span>
                                     </p>
-                                    <a href='stripe-payment-view.jsp?providerEmail=<%=Email%>' target='_blank'>
+                                    <a href='stripe-payment-view.jsp?providerEmail=<%=Email%>&ProviderId=<%=UserID%>' target='_blank'>
                                         <p id='SubscribeFromSettingsBtn' style='padding: 5px; color: white; background-color: darkslateblue; border-radius: 4px;'>Click here to subscribe</p>
                                     </a>
                                         

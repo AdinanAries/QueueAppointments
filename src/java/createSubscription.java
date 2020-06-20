@@ -60,10 +60,10 @@ public class createSubscription extends HttpServlet {
         }
         
         CreateSubscriptionBody postBody = gson.fromJson(JsonData, CreateSubscriptionBody.class);
-        JOptionPane.showMessageDialog(null, postBody.getCustomerId());
+        //JOptionPane.showMessageDialog(null, postBody.getPriceId());
         Customer customer = null;
         
-        /*try{
+        try{
             customer = Customer.retrieve(postBody.getCustomerId());
         }catch(Exception e){}
 
@@ -92,7 +92,7 @@ public class createSubscription extends HttpServlet {
 
         // Create the subscription
         Map<String, Object> item = new HashMap<>();
-        item.put("price", "price_H1NlVtpo6ubk0m");
+        item.put("price", postBody.getPriceId());
         Map<String, Object> items = new HashMap<>();
         items.put("0", item);
         Map<String, Object> params = new HashMap<>();
@@ -109,7 +109,7 @@ public class createSubscription extends HttpServlet {
             
         }
 
-        response.getWriter().print(subscription.toJson());*/
+        response.getWriter().print(subscription.toJson());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

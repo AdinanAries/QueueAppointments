@@ -36,6 +36,52 @@
 .MyCardElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+.QueueLoader {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  top: 50%;
+  left: 45%;
+  padding-left: 18px;
+}
+@media only screen and (max-width: 1000px){
+    .QueueLoader {
+        left: 37%;
+    }
+}
+.QueueLoader img {
+  margin-top: 6px;
+  margin-left: 6px;
+  position: relative;
+  z-index: 1001;
+  border-radius: 100%;
+  box-shadow: #000c3b 0 0 8px 1px;
+  /*opacity: 0.1;*/
+  height: 43px;
+  width: 43px;
+  animation: spin 10s linear infinite;
+}
+
+.QueueLoaderSpinner {
+  position: fixed;
+  z-index: 100;
+  height: 50px;
+  width: 50px;
+  background-color: #313ddc;
+  border: #313ddc 2px solid;
+  border-bottom: #ffffff 2px solid;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .subscriptions-list{
     display: flex;
     flex-direction: column;

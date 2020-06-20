@@ -18,6 +18,9 @@ body {
   background-position: right !important;
   background-repeat: no-repeat !important;
 }
+#ProviderYourBusinessTxt{
+    display: none;
+}
 #notSubscribedCover{
     display: none;
     background-color: white;
@@ -572,7 +575,7 @@ select {
   /*height: 100%;*/
 }
 #ProviderReviewsListDiv {
-  padding-top: 210px;
+  padding-top: 230px;
 }
 #logindetails {
   margin-left: auto;
@@ -1394,6 +1397,9 @@ input[type="file"] {
   border-radius: 4px;
 }
 @media only screen and (max-width: 1000px) {
+    #ProviderYourBusinessTxt{
+        display: block;
+    }
     #LoginHomeBtn{
         margin-top: 110px !important;
     }
@@ -1599,7 +1605,7 @@ input[type="file"] {
   #summeryBtn {
   }
   #ProviderReviewsListDiv {
-    padding-top: 150px;
+    padding-top: 170px;
   }
   #header {
     padding-top: 1px;
@@ -1607,6 +1613,10 @@ input[type="file"] {
   }
   #DashboardLogo {
     margin-bottom: -6px;
+    max-width: 80px;
+    max-height: 45px;
+  }
+  .mobileLogo{
     max-width: 80px;
     max-height: 45px;
   }
