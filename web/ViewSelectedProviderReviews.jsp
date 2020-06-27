@@ -267,7 +267,7 @@
                                 <%}%>
                             </span>
                         </p>
-            <p id='summeryBtn' onclick='showSummery();' style="text-align: center; color: tomato; margin: 0;border-top: 1px solid darkgray; padding: 5px; width: 96%; margin-top: 5px;">Summary</p>
+                        <p id='summeryBtn' onclick='showSummery();' style="text-align: center; color: tomato; margin: 0;border-top: 1px solid darkgray; padding: 10px 0; width: 96%; margin-top: 5px;">See summary <i id="SummaryCaretDown" style="color: white;" class="fa fa-caret-down" aria-hidden="true"></i></p>
             <div id='providerReviewSummery'>
             <p style="color: darkgray; margin: 0; text-align: left;">Total Reviews: <span style="color:#6699ff ;"> <!--%if(NumberOfRatings == 1){>Review<} else{> Reviews<}-->
                     <%=NumberOfRatings%> <%if(NumberOfRatings == 1){%>person.<%} else{%> people.<%}%></span></p>
@@ -286,15 +286,23 @@
                         if(document.getElementById("providerReviewSummery").style.display === "none"){
                             $("#providerReviewSummery").slideDown("fast");
                             document.getElementById("providerReviewSummery").style.display = "block";
-                            document.getElementById("summeryBtn").innerHTML = "Minimize";
+                            document.getElementById("summeryBtn").innerHTML = "Collapse summary <i style='color: white;' class='fa fa-caret-up' aria-hidden='true'></i>";
                         }else{
                             $("#providerReviewSummery").slideUp("fast");  
                             document.getElementById("providerReviewSummery").style.display = "none";
-                            document.getElementById("summeryBtn").innerHTML = "Summary";
+                            document.getElementById("summeryBtn").innerHTML = "See summary <i id='SummaryCaretDown' style='color: white;' class='fa fa-caret-down' aria-hidden='true'></i>";
                         }
 
                     }
                 };
+                
+                if($(window).width() < 1000){
+                    document.getElementById("providerReviewSummery").style.display = "none";
+                }
+                if($(window).width() > 1000){
+                    document.getElementById("SummaryCaretDown").style.display = "none";
+                    document.getElementById("summeryBtn").innerHTML = "Summary";
+                }
                 
             </script>
                             

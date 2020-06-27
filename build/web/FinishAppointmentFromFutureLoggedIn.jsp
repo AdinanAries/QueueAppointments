@@ -373,6 +373,30 @@
             }catch(Exception e){
                 e.printStackTrace();
             }
+            
+            String status = "not_added";
+        
+            //getting the subscription status
+            try{
+                Class.forName(Driver);
+                Connection SubsConn = DriverManager.getConnection(url, User, Password);
+                String SubsString = "select status from QueueObjects.StripSubscriptions where ProvId = ?";
+                PreparedStatement SubsPst = SubsConn.prepareStatement(SubsString);
+
+                SubsPst.setString(1, ID);
+
+                ResultSet SubsRec = SubsPst.executeQuery();
+
+                while(SubsRec.next()){
+                    if(SubsRec.getString("status").equalsIgnoreCase("0")){
+                        status = "inactive";
+                    } else if (SubsRec.getString("status").equalsIgnoreCase("1")){
+                        status = "active";
+                    }
+                }
+
+            }catch(Exception e){}
+            //JOptionPane.showMessageDialog(null, status);
         %>
         
     <body  onload="document.getElementById('PageLoader').style.display = 'none';">
@@ -1506,14 +1530,14 @@
                                 <tr>
                                     <td>
                                         <b>
-                                            <p style="">
-                                                <img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
+                                            <p style="color: #3d6999; font-weight: bolder;">
+                                                <!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
                                                 <%=fullName%>
                                             </p>
                                         </b>
-                                        <p>
-                                            <img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                            <%=Company%>
+                                        <p style="margin-top: -4px;">
+                                            <!--img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/-->
+                                            <small style="color: #636363;"><%=Company%></small>
                                         </p>
                                     </td>
                                 </tr>
@@ -2053,7 +2077,20 @@
                                              document.getElementById("submitAppointment").style.display = "none";
                                              document.getElementById("CreditDebitCardDetails").style.display = "block";
                                         </script>
-                                        <%}%>
+                                        <%
+                                            }
+
+                                            if(status.equalsIgnoreCase("inactive") || status.equalsIgnoreCase("not_added")){
+                                        %>
+                                        
+                                        <script>
+                                             alert("Oops! You cannot continue.\nThis account is not active at this time.\nTry again later.");
+                                             window.history.go(-1);
+                                        </script>
+                                        
+                                        <%
+                                            }
+                                        %>
                                             
                                             <script>
                                                     

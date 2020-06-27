@@ -240,8 +240,46 @@
         }
         
         CurrentProvsName = providersList.get(0).getFirstName().trim(); //+ " " + providersList.get(0).getMiddleName().trim() + " " + providersList.get(0).getLastName().trim();
+        
+        String status = "not_added";
+        
+            //getting the subscription status
+            try{
+                Class.forName(Driver);
+                Connection SubsConn = DriverManager.getConnection(url, User, Password);
+                String SubsString = "select status from QueueObjects.StripSubscriptions where ProvId = ?";
+                PreparedStatement SubsPst = SubsConn.prepareStatement(SubsString);
+
+                SubsPst.setString(1, ID);
+
+                ResultSet SubsRec = SubsPst.executeQuery();
+
+                while(SubsRec.next()){
+                    if(SubsRec.getString("status").equalsIgnoreCase("0")){
+                        status = "inactive";
+                    } else if (SubsRec.getString("status").equalsIgnoreCase("1")){
+                        status = "active";
+                    }
+                }
+
+            }catch(Exception e){}
+            //JOptionPane.showMessageDialog(null, status);
     %>
    
+    <%
+
+            if(status.equalsIgnoreCase("inactive") || status.equalsIgnoreCase("not_added")){
+    %>
+                                        
+            <script>
+                alert("Oops! You cannot continue.\nThis account is not active at this time.\nTry again later.");
+                window.history.go(-1);
+            </script>
+                                        
+    <%
+            }
+    %>
+    
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
@@ -1224,16 +1262,14 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        <b>
-                                            <p style="font-size: 20px; text-align: center;">
-                                                <span><!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
-                                                    <%=fullName%>
-                                                </span>
-                                            </p>
-                                            <p style="text-align: center;"><!--img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/-->
-                                                <%=Company%> 
-                                            </p>
-                                        </b>
+                                        <p style="font-size: 20px; text-align: center;">
+                                            <span style="color: #3d6999; font-weight: bolder;"><!--img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/-->
+                                                <%=fullName%>
+                                            </span>
+                                        </p>
+                                        <p style="text-align: center; margin-top: -4px; color: #636363;"><!--img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/-->
+                                            <small><%=Company%></small> 
+                                        </p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1411,7 +1447,7 @@
                                                  
                                            <p style="text-align: center; color: #8b8b8b; margin: 10px; margin-top: 20px;">Last Review</p>
                                            
-                                           <div style="display: flex; flex-direction: row;">   
+                                           <div style="display: flex; flex-direction: row; justify-content: center;">   
                                             <%
                                                 if(Base64Image == ""){
                                             %> 

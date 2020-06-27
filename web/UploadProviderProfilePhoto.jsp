@@ -25,6 +25,9 @@
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Upload Photo</title>
         
@@ -232,7 +235,11 @@
                         </form>
                                     
                     </div>
-                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="font-weight: bolder; color: white; padding: 5px; margin-top: 10px;">Click here to go to dashboard</p></a>
+                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                        <p style="background-color: darkslateblue; padding: 10px 0; font-weight: bolder; color: white; padding: 5px; margin-top: 10px; margin-left: 5px; margin-right: 5px; border-radius: 4px;">
+                            <i style='color: #06adad; font-size: 20px;' class='fa fa-home'></i> Go to dashboard
+                        </p>
+                    </a>
     
         
     </body>

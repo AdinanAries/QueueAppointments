@@ -481,6 +481,18 @@
         <servlet-name>SaveStripeSubscriptionInfo</servlet-name>
         <servlet-class>SaveStripeSubscriptionInfo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetSubscriptionStatus</servlet-name>
+        <servlet-class>GetSubscriptionStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSubscriptionStatus</servlet-name>
+        <servlet-class>UpdateSubscriptionStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>retryPaymentWithNewInvoice</servlet-name>
+        <servlet-class>retryPaymentWithNewInvoice</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -912,6 +924,18 @@
     <servlet-mapping>
         <servlet-name>SaveStripeSubscriptionInfo</servlet-name>
         <url-pattern>/SaveStripeSubscriptionInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSubscriptionStatus</servlet-name>
+        <url-pattern>/GetSubscriptionStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSubscriptionStatus</servlet-name>
+        <url-pattern>/UpdateSubscriptionStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>retryPaymentWithNewInvoice</servlet-name>
+        <url-pattern>/retryPaymentWithNewInvoice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

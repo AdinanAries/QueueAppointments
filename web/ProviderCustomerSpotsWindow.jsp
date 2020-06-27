@@ -167,23 +167,12 @@
             //incase of array flush
             if(!NewUserName.equals(NameFromList)){
                 isSameUserName = false;
-                //response.sendRedirect("LogInPage.jsp");
             }
-            
-            /*if(tempAccountType.equals("BusinessAccount")){
-                request.setAttribute("UserIndex", UserIndex);
-                request.getRequestDispatcher("ServiceProviderPage.jsp").forward(request, response);
-            }*/
-
-            /*if(UserID == 0)
-                response.sendRedirect("LogInPage.jsp");*/
-            
         }catch(Exception e){
             isUserIndexInList = false;
-            //response.sendRedirect("LogInPage.jsp");
         }
         
-        /*String SessionID = request.getRequestedSessionId();
+        String SessionID = request.getRequestedSessionId();
         String DatabaseSession = "";
         //JOptionPane.showMessageDialog(null, SessionID);
         
@@ -203,28 +192,26 @@
             
         }catch(Exception e){}
         
-        //JOptionPane.showMessageDialog(null, DatabaseSession);
-        if(!SessionID.equals(DatabaseSession)){
-            
-            try{
-                Class.forName(Driver);
-                Connection DltSesConn = DriverManager.getConnection(Url, user, password);
-                String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
-                PreparedStatement DltSesPst = DltSesConn.prepareStatement(DltSesString);
-                DltSesPst.setInt(1, UserIndex);
-                DltSesPst.executeUpdate();
-            }
-            catch(Exception e){}
-            
-            isSameSessionData = false;
-            //response.sendRedirect("LogInPage.jsp");
+        if(SessionID == null){
+            SessionID = "";
         }
         
-        if(!isSameSessionData || !isSameUserName || UserID == 0 || !isUserIndexInList)
-            response.sendRedirect("Queue.jsp");
-        else if(JustLogged == 1){
-            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-        }*/
+        //JOptionPane.showMessageDialog(null, DatabaseSession);
+        if(!SessionID.equals(DatabaseSession)){
+            isSameSessionData = false;
+        }
+        
+        if(!isSameSessionData || !isSameUserName || UserID == 0 || !isUserIndexInList){
+    %>
+            <script>
+
+                let UserName2 = window.localStorage.getItem("QueueUserName");
+                let UserPassword2 = window.localStorage.getItem("QueueUserPassword");
+                parent.window.document.location = "LoginControllerMainRedirect?username="+UserName2+"&password="+UserPassword2;
+                    
+            </script>
+    <%
+        }
         
         String AppointmentDateValue = "";
         
@@ -544,14 +531,14 @@
         
     %>
     
-    <body style="background-color: #6699ff;">
+    <body>
         
         <div id="PagePageLoader" class="QueueLoader" style='display: none;'>
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <div style="background-color: #6699ff;">
+        <div>
                                         
                                         <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; height: 40px; background-color: white; border-spacing: 20px 0;">
                                             <tbody>
@@ -579,7 +566,7 @@
                                         
                                 <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
                                     
-                                    <p style="color: darkblue; margin-top: 10px;">Today's Spots</p>
+                                    <p style="font-weight: bolder; color: darkblue; margin-top: 10px;">Today's Spots</p>
                                    
                                     <script>
                                     
@@ -798,7 +785,7 @@
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
                                                 <p style='color: darkblue; font-weight: bolder;'>This spot with <span style = "color: blue;">
-                                                    <input style="background-color: darkslateblue; padding: 5px; border-radius: 5px; margin: 5px; font-weight: bolder;  color: white; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>"/>
+                                                    <input style="background-color: darkslateblue; padding: 5px; border-radius: 5px; margin: 5px; font-weight: bolder;  color: white; border:0; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>"/>
                                                     </span> started at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span></p>
                                         
                                                 
@@ -862,7 +849,7 @@
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
                                                 
                                                 <p style="font-weight: bolder; color: darkblue;">You are on <span style = "color: blue;">
-                                                    <input style="color: white; padding: 5px; border-radius: 5px; border:0; font-weight: bolder; margin: 5px; background-color: darkslateblue;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>'s"/> <i class='fa fa-arrow-right' aria-hidden='true'></i>
+                                                    <input style="color: white; padding: 5px; border-radius: 5px; border:0; font-weight: bolder; margin: 5px; background-color: darkslateblue;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type='submit' value="<%= ProviderName%>'s"/> <i class='fa fa-arrow-right' aria-hidden='true'></i>
                                                     </span> line at <span id="ApptTimeSpan<%=JString%>" style = "color: red;"> <%= TimeToUse%></span>
                                                 </p>
                                         </form>
@@ -1095,7 +1082,7 @@
                                         <form style=" display: none;" id="addFavProvForm<%=JString%>" class="addFavProvForm" name="addFavProvForm" action="addFavProvController" method="POST">
                                             <input id="CustIDatAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDatAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addProvtoFavBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none; font-weight: bolder;" type="button" value="Add person to favorites" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
@@ -1247,7 +1234,7 @@
                                     
                                     <!--------------------------------------------------------------------------------------------------------------------------------------------->
                                     
-                                    <p style="color: darkblue; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
+                                    <p style="font-weight: bolder; color: darkblue; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
                                     
                                     <%
                                         
@@ -1340,7 +1327,7 @@
                                         
                                             <P style='font-weight: bolder; color: darkblue;'>
                                                 You will be on <span style = "color: blue;">
-                                                    <input style="background-color: darkslateblue; border: 0; border-radius: 4px; margin: 5px; font-weight: bolder; color: white; padding: 5px;" type="submit"  value="<%= ProviderName%>'s" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
+                                                    <input style="background-color: darkslateblue; border: 0; border-radius: 4px; margin: 5px; font-weight: bolder; color: white; padding: 5px;" type="submit"  value="<%= ProviderName%>'s" onclick="document.getElementById('PagePageLoader').style.display = 'block';"/>
                                                 </span> line
                                             </p>
                                             <p style='color: blue; font-weight: bolder; text-align: center;'><i class="fa fa-calendar" aria-hidden="true"></i> <span id="FutureDateSpan<%=QString%>" style ="color: red;"> <%= AppointmentFormattedDate%></span> <i class="fa fa-clock-o" aria-hidden="true"></i> <span id="FutureTimeSpan<%=QString%>" style = "color: red;"> <%= TimeToUse%></span></p>
@@ -1572,7 +1559,7 @@
                                         <form style=" display: none;" id="addFutureFavProvForm<%=QString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustIDforAddFav<%=QString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDforAddFav<%=QString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: none" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: none; font-weight: bolder;" type="button" value="Add person to favorites" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
@@ -1972,7 +1959,7 @@
                                         <form style=" display: none;" id="addFavProvFormFromRecent<%=JString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustomerIDforAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProviderIDforAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none; font-weight: bolder;" type="button" value="Add person to favorites" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  

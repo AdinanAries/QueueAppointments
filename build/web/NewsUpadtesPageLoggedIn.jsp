@@ -33,7 +33,7 @@
         <title>Queue | Settings</title>
         
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -47,12 +47,12 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
-<link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
-<meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon4.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon5.png" />
+        <link rel="apple-touch-icon" href="./HomeIcons/Icon6.png" />
+        <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
     
@@ -60,10 +60,35 @@
     
     <%
         
-        config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
-        config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
-        config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
-        config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        try{
+            config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
+            config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
+            config.getServletContext().setAttribute("DBUser", config.getInitParameter("user"));
+            config.getServletContext().setAttribute("DBPassword", config.getInitParameter("password"));
+        }catch(Exception e){
+    %>
+    
+        <script>
+            if($(window).width() > 1000){
+
+                    let UserName = window.localStorage.getItem("QueueUserName");
+                    let UserPassword = window.localStorage.getItem("QueueUserPassword");
+                    (function(){
+                        //This coinsidentally takes you to login page incase of unavailable login information.
+                        document.location.href="LoginControllerMainRedirect?username="+UserName+"&password="+UserPassword;
+                        return false;
+                    })();
+
+                }else{
+                    
+                    let UserName2 = window.localStorage.getItem("QueueUserName");
+                    let UserPassword2 = window.localStorage.getItem("QueueUserPassword");
+                    parent.window.document.location = "LoginControllerMainRedirect?username="+UserName2+"&password="+UserPassword2;
+                }
+        </script>
+    
+    <%
+        }
         
         int UserID = 0;
         int UserIndex = -1;
@@ -87,7 +112,28 @@
             User = config.getServletContext().getAttribute("DBUser").toString();
             Password = config.getServletContext().getAttribute("DBPassword").toString();
         }catch(Exception e){
-            response.sendRedirect("NewsUpadtesPageLoggedIn.jsp?CustomerID="+UserID);
+    %>
+    
+        <script>
+            if($(window).width() > 1000){
+
+                    let UserName = window.localStorage.getItem("QueueUserName");
+                    let UserPassword = window.localStorage.getItem("QueueUserPassword");
+                    (function(){
+                        //This coinsidentally takes you to login page incase of unavailable login information.
+                        document.location.href="LoginControllerMainRedirect?username="+UserName+"&password="+UserPassword;
+                        return false;
+                    })();
+
+                }else{
+                    
+                    let UserName2 = window.localStorage.getItem("QueueUserName");
+                    let UserPassword2 = window.localStorage.getItem("QueueUserPassword");
+                    parent.window.document.location = "LoginControllerMainRedirect?username="+UserName2+"&password="+UserPassword2;
+                }
+        </script>
+    
+    <%
         }
         
         ProviderCustomerData eachCustomer = null;

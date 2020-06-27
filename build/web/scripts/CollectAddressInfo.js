@@ -11,12 +11,18 @@ var Country = document.getElementById("Country");
 
 function SetAddressAddressLocation(){
 	
-if(HouseNumber.value == "" || Street.value == "" || Town.value == "" ||
-   City.value == "" || ZCode.value == "" || Country.value == "")
-	businessLocation.style.backgroundColor = "red";
-else
-	businessLocation.style.backgroundColor = "green";
-	businessLocation.style.color = "white"
+    if(HouseNumber.value == "" || Street.value == "" || Town.value == "" ||
+        City.value == "" || ZCode.value == "" || Country.value == ""){
+        document.getElementById('AddrStatusIcon').classList.remove('fa-check');
+	document.getElementById('AddrStatusIcon').classList.add('fa-exclamation-triangle');
+        document.getElementById('AddrStatusIcon').style.color = "red";
+    }
+    else{
+        document.getElementById('AddrStatusIcon').classList.remove('fa-exclamation-triangle');
+	document.getElementById('AddrStatusIcon').classList.add('fa-check');
+        document.getElementById('AddrStatusIcon').style.color = "#58FA58";
+	businessLocation.style.color = "white";
+    }
 	
 	var HouseNumberValue = HouseNumber.value;
 	var StreetValue = Street.value;
@@ -26,7 +32,7 @@ else
 	var CountryValue = Country.value;
 	
 	businessLocation.value = HouseNumberValue + " " + StreetValue + ", " + TownValue + ", " +
-								CityValue + ", " + ZCodeValue + " " + CountryValue;
+				    CityValue + ", " + ZCodeValue + " " + CountryValue;
 	
 }
 

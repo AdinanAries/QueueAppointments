@@ -1010,9 +1010,14 @@
                                 <tr>
                                     <td>
                                         <b>
-                                            <p style="">
-                                                <%=fullName%>
-                                            </p>
+                                            <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=SID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                    <%=fullName.split(" ")[0]%> 
+                                                    <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                        go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                    </span>
+                                                </p>
+                                            </a>
                                         </b>
                                             <div style="display: flex; flex-direction: row;">
                                                 <div>

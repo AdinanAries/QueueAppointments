@@ -1602,6 +1602,32 @@
     %>
     
     <%
+        
+        String status = "not_added";
+        
+        //getting the subscription status
+        try{
+            Class.forName(Driver);
+            Connection SubsConn = DriverManager.getConnection(Url, user, password);
+            String SubsString = "select status from QueueObjects.StripSubscriptions where ProvId = ?";
+            PreparedStatement SubsPst = SubsConn.prepareStatement(SubsString);
+            
+            SubsPst.setInt(1, UserID);
+            
+            ResultSet SubsRec = SubsPst.executeQuery();
+            
+            while(SubsRec.next()){
+                if(SubsRec.getString("status").equalsIgnoreCase("0")){
+                    status = "inactive";
+                } else if (SubsRec.getString("status").equalsIgnoreCase("1")){
+                    status = "active";
+                }
+            }
+            
+        }catch(Exception e){}
+        
+        //JOptionPane.showMessageDialog(null, status);
+        
         //Getting Cancellation policy settings
         boolean isSettingExisting = false;
         String isSettingAllowed = "No";
@@ -1770,6 +1796,16 @@
         </div>
         <script>
             subscribedFlag = false;
+            var subscription_status = '<%=status%>';
+            
+            if(subscription_status === "active"){
+                subscribedFlag = true;
+            }else if(subscription_status === "inactive"){
+                subscribedFlag = false;
+            }else if(subscription_status === "not_added"){
+                subscribedFlag = false;
+            }
+            
             if(subscribedFlag === false){
                 document.getElementById('notSubscribedCover').style.display = "block";
             }else{
@@ -1784,16 +1820,10 @@
         
         <div id="PermanentDiv" style="">
             
-            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/-->
+            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
             <script>
-                function showExtraDropDown(){
-                    if(document.getElementById("ExtraDropDown").style.display === "none")
-                        document.getElementById("ExtraDropDown").style.display = "block";
-                    else
-                        document.getElementById("ExtraDropDown").style.display = "none";
-                }
-                
-            </script>
+                //show extradrop down script here
+            </script-->
             
             <div style="float: left; width:fit-content; margin-left: 10px; padding-top: 1px;">
                 <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; background-color: white; padding: 4px; border-radius: 4px" />
@@ -1826,6 +1856,8 @@
             </div>
             
             <ul style="display: block;">
+                <li class="active" id='' onclick='showReservation();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-meeting-time-50.png" width="22" height="19" alt="icons8-calendar-50"/>
+                    Make Reservation</li>
                 <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li class="active" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
                     Notifications<sup style='color: lawngreen; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
                 <li class="active calender_li" id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
@@ -1833,49 +1865,14 @@
                 <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li class="active" id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
                     Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
             </ul>
-        
+            
         </div>
         
-         <div id='ExtraDropDwnDiv'>  
-            <table id='ExtraDropDown' style='display: none; z-index: 120; background-color: white; margin-top: 40px; position: fixed;  box-shadow: 4px 4px 4px #2c3539;'>
-                <tbody>
-                    <tr>
-                        <td onclick="showCustExtraNews();" id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'>
-                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>
-                                <img style='background-color: white;' src="icons/icons8-google-news-50.png" width="20" height="17" alt="icons8-google-news-50"/>
-                                News
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td onclick="showCustExtraNotification2();" id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'>
-                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'>
-                                <img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                                Notifications<sup style='color: red; background-color: white; padding-right: 2px;'> <%=notiCounter%></sup>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td onclick='showCustExtraCal2();' id='' style='cursor: pointer; background-color: #334d81; padding: 5px'>
-                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'>
-                                <img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                                Calender
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td onclick='showCustExtraUsrAcnt2();' id='' style='cursor: pointer; background-color: #334d81; color: white; padding: 5px;'>
-                            <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" style="color: white;" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'>
-                                <img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
-                            Account
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+         <!--div id='ExtraDropDwnDiv'>  
+            
+        </div-->
                 
-        <div onclick='hideExtraDropDown();' id="container">
+        <div id="container">
             
             <div id="miniNavPov" style="height: 35px; padding-top: 3px; padding-bottom: 3px; padding-right: 2px; background-color: #334d81; opacity: 0.9">
                 <center>
@@ -1920,19 +1917,19 @@
                                 <p style="font-size: 11px;">Add News</p>
                             </div>
                         </a>
-                        <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3' style='color: white;'>
-                            <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
-                                <!img style="background-color: white; border-radius: 2px;" src="icons/icons8-calendar-50.png" alt="" height="25" width="25"/>
-                                <i style="font-size: 25px;" class="fa fa-calendar"></i>
-                                <p style="font-size: 11px;">Calender</p>
-                            </div>
-                        </a>
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'>
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
                                 <p style=' width: 13px; position: absolute; z-index: 1000; font-size: 11px; color: red; margin-left: 11%; border: #334d81 1px solid; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;'><%=notiCounter%></p>
                                 <!--img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="25" alt="icons8-notification-50"/-->
                                 <i style="font-size: 25px;" class="fa fa-bell"></i>
                                 <p style="font-size: 11px;">Notifications</p>
+                            </div>
+                        </a>
+                        <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4' style='color: white;'>
+                            <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
+                                <!img style="background-color: white; border-radius: 2px;" src="icons/icons8-calendar-50.png" alt="" height="25" width="25"/>
+                                <i style="font-size: 25px;" class="fa fa-cog"></i>
+                                <p style="font-size: 11px;">Settings</p>
                             </div>
                         </a>
                     </div>
@@ -3029,7 +3026,7 @@
                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
                                     %>
                                                  
-                                    <p style="color: tomato;">Your not open on <%=DayOfWeek%>...</p>
+                                    <p style="color: tomato;">You are not open on <%=DayOfWeek%>...</p>
                                     
                                     <%
                                         }else  if(FormattedStartTime != "" || FormattedClosingTime != "" && !(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00"))){
@@ -3369,7 +3366,7 @@
                                         if(!isLineAvailable){
                                     %>
                                     
-                                    <p style="background-color: red; color: white; text-align: center;">There is no line currently available for this service provider</p>
+                                    <p style="color: darkgrey; text-align: center; padding: 10px 0;"><i style="color: red;" class="fa fa-exclamation-triangle"></i> No available spots for today</p>
                                     
                                     <%}%>
                                     
@@ -3472,7 +3469,6 @@
                                     </div></center>
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
             
-                
                 <div style=" display: block;" id="appointmentsDiv" style="">
                 <center><div style=" width: 100%; background-color: #d8d8d8;">
                                         <h style="color: #000099; font-weight: bolder; text-align: center; padding-top: 20px;">See Your Bookings Below</p>
@@ -3493,7 +3489,7 @@
                                 
                     </div></center>
                     
-                    <div class="scrolldiv" style=" height: 400px; overflow-y: auto; min-width: 100%; padding-top: 10px;">
+                    <div class="scrolldiv" style=" height: auto; overflow-y: auto; min-width: 100%; padding-top: 10px;">
                         
                         <script>
                                     
@@ -3644,8 +3640,8 @@
                                     <center>
                                         <input id="PIDCAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
                                         <input id="CCustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
-                                        <input type="button" id="AddClientsFromCurBtn<%=WString%>" style="cursor: pointer; background: 0; text-align: center; border: none; background-color: darkslateblue; border-radius: 4px;  width: 300px; color: white; margin-top: 5px; padding: 5px;"
-                                           value="Add <%=Name.split(" ")[0]%> to your clients" />
+                                        <input type="button" id="AddClientsFromCurBtn<%=WString%>" style="cursor: pointer; background: 0; text-align: center; border: none; background-color: darkslateblue; border-radius: 4px; color: white; margin-top: 5px; padding:10px 5px;"
+                                           value="Add person to clients" />
                                         <script>
                                                 
                                             $(document).ready(function(){
@@ -4046,8 +4042,8 @@
                                     <center>
                                         <input id="PIDFAddClient<%=WString%>" type="hidden" value="<%=UserID%>" />
                                         <input id="FCustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
-                                        <input type="button" id="AddClientsFromFutBtn<%=WString%>" style="cursor: pointer; background-color: darkslateblue; text-align: center; width: 300px; border: none; border-radius: 4px; color: white; margin-top: 5px; padding: 5px;"
-                                           value="Add <%=Name.split(" ")[0]%> to your clients" />
+                                        <input type="button" id="AddClientsFromFutBtn<%=WString%>" style="cursor: pointer; background-color: darkslateblue; text-align: center; border: none; color: white; border-radius: 4px; margin-top: 5px; padding: 10px 5px;"
+                                           value="Add person to clients" />
                                         <script>
                                                 
                                             $(document).ready(function(){
@@ -4433,7 +4429,7 @@
                                 <form name="BlockThisCustomer" >
                                     <input id="CustIDforBlockCustomer<%=w%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
                                     <input id="PIDforBlockCustomer<%=w%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
-                                    <center><input id="BlockCustBtn<%=w%>" style="background-color: crimson; color: white; border-radius: 4px; border: none; padding: 5px;" type="button" value="Block This Person" /></center>
+                                    <center><input id="BlockCustBtn<%=w%>" style="background-color: crimson; color: white; border-radius: 4px; border: none; padding: 5px;" type="button" value="Block this person" /></center>
                                     
                                     <script>
                                              
@@ -4517,7 +4513,7 @@
                                     <center><form id="AddClientForm<%=WString%>" style="display: none" name="AddClient">
                                         <input id="PIDAddClient<%=WString%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
                                         <input id="CustIDAddClient<%=WString%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
-                                        <input id="addClientBtn<%=WString%>" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Add <%=Name.split(" ")[0]%> to your clients" name="addfavclient" />
+                                        <input id="addClientBtn<%=WString%>" style="padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Add person to clients" name="addfavclient" />
                                     
                                         <script>
                                              
@@ -4645,40 +4641,40 @@
                     </div>
             </div>
                     
-                <div id='ReservationAndFutureSpots' style='overflow-y: auto;'>  
-                    <center><table style="width: 100%; padding-top: 5px;">
+                <div id='ReservationAndFutureSpots' style='overflow-y: auto; background-color: #9bb1d0;'>  
+                    <center><table style="width: 100%; background-color: #3d6999;">
                         <tbody>
                             <tr>
-                                <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; width: 33.3%; background-color: darkslateblue; color: white; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
-                                    <p style="text-align: center;">Make Reservation</p>
+                                <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; width: 33.3%; color: white; padding: 10px 0;">
+                                    <p style="text-align: center;"><i style="color: #ff6b6b; font-size: 18px;" class="fa fa-plus-square" aria-hidden="true"></i><br/>Reservations</p>
                                 </td>
-                                <td onclick="toggleShowBlockFutureSpotsForm();" style="cursor: pointer; width: 33.3%; background-color: darkslateblue; color: white; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
-                                    <p style="text-align: center;">View Future Spots</p>
+                                <td onclick="toggleShowBlockFutureSpotsForm();" style="cursor: pointer; width: 33.3%; color: white; padding: 10px 0;">
+                                    <p style="text-align: center;"><i style="color: #ff6b6b; font-size: 18px;" class="fa fa-users" aria-hidden="true"></i><br/>More Spots</p>
                                 </td>
-                                <td onclick="toggleShowCloseFutureDysForm();" style="cursor: pointer; background-color: darkslateblue; color: white; padding-top: 5px; padding-bottom: 5px; border-radius: 4px;">
-                                    <p style="text-align: center;">Close Future Days</p>
+                                <td onclick="toggleShowCloseFutureDysForm();" style="cursor: pointer; color: white; padding: 10px 0;">
+                                    <p style="text-align: center;"><i style="color: #ff6b6b; font-size: 18px;" class="fa fa-calendar-times-o" aria-hidden="true"></i><br/>Closed Days</p>
                                 </td>
                             </tr>
                         </tbody>
                         
                         </table></center>
                     
-                            <center><div>
-                                    <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="BlockFutureSpots.jsp">
-                                        <p style="font-weight: bolder; text-align: center; color: #000099; margin-top: 5px;">Choose date to block future spots</p>
-                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                        <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                        <input style="border: 1px solid #3d6999;; background-color: white; padding: 5px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
-                                    </form>
-                                </div></center>
+                        <div style="">
+                            <form style="display: none; padding: 10px 0;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="BlockFutureSpots.jsp">
+                                <p style="font-weight: bolder; text-align: center; color: slategrey; padding: 10px;">Choose date to block future spots</p>
+                                <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                <input type="hidden" name="User" value="<%=NewUserName%>" />
+                                <input style="border: 1px solid slategrey; background-color: white; padding: 5px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                                <input id="GenerateSpotsBtn" style="padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="submit" value="Generate Spots" name="GenerateSpots" />
+                            </form>
+                        </div>
                     
-                    <center><div id="CloseFutureDaysForm" style="display: none;">
-                        <form style="width: 100%; max-width: 600px;" >
-                            <p style="font-weight: bolder; text-align: center; color: #000099; margin-top: 5px;">Choose date when to close</p>
-                            <input style="border: 1px solid #3d6999; background-color: white; padding: 5px;" id="Ddatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                        <div id="CloseFutureDaysForm" style="display: none; margin: auto; text-align: center;">
+                        <form style="width: 100%; max-width: 600px; margin: auto;" >
+                            <p style="font-weight: bolder; text-align: center; color: slategrey; padding: 10px;">Choose date when to close</p>
+                            <input style="border: 1px solid slategrey; background-color: white; padding: 5px;" id="Ddatepicker" type="text" name="GetDate" value="" readonly/><br/>
                             <input id="provIDforClosedDate" type="hidden" name="ProviderID" value="<%=UserID%>" />
-                            <input id="CloseDayBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Close this day" name="BlockDay" />
+                            <input id="CloseDayBtn" style="padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Close this day" name="BlockDay" />
                             <script>
                                              
                                 $(document).ready(function() {                        
@@ -4738,8 +4734,8 @@
                             </script>
                         </form>
                             
-                            <div id="NewClosedDays" class="scrolldiv" style="max-height: 300px; overflow-y: auto; width: 100%; max-width: 500px;">
-                            <p style="font-weight: bolder; color: darkblue; margin: 5px;">Days Closed</p>
+                            <div id="NewClosedDays" class="scrolldiv" style="max-height: 300px; overflow-y: auto; width: 100%; max-width: 500px; padding-bottom: 10px;">
+                            <p style="font-weight: bolder; color: slategrey; padding: 10px;">Days Closed</p>
                             
                         <%
                             
@@ -4798,30 +4794,46 @@
                         <%}%>
                         
                         </div>
-                    </div></center>
+                    </div>
                         
-                        <center><div id="MakeReservationForm" style="width: 100%; max-width: 500px;">
+                        <center><div id="MakeReservationForm" style="width: 100%; max-width: 500px; padding: 10px 0;">
                                 
                                 <script>document.getElementById("MakeReservationForm").style.display = "block";</script>
                                     
                                 <form style="" name="makeReservationForm">
-                                    <p style="text-align: center; color: #000099; margin-top: 5px; margin-bottom: 10px; font-weight: bolder;">Add reservation details below</p>
                                     
-                                    <p>Date: <input style="border: #3d6999 1px solid; background-color: white; padding: 5px;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/></p>
-                                    <p>Time: <input style="border: 1px solid #3d6999; background-color: white; padding: 5px;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/></p>
-                                    <p>Service: <select style="border: 1px solid #3d6999; padding: 5px; background-color: white; color: black;" id="reserveService" name="formsOrderedServices">
+                                    <p style="text-align: center; color: slategrey; margin-top: 5px; padding: 10px; font-weight: bolder;">Add reservation details below</p>
+                                    
+                                    <table style="border-spacing: 0; max-width: 310px;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <p style="font-weight: bolder; color: slategrey; padding: 5px; text-align: center;">Date</p>
+                                                    <input style="border: slategrey 1px solid; background-color: white; padding: 5px; max-width: 100px !important;" id="Rdatepicker" type="text" name="formsDateValue" value="" readonly/>
+                                                </td>
+                                                <td>
+                                                    <p style="font-weight: bolder; color: slategrey; padding: 5px; text-align: center;">Time</p>
+                                                    <input style="border: 1px solid slategrey; background-color: white; padding: 5px; max-width: 100px !important;" id="RtimePicker" type="text" name="formsTimeValue" value="" readonly/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <p style="font-weight: bolder; color: slategrey; padding: 5px; margin-top: 10px;">What is this reservation for?</p>
+                                    
+                                        <select style="border: slategrey 1px solid; padding: 10px; background-color: white; color: black;" id="reserveService" name="formsOrderedServices">
                                             <%
                                                 for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
-                                                    
+
                                                 String ServiceName = Services.getService(svc).trim();
                                                 String ServicePrice = Services.getPrice(svc);
                                                 String ServiceDetails = "$" + ServicePrice + "-" + ServiceName; 
                                             %>
-                                            <option><%=ServiceDetails%></option>
+                                                <option><%=ServiceDetails%></option>
                                             <%}%>
-                                        </select></p>
-                                    
-                                    <p style="font-weight: bolder; color: darkblue; padding: 5px;">Who is this reservation for?</p>
+                                        </select>
+                                        
+                                    <p style="font-weight: bolder; color: slategrey; padding: 5px;">Who is this reservation for?</p>
                                     
                                     <div class="scrolldiv" style="max-height: 200px; width:310px; overflow-y: auto; margin-bottom: 10px; padding-top: 5px;">
                                         
@@ -4949,7 +4961,7 @@
                                       
                                     <br/>
                                     <input id="reservePID" name="ProviderID" type="hidden" value="<%=UserID%>"/>
-                                    <input id="MkReservationBtn" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                    <input id="MkReservationBtn" style="padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Make Reservation" name="MakeReservationBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
                                 </form>
                                     
                                     <script>
@@ -5067,14 +5079,14 @@
             </div>
             </div>
                    
-            <script>
+            <!--script>
                 function hideAllDropDowns(){
                     hideExtraDropDown();
                     hideDropDown();
                 }
-            </script>
+            </script-->
          
-        <div  onclick='hideAllDropDowns();' id="newbusiness" style="margin-top: 1px; background-color: #ccccff !important;">
+        <div id="newbusiness" style="margin-top: 1px; background-color: #ccccff !important;">
             <script>
                 if($(window).width() > 1000){
                     document.getElementById("newbusiness").style.height = "100%";
@@ -5086,8 +5098,8 @@
         
             
             <center><div id="Providerprofile" style="width: 100%; max-width: 700px;">
-                 
-                <h4 id="ProviderYourBusinessTxt" style="color: darkblue; padding: 15px 0; background-color: #6699ff;">Your Business Profile</h4>
+                 <!--p id="ProviderYourBusinessTxt"-->
+                    <p style="font-weight: bolder; color: darkblue; background: rgba(255, 255, 255, 0.50); position: relative; z-index: 1; margin-bottom: -35px; padding: 5px;">Your Business Profile</p>
                 
                 <table id="ProviderprofileTable" style="border-spacing: 0; width: 100%; max-width: 600px;">
                     
@@ -5146,7 +5158,7 @@
                                     
                                 </div>
                                         
-                                        <p onclick="toggleShowEditPerInfoDiv();" style="text-align: center; margin: auto; color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; cursor: pointer; border-radius: 4px; padding: 5px; max-width: 300px; margin-bottom: 10px; margin-top: 10px;">
+                                        <p onclick="toggleShowEditPerInfoDiv();" style="text-align: center; margin: auto; color: white; background-color: darkslateblue; padding: 10px 5px; border-radius: 4px; cursor: pointer; border-radius: 4px; max-width: 300px; margin-bottom: 10px; margin-top: 10px;">
                                                 <i style="color: #4ed164;;" class="fa fa-pencil-square" aria-hidden="true"></i>
                                                 <span style="color: white;">Edit Your Personal Information</span>
                                             </p>
@@ -5399,7 +5411,7 @@
                                                     </p>
                                                     
                                                     <p style='text-align: center; color: #8b8b8b; margin: 10px 0; margin-top: 20px;'>Recent Customer Review</p>
-                                                <div style="display: flex; flex-direction: row;"> 
+                                                <div style="display: flex; flex-direction: row; justify-content: center;"> 
                                                 <%
                                                     if(Base64Image == ""){
                                                 %> 
@@ -5462,7 +5474,7 @@
                             if(ReviewsList.size() == 0){
                         %>
 
-                        <center><p style="color: white; background-color: red; text-align: center; margin: 10px; max-width: 600px;">You don't have any customer reviews</p></center>
+                        <center><p style="color: #636363; text-align: center; margin: 10px; max-width: 600px;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> You don't have any customer reviews</p></center>
                         
                         <%}%>
                                         
@@ -5530,7 +5542,7 @@
                                                     <td onclick="activateServicesTab()" id="Services" style="text-align: center; padding: 10px; cursor: pointer; font-weight: bolder;">
                                                         <i class="fa fa-bars" aria-hidden="true"></i> Services
                                                     </td>
-                                                    <td onclick="activateHourOpenTab()()" id="HoursOpen" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
+                                                    <td onclick="activateHourOpenTab()" id="HoursOpen" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
                                                         <i class="fa fa-sliders" aria-hidden="true"></i> Settings
                                                     </td>
                                                     <td onclick="activateClientsTab()" id="Clients" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
@@ -6116,11 +6128,11 @@
                                     %>
                                     
                                     <!--p style="color: tomato; margin: 5px; text-align: center;">Hours Open and Other Settings</p-->
-                                    <table style="width: 100%;">
+                                    <table style="width: 100%; background-color: #3d6999; color: white; padding: 0; border-spacing: 0;">
                                         <tbody>
                                             <tr>
-                                                <td id="ShowHourBtn" onclick="toggleshowHoursOpen();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;"><i style="margin-right: 5px;" class="fa fa-clock-o" aria-hidden="true"></i> Hours Open</td>
-                                                <td id="showOtherSettingsBtn" onclick="toggleshowOtherSettings();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;"><i style="margin-right: 5px;" class="fa fa-cogs" aria-hidden="true"></i> Other Settings</td>
+                                                <td id="ShowHourBtn" onclick="toggleshowHoursOpen();" style="padding: 10px 5px; cursor: pointer; width: 50%; text-align: center; border-bottom: 2px solid white;"><i style="margin-right: 5px;" class="fa fa-clock-o" aria-hidden="true"></i> Hours Open</td>
+                                                <td id="showOtherSettingsBtn" onclick="toggleshowOtherSettings();" style="padding: 10px 5px; cursor: pointer; text-align: center; color: #ccc; border-bottom: #9bb1d0 2px solid;"><i style="margin-right: 5px;" class="fa fa-cogs" aria-hidden="true"></i> Other Settings</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -6933,7 +6945,8 @@
                                        var percentPar = document.getElementById("percentPar");
                                        var CnclPlcyChckOFF = document.getElementById("CnclPlcyChckOFF");
                                        
-                                       CnclPlcyChckOFF.disabled = true;
+                                       if(document.getElementById("CnclPlcyChckOFF"))
+                                           CnclPlcyChckOFF.disabled = true;
                                        
                                        function checkPlcForm(){
                                            
@@ -6952,10 +6965,13 @@
                                         
                                         setInterval(checkPlcForm, 1);
                                        
-                                       if(EnabledCnclPlcy.value === "Yes")
+                                       if(EnabledCnclPlcy.value === "Yes"){
                                            CnclPlcyChck.checked = true;
-                                       else
-                                           CnclPlcyChckOFF.checked = true;
+                                       }
+                                       else{
+                                           if(document.getElementById("CnclPlcyChckOFF"))
+                                               CnclPlcyChckOFF.checked = true;
+                                       }
                                        
                                        function showPolicyForm(){
                                            $("#CnclPlcyForm").slideDown("fast");
@@ -6974,7 +6990,8 @@
                                         
                                        }
                                        
-                                       setInterval(CheckCancellationPlcy, 1);
+                                       if(document.getElementById("CnclPlcyChck"))
+                                           setInterval(CheckCancellationPlcy, 1);
                                        
                                    </script>
                                     
@@ -7092,7 +7109,7 @@
                                         </table>
                                         <p style="color: white;">Your Business Location (Address)</p>
                                         <p style="margin: 5px; text-align: center;">Providing accurate address information<br/>will help customers locate your business</p>
-                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly style="width: 300px; background-color: #6699ff; border: 1px solid black; font-size: 10px"/></p>
+                                        <p><i class='fa fa-exclamation-triangle' id='AddrStatusIcon'></i> <input id="businessLocation" type="text" name="businessLocation" value="" readonly style="background: none; border: none; font-size: 9px; width: 85%;"/></p>
                                         <table style="width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin: auto; margin-top: 5px; margin-top: 5px;">
                                             <tbody>
                                                 <tr>
@@ -7206,7 +7223,7 @@
                                                               document.getElementById("ProvBEmailFld").value = BusinessInfo.BusinessEmail;
                                                               document.getElementById("ProvBTelFld").value = BusinessInfo.BusinessTel;
                                                               BizTypeObj.options[BizTypeObj.selectedIndex].text = BusinessInfo.BusinessType;
-                                                              document.getElementById("LoginNameDisplay").innerHTML = " Logged in as " +FirstName+ " - " + BusinessInfo.BusinessName;
+                                                              //document.getElementById("LoginNameDisplay").innerHTML = " Logged in as " +FirstName+ " - " + BusinessInfo.BusinessName;
                                                           
                                                           
                                                             }                
@@ -7415,12 +7432,11 @@
                                 <div id="serviceslist">
                                     
                                     <!--center><p style="color: tomato; margin: 5px;">Your Clients and Blocked People</p></center-->
-                                    
-                                    <table style="width: 100%; margin-bottom: 5px;">
+                                    <table style="width: 100%; background-color: #3d6999; color: white; padding: 0; border-spacing: 0; margin-bottom: 3px;">
                                         <tbody>
                                             <tr>
-                                                <td id="ShowClientsBtn" onclick="toggleshowClients();" style="background-color: plum; padding: 5px; border-radius: 4px; cursor: pointer; width: 50%;"><i style="" class="fa fa-address-book" aria-hidden="true"></i> Your Clients</td>
-                                                <td id="ShowBlockedPeopleBtn" onclick="toggleshowBlockedPeople();" style="background-color: pink; padding: 5px; border-radius: 4px; cursor: pointer;"><i style="" class="fa fa-ban" aria-hidden="true"></i> Blocked People</td>
+                                                <td id="ShowClientsBtn" onclick="toggleshowClients();" style="padding: 10px 5px; cursor: pointer; width: 50%; text-align: center; border-bottom: 2px solid white;"><i style="" class="fa fa-address-book" aria-hidden="true"></i> Your Clients</td>
+                                                <td id="ShowBlockedPeopleBtn" onclick="toggleshowBlockedPeople();" style="padding: 10px 5px; cursor: pointer; text-align: center; color: #ccc; border-bottom: #9bb1d0 2px solid;"><i style="" class="fa fa-ban" aria-hidden="true"></i> Blocked People</td>
                                             </tr>
                                         </tbody>
                                     </table>

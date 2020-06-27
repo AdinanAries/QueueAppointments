@@ -13,7 +13,7 @@ function checkInputFlds(){
 	var mainPassword = document.getElementById("SUPpassword").value;
 	var confirmPassword = document.getElementById("SUPconfirm").value;
 	
-	 if( (firstName !== "enter your first name" && firstName !== "")&&
+	if( (firstName !== "enter your first name" && firstName !== "")&&
 		(middleName !== "enter your middle name" && middleName !=="") &&
 		(lastName !== "enter your last name" && lastName !=="") && 
 		(telephone !== "enter your telephone/mobile number here" && telephone !=="") &&
@@ -22,48 +22,48 @@ function checkInputFlds(){
 		(mainPassword !== "Password" && mainPassword !=="") &&
 		(confirmPassword !== "Password" && confirmPassword !=="") ){
 			
-			if(mainPassword !== "Password" && mainPassword !== ""){
+                    if(mainPassword !== "Password" && mainPassword !== ""){
 				
-				if(mainPassword !== confirmPassword){
+			if(mainPassword !== confirmPassword){
 			
-					signupBtn.disabled = true;
-					signupBtn.style.backgroundColor = "darkgrey";
-					formstatus.innerHTML = "Passwords Don't Match";
-					formstatus.style.backgroundColor = "red";
+                            signupBtn.disabled = true;
+                            signupBtn.style.backgroundColor = "darkgrey";
+                            formstatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Passwords Don't Match";
+                            //formstatus.style.backgroundColor = "red";
 					
-				}
-				else if(mainPassword.length < 8){
-					
-					signupBtn.disabled = true;
-					signupBtn.style.backgroundColor = "darkgrey";
-					formstatus.innerHTML = "Password Very Short";
-					formstatus.style.backgroundColor = "red";
-				
-				}
-				else{
-					if(userName === mainPassword){
-                        signupBtn.disabled = true;
-						signupBtn.style.backgroundColor = "darkgrey";
-						formstatus.innerHTML = "Same Username as Password";
-						formstatus.style.backgroundColor = "red";
-                    }else{
-						signupBtn.disabled = false; 
-						signupBtn.style.backgroundColor = "darkslateblue";
-						signupBtn.style.cssText = '#SignUpAndBookBtn:hover{ background-color: steelblue; }';
-						formstatus.innerHTML = "OK";
-						formstatus.style.backgroundColor = "green";
-					}
-				}
-				
 			}
-		}
+			else if(mainPassword.length < 8){
+					
+                            signupBtn.disabled = true;
+                            signupBtn.style.backgroundColor = "darkgrey";
+                            formstatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Password Very Short";
+                            //formstatus.style.backgroundColor = "red";
+				
+                        }
+			else{
+                            if(userName === mainPassword){
+                                signupBtn.disabled = true;
+				signupBtn.style.backgroundColor = "darkgrey";
+				formstatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Same Username as Password";
+				//formstatus.style.backgroundColor = "red";
+                            }else{
+				signupBtn.disabled = false; 
+				signupBtn.style.backgroundColor = "darkslateblue";
+				signupBtn.style.cssText = '#SignUpAndBookBtn:hover{ background-color: steelblue; }';
+				formstatus.innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> OK";
+				//formstatus.style.backgroundColor = "green";
+                            }
+			}
+				
+                    }
+        }
 	
 	else{
 		
 		signupBtn.disabled = true;
 		signupBtn.style.backgroundColor = "darkgrey";
-		formstatus.innerHTML = "Uncompleted Form";
-		formstatus.style.backgroundColor = "green";
+		formstatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Uncompleted Form";
+		//formstatus.style.backgroundColor = "green";
 		
 	}
 	

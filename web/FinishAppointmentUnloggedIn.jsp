@@ -32,7 +32,9 @@
         <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!--script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
         
         <!-- Zebra Dialog CSS -->
         <link rel="stylesheet" href="dialog_dist/css/flat/zebra_dialog.min.css" type="text/css">
@@ -40,8 +42,7 @@
         <!-- Zebra Dialog JS -->
         <script src="dialog_dist/zebra_dialog.min.js"></script>
         
-        <!--script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
+        
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
@@ -384,20 +385,22 @@
                     }
                     </script>
                 
-                    <cetnter><h4 style="padding: 10px; color: darkblue; margin-bottom: 10px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=Message%></h4></cetnter>
-                <h3 style="margin-top: 20px; margin-bottom: 5px;">Your Spot Details Provided Below</h3>
-                <p style="color: seashell;"><span><%=ProviderFullName%> from <%=ProviderCompany%></span></p>
-                <center><table border="0">
-                <tbody>
-                    
-                <tr><td>Category: </td><td style="color: white;"><%=ServiceType%></td></tr>
-                <tr><td>Date: </td><td style="color: white;"><%=Date%></td></tr>
-                <tr><td>Time: </td><td style="color: white;"><%=Time%></td></tr>
-                <tr><td>Reason: </td><td style="color: white;"><%=OrderedServices%></td></tr>
-                <tr><td>Total Cost: </td><td style="color: white;">$<%=Price%></td></tr>
-                
-                </tbody>
-                </table></center>
+                <h4 style="padding: 10px; color: darkblue; text-align: center; margin-bottom: 10px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> <%=Message%></h4>
+                <div style="width: 100%; max-width: fit-content; margin: auto; background-color: white; padding: 10px;">
+                <h3 style="margin-bottom: 5px; color: darkblue;">Your Spot Details</h3>
+                <p style="color: tomato; font-weight: bolder;"><span><%=ProviderFullName.split(" ")[0]%> from <%=ProviderCompany%></span></p>
+                    <table border="0" style="border-spacing: 5px; text-align: left;">
+                        <tbody>
+
+                            <tr><td style="font-weight: bolder;">Category: </td><td style="padding-left: 20px;"><%=ServiceType%></td></tr>
+                            <tr><td style="font-weight: bolder;">Date: </td><td style="padding-left: 20px;"><%=Date%></td></tr>
+                            <tr><td style="font-weight: bolder;">Time: </td><td style="padding-left: 20px;"><%=Time%></td></tr>
+                            <tr><td style="font-weight: bolder;">Reason: </td><td style="padding-left: 20px;"><%=OrderedServices%></td></tr>
+                            <tr><td style="font-weight: bolder;">Total Cost: </td><td style="padding-left: 20px;">$<%=Price%></td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
                 <center><div id ="logindetails"> <!--style="border-bottom: solid darkblue 1px; padding-bottom: 20px;"-->
                         
                         <center><h2 style="margin-top: 30px; margin-bottom: 10px; color: #000099">Login to finish.</h2></center>
@@ -552,19 +555,19 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
+                                    <p id='CustEmailStatus' style='color: white; display: none; text-align: center; margin: 10px 0;'></p>
                                     <fieldset class="loginInputFld">
                                         <legend>Enter your email</legend>
                                         <span class="fa fa-envelope"></span>
                                         <input onchange='CustSetVerifyFalse();' placeholder='email' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="34" />
                                     </fieldset>
                                     <input id="SUPemail"  type="hidden" name="email" value="" size="37"/>
-                                    <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
+                                    <div id='CustEmailVeriDiv' style='display: none; background-color: #3d6999; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
                                                 <center><input id='CustSendverifyEmailBtn' type='button' value='1. Click to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
                                             </div>
                                             <div id='CustverifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
-                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
+                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px; margin: 10px 0;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
                                                 <p style='color: #ccc;'><input id="CustEmailConfirm" placeholder="Enter 6-digit code here" type="text" /></p>
                                             </div>
                                             <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='3. Click to verify entered code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
@@ -584,14 +587,14 @@
                                                         
                                                         if(CustEmailVerified){
                                                             document.getElementById("CustEmailStatus").style.display = "block";
-                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "green";
-                                                            document.getElementById("CustEmailStatus").innerHTML = "Your email has been verified";
+                                                            //document.getElementById("CustEmailStatus").style.backgroundColor = "green";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> Your email has been verified";
                                                             document.getElementById("SUPemail").value = document.getElementById("visibleEmail").value;
                                                             document.getElementById("CustEmailVeriDiv").style.display = "none";
                                                         }else{
                                                             document.getElementById("CustEmailStatus").style.display = "block";
-                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "red";
-                                                            document.getElementById("CustEmailStatus").innerHTML = "Please verify your email";
+                                                            //document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please verify your email";
                                                             document.getElementById("SUPemail").value = "";
                                                         }
                                                     }
@@ -611,8 +614,8 @@
                                                     CustPageJustLoaded = false;
                                                     if(document.getElementById("visibleEmail").value === ""){
                                                         document.getElementById("CustEmailVeriDiv").style.display = "none";
-                                                        document.getElementById("CustEmailStatus").innerHTML = "Please enter a valid email";
-                                                        document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                        document.getElementById("CustEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please enter a valid email";
+                                                        //document.getElementById("CustEmailStatus").style.backgroundColor = "red";
                                                         //document.getElementById("provSignUpBtn").style.display = "block";
                                                     }
                                                 };
@@ -625,8 +628,8 @@
                                                         CustVeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         CustVeriCode = CustVeriCode + "";
                                                         
-                                                        document.getElementById("CustvCodeStatus").innerHTML = "Verification Code has been sent to your Email";
-                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> Verification Code has been sent to your Email";
+                                                        //document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
                                                         document.getElementById("CustSendverifyEmailBtn").style.display = "none";
                                                         
                                                         var to = document.getElementById("visibleEmail").value;
@@ -650,8 +653,8 @@
                                                         CustEmailVerified = true;
                                                     }
                                                     else{
-                                                        document.getElementById("CustvCodeStatus").innerHTML = "Make sure verification code is entered or is correct";
-                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "red";
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Make sure verification code is entered or is correct";
+                                                        //document.getElementById("CustvCodeStatus").style.backgroundColor = "red";
                                                     }
                                                         
                                                 };
@@ -672,10 +675,51 @@
                                         <fieldset class="loginInputFld">
                                             <legend>Enter your user name</legend>
                                             <span class="fa fa-user"></span>
-                                            <input id="SUPuserName" placeholder='username' type="text" name="username" value="" size="34"/>
+                                            <input id="SUPuserName" onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" placeholder='username' type="text" name="username" value="" size="34"/>
                                         </fieldset>
+                                        <p id="CustUserNameStatus" style="color: white; text-align: center; max-width: 250px; margin: 10px 0;"></p>
                                     </td>
                                 </tr>
+                                
+                            <script>
+                                function setPasswordsZero(){
+                                    document.getElementById("SUPconfirm").value = "";
+                                    document.getElementById("SUPpassword").value = "";
+                                }
+
+                                function CustUserNameCheck(){
+                                    
+                                    var userName = document.getElementById("SUPuserName").value;
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "CheckCustUserNameExists",
+                                        data: "UserName="+userName,
+                                        success: function(result){
+                                            //alert(result);
+
+                                            if(document.getElementById("SUPuserName").value === ""){
+
+                                                document.getElementById("CustUserNameStatus").innerHTML = "";
+
+                                            }
+                                            else if(result === "true"){
+
+                                                document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: red;" class="fa fa-exclamation-triangle"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is not available. Choose a different Username';
+                                                //document.getElementById("CustUserNameStatus").style.backgroundColor = "red";
+                                                document.getElementById("SUPuserName").value = "";
+
+                                            }else if(result === "false" && document.getElementById("SUPuserName").value !== ""){
+
+                                                document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: #58FA58;" class="fa fa-check"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is available.';
+                                                //document.getElementById("CustUserNameStatus").style.backgroundColor = "green";
+
+                                            }
+                                        }
+                                    });
+                                }
+                            </script>
+                                
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
@@ -697,7 +741,7 @@
                                 </tr>
                             </tbody>
                             </table>
-                            <p id="SignUpAndBookStatus" style="color: white; background-color: red; width: 200px;"></p>
+                            <p id="SignUpAndBookStatus" style="color: white; width: 200px;"></p>
                             
                         </div>
                     

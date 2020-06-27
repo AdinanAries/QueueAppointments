@@ -111,11 +111,19 @@
         
         
         int notiCounter = 0;
+        String url = "";
+        String Driver = "";
+        String User = "";
+        String Password = "";
         
-        String url = config.getServletContext().getAttribute("DBUrl").toString();
-        String Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        String User = config.getServletContext().getAttribute("DBUser").toString();
-        String Password = config.getServletContext().getAttribute("DBPassword").toString();
+        try{
+            url = config.getServletContext().getAttribute("DBUrl").toString();
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            User = config.getServletContext().getAttribute("DBUser").toString();
+            Password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
         String FirstName = "";
         String MiddleName = "";
@@ -430,7 +438,7 @@
         
         <script>
                     $(document).ready(function(){
-                        $("#PermDivNotiBtn").click(function(event){
+                        $("#PhPermDivNotiBtn").click(function(event){
                             document.getElementById('PageLoader').style.display = 'block';
                             var NotiIDs = document.getElementById("NotiIDInput").value;
                             var NotiJSON = JSON.parse(NotiIDs);
@@ -1582,6 +1590,25 @@
             }else if(Settings === "2"){
                 showPCustExtraNotification();
                 document.getElementById("NotiIndicator").style.backgroundColor = "#334d81";
+               
+                var NotiIDs = document.getElementById("NotiIDInput").value;
+                var NotiJSON = JSON.parse(NotiIDs);
+                            
+                for(i in NotiJSON.Data){
+                    //alert(NotiJSON.Data[i].ID);
+                    var ID = NotiJSON.Data[i].ID;
+                    $.ajax({
+                        type: "POST",
+                        url: "SetProvNotificationAsSeen",
+                        data: "ID="+ID,
+                        success: function(result){
+                            document.getElementById("notiCounterSup").innerHTML = " 0 ";
+                        }
+                    });
+                }
+                            
+             
+                
             }else if(Settings === "3"){
                 showPCustExtraCal();
                 document.getElementById("CalIndicator").style.backgroundColor = "#334d81";

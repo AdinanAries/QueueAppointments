@@ -581,15 +581,15 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <center><p id='CustEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
+                                        <p id='CustEmailStatus' style='color: white; display: none; text-align: center; margin: 10px 0;'></p>
                                         <p>Email</p><input onchange='CustSetVerifyFalse();' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="<%=email%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <input id='email' type='hidden' value=''/>
-                                        <div id='CustEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
+                                        <div id='CustEmailVeriDiv' style='display: none; background-color: #3d6999; padding: 10px; margin: 5px;'>
                                             <div id='CustsendVerifyDiv'>
                                                 <center><input id='CustSendverifyEmailBtn' type='button' value='1. Click to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
                                             </div>
                                             <div id='CustverifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
-                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
+                                                <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px; margin: 10px 0;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
                                                 <p style='color: #ccc;'><input id="CustEmailConfirm" placeholder="Enter 6-digit code here" type="text" style="background-color: #d9e8e8; border-radius: 4px;" /></p>
                                             </div>
                                             <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='3. Click to verify entered code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
@@ -609,24 +609,24 @@
                                                         
                                                         if(CustEmailVerified){
                                                             document.getElementById("CustEmailStatus").style.display = "block";
-                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "green";
-                                                            document.getElementById("CustEmailStatus").innerHTML = "Your email has been verified";
+                                                            //document.getElementById("CustEmailStatus").style.backgroundColor = "green";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> Your email has been verified";
                                                             document.getElementById("email").value = document.getElementById("visibleEmail").value;
                                                             document.getElementById("CustEmailVeriDiv").style.display = "none";
                                                         }else{
                                                             document.getElementById("CustEmailStatus").style.display = "block";
-                                                            document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                            //document.getElementById("CustEmailStatus").style.backgroundColor = "red";
                                                             
                                                             if(document.getElementById("CustEmailVeriDiv").style.display === "block"){
                                                                 if(document.getElementById("visibleEmail").value === "")
                                                                     document.getElementById("CustEmailStatus").innerHTML = "";
                                                                 else
-                                                                    document.getElementById("CustEmailStatus").innerHTML = "Please verify your email";
+                                                                    document.getElementById("CustEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please verify your email";
                                                             }else{
                                                                 if(document.getElementById("visibleEmail").value === "")
                                                                     document.getElementById("CustEmailStatus").innerHTML = "";
                                                                 else
-                                                                    document.getElementById("CustEmailStatus").innerHTML = "Click on email to verify your email";
+                                                                    document.getElementById("CustEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Click on email to verify your email";
                                                             }
                                                             document.getElementById("email").value = "";
                                                         }
@@ -647,8 +647,8 @@
                                                     CustPageJustLoaded = false;
                                                     if(document.getElementById("visibleEmail").value === ""){
                                                         document.getElementById("CustEmailVeriDiv").style.display = "none";
-                                                        document.getElementById("CustEmailStatus").innerHTML = "Please enter a valid email";
-                                                        document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                        document.getElementById("CustEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please enter a valid email";
+                                                        //document.getElementById("CustEmailStatus").style.backgroundColor = "red";
                                                         //document.getElementById("provSignUpBtn").style.display = "block";
                                                     }
                                                 };
@@ -662,8 +662,8 @@
                                                         CustVeriCode = Math.floor(100000 + Math.random() * 900000);
                                                         CustVeriCode = CustVeriCode + "";
                                                         
-                                                        document.getElementById("CustvCodeStatus").innerHTML = "Verification Code has been sent to your Email";
-                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> Verification Code has been sent to your Email";
+                                                        //document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
                                                         document.getElementById("CustSendverifyEmailBtn").style.display = "none";
                                                         
                                                         var to = document.getElementById("visibleEmail").value;
@@ -687,8 +687,8 @@
                                                         CustEmailVerified = true;
                                                     }
                                                     else{
-                                                        document.getElementById("CustvCodeStatus").innerHTML = "Make sure verification code is entered or is correct";
-                                                        document.getElementById("CustvCodeStatus").style.backgroundColor = "red";
+                                                        document.getElementById("CustvCodeStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Make sure verification code is entered or is correct";
+                                                        //document.getElementById("CustvCodeStatus").style.backgroundColor = "red";
                                                     }
                                                         
                                                 };
@@ -741,7 +741,7 @@
                                 <tr>
                                     <td style="padding-top: 10px;"><p>User Name</p><input onkeyup="setPasswordsZero();" onfocusout="checkIsUsernameEmpty('userName','CustUserNameStatus');"
                                                                                           onchange="CustUserNameCheck();" type="text" id="userName" name="userName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
-                                        <center><p id="CustUserNameStatus" style="color: white; background-color: red; text-align: center; max-width: 250px;"></p></center></td>
+                                        <p id="CustUserNameStatus" style="color: white; text-align: center; max-width: 250px; margin: 10px 0;"></p></td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top: 10px;"><p>Password</p><input class="passwordFld" type="password" id="firstPassword" name="firstPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
@@ -753,8 +753,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <center><p style="margin-top: 5px; width: 180px; background-color: red; color: white;" id="passwordStatus"></p></center>
-                        <center><p style="margin-top: 5px; width: 180px; background-color: green; color: white;" id="formStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="passwordStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="formStatus"></p></center>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
                         <input class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" id="AddUserSignUpBtn" type="submit" value="Signup" name="submitbtn" />
@@ -784,14 +784,14 @@
                                     }
                                     else if(result === "true"){
                                         
-                                        document.getElementById("CustUserNameStatus").innerHTML = 'Username: <span style="color: blue;">"' + userName + '"</span> is not available. Choose a different Username';
-                                        document.getElementById("CustUserNameStatus").style.backgroundColor = "red";
+                                        document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: red;" class="fa fa-exclamation-triangle"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is not available. Choose a different Username';
+                                        //document.getElementById("CustUserNameStatus").style.backgroundColor = "red";
                                         document.getElementById("userName").value = "";
                                         
                                     }else if(result === "false" && document.getElementById("userName").value !== ""){
                                         
-                                        document.getElementById("CustUserNameStatus").innerHTML = 'Username: <span style="color: orange;">"' + userName + '"</span> is available.';
-                                        document.getElementById("CustUserNameStatus").style.backgroundColor = "green";
+                                        document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: #58FA58;" class="fa fa-check"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is available.';
+                                        //document.getElementById("CustUserNameStatus").style.backgroundColor = "green";
                                         
                                     }
                                 }
@@ -818,15 +818,15 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <center><p id='BizEmailStatus' style='color: white; display: none; text-align: center;'></p></center>
+                                        <p id='BizEmailStatus' style='color: darkblue; margin: 10px 0; display: none; text-align: center;'></p>
                                         <p>Email</p><input onchange='SetVerifyFalse();' onfocusout='CloseEmailVerify();' onfocus='ShowEmailVerify();' id="visibleProvEmail" type="text" name="provEmail" value="<%=email%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
                                         <input id='provEmail' type='hidden' value='' />
-                                        <div id='BizEmailVeriDiv' style='display: none; background-color: blue; padding: 10px; margin: 5px;'>
+                                        <div id='BizEmailVeriDiv' style='display: none; background-color: #3d6999; padding: 10px; margin: 5px;'>
                                             <div id='sendVerifyDiv'>
                                                 <center><input id='SendverifyEmailBtn' type='button' value='1. Click to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
                                             </div>
                                             <div id='verifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
-                                                <p id='vCodeStatus' style='padding-left: 5px; color: white; max-width: 250px;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
+                                                <p id='vCodeStatus' style='padding-left: 5px; color: white; max-width: 250px; margin: 10px 0;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
                                                 <p style='color: #ccc;'><input id="BizEmailConfirm" type="text" placeholder="Enter 6-digit code here" style="background-color: #d9e8e8; border-radius: 4px;" /></p>
                                             </div>
                                             <center><input id='verifyEmailBtn' onclick="VerifyCode();" type='button' value='3. Click to verify entered code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
@@ -845,23 +845,23 @@
                                                         
                                                         if(EmailVerified){
                                                             document.getElementById("BizEmailStatus").style.display = "block";
-                                                            document.getElementById("BizEmailStatus").style.backgroundColor = "green";
-                                                            document.getElementById("BizEmailStatus").innerHTML = "Your email has been verified";
+                                                            //document.getElementById("BizEmailStatus").style.backgroundColor = "green";
+                                                            document.getElementById("BizEmailStatus").innerHTML = "<i style='color: #58FA58;;' class='fa fa-check'></i> Your email has been verified";
                                                             document.getElementById("provEmail").value = document.getElementById("visibleProvEmail").value;
                                                             document.getElementById("BizEmailVeriDiv").style.display = "none";
                                                         }else{
                                                             document.getElementById("BizEmailStatus").style.display = "block";
-                                                            document.getElementById("BizEmailStatus").style.backgroundColor = "red";
+                                                            //document.getElementById("BizEmailStatus").style.backgroundColor = "red";
                                                             if(document.getElementById("BizEmailVeriDiv").style.display === "block"){
                                                                 if(document.getElementById("visibleProvEmail").value === "")
                                                                     document.getElementById("BizEmailStatus").innerHTML = "";
                                                                 else
-                                                                    document.getElementById("BizEmailStatus").innerHTML = "Please verify your email";
+                                                                    document.getElementById("BizEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please verify your email";
                                                             }else{
                                                                 if(document.getElementById("visibleProvEmail").value === "")
                                                                     document.getElementById("BizEmailStatus").innerHTML = "";
                                                                 else
-                                                                    document.getElementById("BizEmailStatus").innerHTML = "Click on email to verify your email";
+                                                                    document.getElementById("BizEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Click on email to verify your email";
                                                             }
                                                             document.getElementById("provEmail").value = "";
                                                         }
@@ -882,8 +882,8 @@
                                                     PageJustLoaded = false;
                                                     if(document.getElementById("visibleProvEmail").value === ""){
                                                         document.getElementById("BizEmailVeriDiv").style.display = "none";
-                                                        document.getElementById("BizEmailStatus").innerHTML = "Please enter a valid email";
-                                                        document.getElementById("BizEmailStatus").style.backgroundColor = "red";
+                                                        document.getElementById("BizEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please enter a valid email";
+                                                        //document.getElementById("BizEmailStatus").style.backgroundColor = "red";
                                                         //document.getElementById("provSignUpBtn").style.display = "block";
                                                     }
                                                 };
@@ -897,8 +897,8 @@
                                                         VeriCode = VeriCode + "";
                                                         //document.getElementById("BizEmailConfirm").value = VeriCode;
                                                         
-                                                        document.getElementById("vCodeStatus").innerHTML = "Verification Code has been sent to your Email";
-                                                        document.getElementById("vCodeStatus").style.backgroundColor = "green";
+                                                        document.getElementById("vCodeStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> Verification Code has been sent to your Email";
+                                                        //document.getElementById("vCodeStatus").style.backgroundColor = "green";
                                                         document.getElementById("SendverifyEmailBtn").style.display = "none";
                                                         
                                                         var to = document.getElementById("visibleProvEmail").value;
@@ -922,8 +922,8 @@
                                                         EmailVerified = true;
                                                     }
                                                     else{
-                                                        document.getElementById("vCodeStatus").innerHTML = "Make sure verification code is entered or is correct";
-                                                        document.getElementById("vCodeStatus").style.backgroundColor = "red";
+                                                        document.getElementById("vCodeStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Make sure verification code is entered or is correct";
+                                                        //document.getElementById("vCodeStatus").style.backgroundColor = "red";
                                                     }
                                                         
                                                 };
@@ -1016,7 +1016,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p><input id="businessLocation" type="text" name="businessLocation" value="" readonly size="47" style="background-color: #6699ff; border: 1px solid black; font-size: 10px;"/></p>
+                                        <p><i class='fa fa-exclamation-triangle' id='AddrStatusIcon'></i> <input id="businessLocation" type="text" name="businessLocation" value="" readonly style="background: none; border: none; font-size: 9px; width: 85%;"/></p>
                                        </td>
                                 </tr>
                                 
@@ -1181,7 +1181,7 @@
                                 <tr>
                                     <td style="padding-top: 10px;"><p>User Name</p><input onkeyup="setProvPasswordsZero();" onfocusout="checkIsUsernameEmpty('provUserName','provUserNameStatus');"
                                                                                           onchange="ProvUserNameCheck();" id="provUserName" type="text" name="provUserName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
-                                        <center><p id="provUserNameStatus" style="background-color: red; color: white; text-align: center; max-width: 250px;"></center></p></td>
+                                        <p id="provUserNameStatus" style="color: white; text-align: center; max-width: 250px; margin: 10px 0;"></p></td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top: 10px;"><p>Password</p><input class="passwordFld" id="firstProvPassword" type="password" name="firstProvPassword" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/>
@@ -1192,8 +1192,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <center><p style="margin-top: 5px; width: 180px; background-color: red; color: white;" id="provPasswordStatus"></p></center>
-                        <center><p style="margin-top: 5px; width: 180px; background-color: green; color: white;" id="provFormStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="provPasswordStatus"></p></center>
+                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="provFormStatus"></p></center>
                         
                         <p style='min-width: 350px;'><input class="button" type="reset" value="Reset" name="resetbtn"/>
                             <input id="provSignUpBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Sign up" name="provSignUpBtn" /></p>
@@ -1235,15 +1235,15 @@
                                     }
                                     else if(result === "true" && document.getElementById("provUserName").value !== ""){
                                         
-                                        document.getElementById("provUserNameStatus").innerHTML = 'Username: <span style="color: blue;">"' + userName + '"</span> is not available. Choose a different Username';
-                                        document.getElementById("provUserNameStatus").style.backgroundColor = "red";
+                                        document.getElementById("provUserNameStatus").innerHTML = '<i style="color: red;" class="fa fa-exclamation-triangle"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is not available. Choose a different Username';
+                                        //document.getElementById("provUserNameStatus").style.backgroundColor = "red";
                                         document.getElementById("provUserName").value = "";
                                         
                                         
                                     }else if(result === "false" && document.getElementById("provUserName").value !== ""){
                                         
-                                        document.getElementById("provUserNameStatus").innerHTML = 'Username: <span style="color: orange;">"' + userName + '"</span> is available.';
-                                        document.getElementById("provUserNameStatus").style.backgroundColor = "green";
+                                        document.getElementById("provUserNameStatus").innerHTML = '<i style="color: #58FA58;" class="fa fa-check"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is available.';
+                                        //document.getElementById("provUserNameStatus").style.backgroundColor = "green";
                                         
                                     }
                                     

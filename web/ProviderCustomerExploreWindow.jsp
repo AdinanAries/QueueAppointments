@@ -191,7 +191,6 @@
             //incase of array flush
             if(!NewUserName.equals(NameFromList)){
                 isSameUserName = false;
-                //response.sendRedirect("LogInPage.jsp");
             }
             
             /*if(tempAccountType.equals("BusinessAccount")){
@@ -204,10 +203,9 @@
             
         }catch(Exception e){
             isUserIndexInList = false;
-            //response.sendRedirect("LogInPage.jsp");
         }
         
-        /*String SessionID = request.getRequestedSessionId();
+        String SessionID = request.getRequestedSessionId();
         String DatabaseSession = "";
         //JOptionPane.showMessageDialog(null, SessionID);
         
@@ -227,28 +225,26 @@
             
         }catch(Exception e){}
         
-        //JOptionPane.showMessageDialog(null, DatabaseSession);
-        if(!SessionID.equals(DatabaseSession)){
-            
-            try{
-                Class.forName(Driver);
-                Connection DltSesConn = DriverManager.getConnection(Url, user, password);
-                String DltSesString = "delete from QueueObjects.UserSessions where UserIndex = ?";
-                PreparedStatement DltSesPst = DltSesConn.prepareStatement(DltSesString);
-                DltSesPst.setInt(1, UserIndex);
-                DltSesPst.executeUpdate();
-            }
-            catch(Exception e){}
-            
-            isSameSessionData = false;
-            //response.sendRedirect("LogInPage.jsp");
+        if(SessionID == null){
+            SessionID = "";
         }
         
-        if(!isSameSessionData || !isSameUserName || UserID == 0 || !isUserIndexInList)
-            response.sendRedirect("Queue.jsp");
-        else if(JustLogged == 1){
-            response.sendRedirect("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
-        }*/
+        //JOptionPane.showMessageDialog(null, DatabaseSession);
+        if(!SessionID.equals(DatabaseSession)){
+            isSameSessionData = false;
+        }
+        
+        if(!isSameSessionData || !isSameUserName || UserID == 0 || !isUserIndexInList){
+    %>
+            <script>
+
+                let UserName2 = window.localStorage.getItem("QueueUserName");
+                let UserPassword2 = window.localStorage.getItem("QueueUserPassword");
+                parent.window.document.location = "LoginControllerMainRedirect?username="+UserName2+"&password="+UserPassword2;
+                    
+            </script>
+    <%
+        }
         
         //initializing Address and its Fields
         String thisUserAddress = "no address information";
@@ -333,7 +329,7 @@
         
             <div id="nav" style='display: block; '>
                
-                <center><div class ="SearchObject">
+                <center><div class ="SearchObject" style="margin-bottom: 15px;">
                         
                     <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                         <input type="hidden" name="User" value="<%=NewUserName%>" />

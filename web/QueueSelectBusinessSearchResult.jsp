@@ -217,7 +217,33 @@
                 
                 ProviderInfo eachrecord; //try block not needed for this operation 
                 
-                while(rows.next()){
+                A:while(rows.next()){
+                    
+                    //getting the subscription status
+                    boolean Subscriptoin_not_added = true;
+                    try{
+                        Class.forName(Driver);
+                        Connection SubsConn = DriverManager.getConnection(url, User, Password);
+                        String SubsString = "select status from QueueObjects.StripSubscriptions where ProvId = ?";
+                        PreparedStatement SubsPst = SubsConn.prepareStatement(SubsString);
+
+                        SubsPst.setInt(1, rows.getInt("Provider_ID"));
+
+                        ResultSet SubsRec = SubsPst.executeQuery();
+
+                        while(SubsRec.next()){
+                            Subscriptoin_not_added = false;
+                            if(SubsRec.getString("status").equalsIgnoreCase("0")){
+                                continue A;
+                            } else if (SubsRec.getString("status").equalsIgnoreCase("1")){
+                                //do nothing
+                            }
+                        }
+
+                    }catch(Exception e){}
+
+                    if(Subscriptoin_not_added == true)
+                        continue;
                     
                     //try block needed for this operation (while(rows.next())
                     eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
@@ -692,9 +718,14 @@
                                 <tr>
                                     <td>
                                         <b>
-                                            <p style="">
-                                                <%=fullName%>
-                                            </p>
+                                            <a href="EachSelectedProvider.jsp?UserID=<%=SID%>">
+                                                <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                    <%=fullName.split(" ")[0]%> 
+                                                    <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                        go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                    </span>
+                                                </p>
+                                            </a>
                                         </b>
                                         <div style="display: flex; flex-direction: row;">
                                             <%

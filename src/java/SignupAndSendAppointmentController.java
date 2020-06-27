@@ -2,6 +2,7 @@
 
 import com.arieslab.queue.queue_model.ExistingProviderAccountsModel;
 import com.arieslab.queue.queue_model.ProcedureClass;
+import com.arieslab.queue.queue_model.QueuePWHash;
 import com.arieslab.queue.queue_model.StatusesClass;
 import com.arieslab.queue.queue_model.UserAccount;
 import java.io.IOException;
@@ -52,6 +53,9 @@ public class SignupAndSendAppointmentController extends HttpServlet {
         
         String UserName = request.getParameter("username").trim().replaceAll("( )+", " ");
         String Password = request.getParameter("password").trim().replaceAll("( )+", " ");
+        
+        //hashing Password
+        Password = QueuePWHash.GetHash(Password);
         
         String ProviderID = request.getParameter("ProviderID");
         String CustomerID = "";

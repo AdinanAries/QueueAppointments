@@ -23,7 +23,7 @@ function EnableCustomerSignUpBtn(){
 			if(firstPassword.length < 8){
                             document.getElementById("AddUserSignUpBtn").disabled = true;
                             document.getElementById("AddUserSignUpBtn").style.backgroundColor = "darkgrey";
-                            document.getElementById("passwordStatus").innerHTML = "Password too short";
+                            document.getElementById("passwordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Password too short";
                             document.getElementById("formStatus").innerHTML = "";
 			}
 			else{
@@ -31,13 +31,13 @@ function EnableCustomerSignUpBtn(){
                             if(userName === firstPassword){
                                 document.getElementById("AddUserSignUpBtn").disabled = true;
 				document.getElementById("AddUserSignUpBtn").style.backgroundColor = "darkgrey";
-				document.getElementById("passwordStatus").innerHTML = "Same Username as Password";
+				document.getElementById("passwordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Same Username as Password";
 				document.getElementById("formStatus").innerHTML = "";
                             }else{
                                 if(email === ""){
                                     document.getElementById("provSignUpBtn").disabled = true;
                                     document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-                                    document.getElementById("passwordStatus").innerHTML = "Please verify your email";
+                                    document.getElementById("passwordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please verify your email";
                                     document.getElementById("CustEmailVeriDiv").style.display = "block";
                                     document.getElementById("provFormStatus").innerHTML = "BizEmailVeriDiv";
                                 }else{
@@ -45,7 +45,7 @@ function EnableCustomerSignUpBtn(){
                                     document.getElementById("AddUserSignUpBtn").style.backgroundColor = "darkslateblue";
                                     document.getElementById("AddUserSignUpBtn").style.cssText = '#AddUserSignUpBtn:hover{ background-color: red; }';
                                     document.getElementById("passwordStatus").innerHTML = "";
-                                    document.getElementById("formStatus").innerHTML = "OK";
+                                    document.getElementById("formStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> OK";
                                 }
                             }
 			}
@@ -53,14 +53,14 @@ function EnableCustomerSignUpBtn(){
 		else{
                     document.getElementById("AddUserSignUpBtn").disabled = true;
                     document.getElementById("AddUserSignUpBtn").style.backgroundColor = "darkgrey";
-                    document.getElementById("passwordStatus").innerHTML = "Passwords don't match";
+                    document.getElementById("passwordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Passwords don't match";
                     document.getElementById("formStatus").innerHTML = "";
 		}
 	}
 	else{
             document.getElementById("AddUserSignUpBtn").disabled = true;
             document.getElementById("AddUserSignUpBtn").style.backgroundColor = "darkgrey";
-            document.getElementById("formStatus").innerHTML = "uncompleted form";
+            document.getElementById("formStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> uncompleted form";
             document.getElementById("passwordStatus").innerHTML = "";
 	}
 
@@ -94,7 +94,7 @@ function EnableProviderSignUpBtn(){
 			if(firstPassword.length < 8){
 				document.getElementById("provSignUpBtn").disabled = true;
 				document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-				document.getElementById("provPasswordStatus").innerHTML = "Password too short";
+				document.getElementById("provPasswordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Password too short";
 				document.getElementById("provFormStatus").innerHTML = "";
 			}
 			else{
@@ -105,7 +105,7 @@ function EnableProviderSignUpBtn(){
                                     if(businessType === "Select Business Type"){
                                         document.getElementById("provSignUpBtn").disabled = true;
                                         document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-                                        document.getElementById("provPasswordStatus").innerHTML = "Specify business Type";
+                                        document.getElementById("provPasswordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Specify business Type";
                                         document.getElementById("provFormStatus").innerHTML = "";
                                     }
                                     
@@ -115,13 +115,13 @@ function EnableProviderSignUpBtn(){
                                     if(userName === firstPassword){
                                        document.getElementById("provSignUpBtn").disabled = true;
 				       document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-				       document.getElementById("provPasswordStatus").innerHTML = "Same Username as Password";
+				       document.getElementById("provPasswordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Same Username as Password";
 				       document.getElementById("provFormStatus").innerHTML = "";
                                     }else{
 					if(email === ""){
                                             document.getElementById("provSignUpBtn").disabled = true;
                                             document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-                                            document.getElementById("provPasswordStatus").innerHTML = "Please verify your email";
+                                            document.getElementById("provPasswordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please verify your email";
                                             document.getElementById("BizEmailVeriDiv").style.display = "block";
                                             document.getElementById("provFormStatus").innerHTML = "";
                                         }else{
@@ -131,21 +131,21 @@ function EnableProviderSignUpBtn(){
                                                 if(otherBusinessType === ""){
                                                     document.getElementById("provSignUpBtn").disabled = true;
                                                     document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-                                                    document.getElementById("provPasswordStatus").innerHTML = "Specify business Type";
+                                                    document.getElementById("provPasswordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Specify business Type";
                                                     document.getElementById("provFormStatus").innerHTML = "";
                                                 }else{
                                                     document.getElementById("provSignUpBtn").disabled = false;
-                                                    document.getElementById("provSignUpBtn").style.backgroundColor = "pink";
+                                                    document.getElementById("provSignUpBtn").style.backgroundColor = "darkslateblue";
                                                     document.getElementById("provSignUpBtn").style.cssText = '#provSignUpBtn:hover{ background-color: red; }';
                                                     document.getElementById("provPasswordStatus").innerHTML = "";
-                                                    document.getElementById("provFormStatus").innerHTML = "OK";
+                                                    document.getElementById("provFormStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> OK";
                                                 }
                                             }else{
                                                 document.getElementById("provSignUpBtn").disabled = false;
-                                                document.getElementById("provSignUpBtn").style.backgroundColor = "pink";
+                                                document.getElementById("provSignUpBtn").style.backgroundColor = "darkslateblue";
                                                 document.getElementById("provSignUpBtn").style.cssText = '#provSignUpBtn:hover{ background-color: red; }';
                                                 document.getElementById("provPasswordStatus").innerHTML = "";
-                                                document.getElementById("provFormStatus").innerHTML = "OK";
+                                                document.getElementById("provFormStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> OK";
                                             }
                                         }
                                     }
@@ -157,7 +157,7 @@ function EnableProviderSignUpBtn(){
                     document.getElementById("otherBusinessType").style.display = "none";
                     document.getElementById("provSignUpBtn").disabled = true;
                     document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-                    document.getElementById("provPasswordStatus").innerHTML = "Passwords don't match";
+                    document.getElementById("provPasswordStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Passwords don't match";
                     document.getElementById("provFormStatus").innerHTML = "";
 		}
 	}
@@ -165,7 +165,7 @@ function EnableProviderSignUpBtn(){
             document.getElementById("otherBusinessType").style.display = "none";
             document.getElementById("provSignUpBtn").disabled = true;
             document.getElementById("provSignUpBtn").style.backgroundColor = "darkgrey";
-            document.getElementById("provFormStatus").innerHTML = "uncompleted form";
+            document.getElementById("provFormStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> uncompleted form";
             document.getElementById("provPasswordStatus").innerHTML = "";
 	}
 

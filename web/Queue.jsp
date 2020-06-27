@@ -388,7 +388,7 @@
                 </div>
             </div>
             
-        <div style='display: block;' id="header">
+        <div class="LandingPageheader" style='display: block;' id="header">
             
             <div style="text-align: center;"><p> </p>
             <image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/>
@@ -620,10 +620,13 @@
                 <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
                
                 <center>
-                    <div class =" SearchObject">
+                    <div class =" SearchObject" style="margin-bottom: 15px; margin-top: 20px; padding-top: 10px; background: none !important;">
                         
-                        <form name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
-                            <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/>
+                        <p style="text-align: center; margin: 10px 0; font-weight: bolder;">Search By Name</p>
+                        
+                        <form style="background-color: #9bb1d0;" name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
+                            <input style="border-top-left-radius: 4px !important; border-bottom-left-radius: 4px !important; background-color: #d9e8e8 !important;" placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" style="border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important; background-color: #06adad !important;
+                                                                                                                                                                                                        color: white !important; border: 1px solid #3d6999 !important;" type="submit" value="Search" name="SearchBtn" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/>
                         </form> 
 
                     </div>
@@ -744,7 +747,7 @@
                 
                 <h1>Beaty Services Appointments</h1-->
                 
-                <h4 style="padding: 5px 0;">Search By Category</h4>
+                <h4 style="padding: 5px 0; margin-bottom: 5px; margin-top: 5px;">Search By Category</h4>
                 
                  <div id="firstSetProvIcons">
                 <center><table id="providericons">

@@ -1010,9 +1010,14 @@
                                 <tr>
                                     <td>
                                         <b>
-                                            <p style="">
-                                                <%=fullName%>
-                                            </p>
+                                            <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=SID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                    <%=fullName.split(" ")[0]%> 
+                                                    <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                        go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                    </span>
+                                                </p>
+                                            </a>
                                         </b>
                                             <div style="display: flex; flex-direction: row;">
                                                 <div>
@@ -2123,9 +2128,13 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
-                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center>
-                
+                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
+                            
                 </div>
                 
                 <div id="thirdSetProvIcons" style="display: none;">
@@ -2146,8 +2155,10 @@
                     </tbody>
                     </table></center>
                     
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center>
-
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
+                                
                 </div>
             </div>
             

@@ -15,7 +15,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-if ('serviceWorker' in navigator) {
+/*if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw2.js')
   .then(function(registration) {
     console.log('Registration successful, scope of sw2 is:', registration.scope);
@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator) {
   .catch(function(error) {
     console.log('Service worker registration failed, error:', error);
   });
-}
+}*/
 
 //document.cookie = "SameSite=None;Secure";
 //document.cookie = "UserID=1;SameSite=None;Secure";
@@ -464,9 +464,11 @@ function toggleshowOtherSettings() {
   var ShowHoursOpenDiv = document.getElementById("ShowHoursOpenDiv");
 
   ShowOtherSettingsDiv.style.display = "block";
-  showOtherSettingsBtn.style.backgroundColor = "plum";
+  showOtherSettingsBtn.style.color = "white";
+  showOtherSettingsBtn.style.borderBottom = "white 2px solid";
   ShowHoursOpenDiv.style.display = "none";
-  ShowHourBtn.style.backgroundColor = "pink";
+  ShowHourBtn.style.color = "#ccc";
+  ShowHourBtn.style.borderBottom = "#9bb1d0 2px solid";
 }
 
 function toggleshowHoursOpen() {
@@ -476,9 +478,11 @@ function toggleshowHoursOpen() {
   var ShowHoursOpenDiv = document.getElementById("ShowHoursOpenDiv");
 
   ShowOtherSettingsDiv.style.display = "none";
-  showOtherSettingsBtn.style.backgroundColor = "pink";
+  showOtherSettingsBtn.style.color = "#ccc";
+  showOtherSettingsBtn.style.borderBottom = "#9bb1d0 2px solid";
   ShowHoursOpenDiv.style.display = "block";
-  ShowHourBtn.style.backgroundColor = "plum";
+  ShowHourBtn.style.color = "white";
+  ShowHourBtn.style.borderBottom = "white 2px solid";
 }
 
 function toggleshowClients() {
@@ -488,9 +492,11 @@ function toggleshowClients() {
   var BlockedPeopleDiv = document.getElementById("BlockedPeopleDiv");
 
   BlockedPeopleDiv.style.display = "none";
-  ShowBlockedPeopleBtn.style.backgroundColor = "pink";
+  ShowBlockedPeopleBtn.style.color = "#ccc";
+  ShowBlockedPeopleBtn.style.borderBottom = "#9bb1d0 2px solid";
   ProviderClientsDiv.style.display = "block";
-  ShowClientsBtn.style.backgroundColor = "plum";
+  ShowClientsBtn.style.color = "white";
+  ShowClientsBtn.style.borderBottom = "white 2px solid";
 }
 
 function toggleshowBlockedPeople() {
@@ -500,9 +506,11 @@ function toggleshowBlockedPeople() {
   var BlockedPeopleDiv = document.getElementById("BlockedPeopleDiv");
 
   BlockedPeopleDiv.style.display = "block";
-  ShowBlockedPeopleBtn.style.backgroundColor = "plum";
+  ShowBlockedPeopleBtn.style.color = "white";
+  ShowBlockedPeopleBtn.style.borderBottom = "white 2px solid";
   ProviderClientsDiv.style.display = "none";
-  ShowClientsBtn.style.backgroundColor = "pink";
+  ShowClientsBtn.style.color = "#ccc";
+  ShowClientsBtn.style.borderBottom = "#9bb1d0 2px solid";
 }
 
 function showDeleteFavProv(number) {
@@ -1174,6 +1182,10 @@ function showProfile() {
   $("html, body").animate({
     scrollTop: $("#newbusiness").position().top
   });
+}
+
+function showReservation() {
+  document.getElementById("ReservationAndFutureSpots").scrollIntoView();
 }
 
 function hideProvApptListAndMkReservForMobile() {

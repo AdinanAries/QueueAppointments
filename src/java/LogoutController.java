@@ -29,11 +29,14 @@ public class LogoutController extends HttpServlet {
         
     @Override
     public void init(ServletConfig config){
-                
-        url = config.getServletContext().getAttribute("DBUrl").toString(); 
-        Driver = config.getServletContext().getAttribute("DBDriver").toString();
-        user = config.getServletContext().getAttribute("DBUser").toString();
-        password = config.getServletContext().getAttribute("DBPassword").toString();
+        try{
+            url = config.getServletContext().getAttribute("DBUrl").toString(); 
+            Driver = config.getServletContext().getAttribute("DBDriver").toString();
+            user = config.getServletContext().getAttribute("DBUser").toString();
+            password = config.getServletContext().getAttribute("DBPassword").toString();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
     }
 
@@ -57,7 +60,9 @@ public class LogoutController extends HttpServlet {
                 DltSesPst.setInt(1, UserIndex);
                 DltSesPst.executeUpdate();
             }
-            catch(Exception e){}
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
              
             if(request.getSession().getAttribute("ThisUserName")!= null && request.getSession().getAttribute("ThisUserPassword") != null){
                 request.getSession().removeAttribute("ThisUserName");
@@ -70,8 +75,12 @@ public class LogoutController extends HttpServlet {
             }
             
             //setting UserAccount Fields to defaults
-            UserAccount.LoggedInUsers.get(UserIndex).setAccountType(null);
-            UserAccount.LoggedInUsers.get(UserIndex).setUserID(0);
+            try{
+                UserAccount.LoggedInUsers.get(UserIndex).setAccountType(null);
+                UserAccount.LoggedInUsers.get(UserIndex).setUserID(0);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
             
             response.sendRedirect("Queue.jsp?Message="+Message);
             

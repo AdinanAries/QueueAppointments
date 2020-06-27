@@ -6,6 +6,21 @@
   font-size: 14px;
   /*font-family: "Helvetica";*/
 }
+#LocSearchDiv form{
+    background-color: #9bb1d0 !important;
+}
+#LocSearchDiv input[type="submit"]{
+    background-color: #06adad !important;
+    padding: 10px 5px !important;
+}
+#SearchDivNB form{
+    background-color: #9bb1d0 !important;
+}
+#SearchDivNB input[type="submit"]{
+    background-color: #06adad !important;
+    padding: 10px 5px !important;
+    border: 1px solid #3d6999 !important;
+}
 body {
   overflow-x: hidden;
   /*max-width: 1600px;
@@ -407,7 +422,7 @@ select {
   /*border-bottom: solid 3px black;*/
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #ccccff;
+  /*background-color: #ccccff;*/
   position: absolute;
   background: none !important;
   /*box-shadow: 4px 4px 10px #334d81;
@@ -1026,7 +1041,7 @@ select {
   #middleScreenSettingsBtn{
       display: block;
   }
-  #PermanentDiv ul li:nth-child(2){
+  #PermanentDiv ul li:nth-child(3){
     display: none;
   }
   #PermanentDiv ul {
@@ -1063,7 +1078,7 @@ select {
     max-height: 300px;
   }
   #ReservationAndFutureSpots {
-    height: 450px;
+    min-height: 450px;
   }
   #MakeReservationForm {
     display: block;
@@ -1397,6 +1412,11 @@ input[type="file"] {
   border-radius: 4px;
 }
 @media only screen and (max-width: 1000px) {
+    #header{
+        background-color: white !important;
+        clip-path: polygon(100% 0, 100% 66%, 91% 73%, 79% 79%, 64% 83%, 50% 86%, 33% 90%, 18% 94%, 0 100%, 0 0);
+        padding-bottom: 30px;
+    }
     #ProviderYourBusinessTxt{
         display: block;
     }
@@ -1553,7 +1573,6 @@ input[type="file"] {
     width: 100%;
     text-align: center;
     margin: 0;
-    margin-bottom: 15px;
     padding: 0;
   }
   .SearchObject input[type="text"] {
@@ -1715,7 +1734,8 @@ input[type="file"] {
     width: 100%;
     /*background-color: #6699ff;*/
     background: none !important;
-    background-color: #6699ff !important;
+    /*background-color: #6699ff !important;*/
+    background-color: #8abde1 !important;
     overflow-x: hidden;
   }
   #QueueJspContent {

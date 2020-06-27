@@ -2855,7 +2855,7 @@
                 
                 
                 
-                <center><div class ="SearchObject">
+                <center><div class ="SearchObject" style="margin-bottom: 15px;">
                         
                     <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
                         <input type="hidden" name="User" value="<%=NewUserName%>" />
@@ -3111,7 +3111,7 @@
                                        <img style='background-color: white;' src="icons/icons8-user-15.png" width="20" height="20" alt="icons8-user-15"/>
                                        Show Your Profile Details</p></center>
                                
-                               <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 10px; margin-top: 0; background-color: cornflowerblue;">
+                               <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 10px; margin-top: 0; background-color: #8abde1;">
                                 
                                    
                                 <div style="display: flex; flex-direction: row; padding: 5px; margin: auto; width: fit-content;">   
@@ -3599,7 +3599,7 @@
                                             <div class="tooltip">
                                                 <p style="cursor: pointer; margin-left: 10px;  background-color: oldlace; padding: 5px; border-radius: 4px;" onclick = "showSettingsDiv();">
                                                     <img style="" src="icons/icons8-settings-96.png" width="20" height="20" alt="icons8-settings-20"/>
-                                                    <small style="color: darkgrey;">Settings</small>
+                                                    <small style="color: darkblue;">Settings</small>
                                                 </p>
                                             </div>
                                         </div>
@@ -3861,7 +3861,7 @@
                                             
                                         </script>
                                         
-                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: cornflowerblue;">
+                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: #8abde1;">
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateAppTab()" id="AppointmentsTab" style="padding-top: 20px; text-align: center; color: white; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
@@ -3877,7 +3877,7 @@
                                             </tbody>
                                         </table></center>
                                         
-                                <div class="scrolldiv" style=" height: 600px; overflow-y: auto; background-color: #6699ffa0 !important;">
+                                <div class="scrolldiv" style=" height: 600px; overflow-y: auto; background-color: #8abde1a0 !important;">
                                    
                                    <script>
                                         function showselectCustSpttabs(){
@@ -4411,7 +4411,7 @@
                                         <form style=" display: none;" id="addFavProvForm<%=JString%>" class="addFavProvForm" name="addFavProvForm" action="addFavProvController" method="POST">
                                             <input id="CustIDatAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDatAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addProvtoFavBtn<%=JString%>" style="color: white; margin: 10px; background-color: darkslateblue; border: 0; padding: 5px; border-radius: 4px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addProvtoFavBtn<%=JString%>" style="color: white; margin: 10px; background-color: darkslateblue; border: 0; padding: 5px; border-radius: 4px; font-weight: bolder;" type="button" value="Add person to favorites" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addProvtoFavBtn<%=JString%>').click(function(event) {  
@@ -4898,7 +4898,7 @@
                                         <form style=" display: none;" id="addFutureFavProvForm<%=QString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustIDforAddFav<%=QString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProvIDforAddFav<%=QString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>"/>
-                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; border: 0; border-radius: 4px; color: white; padding: 5px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavtoProvBtn<%=QString%>" style="margin: 10px; background-color: darkslateblue; border: 0; border-radius: 4px; color: white; padding: 5px; font-weight: bolder;" type="button" value="Add person to favorites" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavtoProvBtn<%=QString%>').click(function(event) {  
@@ -5302,7 +5302,7 @@
                                         <form style=" display: none;" id="addFavProvFormFromRecent<%=JString%>" class="addFavProvForm" name="addFavProvForm">
                                             <input id="CustomerIDforAddFav<%=JString%>" type="hidden" name="CustomerID" value="<%=UserID%>"/>
                                             <input id="ProviderIDforAddFav<%=JString%>" type="hidden" name="ProviderID" value="<%=ProviderID%>" />
-                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border: 0; color: white; padding: 5px; border-radius: 4px;" type="button" value="Add this provider to your favorite providers" />
+                                            <input id="addFavProvBtn<%=JString%>" style="margin: 10px; background-color: darkslateblue; border: 0; color: white; padding: 5px; border-radius: 4px; font-weight: bolder;" type="button" value="Add person to favorites" />
                                             <script>
                                                $(document).ready(function() {                        
                                                     $('#addFavProvBtn<%=JString%>').click(function(event) {  
@@ -5808,7 +5808,7 @@
                         
                    </script>
                     
-                   <iframe onload="OnloadExploreMeth();" style="position: absolute; background-color: #6699ff;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>       
+                   <iframe onload="OnloadExploreMeth();" style="position: absolute; background: none; margin-top: -2px;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>       
                    
                    <script>
                        var OnloadedSpots = 0;
@@ -5840,7 +5840,7 @@
                        
                    </script>
                    
-                   <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background-color: #ccccff; display: none;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background: none; display: none; margin-top: -2px;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
                    
                    <script>
                        var OnloadedFavorites = 0;
@@ -5872,7 +5872,7 @@
                        
                    </script>
                    
-                   <iframe onload="OnloadFavoritesMeth();" id="FavoritesIframe" style="position: absolute; background-color: #6699ff; display: none;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadFavoritesMeth();" id="FavoritesIframe" style="position: absolute; background: none; margin-top: -2px; display: none;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
                    
                    <script>
                        
@@ -5904,7 +5904,7 @@
                         }, 1);
                    </script>
                    
-                   <iframe onload="OnloadAccountMeth();" style="position: absolute; background-color: #6699ff; display: none;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadAccountMeth();" style="position: absolute; background: none; display: none; margin-top: -2px;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
                    
                    <script>
                        var OnloadedSearch = 0;
