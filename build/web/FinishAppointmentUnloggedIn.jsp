@@ -423,19 +423,17 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your user name</legend>
-                                            <span class="fa fa-user"></span>
-                                            <input id="LoginPageUserNameFld" placeholder='user' type="text" name="username" value="" size="34"/>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                            <input id="LoginPageUserNameFld" placeholder='Enter username here' type="text" name="username" value="" size="34"/>
                                         </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your password</legend>
-                                            <span class="fa fa-key"></span>
-                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="34"/>
-                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="Enter password here" type="password" name="password" value="" size="34"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px; margin-bottom: 5px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>
@@ -498,12 +496,19 @@
                 
         <div id="newbusiness">
             
-            <center><h2 style="padding-top: 10px; margin-bottom: 20px; color: #000099">
-                </h2></center>
+            <h2 style="padding-top: 10px; margin-bottom: 20px; color: #000099; text-align: center;">
+                </h2>
             
             <div id="businessdetails">
-                <center><h2 style="color: #000099; margin-bottom: 10px; ">Or sign up to finish.</h2></center>
-
+                <h2 style="color: #000099; text-align: center; margin-bottom: 10px; ">Or sign up to finish.</h2>
+                
+                <style>
+                    @media only screen and (min-width: 1000px){
+                        #businessdetails{
+                            margin-top: -30px !important;
+                        }
+                    }
+                </style>
                 
             <center><form name="AddBusiness" action="SignupAndSendAppointmentController" method="POST">
                     
@@ -520,9 +525,8 @@
                         <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your first name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="SUPfirstName" placeholder='firstname' type="text" name="firstName" value="" size="34"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">First Name</span></p>
+                                        <input id="SUPfirstName" placeholder='Enter first name here' type="text" name="firstName" value="" size="34"/>
                                     </fieldset>
                                 </td>
                             </tr>
@@ -538,18 +542,16 @@
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your last name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="SUPlastName" placeholder='lastname'  type="text" name="lastName" value="" size="34"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Last Name</span></p>
+                                        <input id="SUPlastName" placeholder='Enter last name here'  type="text" name="lastName" value="" size="34"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your mobile</legend>
-                                        <i class="fa fa-mobile" style="font-size: 24px"></i>
-                                        <input id="SUPtelephone" placeholder='mobile'  type="text" name="telNumber" value="" size="34"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i style="font-size: 20px;" class="fa fa-mobile"></i> <span style="margin-left: 10px;">Mobile</span></p>
+                                        <input id="SUPtelephone" placeholder='Enter mobile here'  type="text" name="telNumber" value="" size="34"/>
                                     </fieldset>
                                 </td>
                             </tr>
@@ -557,9 +559,8 @@
                                 <td>
                                     <p id='CustEmailStatus' style='color: white; display: none; text-align: center; margin: 10px 0;'></p>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your email</legend>
-                                        <span class="fa fa-envelope"></span>
-                                        <input onchange='CustSetVerifyFalse();' placeholder='email' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="34" />
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
+                                        <input onchange='CustSetVerifyFalse();' placeholder='Enter email here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="34" />
                                     </fieldset>
                                     <input id="SUPemail"  type="hidden" name="email" value="" size="37"/>
                                     <div id='CustEmailVeriDiv' style='display: none; background-color: #3d6999; padding: 10px; margin: 5px;'>
@@ -673,11 +674,10 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your user name</legend>
-                                            <span class="fa fa-user"></span>
-                                            <input id="SUPuserName" onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" placeholder='username' type="text" name="username" value="" size="34"/>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                            <input id="SUPuserName" onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" placeholder='Enter username here' type="text" name="username" value="" size="34"/>
                                         </fieldset>
-                                        <p id="CustUserNameStatus" style="color: white; text-align: center; max-width: 250px; margin: 10px 0;"></p>
+                                        <p id="CustUserNameStatus" style="color: white; text-align: center; max-width: 240px; margin: 10px 0;"></p>
                                     </td>
                                 </tr>
                                 
@@ -723,19 +723,17 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your password</legend>
-                                            <span class="fa fa-key"></span>
-                                            <input class="passwordFld" id="SUPpassword" placeholder='Password' type="password" name="password" value="" size="34"/>
-                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                            <input class="passwordFld" id="SUPpassword" placeholder='Enter new password here' type="password" name="password" value="" size="34"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px; margin-bottom: 5px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Confirm your password</legend>
-                                            <span class="fa fa-key"></span>
-                                            <input class="passwordFld" id="SUPconfirm" placeholder='Password' type="password" name="confirm" value="" size="34"/>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                            <input class="passwordFld" id="SUPconfirm" placeholder='Confirm password here' type="password" name="confirm" value="" size="34"/>
                                         </fieldset>
                                     </td>
                                 </tr>

@@ -49,3 +49,30 @@ $(document).ready(function(){
     setBodyToScroll();
     
 });
+
+$(document).ready(()=>{
+    function showPassword(){
+
+        document.querySelectorAll(".showPassword").forEach((showPasswordBtn) => {
+
+            if(showPasswordBtn.classList.contains("fa-eye")){
+                showPasswordBtn.classList.remove("fa-eye");
+                showPasswordBtn.classList.add("fa-eye-slash");
+            }else{
+                showPasswordBtn.classList.remove("fa-eye-slash");
+                showPasswordBtn.classList.add("fa-eye");
+            }
+        });
+        document.querySelectorAll(".passwordFld").forEach((passwordFld) =>{
+            if(passwordFld.type === "password"){
+                passwordFld.type = "text";
+            }else{
+                passwordFld.type = "password";
+            }
+        });
+    }
+
+    $(".showPassword").click(()=>{
+        showPassword();
+    });
+});

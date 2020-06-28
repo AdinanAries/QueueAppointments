@@ -1281,18 +1281,18 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your user name</legend>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
                                             <span class="fa fa-user"></span>
-                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="34" style=""/>
+                                            <input id="LoginPageUserNameFld" placeholder="Enter user name here" type="text" name="username" value="" size="34" style=""/>
                                         </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your password</legend>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
                                             <span class="fa fa-key"></span>
-                                            <input id="LoginPagePasswordFld" placeholder='password' type="password" name="password" value="" size="34" style=""/>
+                                            <input id="LoginPagePasswordFld" placeholder='Enter password here' type="password" name="password" value="" size="34" style=""/>
                                         </fieldset>
                                     </td>
                                 </tr>

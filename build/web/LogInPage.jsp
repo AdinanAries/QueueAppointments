@@ -366,7 +366,7 @@
                         
                 <center><h4 style = "margin-bottom: 15px; width: 90%; max-width: 300px;"></h4></center>
                   
-                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; padding-left: 5px; padding-right: 5px; max-width: 310px; min-height: 300px; border: #3d6999 1px solid;"><table border="0"> 
+                <form id="LoginForm" name="login" action="LoginControllerMain" method="POST" style="border-radius: 4px; width: fit-content; padding: 20px; padding-left: 5px; padding-right: 5px; max-width: 310px; min-height: 300px;"><table border="0"> 
                             <center><h2 style="margin-bottom: 40px;">Login here</h2></center>
                             <%if(Message != null){%>
                             <p style="margin: auto; max-width: 350px; margin-bottom: 15px;"><i class="fa fa-exclamation-triangle" style="color: yellow;"></i> <span style="color: white; margin: auto;"><%=Message%></span></p>
@@ -376,19 +376,17 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your user name</legend>
-                                            <span class="fa fa-user"></span>
-                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="29" style=" border-radius: 4px;"/>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                            <input id="LoginPageUserNameFld" placeholder="Enter username here" type="text" name="username" value="" size="29" style=" border-radius: 4px;"/>
                                         </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your password</legend>
-                                            <span class="fa fa-key"></span>
-                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder='password' type="password" name="password" value="" size="28" style=" border-radius: 4px;"/>
-                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder='Enter password here' type="password" name="password" value="" size="28" style=" border-radius: 4px;"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px; margin-bottom: 5px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>
@@ -397,22 +395,21 @@
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn" />
                         <input id="loginPageBtn" class="button" type="submit" onclick="document.getElementById('PageLoader').style.display = 'block';" value="Login" name="submitbtn" />
-                            <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: #254386; cursor: pointer; margin: 10px; padding: 4px; margin-top: 50px;">forgot my password</h5></center>
+                            <center><h5 id="toggleShowFGPassDivLnk" onclick="showForgotPassDiv();" style="width: 200px; color: darkblue; cursor: pointer; margin: 10px; padding: 4px; margin-top: 50px;">forgot my password</h5></center>
                 
-                <h5  style = "margin: 10px;" ><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="SignUpPage.jsp" style="color: #254386; padding: 4px;">I don't have a user account</a></h5>
+                <h5  style = "margin: 10px;" ><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="SignUpPage.jsp" style="color: darkblue; padding: 4px;">I don't have a user account</a></h5>
                 
                 </form>
                 
-                <center><div id="forgotPassDiv" style="display: none; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; padding-left: 5px; padding-right: 5px; max-width: 310px; border: #3d6999 1px solid;">
+                <center><div id="forgotPassDiv" style="display: none; border-radius: 4px; width: fit-content; padding: 20px; padding-left: 5px; padding-right: 5px; max-width: 310px;">
                     
                     <h2 id="FGPassDivStatusTxt" style="margin-bottom: 15px; font-weight: bolder;">Enter your email below</h2>
                     
                     <fieldset class="loginInputFld">
-                        <legend>Enter your email</legend>
-                        <span class="fa fa-envelope"></span>
-                        <input id="forgotPassEmailFld" onkeyup="findAt();" type="text" value="" placeholder="email" size="30" style="background: none; border-radius: 4px;"/>
+                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
+                        <input id="forgotPassEmailFld" onkeyup="findAt();" type="text" value="" placeholder="Enter your email here" size="30" style="background: none; border-radius: 4px;"/>
                     </fieldset>
-                    <p><input id="forgotPassBtn" style="background-color: darkslateblue; color: white; border: none; padding: 5px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
+                    <p><input id="forgotPassBtn" style="background-color: darkslateblue; color: white; border: none; padding: 10px 5px; border-radius: 4px; margin-bottom: 10px;" type="button" value="send authorization email" /><p>
                     
                     <h2 style="text-align: center; margin-top: 15px; cursor: pointer" onclick="showLogin()">Click here to login</h2>
                         <script>
@@ -553,41 +550,34 @@
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td><h3 style="color: white; text-align: center; margin-bottom: 10px;">Provide your information below</h3></td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your first name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="signUpFirtNameFld" placeholder="firstname" type="text" name="firstName" value="" size="32"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">First Name</span></p>
+                                        <input id="signUpFirtNameFld" placeholder="Enter first name here" type="text" name="firstName" value="" size="32"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your last name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="sigUpLastNameFld" placeholder="lastname" type="text" name="lastName" value="" size="32"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Last Name</span></p>
+                                        <input id="sigUpLastNameFld" placeholder="Enter last name here" type="text" name="lastName" value="" size="32"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your mobile</legend>
-                                        <span class="fa fa-mobile" style="font-size: 25px;"></span>
-                                        <input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="mobile" type="text" name="telNumber" value="" size="32"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i style="font-size: 20px;" class="fa fa-mobile"></i> <span style="margin-left: 10px;">Mobile</span></p>
+                                        <input onclick='checkMiddleNumber()' onkeydown="checkMiddleNumber()" id="signUpTelFld" placeholder="Enter mobile here" type="text" name="telNumber" value="" size="32"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your email</legend>
-                                        <span class="fa fa-envelope"></span>
-                                        <input id="signUpEmailFld" placeholder="email" type="text" name="email" value="" size="32"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
+                                        <input id="signUpEmailFld" placeholder="Enter email here" type="text" name="email" value="" size="32"/>
                                     </fieldset>
                                 </td>
                             </tr>

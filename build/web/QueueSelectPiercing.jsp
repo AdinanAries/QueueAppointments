@@ -1678,96 +1678,133 @@
                             
         </div>
                             
-        <div id="newbusiness">
-            <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to book appointment</h2></center>
+        <div id="newbusiness" style="height: 600px;">
             
-            <div id="businessdetails">
+            
+            
+            <!--p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
+                style='margin-top: 10px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
+                <i style='color: white; font-size: 35px;' class="fa fa-newspaper-o" width="28" height="25" ></i>
+                <sup> Show News Updates</sup></p-->
+            
+            
+            
+            <p id='addBizTxt' style="text-align: center; font-size: 20px;  margin-bottom: 10px; margin-top: -10px;">
+                <b>Add your business or create customer account</b>
+            </p>
+            
+            <div id="businessdetails" >
                 
-            <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST"><table border="0">
-                        <tbody>   
-                            <tr>
-                                <td><p style="color: white; text-align: center; padding-bottom: 10px;">Provide your information below<p></td>
-                            </tr>
+            <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST">
+                    <table border="0">
+                        <tbody>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your first name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="signUpFirtNameFld" placeholder="firstname" type="text" name="firstName" value="" size="34"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">First Name</span></p>
+                                        <input id="signUpFirtNameFld" placeholder="Enter first name here" type="text" name="firstName" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your last name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="sigUpLastNameFld" placeholder="lastname" type="text" name="lastName" value="" size="34"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Last Name</span></p>
+                                        <input id="sigUpLastNameFld" placeholder="Enter last name here" type="text" name="lastName" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your mobile</legend>
-                                        <i class="fa fa-mobile" style="font-size: 24px"></i>
-                                        <input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="mobile" type="text" name="telNumber" value="" size="34"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i style="font-size: 20px;" class="fa fa-mobile"></i> <span style="margin-left: 10px;">Mobile</span></p>
+                                        <input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="Enter mobile here" type="text" name="telNumber" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your email</legend>
-                                        <span class="fa fa-envelope"></span>
-                                        <input id="signUpEmailFld" placeholder="email" type="text" name="email" value="" size="34"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
+                                        <input id="signUpEmailFld" placeholder="Enter email here" type="text" name="email" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
-                        </tbody>
                         </tbody>
                     </table>
                     
+                    <script>
+                        var TelFld = document.getElementById("signUpTelFld");
+                        
+                        function numberFunc(){
+                            
+                            var number = parseInt((TelFld.value.substring(TelFld.value.length - 1)), 10);
+                            
+                            if(isNaN(number)){
+                                TelFld.value = TelFld.value.substring(0, (TelFld.value.length - 1));
+                            }
+                            
+                        }
+                        
+                        setInterval(numberFunc, 1);
+                        
+                        function checkMiddleNumber(){
+                            
+                            for(var i = 0; i < TelFld.value.length; i++){
+
+                                var middleString = TelFld.value.substring(i, (i+1));
+                                //window.alert(middleString);
+                                var middleNumber = parseInt(middleString, 10);
+                                //window.alert(middleNumber);
+                                if(isNaN(middleNumber)){
+                                    TelFld.value = TelFld.value.substring(0, i);
+                                }
+                            }
+                        }
+                        
+                        //setInterval(checkMiddleNumber, 1000);
+                    </script>
+                    
                     <input class="button" type="reset" value="Reset" name="resetBtn" />
-                    <input class="button" type="submit" onclick="document.getElementById('PageLoader').style.display = 'block';" value="Submit" name="submitBtn" />
+                    <input id="loginPageSignUpBtn" class="button" onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Submit" name="submitBtn" />
                 </form></center>
                 
             </div>
             
-            <center><h2 style="margin-top: 30px; margin-bottom: 20px; color: #000099">Already with Queue (Login to manage your appointments)</h2></center>
+            <p style="font-size: 20px; margin-top: 30px; margin-bottom: 20px; text-align: center;"><b>Login to view and manage your spots</b></p>
             
             <center><div id ="logindetails">
                     
                     <form name="login" action="LoginControllerMain" method="POST">
                         
-                        <table border="0"> 
+                        <table border="0">
                             <tbody>
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your user name</legend>
-                                            <span class="fa fa-user"></span>
-                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="34"/>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                            <input id="LoginPageUserNameFld" placeholder="enter username here" type="text" name="username" value="" size="30"/>
                                         </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your password</legend>
-                                            <span class="fa fa-key"></span>
-                                            <input id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="34"/>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="enter password here" type="password" name="password" value="" size="20"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
-                        <input class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
+                        <input id="loginPageBtn" class="button" onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Login" name="submitbtn" />
                     </form>
                     
                 </div></center>
-                    
+            
                 </div>
                             
         <div id="footer">

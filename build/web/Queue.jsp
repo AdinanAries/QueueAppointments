@@ -167,6 +167,8 @@
     
     <body onload="document.getElementById('HomePageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         
+        <div id='JumbotromBg' style="width: 100vw; height: 800px; position: fixed; top: 0px; z-index: -1; background-color: white;"></div>
+        
         <div id="HomePageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
@@ -331,37 +333,18 @@
         
         <div id="PermanentDiv" style="">
             
-            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
-                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                    tech.arieslab@outlook.com | 
-                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                    (1) 732-799-9546
+            <div style="margin-top: 3px; margin-right: 10px; width: fit-content; display: flex;">
+                
+                <p style="color: white; text-align: justify;">
+                    <i style='' class='fa fa-phone'></i>
+                    +1 732-799-9546
+                    <br />
+                    <i class='fa fa-envelope'></i>
+                    support@theomotech.com   
                 </p>
             </div>
             
-            <div style="float: right; width: 50px;">
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
-                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
-                    </div></center>
-            </div>
-            
-            <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href='NewsUpadtesPage.jsp'>
-                <div style='border-radius: 4px; width: 40px; height: 40px; margin-top: 0.2px; float: right; margin-right: 5px; background-color: #d9e8e8;'>
-                    <p style="text-align: center; padding: 5px;"><i style='color: #334d81;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
-                    </p><p style="text-align: center; margin-top: -10px;"><span style="color: #334d81; font-size: 11px;">News</span></p>
-                </div></a>
-        
-            <ul style="margin-right: 5px;">
-                <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="LogInPage.jsp">
-                    <li style='cursor: pointer; background-color: #334d81;' class="active"><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
-                    Your Dashboard</li></a>
-                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                    Calender</li>
-                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
-                    Account</li>
-            </ul>
-            
-            <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; margin-top: 1.2px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
+            <div id="ExtraDivSearch" style='padding: 3px; margin-right: 20px; margin-left: 20px; margin-top: 1.2px; border-radius: 4px;'>
                 <form action="QueueSelectBusinessSearchResult.jsp" method="POST">
                     <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; border-radius: 4px; font-weight: bolder;"
                             placeholder="Search service provider" name="SearchFld" type="text"  value="" />
@@ -369,8 +352,35 @@
                            onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" value="Search" />
                 </form>
             </div>
-                <p style='clear: both;'></p>
-        
+            
+            <div style="display: flex;">
+                <ul style="margin-right: 5px;">
+                    <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="LogInPage.jsp">
+                        <li style='cursor: pointer; background-color: #334d81;' class="active"><!--img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/-->
+                        <i class="fa fa-home"></i>
+                        Your Dashboard</li></a>
+                    <li style='cursor: pointer;'><!--img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/-->
+                        <i class="fa fa-calendar"></i>
+                        Calender</li>
+                    <li style='cursor: pointer;'><!--img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/-->
+                        <i class="fa fa-cog"></i>
+                        Account</li>
+                </ul>
+            
+                <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href='NewsUpadtesPage.jsp'>
+                    <div style='border-radius: 4px; width: 40px;'>
+                        <p style="text-align: center; padding: 5px;"><i style='color: #8FC9F0;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
+                        </p><p style="text-align: center; margin-top: -10px;"><span style="color: #8FC9F0; font-size: 11px;">News</span></p>
+                    </div>
+                </a>
+                
+                <!--div style="">
+                        <center><div style="text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
+                           <i style="font-size: 34px; color: darkgrey;" class="fa fa-user-circle" aria-hidden="true"></i> 
+                        </div--></center>
+                </div>
+            </div>
+            
         </div>
 
         <div id="container">
@@ -393,16 +403,6 @@
             <div style="text-align: center;"><p> </p>
             <image id="DashboardLogo" src="QueueLogo.png" style="margin-top: 5px;"/>
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p>
-            </div>
-            <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
-                 box-shadow: 0 0 5px 1px black;'>
-                <div style="text-align: center;"><a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="NewsUpadtesPage.jsp"><p  
-                    style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
-                        <!--img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/-->
-                        <i style='color: white; font-size: 25px;' class="fa fa-newspaper-o"></i>
-                </p>
-                <p style='font-size: 15px; color: white; margin-top: -2px;'>News</p>
-                </a></div>
             </div>
         </div>
             
@@ -863,50 +863,53 @@
             
             
             
-            <center><p id='addBizTxt' style="font-size: 20px;  margin-bottom: 10px; color: #000099"><b>Add your business or create customer account below</b>
-                </p></center>
+            <p id='addBizTxt' style="text-align: center; font-size: 20px;  margin-bottom: 10px; margin-top: -10px;">
+                <b>Add your business or create customer account</b>
+            </p>
             
             <div id="businessdetails" >
-                
+                <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+                 box-shadow: 0 0 5px 1px black;'>
+                    <div style="text-align: center;"><a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="NewsUpadtesPage.jsp"><p  
+                        style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
+                            <!--img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/-->
+                            <i style='color: white; font-size: 25px;' class="fa fa-newspaper-o"></i>
+                    </p>
+                    <p style='font-size: 15px; color: white; margin-top: -2px;'>News</p>
+                    </a></div>
+                </div>
             <center><form name="AddBusiness" action="SignUpPage.jsp" method="POST">
                     <table border="0">
                         <tbody>
                             <tr>
-                                <td><p style="color: white; text-align: center; padding-bottom: 10px;">Provide your information below<p></td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your first name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="signUpFirtNameFld" placeholder="firstname" type="text" name="firstName" value="" size="30"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">First Name</span></p>
+                                        <input id="signUpFirtNameFld" placeholder="Enter first name here" type="text" name="firstName" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your last name</legend>
-                                        <span class="fa fa-user"></span>
-                                        <input id="sigUpLastNameFld" placeholder="lastname" type="text" name="lastName" value="" size="30"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Last Name</span></p>
+                                        <input id="sigUpLastNameFld" placeholder="Enter last name here" type="text" name="lastName" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your mobile</legend>
-                                        <i class="fa fa-mobile" style="font-size: 24px"></i>
-                                        <input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="mobile" type="text" name="telNumber" value="" size="30"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i style="font-size: 20px;" class="fa fa-mobile"></i> <span style="margin-left: 10px;">Mobile</span></p>
+                                        <input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="Enter mobile here" type="text" name="telNumber" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <legend>Enter your email</legend>
-                                        <span class="fa fa-envelope"></span>
-                                        <input id="signUpEmailFld" placeholder="email" type="text" name="email" value="" size="30"/>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
+                                        <input id="signUpEmailFld" placeholder="Enter email here" type="text" name="email" value="" size="30"/>
                                     </fieldset>
                                 </td>
                             </tr>
@@ -951,7 +954,7 @@
                 
             </div>
             
-            <center><p style="font-size: 20px; margin-top: 30px; margin-bottom: 20px; color: #000099"><b>Login to view and manage your spots</b></p></center>
+            <p style="font-size: 20px; margin-top: 30px; margin-bottom: 20px; text-align: center;"><b>Login to view and manage your spots</b></p>
             
             <center><div id ="logindetails">
                     
@@ -962,19 +965,17 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your user name</legend>
-                                            <span class="fa fa-user"></span>
-                                            <input id="LoginPageUserNameFld" placeholder="username" type="text" name="username" value="" size="30"/>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                            <input id="LoginPageUserNameFld" placeholder="enter username here" type="text" name="username" value="" size="30"/>
                                         </fieldset>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <legend>Enter your password</legend>
-                                            <span class="fa fa-key"></span>
-                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="password" type="password" name="password" value="" size="20"/>
-                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                            <input class="passwordFld" id="LoginPagePasswordFld" placeholder="enter password here" type="password" name="password" value="" size="20"/>
+                                            <p style="text-align: right; margin-top: -20px; padding-right: 10px; margin-bottom: 5px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
                                     </td>
                                 </tr>
@@ -988,9 +989,127 @@
                 </div></center>
             
                 </div>
+            
+            <div id="CosmeticsSection">
+                <div>
+                    <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto;'>
+                        Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
+                        It also provides features for the businesses to post news updates with pictures to keep you informed about their services
+                        and products.
+                    </p>
+                    <div class='CosmeSectFlex'>
+                        <div class='eachCSecFlex'>
+                            <h1>Book your doctors appointment online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctors appointment has never been easier.</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find barber shops near you</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our ratings algorithms make it easier for you to find the best barber shops in town</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find your beauty time online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px;'>We have the best services in your area</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto;'>
+                        Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
+                        our platform. Queue Appointments will eventually disassociate with badly rated businesses.
+                    </p>
+                    
+                    <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                        <div class='eachCSecFlex'>
+                            <h1>Your reviews make a difference</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Fast growing community</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Our businesses keep you posted</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 
-        <div id="footer">
-            <p>AriesLab &copy;2019</p>
+            <div style='background-color: #212c2c; display: block;' id="footer">
+            <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                <div id='footerContactsDiv' class='eachCSecFlex'>
+                    <h1 style='color: #06adad; text-align: justify'>Contact</h1>
+                    <p style='padding: 5px; font-weight: bolder; margin-top: 10px; text-align: justify;'><i style='margin-right: 15px; font-size: 20px;' class="fa fa-map-marker" aria-hidden="true"></i> 260 Manning Blvd</p> 
+                    <p style='text-align: justify; padding-left: 35px;'>Albany, NY</p>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 732-799-9546</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 518-898-3991</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px;' class='fa fa-envelope'></i> support@theomotech.com</p>
+                        
+                    </div>
+                </div>
+                <style>
+                    @media only screen and (max-width: 1000px){
+                        #footerContactsDiv p{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv h1{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv{
+                            padding-bottom: 30px !important;
+                        }
+                    }
+                </style>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad;'>About the company</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech inc. Theomotech as a Tech company is
+                            dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
+                            <span style='color: #ccc;'>increase in revenue... <br/>read more...</span>
+                        </p>
+                        <p><i style='padding: 5px; background-color: #374949; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
+                            <i style='padding: 5px; background-color: #374949; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
+                            <i style='padding: 5px; background-color: #374949; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad'></h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
+                                <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
+                    </div>
+                </div>
+            </div>
         </div>
                 
     </div>

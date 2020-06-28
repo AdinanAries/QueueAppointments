@@ -1092,8 +1092,14 @@
                 
             </script-->
                
-            <div style="float: left; width: 350px; margin-left: 10px; padding-top: 1px;">
-                <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; background-color: white; padding: 4px; border-radius: 4px" />
+            <div style="float: left; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white; text-align: justify;">
+                    <i style='' class='fa fa-phone'></i>
+                    +1 732-799-9546
+                    <br />
+                    <i class='fa fa-envelope'></i>
+                    support@theomotech.com   
+                </p>
             </div>
             
             <div style="float: right; width: 50px;">

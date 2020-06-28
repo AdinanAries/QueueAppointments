@@ -591,11 +591,13 @@
                         <p><img style='background-color: white; padding: 4px; border-radius: 4px;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
                             <sup>Home</sup></p></a>
             
-            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
-                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                    tech.arieslab@outlook.com | 
-                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                    (1) 732-799-9546
+            <div style="float: left; margin-top: 5px; margin-left: 10px;">
+                <p style="color: white; text-align: justify;">
+                    <i style='' class='fa fa-phone'></i>
+                    +1 732-799-9546
+                    <br />
+                    <i class='fa fa-envelope'></i>
+                    support@theomotech.com   
                 </p>
             </div>
             

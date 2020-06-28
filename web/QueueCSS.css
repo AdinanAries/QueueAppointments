@@ -33,6 +33,13 @@ body {
   background-position: right !important;
   background-repeat: no-repeat !important;
 }
+#JumbotromBg{
+  background: linear-gradient(rgba(255, 186, 186, 0.712), #00a2ffaf),
+  url("stetoscopeBg.jpg") !important;
+  background-size: cover !important;
+  background-position: right !important;
+  background-repeat: no-repeat !important;
+}
 #ProviderYourBusinessTxt{
     display: none;
 }
@@ -441,8 +448,8 @@ select {
   display: none;
 }
 #header img {
-  width: 180px;
-  height: 60px;
+  width: 110px;
+  height: 40px;
 }
 #ProviderHeader img {
   width: 180px;
@@ -672,7 +679,31 @@ select {
   border-radius: 5px;
   width: 95%;
 }
+#CosmeticsSection{
+    clear: both;
+    width: 100vw;
+    min-height: 100vh;
+    background: rgb(255,255,255);
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
 
+#CosmeticsSection h1{
+    font-family: sans-serif;
+    text-align: center;
+    color: darkblue;
+    margin: 10px;
+}
+.CosmeSectFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+.eachCSecFlex{
+    width: 33%;
+    text-align: center;
+}
 #DashboardLocationSearchForm input {
   background-color: #9bb1d0;
   border: 1px solid #626b9e;
@@ -1096,7 +1127,7 @@ select {
     display: none;
   }
   #addBizTxt {
-    padding-top: 20px;
+    /*padding-top: 20px;*/
   }
   .scrolldiv {
     max-width: 600px;
@@ -1141,31 +1172,31 @@ select {
   }
   #PermanentDiv {
     display: block;
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
     /*box-shadow: #2c3539 3px 3px 4px;*/
     position: fixed;
     width: 100%;
-    height: 41px;
-    background-color: #334d81;
-    padding-top: 1px;
+    padding: 10px 0;
+    background-color: #212c2c;
     z-index: 110;
   }
   #PermanentDiv ul {
-    float: right;
-    margin: auto;
     margin-top: 5px;
     margin-right: 20px;
   }
   #PermanentDiv ul li {
     display: inline-block;
-    /*border: 2px solid white;*/
     padding: 5px;
     /*color: white;*/
     color: darkgray;
+    background: none !important;
     /*background-color: #334d81;*/
     margin-left: 5px;
     min-width: 100px;
-    /*border-radius: 4px;*/
     text-align: center;
+    font-size: 15px;
   }
   #PermanentDiv ul .active {
     color: white;
@@ -1173,8 +1204,29 @@ select {
   #PermanentDiv ul .active:hover {
     color: moccasin;
   }
+  #ExtraDivSearch {
+      margin-top: 0 !important;
+      background-color: darkgrey !important;
+      padding: 0px !important;
+      width: 640px !important;
+  }
+  #ExtraDivSearch input[type='text']{
+      width: 500px !important;
+      background-color: white !important;
+      border: none !important;
+      border-radius: 0 !important;
+      border-bottom-left-radius: 5px !important;
+      border-top-left-radius: 5px !important;
+  }
+  #ExtraDivSearch input{
+      padding: 5px !important;
+  }
+  #ExtraDivSearch input[type='submit']{
+      background-color: darkgrey !important;
+      width: 120px !important;
+  }
   #container {
-    padding-top: 40px;
+    padding-top: 60px;
   }
   #content {
     width: 66%;
@@ -1412,6 +1464,21 @@ input[type="file"] {
   border-radius: 4px;
 }
 @media only screen and (max-width: 1000px) {
+    #QShowNews22{
+        display: block;
+    }
+    .marginUp20{
+        margin-top: 20px;
+    }
+    .CosmeSectFlex{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .eachCSecFlex{
+        width: 100%;
+        text-align: center;
+    }
     #header{
         background-color: white !important;
         clip-path: polygon(100% 0, 100% 66%, 91% 73%, 79% 79%, 64% 83%, 50% 86%, 33% 90%, 18% 94%, 0 100%, 0 0);
@@ -1523,6 +1590,7 @@ input[type="file"] {
     /*background-color: #6699ff;*/
     background: none !important;
     padding: 0;
+    padding-bottom: 30px !important;
   }
   #providericons tr td img {
     width: 45px;
