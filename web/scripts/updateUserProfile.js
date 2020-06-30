@@ -19,6 +19,11 @@ function showUserProfileForm(){
 		$("#UpdateUserAccountForm").slideUp("fast");
 		
 	}
+        
+        if(document.getElementById("SettingsDiv")){
+        $("#SettingsDiv").slideUp("slow");
+        //document.getElementById("SettingsDiv").style.display = "none";
+    }
 	
 }
 
@@ -38,5 +43,10 @@ function showUserFeedBackForm(){
 		$("#SendFeedBackForm").slideUp("fast");
 		
 	}
+        
+        if(document.getElementById("SettingsDiv")){
+        $("#SettingsDiv").slideUp("slow");
+        //document.getElementById("SettingsDiv").style.display = "none";
+    }
 	
 }

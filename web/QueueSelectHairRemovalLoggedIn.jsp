@@ -314,57 +314,81 @@
         
         <div id="PermanentDiv" style="">
             
-            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn' style='margin-top: 2px; margin-left: 2px;float: left; width: 80px; font-weight: bolder; padding: 4px; cursor: pointer; background-color: cadetblue; color: white; border-radius: 4px;'>
-                        <p><img style='background-color: white; padding: 4px; border-radius: 4px;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
-                            <sup>Home</sup></p></a>
-            
-            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
-                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                    tech.arieslab@outlook.com | 
-                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                    (1) 732-799-9546
+            <div style="margin-top: 3px; margin-right: 10px; width: fit-content; display: flex;">
+                
+                <p style="color: white; text-align: justify;">
+                    <i style='' class='fa fa-phone'></i>
+                    +1 732-799-9546
+                    <br />
+                    <i class='fa fa-envelope'></i>
+                    support@theomotech.com   
                 </p>
             </div>
             
-            <div style="float: right; width: 50px;">
+            <div id="ExtraDivSearch" style='padding: 3px; margin-right: 20px; margin-left: 20px; margin-top: 1.2px; border-radius: 4px;'>
+                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; border-radius: 4px; font-weight: bolder;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
+                    <input style="font-weight: bolder; margin: 0; background-color: cadetblue; color: white; border-radius: 4px; padding: 5px 7px; font-size: 15px;" 
+                            type="submit" value="Search" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';" />
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type='hidden' name='User' value='<%=NewUserName%>' />
+                </form>
+            </div>
+            
+            <div style="display: flex;">
+                
+                <ul>
+                    <a onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"  href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                        <li class="active" onclick="" style='cursor: pointer; background-color: #334d81;'>
+                            <i class="fa fa-home"></i>
+                            Home</li></a>
+                    <li style='cursor: pointer;'>
+                        <i class="fa fa-calendar"></i>
+                        Calender</li>
+                    <li style='cursor: pointer;'>
+                        <i class="fa fa-cog"></i>
+                        Account</li>
+                </ul>
+      
+                <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>
+                    <div style='border-radius: 4px; width: 40px;'>
+                        <p style="text-align: center; padding: 5px;"><i style='color: #8FC9F0;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
+                        </p><p style="text-align: center; margin-top: -10px;"><span style="color: #8FC9F0; font-size: 11px;">News</span></p>
+                    </div>
+                </a>
+                
+                <a href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" id='ExtraDrpDwnBtn'>
+                    <div style='border-radius: 4px; width: 40px;'>
+                        <p style="text-align: center; padding: 5px;"><i style='color: #8FC9F0;  padding-bottom: 0; font-size: 22px;' class="fa fa-home"></i>
+                        </p><p style="text-align: center; margin-top: -10px;"><span style="color: #8FC9F0; font-size: 11px;">Home</span></p>
+                    </div>
+                </a>
+                
+                    <!--p style="margin-left: 20px; margin-top: 2px; margin-left: 2px;float: left; font-weight: bolder; padding: 4px; cursor: pointer; color: white; border-radius: 4px;">
+                        <img style='background-color: white; padding: 4px; border-radius: 4px;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
+                        <sup>Home</sup>
+                    </p-->
+                        
+                <div style="margin-left: 10px;">
                 <%
                     if(Base64Pic != ""){
                 %>
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
+                    <center><div style="width: 100%; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
                         <img class="fittedImg" id="" style="border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
                     </div></center>
                 <%
                     }else{
                 %>
-                
-                        <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
-                                <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
-                            </div></center>
+                    <div style="text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
+                        <i style="font-size: 34px; color: darkgrey;" class="fa fa-user-circle" aria-hidden="true"></i>
+                    </div>
                 
                 <%}%>
+                </div>
+                
+                </div>
             </div>
-            
-            <ul>
-                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="PageController?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                    <li class="active" onclick="" style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/>
-                    Home</li></a>
-                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                    Calender</li>
-                <li style='cursor: pointer;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
-                    Account</li>
-            </ul>
-            <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; margin-top: 1.2px; border-radius: 4px; max-width: 590px; float: right; margin-right: 5px;'>
-                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; border-radius: 4px; font-weight: bolder;"
-                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
-                    <input style="font-weight: bolder; margin: 0; background-color: cadetblue; color: white; border-radius: 4px; padding: 5px 7px; font-size: 15px;" 
-                           onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Search" />
-                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <input type='hidden' name='User' value='<%=NewUserName%>' />
-                </form>
-            </div>
-                <p style='clear: both;'></p>
-        </div>
         
         <div id="container">
             

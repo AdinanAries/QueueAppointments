@@ -48,7 +48,7 @@ public class createSubscription extends HttpServlet {
             throws ServletException, IOException {
         // Set your secret key. Remember to switch to your live secret key in production!
         // See your keys here: https://dashboard.stripe.com/account/apikeys
-        Stripe.apiKey = "sk_test_EC7e1f7iodwPa8U1GTIECHsR00zWDKWZdD";
+        Stripe.apiKey = "sk_live_dlnn4nlqjZg8vTmD4umnzOS900GsfWmpMF";
         Gson gson = new Gson();
         response.setContentType("application/json");
         String JsonData = "";

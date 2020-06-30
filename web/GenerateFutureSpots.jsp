@@ -43,17 +43,17 @@
 
     </head>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #7e7e7e !important; position: absolute; width: 100%;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: white !important; position: absolute; width: 100%;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <h3 style="text-align: center; margin: 5px; color: white;">Available Future Spots</h3>
+        <h3 style="text-align: center; font-size: 16px; margin: 20px; color: #3d6999;">Available Future Spots</h3>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                
-                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px;">
+                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px; border-top: 1px solid darkgrey; border-bottom: 1px solid darkgrey;">
                                         
                 <%
                     
@@ -669,7 +669,7 @@
                                     
                                         <!--p>Next Appointment: <%=NextAvailableTime%></p-->
                                     
-                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px;'>Available Queue</p></center>
+                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px; padding-bottom: 5px;'>Available Queue</p></center>
                                     <center><p>Select any <span style="color: blue;">blue </span> spot take the position</p></center>
                                     
                                     <center><div class="scrolldiv" style="width: 95%; max-width: 600px; overflow-x: auto;">
@@ -1093,7 +1093,7 @@
                             
                 <center><div style="width: 100%; max-width: 600px;">
                             <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray; border-bottom: 1px solid darkgray;">
-                                <p id="showFutureSpotsBtn" style="font-weight: bolder; color: darkblue; text-align: center; cursor: pointer;">Find More Spots</p>
+                                <p id="showFutureSpotsBtn" style="font-weight: bolder; color: darkblue; text-align: center; cursor: pointer; padding: 5px;">Find More Spots</p>
                                     
                                     <center><div>
                                     <form style="" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpots.jsp">
@@ -1154,6 +1154,14 @@
                                     Go to your dashboard</p></a>
     
                     </div></center>
+                                
+                                <div id="TheomotechPromo" style="padding-top: 40px;">
+                                    <div style="margin: 20px;">
+                                        <p style="text-align: center;"><img src='TMTlogo.svg'  style='width: 100px; height: 50px'/></p>
+                                        <p style="text-align: center; font-weight: bolder; color: #37a0f5; padding: 5px;">Theomotech Inc. &copy;2020</p>
+                                        <p style='color: darkgray; font-size: 13px; text-align: center;'>All rights reserved</p>
+                                    </div>
+                                </div>
     </body>
     <style>
         @media only screen and(max-width: 1000px){

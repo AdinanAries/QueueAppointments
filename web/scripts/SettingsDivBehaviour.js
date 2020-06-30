@@ -3,6 +3,19 @@ function showSettingsDiv() {
 
   if (SettingsDiv.style.display === "none") $("#SettingsDiv").slideDown("fast");
   else $("#SettingsDiv").slideUp("fast");
+  
+  if(document.getElementById("UpdateUserAccountForm")){
+        $("#UpdateUserAccountForm").slideUp("slow");
+        //document.getElementById("UpdateUserAccountForm").style.display = "none";
+    }
+    if(document.getElementById("SetUserAddress")){
+        $("#SetUserAddress").slideUp("slow");
+        //document.getElementById("SetUserAddress").style.display = "none";
+    }
+    if(document.getElementById("SendFeedBackForm")){
+        $("#SendFeedBackForm").slideUp("slow");
+        //document.getElementById("SendFeedBackForm").style.display = "none";
+    }
 }
 
 function showLoginForm() {

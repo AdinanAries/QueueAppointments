@@ -374,6 +374,13 @@
                     </div>
                 </a>
                 
+                <a href="#" id='ExtraDrpDwnBtn'>
+                    <div style='border-radius: 4px; width: 40px;'>
+                        <p style="text-align: center; padding: 5px;"><i style='color: #8FC9F0;  padding-bottom: 0; font-size: 22px;' class="fa fa-home"></i>
+                        </p><p style="text-align: center; margin-top: -10px;"><span style="color: #8FC9F0; font-size: 11px;">Home</span></p>
+                    </div>
+                </a>
+                
                 <!--div style="">
                         <center><div style="text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
                            <i style="font-size: 34px; color: darkgrey;" class="fa fa-user-circle" aria-hidden="true"></i> 
@@ -381,7 +388,7 @@
                 </div>
             </div>
             
-        </div>
+        <!--/div-->
 
         <div id="container">
             
@@ -1000,11 +1007,11 @@
                     </p>
                     <div class='CosmeSectFlex'>
                         <div class='eachCSecFlex'>
-                            <h1>Book your doctors appointment online</h1>
+                            <h1>Book your doctor's appointment online</h1>
                             <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
                                  background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctors appointment has never been easier.</p>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
                             </div>
                         </div>
                         <div class='eachCSecFlex marginUp20'>
@@ -1012,7 +1019,7 @@
                             <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
                                  background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our ratings algorithms make it easier for you to find the best barber shops in town</p>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
                             </div>
                         </div>
                         <div class='eachCSecFlex marginUp20'>
@@ -1091,13 +1098,14 @@
                     <h1 style='color: #06adad;'>About the company</h1>
                     <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
-                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech inc. Theomotech as a Tech company is
+                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech Inc. Theomotech as a Tech company is
                             dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
-                            <span style='color: #ccc;'>increase in revenue... <br/>read more...</span>
+                            <span style='color: #ccc;'>increase in revenue... 
+                                <br/><br/><a href="https://theomotech.herokuapp.com" style="color: #ccc;" target="_blank">read more 
+                                    <i style="color: white; margin-left: 5px;" class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            </span>
                         </p>
-                        <p><i style='padding: 5px; background-color: #374949; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
-                            <i style='padding: 5px; background-color: #374949; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
-                            <i style='padding: 5px; background-color: #374949; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i></p>
+                        
                     </div>
                 </div>
                 <div class='eachCSecFlex'>
@@ -1107,6 +1115,15 @@
                                 <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
                                 <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
                                 <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
+                                <p style="margin-top: 10px;">
+                                    <a href="https://www.facebook.com/TheoMotech-107976207592401/about/?ref=page_internal" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/theomotech-inc" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
+                                    </a>
+                                    <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i>
+                                </p>
                     </div>
                 </div>
             </div>

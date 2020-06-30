@@ -43,7 +43,7 @@
         
     </head>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #7e7e7e !important; position: absolute; width: 100%;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: white !important; position: absolute; width: 100%;">
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
                 <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
@@ -58,10 +58,10 @@
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <h3 style="text-align: center; margin: 5px; color: white;">Available Future Spots</h3>
+        <h3 style="text-align: center; margin: 20px; font-size: 16px; color: #3d6999;">Available Future Spots</h3>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                
-                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px;">
+                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px; border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey;">
                         
                 <%
                     
@@ -592,7 +592,7 @@
                                     
                                         <!--p>Next Appointment: <=NextAvailableTime%></p-->
                                     
-                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px;'>Available Queue</p></center>
+                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px; padding-bottom: 5px;'>Available Queue</p></center>
                                     
                                     <center><p>Select any <span style="color: blue;">blue </span> spot take the position</p></center>
                                     
@@ -1006,7 +1006,7 @@
                 
                 <center><div style="width: 100%; max-width: 600px;">
                             <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray; border-bottom: 1px solid darkgray;">
-                                <p id="showFutureSpotsBtn" style="text-align: center; cursor: pointer;">Find More Spots</p>
+                                <p id="showFutureSpotsBtn" style="text-align: center; color: darkblue; font-weight: bolder; cursor: pointer; margin: 5px;">Find More Spots</p>
                                     
                                     <center><div>
                                     <form style="" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpotsUnloggedIn.jsp">
@@ -1056,6 +1056,14 @@
                                         
                             <a href="Queue.jsp"><p style="padding: 10px; background-color: darkslateblue; color: white; text-align:center; "><i style='color: #4ed164; font-size: 22px;' class="fa fa-home" aria-hidden="true"></i> Go to your dashboard</p></a>
                     </div></center>
+                                        
+                    <div id="TheomotechPromo" style="padding-top: 40px;">
+                        <div style="margin: 20px;">
+                            <p style="text-align: center;"><img src='TMTlogo.svg'  style='width: 100px; height: 50px'/></p>
+                            <p style="text-align: center; font-weight: bolder; color: #37a0f5; padding: 5px;">Theomotech Inc. &copy;2020</p>
+                            <p style='color: darkgray; font-size: 13px; text-align: center;'>All rights reserved</p>
+                        </div>
+                    </div>
     </body>
     
     <script src="scripts/script.js"></script>

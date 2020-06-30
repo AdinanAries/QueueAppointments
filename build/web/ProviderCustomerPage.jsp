@@ -875,6 +875,8 @@
     
     <body onload="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';" id="CustomerPageHtmlBody">
         
+        <div id='JumbotromBg' class="notShownOnMobile" style="width: 100vw; height: 800px; position: fixed; top: 0px; z-index: -1; background-color: white;"></div>
+        
         <script>
             
             var GoogleReturnedZipCode;
@@ -1081,18 +1083,8 @@
         
         <div id="PermanentDiv" style="">
             
-            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
-            <script>
-                function showExtraDropDown(){
-                    if(document.getElementById("ExtraDropDown").style.display === "none")
-                        document.getElementById("ExtraDropDown").style.display = "block";
-                    else
-                        document.getElementById("ExtraDropDown").style.display = "none";
-                }
+            <div style="margin-top: 3px; margin-right: 10px; width: fit-content; display: flex;">
                 
-            </script-->
-               
-            <div style="float: left; margin-top: 5px; margin-left: 10px;">
                 <p style="color: white; text-align: justify;">
                     <i style='' class='fa fa-phone'></i>
                     +1 732-799-9546
@@ -1102,46 +1094,34 @@
                 </p>
             </div>
             
-            <div style="float: right; width: 50px;">
-                <%
-                    if(Base64Pic != ""){
-                %>
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
-                        <img class="fittedImg" id="" style="border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
-                    </div></center>
-                <%
-                    }else{
-                %>
-                    <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0; padding-left: 10px;">
-                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
-                    </div></center>
-                
-                <%}%>
+            <div id="ExtraDivSearch" style='padding: 3px; margin-right: 20px; margin-left: 20px; margin-top: 1.2px; border-radius: 4px;'>
+                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
+                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; font-weight: bolder; border-radius: 4px;"
+                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
+                    <input style="font-weight: bolder; margin: 0; border-radius: 4px; background-color: cadetblue; color: white; padding: 5px 7px; font-size: 15px;" 
+                            type="submit" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
+                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                    <input type='hidden' name='User' value='<%=NewUserName%>' />
+                </form>
             </div>
             
-            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>
-                <div style='border-radius: 4px; width: 40px; height: 40px; margin-top: 0.2px; float: right; margin-right: 5px; background-color: #d9e8e8;'>
-                    <p style="text-align: center; padding: 5px;"><i style='color: #334d81;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
-                    </p><p style="text-align: center; margin-top: -10px;"><span style="color: #334d81; font-size: 11px;">News</span></p>
-                </div>
-            </a>
             
-            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'>
-                    <div id="middleScreenSettingsBtn" style='margin-right: 5px; cursor: pointer; text-align: center; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 2px; border-radius: 4px;'>
-                        <img style='border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="22" alt="icons8-settings-50"/>
-                        <p style='font-size: 11px; margin-top: -2px; color: black;'>Settings</p>
-                    </div></a>
-                    
-            <ul style="margin-right: 5px;">
+            
+            <div style="display: flex;">
+                
+                <ul style="margin-right: 5px;">
                 <textarea style="display: none;" id="NotiIDInput" rows="4" cols="20"><%=NotiIDs%>
                 </textarea>
-                <li class="active" onclick="showCustExtraNotification();" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                    Notifications<sup id="notiCounterSup" style='color: lawngreen; padding-right: 2px;'> <%=notiCounter%></sup></li>
-                <li class="active" onclick='showCustExtraCal();' id='PermDivCalBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                    Calender</li>
-                <li class="active" onclick='showCustExtraUsrAcnt();' id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
-                    Account</li>
-            </ul>
+                    <li class="active" onclick="showCustExtraNotification();" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/-->
+                        <i class="fa fa-bell"></i>
+                        Notifications<sup id="notiCounterSup" style='color: lawngreen; padding-right: 2px;'> <%=notiCounter%></sup></li>
+                    <li class="active" onclick='showCustExtraCal();' id='PermDivCalBtn' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/-->
+                        <i class="fa fa-calendar"></i>
+                        Calender</li>
+                    <li class="active" onclick='showCustExtraUsrAcnt();' id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/-->
+                        <i class="fa fa-cog"></i>
+                        Account</li>
+                </ul>
                 
                 <script>
                     $(document).ready(function(){
@@ -1166,18 +1146,60 @@
                         });
                     });
                 </script>
+                    
+                    
+                <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'>
+                    <div id="middleScreenSettingsBtn" style='margin-right: 5px; cursor: pointer; text-align: center; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 2px; border-radius: 4px;'>
+                        <img style='border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="22" alt="icons8-settings-50"/>
+                        <p style='font-size: 11px; margin-top: -2px; color: black;'>Settings</p>
+                    </div></a>
+            
+                <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'>
+                    <div style='border-radius: 4px; width: 40px;'>
+                        <p style="text-align: center; padding: 5px;"><i style='color: #8FC9F0;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
+                        </p><p style="text-align: center; margin-top: -10px;"><span style="color: #8FC9F0; font-size: 11px;">News</span></p>
+                    </div>
+                </a>
                 
-            <div id="ExtraDivSearch" style='background-color: cadetblue; padding: 3px; padding-right: 5px; padding-left: 5px; max-width: 590px; float: right; margin-top: 1.2px; margin-right: 5px; border-radius: 4px;'>
-                <form action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                    <input style="width: 450px; margin: 0; background-color: #d9e8e8; height: 30px; font-weight: bolder; border-radius: 4px;"
-                            placeholder="Search service provider" name="SearchFld" type="text"  value="" />
-                    <input style="font-weight: bolder; margin: 0; border-radius: 4px; background-color: cadetblue; color: white; padding: 5px 7px; font-size: 15px;" 
-                            type="submit" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/>
-                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <input type='hidden' name='User' value='<%=NewUserName%>' />
-                </form>
+                <div style="margin-left: 10px;">
+                <%
+                    if(Base64Pic != ""){
+                %>
+                    <center><div style="width: 100%; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
+                        <img class="fittedImg" id="" style="border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
+                    </div></center>
+                <%
+                    }else{
+                %>
+                    <div style="text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
+                        <i style="font-size: 34px; color: darkgrey;" class="fa fa-user-circle" aria-hidden="true"></i>
+                    </div>
+                
+                <%}%>
+                </div>
+            
+                </div>
             </div>
-                <p style='clear: both;'></p>
+        
+        <div id="PermanentDiv1" style="display:none;">
+            
+            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
+            <script>
+                function showExtraDropDown(){
+                    if(document.getElementById("ExtraDropDown").style.display === "none")
+                        document.getElementById("ExtraDropDown").style.display = "block";
+                    else
+                        document.getElementById("ExtraDropDown").style.display = "none";
+                }
+                
+            </script>
+            
+                <div style='border-radius: 4px; width: 40px; height: 40px; margin-top: 0.2px; float: right; margin-right: 5px; background-color: #d9e8e8;'>
+                    <p style="text-align: center; padding: 5px;"><i style='color: #334d81;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
+                    </p><p style="text-align: center; margin-top: -10px;"><span style="color: #334d81; font-size: 11px;">News</span></p>
+                </div>
+            </a-->
+            
         </div>
                 
         <div id='ExtraDropDwnDiv'>  
@@ -3085,11 +3107,11 @@
           </div>    
         </div>
                 
-        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0; margin-top: 2px;">
+        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0; margin-top: 0;">
             
             <script>
                 if($(window).width() > 1000){
-                    document.getElementById("newbusiness").style.height = "100%";
+                    document.getElementById("newbusiness").style.minHeight = "100%";
                 }
             </script>
                 
@@ -3100,8 +3122,6 @@
             
                 <div id="Customerprofile" style="padding-top: 0;">
                     
-                <h2 style="color: darkblue; text-align: center; margin: 5px;">Your Profile</h2>
-                
                 <table id="CustomerprofileTable" style="border-spacing: 0; width: 100%; max-width: 700px;">
                     
                     <tbody>
@@ -3867,7 +3887,7 @@
                                             
                                         </script>
                                         
-                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: #8abde1;">
+                                        <center><table onclick="collapseAllSettings();" id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: #8abde1;">
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateAppTab()" id="AppointmentsTab" style="padding-top: 20px; text-align: center; color: white; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
@@ -3883,7 +3903,7 @@
                                             </tbody>
                                         </table></center>
                                         
-                                <div class="scrolldiv" style=" height: 600px; overflow-y: auto; background-color: #8abde1a0 !important;">
+                                <div class="scrolldiv" style=" height: 577px; overflow-y: auto; background-color: #8abde1a0 !important;">
                                    
                                    <script>
                                         function showselectCustSpttabs(){
@@ -5956,8 +5976,135 @@
                     
                 </div>
                    
-        <div class="DashboardFooter" id="footer">
-            <p>AriesLab &copy;2019</p>
+        <div class="DashboardFooter" style='background-color: #212c2c; position: relative; z-index: 100 !important; padding-top: 0;' id="footer">
+            <div id="CosmeticsSection">
+                <div>
+                    <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
+                        Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
+                        It also provides features for the businesses to post news updates with pictures to keep you informed about their services
+                        and products.
+                    </p>
+                    <div class='CosmeSectFlex'>
+                        <div class='eachCSecFlex'>
+                            <h1>Book your doctor's appointment online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find barber shops near you</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find your beauty time online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px;'>We have the best services in your area</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
+                        Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
+                        our platform. Queue Appointments will eventually disassociate with badly rated businesses.
+                    </p>
+                    
+                    <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                        <div class='eachCSecFlex'>
+                            <h1>Your reviews make a difference</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Fast growing community</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Our businesses keep you posted</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                <div id='footerContactsDiv' class='eachCSecFlex'>
+                    <h1 style='color: #06adad; text-align: justify'>Contact</h1>
+                    <p style='padding: 5px; font-weight: bolder; margin-top: 10px; text-align: justify;'><i style='margin-right: 15px; font-size: 20px;' class="fa fa-map-marker" aria-hidden="true"></i> 260 Manning Blvd</p> 
+                    <p style='text-align: justify; padding-left: 35px;'>Albany, NY</p>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 732-799-9546</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 518-898-3991</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px;' class='fa fa-envelope'></i> support@theomotech.com</p>
+                        
+                    </div>
+                </div>
+                <style>
+                    @media only screen and (max-width: 1000px){
+                        #footerContactsDiv p{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv h1{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv{
+                            padding-bottom: 30px !important;
+                        }
+                    }
+                </style>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad;'>About the company</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech Inc. Theomotech as a Tech company is
+                            dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
+                            <span style='color: #ccc;'>increase in revenue... 
+                                <br/><br/><a href="https://theomotech.herokuapp.com" style="color: #ccc;" target="_blank">read more 
+                                    <i style="color: white; margin-left: 5px;" class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            </span>
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad'></h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
+                                <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
+                                <p style="margin-top: 10px;">
+                                    <a href="https://www.facebook.com/TheoMotech-107976207592401/about/?ref=page_internal" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/theomotech-inc" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
+                                    </a>
+                                    <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i>
+                                </p>
+                    </div>
+                </div>
+            </div>
         </div>
                                         
     </div>

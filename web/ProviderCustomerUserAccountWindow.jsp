@@ -743,7 +743,7 @@
         
         <div id="container">
               
-        <div id="newbusiness" style="padding-top: 0; border-bottom: 0;">
+        <div id="newbusiness" style="padding-top: 0; border-bottom: 0; padding-bottom: 0 !important;">
                 
             <center><h4 id="YourAccountH4" style="margin-top: 1px; margin-bottom: 5px; color: #000099">Your Account</h4></center>
             

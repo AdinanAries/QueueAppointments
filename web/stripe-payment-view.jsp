@@ -148,7 +148,7 @@ and open the template in the editor.
                             <p style="margin-top: -20px;"><small style="font-size: 11px; color: #ababab;">pay every year</small></p>
                         </div>
                     </div>
-                    <input id="SubscriptionPriceID" type="hidden" value="price_1Gv6vGFNNtFYAcj1GBjxRXhf" />
+                    <input id="SubscriptionPriceID" type="hidden" value="price_1Gv93RFNNtFYAcj1yagdB2zu" />
                 </div>
                 <form id="subscription-form">
                     
@@ -185,20 +185,20 @@ and open the template in the editor.
                         });
                         document.getElementById(type).classList.add('active');
                         if(type === "3MonthsSubscription"){
-                            document.getElementById("SubscriptionPriceID").value = "price_1Gv73WFNNtFYAcj1ERN1vhoy";
-                            document.getElementById("subscriptionTotal").innerText = "69.99";
+                            document.getElementById("SubscriptionPriceID").value = "price_1Gv94LFNNtFYAcj14W4OfRLO";
+                            document.getElementById("subscriptionTotal").innerText = "63.99";
                             document.getElementById("subscriptionDesc").innerText = "3 months";
                         }else if(type === "6MonthsSubscription"){
-                            document.getElementById("SubscriptionPriceID").value = "price_1Gv701FNNtFYAcj1vjk8uwuC";
-                            document.getElementById("subscriptionTotal").innerText = "139.99";
+                            document.getElementById("SubscriptionPriceID").value = "price_1GwGJBFNNtFYAcj1ssenpxG3";
+                            document.getElementById("subscriptionTotal").innerText = "127.99";
                             document.getElementById("subscriptionDesc").innerText = "6 months";
                         }else if(type === "YearlySubscription"){
-                            document.getElementById("SubscriptionPriceID").value = "price_1Gv75PFNNtFYAcj1hRka53sz";
-                            document.getElementById("subscriptionTotal").innerText = "269.99";
+                            document.getElementById("SubscriptionPriceID").value = "price_1GwGKEFNNtFYAcj1DXrFTvOy";
+                            document.getElementById("subscriptionTotal").innerText = "245.99";
                             document.getElementById("subscriptionDesc").innerText = "yearly";
                         }else {
-                            document.getElementById("SubscriptionPriceID").value = "price_1Gv6vGFNNtFYAcj1GBjxRXhf";
-                            document.getElementById("subscriptionTotal").innerText = "24.99";
+                            document.getElementById("SubscriptionPriceID").value = "price_1Gv93RFNNtFYAcj1yagdB2zu";
+                            document.getElementById("subscriptionTotal").innerText = "22.99";
                             document.getElementById("subscriptionDesc").innerText = "monthly";
                         }
                     }
@@ -262,7 +262,7 @@ and open the template in the editor.
 
                     // Set your publishable key: remember to change this to your live publishable key in production
                     // See your keys here: https://dashboard.stripe.com/account/apikeys
-                    var stripe = Stripe('pk_test_0etJCeBvPiJRDEEzxSLVXgBW009YQmsWbU');
+                    var stripe = Stripe('pk_live_8lUzTgKEDL8iLlezPYrQL4so00KOSnuiut');
                     var elements = stripe.elements();
 
                     // Set up Stripe.js and Elements to use in checkout form

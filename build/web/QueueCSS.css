@@ -26,7 +26,7 @@ body {
   /*max-width: 1600px;
   background: linear-gradient(rgba(255, 255, 255, 0.747), #00a6f3c5),
     url("salonBg3.jpg") !important;*/
-  background: linear-gradient(rgba(255, 186, 186, 0.712), #00a2ffaf),
+  background: linear-gradient(rgba(255, 255, 255, 0.712), #00a2ffaf),
     url("stetoscopeBg.jpg") !important;
   margin: auto;
   background-size: cover !important;
@@ -34,7 +34,7 @@ body {
   background-repeat: no-repeat !important;
 }
 #JumbotromBg{
-  background: linear-gradient(rgba(255, 186, 186, 0.712), #00a2ffaf),
+  background: linear-gradient(rgba(255, 255, 255, 0.712), #00a2ffaf),
   url("stetoscopeBg.jpg") !important;
   background-size: cover !important;
   background-position: right !important;
@@ -1233,7 +1233,7 @@ select {
     margin-left: 0;
     float: right;
     padding-top: 0;
-    height: 100vh !important;
+    height: auto !important;
     /*min-height: 736px;*/
     min-height: 100vh;
     overflow-y: auto;
@@ -1254,6 +1254,9 @@ select {
   #main {
     /*min-height: 736px;*/
     min-height: 100vh !important;
+  }
+  .ProvidersDashboardContent{
+      min-height: 1840px !important;
   }
   .Main {
     /*height: 400px;*/
@@ -1464,6 +1467,9 @@ input[type="file"] {
   border-radius: 4px;
 }
 @media only screen and (max-width: 1000px) {
+    .notShownOnMobile{
+        display: none;
+    }
     #QShowNews22{
         display: block;
     }
@@ -1752,7 +1758,7 @@ input[type="file"] {
   #ExploreAndAccountButtons #favoritesBtn {
     float: left;
     width: 24%;
-    padding-top: 1px;
+    padding-top: 3px;
     padding-bottom: 1px;
     cursor: pointer;
   }

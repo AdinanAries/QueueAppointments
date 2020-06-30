@@ -1775,6 +1775,8 @@
     %>
     <body onload="document.getElementById('ProviderPageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
         
+        <div id='JumbotromBg' class="notShownOnMobile" style="width: 100vw; height: 800px; position: fixed; top: 0px; z-index: -1; background-color: white;"></div>
+        
         <div id='notSubscribedCover'>
             <div style='display: flex; flex-direction: column; justify-content: center; height: 100vh;'>
                 <div style="margin-bottom: 30px;">
@@ -1829,15 +1831,33 @@
                 <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; background-color: white; padding: 4px; border-radius: 4px" />
             </div>
             
-            <div style="float: left; width: 350px; margin-top: 5px; margin-left: 10px;">
-                <p style="color: white;"><img style="background-color: white; padding: 1px;" src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                    tech.arieslab@outlook.com | 
-                    <img style="background-color: white; padding: 1px;" src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                    (1) 732-799-9546
+            <div style="margin-top: 3px; margin-right: 20px; margin-left: 10px; width: fit-content; display: flex;">
+                
+                <p style="color: white; text-align: justify;">
+                    <i style='' class='fa fa-phone'></i>
+                    +1 732-799-9546
+                    <br />
+                    <i class='fa fa-envelope'></i>
+                    support@theomotech.com   
                 </p>
             </div>
             
-            <div style="float: right; width: 50px;">
+            <ul style="display: block; margin: 0 30px;">
+                <li class="active" id='' onclick='showReservation();' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-meeting-time-50.png" width="22" height="19" alt="icons8-calendar-50"/-->
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    Make Reservation</li>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li class="active" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/-->
+                        <i class="fa fa-bell" aria-hidden="true"></i>
+                        Notifications<sup style='color: lawngreen; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
+                <li class="active calender_li" id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/-->
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    Calender</li>
+                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li class="active" id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/-->
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                        Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
+            </ul>
+                    
+            <div style="margin-left: 20px;">
                 <%
                     if(base64Image != ""){
                 %>
@@ -1849,22 +1869,11 @@
                 %>
                 
                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
-                        <img style='background-color: beige; border-radius: 100%; margin-bottom: 20px; position: absolute;' src="icons/icons8-user-filled-100.png" width="30" height="30" alt="icons8-user-filled-100"/>
+                        <i style="font-size: 34px; color: darkgrey;" class="fa fa-user-circle" aria-hidden="true"></i>
                     </div></center>
                 
                 <%}%>
             </div>
-            
-            <ul style="display: block;">
-                <li class="active" id='' onclick='showReservation();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-meeting-time-50.png" width="22" height="19" alt="icons8-calendar-50"/>
-                    Make Reservation</li>
-                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><li class="active" id='PermDivNotiBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-notification-50.png" width="20" height="17" alt="icons8-notification-50"/>
-                    Notifications<sup style='color: lawngreen; padding-left: 2px; padding-right: 2px;'><%=notiCounter%></sup></li></a> <!--onclick='showCustExtraNotification();'-->
-                <li class="active calender_li" id='PermDivCalBtn' onclick='showCustExtraCal();' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/>
-                    Calender</li>
-                <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li class="active" id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/>
-                    Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
-            </ul>
             
         </div>
         
@@ -2661,12 +2670,13 @@
   
   <!-------------------------------------------------------------------------------------------------------------------------------------------------->
             
-            <div id="content"  onclick="hideDropDown();">
+            <div class="ProvidersDashboardContent" id="content"  style="" onclick="hideDropDown();">
+                
             <div id="nav" style='padding: 0;'>
                 
             </div>
-            <div id="main" style="">
-               
+            <div class="ProviderMainDiv" id="main" >
+                
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                 
                           
@@ -5089,7 +5099,7 @@
         <div id="newbusiness" style="margin-top: 1px; background-color: #ccccff !important;">
             <script>
                 if($(window).width() > 1000){
-                    document.getElementById("newbusiness").style.height = "100%";
+                    document.getElementById("newbusiness").style.minHeight = "100%";
                 }
             </script>
             <!------------------------------------------------------------------------------------------------------------------------------------------->
@@ -5552,10 +5562,10 @@
                                             </tbody>
                                         </table>
                                         
-                                <div class="scrolldiv" style=" height: 400px; overflow-y: auto;">
+                                <div style=" height: auto; overflow-y: auto;">
                                         
                                 <div id="ServiceListDiv">
-                                <div id="serviceslist">
+                                <div class="scrolldiv" id="serviceslist" style="height: 490px;">
                                     
                                      <!--center><p style="color: tomato; margin: 5px;">Services</p></center-->
                                      
@@ -6137,7 +6147,7 @@
                                         </tbody>
                                     </table>
                                     
-                                <div class="scrolldiv" style="height: 330px; overflow-y: auto;">
+                                <div class="scrolldiv" style="height: 450px; overflow-y: auto;">
                                     
                                     <div id="ShowHoursOpenDiv">
                                     
@@ -7441,9 +7451,9 @@
                                         </tbody>
                                     </table>
                                     
-                                <div class="scrolldiv" style="height: 330px; overflow-y: auto;">
+                                <div>
                                     
-                                <div id="ProviderClientsDiv">
+                                <div class="scrolldiv" style="height: 450px; overflow-y: auto;" id="ProviderClientsDiv">
                                     
                                 <%
                                     for(int c = 0; c < ClientsList.size(); c++){
@@ -7682,7 +7692,7 @@
                                 
                                 <%}%>
                             </div>
-                            <div>
+                            </div>
                                 </div>
                                 </div>
                                 </div>
@@ -7710,8 +7720,69 @@
                         
                                     
        
-        <div id="footer">
+        <!--div id="footer">
             <p>AriesLab &copy;2019</p>
+        </div-->
+        <div style='background-color: #212c2c; display: block; position: relative; z-index: 100;' id="footer">
+            <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                <div id='footerContactsDiv' class='eachCSecFlex'>
+                    <h1 style='color: #06adad; text-align: justify'>Contact</h1>
+                    <p style='padding: 5px; font-weight: bolder; margin-top: 10px; text-align: justify;'><i style='margin-right: 15px; font-size: 20px;' class="fa fa-map-marker" aria-hidden="true"></i> 260 Manning Blvd</p> 
+                    <p style='text-align: justify; padding-left: 35px;'>Albany, NY</p>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 732-799-9546</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 518-898-3991</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px;' class='fa fa-envelope'></i> support@theomotech.com</p>
+                        
+                    </div>
+                </div>
+                <style>
+                    @media only screen and (max-width: 1000px){
+                        #footerContactsDiv p{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv h1{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv{
+                            padding-bottom: 30px !important;
+                        }
+                    }
+                </style>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad;'>About the company</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech Inc. Theomotech as a Tech company is
+                            dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
+                            <span style='color: #ccc;'>increase in revenue... 
+                                <br/><br/><a href="https://theomotech.herokuapp.com" style="color: #ccc;" target="_blank">read more 
+                                    <i style="color: white; margin-left: 5px;" class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            </span>
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad'></h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
+                                <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
+                                <p style="margin-top: 10px;">
+                                    <a href="https://www.facebook.com/TheoMotech-107976207592401/about/?ref=page_internal" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/theomotech-inc" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
+                                    </a>
+                                    <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i>
+                                </p>
+                    </div>
+                </div>
+            </div>
         </div>
                                      
     </div>

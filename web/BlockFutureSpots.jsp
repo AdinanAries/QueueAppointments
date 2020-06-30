@@ -52,17 +52,17 @@
    
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
-    <body style="background: none !important; background-color: #7e7e7e !important;" onload="document.getElementById('PageLoader').style.display = 'none';">
+    <body style="background: none !important; background-color: white !important;" onload="document.getElementById('PageLoader').style.display = 'none';">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <h3 style="text-align: center; margin: 5px; color: white;">Block Future Spots</h3>
+        <h3 style="text-align: center; margin: 20px; font-size: 16px; color: #3d6999;">Block Future Spots</h3>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                
-                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px;">
+                <center><div id="QueuLineDiv" style="width: 100%; max-width: 600px; border-top: 1px solid darkgrey; border-bottom: 1px solid darkgrey;">
                         
                                         
                 <%
@@ -606,7 +606,7 @@
                                     
                                         <!--p>Next Appointment: <%=NextAvailableTime%></p-->
                                     
-                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px;'>Available Queue</p></center>
+                                    <center><p style='color: darkblue; font-weight: bold; padding-top: 10px; padding-bottom: 5px;'>Available Queue</p></center>
                                     
                                     <center><div class="scrolldiv" style="width: 95%; max-width: 600px; overflow-x: auto;">
                                     
@@ -1032,9 +1032,9 @@
                                     </div></center>
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
                                 
-                                <center><div style="width: 100%; max-width: 600px; background-color: #eeeeee;">
+                                <center><div style="width: 100%; max-width: 600px; border-top: 1px solid darkgrey; background-color: #eeeeee;">
                                     <form style="" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="BlockFutureSpots.jsp">
-                                        <p style="text-align: center; font-weight: bolder; color: darkblue;">Get More Spots</p>
+                                        <h3 style="text-align: center; font-weight: bolder; color: darkblue; margin: 5px;">Get More Spots</h3>
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to block future spots</p>
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
@@ -1075,7 +1075,7 @@
                                 </script>
 
                                 <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ServiceProviderPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                                        <p style="margin: auto; width: 100%; max-width: 580px; padding: 10px; background-color: darkslateblue; color: white; text-align:center; ">
+                                        <p style="margin: auto; width: 100%; max-width: 580px; padding: 10px 0; background-color: darkslateblue; color: white; text-align:center; ">
                                             <i style='color: #4ed164; font-size: 22px;' class="fa fa-home" aria-hidden="true"></i> Go to your dashboard</p></a>
 
                 <%
@@ -1174,7 +1174,7 @@
                     }
                 %>
 
-            <div class="scrolldiv" style=" height: 400px; overflow-y: auto;">
+            <div class="scrolldiv" style="height: auto !important; overflow-y: auto;">
                 
                 <%
                     Date JSCurrentDate = new Date();
@@ -1219,9 +1219,9 @@
                     
                 %>
                 
-                <div id="CurrentProvAppointmentsDiv">
-                            <center><h4 style="margin: 5px; color: white;">Taken Spots on <%=TKDayOfWeek%>, <%=TKStringDate%></h4></center>
-                <center><table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%; max-width: 600px;">
+                <div id="CurrentProvAppointmentsDiv" style="background-color: #eee; border-top: 1px solid darkgrey; border-bottom: 1px solid darkgrey; margin-top: 7px;">
+                            <center><h4 style="padding: 10px 0; color: darkblue;">Taken Spots on <%=TKDayOfWeek%>, <%=TKStringDate%></h4></center>
+                <center><table id="ProviderAppointmentList" style="border-spacing: 0 5px; border: 0; width: 100%; max-width: 600px;">
                         <tbody>
                             
     <%
@@ -1286,7 +1286,7 @@
                           
     %>
                         <tr>
-                            <td style = "padding: 5px; background-color: white; margin: 5px; border: 0; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgray;">
+                            <td style = "padding: 5px; background-color: white; margin: 5px; border: 0;">
                 <%
                     if(Base64CustPic != ""){
                 %>
@@ -1485,13 +1485,22 @@
                         
                         %>
                         
-                        <center><p style="margin: 20px 0; color: white; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> You have no bookings for <%=DayOfWeek%>, <%=stringDate%></p></center>
+                        <center><p style="margin: 20px 0; color: #333333; text-align: center;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> You have no bookings for <%=DayOfWeek%>, <%=stringDate%></p></center>
                         <%} //end of if block%>
                     </tbody>
                     </table></center>
                 
                 </div>
             </div>
+                    
+            <div id="TheomotechPromo" style="padding-top: 40px;">
+                <div style="margin: 20px;">
+                    <p style="text-align: center;"><img src='TMTlogo.svg'  style='width: 100px; height: 50px'/></p>
+                    <p style="text-align: center; font-weight: bolder; color: #37a0f5; padding: 5px;">Theomotech Inc. &copy;2020</p>
+                    <p style='color: darkgray; font-size: 13px; text-align: center;'>All rights reserved</p>
+                </div>
+            </div>
+                    
     </body>
     <script>
         var ControllerResult = "<%=ControllerResult%>";

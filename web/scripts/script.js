@@ -1367,3 +1367,22 @@ function showPassword(){
 $(".showPassword").click(()=>{
     showPassword();
 });
+
+function collapseAllSettings(){
+    if(document.getElementById("UpdateUserAccountForm")){
+        $("#UpdateUserAccountForm").slideUp("slow");
+        //document.getElementById("UpdateUserAccountForm").style.display = "none";
+    }
+    if(document.getElementById("SetUserAddress")){
+        $("#SetUserAddress").slideUp("slow");
+        //document.getElementById("SetUserAddress").style.display = "none";
+    }
+    if(document.getElementById("SendFeedBackForm")){
+        $("#SendFeedBackForm").slideUp("slow");
+        //document.getElementById("SendFeedBackForm").style.display = "none";
+    }
+    if(document.getElementById("SettingsDiv")){
+        $("#SettingsDiv").slideUp("slow");
+        //document.getElementById("SettingsDiv").style.display = "none";
+    }
+}
