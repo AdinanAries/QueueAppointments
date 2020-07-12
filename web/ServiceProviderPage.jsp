@@ -1637,7 +1637,7 @@
         try{
             Class.forName(Driver);
             Connection CnclConn = DriverManager.getConnection(Url, user, password);
-            String CnclString = "Select * from  QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyTimeElapse%'";
+            String CnclString = "Select * from  QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyChargeCost%'";
             PreparedStatement CnclPst = CnclConn.prepareStatement(CnclString);
             CnclPst.setInt(1, UserID);
             ResultSet PlcyRec = CnclPst.executeQuery();
@@ -1647,10 +1647,13 @@
                 
                 if(!PlcyRec.getString("CurrentValue").trim().equals("0")){
                     isSettingAllowed = "Yes";
-                    int tempValue = Integer.parseInt(PlcyRec.getString("CurrentValue").trim() );
-                    TimeElapseValue = tempValue + " mins";
+                    //int tempValue = Integer.parseInt(PlcyRec.getString("CurrentValue").trim() );
+                    //TimeElapseValue = tempValue + " mins";
                     
-                    try{
+                    int tempPercentValue = Integer.parseInt(PlcyRec.getString("CurrentValue").trim());
+                    ChargePercentValue = tempPercentValue + "%";
+                    
+                    /*try{
                         Class.forName(Driver);
                         Connection CnclConnChrg = DriverManager.getConnection(Url, user, password);
                         String CnclStringChrg = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyChargeCost%'";
@@ -1668,7 +1671,7 @@
                         
                     }catch(Exception e){
                         e.printStackTrace();
-                    }
+                    }*/
                 }
                 
             }
@@ -3072,7 +3075,7 @@
                                     
                                         <!--p>Next Appointment: <%=NextAvailableTime%></p-->
                                     
-                                    <div style="text-align: center;"><p id="TodaysLineP" style='color: darkblue; font-weight: bold; padding-top: 10px;'>Today's Queue</p></div>
+                                    <div style="text-align: center;"><p id="TodaysLineP" style='color: darkblue; font-weight: bold; padding: 10px 0;'>Today's Queue</p></div>
                                     <script>
                                         if($(document).width() < 1000){
                                             document.getElementById("PMargin").style.display = "block";
@@ -3447,11 +3450,11 @@
                                         Blocked Spot </span> </p>
                                     
                                         <form style=" margin-top: 10px; padding: 5px; background-color: #d8d8d8;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
-                                            <p style="text-align: center; color: #000099; margin: 5px; font-weight: bolder;">Change Your Spots Intervals Below</p>
+                                            <p style="text-align: center; color: #000099; margin: 10px 0; font-weight: bolder;">Change Your Spots Intervals Below</p>
                                             
-                                            <center><div>
-                                                <p style="margin: auto; width: fit-content; text-align: right; background-color: darkslateblue; color: white; padding: 5px; padding-bottom: 0; border-radius: 5px;">
-                                                    <select style="border: 0; background-color: darkslateblue; color: white;" name="SpotsIntervals">
+                                            <div style="display: flex; flex-direction: row; justify-content: center;">
+                                                <div style="padding-top: 5px;">
+                                                    <select style="border: 0; color: white; padding: 10px 5px; background-color: darkslateblue; color: white; border-radius: 5px;" name="SpotsIntervals">
                                                         <option value="<%=IntervalsValue%>"><%=IntervalsValue%> minutes</option>
                                                         <option value="15">15 minutes</option>
                                                         <option value="30">30 minutes</option>
@@ -3466,14 +3469,19 @@
                                                         <option value="270">4 hours, 30 minutes</option>
                                                         <option value="300">5 hours</option>
                                                     </select>
-                                                    <i style="" class="fa fa-caret-down" aria-hidden="true"></i>
-                                                </p>
+                                                    <!--i style="" class="fa fa-caret-down" aria-hidden="true"></i-->
+                                                </div>
 
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <input style="background-color: #ff3333; border: 0; color: white; padding: 5px; border-radius: 4px;" type="submit" value="Change" name="SetSpotsIntervalBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
-                                            </div></center>
+                                                <div>
+                                                    <input style="background-color: #ff3333; border: 0; color: white; 
+                                                           padding: 10px 5px; border-radius: 4px; width: 120px;" 
+                                                           type="submit" value="Change" 
+                                                           name="SetSpotsIntervalBtn" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"/>
+                                                </div>
+                                            </div>
                                                 
                                         </form>
                                     </div></center>
@@ -4831,17 +4839,37 @@
                                     
                                     <p style="font-weight: bolder; color: slategrey; padding: 5px; margin-top: 10px;">What is this reservation for?</p>
                                     
-                                        <select style="border: slategrey 1px solid; padding: 10px; background-color: white; color: black;" id="reserveService" name="formsOrderedServices">
-                                            <%
-                                                for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
+                                        <%
+                                            if(Services.getNumberOfServices() > 0){
+                                        %>
+                                            <select style="border: slategrey 1px solid; padding: 10px; background-color: white; color: black;" id="reserveService" name="formsOrderedServices">
+                                                <%
 
-                                                String ServiceName = Services.getService(svc).trim();
-                                                String ServicePrice = Services.getPrice(svc);
-                                                String ServiceDetails = "$" + ServicePrice + "-" + ServiceName; 
-                                            %>
-                                                <option><%=ServiceDetails%></option>
-                                            <%}%>
-                                        </select>
+                                                        for(int svc = 0; svc < Services.getNumberOfServices(); svc++){
+
+                                                            String ServiceName = Services.getService(svc).trim();
+                                                            String ServicePrice = Services.getPrice(svc);
+                                                            String ServiceDetails = "$" + ServicePrice + "-" + ServiceName; 
+                                                %>
+                                                            <option><%=ServiceDetails%></option>
+                                                <%
+                                                        }
+                                                %>
+                                            </select>
+                                        <%
+                                            }else{
+                                        %>
+                                            <p style='margin: 10px 0; color: white; text-align: center;'>
+                                                <i class='fa fa-exclamation-triangle' style='color: yellow'></i>
+                                                You have no services to choose from.
+                                                <br/>
+                                                <br/>
+                                                To add a service go to services tab which you will find below your profile area to add services your business provide to customers 
+                                            </p>
+                                        <%
+                                            }
+                                        %>
+                                        
                                         
                                     <p style="font-weight: bolder; color: slategrey; padding: 5px;">Who is this reservation for?</p>
                                     
@@ -4946,7 +4974,9 @@
  
                                     }
                                     
-                                    setInterval(checkMkReservationBtn,1);
+                                    $(document).ready(()=> {
+                                        setInterval(checkMkReservationBtn,1);
+                                    });
                                     
                                     </script>
                                     
@@ -4957,11 +4987,15 @@
                                     <p style="color: white;">
                                         <span><i style="color: yellow;" class="fa fa-exclamation-triangle"></i> You don't have any clients in your clients list.</span>
                                         <br/><br/>
-                                        <span style="">To add a client, go to your current line or your appointment history to add a customer from your bookings.</span>
+                                        <span style="">You can only make reservations for people you've added to your cliets list.
+                                            To add a client, go to your current line or your appointment history to add a customer from your bookings.</span>
                                     </p>
                                     <script>
-                                        document.getElementById("MkReservationBtn").style.backgroundColor = "darkgrey";
-                                        document.getElementById("MkReservationBtn").disabled = true;
+                                        
+                                        $(document).ready(()=> {
+                                            document.getElementById("MkReservationBtn").style.backgroundColor = "darkgrey";
+                                            document.getElementById("MkReservationBtn").disabled = true;
+                                        });
                                         
                                     </script>
                                         
@@ -5836,13 +5870,15 @@
 
                                 %>
                                 
-                                <p id='noServStatus1' style="padding: 5px; color: darkblue;"><i style="color: red;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> Your Customers cannot book appointment with you if you don't have any service(s) in your services list</p>
-                                <p id='noServStatus2' style="padding: 10px;">Click add service sign below to add new service</p>
+                                <p id='noServStatus1' style="padding: 10px 5px; color: darkblue;">
+                                    <i style="color: red; font-weight: bolder;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+                                    Customers cannot book appointment with you if you don't have any service(s) they can book for</p>
+                                <p id='noServStatus2' style="padding: 10px;"></p>
                                 
                                 
                                 
                                 <% 
-                                        try{
+                                        /*try{
 
                                             Class.forName(Driver);
                                             Connection AddSVCConn = DriverManager.getConnection(Url, user, password);
@@ -5859,9 +5895,9 @@
 
                                         }catch(Exception e){
                                             e.printStackTrace();
-                                        }
+                                        }*/
                                     } 
-             //end of else block%>
+                                %>
                                      
                                         </tbody>
                                      </table></center>
@@ -6012,7 +6048,8 @@
                                                           document.getElementById("NewPriceDD").value = "";
                                                           document.getElementById("NewPriceCC").value = "";
                                                           document.getElementById("ServiceDescForAdd").innerHTML = "";
-                                                          
+                                                          if(document.getElementById("noServStatus1"))
+                                                          document.getElementById("noServStatus1").style.display = "none";
                                                           
                                                           $.ajax({
                                                               type: "POST",
@@ -6076,8 +6113,8 @@
                                          </script>
                                      </div></center>
                                                                   
-                                     <div id='newServDiv' style='display:none;'>
-                                        <p style='color: #000099; margin-bottom: 5px; text-align: center;'>Recent Added Service(s)</p>
+                                     <div id='newServDiv' style='display: none;'>
+                                        <p style='color: darkblue; font-weight: bolder; margin: 10px 5px; text-align: center;'>Recent Added Service(s)</p>
                                      </div>
                                          
                                      </div>
@@ -6574,61 +6611,114 @@
                                     
                                     <div style="background-color: white; padding: 5px; margin: 5px;">
                                     
-                                    <!--center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee; text-align: left;
-                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;">Accept Payments
+                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee; text-align: left;
+                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;"><label for="CnclPlcyChck">Cancellation/Payment <span style="margin-left: 10px;"><i id="CnclPlcyPaymentStatuIcon" class="fa"></i></span></label>
                                             <span style="float: right;"><input style="background-color: white;" id="CnclPlcyChck" type="radio" name="CancellationPolicyChck" value="ON" />
                                             <label for="CnclPlcyChck">ON</label>
                                             <input style="background-color: white;" id="CnclPlcyChckOFF" type="radio" name="CancellationPolicyChck" value="OFF" />
-                                            <label for="CnclPlcyChckOFF">OFF</label></span></p></center-->
+                                            <label for="CnclPlcyChckOFF">OFF</label></span></p></center>
                                             <p style="clear: both;"></p>
                                             
                                         <input id="EnabledCnclPlcy" type="hidden" name="CancelationPolicyEnabled" value="<%=isSettingAllowed%>" />
                                     
                                    <div style="background-color: #6699ff;">
+                                
                                    <div id="CnclPlcyInfo" style="display: none; padding: 5px;">
+                                <%
+                                    String CardAdded = "0";
                                     
-                                   <p style="color: white; text-align: center; margin: 5px;">Add Your Business Bank Card</p>
-                                        <p style="text-align: center;">add bank account where to receive online payments from customers</p>
+                                    try{
+                                        Class.forName(Driver);
+                                        Connection SaveIDConn = DriverManager.getConnection(Url, user, password);
+                                        String SaveIDSql = "select * from QueueServiceProviders.StripeConnectedAccountIDs where ProvID = ?";
+                                        PreparedStatement GetStatusPst = SaveIDConn.prepareStatement(SaveIDSql);
+                                        GetStatusPst.setInt(1, UserID);
+                                        ResultSet GetStatusRec = GetStatusPst.executeQuery();
 
-                                        <table style="max-width: 350px; margin: auto; background-color: #9bb1d0; border-radius: 5px; padding: 5px; margin-top: 5px; margin-bottom: 5px; border: #3d6999 1px solid;">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="text-align: left;">Card Number: </td>
-                                                    <td><input  id="CnclPlcyBizCardNumber" onclick="checkMiddlenumberCnclPlcyBizCardNumber();" onkeydown="checkMiddlenumberCnclPlcyBizCardNumber();" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: left;">Card Name: </td>
-                                                    <td><input id="CnclPlcyCardName" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNameForSubscription" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: left;">Routing Number: </td>
-                                                    <td><input id="CnclPlcyRoutingNumber" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardNumberForSubscription" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: left;">Sec. Code: </td>
-                                                    <td><input id="CnclPlcySecCode" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardCodeForSubscription" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: left;">Exp. Date: </td>
-                                                    <td><input id="CnclPlcyExpDate" style="background-color: #d9e8e8; border: #3d6999 1px solid;" type="text" name="CardExpForSubscription" value="" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table> 
-                                        
-                                        <p id="validateCnclPlcyCardBtn" style="cursor: pointer; color: white; 
-                                           background-color: initial; width: 270px; padding: 5px; border-radius: 4px; text-align: center; margin: auto;">
-                                            Validate this card</p>
-                                        
-                                        <p id='BankCardValidStatus' style='color: white; text-align: center;'></p>
-                                        <center><p  id="bizBankforCancelStatus" style="color: white; background-color: red; text-align: center;"></p></center>
-                                        <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: darkslateblue; width: 200px; margin: 5px; margin-bottom: 20px; border-radius: 4px; color: white;">Save Card Information</p></center>
-                                       
-                                    <p style='color: darkblue; font-weight: bolder; margin: 5px 0;'>Cancellation Policy Information</p>
+                                        while(GetStatusRec.next()){
+                                            
+                                            CardAdded = GetStatusRec.getString("CardAdded").trim();
+                                            break;
+
+                                        }
+
+
+                                    }catch(Exception e){}
                                     
-                                    <small style='color: aqua;'>The settings below indicates at what time your customers should be charged cancellation fee if they cancel their appointment.</small>
-                                    <p style='margin-bottom: 10px; margin-top: 5px;'>Charge when: <span id="TimeSpan" style="color: #eeeeee;"> <%=TimeElapseValue%> to appointment time</span></p>
-                                    <small style='color: aqua'>The settings below indicates how much your customers get charged for cancellation policy</small>
-                                    <p style='margin-top: 5px; margin-bottom: 10px;'>Penalty of: <span id="PercentSpan" style="color: #eeeeee;"><%=ChargePercentValue%> of total cost</span></p>
+                                     if(CardAdded.equalsIgnoreCase("0")){
+                                %>
+                                
+                                                <div id="cardNotAddedForm">
+                                                    <p id="AcceptPaymentCardStatus" style="color: darkblue; text-align: center; padding: 10px 0;">
+                                                        <i style="color: orange;" class="fa fa-exclamation-triangle"></i> 
+                                                        You cannot accept online payments.
+                                                        <br/>
+                                                        Your business bank is not added.
+                                                    </p>
+                                                    <%
+                                                        String emailHash = QueuePWHash.GetHash(Email);
+                                                        emailHash = UserID + emailHash;
+                                                        //JOptionPane.showMessageDialog(null, emailHash);
+                                                    %>
+                                                    <!--p style='margin: 10px 5px; margin-top: 0; border-bottom: #334d81 1px solid; display: block;'></p-->
+                                                    <a href="https://connect.stripe.com/express/oauth/authorize?client_id=ca_HaRSyhhy1omR9EXdBPZRCswKBXY4vb2i&state=<%=emailHash%>&stripe_user[email]=<%=Email%>" 
+                                                       target="_blank">
+                                                     <p style="padding: 10px 5px; background-color: #06adad; color: white; text-align: center; border-radius: 4px; max-width: 150px; margin:auto; cursor: pointer;">
+                                                         <i class="fa fa-credit-card-alt" aria-hidden="true"></i> 
+                                                         Add your bank card
+                                                     </p>
+                                                    </a>
+                                                       
+                                                    <script>
+                                                        document.getElementById("CnclPlcyPaymentStatuIcon").classList.add("fa-exclamation-triangle");
+                                                        document.getElementById("CnclPlcyPaymentStatuIcon").style.color = "red";
+                                                    </script>
+                                                       
+                                                </div>
+                                
+                                <%
+                                            }else if(CardAdded.equalsIgnoreCase("1")){
+                                %>
+                                
+                                                <div id="cardAddedForm">
+                                                    <p id="AcceptPaymentCardStatus" style="color: darkblue; text-align: center; padding: 10px 0;">
+                                                        <i style="color: green;" class="fa fa-check"></i> 
+                                                        You're all set to receive payments.
+                                                    </p>
+                                                    
+                                                    <script>
+                                                        document.getElementById("CnclPlcyPaymentStatuIcon").classList.add("fa-check");
+                                                        document.getElementById("CnclPlcyPaymentStatuIcon").style.color = "green";
+                                                    </script>
+                                                </div>
+                                
+                                <%
+                                            }
+                                %>
+                                    
+                                   
+                                    <p style='margin: 10px 5px; border-bottom: 1px solid #334d81; display: block;'></p>
+                                    
+                                    <p style='color: white; font-weight: bolder; margin: 5px 0; text-align: center;'>Cancellation and No-Show Policy</p>
+                                    
+                                    <p style="margin: 10px 0; text-align: center;">
+                                    <small style='color: #eeeeee;'>
+                                        The customer is allowed to cancel the appointment anytime before the appointment due time. This results in the customer having
+                                        to pay the percentage amount you specify for cancellation charge.
+                                    </small>
+                                   </p>
+                                   
+                                   <p style="margin: 10px 0; text-align: center;">
+                                    <small style='color: #eeeeee;'>
+                                        No-show means that the customer failed to cancel before the appointment due time resulting 
+                                        in them getting charged full amount immediately when appointment time is due.
+                                    </small>
+                                   </p>
+                                   
+                                   <p style='margin: 10px 5px; border-bottom: 1px solid #334d81; display: block;'></p>
+                                   
+                                   <p id="CancelStatusIndicator" style="color: darkblue; font-weight: bolder; text-align: center; margin: 10px 0;"></p>
+                                    <p style='margin-top: 5px; margin-bottom: 10px; color: darkblue; font-weight: bolder;'><i class='fa fa-info-circle' style='color: #fefde5;'></i> Your current cancellation charge is <span id="PercentSpan" style=""><%=ChargePercentValue%> of total cost</span></p>
                                      
                                     <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: darkslateblue; width: 200px; margin: 5px; border-radius: 4px; color: white;">Change Cancellation Policy</p></center>
                                        
@@ -6639,40 +6729,31 @@
                                         <input id="timeElapse" type="hidden" name="TimeElapse" value="CnclPlcyTimeElapse"/>
                                         <input id="ChargeCost" type="hidden" name="ChargeCost" value="CnclPlcyChargeCost"/>
                                         
+                                        <p onclick="$('#CnclPlcyForm').slideUp('slow');" style="text-align: center; color: white; font-size: 30px; padding: 0;">
+                                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                        </p>
+                                        
                                         <p style="text-align: center; margin-bottom: 10px; color: white;">Change Cancellation Policy</p>
                                         
-                                        <small style='color: honeydew'>What percentage of the service cost should your customers be charged as cancellation fee</small>
-                                        <center><p id="percentPar" style="text-align: left; max-width: 500px;">Charge Percentage: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="ChargePercent" name="ChargePercent">
+                                        <small style='color: honeydew'>What percentage of the service cost should your customers be charged as cancellation fee.
+                                            <br/> For example, If the customer books for $30.00 service, then 50% means you charge them $15.00 as cancellation fee.</small>
+                                        <center><p id="percentPar" style="text-align: left; max-width: 500px; padding: 10px;">Charge Percentage: <select style="border: none; background-color: #d9e8e8; padding: 10px; color: black;" id="ChargePercent" name="ChargePercent">
                                                     <option>100%</option>
+                                                    <option>90%</option>
+                                                    <option>80%</option>
                                                     <option>75%</option>
+                                                    <option>70%</option>
+                                                    <option>60%</option>
                                                     <option>50%</option>
+                                                    <option>40%</option>
+                                                    <option>30%</option>
                                                     <option>25%</option>
+                                                    <option>20%</option>
                                                     <option>10%</option>
-                                                </select></p></center>
+                                                </select>
+                                            </p></center>
                                         
-                                        <small style='color: honeydew'>How many minutes or hours before appointment time should your customers be charged cancellation fee if they cancel their appointment</small>
-                                        <center><p id="timePar" style="text-align: left; max-width: 500px;">Due Time: <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="HHforCancellation" name="DurationFldHH">
-                                                     <option>0</option>
-                                                     <option>1</option>
-                                                     <option>2</option>
-                                                     <option>3</option>
-                                                     <option>4</option>
-                                                     <option>5</option>
-                                                 </select> hour(s) -
-                                                 <select style="border: none; background-color: #d9e8e8; padding: 0 5px; color: black;" id="MMforCancellation" name="DurationFldMM">
-                                                     <option>15</option>
-                                                     <option>20</option>
-                                                     <option>25</option>
-                                                     <option>30</option>
-                                                     <option>35</option>
-                                                     <option>40</option>
-                                                     <option>45</option>
-                                                     <option>50</option>
-                                                     <option>55</option>
-                                                     <option>0</option>
-                                                 </select> minute(s)</p></center>
-                                        
-                                        <script>
+                                        <!--script>
                                                     var CnclPlcyExpDate = document.getElementById("CnclPlcyExpDate");
                                                          
                                                          setInterval(function(){
@@ -6717,9 +6798,9 @@
                                                               
                                                             }
                                                          },1);
-                                                </script>
+                                                </script-->
                                         
-                                            <script>
+                                            <!--script>
                                                         var CnclPlcyBizCardNumber = document.getElementById("CnclPlcyBizCardNumber");
 
                                                         function numberFuncCnclPlcyBizCardNumber(){
@@ -6749,10 +6830,12 @@
                                                         }
 
                                                         //setInterval(checkMiddleNumber, 1000);
-                                                    </script>
+                                                    </script-->
                                                
-                                        <p style="margin: auto; text-align: left; color: white; background-color: crimson; padding: 5px; border-radius: 4px; width: fit-content; margin: 5px;"><input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" /><label for="RmvCnclPlcy">Remove Cancellation Policy</label>
-                                            </p>
+                                        <p style="margin: auto; text-align: center; color: white; background-color: crimson; padding: 5px; border-radius: 4px; margin: 5px;">
+                                            <input id="RmvCnclPlcy" type="checkbox" name="RMVCnclPlcy" value="ON" />
+                                            <label for="RmvCnclPlcy">I dont want cancellation policy</label>
+                                        </p>
                                         
                                         <center><input id="submitCnclPlcyBtn" style="padding: 5px; color: white; border: none; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
                                     </form>
@@ -6762,112 +6845,17 @@
                                     
                                    </div>
                                         
+                                        
+                                        
                                         <script>
-                                            
-                                            var isCardAdded = false;
-                                            var cardVerified = 0;
-                                            
-                                            setInterval(function(){
-                                                    var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
-                                                    var CPcName = document.getElementById("CnclPlcyCardName").value;
-                                                    var CPcRNumber = document.getElementById("CnclPlcyRoutingNumber").value;
-                                                    var CPSecCode = document.getElementById("CnclPlcySecCode").value;
-                                                    var CPcDate = document.getElementById("CnclPlcyExpDate").value;
-                                                    
-                                                    
-                                                    if(CPcNumber === "" || CPcName === "" || CPSecCode === "" || CPcDate === "" || CPcRNumber === ""){
-                                                        document.getElementById("validateCnclPlcyCardBtn").innerHTML = "uncompleted form";
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.color = "white";
-                                                        document.getElementById("validateCnclPlcyCardBtn").disabled = true;
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "initial";
-                                                        document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "darkgrey";
-                                                        document.getElementById("submitCnclPlcyBtn").disabled = true;
-                                                    }else{
-                                                        document.getElementById("validateCnclPlcyCardBtn").innerHTML = "Validate this card";
-                                                        document.getElementById("validateCnclPlcyCardBtn").disabled = false;
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.color = "white";
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.backgroundColor = "darkslateblue";
-                                                        document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "darkslateblue";
-                                                        document.getElementById("submitCnclPlcyBtn").disabled = false;
-                                                    }
-                                            }, 1);
-                                            
-                                            setInterval(function(){
-                                                if(document.getElementById("RmvCnclPlcy").checked === true){
-                                                    isCardAdded = true;
-                                                    document.getElementById("submitCnclPlcyBtn").style.backgroundColor = "darkslateblue";
-                                                    document.getElementById("submitCnclPlcyBtn").disabled = false;
-                                                }
-                                            }
-                                            ,1);
-                                            
-                                            //this is where to verify my card
-                                            $(document).ready(function(){
-                                                
-                                                $("#validateCnclPlcyCardBtn").click(function(event){
-                                                    document.getElementById('ProviderPageLoader').style.display = 'block';
-                                                    if(document.getElementById("validateCnclPlcyCardBtn").disabled === false){
-                                                        
-                                                        alert("clicked");
-                                                        isCardAdded = true;
-                                                        document.getElementById("validateCnclPlcyCardBtn").style.display = "none";
-                                                        
-                                                        //call verification controller here
-                                                        /*$.ajax({
-                                                            type: "POST",
-                                                            url: "",
-                                                            data: "",
-                                                            success: function(result){
-                                                                document.getElementById('ProviderPageLoader').style.display = 'none';
-                                                                //if(result === "success"){
-            
-                                                                    cardVerified = 1;
-            
-                                                                    //saving card to database
-                                                                    $.ajax({
-                                                                        type: "POST",
-                                                                        url: "SaveProviderBizBankCard",
-                                                                        data: "ProviderID=" + '<=UserID%>' + "&AccNo=" + CPcNumber + "&AccHName=" + CPcName + "&AccRNo=" + CPcRNumber + "&AccSecCode=" + CPSecCode + "&AccExpDate=" + CPcDate + "&Verified=" + cardVerified,
-                                                                        success: function(result){
-                                                                            if(result === "success"){
-                                                                                document.getElementById("BankCardValidStatus").innerHTML = "Customer payments are recieved on" + CPcNumber.substring() + "*********" + CPcNumber.substring();
-                                                                                document.getElementById("BankCardValidStatus").style.backgroundColor = "green";
-                                                                                isCardAdded = true;
-                                                                            }
-                                                                        }
-                                                                    });
-                                                                    
-            
-                                                                 }
-                                                                //else{
-                                                                    document.getElementById("BankCardValidStatus").innerHTML = "Your business bank card isn't valid. You cannot recieve payments on this card";
-                                                                    document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
-                                                                }
-                                                            }
-                                                        });*/
-            
-                                                    }
-                                                    
-                                                });
-                                                
-                                            });
                                             
                                             $(document).ready(function() {                        
                                                     $('#submitCnclPlcyBtn').click(function(event) {
                                                         document.getElementById('ProviderPageLoader').style.display = 'block';
-                                                        if(isCardAdded){
                                                         
-                                                            var CPcNumber = document.getElementById("CnclPlcyBizCardNumber").value;
-                                                            var CPcName = document.getElementById("CnclPlcyCardName").value;
-                                                            var CPcRNumber = document.getElementById("CnclPlcyRoutingNumber").value;
-                                                            var CPSecCode = document.getElementById("CnclPlcySecCode").value;
-                                                            var CPcDate = document.getElementById("CnclPlcyExpDate").value;
-
                                                             var ProviderID = document.getElementById("PIDforCnclPlcy").value;
-                                                            var DHH = document.getElementById("HHforCancellation");
-                                                            var DurationHH = DHH.options[DHH.selectedIndex].text;
-                                                            var DMM = document.getElementById("MMforCancellation");
-                                                            var DurationMM = DMM.options[DMM.selectedIndex].text;
+                                                            var DurationHH = 0;
+                                                            var DurationMM = 0;
                                                             var ChargeCost = document.getElementById("ChargeCost").value;
                                                             var timeElapse = document.getElementById("timeElapse").value;
                                                             var PercentOption = document.getElementById("ChargePercent");
@@ -6893,52 +6881,22 @@
                                                                   document.getElementById('ProviderPageLoader').style.display = 'none';
                                                                   document.getElementById("CnclPlcyForm").style.display = "none";
 
-                                                                  var Hour = 0;
-                                                                  if(parseInt(DurationHH, 10) === 1)
-                                                                      Hour = 60;
-                                                                  if(parseInt(DurationHH, 10) === 2)
-                                                                      Hour = 120;
-                                                                  if(parseInt(DurationHH, 10) === 3)
-                                                                      Hour = 180;
-                                                                  if(parseInt(DurationHH, 10) === 4)
-                                                                      Hour = 240;
-                                                                  if(parseInt(DurationHH, 10) === 5)
-                                                                      Hour = 300;
-
-                                                                  document.getElementById("bizBankforCancelStatus").style.backgroundColor = "green";
-                                                                  document.getElementById("bizBankforCancelStatus").innerHTML = "Cancellation policy has been set";
-                                                                  document.getElementById("BankCardValidStatus").style.backgroundColor = "green";
-                                                                  document.getElementById("BankCardValidStatus").innerHTML = "Cancellation policy has been set";
+                                                                  document.getElementById("CancelStatusIndicator").innerHTML = "<i style='color: green;' class='fa fa-check'></i> Cancellation policy has been set";
 
                                                                   if(document.getElementById("RmvCnclPlcy").checked === true){
 
                                                                      document.getElementById("PercentSpan").innerHTML = 0 + "% of service cost";
-                                                                     document.getElementById("TimeSpan").innerHTML = "at " + 0 + " mins to spot due time";
                                                                      document.getElementById("CnclPlcyChckOFF").checked = true;
                                                                      document.getElementById("CnclPlcyChck").checked = false;
-                                                                     document.getElementById("bizBankforCancelStatus").style.backgroundColor = "red";
-                                                                     document.getElementById("bizBankforCancelStatus").innerHTML = "No cancellation policy";
-                                                                     document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
-                                                                     document.getElementById("BankCardValidStatus").innerHTML = "No cancellation policy";
-                                                                     //if(isCardAdded === false)
-                                                                     //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
-
+                                                                     document.getElementById("CancelStatusIndicator").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> No cancellation policy";
+                                                                     
                                                                   }else{
 
                                                                     document.getElementById("PercentSpan").innerHTML = parseInt(ChargePercent, 10) + "% of service cost";
-                                                                    document.getElementById("TimeSpan").innerHTML = "at " + (parseInt(Hour, 10) + parseInt(DurationMM, 10))+ " mins to spot due time";
-                                                                     //if(isCardAdded === false)
-                                                                     //document.getElementById("bizBankforCancelStatus").innerHTML = "You cannot recieve any cancellation fees. In order to be able to do so, you must add your business bank card";
                                                                   }
                                                                 }                
                                                           });
                                                         
-                                                      }else{
-                                                          document.getElementById("bizBankforCancelStatus").style.backgroundColor = "red";
-                                                          document.getElementById("bizBankforCancelStatus").innerHTML = "Please validate your bank card";
-                                                          document.getElementById("BankCardValidStatus").style.backgroundColor = "red";
-                                                          document.getElementById("BankCardValidStatus").innerHTML = "Please validate your bank card";
-                                                      }
                                                       
                                                     });
                                                 });
@@ -6946,12 +6904,7 @@
                                         
                                    <script>
                                        
-                                       var CnclPlcyChck = document.getElementById("CnclPlcyChck");
-                                       var CnclPlcyInfo = document.getElementById("CnclPlcyInfo");
-                                       var CnclPlcyForm = document.getElementById("CnclPlcyForm");
                                        var RmvCnclPlcy = document.getElementById("RmvCnclPlcy");
-                                       var EnabledCnclPlcy = document.getElementById("EnabledCnclPlcy");
-                                       var timePar = document.getElementById("timePar");
                                        var percentPar = document.getElementById("percentPar");
                                        var CnclPlcyChckOFF = document.getElementById("CnclPlcyChckOFF");
                                        
@@ -6961,19 +6914,21 @@
                                        function checkPlcForm(){
                                            
                                             if(RmvCnclPlcy.checked === true){
-                                                
-                                                timePar.style.display = "none";
                                                 percentPar.style.display = "none";
                                             }
                                             else{
-                                                
-                                                timePar.style.display = "block";
                                                 percentPar.style.display = "block";
                                                 
                                             }
                                         }
                                         
                                         setInterval(checkPlcForm, 1);
+                                       
+                                       
+                                       var CnclPlcyChck = document.getElementById("CnclPlcyChck");
+                                       var CnclPlcyInfo = document.getElementById("CnclPlcyInfo");
+                                       var CnclPlcyForm = document.getElementById("CnclPlcyForm");
+                                       var EnabledCnclPlcy = document.getElementById("EnabledCnclPlcy");
                                        
                                        if(EnabledCnclPlcy.value === "Yes"){
                                            CnclPlcyChck.checked = true;
@@ -7301,7 +7256,7 @@
                                                                 <input id="oldPassfld" type="hidden" name="oldpass" value=""/>
                                                                 <td style="text-align: left;">Old Password: </td>
                                                                 <td><input class="passwordFld" id="compareOldPassfld" id="" style="background-color: #d9e8e8;" type="password" name="OldPasswordFld" value="" />
-                                                                <p style="text-align: right; margin-top: -25px; margin-bottom: 10px; padding-right: 10px;"><i class="fa fa-eye showPassword" style="color: red;" aria-hidden="true"></i></p></td>
+                                                                    <p style="text-align: right; margin-top: -25px; margin-bottom: 10px; padding-right: 10px;"><i class="fa fa-eye showPassword" onclick="showPassword();" style="color: red;" aria-hidden="true"></i></p></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="text-align: left;">New Password: </td>
@@ -7552,7 +7507,7 @@
                             
                             <%}%>
                             </div>
-                            <div id="BlockedPeopleDiv" style="display: none;">
+                            <div class="scrolldiv" style="height: 450px; overflow-y: auto;" id="BlockedPeopleDiv" style="display: none;">
                                 
                                 <%
                                     boolean isBlockedEmpty = true;
@@ -7794,6 +7749,7 @@
             alert(ControllerResult);
     </script>
     <script src="scripts/script.js"></script>
+    <script src="ServiceProviderPageAddCardBizScripts.js"></script>
     <script src="scripts/checkAppointmentDateUpdate.js"></script>
     <script src="scripts/QueueLineDivBehavior.js"></script>
     <script src="scripts/CollectAddressInfo.js"></script>

@@ -15,6 +15,12 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        
+        <script>
+            document.cookie = "SameSite=None";
+            document.cookie = "SameSite=None; Secure";
+        </script>
+        
         <title>Queue Payment</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
@@ -100,8 +106,6 @@ and open the template in the editor.
              //JOptionPane.showMessageDialog(null, response.getHeader("Set-Cookie"));
         %>
         <script>
-            document.cookie = "SameSite=None";
-            document.cookie = "SameSite=None; Secure";
             
             var isStripeCustomerCreated = false;
             var CustomerId = '';

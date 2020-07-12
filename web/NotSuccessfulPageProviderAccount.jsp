@@ -444,22 +444,29 @@
                    
                 %>
                 
-                <div style="background-color: white; height: 250px; margin: 2px; margin-bottom: 5px; padding-top: 5px; padding: 5px; display: flex; flex-direction: column; justify-content: center;">
+                <div style="background-color: white; margin: 2px; margin-bottom: 5px; padding: 10px; padding: 5px; display: flex; flex-direction: column; justify-content: center;">
                     <%
                         if(base64Image != ""){
                     %>
-                    <img class="fittedImg" style="width: 100px; height: 100px; margin-bottom: 10px;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                    <p style="text-align: center;"><img class="fittedImg" style="width: 100px; height: 100px; border-radius: 100%; margin-bottom: 10px;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/></p>
                 
                     <%}%>
                 <p><%=FullName%></p>
                 <p><%=Company%></p>
                 <p><%=Tel%></p>
-                <p><%=Email%></p>
+                <p style="margin-bottom: 5px;"><%=Email%></p>
                 
                 <form name="login" action="LoginControllerMain" method="POST">
-                    <input style="background-color: #d9e8e8; padding: 5px;" placeholder="enter user name here" type="hidden" name="username" value="<%=UserName%>" />
-                    <input style="background-color: #d9e8e8; padding: 5px; width: 50%;" placeholder="enter password here" type="password" name="password" value="" />
-                    <input style="background-color: darkslateblue; padding: 5px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" />
+                    <fieldset class="loginInputFld">
+                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Username</span></p>
+                        <input placeholder="enter username here" type="text" name="username" value="<%=UserName%>" />
+                    </fieldset>
+                    <fieldset class="loginInputFld" style="margin-top: 5px;">
+                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                           <input class="passwordFld" placeholder="enter password here" type="password" name="password" value="" />
+                           <p style="text-align: right; margin-top: -20px; padding-right: 10px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                    </fieldset>
+                    <input style="background-color: darkslateblue; padding: 10px 5px; width: 150px; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Login" />
                 </form>
                 
                 <p style="clear: both;"></p>

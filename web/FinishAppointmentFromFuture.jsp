@@ -581,7 +581,7 @@
                 
                 <cetnter><p> </p></cetnter>
                 <center><div id="providerlist">
-                <h4 style="color: black; padding-top: 5px;">Finish Here</h4>
+                <!--h4 style="color: black; padding-top: 5px;">Finish Here</h4-->
                 
                 <center><table id="providerdetails" style="">
                         
@@ -1275,11 +1275,12 @@
                                     
                                     <%}%>
                                     
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border-radius: 4px; background-color: darkslateblue; color: white; padding: 5px; cursor: pointer;">Customize Your Spot</p>
+                                    <div style="background-color: #eeeeee; padding: 5px; border-top: 1px solid darkgrey;">
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border-radius: 4px; background-color: #365266; color: white; padding: 10px 0; cursor: pointer;">Customize Your Spot <i class="fa fa-caret-down"></i></p>
                                     
                                     <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
                                         
-                                    <div id="serviceslist">
+                                        <div id="serviceslist" style="border-top: none;">
                                         
                                        <p style="color: tomato;">Select Date</p>
                                        <p>Click on date field below to set date</p>
@@ -1387,8 +1388,9 @@
                                     </div>
                                         
                                     </div>
+                                    </div>
                                     
-                                    <div id="QueuLineDiv">
+                                    <div id="QueuLineDiv" style="padding-bottom: 5px; border-top: 1px solid darkgrey; border-bottom: 1px solid darkgrey;">
                                         
                                         <p style="color: tomato;">Suggested Spots Listed Below</p> 
                                       
@@ -1471,11 +1473,11 @@
                                         
                                     %>
                                     
-                                    <div id="serviceslist" style="clear: both;">
+                                    <div id="serviceslist" style="clear: both; border-top: none;">
                                         
                                         <div id="reviewsheet">
                                         
-                                        <p style="color: tomato;">Review Spot Details</p>
+                                        <p style="color: darkblue; font-weight: bolder; text-align: center;">Review Spot Details</p>
                                         
                                         <p> Type: <span style="color: red; float: right;"><%=ServiceCategory%></span></p>
                                         <p><input id="formsServiceCategory" type="hidden" name="formsServiceCategory" value="<%=ServiceCategory%>" /></p>

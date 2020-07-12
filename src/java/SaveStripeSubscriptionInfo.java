@@ -61,13 +61,14 @@ public class SaveStripeSubscriptionInfo extends HttpServlet {
             
             Class.forName(Driver);
             Connection saveConn = DriverManager.getConnection(url, user, password);
-            String saveString = "UPDATE  QueueObjects.StripSubscriptions SET StripeProductId = ?, StripeSubscriptionId = ?, StripePriceId = ?"
+            String saveString = "UPDATE  QueueObjects.StripSubscriptions SET StripeProductId = ?, StripeSubscriptionId = ?, StripePriceId = ?, status = ?"
                     + " where ProvId = ?";
             PreparedStatement savePst = saveConn.prepareStatement(saveString);
             savePst.setString(1, StripeProductId);
             savePst.setString(2, StripeSubscriptionID);
             savePst.setString(3, StripePriceID);
-            savePst.setString(4, ProviderID);
+            savePst.setInt(4, 1);
+            savePst.setString(5, ProviderID);
             
             savePst.executeUpdate();
         }catch(Exception e){

@@ -43,6 +43,8 @@
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
+        <script src="https://js.stripe.com/v3/"></script>
+        
         <!--script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
@@ -214,17 +216,21 @@
         String User = config.getServletContext().getAttribute("DBUser").toString();
         String Password = config.getServletContext().getAttribute("DBPassword").toString();*/
         
+        String FullName = "";
+        
         try{
             
             Class.forName(Driver);
             Connection PicConn = DriverManager.getConnection(url, User, Password);
-            String PicQuery = "Select Profile_Pic from ProviderCustomers.CustomerInfo where Customer_ID = ?";
+            String PicQuery = "Select Profile_Pic, First_Name, Last_Name from ProviderCustomers.CustomerInfo where Customer_ID = ?";
             PreparedStatement PicPst = PicConn.prepareStatement(PicQuery);
             PicPst.setInt(1, UserID);
             
             ResultSet PicRec = PicPst.executeQuery();
             
             while(PicRec.next()){
+
+                FullName = PicRec.getString("First_Name").trim() + " " + PicRec.getString("Last_Name").trim();
                 
                 try{    
                     //put this in a try catch block for incase getProfilePicture returns nothing
@@ -249,7 +255,7 @@
             }
             
         }catch(Exception e){e.printStackTrace();}
-        
+        //JOptionPane.showMessageDialog(null,FullName);
         /*String SessionID = request.getRequestedSessionId();
         String DatabaseSession = "";
         //JOptionPane.showMessageDialog(null, SessionID);
@@ -398,15 +404,31 @@
         %>
         
         <%
+            String StripeAccID = "";
+            try{
+                Class.forName(Driver);
+                Connection StripAccIDConn = DriverManager.getConnection(url, User, Password);
+                String StripAccIDSql = "select * from QueueServiceProviders.StripeConnectedAccountIDs where ProvID = ?";
+                PreparedStatement StripAccIDPst = StripAccIDConn.prepareStatement(StripAccIDSql);
+                StripAccIDPst.setString(1, ID);
+                ResultSet StripAccRec = StripAccIDPst.executeQuery();
+                
+                while(StripAccRec.next()){
+                    StripeAccID = StripAccRec.getString("StripeConnectID").trim();
+                }
+            }catch(Exception e){}
+        %>
+        
+        <%
             //getting cancellation policy data
             boolean hasCancellation = false;
-            int CancelElapse = 0;
+            //int CancelElapse = 0;
             int ChargePercent = 0;
             
             try{
                 Class.forName(Driver);
                 Connection CnclPlcyConn = DriverManager.getConnection(url, User, Password);
-                String CnclPlcyString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyTimeElapse%' ";
+                String CnclPlcyString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyChargeCost%' ";
                 PreparedStatement CnclPlcyPst = CnclPlcyConn.prepareStatement(CnclPlcyString);
                 CnclPlcyPst.setString(1,ID);
                 ResultSet CnclRow = CnclPlcyPst.executeQuery();
@@ -416,9 +438,10 @@
                     if(!CnclRow.getString("CurrentValue").trim().equals("0")){
                         
                         hasCancellation = true;
-                        CancelElapse = Integer.parseInt(CnclRow.getString("CurrentValue").trim());
+                        ChargePercent = Integer.parseInt(CnclRow.getString("CurrentValue").trim());
+                        //CancelElapse = Integer.parseInt(CnclRow.getString("CurrentValue").trim());
                         
-                        try{
+                        /*try{
                             Class.forName(Driver);
                             Connection CnclPlcyConn2 = DriverManager.getConnection(url, User, Password);
                             String CnclPlcyString2 = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyChargeCost%' ";
@@ -433,7 +456,7 @@
                         }
                         catch(Exception e){
                             e.printStackTrace();
-                        }
+                        }*/
                         
                     }
                     //JOptionPane.showMessageDialog(null, ChargePercent);
@@ -1024,7 +1047,7 @@
                 
                 <cetnter><p> </p></cetnter>
                 <center><div id="providerlist">
-                <h4 style="color: black; padding-top: 5px;">Finish Here</h4>
+                <h4 style="color: black; padding: 10px 0;">Finish Here</h4>
                 
                 <center><table id="providerdetails" style="">
                         
@@ -1718,7 +1741,7 @@
                                 </div>
                                 </div>
                                 <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray;">
-                                <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="text-align: center; border: 0; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Find Future Spots</p>
+                                    <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="text-align: center; border: 0; border-radius: 4px; color: white; background-color: #365266; padding: 10px 0; cursor: pointer;">Find Future Spots <i class="fa fa-caret-down"></i></p>
                                     
                                     <center><div>
                                     <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpots.jsp">
@@ -1771,15 +1794,16 @@
                                 <form >
                                     
                                     <%
-                                        if(FormattedAppointmentTime != " "){
+                                        //if(FormattedAppointmentTime != " "){
                                             
                                     %>
                                     
-                                    <p id="ShowThisAppointmentTimeForFinishAppointmentWindow" style="color: red;">This line spot is for today at <%=FormattedAppointmentTime%></p>
+                                    <!--p id="ShowThisAppointmentTimeForFinishAppointmentWindow" style="color: red;">This line spot is for today at <=FormattedAppointmentTime%></p-->
                                     
-                                    <%}%>
+                                    <%//}%>
                                     
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 0; color: white; border-radius: 4px; background-color: darkslateblue; padding: 5px; cursor: pointer;">Customize Your Spot</p>
+                                    <div style="background-color: #eeeeee; padding: 5px 0;">
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 0; color: white; border-radius: 4px; background-color: #365266; padding: 10px 0; cursor: pointer;">Customize Your Spot <i class="fa fa-caret-down"></i></p>
                                     
                                     <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
                                         
@@ -1891,14 +1915,15 @@
                                     </div>
                                         
                                     </div>
+                                    </div>
                                     
-                                    <div id="QueuLineDiv">
+                                    <div id="QueuLineDiv" style="padding-bottom: 5px; border-bottom: 1px solid darkgrey;">
                                         
                                         <p style="color: tomato;">Suggested Spots For Today Listed Below</p> 
                                       
                                         <center><p>You may also choose a spot from suggested list below</p></center>
                                         
-                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Show Suggested Spots For Today</p>
+                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: #365266; padding: 10px 0; cursor: pointer;">Show Suggested Spots For Today <i class="fa fa-caret-down"></i></p>
                                         
                                         <center><p id="SuggestedTimeDivStatus" style="color: white; background-color: green; text-align: center;"></p></center>
                                    
@@ -1981,11 +2006,11 @@
                                         
                                     %>
                                     
-                                    <div id="serviceslist" style="clear: both;">
+                                    <div id="serviceslist" style="clear: both; border-top: none;">
                                         
                                         <div id="reviewsheet">
                                         
-                                        <p style="color: tomato;">Review Spot Details</p>
+                                        <p style="color: darkblue; font-weight: bolder; text-align: center;">Review Spot Details</p>
                                         
                                         <p> Type: <span style="color: red; float: right;"><%=ServiceCategory%></span></p>
                                         <p><input id="formsServiceCategory" type="hidden" name="formsServiceCategory" value="<%=ServiceCategory%>" /></p>
@@ -2004,11 +2029,11 @@
                                             <%  }   //end of condition%>
                                             
                                             </p>
-                                        <p style='display: none;'> Payment: <span style="color: red; float: right;">
+                                        <p id='PaymentOptionsP'> Payment: <span style="color: red; float: right;">
                                             <%
                                                 if(!hasCancellation){
                                             %>
-                                            <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" value="Cash" checked="true" style="background-color: white;"/><label for="Cash" style="margin-right: 5px">Later</label></span>
+                                            <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" value="Cash" style="background-color: white;"/><label for="Cash" style="margin-right: 5px">Later</label></span>
                                                 / <%}%><span onclick="toggleShowCardDetailsDiv()"><input onclick="toggleShowCardDetailsDiv()" id="Credit/Debit" type="radio" name="payment" value="Debit/Credit Card" style="background-color: white;"/><label for="Credit/Debit">Now</label></span></span></p>
                                                 <p style="clear: both;"></p>
                                         <p> Price: <span style="color: red; float: right;">$<%=TotalPrice%></span></p>
@@ -2030,11 +2055,18 @@
                                     </div>
                                         
                                     <center>
+                                        
+                                        <script>
+                                            var PaymentAmount = '<%=(TaxedPrice * 100)%>';
+                                        </script>
                                          
                                         <%
                                             if(hasCancellation == true){
                                         %>
                                         <p style="font-weight: bolder; text-align: center; color: darkblue;"><i style="color: red;" class="fa fa-exclamation-triangle"></i> <%=fullName%> has a cancellation policy.</p>
+                                        <script>
+                                            PaymentAmount = '<%=(CnclCharge * 100)%>';
+                                        </script>
                                         <%}%>
                                         
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; font-weight: bolder; color: darkblue; padding: 5px;"></p>
@@ -2096,19 +2128,19 @@
                                         
                                         
                                          <%
-                                            //putting neccessery data into
+                                            /*/putting neccessery data into
 
                                             ResendAppointmentData.ProviderID = Integer.toString(PID);
                                             ResendAppointmentData.SelectedServices = SelectedServicesList;
 
 
-                                            ResendAppointmentData.ServicesCost = Double.toString(TaxedPrice);
+                                            ResendAppointmentData.ServicesCost = Double.toString(TaxedPrice);*/
                                         %>
                                         
                                 </form>
                                         
                                         <center><div id="CreditDebitCardDetails" style="padding: 10px; background-color: #eeeeee;">
-                                            <p style="color: crimson; font-weight: bolder; text-align: center;">Add Your Debit/Credit Card</p>
+                                            <p id='PayBelowThenConfirmStatus' style="color: crimson; font-weight: bolder; text-align: center;">Pay below then confirm here</p>
                                             
                                                     
                                             <form name="PaymentForm" action="PayAndSubmitQueueLoggedIn.jsp" method="POST">
@@ -2139,10 +2171,11 @@
                                             <%
                                                 if(hasCancellation){
                                             %>
-                                            <p style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;"><i style="color: orange;" class="fa fa-info-circle"></i> <%=fullName.split(" ")[0]%> charges <span style=""><%=ChargePercent%>%</span> cancellation fee</p>
+                                            <p id='ChargesPercentStatus' style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;"><i style="color: orange;" class="fa fa-info-circle"></i> <%=fullName.split(" ")[0]%> charges <span style=""><%=ChargePercent%>%</span> cancellation fee</p>
                                             <!--p style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;">cancell at <=CancelElapse%> </p-->
                                             <%}%>
-                                                <table id="paymentDetailsTable">
+                                            
+                                                <!--table id="paymentDetailsTable">
                                                     <tbody>
                                                     
                                                         <tr><td style="border-radius: 0; padding: 4px;">Card Number: </td><td style="border-radius: 0; padding: 4px;"><input onclick="checkMiddleCardNumber();" onkeydown="checkMiddleCardNumber();" id="cardNumber" style="background-color: #eeeeee;" type="text" name="C/DcardNumber" value="" /></td></tr>
@@ -2230,12 +2263,113 @@
                                                               
                                                             }
                                                          },1);
-                                                </script>
+                                                </script-->
                                                 
-                                                <p  style="font-weight: bolder; color: darkblue; text-align: center;"><i style="color: red;" class="fa fa-exclamation-triangle"></i> <span id="paymentBtnStatus"></span></p>
-                                                <input id="submitPaymentBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px;" type="submit" value="Submit Payment" name="paymentBtn" />
+                                                <p  style="font-weight: bolder; color: darkblue; text-align: center;"><span id="paymentBtnStatus"></span></p>
+                                                <input id="submitPaymentBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px;" type="submit" value="Confirm Appointment" name="paymentBtn" />
                                                 
                                             </form>
+                                            
+                                            <script>
+                                                // Set your publishable key: remember to change this to your live publishable key in production
+                                                // See your keys here: https://dashboard.stripe.com/account/apikeys
+                                                var stripe = Stripe('pk_live_8lUzTgKEDL8iLlezPYrQL4so00KOSnuiut');
+                                                var elements = stripe.elements();
+                                            </script>
+                                            <div id='DivForCardPay'>
+                                                <p style='display: block; border-bottom: 1px solid darkgrey;'></p>
+                                            
+                                                <form id="payment-form" style='padding-bottom: 10px;'>
+
+                                                    <p style='text-align: center; font-weight: bolder; padding-bottom: 10px; color: crimson;'>Add your payment card</p>
+
+                                                    <div id="card-element">
+                                                          <!-- Elements will create input elements here -->
+                                                    </div>
+
+                                                    <!-- We'll put the error messages in this element -->
+                                                    <div id="card-errors" role="alert"></div>
+
+                                                    <button id="PaymentSubmit" style='padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px; width: 100px; margin-top: 20px;'>Pay $</button>
+                                                </form>
+                                            </div>
+                                            <script>
+                                                
+                                                document.getElementById("PaymentSubmit").innerText += (parseInt(PaymentAmount) / 100);
+                                                
+                                                // Set up Stripe.js and Elements to use in checkout form
+                                                var style = {
+                                                  base: {
+                                                    color: "#32325d",
+                                                  }
+                                                };
+
+                                                var card = elements.create("card", { style: style });
+                                                card.mount("#card-element");
+                                                
+                                                
+                                                card.on('change', ({error}) => {
+                                                    const displayError = document.getElementById('card-errors');
+                                                    if (error) {
+                                                      displayError.textContent = error.message;
+                                                    } else {
+                                                      displayError.textContent = '';
+                                                    }
+                                                  });
+                                                  
+                                                  
+                                                  var form = document.getElementById('payment-form');
+
+                                                    form.addEventListener('submit', function(ev) {
+                                                      document.getElementById("PageLoader").style.display = "block";
+                                                      ev.preventDefault();
+                                                      //alert('<=StripeAccID%>');
+                                                      //alert(PaymentAmount);
+                                                      $.ajax({
+                                                          type: "GET",
+                                                          url: "./GetStripePaymentIntent",
+                                                          data: "ConnAccID=<%=StripeAccID%>&Charge="+PaymentAmount,
+                                                          success: function(result){
+                                                                //alert(result);
+                                                                if(result === "failed"){
+                                                                    document.getElementById("PageLoader").style.display = "none";
+                                                                    alert("<%=fullName.split(" ")[0]%> account cannot accept payments at this moment");
+                                                                    throw {msg: "server failed to create payment intent"};
+                                                                }
+                                                                let clientSecret = result;
+                                                                stripe.confirmCardPayment(clientSecret, {
+                                                                  payment_method: {
+                                                                    card: card,
+                                                                    billing_details: {
+                                                                      name: '<%=FullName%>'
+                                                                    }
+                                                                  }
+                                                                }).then(function(result) {
+                                                                  if (result.error) {
+                                                                    // Show error to your customer (e.g., insufficient funds)
+                                                                    document.getElementById("PageLoader").style.display = "none";
+                                                                    console.log(result.error.message);
+                                                                  } else {
+                                                                    // The payment has been processed!
+                                                                    if (result.paymentIntent.status === 'succeeded') {
+                                                                        document.getElementById("PageLoader").style.display = "none";
+                                                                        alert("you've Successfully Paid");
+                                                                        isPaymentSuccess = true;
+                                                                        $("#DivForCardPay").slideUp("fast");
+                                                                      // Show a success message to your customer
+                                                                      // There's a risk of the customer closing the window before callback
+                                                                      // execution. Set up a webhook or plugin to listen for the
+                                                                      // payment_intent.succeeded event that handles any business critical
+                                                                      // post-payment actions.
+                                                                    }
+                                                                  }
+                                                                });
+                                                            }
+                                                      });
+                                                    });
+                                                  
+                                            </script>
+                                            
                                         <%
                                             if(hasCancellation == true){
                                         %>
@@ -2262,16 +2396,16 @@
                                         %>
                                                 <script>
                                                     
-                                                        var cardNumber = document.getElementById("cardNumber");
+                                                        /*var cardNumber = document.getElementById("cardNumber");
                                                         var cardName = document.getElementById("cardName");
                                                         var cardDate = document.getElementById("cardDate");
-                                                        var cardCVV = document.getElementById("cardCVV");
+                                                        var cardCVV = document.getElementById("cardCVV");*/
                                                         var formsDateValue = document.getElementById("formsDateValue");
                                                         var formsTimeValue = document.getElementById("formsTimeValue");
                                                         var submitPaymentBtn = document.getElementById("submitPaymentBtn");
                                                         var paymentBtnStatus = document.getElementById("paymentBtnStatus");
                                                         
-                                                        function checksubmitPaymentBtn(){
+                                                        /*function checksubmitPaymentBtn(){
                                                             
                                                             if(formsDateValue.value === "" || formsTimeValue.value === "" || formsDateValue.value === " " || formsTimeValue.value === " "
                                                                     || cardNumber.value === "" || cardName.value === "" || cardDate.value === "" || cardCVV.value === ""){
@@ -2285,11 +2419,97 @@
                                                             }
                                                              
                                                             
+                                                        }*/
+    
+                                                        var isPaymentSuccess = false;
+                                                        
+                                                        function checksubmitPaymentBtn(){
+                                                            
+                                                            if(formsDateValue.value === "" || formsTimeValue.value === "" || formsDateValue.value === " " || formsTimeValue.value === " "){
+                                                                submitPaymentBtn.style.backgroundColor = "darkgrey";
+                                                                submitPaymentBtn.disabled = true;
+                                                                paymentBtnStatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please set appointment date or time.";
+                                                            }else if(isPaymentSuccess === false){
+                                                                submitPaymentBtn.style.backgroundColor = "darkgrey";
+                                                                submitPaymentBtn.disabled = true;
+                                                                paymentBtnStatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please add your card to pay.";
+                                                            }else{
+                                                                submitPaymentBtn.style.backgroundColor = "darkslateblue";
+                                                                submitPaymentBtn.disabled = false;
+                                                                paymentBtnStatus.innerHTML = "<i style='color: green;' class='fa fa-check'></i> OK";
+                                                            }
+                                                             
+                                                            
                                                         }
                                                         
+                                                        
                                                         setInterval(checksubmitPaymentBtn, 1);
+                                                        
+                                                        if((parseInt(PaymentAmount) / 100) === 0){
+                                                            //alert("here");
+                                                            document.getElementById("PaymentOptionsP").style.display = "none";
+                                                            if(document.getElementById("Cash"))
+                                                                document.getElementById("Cash").checked = true;
+                                                            isPaymentSuccess = true;
+                                                            $("#DivForCardPay").slideUp("fast");
+                                                            if(document.getElementById("ChargesPercentStatus"))
+                                                                document.getElementById("ChargesPercentStatus").style.display = "none";
+                                                            if(document.getElementById("PayBelowThenConfirmStatus"))
+                                                                document.getElementById("PayBelowThenConfirmStatus").style.display = "none";
+                                                        }
                                                     
-                                                </script>      
+                                                </script>  
+                                                
+                                                <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#submitPaymentBtn').click(function(event) {  
+                                                        document.getElementById("PageLoader").style.display = "block";
+                                                        var ProviderID = document.getElementById("SendApptPID").value;
+                                                        var CustomerID = document.getElementById("SendApptCustID").value;
+                                                        var UserIndex = document.getElementById("SendApptUserIndex").value;
+                                                        var NewUserName = document.getElementById("sendApptUser").value;
+                                                        var TotalPrice = document.getElementById("TaxedPrice").value;
+                                                        var ApptDate = document.getElementById("formsDateValue").value;
+                                                        var ApptTime = document.getElementById("formsTimeValue").value;
+                                                        var ApptReason = document.getElementById("formsOrderedServices").value;
+                                                        var PayMeth = $("input:radio[name=payment]:checked").val();
+                                                        
+                                                        /*alert("ProviderID: "+ProviderID);
+                                                        alert("CustomerID: "+CustomerID);
+                                                        alert("UserIndex: "+UserIndex);
+                                                        alert("TotalPrice: "+TotalPrice);
+                                                        alert("ApptDate: "+ApptDate);
+                                                        alert("ApptTime: "+ApptTime);
+                                                        alert("ApptReason: "+ApptReason);
+                                                        alert("Payment Method: "+PayMeth);*/
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "SendAppointmentControl",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&TotalPrice="+TotalPrice+"&formsDateValue="+ApptDate+"&formsTimeValue="+ApptTime+"&formsOrderedServices="+ApptReason+"&payment="+PayMeth,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          if(result === "Success"){
+                                                              alert("You've been enqueued successfully!");
+                                                              if($(window).width() > 1000){
+                                                                  //document.getElementById("PageLoader").style.display = "none";
+                                                                window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              }else{
+                                                                window.location.replace("ProviderCustomerSpotsWindow.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              }
+                                                          }else{
+                                                              alert(result);
+                                                              document.getElementById("PageLoader").style.display = "none";
+                                                          }
+                                                          //document.getElementById("eachClosedDate<>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
                                                 
                                         </div></center>
                             </td> 

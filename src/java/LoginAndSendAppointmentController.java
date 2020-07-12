@@ -62,6 +62,14 @@ public class LoginAndSendAppointmentController extends HttpServlet {
         String PaymentMethod = request.getParameter("PaymentMethod");
         String DebitCreditCardNumber = request.getParameter("DebitCreditCard");
         
+        /*JOptionPane.showMessageDialog(null, ProviderID);
+        JOptionPane.showMessageDialog(null, OrderedServices);
+        JOptionPane.showMessageDialog(null, AppointmentDate);
+        JOptionPane.showMessageDialog(null, AppointmentTime);
+        JOptionPane.showMessageDialog(null, ServicesCost);
+        JOptionPane.showMessageDialog(null, PaymentMethod);
+        JOptionPane.showMessageDialog(null, DebitCreditCardNumber);*/
+        
         String VerifiedName = "";
         
         //putting neccessery data into
@@ -189,7 +197,12 @@ public class LoginAndSendAppointmentController extends HttpServlet {
 
                  //Date DateForClosedCompare = new Date();
                 SimpleDateFormat DateForCompareSdf2 = new SimpleDateFormat("yyyy-MM-dd");
-                String StringDateForCompare = DateForCompareSdf2.format(DateForClosedCompare);
+                String StringDateForCompare = "";
+                
+            try{
+               StringDateForCompare = DateForCompareSdf2.format(DateForClosedCompare);
+            }catch(Exception e){}
+                
 
             try{
 

@@ -388,7 +388,7 @@
                 <center><h4 style = "margin-bottom: 15px;">____________________________________________</h4></center-->
                 
                 <%if(Message != null){%>
-                    <center><h4 style="color: white; margin-bottom: 15px; max-width: 350px;"><%=Message%></h4></center>
+                    <center><h4 style="color: #334d81; margin-bottom: 15px; max-width: 350px;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> <%=Message%></h4></center>
                 <%}%>
                     
                 <center><h2 style="margin-bottom: 20px;">Reset Your Password</h2></center>
@@ -594,9 +594,6 @@
                     
                     <table border="0">
                         <tbody>
-                            <tr>
-                                <td><h3 style="color: white; text-align: center;">Provide your information below</h3></td>
-                            </tr>
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">

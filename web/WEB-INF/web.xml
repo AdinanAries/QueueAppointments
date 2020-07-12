@@ -493,6 +493,22 @@
         <servlet-name>retryPaymentWithNewInvoice</servlet-name>
         <servlet-class>retryPaymentWithNewInvoice</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>stripe_connect_oauth</servlet-name>
+        <servlet-class>stripe_connect_oauth</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IsBizBankCardAdded</servlet-name>
+        <servlet-class>IsBizBankCardAdded</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetStripePaymentIntent</servlet-name>
+        <servlet-class>GetStripePaymentIntent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubscriptionStatusWebHookHandler</servlet-name>
+        <servlet-class>SubscriptionStatusWebHookHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -936,6 +952,22 @@
     <servlet-mapping>
         <servlet-name>retryPaymentWithNewInvoice</servlet-name>
         <url-pattern>/retryPaymentWithNewInvoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>stripe_connect_oauth</servlet-name>
+        <url-pattern>/stripe_connect_oauth</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IsBizBankCardAdded</servlet-name>
+        <url-pattern>/IsBizBankCardAdded</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetStripePaymentIntent</servlet-name>
+        <url-pattern>/GetStripePaymentIntent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubscriptionStatusWebHookHandler</servlet-name>
+        <url-pattern>/SubscriptionStatusWebHookHandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -66,7 +66,13 @@ public class SignupAndSendAppointmentController extends HttpServlet {
         String PaymentMethod = request.getParameter("PaymentMethod");
         String DebitCreditCardNumber = request.getParameter("DebitCreditCard");
         
-        
+        request.setAttribute("ApptProvID", ProviderID);
+        request.setAttribute("ApptServices", OrderedServices);
+        request.setAttribute("ApptDate", AppointmentDate);
+        request.setAttribute("ApptTime", AppointmentTime);
+        request.setAttribute("ApptCost", ServicesCost);
+        request.setAttribute("ApptPayMeth", PaymentMethod);
+        request.setAttribute("ApptCardNum", DebitCreditCardNumber);
         
         int UserIndex = ExistingProviderAccountsModel.getUserIndex();
         
@@ -94,7 +100,7 @@ public class SignupAndSendAppointmentController extends HttpServlet {
             }
             
             if(istel == 1)
-                response.sendRedirect("NotSuccessfulPageCustomerSendApp.jsp?UserIndex="+UserIndex);
+                request.getRequestDispatcher("NotSuccessfulPageCustomerSendApp.jsp?UserIndex="+UserIndex).forward(request, response);
         
         }catch(Exception e){
             e.printStackTrace();
@@ -126,7 +132,8 @@ public class SignupAndSendAppointmentController extends HttpServlet {
            }
            
            if(isuser == 1)
-               response.sendRedirect("NotSuccessfulPageCustomerSendApp.jsp?UserIndex="+UserIndex);
+               //response.sendRedirect("NotSuccessfulPageCustomerSendApp.jsp?UserIndex="+UserIndex);
+               request.getRequestDispatcher("NotSuccessfulPageCustomerSendApp.jsp?UserIndex="+UserIndex).forward(request, response);
             
         }
         catch(Exception e){

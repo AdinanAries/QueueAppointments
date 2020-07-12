@@ -581,7 +581,7 @@
                 
                 <cetnter><p> </p></cetnter>
                 <center><div id="providerlist">
-                <h4 style="color: black; padding-top: 5px;">Finish Here</h4>
+                <!--h4 style="color: black; padding-top: 5px;">Finish Here</h4-->
                 
                 <center><table id="providerdetails" style="">
                         
@@ -1273,7 +1273,7 @@
                                 </div>
                                 
                                 <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray;">
-                                <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="text-align: center; border-radius: 4px; background-color: darkslateblue; color: white; padding: 5px; cursor: pointer;">Find Future Spots</p>
+                                    <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="text-align: center; border-radius: 4px; background-color: #365266; color: white; padding: 10px 0; cursor: pointer;">Find Future Spots <i class="fa fa-caret-down"></i></p>
                                     
                                     <center><div>
                                     <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpotsUnloggedIn.jsp">
@@ -1336,7 +1336,8 @@
                                     
                                     <%}%>
                                 
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Customize Your Spot</p>
+                                    <div style="background-color: #eeeeee; padding: 5px;">
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border-radius: 4px; color: white; background-color: #365266; padding: 10px 0; cursor: pointer;">Customize Your Spot <i class="fa fa-caret-down"></i></p>
                                     
                                     <div id="customizeAppointmentTime"  style="background-color: #eeeeee;">
                                         
@@ -1448,14 +1449,15 @@
                                     </div>
                                         
                                     </div>
+                                    </div>
                                             
-                                        <div id="QueuLineDiv">
+                                        <div id="QueuLineDiv" style="border-bottom: 1px solid darkgrey;">
                                             
                                             <p style="color: tomato;">Suggested Spots For Today Listed Below</p>
                                        
                                          <center><p>You may also choose a spot from suggested list below</p></center>
                                         
-                                         <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: darkslateblue; padding: 5px; cursor: pointer;">Show Suggested Spots For Today</p>
+                                         <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: #365266; padding: 10px 0; cursor: pointer;">Show Suggested Spots For Today <i class="fa fa-caret-down"></i></p>
                                          
                                          <center><p id="SuggestedTimeDivStatus" style="color: white; background-color: green; text-align: center;"></p></center>
                                          
@@ -1540,11 +1542,11 @@
                                         
                                     %>
                                                 
-                                    <div id="serviceslist" style="clear: both;">
+                                    <div id="serviceslist" style="clear: both; border-top: none;">
                                         
                                         <div id="reviewsheet">
                                             
-                                        <p style="color: tomato;">Review Spot Details</p>
+                                        <p style="color: darkblue; font-weight: bolder; text-align: center">Review Spot Details</p>
                                         
                                         <p> Type: <span style="color: red; float: right;"><%=ServiceCategory%></span></p>
                                         <p><input id="formsServiceCategory" type="hidden" name="formsServiceCategory" value="<%=ServiceCategory%>" /></p>
