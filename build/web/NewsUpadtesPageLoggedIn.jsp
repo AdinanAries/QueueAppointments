@@ -140,7 +140,19 @@
        
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #333333; padding-bottom: 0; position: absolute;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: #333333; padding-bottom: 0; height: auto !important; position: initial !important;">
+        
+        <style>
+            @media only screen and (max-width: 700px){
+                .dontShowMobile{
+                    display: none;
+                } 
+            }
+            .marginUp20{
+                margin-top: 20px;
+            }
+            
+        </style>
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -186,10 +198,49 @@
                         Home</span></a></p>
              
         </div></center-->
+        <div style='display: flex; flex-direction: row; justify-content: center; width: 100vw;'>
         
-    <center><div id="PhoneExtras" style='width: 100vw;'>
+            <div class='dontShowMobile' style='padding: 0 20px; margin: 10px; margin-top: 80px; background-color: #e6f3f7; height: 1200px; max-width: 300px;'>
             
-            <div id='PhoneNews' style='width: 100%; max-width: 500px; padding-top: 60px; margin: auto;' >
+            <h1 style='color: orange; font-size: 22px; font-family: serif; text-align: center; margin-top: 40px;'>What is Queue Appointments</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto;'>
+                        Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
+                        It also provides features for the businesses to post news updates with pictures to keep you informed about their services
+                        and products.
+                    </p>
+            
+            <div class='CosmeSectFlex' style='flex-direction: column;'>
+                        <div class='eachCSecFlex' style='width: 100%;'>
+                            <h1>Book your doctor's appointment online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20' style='width: 100%;'>
+                            <h1>Find barber shops near you</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20' style='width: 100%;'>
+                            <h1>Find your beauty time online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
+                            </div>
+                        </div>
+                </div>
+        </div>
+                    
+        
+    <div id="" style='max-width: 600px;'>
+            
+            <div id='PhoneNews' style='width: 100%; max-width: 600px; padding-top: 60px; margin: auto;' >
             <div id='News' style=''>
             <center><p style="color: darkblue; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
             
@@ -199,6 +250,47 @@
                         int newsItems = 0;
                         String newsQuery = "";
                         //String base64Profile = "";
+                        
+                        //Using location for querying news for only specific area
+                        String IDList = "(";
+                        String PCity = "";
+                        String PTown = "";
+                        String PZipCode = "";
+                        try{
+                            PCity = session.getAttribute("UserCity").toString().trim();
+                            PTown = session.getAttribute("UserTown").toString().trim();
+                            PZipCode = session.getAttribute("UserZipCode").toString().trim();
+                        }catch(Exception e){
+                            PCity = "";
+                            PTown = "";
+                            PZipCode = "";
+                        }
+
+                        try{
+
+                            Class.forName(Driver);
+                            Connection conn = DriverManager.getConnection(url, User, Password);
+                            String AddressQuery = "Select top 1000 ProviderID from QueueObjects.ProvidersAddress where City like '"+PCity+"%' and Town like '"+PTown+"%' ORDER BY NEWID()";
+                             // and Zipcode = "+zipCode;//+" ORDER BY NEWID()"; adding zipcode to search filter is going to narrow down search results. keeping search result up to whole town coverage
+                            PreparedStatement AddressPst = conn.prepareStatement(AddressQuery);
+                            ResultSet ProvAddressRec = AddressPst.executeQuery();
+
+                            boolean isFirst = true;
+                            while(ProvAddressRec.next()){
+
+                                if(!isFirst)
+                                    IDList += ",";
+
+                                IDList += ProvAddressRec.getString("ProviderID");
+                                //JOptionPane.showMessageDialog(null, ProvAddressRec.getInt("ProviderID"));
+                                //ProviderIDsFromAddress.add(ProvAddressRec.getInt("ProviderID"));
+                                isFirst = false;
+                            }
+                            IDList += ")";
+                            //JOptionPane.showMessageDialog(null, IDList);
+
+                        }catch(Exception e){}
+                        //This code snippet is need to be finished and replicated to all needed pages
                         
                        // while(newsItems < 10){
                             
@@ -376,7 +468,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="background-color: #eeeeee;">
                                     <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                                 </td>
                             </tr>
@@ -414,7 +506,7 @@
                         try{
                             Class.forName(Driver);
                             Connection newsConn = DriverManager.getConnection(url, User, Password);
-                            String newsQuery2 = "Select top 10 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                            String newsQuery2 = "Select top 10 * from QueueServiceProviders.MessageUpdates where ProvID in "+IDList+" and VisibleTo like 'Public%' order by MsgID desc";
                             PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
                             ResultSet newsRec = newsPst.executeQuery();
 
@@ -576,7 +668,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="background-color: #eeeeee;">
                                     <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
                                 </td>
                             </tr>
@@ -607,7 +699,130 @@
                </div> 
             </div>
         </div>
-        </div></center>
+               <div id='InfiniteScrollContent'>
+                   <p style='font-size: 20px; text-align: center; display: none; font-weight: bolder; padding: 40px;' id='loadingMoreNew'><i class="fa fa-spinner" style='color: #06adad' aria-hidden="true"></i> Loading more</p>
+               </div>
+        </div>
+               
+        <div class='dontShowMobile' style='padding: 0 20px; margin: 10px; height: 850px; margin-top: 80px; background-color: #e6f3f7; max-width: 300px;'>
+            <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px; text-align: center;'>We have the best services in your area</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto;'>
+                        Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
+                        our platform. Queue Appointments will eventually disassociate with badly rated businesses.
+                    </p>
+                    
+                    <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px; flex-direction: column;'>
+                        <div class='eachCSecFlex' style='width: 100%;'>
+                            <h1>Your reviews make a difference</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20' style='width: 100%;'>
+                            <h1>Fast growing community</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20' style='width: 100%;'>
+                            <h1>Our businesses keep you posted</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+               
+               <script>
+                        //infinite scroll
+                        const infiniteDiv = document.getElementById("InfiniteScrollContent");
+                        const loadingMoreP = document.getElementById("loadingMoreNew");
+                        
+                        //scroll event listener
+                        window.addEventListener('scroll', () => {
+                            //console.log("scrollHieght: " , document.documentElement.scrollHeight);
+                            //console.log("Calculated: " , window.scrollY + window.innerHeight);
+                            if(window.scrollY + window.innerHeight + 10 >= document.documentElement.scrollHeight){
+                                //console.log("bottom reached");
+                                loadingMoreP.style.display = "block";
+                                $(document).ready(()=>{
+                                   $.ajax({
+                                       type: "GET",
+                                       url: "./LoadMorePublicNews",
+                                       success: function(result){
+                                           let newsRec = JSON.parse(result);
+                                           newsRec.forEach((eachNews)=>{
+                                                let news = document.createElement("div");
+                                                news.innerHTML = 
+                                                '<table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">'+
+                                                     '<tbody>'+
+                                                         '<tr style="background-color: #eeeeee;">'+
+                                                             '<td>'+
+                                                                 '<div id="ProvMsgBxOne" style="padding-top: 10px;">'+
+                                                                     '<div style="font-weight: bolder;">'+
+                                                                             '<img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,'+eachNews.base64Profile+'"/>'+
+                                                                         '<div>'+
+                                                                             '<p>'+eachNews.ProvFirstName+'</p>'+
+                                                                             '<p style="color: red;">'+eachNews.ProvCompany+'</p>'+
+                                                                         '</div>'+
+                                                                     '</div>'+
+                                                                 '</div>'+
+                                                             '</td>'+
+                                                         '</tr>'+
+                                                         '<tr style="background-color: #eeeeee;">'+
+                                                             '<td style="padding: 0;">'+
+                                                                 '<div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">'+
+                                                                     '<p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">'+
+                                                                         '<a style="color: white;" href="mailto:'+eachNews.ProvEmail+'">'+
+                                                                             '<i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail'+
+                                                                         '</a>'+
+                                                                     '</p>'+
+                                                                    '<p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">'+
+                                                                         '<a style="color: white;" href="tel:'+eachNews.ProvTel+'">'+
+                                                                             '<i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call'+
+                                                                         '</a>'+
+                                                                     '</p>'+
+                                                                     '<p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">'+
+                                                                         '<a style="color: white;" href="https://maps.google.com/?q='+eachNews.ProvAddress+'" target="_blank">'+
+                                                                             '<i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map'+
+                                                                         '</a>'+
+                                                                     '</p>'+
+                                                                 '</div>'+
+                                                             '</td>'+
+                                                         '</tr>'+
+                                                         '<tr>'+
+                                                             '<td style="background-color: #eeeeee;">'+
+                                                                 '<p style="font-family: helvetica; text-align: justify; padding: 3px;">'+eachNews.Msg+'</p>'+
+                                                             '</td>'+
+                                                         '</tr>'+
+                                                         '<tr>'+
+                                                             '<td style="padding: 0;">'+
+                                                                 '<div>'+
+                                                                     '<img src="data:image/jpg;base64,'+eachNews.MsgPhoto+'" width="100%" alt="NewsImage"/>'+
+                                                                 '</div>'+
+                                                             '</td>'+
+                                                         '</tr>'+
+                                                     '</tbody>'+
+                                                 '</table>';
+                                                 infiniteDiv.appendChild(news); 
+                                            });
+                                            loadingMoreP.style.display = "none";
+                                       }
+                                   }); 
+                                });
+                            }
+                            
+                        });
+                        
+               </script>
+           
     </body>
     
     <script src="scripts/script.js"></script>

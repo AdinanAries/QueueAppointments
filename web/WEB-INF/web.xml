@@ -509,6 +509,10 @@
         <servlet-name>SubscriptionStatusWebHookHandler</servlet-name>
         <servlet-class>SubscriptionStatusWebHookHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadMorePublicNews</servlet-name>
+        <servlet-class>LoadMorePublicNews</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -968,6 +972,10 @@
     <servlet-mapping>
         <servlet-name>SubscriptionStatusWebHookHandler</servlet-name>
         <url-pattern>/SubscriptionStatusWebHookHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadMorePublicNews</servlet-name>
+        <url-pattern>/LoadMorePublicNews</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

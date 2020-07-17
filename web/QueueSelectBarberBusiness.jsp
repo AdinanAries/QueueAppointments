@@ -115,7 +115,7 @@
                    
                    Class.forName(Driver);
                    conn = DriverManager.getConnection(url, User, Password);
-                   String AddressQuery = "Select ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%'";
+                   String AddressQuery = "Select top 1000 ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%'";
                     // and Zipcode = "+zipCode;//+" ORDER BY NEWID()"; adding zipcode to search filter is going to narrow down search results. keeping search result up to whole town coverage
                    PreparedStatement AddressPst = conn.prepareStatement(AddressQuery);
                    ResultSet ProvAddressRec = AddressPst.executeQuery();

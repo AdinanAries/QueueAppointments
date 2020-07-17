@@ -90,6 +90,9 @@
         
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+        
         <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
@@ -199,6 +202,7 @@
         ResendAppointmentData.CreditCardNumber = "";
         
         int notiCounter = 0;
+        String GlobalIDList = "";
         
         config.getServletContext().setAttribute("DBUrl", config.getInitParameter("databaseUrl"));
         config.getServletContext().setAttribute("DBDriver", config.getInitParameter("databaseDriver"));
@@ -211,6 +215,18 @@
         String user = config.getServletContext().getAttribute("DBUser").toString();
         String password = config.getServletContext().getAttribute("DBPassword").toString();
         
+        String PCity = "";
+        String PTown = "";
+        String PZipCode = "";
+        try{
+            PCity = session.getAttribute("UserCity").toString().trim();
+            PTown = session.getAttribute("UserTown").toString().trim();
+            PZipCode = session.getAttribute("UserZipCode").toString().trim();
+        }catch(Exception e){
+            PCity = "";
+            PTown = "";
+            PZipCode = "";
+        }
         
         Date ThisDate = new Date();//default date constructor returns current date 
         String CurrentTime = ThisDate.toString().substring(11,16);
@@ -873,6 +889,102 @@
         
     %>
     
+    <%!
+        
+       class getUserDetails{
+           
+           //class instance fields
+           private Connection conn; //connection object variable
+           private ResultSet records; //Resultset object variable
+           private Statement st;
+           private String Driver;
+           private String url;
+           private String User;
+           private String Password;
+           private String IDList = "(";
+           
+           public void initializeDBParams(String driver, String url, String user, String password){
+               
+               this.Driver = driver;
+               this.url = url;
+               this.User = user;
+               this.Password = password;
+           }
+           
+           public String getIDsFromAddress(String city, String town, String zipCode){
+               
+               try{
+                   
+                   Class.forName(Driver);
+                   conn = DriverManager.getConnection(url, User, Password);
+                   String AddressQuery = "Select top 1000 ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%' ORDER BY NEWID()";// and Zipcode = "+zipCode;//+" ORDER BY NEWID()";
+                   PreparedStatement AddressPst = conn.prepareStatement(AddressQuery);
+                   ResultSet ProvAddressRec = AddressPst.executeQuery();
+                   
+                   boolean isFirst = true;
+                   while(ProvAddressRec.next()){
+                       
+                       if(!isFirst)
+                           IDList += ",";
+                       
+                       IDList += ProvAddressRec.getString("ProviderID");
+                       //JOptionPane.showMessageDialog(null, ProvAddressRec.getInt("ProviderID"));
+                       //ProviderIDsFromAddress.add(ProvAddressRec.getInt("ProviderID"));
+                       isFirst = false;
+                   }
+                   IDList += ")";
+                   //JOptionPane.showMessageDialog(null, IDList);
+                   
+               }catch(Exception e){}
+               
+               return IDList;
+               
+           }
+           
+           public ResultSet getRecords(){
+               
+               try{
+                    Class.forName(Driver); //registering driver class
+                    conn = DriverManager.getConnection(url,User,Password); //creating a connection object
+                    st = conn.createStatement();  //Creating a statement object
+                    String  select = "Select top 10 * from QueueServiceProviders.ProviderInfo where (Ratings = 5 or Ratings = 4) and Provider_ID in "+ IDList + " ORDER BY NEWID()"; //SQL query string
+                    records = st.executeQuery(select); //execute Query
+
+               }
+               catch(Exception e){
+                  e.printStackTrace();
+                }
+               
+                return records;
+            }
+       }
+       
+    %>
+    
+    <%
+            
+            getUserDetails details = new getUserDetails();
+            details.initializeDBParams(Driver, Url, user, password);
+            GlobalIDList = details.getIDsFromAddress(PCity, PTown, "");
+            //System.out.println(GlobalIDList);
+            
+            ArrayList <ProviderInfo> providersList = new ArrayList<>();
+            ResultSet rows = details.getRecords();
+            
+            try{
+                ProviderInfo eachrecord;
+                while(rows.next()){
+                    eachrecord = new ProviderInfo(rows.getInt("Provider_ID"),rows.getString("First_Name"), rows.getString("Middle_Name"), rows.getString("Last_Name"), rows.getDate("Date_Of_Birth"), rows.getString("Phone_Number"),
+                                                    rows.getString("Company"), rows.getInt("Ratings"), rows.getString("Service_Type"), rows.getString("First_Name") + " - " +rows.getString("Company"),rows.getBlob("Profile_Pic"), rows.getString("Email"));
+                    providersList.add(eachrecord);
+                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            
+        %>
+    
     <body onload="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';" id="CustomerPageHtmlBody">
         
         <div id='JumbotromBg' class="notShownOnMobile" style="width: 100vw; height: 800px; position: fixed; top: 0px; z-index: -1; background-color: white;"></div>
@@ -1035,7 +1147,7 @@
                   $.ajax({
                       type: "POST",
                       data: "city="+GoogleReturnedCity+"&town="+GoogleReturnedTown+"&zipcode="+GoogleReturnedZipCode,
-                      url: "addLocationDataToWebContext",
+                      url: "./addLocationDataToWebContext",
                       success: function(result){
                           //alert("Location added!");
                       }
@@ -1560,7 +1672,7 @@
                         try{
                             Class.forName(Driver);
                             Connection newsConn = DriverManager.getConnection(Url, user, password);
-                            String newsQuery2 = "Select top 10 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                            String newsQuery2 = "Select top 10 * from QueueServiceProviders.MessageUpdates where ProvID in "+GlobalIDList+" and VisibleTo like 'Public%' order by MsgID desc";
                             PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
                             ResultSet newsRec = newsPst.executeQuery();
 
@@ -5977,7 +6089,202 @@
                 </div>
                    
         <div class="DashboardFooter" style='background-color: #212c2c; position: relative; z-index: 100 !important; padding-top: 0;' id="footer">
-            <div id="CosmeticsSection">
+            <div id="CosmeticsSection" style="padding-top: 0;">
+                <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
+                    <h1 style='color: white; font-size: 19px; font-family: serif; padding-bottom: 20px;'>Popular Services</h1>
+                    
+                    <div style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
+                        <a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                            <div class="dontShowMobile eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                            <div class="dontShowMobile eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
+                            </div>
+                        </a>
+                    </div>
+                    <style>
+                        .eachPopularService{
+                            cursor: pointer;
+                        }
+                        /*.eachPopularService:hover{
+                            border-bottom: 1px solid #224467;
+                        }*/
+                        @media only screen and (max-width: 700px){
+                            .dontShowMobile{
+                                display: none;
+                            }
+                        }
+                    </style>
+                    
+                    <p style='margin: auto; margin-bottom: 20px; margin-top: 30px; display: block; border-bottom: #374949 1px solid; max-width: 700px;'></p>
+                    <h1 style='color: white; font-size: 19px; font-family: serif; padding: 10px 0;'>Suggested Places</h1>
+                    
+                    <div style="max-width: 1000px; margin: auto; text-align: center;">
+                        <div style="width: 85%; margin: auto;" class="recommendedProvidersDiv">
+                            <%
+                                for(int i = 0; i < providersList.size(); i++){
+                                    
+                                    String RProvName = providersList.get(i).getFirstName() + " " + providersList.get(i).getLastName() ;
+                                    int ratings = providersList.get(i).getRatings();
+                                    String RBizName = providersList.get(i).getCompany();
+                                    String RBizType = providersList.get(i).getServiceType().trim();
+                                    String RProPic = "";
+                                    String RCovPic = "";
+                                    int RPID = providersList.get(i).getID();
+                                    
+                                    try{    
+                                        //put this in a try catch block for incase getProfilePicture returns nothing
+                                        Blob profilepic = providersList.get(i).getProfilePicture(); 
+                                        InputStream inputStream = profilepic.getBinaryStream();
+                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                        byte[] buffer = new byte[4096];
+                                        int bytesRead = -1;
+
+                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                            outputStream.write(buffer, 0, bytesRead);
+                                        }
+
+                                        byte[] imageBytes = outputStream.toByteArray();
+
+                                         RProPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                    }
+                                    catch(Exception e){}
+                                    
+
+                                    try{
+                            
+                                        Class.forName(Driver);
+                                        Connection coverConn = DriverManager.getConnection(Url, user, password);
+                                        String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID =?";
+                                        PreparedStatement coverPst = coverConn.prepareStatement(coverString);
+                                        coverPst.setInt(1,RPID);
+                                        ResultSet cover = coverPst.executeQuery();
+
+                                        while(cover.next()){
+
+                                             try{    
+                                                //put this in a try catch block for incase getProfilePicture returns nothing
+                                                Blob profilepic = cover.getBlob("CoverPhoto"); 
+                                                InputStream inputStream = profilepic.getBinaryStream();
+                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                byte[] buffer = new byte[4096];
+                                                int bytesRead = -1;
+
+                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                    outputStream.write(buffer, 0, bytesRead);
+                                                }
+
+                                                byte[] imageBytes = outputStream.toByteArray();
+
+                                                RCovPic = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                            }
+                                            catch(Exception e){
+
+                                            }
+
+                                            if(!RCovPic.equals(""))
+                                                break;
+
+                                        }
+
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                            %>
+                            <a href='EachSelectedProviderLoggedIn.jsp?UserID=<%=RPID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>' onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                                <div style="height: 120px; background-color: #334d81;
+                                 padding: 15px 5px; border-radius: 10px; margin: 0 5px;
+                                 background: linear-gradient(rgba( 0, 0, 0, 0.3), rgba(0,0,0,0.8)), url('data:image/jpg;base64,<%=RCovPic%>'); background-size: cover;
+                                 background-position: center;
+                                 display: flex; flex-direction: column; justify-content: space-between;">
+                                    <div style='display: flex; flex-direction: row; justify-content: space-between;'>
+                                        <div>
+                                           <img src="data:image/jpg;base64,<%=RProPic%>" style="border-bottom-right-radius: 10px; border-top-left-radius: 10px; margin-top: -15px; margin-left: -5px; width: 70px; height: 70px; object-fit: cover;">
+                                        </div>
+                                        <div>
+                                            <p style="color: #fefde5; font-weight: bolder; font-size: 17px;"><%=RProvName%></p>
+                                            <p style="font-size: 20px; max-width: 200px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
+                                                        <span style="font-size: 20px; margin-left: 10px;">
+                                                        <%
+                                                            if(ratings ==5){
+
+                                                        %> 
+                                                        ★★★★★ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: white; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 4){
+                                                        %>
+                                                        ★★★★☆ 
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: white; font-size: 10px;"> Recommended</span></i>
+                                                        <%
+                                                             }else if(ratings == 3){
+                                                        %>
+                                                        ★★★☆☆ 
+                                                        <i class="fa fa-thumbs-up" style="color: orange; font-size: 16px; margin-left: 20px;"><span style="color: white; font-size: 10px;"> Average</span></i>
+                                                        <%
+                                                             }else if(ratings == 2){
+                                                        %>
+                                                        ★★☆☆☆ 
+                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: white; font-size: 10px;"> Bad rating</span></i>
+                                                        <%
+                                                             }else if(ratings == 1){
+                                                        %>
+                                                        ★☆☆☆☆   
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: white; font-size: 10px;"> Worst rating</span></i>
+                                                        <%}%>
+                                                        </span>
+                                                        
+                                                    </p>
+                                        </div>
+
+                                    </div>
+                                    <p style='color: white; font-weight: bolder;'><!--i style="color: tomato;" class="fa fa-briefcase" aria-hidden="true"></i--><%=RBizName%></p>
+                                    <p style="color: #ccc; margin-top: -3px;">- <%=RBizType%> -</p>
+                                </div>
+                            </a>
+                            <%}%>
+                            
+                          </div>
+                          <%
+                             if(providersList.size() == 0){
+                           %>
+                                <p style='color: white;'><i class='fa fa-exclamation-triangle' style='color: yellow;'></i> Oops! We have no recommendations at this time</p>
+                           <%}%>
+                    </div>
+                </div>
                 <div>
                     <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
                     <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
@@ -6108,7 +6415,47 @@
         </div>
                                         
     </div>
-                                    
+       <!--script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script-->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.recommendedProvidersDiv').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                dots: false,
+                responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                  }
+                },
+                {
+                  breakpoint: 850,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+              ]
+              });
+        });
+    </script>                             
     </body>
     <script>
         var ControllerResult = "<%=ControllerResult%>";

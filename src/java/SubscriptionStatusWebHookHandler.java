@@ -41,10 +41,10 @@ public class SubscriptionStatusWebHookHandler extends HttpServlet {
     @Override
     public void init(ServletConfig config){
         
-        DBDriver = config.getServletContext().getAttribute("").toString();
-        DBUrl = config.getServletContext().getAttribute("").toString();
-        DBUser = config.getServletContext().getAttribute("").toString();
-        DBPassword = config.getServletContext().getAttribute("").toString();
+        DBDriver = config.getServletContext().getAttribute("DBDriver").toString();
+        DBUrl = config.getServletContext().getAttribute("DBUrl").toString();
+        DBUser = config.getServletContext().getAttribute("DBUser").toString();
+        DBPassword = config.getServletContext().getAttribute("DBPassword").toString();
     }
 
     

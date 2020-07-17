@@ -934,7 +934,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID = ?";
+                            String coverString = "Select top 1 * from QueueServiceProviders.CoverPhotos where ProviderID = ?";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,UserID);
                             ResultSet cover = coverPst.executeQuery();
@@ -1036,7 +1036,7 @@
                             
                             Class.forName(Driver);
                             Connection coverConn = DriverManager.getConnection(Url, user, password);
-                            String coverString = "Select * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
+                            String coverString = "Select top 7 * from QueueServiceProviders.CoverPhotos where ProviderID = ? order by PicID desc";
                             PreparedStatement coverPst = coverConn.prepareStatement(coverString);
                             coverPst.setInt(1,UserID);
                             ResultSet cover = coverPst.executeQuery();
@@ -1486,7 +1486,7 @@
         try{
             Class.forName(Driver);
             Connection ReviewsConn = DriverManager.getConnection(Url, user, password);
-            String ReviewString = "Select * from QueueServiceProviders.ProviderCustomersReview where ProviderID = ? order by ReviewID desc";
+            String ReviewString = "Select top 1 * from QueueServiceProviders.ProviderCustomersReview where ProviderID = ? order by ReviewID desc";
             PreparedStatement ReviewPst = ReviewsConn.prepareStatement(ReviewString);
             ReviewPst.setInt(1, UserID);
             
@@ -1740,7 +1740,7 @@
         try{
             Class.forName(Driver);
             Connection lastNewsConn = DriverManager.getConnection(Url, user, password);
-            String lastNewsString = "Select * from QueueServiceProviders.MessageUpdates where ProvID = ? order by MsgID desc";
+            String lastNewsString = "Select top 1 * from QueueServiceProviders.MessageUpdates where ProvID = ? order by MsgID desc";
             PreparedStatement lastNewsPst = lastNewsConn.prepareStatement(lastNewsString);
             lastNewsPst.setInt(1, UserID);
             
@@ -1886,7 +1886,7 @@
                 
         <div id="container">
             
-            <div id="miniNavPov" style="height: 35px; padding-top: 3px; padding-bottom: 3px; padding-right: 2px; background-color: #334d81; opacity: 0.9">
+            <div id="miniNavPov" style="padding-top: 10px; padding-bottom: 10px; padding-right: 2px; background-color: #334d81; opacity: 0.9">
                 <center>
                     <script>
                         function showDropDown(){
@@ -1907,16 +1907,7 @@
                         }
                     </script>
                     
-                    <div style="float: right; width: 15%;" onclick="showProfile();">
-                        <%if(base64Image != ""){%>
-                            <img class="fittedImg" style="border-radius: 100%; margin-top: 2px;" src="data:image/jpg;base64,<%=base64Image%>" width="30" height="30" alt="icons8-menu-25"/>
-                        <%} else{%>
-                            <img style="border-radius: 100%; border: 2px solid white; background-color: white;" src="icons/icons8-user-filled-100.png" width="30" height="30"/>
-                        <%}%>
-                    </div>
-                    <!--onclick='hideDropDownBtnclick();'-->
-                    
-                    <div style='width: 85%; float: left; margin-left: 0;'>
+                    <div style=' margin-left: 0;'>
                         <div onclick="toggleHideAppointmentsDiv()" style="width: 25%; color: white; float: left; cursor: pointer; border-radius: 4px;">
                             <!--img style="background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;" src="icons/ProviderApptIcon.png" alt="" width="24" height="24"/-->
                             <i style="font-size: 25px;" class="fa fa-users"></i>
@@ -2648,21 +2639,8 @@
             </div>
                              
         <div id='ExtrasUserAccountDiv' style='display: none;'>
-            <center><p style="color: #254386; font-size: 19px; font-weight: bolder; margin-bottom: 10px;">Your Account</p></center>
-            
                 <table  id="ExtrasTab" cellspacing="0">
-                    <tbody>
-                        
-                        
-                        <tr>
-                            <td>
-                                <form action = "LogoutController" name="LogoutForm" method="POST"> 
-                                    <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input style='width: 95%;' type="submit" value="Logout" class="button" /></center>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
+                    
                 </table>
             </div>
                                 
@@ -3033,19 +3011,19 @@
                                         
                                     %>
                                     
-                                    <p id="PMargin" style="height: 40px; display: none;"></p>
+                                    <p id="PMargin" style="height: 60px; display: none;"></p>
                                     
                                      <%
                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
                                     %>
                                                  
-                                    <p style="color: tomato;">You are not open on <%=DayOfWeek%>...</p>
+                                    <!--p style="color: tomato;">You are not open on <%=DayOfWeek%>...</p-->
                                     
                                     <%
                                         }else  if(FormattedStartTime != "" || FormattedClosingTime != "" && !(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00"))){
                                     %>
                                     
-                                        <p><span>
+                                        <!--p><span>
                                             
                                         <%
                                             if((startHour > CurrentHourForStatusLed || closeHour < CurrentHourForStatusLed) && closeHour != 0){
@@ -3067,7 +3045,7 @@
                                             
                                         </span>Hours: <span style="color: tomato"><%=FormattedStartTime%></span> -
                                         <span style="color: tomato"><%=FormattedClosingTime%></span>,
-                                        <span style="color: tomato"><%=DayOfWeek%>, <%=stringDate%></span>.</p>
+                                        <span style="color: tomato"><%=DayOfWeek%>, <%=stringDate%></span>.</p-->
                                         
                                     <%
                                         }
@@ -3083,7 +3061,7 @@
                                     </script>
                                     <center><div class="scrolldiv" style="width: 95%; max-width: 600px; overflow-x: auto;">
                                     
-                                    <table style="width:100%; max-width: 600px;">
+                                    <table style="width:100%; max-width: 600px; border-spacing: 20px 5px !important;">
                                         <tbody>
                                             <tr>
                                                 
@@ -3442,14 +3420,14 @@
                                         
                                     <%}%>
                                     
-                                        <center><p style="padding-bottom: 10px;">Summary: <span style="color: blue;"><%=HowManyColums%> spots,</span> <span style="color: red;"> <%=TotalUnavailableList%> booked,</span> <span style="color: green;"> <%=TotalThisCustomerTakenList%> blocked</span></p></center>
+                                        <!--center><p style="padding-bottom: 10px;">Summary: <span style="color: blue;"><%=HowManyColums%> spots,</span> <span style="color: red;"> <%=TotalUnavailableList%> booked,</span> <span style="color: green;"> <%=TotalThisCustomerTakenList%> blocked</span></p></center-->
                                     
-                                        <p style=""><span style="color: blue; border: 1px solid blue;"><img src="icons/icons8-standing-man-filled-50 (1).png" width="30" height="25" alt="icons8-standing-man-filled-50 (1)"/>
+                                        <p style="margin: 20px 0;"><span style="color: blue; border: 1px solid blue;"><img src="icons/icons8-standing-man-filled-50 (1).png" width="30" height="25" alt="icons8-standing-man-filled-50 (1)"/>
                                         Not Taken </span> <span style="color: red; border: 1px solid red;"><img src="icons/icons8-standing-man-filled-50.png" width="30" height="25" alt="icons8-standing-man-filled-50"/>
                                         Taken </span> <span style="color: green; border: 1px solid green; padding-right: 3px;"><img src="icons/icons8-standing-man-filled-50 (2).png" width="30" height="25" alt="icons8-standing-man-filled-50 (2)"/>
                                         Blocked Spot </span> </p>
                                     
-                                        <form style=" margin-top: 10px; padding: 5px; background-color: #d8d8d8;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
+                                        <form style=" margin-top: 10px; padding: 5px; background-color: #d8d8d8; padding-bottom: 10px;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
                                             <p style="text-align: center; color: #000099; margin: 10px 0; font-weight: bolder;">Change Your Spots Intervals Below</p>
                                             
                                             <div style="display: flex; flex-direction: row; justify-content: center;">
@@ -5186,11 +5164,9 @@
                                 <div class="proinfo" style="padding-top:5px; margin-top:5px; padding-bottom: 5px; margin-bottom:5px;">
                             
                                     <p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; padding-top: 75px; text-align: center;"><%=FullName%></p>
+                                    <p style='margin-bottom: 10px; text-align: center;'><span style='font-weight: bolder;' id="CompanyDetail"><%=Company%></span></p>
                                     
-                                    <center><table style="border-spacing: 0; text-align: center;">
-                                        
-                                            <tr><td><p style='margin-bottom: 10px;'>
-                                                    <span style='font-weight: bolder;' id="CompanyDetail"><%=Company%></span></p></td></tr>
+                                    <!--center><table style="border-spacing: 0; text-align: center;">
                                             <tr><td><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
                                                         <span style="color: #636363;" id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
                                             <tr><td><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
@@ -5198,7 +5174,7 @@
                                         <tr><td><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
                                                 <span style="color: #636363;" id="AddressDetail"><%=Address.split(",")[0]%></span></p></td></tr>
                                     
-                                        </table></center>
+                                        </table></center-->
                                     
                                 </div>
                                         

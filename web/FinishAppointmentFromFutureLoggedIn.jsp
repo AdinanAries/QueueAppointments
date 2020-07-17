@@ -1921,6 +1921,7 @@
                                         
                                         <script>
                                             var PaymentAmount = '<%=(TaxedPrice * 100)%>';
+                                            var BallanceToPay = '0.00';
                                         </script>
                                         
                                         <%
@@ -1929,6 +1930,7 @@
                                         <p style="font-weight: bolder; text-align: center; color: darkblue;"><i style="color: red" class="fa fa-exclamation-triangle"></i> <%=fullName%> has a cancellation policy.</p>
                                         <script>
                                             PaymentAmount = '<%=(CnclCharge * 100)%>';
+                                            BallanceToPay = '<%=Double.parseDouble(decformat.format(TaxedPrice - CnclCharge))%>';
                                         </script>
                                         <%}%>
                                         
@@ -2136,6 +2138,24 @@
                                                 <form id="payment-form" style='padding-bottom: 10px;'>
 
                                                     <p style='text-align: center; font-weight: bolder; padding-bottom: 10px; color: crimson;'>Add your payment card</p>
+                                                    
+                                                    <%
+                                                        if(hasCancellation == true){
+                                                    %>
+                                                    <p id="SetPaymentFullBtn" onclick="SetPaymentFull();" 
+                                                       style="padding: 10px 0; margin-bottom: 10px; background-color: #365266; text-align: center; color: white; cursor: pointer; max-width: 200px; border-radius: 4px;">
+                                                        Set Full Payment <span style="color: darkgrey;"> - <%=TaxedPrice%></span> <i style="color: #fa755a; margin-left: 10px;" class="fa fa-arrow-down"></i></p>
+                                                    <script>
+                                                        function SetPaymentFull(){
+                                                            //PaymentAmount = '<=(CnclCharge * 100)%>';
+                                                            //BallanceToPay = '<=Double.parseDouble(decformat.format(TaxedPrice - CnclCharge))%>';
+                                                            PaymentAmount = '<%=(TaxedPrice * 100)%>';
+                                                            BallanceToPay = '0.00';
+                                                            document.getElementById("PaymentSubmit").innerHTML = "Pay $" + (parseInt(PaymentAmount) / 100) + "<span style='color: darkgrey;'> - Balance: $" + BallanceToPay + "</span>";
+                                                            document.getElementById("SetPaymentFullBtn").style.display = "none";
+                                                        }
+                                                    </script>
+                                                    <%}%>
 
                                                     <div id="card-element">
                                                           <!-- Elements will create input elements here -->
@@ -2144,12 +2164,12 @@
                                                     <!-- We'll put the error messages in this element -->
                                                     <div id="card-errors" role="alert"></div>
 
-                                                    <button id="PaymentSubmit" style='padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px; width: 100px; margin-top: 20px;'>Pay $</button>
+                                                    <button id="PaymentSubmit" style='padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px; width: 200px; margin-top: 20px;'>Pay $</button>
                                                 </form>
                                             </div>
                                                 <script>
                                                     
-                                                    document.getElementById("PaymentSubmit").innerText += (parseInt(PaymentAmount) / 100);
+                                                    document.getElementById("PaymentSubmit").innerHTML += (parseInt(PaymentAmount) / 100) + "<span style='color: darkgrey;'> - Balance: $" + BallanceToPay + "</span>";
                                                     
                                                     // Set up Stripe.js and Elements to use in checkout form
                                                     var style = {
