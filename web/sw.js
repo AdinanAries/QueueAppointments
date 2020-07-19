@@ -1,4 +1,4 @@
-const staticCacheName = 'site-static-v1';
+const staticCacheName = 'site-static-v2';
 
 //install service worker
 self.addEventListener('install', function(event) {
@@ -10,6 +10,13 @@ self.addEventListener('install', function(event) {
           '/QueueCSS.css',
           '/404.jsp',
           '/QueueLogo.png',
+          '/BarberAppt.jpg',
+          '/SpaAppt.jpg',
+          '/TMTlogo.svg',
+          '/ReviewIcon.png',
+          '/NewsPic.png',
+          '/DocAppt.jpg',
+          '/BizGroup.png',
           'https://fonts.googleapis.com/css?family=Roboto',
           'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
           'https://code.jquery.com/jquery-1.12.4.js',

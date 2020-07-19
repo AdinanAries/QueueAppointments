@@ -68,7 +68,6 @@
             
         </script>
         
-        <!--meta http-equiv="refresh" content="30"-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Queue  | Customer</title>
         <link href="QueueCSS.css" rel="stylesheet" media="screen" type="text/css"/>
@@ -77,14 +76,14 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
-        <!--script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script-->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+        
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
@@ -105,30 +104,34 @@
         
     </head>
     
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    
-    <script>
-        //window.localStorage.clear();
-        //alert(window.localStorage.getItem("QueueUserName"));
-        //alert(document.cookie);
-        //console.log(document.cookie);
-        </script>
+    <!--script>
+        if($(window).width() > 1000){
+            
+            var jQry = document.createElement('script');
+            jQry.setAttribute('src','https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js');
+            document.head.appendChild(jQry);
+            
+            var jQryTmPkr = document.createElement('script');
+            jQryTmPkr.setAttribute('src','//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js');
+            document.head.appendChild(jQryTmPkr);
+            
+            var SlickCarousel = document.createElement('script');
+            SlickCarousel.setAttribute('src','//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
+            document.head.appendChild(SlickCarousel);
+            
+        }
+    </script-->
     
     <%
         
         String GlobalUserName = "";
         String GlobalUserPassword = "";
         
-        //I asumed that if session is expired, then this block of code won't succeed, leaving GlobalUserName and GlobalUserPassword with null values
-        //or maybe empty Strings.
         if(session.getAttribute("ThisUserName") != null && session.getAttribute("ThisUserPassword") != null){
             GlobalUserName = session.getAttribute("ThisUserName").toString();
             GlobalUserPassword = session.getAttribute("ThisUserPassword").toString();
         }
         
-        
-        //JOptionPane.showMessageDialog(null, GlobalUserName);
-        //JOptionPane.showMessageDialog(null, GlobalUserPassword);
     %>
     
     <script>
@@ -138,8 +141,6 @@
         //check condition for in order to make sure we aren't storing empty strings or null inside of GlobalUserName and GlobalUserPassword
         if((GlobalUserName !== 'null' && GlobalUserPassword !== 'null') || (GlobalUserName !== '' && GlobalUserPassword !== '') ){
             
-            //set this only the first time and on subsequent page loads this condition will return false. Since localStorage.getItem() won't be null for provided parameters
-            //Then when user logs out, the parameters are removed for the local storage, making it possible for it to be reset at next login
             
             if(window.localStorage.getItem("QueueUserName") === null && window.localStorage.getItem("QueueUserPassword") === null){
                 window.localStorage.setItem("QueueUserName", GlobalUserName);
@@ -147,9 +148,6 @@
                 //alert("just got set");
             }
             
-            //alert("already there");
-            //alert(window.localStorage.getItem("QueueUserName"));
-            //alert(window.localStorage.getItem("QueueUserPassword"));
         }
     </script>
         
@@ -1052,31 +1050,19 @@
                 "WI": "Wisconsin",
                 "WY": "Wyoming"
             };
-            /*if ("geolocation" in navigator) {
-                alert("I'm you location navigator");
-            } else {
-                alert("You don't have any location navigator");
-            }*/
             
             function GetGoogleMapsJSON(lat, long){
                     
-                    //alert(lat);
-                    //alert(long);
                     $.ajax({
                         type: "GET",
                         data: 'latlng=' + lat + ',' + long + '&sensor=true&key=AIzaSyAoltHbe0FsMkNbMCAbY5dRYBjxwkdSVQQ',
                         url: 'https://maps.googleapis.com/maps/api/geocode/json',
                         success: function(result){
 
-                            //GoogleReturnedZipCode = result.results[0].address_components[8].long_name;
-                            //GoogleReturnedCity = result.results[0].address_components[4].long_name;
-                            //GoogleReturnedTown = result.results[0].address_components[3].long_name;
-                            
                             let AddressParts = result.results[0].formatted_address.split(",");
                             let CityZipCodeParts = AddressParts[2].split(" ");
                             let StreetParts = AddressParts[0].split(" ");
-                            //alert(result.results[0].formatted_address);
-                            //alert(AddressParts[0]);
+                            
                             let city = CityZipCodeParts[1].trim();
                             GoogleReturnedTown = AddressParts[1].trim();
                             if(GoogleReturnedTown === "The Bronx")
@@ -1090,19 +1076,10 @@
                             GoogleReturnedCountry = AddressParts[3].trim();
                             addLocationToWebContext();
                             formatted_address = result.results[0].formatted_address;
-                            /*alert(result.results[0].address_components[5].long_name);
-                            alert(result.results[0].address_components[4].long_name);
-                            alert(result.results[0].address_components[3].long_name);
-                            alert(result.results[0].address_components[2].long_name);
-                            alert(result.results[0].address_components[1].long_name);
-                            alert(result.results[0].address_components[0].long_name);*/
 
                         }
                     });
                     
-                    /*var mapLink = document.getElementById("mapLink");
-                    mapLink.href = "";
-                    mapLink.href = 'https://www.openstreetmap.org/#map=18/'+lat+'/'+long;*/
                     
                 }
 
@@ -1112,8 +1089,6 @@
             }
             
             function locationErrorHandling(error){
-                //alert("ERROR(" + error.code + "): " + error.message);
-                //Will add error handling here;
             }
             
             var locationOptions = {
@@ -1128,9 +1103,6 @@
                 if (navigator.geolocation){
                     
                   var watchID = navigator.geolocation.watchPosition(showPosition, locationErrorHandling, locationOptions);
-                  //navigator.geolocation.getCurrentPosition(showPosition, locationErrorHandling, locationOptions);
-                  //alert(watchID);
-                  //navigator.geolocation.clearWatch(watchID);
 
                 }else{ 
                     alert("Location is not supported by this browser.");
@@ -1187,12 +1159,6 @@
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <!--script>
-            setTimeout(function(){
-                window.location.replace("ProviderCustomerPage.jsp?UserIndex=<=UserIndex%>&User=<=NewUserName%>");
-            }, 60000);
-        </script-->
-        
         <div id="PermanentDiv" style="">
             
             <div style="margin-top: 3px; margin-right: 10px; width: fit-content; display: flex;">
@@ -1216,8 +1182,6 @@
                     <input type='hidden' name='User' value='<%=NewUserName%>' />
                 </form>
             </div>
-            
-            
             
             <div style="display: flex;">
                 
@@ -1294,24 +1258,7 @@
             </div>
         
         <div id="PermanentDiv1" style="display:none;">
-            
-            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
-            <script>
-                function showExtraDropDown(){
-                    if(document.getElementById("ExtraDropDown").style.display === "none")
-                        document.getElementById("ExtraDropDown").style.display = "block";
-                    else
-                        document.getElementById("ExtraDropDown").style.display = "none";
-                }
-                
-            </script>
-            
-                <div style='border-radius: 4px; width: 40px; height: 40px; margin-top: 0.2px; float: right; margin-right: 5px; background-color: #d9e8e8;'>
-                    <p style="text-align: center; padding: 5px;"><i style='color: #334d81;  padding-bottom: 0; font-size: 22px;' class="fa fa-newspaper-o"></i>
-                    </p><p style="text-align: center; margin-top: -10px;"><span style="color: #334d81; font-size: 11px;">News</span></p>
-                </div>
-            </a-->
-            
+           
         </div>
                 
         <div id='ExtraDropDwnDiv'>  
@@ -1383,12 +1330,6 @@
                         function SearchFromMiniNav(){
                             document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                             
-                            /*document.getElementById("SpotsIframe").style.display = "none";
-                            document.getElementById("FavoritesIframe").style.display = "none";
-                            document.getElementById("ExploreDiv").style.display = "none";
-                            document.getElementById("SearchIframe").style.display = "block";
-                            document.querySelector(".UserProfileContainer").style.display = "none";*/
-                            
                             $("#SpotsIframe").hide("slide", { direction: "right" }, 100);
                             $(".UserProfileContainer").hide("slide", { direction: "right" }, 100);
                             $("#ExploreDiv").hide("slide", { direction: "right" }, 100);
@@ -1423,9 +1364,6 @@
             <div style="width: 40px; height: 36px; float: left; margin-left: 3px;">
                 <div class='MenuIcon' style=''>
                     <a id="nav-toggle" href="#"><span></span></a>
-                    <!--div id='firstMenuIconBar' style=''></div>
-                    <div id='secondMenuIconBar' style=''></div>
-                    <div id='thirdMenuIconBar' style=''></div-->
                 </div>
             </div>
             
@@ -1433,9 +1371,7 @@
             <%
                 if(Base64Pic != ""){
             %>
-                <!--center><div id="custProPicDisplay" style="width: 100%; max-width: 340px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
                 <img class="fittedImg" style="border-radius: 100%; float: right; background-color: darkgray; width: 36px; height: 36px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;" src="data:image/jpg;base64,<%=Base64Pic%>"/>
-                <!--/div></center-->
             <%
                 }else{
             %>
@@ -1587,23 +1523,15 @@
                                     <div id="ProvMsgBxOne">
                                         
                                         <div style='font-weight: bolder;'>
-                                            <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
-                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                    <!--/div></center-->
+                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 <%
                                                     }else{
                                                 %>
-
-                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
                                                     <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                                <!--/div></center-->
-
                                                 <%}%>
-                                            <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
                                                 <p style='color: red;'><%=ProvCompany%></p>
@@ -1787,23 +1715,15 @@
                                     <div id="ProvMsgBxOne">
                                         
                                         <div style='font-weight: bolder;'>
-                                            <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
-                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                    <!--/div></center-->
+                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 <%
                                                     }else{
                                                 %>
-
-                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
                                                     <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                                <!--/div></center-->
-
                                                 <%}%>
-                                            <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
                                                 <p style='color: red;'><%=ProvCompany%></p>
@@ -1933,16 +1853,12 @@
                                                 document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
                                                 var date = document.getElementById("CalDatePicker").value;
                                                 var CustomerID = document.getElementById("CalApptUserID").value;
-                                                //alert(CustomerID);
-                                                //alert(date);
                                                 
                                                 $.ajax({
                                                     type: "POST",
                                                     url: "GetApptForExtra",
                                                     data: "Date="+date+"&CustomerID="+CustomerID,
                                                     success: function(result){
-                                                        
-                                                        //alert(result);
                                                         
                                                         var ApptData = JSON.parse(result);
                                                         
@@ -1974,7 +1890,6 @@
                                                     url: "GetCustEvntAjax",
                                                     data: "Date="+date+"&CustomerID="+CustomerID,
                                                     success: function(result){
-                                                        //alert(result);
                                                         document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                         var EvntsData = JSON.parse(result);
                                                         
@@ -2267,8 +2182,6 @@
                                 
                                 var CalDate = document.getElementById("CalDatePicker").value;
                                     
-                                    //alert(CalDate);
-                                    
                                     $.ajax({
                                         type: "POST",
                                         url: "UpdateEvent",
@@ -2279,10 +2192,6 @@
                                            alert("Event Updated Successfully");
                                             
                                             var Evnt = JSON.parse(result);
-                                            
-                                            //alert(Evnt.EvntID);
-                                            //alert(Evnt.JQDate);
-                                            
                                             
                                             if(Evnt.JQDate === EvntDate){
                                                 updateCounter = parseInt(updateCounter, 10) + 1;
@@ -2325,10 +2234,8 @@
                                     EvntDesc = EvntDesc.replace("\"","");
                                     var EvntDate = document.getElementById("EvntDatePicker").value;
                                     var EvntTime = document.getElementById("AddEvntTime").value;
-                                    //alert(EvntTime);
                                     
                                     var CalDate = document.getElementById("CalDatePicker").value;
-                                    //alert(CalDate);
                                     
                                     var CustID = document.getElementById("CalApptUserID").value;
                                     
@@ -2344,10 +2251,6 @@
                                             
                                             var Evnt = JSON.parse(result);
                                             
-                                            //alert(Evnt.EvntID);
-                                            //alert(Evnt.JQDate);
-                                            
-                                            
                                             if(Evnt.JQDate === EvntDate){
                                                 updateCounter = parseInt(updateCounter, 10) + 1;
                                                 document.getElementById("EventsListDiv").innerHTML += '<div id="updt'+updateCounter+'" ' +
@@ -2357,8 +2260,6 @@
                                                     '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
                                                     '<P style="color: #334d81;">'+EvntDesc+'</p>'+
                                                 '</div>';
-                                        //alert('onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle+'","'+EvntDesc+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' );
-                                        
                                             }
                                         }
                                     });
@@ -2382,7 +2283,7 @@
             
                 <table  id="ExtrasTab" style="" cellspacing="0">
                     <tbody>
-                        <tr style=""> <!--fNameExtraFld mNameExtraFld lNameExtraFld EmailExtraFld-->
+                        <tr style="">
                             <td>
                                 <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
                                 <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
@@ -2550,8 +2451,7 @@
                                             url: "updateLoginController",
                                             data: "CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&userName="+UserName+"&newPassword="+NewPassword+"&currentPassword="+oldPassword,
                                             success: function(result){
-                                                                        
-                                                //alert(result);
+                                                                
                                                 document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                 
                                                 if(result === "fail"){
@@ -2561,10 +2461,6 @@
                                                     document.getElementById("ExtraCurrentPasswordFld").style.backgroundColor = "red";
                                                     document.getElementById("ExtraCurrentPasswordFld").style.color = "white";
 
-                                                    //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
-                                                    //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
-                                                    //document.getElementById("LoginFormBtn").disabled = true;
-                                                    //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
                                                 }
                                                 if(result === "success"){
                                                     document.getElementById("ExtraNewPasswordFld").value = "";
@@ -2652,25 +2548,10 @@
                             }
                         }
                     %>
-                        <!--tr style="background-color: #eeeeee;">
-                            <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>third notification here</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style='text-align: justify; border: 1px solid #d8d8d8; padding: 3px;'>fourth notification here</p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p>
-                            </td>
-                        </tr-->
+                        
                     </tbody>
                 </table>
                         
-                <!--p style='text-align: center; color: green; padding: 5px; cursor: pointer;'>more...</p-->
             </div>
                     
             </div>
@@ -2778,8 +2659,7 @@
                     <div onclick="showDashboardSpots();" id="QueueIconBtn">
                             <img style="display: none;" style="" id="SpotsIcon" src="icons/SpotsIcon.png" alt="" width="29" height="29"/>
                             <img style="display: none;" style="" id="ActiveSpotsIcon" src="icons/ActiveSpotsIcon.png" alt="" width="29" height="29"/>
-                            <!--img style="display: none;" style="" id="QueueIcon" src="icons/Logo.png" alt="" width="24" height="24"/>
-                            <img style="display: none;" style="" id="FavoritesIcon" src="icons/FavoritesIcon.png" alt="" width="32" height="32"/-->
+                            
                             <p id="SpotsBtnTxt" style="padding: 0; font-size: 10px; margin-top: 1px; color: #7e7e7e;">Spots</p>
                     </div>
                     <div onclick="showDashboardFavorites();" id="favoritesBtn">
@@ -2800,27 +2680,26 @@
                         document.getElementById("RegularUserProfile").style.display = "block";
                         document.getElementById("FavoritesIcon").style.display = "block";
                         document.getElementById("SpotsIcon").style.display = "block";
+                        var MblFavFirstLoaded = 0;
+                        var SptsFirstLoaded = 0;
+                        var AccntFirstLoaded = 0;
                         
                         document.getElementById("ExploreBtnText").style.color = "darkblue";
                         
                         function showDashboardSpots(){
                             
+                            if(SptsFirstLoaded === 0){
+                                OnloadedSpots = 0;
+                                document.getElementById("SpotsIframe").src = "ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                                SptsFirstLoaded = 1;
+                            }
                             if(document.getElementById("SpotsIframe").style.display === "block"){
                                 OnloadedSpots = 0;
                                 document.getElementById("SpotsIframe").src = "ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
-                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 1;-moz-filter: grayscale(0%);-ms-filter: grayscale(0%); -o-filter: grayscale(0%);filter: grayscale(0%);";
-                            document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";*/
-
                             document.getElementById("ActiveSpotsIcon").style.display = "block";
                             document.getElementById("SpotsIcon").style.display = "none";
-                            
-                            //document.querySelector(".UserProfileContainer").style.display = "none";
-                            //document.getElementById("SearchIframe").style.display = "none";
-                            //document.getElementById("FavoritesIframe").style.display = "none";
-                            //document.getElementById("ExploreDiv").style.display = "none";
                             
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
@@ -2854,19 +2733,9 @@
                                 document.getElementById("ExploreDiv").src = "ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
-                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
-                            document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";*/
-
                             document.getElementById("ActiveSpotsIcon").style.display = "none";
                             document.getElementById("SpotsIcon").style.display = "block";
                             
-                            /*document.querySelector(".UserProfileContainer").style.display = "none";
-                            document.getElementById("FavoritesIframe").style.display = "none";
-                            document.getElementById("ExploreDiv").style.display = "block";
-                            document.getElementById("SpotsIframe").style.display = "none";
-                            document.getElementById("SearchIframe").style.display = "none";*/
-
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
                             document.getElementById("RegularUserProfile").style.display = "block";
@@ -2893,23 +2762,19 @@
                         }
                         function showDashboardAccount(){
                         
+                            if(AccntFirstLoaded === 0){
+                                OnloadedUser = 0;
+                                document.querySelector(".UserProfileContainer").src = "ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                                AccntFirstLoaded = 1;
+                            }
+                        
                             if(document.querySelector(".UserProfileContainer").style.display === "block"){
                                 OnloadedUser = 0;
                                 document.querySelector(".UserProfileContainer").src = "ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                         
-                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
-                            document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";*/
-
                             document.getElementById("ActiveSpotsIcon").style.display = "none";
                             document.getElementById("SpotsIcon").style.display = "block";
-                            
-                            /*document.querySelector(".UserProfileContainer").style.display = "block";
-                            document.getElementById("FavoritesIframe").style.display = "none";
-                            document.getElementById("ExploreDiv").style.display = "none";
-                            document.getElementById("SpotsIframe").style.display = "none";
-                            document.getElementById("SearchIframe").style.display = "none";*/
                             
                             document.getElementById("ActiveUserProfile").style.display = "block";
                             document.getElementById("SecondFavoritesIcon").style.display = "none";
@@ -2938,24 +2803,20 @@
                         
                         function showDashboardFavorites(){
                         
+                            if(MblFavFirstLoaded === 0){
+                                OnloadedFavorites = 0;
+                                document.getElementById("FavoritesIframe").src = "AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                                MblFavFirstLoaded = 1;
+                            }
+                        
                             if(document.getElementById("FavoritesIframe").style.display === "block"){
                                 OnloadedFavorites = 0;
                                 document.getElementById("FavoritesIframe").src = "AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
                             }
                             
-                            /*document.getElementById("QueueIcon").style.cssText = "opacity: 0.8;-moz-filter: grayscale(100%);-ms-filter: grayscale(100%); -o-filter: grayscale(100%);filter: grayscale(100%);";
-                            document.getElementById("QueueIcon").style.display = "none";
-                            document.getElementById("QueueIcon").style.display = "block";*/
-
                             document.getElementById("ActiveSpotsIcon").style.display = "none";
                             document.getElementById("SpotsIcon").style.display = "block";
                         
-                            /*document.querySelector(".UserProfileContainer").style.display = "none";
-                            document.getElementById("FavoritesIframe").style.display = "block";
-                            document.getElementById("ExploreDiv").style.display = "none";
-                            document.getElementById("SpotsIframe").style.display = "none";
-                            document.getElementById("SearchIframe").style.display = "none";*/
-                            
                             document.getElementById("ActiveUserProfile").style.display = "none";
                             document.getElementById("SecondFavoritesIcon").style.display = "block";
                             document.getElementById("RegularUserProfile").style.display = "block";
@@ -2988,9 +2849,6 @@
                 
             <div id="nav" style='display: block;'>
                
-                <!--h3><a href="index.jsp?UserIndex=<=UserIndex%>" style ="color: blanchedalmond">AriesLab.com</a></h3>
-                <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
-                
                 <h4><a href="" style=" color: black;"></a></h4>
                 
                 
@@ -3110,111 +2968,7 @@
             </div>
             
             <div id="main" class="Main">
-                
-                    
-                <center><h4 style="margin-bottom: 5px; padding-top: 10px; max-width: 300px">
-                        <!--span style='color: white;' id="NameForLoginStatus"><=FirstName%></span--> Search By Category </h4></center>
-                 
-                <!--cetnter><h4></h4></cetnter-->
-                
-                <div id="firstSetProvIcons">
-                <center><table id="providericons">
-                        <tbody>
-                        <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectPodiatryLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PodiatrySelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PhysicalTherapySelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectMassageLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MassageSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectTattooLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MedEsthSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Medical Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p onclick="showSecondSetProvIcons()" style="padding: 5px; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
-                        <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
-                        </p></center>
-                
-                </div>
-                
-                <div id="secondSetProvIcons" style="display: none;">
-                    <center><table id="providericons">
-                        <tbody>
-                        <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBrowLashLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="EyebrowsSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
-                            </a></center></td>
-                             <td style="width: 33.3%;"><center><a href="QueueSelectDieticianLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="DieticianSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectPetServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="PetServicesSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectHomeServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectPiercingLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-mortar-and-pestle-100.png" width="70" height="70" alt="icons8-pill-filled-70"/>
-                            </a></center></td>
-                        <tr>
-                            <td><center><a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectPersonalTrainerLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
-                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
-                            </span>
-                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">
-                            <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
-                            </span></p></center>
-                
-                </div>
-                
-                <div id="thirdSetProvIcons" style="display: none;">
-                        <center><table id="providericons">
-                        <tbody>
-                            <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectHairRemovalLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
-                            </a></center></td>
-                            </tr> 
-                            <tr>
-                                <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
-                                </a></center></td>
-                            </tr>
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
-                        <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
-                        </p></center>
-
-                </div>
-                
+               
             </div>
           </div>    
         </div>
@@ -3227,11 +2981,6 @@
                 }
             </script>
                 
-                <!----------------------------------------------------------------------------------------------------------------->
-                <!------------------------------------------------------------------------------------------------------------------>
-            
-            <!--center><h4 id="YourAccountH4" style="margin-top: 1px; margin-bottom: 5px; color: #000099">Your Account</h4></center-->
-            
                 <div id="Customerprofile" style="padding-top: 0;">
                     
                 <table id="CustomerprofileTable" style="border-spacing: 0; width: 100%; max-width: 700px;">
@@ -3240,10 +2989,6 @@
                         <tr>
                             <td>
                             <center>
-                                
-                               <!-- <div class="propic">
-                                    <img src="" width="100" height="100"/>
-                                </div> -->
                                     
                                <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: #3d6999; border: 1px solid black; color: white; padding: 5px; margin-bottom: 5px;">
                                        <img style='background-color: white;' src="icons/icons8-user-15.png" width="20" height="20" alt="icons8-user-15"/>
@@ -3257,30 +3002,8 @@
                                     if(Base64Pic != ""){
                                 %> 
                                 
-                                    <!--center><div id="WideScreenProfilePic" style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; padding: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">
-                                        <div style="height: 5px; background-size: cover; background-position: 50% 50%; margin-left: 5px; margin-right: 5px; margin-bottom: 150px; background-color: #334d81;" >
-                                            <center><img class="fittedImg" style="margin-top: 0; border-radius: 100%; border: 5px solid #334d81; margin-bottom: 0; background-color: darkgrey; object-fit: cover;" src="data:image/jpg;base64,<%=Base64Pic%>" width="150" height="150"/></center>
-                                        </div>
-                                        <div style="background-color: #334d81; height: 5px; margin-left: 5px; margin-right: 5px;">
-                                        </div>
-                                    </div></center-->
                                 <div style="min-width: 80px;"><img class="fittedImg" style="margin-top: 0; border-radius: 100%; margin-bottom: 0; background-color: darkgrey; object-fit: cover;" src="data:image/jpg;base64,<%=Base64Pic%>" width="60" height="60"/></div>
-                                    
-                                    <!--div id="SmallscreenProfilePic">
-                                        <center><div class="SearchObject">
-                                            <form name="searchForm" action="QueueSelectBusinessSearchResultLoggedIn.jsp" method="POST">
-                                                <input type="hidden" name="User" value="<%=NewUserName%>" />
-                                                <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                                <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" type="submit" value="Search" name="SearchBtn" />
-                                            </form> 
-                                        </div></center>
-                                        <div style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; height: 100px; margin-bottom: 60px; border-bottom: #3d6999 1px solid">
-                                            <div id="" style="height: 100px; background-color: #6699ff; opacity: 0.7;"></div>        
-                                            <img class="fittedImg" style="position: relative; z-index: 2; margin-top: -50px; margin-left: 6px; border-radius: 100%; border: #3d6999 1px solid; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="100" height="100"/>
-                                            
-                                        </div>
-                                    </div-->
-                                
+                                   
                                 <%
                                     } else{
                                 %>
@@ -3290,9 +3013,6 @@
                                                 <div style="text-align: center;">
                                                     <img src="icons/SecondUserProfileIcon.png" style="width: 50px; height: 50px; border-radius: 0; background: none; border: none;" alt=""/>
                                                 </div>
-                                                <!--div style="text-align: center;">
-                                                    <small style="color: black;">Add Photo</small>
-                                                </div-->
                                            </div>
                                    </a>
                                     
@@ -3315,8 +3035,6 @@
                                                     </p>
                                                 </td>
                                             </tr>
-                                            <!--tr><td style="padding-bottom: 2px;"><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                                        <span id="AddressDetail"><%=thisUserAddress%></span></p></td></tr-->
                                     </table>
                                 </div>
                                         
@@ -3686,17 +3404,6 @@
                                                     
                                                     document.getElementById("FeedBackTxtFld").innerHTML = "Add your message here...";
                                                     
-                                                   /* setInterval( function(){
-                                                        
-                                                        if(document.getElementById("FeedBackTxtFld") !== document.activeElement){
-                                                            
-                                                            if(document.getElementById("FeedBackTxtFld").innerHTML === "")
-                                                                document.getElementById("FeedBackTxtFld").innerHTML = "Add your message here...";
-                                                            
-                                                        }
-                                                        
-                                                    }, 1);*/
-                                                    
                                                     function checkFeedBackFld(){
                                                         
                                                         var FeedBackTxtFld = document.getElementById("FeedBackTxtFld");
@@ -3731,7 +3438,6 @@
                                                     <img style="" src="icons/icons8-edit-96.png" width="20" height="20" alt="icons8-pencil-20"/>
                                                     <small style="color: darkblue;">Edit info</small>
                                                 <p>
-                                                <!--p class="tooltiptext"><br></p-->
                                             </div>
                                             
                                             <div class="tooltip">
@@ -3788,18 +3494,12 @@
                                                                         
                                                                         document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'none';
                                                                         
-                                                                        //alert(result);
-                                                                        
                                                                         if(result === "fail"){
                                                                             
                                                                             document.getElementById("WrongPassStatus").style.display = "block";
                                                                             document.getElementById("CurrentPasswordFld").value = "";
                                                                             document.getElementById("CurrentPasswordFld").style.backgroundColor = "red";
                                                                             
-                                                                            //document.getElementById("changeUserAccountStatus").innerHTML = "Enter your old password correctly";
-                                                                            //document.getElementById("changeUserAccountStatus").style.backgroundColor = "red";
-                                                                            //document.getElementById("LoginFormBtn").disabled = true;
-                                                                            //document.getElementById("LoginFormBtn").style.backgroundColor = "darkgrey";
                                                                         }
                                                                         if(result === "success"){
                                                                             document.getElementById("NewPasswordFld").value = "";
@@ -3840,22 +3540,8 @@
                                                         <p style="margin-bottom: 5px; ">Our contact information:</p>
                                                         <p style="color: black;"><img src="icons/icons8-phone-32.png" width="20" height="20" alt="icons8-phone-32"/>
                                                           +1 (732) 799-9546</p>
-                                                        <!--p style="color: black;"><img src="icons/icons8-fax-32.png" width="20" height="20" alt="icons8-fax-32"/>
-                                                            7345738232</p-->
                                                         <p style="color: black;"><img src="icons/icons8-secured-letter-32.png" width="20" height="20" alt="icons8-secured-letter-32"/>
                                                             tech.arieslab@outlook.com</p>
-                                                        <!--p style="color: black;"><img src="icons/icons8-facebook-32.png" width="20" height="20" alt="icons8-facebook-32"/>
-                                                            @Queue</p>
-                                                        <p style="color: black;"><img src="icons/icons8-twitter-32.png" width="20" height="20" alt="icons8-twitter-32"/>
-                                                            @Queue</p>
-                                                        <p style="color: black"><img src="icons/icons8-snapchat-32.png" width="20" height="20" alt="icons8-snapchat-32"/>
-                                                            @Queue
-                                                        </p>
-                                                        <p style="color: black"><img src="icons/icons8-instagram-32.png" width="20" height="20" alt="icons8-instagram-32"/>
-                                                            @Queue</p>
-                                                        <p style="color: black;"><img src="icons/icons8-organization-32.png" width="20" height="20" alt="icons8-organization-32"/>
-                                                            1227 Grand Concourse, New York, 10344 USA</p-->
-                                                        
                                                     </div>
                                                 </li>
                                                 <li style='display: none;'> 
@@ -4470,14 +4156,7 @@
                                             
                                             
                                             <script>
-                                                
-                                                            
-                                                            
-                                                        //---------------------------------------------
-                                                         //var datepicker = document.getElementById("datepicker<%=JString%>");
-                                                         //var datePickerStatus = document.getElementById("datePickerStatus<%=JString%>");
-
-                                                         
+                                        
                                                          document.getElementById("datePickerStatus<%=JString%>").innerHTML = "";
 
 
@@ -4502,8 +4181,6 @@
                                                                  else{
 
                                                                          document.getElementById("datePickerStatus<%=JString%>").innerHTML = "";
-                                                                         //datePickerStatus.innerHTML = "Chosen Date: " + datepicker.value;
-                                                                         //datePickerStatus.style.backgroundColor = "green";
                                                                  }
 
                                                          }
@@ -4962,11 +4639,6 @@
                                                                     } 
                                                              );
                                                             
-                                                        //---------------------------------------------
-                                                        // var datepicker = document.getElementById("datepicker<%=QString%>");
-                                                         //var datePickerStatus = document.getElementById("datePickerStatus<%=QString%>");
-
-                                                         
                                                          document.getElementById("datePickerStatusFuture<%=QString%>").innerHTML = "";
 
 
@@ -5915,7 +5587,7 @@
                 
                 <div id="IframesDiv">
                     
-                   <script>
+                   <script defer>
                        var OnloadedExplore = 0;
                        
                        function OnloadExploreMeth(){
@@ -5936,19 +5608,25 @@
                             
                        }
                        
-                       
-                            setInterval(
-                                function(){
-                                    if($(window).width() < 1000){
-                                        checkExploreLoadStatus();
-                                    }
-                            }, 1);
+                        $(document).ready(()=>{
+                                setInterval(
+                                    function(){
+                                        if($(window).width() < 1000){
+                                            checkExploreLoadStatus();
+                                        }
+                                }, 1);
+                            })
                         
                    </script>
                     
-                   <iframe onload="OnloadExploreMeth();" style="position: absolute; background: none; margin-top: -2px;" id="ExploreDiv" src="ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>       
+                   <iframe onload="OnloadExploreMeth();" style="position: absolute; background: none; margin-top: -2px;" id="ExploreDiv" src=""></iframe>       
                    
-                   <script>
+                   <script defer>
+                       
+                       if($(window).width() < 1000){
+                           document.getElementById("ExploreDiv").src = "ProviderCustomerExploreWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                       }
+                       
                        var OnloadedSpots = 0;
                        
                        function OnloadSpotsMeth(){
@@ -5969,18 +5647,25 @@
                             
                        }
                        
-                        setInterval(
-                            function(){
-                                if($(window).width() < 1000){
-                                    checkSpotsLoadStatus();
-                                }
-                        }, 1);
+                       $(document).ready(()=>{
+                            setInterval(
+                                function(){
+                                    if($(window).width() < 1000){
+                                        checkSpotsLoadStatus();
+                                    }
+                            }, 1);
+                        });
                        
                    </script>
                    
-                   <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background: none; display: none; margin-top: -2px;"  src="ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadSpotsMeth();" id="SpotsIframe" style="position: absolute; background: none; display: none; margin-top: -2px;"  src=""></iframe>
                    
-                   <script>
+                   <script defer>
+                       
+                       /*if($(window).width() < 1000){
+                           document.getElementById("SpotsIframe").src = "ProviderCustomerSpotsWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                       }*/
+                       
                        var OnloadedFavorites = 0;
                        
                        function OnloadFavoritesMeth(){
@@ -5988,31 +5673,15 @@
                            OnloadedFavorites = 1;
                        }
                        
-                        /*function checkFavoritesLoadStatus(){
-                           
-                           if(document.getElementById("FavoritesIframe").style.display === "none"){
-                                document.getElementById("FavoritesLoading").style.display = "none";
-                            }else if(OnloadedFavorites === 1){
-                                document.getElementById("FavoritesLoading").style.display = "none";
-                            }else{
-                                document.getElementById("FavoritesLoading").style.display = "block";
-                                    
-                            }
-                            
-                       }
-                       
-                        setInterval(
-                            function(){
-                                if($(window).width() < 1000){
-                                    checkFavoritesLoadStatus();
-                                }
-                        }, 1);*/
-                       
                    </script>
                    
-                   <iframe onload="OnloadFavoritesMeth();" id="FavoritesIframe" style="position: absolute; background: none; margin-top: -2px; display: none;" src="AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadFavoritesMeth();" id="FavoritesIframe" style="position: absolute; background: none; margin-top: -2px; display: none;" src=""></iframe>
                    
-                   <script>
+                   <script defer>
+                       
+                       /*if($(window).width() < 1000){
+                           document.getElementById("FavoritesIframe").src = "AllFavProviders.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                       }*/
                        
                        var OnloadedUser = 0;
                        
@@ -6034,17 +5703,24 @@
                             
                        }
                        
-                        setInterval(
-                            function(){
-                                if($(window).width() < 1000){
-                                    checkUserAcountWindowLoadStatus();
-                                }
-                        }, 1);
+                       $(document).ready(()=>{
+                            setInterval(
+                                function(){
+                                    if($(window).width() < 1000){
+                                        checkUserAcountWindowLoadStatus();
+                                    }
+                            }, 1);
+                        });
                    </script>
                    
-                   <iframe onload="OnloadAccountMeth();" style="position: absolute; background: none; display: none; margin-top: -2px;" class="UserProfileContainer" src="ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"></iframe>
+                   <iframe onload="OnloadAccountMeth();" style="position: absolute; background: none; display: none; margin-top: -2px;" id="UsrAccountIframe" class="UserProfileContainer" src=""></iframe>
                    
-                   <script>
+                   <script defer>
+                       
+                       /*if($(window).width() < 1000){
+                           document.getElementById("UsrAccountIframe").src = "ProviderCustomerUserAccountWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                       }*/
+                       
                        var OnloadedSearch = 0;
                        
                        function OnloadSearchIframetMeth(){
@@ -6066,12 +5742,14 @@
                             
                        }
                        
-                        setInterval(
-                            function(){
-                                if($(window).width() < 1000){
-                                    checkSeachLoadStatus();
-                                }
-                        }, 1);
+                       $(document).ready(()=>{
+                            setInterval(
+                                function(){
+                                    if($(window).width() < 1000){
+                                        checkSeachLoadStatus();
+                                    }
+                            }, 1);
+                        });
                        
                    </script>
                    
@@ -6093,43 +5771,8 @@
                 <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
                     <h1 style='color: white; font-size: 19px; font-family: serif; padding-bottom: 20px;'>Popular Services</h1>
                     
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
-                        <a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
-                            <div class="dontShowMobile eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
-                            <div class="dontShowMobile eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
-                            </div>
-                        </a>
+                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
+                        
                     </div>
                     <style>
                         .eachPopularService{
@@ -6148,8 +5791,352 @@
                     <p style='margin: auto; margin-bottom: 20px; margin-top: 30px; display: block; border-bottom: #374949 1px solid; max-width: 700px;'></p>
                     <h1 style='color: white; font-size: 19px; font-family: serif; padding: 10px 0;'>Suggested Places</h1>
                     
-                    <div style="max-width: 1000px; margin: auto; text-align: center;">
-                        <div style="width: 85%; margin: auto;" class="recommendedProvidersDiv">
+                    <div id="SuggestedPlcsDiv" style="max-width: 1000px; margin: auto; text-align: center;">
+                        
+                    </div>
+                </div>
+                <div>
+                    <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
+                        Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
+                        It also provides features for the businesses to post news updates with pictures to keep you informed about their services
+                        and products.
+                    </p>
+                    <div class='CosmeSectFlex'>
+                        <div id="BkApptOnlnInfoDiv" class='eachCSecFlex'>
+                            
+                        </div>
+                        <div id="FindBarberShopsNearInfoDiv" class='eachCSecFlex marginUp20'>
+                            
+                        </div>
+                        <div id="FindBwtyTymOnlnDiv" class='eachCSecFlex marginUp20'>
+                            
+                        </div>
+                    </div>
+                    
+                    <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px;'>We have the best services in your area</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
+                        Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
+                        our platform. Queue Appointments will eventually disassociate with badly rated businesses.
+                    </p>
+                    
+                    <div id="YourRvwsCosmeticFlexDiv" class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                <div id='footerContactsDiv' class='eachCSecFlex'>
+                    <h1 style='color: #06adad; text-align: justify'>Contact</h1>
+                    <p style='padding: 5px; font-weight: bolder; margin-top: 10px; text-align: justify;'><i style='margin-right: 15px; font-size: 20px;' class="fa fa-map-marker" aria-hidden="true"></i> 260 Manning Blvd</p> 
+                    <p style='text-align: justify; padding-left: 35px;'>Albany, NY</p>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 732-799-9546</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 518-898-3991</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px;' class='fa fa-envelope'></i> support@theomotech.com</p>
+                        
+                    </div>
+                </div>
+                <style>
+                    @media only screen and (max-width: 1000px){
+                        #footerContactsDiv p{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv h1{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv{
+                            padding-bottom: 30px !important;
+                        }
+                    }
+                </style>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad;'>About the company</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech Inc. Theomotech as a Tech company is
+                            dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
+                            <span style='color: #ccc;'>increase in revenue... 
+                                <br/><br/><a href="https://theomotech.herokuapp.com" style="color: #ccc;" target="_blank">read more 
+                                    <i style="color: white; margin-left: 5px;" class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            </span>
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad'></h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
+                                <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
+                                <p style="margin-top: 10px;">
+                                    <a href="https://www.facebook.com/TheoMotech-107976207592401/about/?ref=page_internal" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/theomotech-inc" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
+                                    </a>
+                                    <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i>
+                                </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                        
+    </div>
+    
+    <script>
+        $(document).ready(function(){
+            $('.recommendedProvidersDiv').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                dots: false,
+                responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                  }
+                },
+                {
+                  breakpoint: 850,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+              ]
+              });
+        });
+    </script>                             
+    </body>
+    <script>
+        var ControllerResult = "<%=ControllerResult%>";
+        
+        if(ControllerResult !== "null")
+            alert(ControllerResult);
+        
+        /*var iframes = Array.prototype.slice.call(document.getElementsByTagName("iframe"));
+            iframes.forEach(iframe => {
+                //console.log(iframe);
+                iframe.onclick = function(){
+                    alert("clicked");
+                    if(count < 10){
+                        stopTimer();
+                    }
+                };
+            });*/
+    </script>
+    
+    <script defer>
+        if($(window).width() > 1000){
+            
+            document.getElementById("main").innerHTML =
+                    `<center><h4 style="margin-bottom: 5px; padding-top: 10px; max-width: 300px"> Search By Category </h4></center>
+
+                    <div id="firstSetProvIcons">
+                    <center><table id="providericons">
+                            <tbody>
+                            <tr>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
+                                </a></center></td>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
+                                </a></center></td>
+                            </tr>
+                            <tr>
+                                <td><center><a href="QueueSelectPodiatryLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PodiatrySelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="PhysicalTherapySelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectMassageLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MassageSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
+                                </a></center></td>
+                            </tr>
+                            <tr>
+                                <td><center><a href="QueueSelectTattooLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectMedAesthetLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>"><p style="margin:0;" name="MedEsthSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Medical Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                                </a></center></td>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
+                                </a></center></td>
+                            </tr>
+                        </tbody>
+                        </table></center>
+
+                        <center><p onclick="showSecondSetProvIcons()" style="padding: 5px; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </p></center>
+
+                    </div>
+
+                    <div id="secondSetProvIcons" style="display: none;">
+                        <center><table id="providericons">
+                            <tbody>
+                            <tr>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectBrowLashLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="EyebrowsSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
+                                </a></center></td>
+                                 <td style="width: 33.3%;"><center><a href="QueueSelectDieticianLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="DieticianSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
+                                </a></center></td>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectPetServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="PetServicesSelect" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
+                                </a></center></td>
+                            </tr>
+                            <tr>
+                                <td><center><a href="QueueSelectHomeServLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectPiercingLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectHolisticMedicineLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-mortar-and-pestle-100.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                                </a></center></td>
+                            <tr>
+                                <td><center><a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectPersonalTrainerLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
+                                </a></center></td>
+                                <td><center><a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
+                                </a></center></td>
+                            </tr>
+                        </tbody>
+                        </table></center>
+
+                        <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                                </span>
+                                <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                                </span></p></center>
+
+                    </div>
+
+                    <div id="thirdSetProvIcons" style="display: none;">
+                            <center><table id="providericons">
+                            <tbody>
+                                <tr>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
+                                </a></center></td>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectHairRemovalLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
+                                </a></center></td>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                                </a></center></td>
+                                </tr> 
+                                <tr>
+                                    <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtistLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
+                                    </a></center></td>
+                                </tr>
+                        </tbody>
+                        </table></center>
+
+                        <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </p></center>
+
+                    </div>`;
+
+            document.getElementById("PopularSvcDiv").innerHTML =
+                    `<a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                                <div class="eachPopularService">
+                                    <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
+                                </div>
+                            </a>
+                            <a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                                <div class="eachPopularService">
+                                    <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
+                                </div>
+                            </a>
+                            <a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                                <div class="eachPopularService">
+                                    <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
+                                    <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
+                                </div>
+                            </a>
+                            <a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                                <div class="eachPopularService">
+                                    <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
+                                </div>
+                            </a>
+                            <a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                                <div class="dontShowMobile eachPopularService">
+                                    <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
+                                </div>
+                            </a>
+                            <a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
+                                <div class="dontShowMobile eachPopularService">
+                                    <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
+                                </div>
+                            </a>`;
+    
+            document.getElementById("BkApptOnlnInfoDiv").innerHTML =
+                    `<h1>Book your doctor's appointment online</h1>
+                     <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                        background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
+                        display: flex; justify-content: flex-end; flex-direction: column;'>
+                          <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
+                     </div>`;
+            document.getElementById("FindBarberShopsNearInfoDiv").innerHTML = 
+                    `<h1>Find barber shops near you</h1>
+                     <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                        background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
+                        display: flex; justify-content: flex-end; flex-direction: column;'>
+                          <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
+                     </div>`;
+            document.getElementById("FindBwtyTymOnlnDiv").innerHTML = 
+                    `<h1>Find your beauty time online</h1>
+                     <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                        background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
+                        display: flex; justify-content: flex-end; flex-direction: column;'>
+                          <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
+                     </div>`;
+    
+            document.getElementById("YourRvwsCosmeticFlexDiv").innerHTML =
+                    `<div class='eachCSecFlex'>
+                            <h1>Your reviews make a difference</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Fast growing community</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Our businesses keep you posted</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
+                            </div>
+                        </div>`;
+    
+                        document.getElementById("SuggestedPlcsDiv").innerHTML =
+                                `<div style="width: 85%; margin: auto;" class="recommendedProvidersDiv">
                             <%
                                 for(int i = 0; i < providersList.size(); i++){
                                     
@@ -6282,197 +6269,9 @@
                              if(providersList.size() == 0){
                            %>
                                 <p style='color: white;'><i class='fa fa-exclamation-triangle' style='color: yellow;'></i> Oops! We have no recommendations at this time</p>
-                           <%}%>
-                    </div>
-                </div>
-                <div>
-                    <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
-                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
-                        Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
-                        It also provides features for the businesses to post news updates with pictures to keep you informed about their services
-                        and products.
-                    </p>
-                    <div class='CosmeSectFlex'>
-                        <div class='eachCSecFlex'>
-                            <h1>Book your doctor's appointment online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Find barber shops near you</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Find your beauty time online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px;'>We have the best services in your area</h1>
-                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
-                        Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
-                        our platform. Queue Appointments will eventually disassociate with badly rated businesses.
-                    </p>
-                    
-                    <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
-                        <div class='eachCSecFlex'>
-                            <h1>Your reviews make a difference</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Fast growing community</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Our businesses keep you posted</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
-                <div id='footerContactsDiv' class='eachCSecFlex'>
-                    <h1 style='color: #06adad; text-align: justify'>Contact</h1>
-                    <p style='padding: 5px; font-weight: bolder; margin-top: 10px; text-align: justify;'><i style='margin-right: 15px; font-size: 20px;' class="fa fa-map-marker" aria-hidden="true"></i> 260 Manning Blvd</p> 
-                    <p style='text-align: justify; padding-left: 35px;'>Albany, NY</p>
-                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; flex-direction: column;'>
-                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 732-799-9546</p>
-                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 518-898-3991</p>
-                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px;' class='fa fa-envelope'></i> support@theomotech.com</p>
-                        
-                    </div>
-                </div>
-                <style>
-                    @media only screen and (max-width: 1000px){
-                        #footerContactsDiv p{
-                            text-align: center !important;
-                        }
-                        #footerContactsDiv h1{
-                            text-align: center !important;
-                        }
-                        #footerContactsDiv{
-                            padding-bottom: 30px !important;
-                        }
-                    }
-                </style>
-                <div class='eachCSecFlex'>
-                    <h1 style='color: #06adad;'>About the company</h1>
-                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech Inc. Theomotech as a Tech company is
-                            dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
-                            <span style='color: #ccc;'>increase in revenue... 
-                                <br/><br/><a href="https://theomotech.herokuapp.com" style="color: #ccc;" target="_blank">read more 
-                                    <i style="color: white; margin-left: 5px;" class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                            </span>
-                        </p>
-                        
-                    </div>
-                </div>
-                <div class='eachCSecFlex'>
-                    <h1 style='color: #06adad'></h1>
-                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
-                                <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
-                                <p style="margin-top: 10px;">
-                                    <a href="https://www.facebook.com/TheoMotech-107976207592401/about/?ref=page_internal" target="_blank">
-                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
-                                    </a>
-                                    <a href="https://www.linkedin.com/company/theomotech-inc" target="_blank">
-                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
-                                    </a>
-                                    <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i>
-                                </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-                                        
-    </div>
-       <!--script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script-->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.recommendedProvidersDiv').slick({
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                dots: false,
-                responsive: [
-                {
-                  breakpoint: 1024,
-                  settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                  }
-                },
-                {
-                  breakpoint: 850,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                  }
-                }
-                // You can unslick at a given breakpoint now by adding:
-                // settings: "unslick"
-                // instead of a settings object
-              ]
-              });
-        });
-    </script>                             
-    </body>
-    <script>
-        var ControllerResult = "<%=ControllerResult%>";
-        
-        if(ControllerResult !== "null")
-            alert(ControllerResult);
-        
-        /*var iframes = Array.prototype.slice.call(document.getElementsByTagName("iframe"));
-            iframes.forEach(iframe => {
-                //console.log(iframe);
-                iframe.onclick = function(){
-                    alert("clicked");
-                    if(count < 10){
-                        stopTimer();
-                    }
-                };
-            });*/
+                           <%}%>`;
+    
+        }
     </script>
     
     <script src="scripts/script.js"></script>

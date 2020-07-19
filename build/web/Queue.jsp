@@ -38,15 +38,16 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
         
         <title>Queue</title>
         
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
-        <!--link rel="shortcut icon" type="image/png" href="http://localhost/QueueWebAppPrototype/favicon.png"/-->
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
@@ -137,12 +138,7 @@
          }
          //JOptionPane.showMessageDialog(null, CookieText);
          response.setHeader("Set-Cookie", "Name=Mohammed;"+CookieText+"; HttpOnly; SameSite=None; Secure");
-         //JOptionPane.showMessageDialog(null, response.getHeader("Set-Cookie"));
-        
-        /*Cookie newCookie = new Cookie("SameSite", "None");
-        newCookie.setSecure(true);
-        newCookie.setHttpOnly(false);
-        response.addCookie(newCookie);*/
+         
          
         //resetting ResendAppointmentData data feilds
         ResendAppointmentData.CustomerID = "";
@@ -153,15 +149,6 @@
         ResendAppointmentData.PaymentMethod = "";
         ResendAppointmentData.ServicesCost = "";
         ResendAppointmentData.CreditCardNumber = "";
-        
-        /*Date NotiDate = new Date();
-        String NotiSDate = NotiDate.toString();
-        SimpleDateFormat NotiDformat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = NotiDformat.format(NotiDate);
-        String time = NotiSDate.substring(11,16);
-        JOptionPane.showMessageDialog(null, NotiDate);
-        JOptionPane.showMessageDialog(null, time);
-        JOptionPane.showMessageDialog(null, date);*/
         
         String Message = "You are not logged in";
         
@@ -289,7 +276,6 @@
             <div class="QueueLoaderSpinner"></div>
             <img src="icons/Logo.png" alt=""/>
         </div>
-        <!--a id='mapLink'>Click here to see location</a-->
         
         <script>
             
@@ -350,11 +336,6 @@
                 "WI": "Wisconsin",
                 "WY": "Wyoming"
             };
-            /*if ("geolocation" in navigator) {
-                alert("I'm you location navigator");
-            } else {
-                alert("You don't have any location navigator");
-            }*/
             
             function GetGoogleMapsJSON(lat, long){
                     
@@ -372,8 +353,6 @@
 
                             let AddressParts = result.results[0].formatted_address.split(",");
                             let CityZipCodeParts = AddressParts[2].split(" ");
-                            //alert(result.results[0].formatted_address);
-                            //alert(AddressParts[0]);
                             let city = CityZipCodeParts[1].trim();
                             GoogleReturnedTown = AddressParts[1].trim();
                             if(GoogleReturnedTown === "The Bronx")
@@ -381,19 +360,9 @@
                             GoogleReturnedCity = StateAbbrev[city].trim();
                             GoogleReturnedZipCode = CityZipCodeParts[2].trim();
                             addLocationToWebContext();
-                            /*alert(result.results[0].address_components[5].long_name);
-                            alert(result.results[0].address_components[4].long_name);
-                            alert(result.results[0].address_components[3].long_name);
-                            alert(result.results[0].address_components[2].long_name);
-                            alert(result.results[0].address_components[1].long_name);
-                            alert(result.results[0].address_components[0].long_name);*/
 
                         }
                     });
-                    
-                    /*var mapLink = document.getElementById("mapLink");
-                    mapLink.href = "";
-                    mapLink.href = 'https://www.openstreetmap.org/#map=18/'+lat+'/'+long;*/
                     
                 }
 
@@ -403,8 +372,6 @@
             }
             
             function locationErrorHandling(error){
-                //alert("ERROR(" + error.code + "): " + error.message);
-                //Will add error handling here;
             }
             
             var locationOptions = {
@@ -417,10 +384,7 @@
             
             function getLocation(){
                 if (navigator.geolocation){
-                  //navigator.geolocation.getCurrentPosition(showPosition, locationErrorHandling, locationOptions);
                   var watchID = navigator.geolocation.watchPosition(showPosition, locationErrorHandling, locationOptions);
-                  //alert(watchID);
-                  //navigator.geolocation.clearWatch(watchID);
 
                 }else{ 
                     alert("Location is not supported by this browser.");
@@ -439,7 +403,6 @@
                       data: "city="+GoogleReturnedCity+"&town="+GoogleReturnedTown+"&zipcode="+GoogleReturnedZipCode,
                       url: "./addLocationDataToWebContext",
                       success: function(result){
-                          //alert("Location added!");
                       }
                   });
                   
@@ -472,13 +435,13 @@
             <div style="display: flex;">
                 <ul style="margin-right: 5px;">
                     <a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="LogInPage.jsp">
-                        <li style='cursor: pointer; background-color: #334d81;' class="active"><!--img style='background-color: white;' src="icons/icons8-home-50.png" width="20" height="17" alt="icons8-home-50"/-->
+                        <li style='cursor: pointer; background-color: #334d81;' class="active">
                         <i class="fa fa-home"></i>
                         Your Dashboard</li></a>
-                    <li style='cursor: pointer;'><!--img style='background-color: white;' src="icons/icons8-calendar-50.png" width="20" height="17" alt="icons8-calendar-50"/-->
+                    <li style='cursor: pointer;'>
                         <i class="fa fa-calendar"></i>
                         Calender</li>
-                    <li style='cursor: pointer;'><!--img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/-->
+                    <li style='cursor: pointer;'>
                         <i class="fa fa-cog"></i>
                         Account</li>
                 </ul>
@@ -496,16 +459,9 @@
                         </p><p style="text-align: center; margin-top: -10px;"><span style="color: #8FC9F0; font-size: 11px;">Home</span></p>
                     </div>
                 </a>
-                
-                <!--div style="">
-                        <center><div style="text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
-                           <i style="font-size: 34px; color: darkgrey;" class="fa fa-user-circle" aria-hidden="true"></i> 
-                        </div--></center>
                 </div>
             </div>
             
-        <!--/div-->
-
         <div id="container">
             
             <div id="miniNav" style="display: none;">
@@ -528,8 +484,6 @@
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p>
             </div>
         </div>
-            
-          
             
             <div id="Extras">
             
@@ -657,23 +611,15 @@
                                     <div id="ProvMsgBxOne">
                                         
                                         <div style='font-weight: bolder;'>
-                                            <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
-                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                    <!--/div></center-->
+                                                   <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
                                                 <%
                                                     }else{
                                                 %>
-
-                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                                <!--/div></center-->
-
+                                                   <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <%}%>
-                                            <!--/div-->
                                             <div>
                                                 <p><%=ProvFirstName%></p>
                                                 <p style='color: red;'><%=ProvCompany%></p>
@@ -736,12 +682,6 @@
         <div class="DashboardContent" id="QueueJspContent">
             
             <div id="nav" style='display: block;'>
-                
-                <!--h4><a href="index.jsp" style ="color: blanchedalmond">AriesLab.com</a></h4>
-                <!--h4><a href="SignUpPage.jsp" style=" color: #000099;">First time on Queue (Sign-up now)</a></h4-->
-                <!--h4><a href="PageController?Message=<=Message%>" style=" color: black;">Go to your dashboard/Login now</a></h4-->
-                <!--center><p style = "width: 130px; margin: 5px;"><span id="displayDate" style=""></span></p></center-->
-               
                 <center>
                     <div class =" SearchObject" style="margin-bottom: 15px; margin-top: 20px; padding-top: 10px; background: none !important;">
                         
@@ -768,7 +708,6 @@
                         var setLocation = setInterval(
                                 function(){
                                     
-                                    //don't clear interval as long as values are undefined
                                     if(GoogleReturnedCity !== undefined && GoogleReturnedZipCode !== undefined && GoogleReturnedTown !== undefined){
                                         document.getElementById("city4Search").value = GoogleReturnedCity;
                                         document.getElementById("zcode4Search").value = GoogleReturnedZipCode;
@@ -859,132 +798,11 @@
             
             <div id="main" class="Main" style="padding-top: 5px;">
                
-                <!--center><p style="max-width: 350px; color: white; background-color: red; margin-bottom: 10px;"><=Message%></p><center-->
-               
-                <!--h1>Academic Appointments</h1>
-                <h2>Select Service category</h2>
-                
-                <h1>Health Services Appointments</h1>
-                <h2>Select Service category</h2>
-                
-                
-                <h1>Beaty Services Appointments</h1-->
-                
-                <h4 style="padding: 5px 0; margin-bottom: 5px; margin-top: 5px;">Search By Category</h4>
-                
-                 <div id="firstSetProvIcons">
-                <center><table id="providericons">
-                        <tbody>
-                        <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectMedicalCenter.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectDentist.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectPodiatry.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectPhisicalTherapy.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectMassage.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectTattoo.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectMedAesthet.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MedEsthSelect">Medical Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
-                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
-                    </p></center>
-                
-                </div>
-                
-                <div id="secondSetProvIcons" style="display: none;">
-                    <center><table id="providericons">
-                        <tbody>
-                        <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBrowsLashes.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
-                            </a></center></td>
-                             <td style="width: 33.3%;"><center><a href="QueueSelectDietician.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectPetServe.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PetServicesSelect">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                        <tr>
-                            <td><center><a href="QueueSelectHomeServe.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectPiercing.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectHolisticMed.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-mortar-and-pestle-100.png" width="70" height="70" alt="icons8-pill-filled-70"/>
-                            </a></center></td>
-                        <tr>
-                            <td><center><a href="QueueSelectNailSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectPersonalTrainer.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
-                            </a></center></td>
-                            <td><center><a href="QueueSelectHairSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
-                            </a></center></td>
-                        </tr>
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
-                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
-                            </span>
-                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
-                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
-                            </span></p></center>
-                
-                </div>
-                
-                <div id="thirdSetProvIcons" style="display: none;">
-                        <center><table id="providericons">
-                        <tbody>
-                            <tr>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectDaySpa.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectHairRemoval.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
-                            </a></center></td>
-                            <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
-                            </a></center></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtist.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
-                                </a></center></td>
-                            </tr>
-                            
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
-                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
-                        </p></center>
-
-                </div>
-                
             </div>
                 
         </div>
                 
         <div id="newbusiness" style="height: 600px;">
-            
-            
-            
-            <!--p id='QShowNews2' onclick='document.getElementById("Extras2").style.display = "block";'
-                style='margin-top: 10px; background-color: #334d81; color: white; padding: 5px; cursor: pointer;'>
-                <i style='color: white; font-size: 35px;' class="fa fa-newspaper-o" width="28" height="25" ></i>
-                <sup> Show News Updates</sup></p-->
-            
-            
             
             <p id='addBizTxt' style="text-align: center; font-size: 20px;  margin-bottom: 10px; margin-top: -10px;">
                 <b>Add your business or create customer account</b>
@@ -995,7 +813,6 @@
                  box-shadow: 0 0 5px 1px black;'>
                     <div style="text-align: center;"><a onclick="document.getElementById('HomePageLoader').style.display = 'block';" href="NewsUpadtesPage.jsp"><p  
                         style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
-                            <!--img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-google-news-50.png" alt="icons8-google-news-50"/-->
                             <i style='color: white; font-size: 25px;' class="fa fa-newspaper-o"></i>
                     </p>
                     <p style='font-size: 15px; color: white; margin-top: -2px;'>News</p>
@@ -1118,51 +935,13 @@
                 <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
                     <h1 style='color: white; font-size: 19px; font-family: serif; padding: 20px 0;'>Popular Services</h1>
                     
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
-                        <a href="QueueSelectMedicalCenter.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectBarberBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectNailSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
-                            </div>
-                        </a>
-                        <a href="QueueSelectDaySpa.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
-                            </div>
-                        </a>
-                        <a class="dontShowMobile" href="QueueSelectBeautySalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
-                            </div>
-                        </a>
-                        <a class="dontShowMobile" href="QueueSelectHairSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                            <div class="eachPopularService">
-                                <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
-                                <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
-                            </div>
-                        </a>
+                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
+                        
                     </div>
                     <style>
                         .eachPopularService{
                             cursor: pointer;
                         }
-                        /*.eachPopularService:hover{
-                            background-color: #224467;
-                        }*/
                         @media only screen and (max-width: 700px){
                             .dontShowMobile{
                                 display: none;
@@ -1295,7 +1074,7 @@
                                         </div>
 
                                     </div>
-                                    <p style='color: white; font-weight: bolder;'><!--i style="color: tomato;" class="fa fa-briefcase" aria-hidden="true"></i--><%=RBizName%></p>
+                                    <p style='color: white; font-weight: bolder;'><%=RBizName%></p>
                                     <p style="color: #ccc; margin-top: -3px;">- <%=RBizType%> -</p>
                                 </div>
                             </a>
@@ -1318,31 +1097,8 @@
                         It also provides features for the businesses to post news updates with pictures to keep you informed about their services
                         and products.
                     </p>
-                    <div class='CosmeSectFlex'>
-                        <div class='eachCSecFlex'>
-                            <h1>Book your doctor's appointment online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Find barber shops near you</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Find your beauty time online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
-                            </div>
-                        </div>
+                    <div id="BkApptOnlnInfoDiv" class='CosmeSectFlex'>
+                        
                     </div>
                     
                     <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px;'>We have the best services in your area</h1>
@@ -1351,31 +1107,8 @@
                         our platform. Queue Appointments will eventually disassociate with badly rated businesses.
                     </p>
                     
-                    <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
-                        <div class='eachCSecFlex'>
-                            <h1>Your reviews make a difference</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Fast growing community</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Our businesses keep you posted</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
-                            </div>
-                        </div>
+                    <div id="RvwGrowingCmntCosmeDiv" class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                        
                     </div>
                 </div>
             </div>
@@ -1443,9 +1176,7 @@
         </div>
                 
     </div>
-    <!--script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script-->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    
     <script>
         $(document).ready(function(){
             $('.recommendedProvidersDiv').slick({
@@ -1477,15 +1208,204 @@
                     slidesToScroll: 1
                   }
                 }
-                // You can unslick at a given breakpoint now by adding:
-                // settings: "unslick"
-                // instead of a settings object
               ]
               });
         });
     </script>
     </body>
+    <script defer>
+        document.getElementById("main").innerHTML = 
+                `<h4 style="padding: 5px 0; margin-bottom: 5px; margin-top: 5px;">Search By Category</h4>
+                
+                 <div id="firstSetProvIcons">
+                <center><table id="providericons">
+                        <tbody>
+                        <tr>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectMedicalCenter.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectDentist.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a href="QueueSelectPodiatry.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PodiatrySelect">Podiatry</p><img src="icons/icons8-foot-filled-70.png" width="70" height="70" alt="icons8-foot-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectPhisicalTherapy.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectMassage.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MassageSelect">Massage</p><img src="icons/icons8-massage-filled-70.png" width="70" height="70" alt="icons8-massage-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a href="QueueSelectTattoo.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Tattoo Shop</p><img src="icons/icons8-tattoo-machine-filled-70.png" width="70" height="70" alt="icons8-tattoo-machine-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectMedAesthet.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MedEsthSelect">Medical Aesthetician</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                    </tbody>
+                    </table></center>
+                    
+                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                    </p></center>
+                
+                </div>
+                
+                <div id="secondSetProvIcons" style="display: none;">
+                    <center><table id="providericons">
+                        <tbody>
+                        <tr>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBrowsLashes.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
+                            </a></center></td>
+                             <td style="width: 33.3%;"><center><a href="QueueSelectDietician.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectPetServe.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PetServicesSelect">Pet Services</p><img src="icons/icons8-dog-filled-70.png" width="70" height="70" alt="icons8-dog-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                        <tr>
+                            <td><center><a href="QueueSelectHomeServe.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="HomeServicesSelect">Home Services</p><img src="icons/icons8-home-filled-70.png" width="70" height="70" alt="icons8-home-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectPiercing.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PiercingSelect">Piercing</p><img src="icons/icons8-piercing-filled-70.png" width="70" height="70" alt="icons8-piercing-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectHolisticMed.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="HolMedSelect">Holistic Medicine</p><img src="icons/icons8-mortar-and-pestle-100.png" width="70" height="70" alt="icons8-pill-filled-70"/>
+                            </a></center></td>
+                        <tr>
+                            <td><center><a href="QueueSelectNailSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="NailSalonSelect">Nail Salon</p><img src="icons/icons8-nails-filled-70.png" width="70" height="70" alt="icons8-nails-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectPersonalTrainer.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="PersonalTrainSelect">Personal Trainer</p><img src="icons/icons8-personal-trainer-filled-70.png" width="70" height="70" alt="icons8-personal-trainer-filled-70"/>
+                            </a></center></td>
+                            <td><center><a href="QueueSelectHairSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Hair Salon</p><img src="icons/icons8-woman's-hair-filled-70.png" width="70" height="70" alt="icons8-woman's-hair-filled-70"/>
+                            </a></center></td>
+                        </tr>
+                    </tbody>
+                    </table></center>
+                    
+                    <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
+                
+                </div>
+                
+                <div id="thirdSetProvIcons" style="display: none;">
+                        <center><table id="providericons">
+                        <tbody>
+                            <tr>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectDaySpa.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectHairRemoval.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
+                            </a></center></td>
+                            <td style="width: 33.3%;"><center><a href="QueueSelectBeautySalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="BeautySalonSelect">Beauty Salon</p><img src="icons/icons8-cleansing-filled-70.png" width="70" height="70" alt="icons8-cleansing-filled-70"/>
+                            </a></center></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 33.3%;"><center><a href="QueueSelectMakeUpArtist.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';"><p style="margin:0;" name="MakeupArtistSelect">Makeup Artist</p><img src="icons/icons8-cosmetic-brush-filled-70.png" width="70" height="70" alt="icons8-cosmetic-brush-filled-70"/>
+                                </a></center></td>
+                            </tr>
+                            
+                    </tbody>
+                    </table></center>
+                    
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
+
+                </div>`;
     
+        document.getElementById("PopularSvcDiv").innerHTML = 
+                `<a href="QueueSelectMedicalCenter.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectBarberBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectNailSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
+                            </div>
+                        </a>
+                        <a href="QueueSelectDaySpa.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
+                            </div>
+                        </a>
+                        <a class="dontShowMobile" href="QueueSelectBeautySalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
+                            </div>
+                        </a>
+                        <a class="dontShowMobile" href="QueueSelectHairSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
+                            <div class="eachPopularService">
+                                <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
+                                <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
+                            </div>
+                        </a>`;
+    
+        document.getElementById("BkApptOnlnInfoDiv").innerHTML =
+                `<div class='eachCSecFlex'>
+                            <h1>Book your doctor's appointment online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find barber shops near you</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find your beauty time online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
+                            </div>
+                        </div>`;
+    
+        document.getElementById("RvwGrowingCmntCosmeDiv").innerHTML =
+                `<div class='eachCSecFlex'>
+                            <h1>Your reviews make a difference</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Fast growing community</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Our businesses keep you posted</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
+                            </div>
+                        </div>`;
+    </script>
     <script src="scripts/script.js"></script>
     <script src="scripts/loginPageBtn.js"></script>
     

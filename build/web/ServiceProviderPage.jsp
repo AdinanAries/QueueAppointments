@@ -48,17 +48,15 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
-        
-        <!--script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
-         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script-->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js" defer></script>
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
@@ -70,8 +68,6 @@
     
     </head>
    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    
     <%
         
         /*Cookie myName = new Cookie("Name","Mohammed");
@@ -1825,11 +1821,6 @@
         
         <div id="PermanentDiv" style="">
             
-            <!--img onclick="showExtraDropDown();" id="ExtraDrpDwnBtn" style='margin-top: 2px; margin-left: 2px;float: left; border: 1px solid black; cursor: pointer; background-color: white;' src="icons/icons8-menu-25.png" width="33" height="33" alt="icons8-menu-25"/>
-            <script>
-                //show extradrop down script here
-            </script-->
-            
             <div style="float: left; width:fit-content; margin-left: 10px; padding-top: 1px;">
                 <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; background-color: white; padding: 4px; border-radius: 4px" />
             </div>
@@ -1857,7 +1848,7 @@
                     Calender</li>
                 <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4'><li class="active" id='PermDivUserBtn' style='cursor: pointer; background-color: #334d81;'><!--img style='background-color: white;' src="icons/icons8-user-50 (1).png" width="20" height="17" alt="icons8-user-50 (1)"/-->
                         <i class="fa fa-cog" aria-hidden="true"></i>
-                        Account</li></a> <!--onclick='showCustExtraUsrAcnt();'-->
+                        Account</li></a>
             </ul>
                     
             <div style="margin-left: 20px;">
@@ -1879,11 +1870,7 @@
             </div>
             
         </div>
-        
-         <!--div id='ExtraDropDwnDiv'>  
-            
-        </div-->
-                
+             
         <div id="container">
             
             <div id="miniNavPov" style="padding-top: 10px; padding-bottom: 10px; padding-right: 2px; background-color: #334d81; opacity: 0.9">
@@ -1909,13 +1896,11 @@
                     
                     <div style=' margin-left: 0;'>
                         <div onclick="toggleHideAppointmentsDiv()" style="width: 25%; color: white; float: left; cursor: pointer; border-radius: 4px;">
-                            <!--img style="background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;" src="icons/ProviderApptIcon.png" alt="" width="24" height="24"/-->
                             <i style="font-size: 25px;" class="fa fa-users"></i>
                             <p style="font-size: 11px;" id="hideAppointments">Hide Spots</p>
                         </div>
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'>  
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
-                                <!--img style="background-color: white; border-radius: 2px;" src="icons/icons8-google-news-50.png" alt="" height="25" width="30"/-->
                                 <i style="font-size: 25px;" class="fa fa-newspaper-o"></i>
                                 <p style="font-size: 11px;">Add News</p>
                             </div>
@@ -1923,14 +1908,12 @@
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2' style='color: white;'>
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
                                 <p style=' width: 13px; position: absolute; z-index: 1000; font-size: 11px; color: red; margin-left: 11%; border: #334d81 1px solid; background-color: white; background-color: white; padding-left: 2px; padding-right: 2px; border-radius: 2px;'><%=notiCounter%></p>
-                                <!--img style='background-color: white; border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="25" alt="icons8-notification-50"/-->
                                 <i style="font-size: 25px;" class="fa fa-bell"></i>
                                 <p style="font-size: 11px;">Notifications</p>
                             </div>
                         </a>
                         <a onclick="document.getElementById('ProviderPageLoader').style.display = 'block';" href='ProviderSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=4' style='color: white;'>
                             <div id="" style="float: left; width: 25%; color: white; cursor: pointer; border-radius: 4px;">
-                                <!img style="background-color: white; border-radius: 2px;" src="icons/icons8-calendar-50.png" alt="" height="25" width="25"/>
                                 <i style="font-size: 25px;" class="fa fa-cog"></i>
                                 <p style="font-size: 11px;">Settings</p>
                             </div>
@@ -1945,17 +1928,14 @@
             </div>
             
             
-            <div class="providerHeader" id="ProviderHeader" style="display: none;"> <!--onclick="hideDropDown();"-->
+            <div class="providerHeader" id="ProviderHeader" style="display: none;">
                 <cetnter><p> </p></cetnter>
                 <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
-                <!--center><h2 style="color: #000099;">Line Your Customers Now!</h2></center-->
             </div>
                     
             <div>
                 
             </div>
-  <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-  
   <div id="Extras">
             
             <div id='News' style=''>
@@ -2649,17 +2629,12 @@
             </div>
         </div>
   
-  <!-------------------------------------------------------------------------------------------------------------------------------------------------->
-            
             <div class="ProvidersDashboardContent" id="content"  style="" onclick="hideDropDown();">
                 
             <div id="nav" style='padding: 0;'>
                 
             </div>
             <div class="ProviderMainDiv" id="main" >
-                
-                <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
-                
                           
                 <center><div id="QueuLineDiv" style="width: 100%; margin-bottom: 0;">
                                         
@@ -5165,16 +5140,6 @@
                             
                                     <p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; padding-top: 75px; text-align: center;"><%=FullName%></p>
                                     <p style='margin-bottom: 10px; text-align: center;'><span style='font-weight: bolder;' id="CompanyDetail"><%=Company%></span></p>
-                                    
-                                    <!--center><table style="border-spacing: 0; text-align: center;">
-                                            <tr><td><p><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
-                                                        <span style="color: #636363;" id="PhoneDetail"><%=PhoneNumber%></span></p></td></tr>
-                                            <tr><td><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                                        <span style="color: #636363;" id="EmailDetail"><%=Email%></span></p></td></tr>
-                                        <tr><td><p><img src="icons/icons8-home-15.png" width="15" height="15" alt="icons8-home-15"/>
-                                                <span style="color: #636363;" id="AddressDetail"><%=Address.split(",")[0]%></span></p></td></tr>
-                                    
-                                        </table></center-->
                                     
                                 </div>
                                         

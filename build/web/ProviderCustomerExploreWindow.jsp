@@ -40,16 +40,15 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <!--link rel="stylesheet" href="/resources/demos/style.css"-->
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
-        <!--script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script-->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
         
@@ -65,8 +64,6 @@
         <meta name="apple-mobile-web-app-status-bar" content="#ffffff" />
         
     </head>
-    
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
     <%
         
@@ -525,12 +522,169 @@
             </div>
                  
             <div id="main" class="Main" style="padding-bottom: 0 !important;">
-                <center><h4 style="color: darkblue; margin-bottom: 5px; padding-top: 5px; max-width: 300px">
-                        <!--span style='color: white;' id="NameForLoginStatus"><=FirstName%></span--> Search By Category </h4></center>
+                <center><h4 style="color: darkblue; margin-bottom: 5px; padding-top: 5px; max-width: 300px"> Search By Category </h4></center>
                  
-                <!--cetnter><h4></h4></cetnter-->
+                <div id="CategoriesIcons">
                 
-                <div id="firstSetProvIcons">
+                </div>
+                                
+                <div class="DashboardFooter" style='background-color: #212c2c; 
+                     margin-bottom: 0 !important; margin-top: 10px !important; position: relative; z-index: 100 !important; padding-top: 0; display: block !important;' id="footer">
+            <div id="CosmeticsSection" style="padding-top: 0;">
+                <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
+                    <h1 style='color: white; font-size: 19px; font-family: serif; padding-bottom: 20px;'>Popular Services</h1>
+                    
+                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
+                        
+                    </div>
+                    <style>
+                        .eachPopularService{
+                            cursor: pointer;
+                        }
+                        /*.eachPopularService:hover{
+                            border-bottom: 1px solid #224467;
+                        }*/
+                        @media only screen and (max-width: 700px){
+                            .dontShowMobile{
+                                display: none;
+                            }
+                        }
+                    </style>
+                    
+                    <p style='margin: auto; margin-bottom: 20px; margin-top: 30px; display: block; border-bottom: #374949 1px solid; max-width: 700px;'></p>
+                    <h1 style='color: white; font-size: 19px; font-family: serif; padding: 10px 0;'>Suggested Places</h1>
+                    
+                    <div id="SuggestedPlcsDiv" style="max-width: 1000px; margin: auto; text-align: center;">
+                        
+                    </div>
+                </div>
+                <div>
+                    <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
+                        Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
+                        It also provides features for the businesses to post news updates with pictures to keep you informed about their services
+                        and products.
+                    </p>
+                    <div id="BkApptmtInfoDiv" class='CosmeSectFlex'>
+                        
+                    </div>
+                    
+                    <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px;'>We have the best services in your area</h1>
+                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
+                        Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
+                        our platform. Queue Appointments will eventually disassociate with badly rated businesses.
+                    </p>
+                    
+                    <div id="RvwGrowingCmntCosmeDiv" class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
+                <div id='footerContactsDiv' class='eachCSecFlex'>
+                    <h1 style='color: #06adad; text-align: justify'>Contact</h1>
+                    <p style='padding: 5px; font-weight: bolder; margin-top: 10px; text-align: justify;'><i style='margin-right: 15px; font-size: 20px;' class="fa fa-map-marker" aria-hidden="true"></i> 260 Manning Blvd</p> 
+                    <p style='text-align: justify; padding-left: 35px;'>Albany, NY</p>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 732-799-9546</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 518-898-3991</p>
+                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px;' class='fa fa-envelope'></i> support@theomotech.com</p>
+                        
+                    </div>
+                </div>
+                <style>
+                    @media only screen and (max-width: 1000px){
+                        #footerContactsDiv p{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv h1{
+                            text-align: center !important;
+                        }
+                        #footerContactsDiv{
+                            padding-bottom: 30px !important;
+                        }
+                    }
+                </style>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad;'>About the company</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech Inc. Theomotech as a Tech company is
+                            dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
+                            <span style='color: #ccc;'>increase in revenue... 
+                                <br/><br/><a href="https://theomotech.herokuapp.com" style="color: #ccc;" target="_blank">read more 
+                                    <i style="color: white; margin-left: 5px;" class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                            </span>
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class='eachCSecFlex'>
+                    <h1 style='color: #06adad'></h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
+                                <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
+                                <p style="margin-top: 10px;">
+                                    <a href="https://www.facebook.com/TheoMotech-107976207592401/about/?ref=page_internal" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/theomotech-inc" target="_blank">
+                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
+                                    </a>
+                                    <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i>
+                                </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+    
+    <script>
+        $(document).ready(function(){
+            $('.recommendedProvidersDiv').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                dots: false,
+                responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                  }
+                },
+                {
+                  breakpoint: 850,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+              ]
+              });
+        });
+    </script>
+    </body>
+    
+    <script defer>
+        document.getElementById("CategoriesIcons").innerHTML =
+                `<div id="firstSetProvIcons">
                 <center><table id="providericons">
                         <tbody>
                         <tr>
@@ -626,16 +780,10 @@
                                     <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
                                     </p></center>
 
-                </div>
-                                
-                <div class="DashboardFooter" style='background-color: #212c2c; 
-                     margin-bottom: 0 !important; margin-top: 10px !important; position: relative; z-index: 100 !important; padding-top: 0; display: block !important;' id="footer">
-            <div id="CosmeticsSection" style="padding-top: 0;">
-                <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
-                    <h1 style='color: white; font-size: 19px; font-family: serif; padding-bottom: 20px;'>Popular Services</h1>
-                    
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
-                        <a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
+                </div>`;
+    
+        document.getElementById("PopularSvcDiv").innerHTML = 
+                `<a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
                             <div class="eachPopularService">
                                 <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
                                 <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
@@ -670,27 +818,61 @@
                                 <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
                                 <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
                             </div>
-                        </a>
-                    </div>
-                    <style>
-                        .eachPopularService{
-                            cursor: pointer;
-                        }
-                        /*.eachPopularService:hover{
-                            border-bottom: 1px solid #224467;
-                        }*/
-                        @media only screen and (max-width: 700px){
-                            .dontShowMobile{
-                                display: none;
-                            }
-                        }
-                    </style>
-                    
-                    <p style='margin: auto; margin-bottom: 20px; margin-top: 30px; display: block; border-bottom: #374949 1px solid; max-width: 700px;'></p>
-                    <h1 style='color: white; font-size: 19px; font-family: serif; padding: 10px 0;'>Suggested Places</h1>
-                    
-                    <div style="max-width: 1000px; margin: auto; text-align: center;">
-                        <div style="width: 85%; margin: auto;" class="recommendedProvidersDiv">
+                        </a>`;
+    
+        document.getElementById("BkApptmtInfoDiv").innerHTML = 
+                `<div class='eachCSecFlex'>
+                            <h1>Book your doctor's appointment online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find barber shops near you</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Find your beauty time online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
+                            </div>
+                        </div>`;
+        document.getElementById("RvwGrowingCmntCosmeDiv").innerHTML =
+                `<div class='eachCSecFlex'>
+                            <h1>Your reviews make a difference</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Fast growing community</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
+                            </div>
+                        </div>
+                        <div class='eachCSecFlex marginUp20'>
+                            <h1>Our businesses keep you posted</h1>
+                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                                 display: flex; justify-content: flex-end; flex-direction: column;'>
+                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
+                            </div>
+                        </div>`;
+    
+            document.getElementById("SuggestedPlcsDiv").innerHTML = 
+                    `<div style="width: 85%; margin: auto;" class="recommendedProvidersDiv">
                             <%
                                 for(int i = 0; i < providersList.size(); i++){
                                     
@@ -823,181 +1005,8 @@
                              if(providersList.size() == 0){
                          %>
                          <p style='color: white;'><i class='fa fa-exclamation-triangle' style='color: yellow;'></i> Oops! We have no recommendations at this time</p>
-                         <%}%>
-                    </div>
-                </div>
-                <div>
-                    <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
-                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
-                        Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
-                        It also provides features for the businesses to post news updates with pictures to keep you informed about their services
-                        and products.
-                    </p>
-                    <div class='CosmeSectFlex'>
-                        <div class='eachCSecFlex'>
-                            <h1>Book your doctor's appointment online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Find barber shops near you</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Find your beauty time online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
-                                 background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px;'>We have the best services in your area</h1>
-                    <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto; color: black;'>
-                        Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
-                        our platform. Queue Appointments will eventually disassociate with badly rated businesses.
-                    </p>
-                    
-                    <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
-                        <div class='eachCSecFlex'>
-                            <h1>Your reviews make a difference</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Always feel free to tell us how you were served. You help us keep the platform clean</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Fast growing community</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>More and more businesses are signing up on our platform everyday</p>
-                            </div>
-                        </div>
-                        <div class='eachCSecFlex marginUp20'>
-                            <h1>Our businesses keep you posted</h1>
-                            <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular news updates to keep you informed</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px;'>
-                <div id='footerContactsDiv' class='eachCSecFlex'>
-                    <h1 style='color: #06adad; text-align: justify'>Contact</h1>
-                    <p style='padding: 5px; font-weight: bolder; margin-top: 10px; text-align: justify;'><i style='margin-right: 15px; font-size: 20px;' class="fa fa-map-marker" aria-hidden="true"></i> 260 Manning Blvd</p> 
-                    <p style='text-align: justify; padding-left: 35px;'>Albany, NY</p>
-                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; flex-direction: column;'>
-                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 732-799-9546</p>
-                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px; font-size: 20px;' class='fa fa-phone'></i> +1 518-898-3991</p>
-                        <p style='text-align: justify; font-weight: bolder;'><i style='margin-right: 15px;' class='fa fa-envelope'></i> support@theomotech.com</p>
-                        
-                    </div>
-                </div>
-                <style>
-                    @media only screen and (max-width: 1000px){
-                        #footerContactsDiv p{
-                            text-align: center !important;
-                        }
-                        #footerContactsDiv h1{
-                            text-align: center !important;
-                        }
-                        #footerContactsDiv{
-                            padding-bottom: 30px !important;
-                        }
-                    }
-                </style>
-                <div class='eachCSecFlex'>
-                    <h1 style='color: #06adad;'>About the company</h1>
-                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 10px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                        <p style='color: white; padding: 5px;'>Queue appointments is a product of Theomotech Inc. Theomotech as a Tech company is
-                            dedicated to providing businesses with Software and IT solutions in order to help improve their business operations and 
-                            <span style='color: #ccc;'>increase in revenue... 
-                                <br/><br/><a href="https://theomotech.herokuapp.com" style="color: #ccc;" target="_blank">read more 
-                                    <i style="color: white; margin-left: 5px;" class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                            </span>
-                        </p>
-                        
-                    </div>
-                </div>
-                <div class='eachCSecFlex'>
-                    <h1 style='color: #06adad'></h1>
-                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
-                                 display: flex; justify-content: flex-end; flex-direction: column;'>
-                                <p style='text-align: center;'><img src='TMTlogo.svg'  style='width: 80px; height: 40px'/></p>
-                                <p style='color: #37a0f5; padding: 5px;'>Theomotech Inc. &copy;2020</p>
-                                <p style='color: darkgray; font-size: 13px;'>All rights reserved</p>
-                                <p style="margin-top: 10px;">
-                                    <a href="https://www.facebook.com/TheoMotech-107976207592401/about/?ref=page_internal" target="_blank">
-                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-facebook" aria-hidden="true"></i> 
-                                    </a>
-                                    <a href="https://www.linkedin.com/company/theomotech-inc" target="_blank">
-                                        <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-linkedin" aria-hidden="true"></i> 
-                                    </a>
-                                    <i style='padding: 5px; background-color: #374949; color: white; border-radius: 4px; margin: 5px; width: 20px; font-size: 20px;' class="fa fa-instagram" aria-hidden="true"></i>
-                                </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-            </div>     
-                            
-        <!--script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script-->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.recommendedProvidersDiv').slick({
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                dots: false,
-                responsive: [
-                {
-                  breakpoint: 1024,
-                  settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                  }
-                },
-                {
-                  breakpoint: 850,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                  }
-                }
-                // You can unslick at a given breakpoint now by adding:
-                // settings: "unslick"
-                // instead of a settings object
-              ]
-              });
-        });
+                         <%}%>`;
     </script>
-    </body>
     
     <script>
         var ControllerResult = "<%=ControllerResult%>";
