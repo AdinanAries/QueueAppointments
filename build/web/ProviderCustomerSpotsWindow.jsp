@@ -44,8 +44,11 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
         
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script-->
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!--script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
@@ -64,11 +67,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
     <%
-        
-        /*Cookie myName = new Cookie("Name","Mohammed");
-        myName.setMaxAge(60*60*24); 
-        response.addCookie(myName);*/
-        
         //Changing some domain cookie properties
         Cookie cookie = null;
          Cookie[] cookies = null;
@@ -85,13 +83,6 @@
                cookie = cookies[i];
                CookieText += cookie.getName()+"="+cookie.getValue();
                
-               /*if((cookie.getName()).compareTo("JSESSIONID") == 0 ) {
-                  //cookie.setHttpOnly(false);
-                  //cookie.setSecure(false);
-                  //cookie.setMaxAge(60*60*999999999);
-                  //response.addCookie(cookie);
-                  
-               }*/
             }
          } else {
              //JOptionPane.showMessageDialog(null, "no cookies found");
@@ -117,8 +108,6 @@
         Date ThisDate = new Date();//default date constructor returns current date 
         String CurrentTime = ThisDate.toString().substring(11,16);
         
-        //UserAccount.UserID stores UserID after Login Successfully
-        //ProviderCustomerData.eachCustomer = null;
         int JustLogged = 0;
         boolean isSameUserName = true;
         boolean isSameSessionData = true;
@@ -238,7 +227,6 @@
         catch(Exception e){
             e.printStackTrace();
         }
-        
         
         String thisUserName = "";
         String ThisPassword = "";
@@ -537,61 +525,60 @@
         </div>
         
         <div>
-                                        
-                                        <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; height: 40px; background-color: white; border-spacing: 20px 0;">
-                                            <tbody>
-                                                <tr>
-                                                    <td onclick="activateAppTabMobile()" id="AppointmentsTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkblue; font-weight: bolder; width: 33.3%;  background-color: white; border-bottom: 2px solid darkblue;">
-                                                        <i class="fa fa-list" aria-hidden="true"></i> Your Spots
-                                                    </td>
-                                                    <td onclick="activateHistoryMobile()" id="HistoryTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkgrey; background-color: white; font-weight: bolder; width: 33.3%;">
-                                                        <i class="fa fa-history" aria-hidden="true"></i> History
-                                                    </td>
-                                                    <td style="display: none;" onclick="activateFavTabMobile()" id="FavoritesTab" style="text-align: center; padding: 5px; cursor: pointer; background-color: white; width: 33.3%;">
-                                                       
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table></center>
+             <center><table id="selectCustSpttabs" cellspacing="0" style="width: 100%; height: 40px; background-color: white; border-spacing: 20px 0;">
+                    <tbody>
+                        <tr>
+                            <td onclick="activateAppTabMobile()" id="AppointmentsTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkblue; font-weight: bolder; width: 33.3%;  background-color: white; border-bottom: 2px solid darkblue;">
+                                    <i class="fa fa-list" aria-hidden="true"></i> Your Spots
+                            </td>
+                            <td onclick="activateHistoryMobile()" id="HistoryTab" style="text-align: center; padding: 5px; cursor: pointer; color: darkgrey; background-color: white; font-weight: bolder; width: 33.3%;">
+                                <i class="fa fa-history" aria-hidden="true"></i> History
+                            </td>
+                            <td style="display: none;" onclick="activateFavTabMobile()" id="FavoritesTab" style="text-align: center; padding: 5px; cursor: pointer; background-color: white; width: 33.3%;">
+                                   
+                            </td>
+                        </tr>
+                    </tbody>
+                </table></center>
                                         
             <center><div class="scrolldiv" style=" height: auto; overflow-y: auto;">
                                    
-                                   <script>
-                                        function showselectCustSpttabs(){
-                                            document.getElementById("selectCustSpttabs").scrollIntoView();
-                                        }
-                                    </script>
+                <script>
+                    function showselectCustSpttabs(){
+                        document.getElementById("selectCustSpttabs").scrollIntoView();
+                    }
+                </script>
                                         
-                                <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
+                <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
                                     
-                                    <p style="font-weight: bolder; color: darkblue; margin-top: 10px;">Today's Spots</p>
+                <p style="font-weight: bolder; color: darkblue; margin-top: 10px;">Today's Spots</p>
                                    
-                                    <script>
+                <script>
                                     
-                                                        var currentDate = new Date();
-                                                        var currentTime = '<%=CurrentTime%>';
+                        var currentDate = new Date();
+                        var currentTime = '<%=CurrentTime%>';
                                                         
-                                                        var currentHour = currentTime.substring(0,2);
-                                                        var currentMinute = currentTime.substring(3,5);
+                        var currentHour = currentTime.substring(0,2);
+                        var currentMinute = currentTime.substring(3,5);
 
-                                                         var currentMonth = currentDate.getMonth();
-                                                                 currentMonth += 1;
-                                                                 currentMonth += "";
+                        var currentMonth = currentDate.getMonth();
+                        currentMonth += 1;
+                        currentMonth += "";
 
-                                                                 if(currentMonth.length < 2)
-                                                                         currentMonth = "0" + currentMonth;
+                        if(currentMonth.length < 2)
+                            currentMonth = "0" + currentMonth;
 
-                                                         var currentDay = currentDate.getDate() + "";
+                        var currentDay = currentDate.getDate() + "";
 
-                                                                 if(currentDay.length < 2)
-                                                                         currentDay = "0" + currentDay;
+                        if(currentDay.length < 2)
+                            currentDay = "0" + currentDay;
 
-                                                         var currentYear = currentDate.getFullYear();
+                        var currentYear = currentDate.getFullYear();
 
-                                                         currentDate = currentMonth + "/" + currentDay + "/" + currentYear;
+                        currentDate = currentMonth + "/" + currentDay + "/" + currentYear;
                                                          //var anotherDate = currentYear + "-" + currentMonth + "-" + currentDay;
                                                          
-                                    </script>
+                </script>
 
                                     
                                     <% 
@@ -1574,94 +1561,6 @@
                                                          if(result === "NewAdded"){
                                                              alert("Provider added to your favorites");
                                                              
-                                                            /*$.ajax({
-
-                                                                type: "POST",
-                                                                url: "GetLastFavProv",
-                                                                data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
-                                                                success: function(result){
-                                                                    //alert(result);
-                                                                    
-                                                                    var favProv = JSON.parse(result);
-                                                                    
-                                                                    var UserIndex = "<=UserIndex%>";
-                                                                    var UserName = "<=NewUserName%>";
-                                                                    var provName = favProv.Name;
-                                                                    var provCoverPic = favProv.CoverPic;
-                                                                    var provProPic = favProv.ProfilePic;
-                                                                    var provRating = parseInt(favProv.Rating, 10);
-                                                                    //alert(provRating);
-                                                                    
-                                                                    var ratingStars;
-                                                                    if(provRating === 5){
-                                                                        ratingStars = '★★★★★';
-                                                                    }
-                                                                    else if(provRating === 4){
-                                                                        ratingStars = '★★★★☆';
-                                                                    }
-                                                                    else if(provRating === 3){
-                                                                        ratingStars = '★★★☆☆';
-                                                                    }
-                                                                    else if(provRating === 2){
-                                                                        ratingStars = '★★☆☆☆';
-                                                                    }
-                                                                    else{
-                                                                        ratingStars = '★☆☆☆☆';
-                                                                    }
-                                                                    //alert(ratingStars);
-                                                                    
-                                                                    var provCompany = favProv.Company;
-                                                                    
-                                                                    var LastFavDiv = document.getElementById("LastFavDiv");
-                                                                    var Divv = document.createElement('div');
-                                                                    
-                                                                    Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
-                                    
-                                                                                    '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
-                                                                                    '</div>' +
-
-                                                                                    '<div style="padding-top: 75px;">' +
-                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;"><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>' +
-                                                                                     provName + '</p></b>' +
-                                                                                    '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
-                                                                                     provCompany +
-                                                                                    '<span style="color: blue;">'+
-                                                                                     ratingStars +
-                                                                                    '</span></p>' +
-
-
-                                                                                    '<div style="width: 70%;">' +
-
-                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
-
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
-                                                                                    '</span></p>' +
-                                                                                    '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
-                                                                                    '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
-                                                                                    '<input type="hidden" name="User" value="'+UserName+'" />' +
-
-                                                                                    '</form>' +
-
-                                                                                    '<center><form name="bookFromFavoritesForm" action="EachSelectedProviderLoggedIn.jsp" method="POST">' +
-                                                                                        '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
-                                                                                        '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
-                                                                                        '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
-                                                                                        '</form></center>' +
-                                                                                    '</div>' +
-                                                                                    '</div>' +       
-                                                                                    '</div>';
-                                                                            
-                                                                            //alert('im here');
-                                                                    
-                                                                            LastFavDiv.appendChild(Divv);
-
-                                                                            if(document.getElementById("noFavProvStatus"))
-                                                                                document.getElementById("noFavProvStatus").style.display = "none";
-                                                                    
-                                                                }
-                                                            });*/
                                                          }else{
                                                           alert(result);
                                                          }
@@ -1824,7 +1723,7 @@
                                                         url: "DeleteAppointment",  
                                                         data: "AppointmentID="+AppointmentID,  
                                                         success: function(result){  
-                                                          alert("This is history has been removed");
+                                                          alert("This history has been removed");
                                                           document.getElementById('PagePageLoader').style.display = 'none';
                                                           document.getElementById("HistoryAppointmentDiv<%=JString%>").style.display = "none";
                                                         }                
@@ -1973,94 +1872,7 @@
                                                           document.getElementById('PagePageLoader').style.display = 'none';
                                                           if(result === "NewAdded"){
                                                               alert("Provider added to your favorites");
-                                                            /*$.ajax({
-
-                                                                type: "POST",
-                                                                url: "GetLastFavProv",
-                                                                data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID,
-                                                                success: function(result){
-                                                                    //alert(result);
-                                                                    
-                                                                    var favProv = JSON.parse(result);
-                                                                    
-                                                                    var UserName = "<=NewUserName%>";
-                                                                    var UserIndex = "<=UserIndex%>";
-                                                                    var provName = favProv.Name;
-                                                                    var provCoverPic = favProv.CoverPic;
-                                                                    var provProPic = favProv.ProfilePic;
-                                                                    var provRating = parseInt(favProv.Rating, 10);
-                                                                    //alert(provRating);
-                                                                    
-                                                                    var ratingStars;
-                                                                    if(provRating === 5){
-                                                                        ratingStars = '★★★★★';
-                                                                    }
-                                                                    else if(provRating === 4){
-                                                                        ratingStars = '★★★★☆';
-                                                                    }
-                                                                    else if(provRating === 3){
-                                                                        ratingStars = '★★★☆☆';
-                                                                    }
-                                                                    else if(provRating === 2){
-                                                                        ratingStars = '★★☆☆☆';
-                                                                    }
-                                                                    else{
-                                                                        ratingStars = '★☆☆☆☆';
-                                                                    }
-                                                                    //alert(ratingStars);
-                                                                    
-                                                                    var provCompany = favProv.Company;
-                                                                    
-                                                                    var LastFavDiv = document.getElementById("LastFavDiv");
-                                                                    var Divv = document.createElement('div');
-                                                                    
-                                                                    Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
-                                    
-                                                                                    '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
-                                                                                    '</div>' +
-
-                                                                                    '<div style="padding-top: 75px;">' +
-                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;"><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>' +
-                                                                                     provName + '</p></b>' +
-                                                                                    '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
-                                                                                     provCompany +
-                                                                                    '<span style="color: blue;">'+
-                                                                                     ratingStars +
-                                                                                    '</span></p>' +
-
-
-                                                                                    '<div style="width: 70%;">' +
-
-                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
-
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
-                                                                                    '</span></p>' +
-                                                                                    '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
-                                                                                    '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
-                                                                                    '<input type="hidden" name="User" value="'+UserName+'" />' +
-
-                                                                                    '</form>' +
-
-                                                                                    '<center><form name="bookFromFavoritesForm" action="EachSelectedProviderLoggedIn.jsp" method="POST">' +
-                                                                                        '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
-                                                                                        '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
-                                                                                        '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: pink; border: 1px solid black; padding: 5px;" type="submit" value="Find a Spot" />' +
-                                                                                        '</form></center>' +
-                                                                                    '</div>' +
-                                                                                    '</div>' +       
-                                                                                    '</div>';
-                                                                            
-                                                                            //alert('im here');
-                                                                    
-                                                                    LastFavDiv.appendChild(Divv);
-                                                                    
-                                                                    if(document.getElementById("noFavProvStatus"))
-                                                                        document.getElementById("noFavProvStatus").style.display = "none";
-                                                                    
-                                                                }
-                                                            });*/
+                                                            
                                                           }else{
                                                             alert(result);
                                                           }
@@ -2124,10 +1936,10 @@
             alert(ControllerResult);
     </script>
     
-    <script src="scripts/script.js"></script>
+    <script src="scripts/script.js" defer></script>
     <!--script src="scripts/checkAppointmentDateUpdate.js"></script-->
-    <script src="scripts/updateUserProfile.js"></script>
-    <script src="scripts/customerReviewsAndRatings.js"></script>
-    <script src="scripts/SettingsDivBehaviour.js"></script>
-    <script src="scripts/ChangeProfileInformationFormDiv.js"></script>
+    <script src="scripts/updateUserProfile.js" defer></script>
+    <script src="scripts/customerReviewsAndRatings.js" defer></script>
+    <script src="scripts/SettingsDivBehaviour.js" defer></script>
+    <script src="scripts/ChangeProfileInformationFormDiv.js" defer></script>
 </html>

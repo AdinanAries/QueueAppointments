@@ -168,7 +168,7 @@
                    
                    Class.forName(Driver);
                    conn = DriverManager.getConnection(url, User, Password);
-                   String AddressQuery = "Select ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%'";// and Zipcode = "+zipCode;//+" ORDER BY NEWID()";
+                   String AddressQuery = "Select top 1000 ProviderID from QueueObjects.ProvidersAddress where City like '"+city+"%' and Town like '"+town+"%' ORDER BY NEWID()";// and Zipcode = "+zipCode;//+" ORDER BY NEWID()";
                    PreparedStatement AddressPst = conn.prepareStatement(AddressQuery);
                    ResultSet ProvAddressRec = AddressPst.executeQuery();
                    

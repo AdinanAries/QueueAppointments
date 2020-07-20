@@ -4,7 +4,6 @@
   margin: 0;
   font-family: "Roboto";
   font-size: 14px;
-  /*font-family: "Helvetica";*/
 }
 #LocSearchDiv form{
     background-color: #9bb1d0 !important;
@@ -23,9 +22,6 @@
 }
 body {
   overflow-x: hidden;
-  /*max-width: 1600px;
-  background: linear-gradient(rgba(255, 255, 255, 0.747), #00a6f3c5),
-    url("salonBg3.jpg") !important;*/
   background: linear-gradient(rgba(255, 255, 255, 0.712), #00a2ffaf),
     url("stetoscopeBg.jpg") !important;
   margin: auto;
@@ -58,7 +54,6 @@ body {
   font-weight: bolder;
   font-size: 17px;
   color: #254386;
-  /*background-color: #9bb1d0;*/
   background-color: #d9e8e8;
   border-radius: 4px;
   border: 1px solid #626b9e;
@@ -76,7 +71,6 @@ body {
   width: 250px !important;
 }
 #PermanentDiv {
-  /*max-width: 1600px;*/
   margin: auto;
 }
 #PermanentDiv ul li img {
@@ -100,21 +94,17 @@ body {
   width: 80px;
   height: 35px;
 }
-
-/*----------------------------------------------------------------------------------------*/
 .MenuIcon {
   z-index: 1010;
   margin-top: 8px;
   float: left;
   position: relative;
 }
-
 #nav-toggle {
   position: absolute;
   left: 50%;
   top: 50%;
 }
-
 #nav-toggle {
   cursor: pointer;
   padding: 10px 35px 16px 0px;
@@ -137,7 +127,6 @@ body {
 #nav-toggle span:after {
   bottom: -10px;
 }
-
 #nav-toggle span,
 #nav-toggle span:before,
 #nav-toggle span:after {
@@ -156,18 +145,13 @@ body {
 #nav-toggle.active span:after {
   transform: rotate(-45deg);
 }
-
 #MainMenuCover {
-  /*padding: 10px;*/
   position: absolute;
   z-index: 1002;
-  /*top: 43px;*/
   height: 100%;
   width: 100%;
-  /*background-color: beige;*/
   background-color: white;
   color: white;
-  /*display: none;*/
 }
 MainMenuItems {
   position: absolute;
@@ -179,15 +163,10 @@ MainMenuItems {
   position: fixed;
   height: 100vh;
   top: 0;
-  /*top: 43px;
-        height:calc(100vh - 79px);*/
   width: 100%;
   z-index: 1001;
-  /*background-color: beige;
-        background-color: black;*/
   color: black;
   display: none;
-  /*opacity: 0.9;*/
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -210,10 +189,8 @@ MainMenuItems {
 }
 
 .MainMenu .SettingIcon {
-  /*width: 50px;*/
 }
 .MainMenu .SettingName {
-  /*border-bottom: 1px solid #ccc;*/
 }
 
 .MainMenu table tbody tr td {
@@ -226,7 +203,6 @@ MainMenuItems {
   background: linear-gradient(-45deg, #6bedff, #809afe);
   text-align: center;
   box-shadow: #ccc 3px 3px 3px;
-  /*background-color: */
 }
 #MenuSummaries {
   position: relative;
@@ -240,7 +216,6 @@ MainMenuItems {
   border-top-right-radius: 80%;
   background: linear-gradient(-45deg, #f3c0ff, #c0ffec);
   box-shadow: #ccc 3px 3px 3px;
-  /*background-color: */
 }
 #MenuSummaries table {
   margin-top: 0;
@@ -278,17 +253,7 @@ MainMenuItems {
 #QueuLineDiv table tbody tr td img {
     width: 35px !important;
     height: 35px !important;
-    /*background: none;
-        border: 0;
-        border-top: 1px solid darkgray;
-        border-bottom: 1px solid darkgray;*/
   }
-/*#miniNav{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}*/
-
 a {
   text-decoration: none;
 }
@@ -347,11 +312,9 @@ h3 {
 }
 
 #miniNavPov {
-  /*background-color: pink;*/
   width: 100%;
   z-index: 110;
   position: fixed;
-  /*box-shadow: 4px 4px 10px #334d81;*/
   padding: 1px;
   padding-bottom: 0;
   opacity: 0.95;
@@ -368,7 +331,6 @@ h3 {
   display: inline-block;
   text-decoration: none;
   list-style-type: none;
-  /*background-color: #a1bed0;*/
   padding: 5px;
   cursor: pointer;
 }
@@ -414,35 +376,25 @@ select {
   border-radius: 3px;
 }
 .button {
-  /*border: 1px solid black;
-  background-color: pink;*/
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  /*color: black;*/
   border-radius: 3px;
 }
 .button:hover {
   background-color: steelblue;
 }
 #header {
-  /*border-bottom: solid 3px black;*/
   padding-top: 10px;
   padding-bottom: 10px;
-  /*background-color: #ccccff;*/
   position: absolute;
   background: none !important;
-  /*box-shadow: 4px 4px 10px #334d81;
-			margin-bottom: 1px;*/
 }
 #ProviderHeader {
-  /*border-bottom: solid 3px black;*/
   padding-top: 40px;
   padding-bottom: 10px;
   background-color: #ccccff;
   position: relative;
-  /*box-shadow: 4px 4px 10px #334d81;
-			margin-bottom: 1px;*/
 }
 #ExploreAndAccountButtons {
   display: none;
@@ -463,14 +415,10 @@ select {
   color: darkblue;
 }
 #nav {
-  /*background-color: cornflowerblue;*/
-  /*width: 200px;*/
-  /*border: solid black 1px;*/
   text-align: center;
   padding-bottom: 10px;
   padding-top: 5px;
   display: none;
-  /*float: left;*/
 }
 #UpdateUserAccountForm {
   display: none;
@@ -508,7 +456,6 @@ select {
   border-radius: 0;
   min-width: 230px;
 }
-
 .QueueLoader {
   display: none;
   position: fixed;
@@ -517,7 +464,6 @@ select {
   left: 50%;
   padding-left: 18px;
 }
-
 .QueueLoader img {
   margin-top: 6px;
   margin-left: 6px;
@@ -525,7 +471,6 @@ select {
   z-index: 1001;
   border-radius: 100%;
   box-shadow: #000c3b 0 0 8px 1px;
-  /*opacity: 0.1;*/
   height: 43px;
   width: 43px;
   animation: spin 10s linear infinite;
@@ -542,7 +487,6 @@ select {
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -551,14 +495,12 @@ select {
     transform: rotate(360deg);
   }
 }
-
 #MainProviderCustomerPagePageLoader {
   display: block;
 }
 #AllFavoritesPageLoader {
   display: block;
 }
-
 .searchbtn {
   border: 0;
   background-color: pink;
@@ -568,20 +510,16 @@ select {
   padding-right: 10px;
   height: 44px;
   font-size: 15px;
-  /*border-radius: 4px;*/
 }
 .searchbtn:hover {
   background-color: red;
 }
 
 #main {
-  /*background-color: #6699ff;*/
   background-size: cover;
   background-repeat: no-repeat;
   width: auto;
   text-align: center;
-  /*min-height: 700px;*/
-  /*padding-top: 15px;*/
   padding-bottom: 15px;
   margin-bottom: 0;
 }
@@ -591,10 +529,6 @@ select {
   clear: both;
   padding: 5px;
   margin-top: 0;
-  /*border-top: black solid 2px;
-			box-shadow: 4px -4px 10px #334d81;
-            position: fixed;*/
-  /*height: 100%;*/
 }
 #ProviderReviewsListDiv {
   padding-top: 230px;
@@ -613,11 +547,9 @@ select {
   border-spacing: 10px;
 }
 #providerdetails tbody tr td {
-  /*background-color: #eeeeee;*/
   background-color: white;
   padding: 2px;
   border-radius: 4px;
-  /*box-shadow: 4px 4px 10px #334d81;*/
   width: auto;
 }
 #ProInfoTable tbody tr td {
@@ -638,7 +570,6 @@ select {
   border-radius: 4px;
 }
 #eachprov:hover {
-  /*box-shadow: 2px 2px 2px darkgrey;*/
 }
 #providerdetails p {
   text-align: left;
@@ -661,7 +592,6 @@ select {
   height: 80px;
 }
 .propic img {
-  /*border: 5px solid #eeeeee;*/
   border: white solid 5px;
   background-color: #7e7e7e;
   border-radius: 100%;
@@ -752,18 +682,11 @@ select {
     margin-top: 2px;
     margin-bottom: 2px;
   }
-  /*#appointmentsDiv{
-      display: none;
-  }
-  #hideAppointments{
-      
-  }*/
 }
 
 #footer {
   z-index: 2000;
   clear: both;
-  /*background-color: rgba(64, 151, 132, 0.486);*/
   color: white;
   text-align: right;
   padding-right: 7px;
@@ -780,8 +703,6 @@ select {
 }
 #providericons td {
   background-color: #d9e8e8;
-  /*box-shadow: 4px 4px 10px #334d81;*/
-  /*border: solid #334d81 1px;*/
   border-radius: 4px;
   padding: 10px;
 }
@@ -798,8 +719,6 @@ select {
   padding-right: 5px;
 }
 #QueuLineDiv {
-  /*border-top: 1px solid darkgrey;
-  border-bottom: 1px solid darkgrey;*/
   background-color: #eeeeee;
   padding-top: 5px;
   margin-bottom: 7px;
@@ -812,8 +731,6 @@ select {
   margin: 0px;
   cursor: pointer;
   padding: 2px;
-  /*border-bottom: 1px solid darkgrey;
-  border-top: 1px solid darkgrey;*/
 }
 .servicesList {
   background-color: #eeeeee;
@@ -822,7 +739,6 @@ select {
 }
 #QueuLineDiv table tbody tr td:hover {
   background-color: powderblue;
-  /*border: 1px black solid;*/
 }
 #reviewsheet {
   background-color: white;
@@ -844,36 +760,28 @@ select {
   background-color: #a3deff;
 }
 .SearchObject {
-  /*border: black solid 1px;*/
   border-radius: 4px;
   width: 330px;
   text-align: right;
   padding: 0;
   margin-top: 5px;
 }
-
 .SearchObject:hover {
-  /*box-shadow: 4px 4px 10px #334d81;*/
 }
-
 .deleteFavProvider {
   display: none;
 }
 .addFavProvForm {
   display: none;
 }
-
 #addServiceBtn {
   border: 1px solid black;
   padding: 4px;
   background-color: grey;
   color: white;
 }
-
 #addServiceBtn:hover {
-  /*box-shadow: 2px 2px 2px purple;*/
 }
-
 #addServiceDiv {
   display: none;
   margin-top: 10px;
@@ -882,54 +790,41 @@ select {
   border-bottom: 1px solid darkgray;
   border-right: 1px solid darkgray;
 }
-
 #customizeAppointmentTime {
   display: none;
 }
-
 .ratingAndReviewaForm {
   display: none;
 }
-
 .changeServiceForm {
   display: none;
 }
-
 .deleteAppointmentForm {
   display: none;
 }
-
 .changeBookedAppointmentForm {
   display: none;
 }
-
 .deleteAppointmentHistoryForm {
   display: none;
 }
-
 #businessForm {
   display: none;
 }
 #customerForm {
   display: none;
 }
-
 #accountTypeOptions {
-  /*border: 1px solid black;*/
   width: 300px;
-  /*box-shadow: #334d81 4px 4px 10px;*/
   padding: 5px;
   border-radius: 5px;
 }
-
 #CreditDebitCardDetails {
   display: none;
 }
-
 #CreditDebitCardDetails td {
   border-radius: 0;
 }
-
 #SettingsDiv ul li {
   text-decoration: none;
   list-style-type: none;
@@ -937,9 +832,6 @@ select {
   padding: 5px;
   margin: 5px;
 }
-
-/*------------------------------------------------------------------*/
-
 .rate {
   display: inline-block;
   -webkit-transform: rotate(180deg);
@@ -951,18 +843,14 @@ select {
   padding: 0;
   margin: 0;
 }
-
 .rate:not(:checked) > input {
   position: absolute;
   cursor: pointer;
   opacity: 0;
   transform: scale(3);
   z-index: 100;
-  /*top:-9999px;*/
 }
-
 .rate:not(:checked) > label {
-  /*float:right;*/
   display: inline-block;
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -970,13 +858,9 @@ select {
   transform: rotate(180deg);
   width: 1em;
   z-index: 90;
-  /*overflow:hidden;*/
-  /*white-space:nowrap;*/
-  /*cursor:pointer;*/
   font-size: 30px;
   color: #ccc;
 }
-
 .rate:not(:checked) > label:before {
   /*content: '★ ';*/
 }
@@ -994,15 +878,11 @@ select {
 .rate > label:hover ~ input:checked ~ label {
   /*color: #c59b08;*/
 }
-
-/*------------------Tool tip settings---------------*/
-
 .tooltip {
   position: relative;
   display: inline-block;
   /*border-bottom: 1px dotted black;  If you want dots under the hoverable text */
 }
-
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 58px;
@@ -1016,7 +896,6 @@ select {
   position: absolute;
   z-index: 1;
 }
-
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
@@ -1036,7 +915,6 @@ select {
 #ProInfoDiv {
   display: none;
 }
-
 #Extras {
   display: none;
   float: right;
@@ -1058,7 +936,6 @@ select {
 #MakeReservationForm {
   display: none;
 }
-
 #QShowNews2 {
   display: none;
 }
@@ -1066,9 +943,6 @@ select {
     display: none;
 }
 @media only screen and (max-width: 1400px) {
-  /*.SearchObject {
-    display: block;
-  }*/
   #middleScreenSettingsBtn{
       display: block;
   }
@@ -1086,19 +960,7 @@ select {
   display: none;
 }
 
-/*--------------------------------------------------------------------------------------*/
-
 @media only screen and (min-width: 1000px) {
-  /*body{
-        position: fixed;
-        width: 100%;
-    }
-    #footer{
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-    }*/
   #QShowNews2 {
     display: block;
   }
@@ -1127,7 +989,6 @@ select {
     display: none;
   }
   #addBizTxt {
-    /*padding-top: 20px;*/
   }
   .scrolldiv {
     max-width: 600px;
@@ -1175,7 +1036,6 @@ select {
     display: flex; 
     flex-direction: row;
     justify-content: center;
-    /*box-shadow: #2c3539 3px 3px 4px;*/
     position: fixed;
     width: 100%;
     padding: 10px 0;
@@ -1189,10 +1049,8 @@ select {
   #PermanentDiv ul li {
     display: inline-block;
     padding: 5px;
-    /*color: white;*/
     color: darkgray;
     background: none !important;
-    /*background-color: #334d81;*/
     margin-left: 5px;
     min-width: 100px;
     text-align: center;
@@ -1234,7 +1092,6 @@ select {
     float: right;
     padding-top: 0;
     height: auto !important;
-    /*min-height: 736px;*/
     min-height: 100vh;
     overflow-y: auto;
     scrollbar-track-color: #6699ff;
@@ -1246,20 +1103,16 @@ select {
     float: right;
     padding-top: 0;
     height: 100vh !important;
-    /*min-height: 736px;*/
     min-height: 100vh;
     scrollbar-track-color: #6699ff;
   }
-  /*main contains just explore icons*/
   #main {
-    /*min-height: 736px;*/
     min-height: 100vh !important;
   }
   .ProvidersDashboardContent{
       min-height: 1840px !important;
   }
   .Main {
-    /*height: 400px;*/
     height: auto;
   }
   #custProPicDisplay {
@@ -1271,13 +1124,11 @@ select {
   }
   #header {
     position: absolute;
-    /*border-bottom: 1px solid black;*/
     padding: 0;
     width: 34%;
   }
   #ProviderHeader {
     position: absolute;
-    /*border-bottom: 1px solid black;*/
     padding: 0;
     width: 34%;
   }
@@ -1291,7 +1142,6 @@ select {
     scrollbar-track-color: cornflowerblue;
     scrollbar-arrow-color: #3d6999;
     scrollbar-shadow-color: grey;
-    /*scrollbar-dark-shadow-color: grey;*/
   }
   #QueuLineDiv {
     scrollbar-base-color: darkgrey;
@@ -1321,8 +1171,6 @@ select {
   #photoStatus {
     display: none;
   }
-
-  /* width */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -1331,22 +1179,16 @@ select {
   ::-webkit-scrollbar:hover {
     opacity: 1;
   }
-
-  /* Track */
   ::-webkit-scrollbar-track {
     background: none;
     border: 1px solid darkgray;
     border-radius: 10px;
   }
-
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #3d6999;
     border-radius: 10px;
     border: 1px solid #254386;
   }
-
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
   }
 
@@ -1363,9 +1205,6 @@ select {
     margin: 0;
   }
 }
-
-/*---------------------------------------------------------------------------*/
-
 @media only screen and (min-width: 1400px) {
   .middleScreenWidthLogoutBtn{
     display: none;
@@ -1390,8 +1229,6 @@ select {
   }
   #newbusiness {
     width: 33.2%;
-    /*margin-top: 80px;*/
-    /*padding-top: 40px;*/
   }
   #content {
     width: 45%;
@@ -1406,7 +1243,6 @@ select {
     display: none;
   }
 }
-
 input[type="checkbox"] {
   position: relative;
   appearance: none;
@@ -1419,7 +1255,6 @@ input[type="checkbox"] {
   box-shadow: inset -20px 0 0 0 #ffffff;
   transition-duration: 200ms;
 }
-
 input[type="checkbox"]:after {
   content: "";
   position: absolute;
@@ -1433,17 +1268,14 @@ input[type="checkbox"]:after {
   border-radius: 50%;
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 input[type="checkbox"]:checked {
   border-color: #4ed164;
   box-shadow: inset 20px 0 0 0 #4ed164;
 }
-
 input[type="checkbox"]:checked:after {
   left: 10px;
   box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.05);
 }
-
 input[type="radio"] {
   position: relative;
   appearance: none;
@@ -1456,7 +1288,6 @@ input[type="radio"] {
   box-shadow: inset -20px 0 0 0 #ffffff;
   transition-duration: 200ms;
 }
-
 input[type="radio"]:checked {
   border-color: #4ed164;
   box-shadow: inset 20px 0 0 0 #4ed164;
@@ -1536,10 +1367,6 @@ input[type="file"] {
   }
   #QueuLineDiv table tbody tr td {
       text-align: center;
-    /*background: none;
-        border: 0;
-        border-top: 1px solid darkgray;
-        border-bottom: 1px solid darkgray;*/
   }
   #QueuLineDiv table tbody tr td:hover {
     background: none;
@@ -1547,12 +1374,7 @@ input[type="file"] {
   #QueuLineDiv table tbody tr td img {
     width: 35px !important;
     height: 35px !important;
-    /*background: none;
-        border: 0;
-        border-top: 1px solid darkgray;
-        border-bottom: 1px solid darkgray;*/
   }
-
   #DesktopExplore {
     display: none;
   }
@@ -1567,8 +1389,6 @@ input[type="file"] {
     border: 0;
     background-color: #6699ff;
     overflow-y: scroll;
-    /*top: 40px;
-        bottom: 41px;*/
   }
   * {
     font-family: "Roboto";
@@ -1593,7 +1413,6 @@ input[type="file"] {
     border: 0;
   }
   #newbusiness {
-    /*background-color: #6699ff;*/
     background: none !important;
     padding: 0;
     padding-bottom: 30px !important;
@@ -1612,7 +1431,6 @@ input[type="file"] {
     width: 120px;
     height: 40px;
   }
-
   #LocSearchDiv {
     padding-bottom: 5px;
   }
@@ -1688,10 +1506,6 @@ input[type="file"] {
   #main {
     padding-bottom: 5px;
   }
-  /*#ProviderReviewSummary{
-        max-height: 100px; ;
-        overflow-y: auto;
-    }*/
   #providerReviewSummery {
     display: none;
   }
@@ -1806,9 +1620,7 @@ input[type="file"] {
     position: absolute;
     height: calc(100% - 90px);
     width: 100%;
-    /*background-color: #6699ff;*/
     background: none !important;
-    /*background-color: #6699ff !important;*/
     background-color: #8abde1 !important;
     overflow-x: hidden;
   }
@@ -1818,16 +1630,6 @@ input[type="file"] {
   #header {
     width: 100%;
   }
-  /*#CustomerPageHtmlBody{
-        position: fixed;
-    }*/
-  /*#container{
-        width: 100%;
-        height: 100%;
-    }
-    #IframesDiv{
-        height: calc(100% - 81px);
-    }*/
   #accountTypeOptions {
     margin-top: 80px;
   }
@@ -1862,22 +1664,7 @@ input[type="file"] {
 }
 
 @media only screen and (max-width: 320px) {
-  /*.UserProfileContainer{
-        margin-bottom: 40px;
-    }
-    #FavoritesIframe{
-        margin-bottom: 40px;
-    }
-    #SpotsIframe{
-        margin-bottom: 40px;
-    }
-    #SearchIframe{
-        margin-bottom: 40px;
-    }
-    #ExploreDiv{
-        margin-bottom: 40px;
-    }*/
-
+  
   body {
     position: static;
     height: auto;
@@ -1904,7 +1691,6 @@ input[type="file"] {
     opacity: 1;
   }
 }
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1913,7 +1699,6 @@ input[type="file"] {
     opacity: 1;
   }
 }
-
 input[type="submit"] {
   border: 0;
   background-color: darkslateblue;

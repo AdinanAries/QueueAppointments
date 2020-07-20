@@ -43,8 +43,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel='stylesheet'>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!--script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        
         <script src="scripts/QueueLineDivBehavior.js"></script>
         
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
@@ -2187,8 +2190,69 @@
                 
                 <div id="firstSetProvIcons">
                 <center><table id="providericons">
-                        <tbody>
-                        <tr>
+                        <tbody id="firstIconsTbody">
+                            
+                        </tbody>
+                    </table></center>
+                    
+                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                    </p></center>
+                    
+                            
+                    <!--center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center-->
+                
+                </div>
+                
+                <div id="secondSetProvIcons" style="display: none;">
+                    <center><table id="providericons">
+                        <tbody id="secondIconsTbody">
+                        
+                        </tbody>
+                    </table></center>
+                    
+                            <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span>
+                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
+                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
+                            </span></p></center>
+                    
+                          
+                    <!--center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
+                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center-->
+                
+                </div>
+                
+                <div id="thirdSetProvIcons" style="display: none;">
+                        <center><table id="providericons">
+                        <tbody id="thirdIconsTbody">
+                            
+                        </tbody>
+                    </table></center>
+                    
+                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
+                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
+                        </p></center>
+                                
+                    <!--center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center-->
+
+                </div>
+            </div>
+            
+        </div>
+                            
+        <div id="footer">
+            <p>AriesLab &copy;2019</p>
+        </div>
+                            
+    </div>
+                            
+    </body>
+    <script>
+        if($(window).width() > 1000){
+            document.getElementById("firstIconsTbody").innerHTML =
+                    `<tr>
                             <td style="width: 33.3%;"><center><a href="QueueSelectBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;">All Services</p><img src="icons/icons8-ellipsis-filled-70.png" width="70" height="70" alt="icons8-ellipsis-filled-70"/>
                             </a></center></td>
                             <td style="width: 33.3%;"><center><a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;" name="BarberShopSelect">Barber Shop</p><img src="icons/icons8-barber-clippers-filled-70.png" width="70" height="70" alt="icons8-barber-clippers-filled-70"/>
@@ -2211,23 +2275,10 @@
                             </a></center></td>
                             <td><center><a href="QueueSelectDentistLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;">Dentist</p><img src="icons/icons8-tooth-filled-70.png" width="70" height="70" alt="icons8-tooth-filled-70"/>
                             </a></center></td>
-                        </tr>
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p onclick="showSecondSetProvIcons()" style="margin-top: 5px; cursor: pointer; border-radius: 4px;">
-                    <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
-                    </p></center>
-                    
-                            
-                    <!--center><p onclick="showSecondSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Next</p></center-->
-                
-                </div>
-                
-                <div id="secondSetProvIcons" style="display: none;">
-                    <center><table id="providericons">
-                        <tbody>
-                        <tr>
+                        </tr>`;
+    
+                    document.getElementById("secondIconsTbody").innerHTML = 
+                            `<tr>
                             <td style="width: 33.3%;"><center><a href="QueueSelectBrowLashLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;" name="EyebrowsSelect">Eyebrows and Lashes</p><img src="icons/icons8-eye-filled-70.png" width="70" height="70" alt="icons8-eye-filled-70"/>
                             </a></center></td>
                              <td style="width: 33.3%;"><center><a href="QueueSelectDieticianLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;" name="DieticianSelect">Dietician</p><img src="icons/icons8-dairy-filled-70.png" width="70" height="70" alt="icons8-dairy-filled-70"/>
@@ -2249,27 +2300,10 @@
                             </a></center></td>
                             <td><center><a href="QueueSelectPhysicalTherapyLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;" name="PhysicalTherapySelect">Physical Therapy</p><img src="icons/icons8-physical-therapy-filled-70.png" width="70" height="70" alt="icons8-physical-therapy-filled-70"/>
                             </a></center></td>
-                        </tr>
-                    </tbody>
-                    </table></center>
-                    
-                            <center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="padding: 5px; width: 50px; cursor: pointer; border-radius: 4px;">
-                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
-                            </span>
-                            <span onclick="showThirdSetProvIcons()" style="padding: 5px; padding-left: 17px; padding-right: 18px; cursor: pointer; border-radius: 4px;">
-                                <img src="icons/nextIcon.png" alt="" style="width: 35px; height: 35px"/>
-                            </span></p></center>
-                    
-                          
-                    <!--center><p style="margin-bottom: 7px; margin-top: 10px;"><span onclick="showFirstSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 50px; cursor: pointer; border-radius: 4px;">Previous</span>
-                            <span onclick="showThirdSetProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; padding-left: 17px; padding-right: 18px; width: 50px; cursor: pointer; border-radius: 4px;">Next</span></p></center-->
-                
-                </div>
-                
-                <div id="thirdSetProvIcons" style="display: none;">
-                        <center><table id="providericons">
-                        <tbody>
-                            <tr>
+                        </tr>`;
+    
+                document.getElementById("thirdIconsTbody").innerHTML =
+                        `<tr>
                             <td style="width: 33.3%;"><center><a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;">Day Spa</p><img src="icons/icons8-sauna-filled-70.png" width="70" height="70" alt="icons8-sauna-filled-70"/>
                             </a></center></td>
                             <td style="width: 33.3%;"><center><a href="QueueSelectHairRemovalLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;">Hair Removal</p><img src="icons/icons8-skin-filled-70.png" width="70" height="70" alt="icons8-skin-filled-70"/>
@@ -2280,29 +2314,9 @@
                             <tr>
                                 <td style="width: 33.3%;"><center><a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('AllFavoritesPageLoader').style.display = 'block';"><p style="margin:0;">Medical Center</p><img src="icons/icons8-hospital-3-filled-70.png" width="70" height="70" alt="icons8-hospital-3-filled-70"/>
                                 </a></center></td>
-                            </tr>
-                    </tbody>
-                    </table></center>
-                    
-                    <center><p onclick="showSecondFromThirdProvIcons()" style="padding: 5px; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">
-                            <img src="icons/previousIcon.png" alt="" style="width: 35px; height: 35px"/>
-                        </p></center>
-                                
-                    <!--center><p onclick="showSecondFromThirdProvIcons()" style="text-align: center; background-color: pink; padding: 5px; border: 1px solid black; width: 55px; margin-top: 5px; cursor: pointer; border-radius: 4px;">Previous</p></center-->
-
-                </div>
-            </div>
-            
-        </div>
-                            
-        <div id="footer">
-            <p>AriesLab &copy;2019</p>
-        </div>
-                            
-    </div>
-                            
-    </body>
-    
+                            </tr>`;
+        }
+    </script>
     <script src="scripts/script.js"></script>
     
 </html>
