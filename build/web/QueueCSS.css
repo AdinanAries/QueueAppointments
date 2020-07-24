@@ -22,8 +22,9 @@
 }
 body {
   overflow-x: hidden;
-  background: linear-gradient(rgba(255, 255, 255, 0.712), #00a2ffaf),
-    url("stetoscopeBg.jpg") !important;
+  /*background: linear-gradient(rgba(255, 255, 255, 0.712), #00a2ffaf),
+    url("stetoscopeBg.jpg") !important;*/
+  background-color: #d8d8d8 !important;
   margin: auto;
   background-size: cover !important;
   background-position: right !important;

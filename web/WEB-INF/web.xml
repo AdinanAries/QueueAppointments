@@ -513,6 +513,18 @@
         <servlet-name>LoadMorePublicNews</servlet-name>
         <servlet-class>LoadMorePublicNews</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>isAppointmentTimeAvailable</servlet-name>
+        <servlet-class>isAppointmentTimeAvailable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginBeforeFinishApptControl</servlet-name>
+        <servlet-class>LoginBeforeFinishApptControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignupBeforeFinishApptControl</servlet-name>
+        <servlet-class>SignupBeforeFinishApptControl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -976,6 +988,18 @@
     <servlet-mapping>
         <servlet-name>LoadMorePublicNews</servlet-name>
         <url-pattern>/LoadMorePublicNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>isAppointmentTimeAvailable</servlet-name>
+        <url-pattern>/isAppointmentTimeAvailable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginBeforeFinishApptControl</servlet-name>
+        <url-pattern>/LoginBeforeFinishApptControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignupBeforeFinishApptControl</servlet-name>
+        <url-pattern>/SignupBeforeFinishApptControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

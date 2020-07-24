@@ -672,7 +672,7 @@
                     </table>
                         
                         <div>
-                            <h3 style="color: white; margin-top: 10px;">Add your login information</h3>
+                            <h3 style="color: darkblue; margin: 10px 0;">Add your login information</h3>
                             
                             <table border="0">
                             <tbody>
@@ -682,7 +682,7 @@
                                             <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
                                             <input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" id="SUPuserName" placeholder='Enter username here' type="text" name="username" value="" size="34"/>
                                         </fieldset>
-                                        <p id="CustUserNameStatus" style="color: white; text-align: center; max-width: 250px; margin: 10px 0;"></p>
+                                        <p id="CustUserNameStatus" style="color: black; text-align: center; max-width: 250px; margin: 10px 0;"></p>
                                     </td>
                                 </tr>
                                 
@@ -710,13 +710,13 @@
                                                 }
                                                 else if(result === "true"){
 
-                                                    document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: red;" class="fa fa-exclamation-triangle"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is not available. Choose a different Username';
+                                                    document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: red;" class="fa fa-exclamation-triangle"></i> <span style="color: blue;">"' + userName + '"</span> is not available. Choose a different Username';
                                                     //document.getElementById("CustUserNameStatus").style.backgroundColor = "red";
                                                     document.getElementById("SUPuserName").value = "";
 
                                                 }else if(result === "false" && document.getElementById("SUPuserName").value !== ""){
 
-                                                    document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: #58FA58;" class="fa fa-check"></i> <span style="color: #E6E6E6; font-weight: bolder;">"' + userName + '"</span> is available.';
+                                                    document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: #58FA58;" class="fa fa-check"></i> <span style="color: blue;">"' + userName + '"</span> is available.';
                                                     //document.getElementById("CustUserNameStatus").style.backgroundColor = "green";
 
                                                 }
@@ -744,7 +744,7 @@
                                 </tr>
                             </tbody>
                             </table>
-                            <p id="SignUpAndBookStatus" style="color: white; width: 200px;"></p>
+                            <p id="SignUpAndBookStatus" style="color: black; width: 200px; margin: 10px 0;"></p>
                             
                         </div>
                     

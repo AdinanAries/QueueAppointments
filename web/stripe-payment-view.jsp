@@ -131,24 +131,24 @@ and open the template in the editor.
                     <div class="subscription-row">
                         <div class="each-subscription active" id="MonthlySubscription" onclick="pickSubcription('MonthlySubscription')">
                             <p style="font-weight: bolder;">Monthly</p>
-                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$22.99 <span style="font-size: 13px; color: #ff6b6b">- default</span></p>
+                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$9.99 <span style="font-size: 11px; color: #ff6b6b">- 30 days free</span></p>
                             <p style="margin-top: -20px;"><small style="font-size: 11px; color: #ababab;">pay every month</small></p>
                         </div>
                         <div class="each-subscription" id="3MonthsSubscription" onclick="pickSubcription('3MonthsSubscription')">
                             <p style="font-weight: bolder;">3 Months</p>
-                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$63.99 <span style="font-size: 13px; color: #ff6b6b">- save $5</span></p>
+                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$29.99 <span style="font-size: 11px; color: #ff6b6b">- 60 days free</span></p>
                             <p style="margin-top: -20px;"><small style="font-size: 11px; color: #ababab;">pay every three months</small></p>
                         </div>
                     </div>
                     <div class="subscription-row">
                         <div class="each-subscription" id="6MonthsSubscription" onclick="pickSubcription('6MonthsSubscription')">
                             <p style="font-weight: bolder;">6 Months</p>
-                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$127.99 <span style="font-size: 13px; color: #ff6b6b">- save $10</span></p>
+                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$59.99 <span style="font-size: 11px; color: #ff6b6b">- 90 days free</span></p>
                             <p style="margin-top: -20px;"><small style="font-size: 11px; color: #ababab;">pay every six months</small></p>
                         </div>
                         <div class="each-subscription" id="YearlySubscription" onclick="pickSubcription('YearlySubscription')">
                             <p style="font-weight: bolder;">Yearly</p>
-                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$245.99 <span style="font-size: 13px; color: #ff6b6b">- save $30</span></p>
+                            <p style="font-weight: bolder; font-size: 20px; color: #6699ff">$120 <span style="font-size: 11px; color: #ff6b6b">- 90 days free</span></p>
                             <p style="margin-top: -20px;"><small style="font-size: 11px; color: #ababab;">pay every year</small></p>
                         </div>
                     </div>
@@ -157,16 +157,17 @@ and open the template in the editor.
                 <form id="subscription-form">
                     
                     <p style="text-align: left; padding: 0 10px; color: #636363;">
-                        <span style="font-size: 13px;">Your subscription will start now.</span>
+                        <span style="font-weight: bolder; font-size: 13px; color: #ff6b6b;">Your subscription will start now.</span>
+                        <br/>
                         <br/>
                         <small style="font-size: 13px;">
-                            <i class="fa fa-arrow-right"></i> Total due now 
-                            $<span id="subscriptionTotal">24.99</span>
+                            <i class="fa fa-arrow-right"></i> Charge per cycle 
+                            <span style='font-weight: bolder; color: #6699ff;' id="subscriptionTotal">$9.99</span>
                         </small>
                         <br/>
                         <small style="font-size: 13px;">
                             <i class="fa fa-arrow-right"></i> Subscribing to a 
-                            <span style="font-weight: bolder;" id="subscriptionDesc">monthly</span>
+                            <span style="font-weight: bolder; color: #6699ff;" id="subscriptionDesc">monthly</span>
                              plan
                         </small>
                     </p>
@@ -190,19 +191,19 @@ and open the template in the editor.
                         document.getElementById(type).classList.add('active');
                         if(type === "3MonthsSubscription"){
                             document.getElementById("SubscriptionPriceID").value = "price_1Gv94LFNNtFYAcj14W4OfRLO";
-                            document.getElementById("subscriptionTotal").innerText = "63.99";
+                            document.getElementById("subscriptionTotal").innerText = "$29.99";
                             document.getElementById("subscriptionDesc").innerText = "3 months";
                         }else if(type === "6MonthsSubscription"){
                             document.getElementById("SubscriptionPriceID").value = "price_1GwGJBFNNtFYAcj1ssenpxG3";
-                            document.getElementById("subscriptionTotal").innerText = "127.99";
+                            document.getElementById("subscriptionTotal").innerText = "$59.99";
                             document.getElementById("subscriptionDesc").innerText = "6 months";
                         }else if(type === "YearlySubscription"){
                             document.getElementById("SubscriptionPriceID").value = "price_1GwGKEFNNtFYAcj1DXrFTvOy";
-                            document.getElementById("subscriptionTotal").innerText = "245.99";
+                            document.getElementById("subscriptionTotal").innerText = "$119.99";
                             document.getElementById("subscriptionDesc").innerText = "yearly";
                         }else {
                             document.getElementById("SubscriptionPriceID").value = "price_1Gv93RFNNtFYAcj1yagdB2zu";
-                            document.getElementById("subscriptionTotal").innerText = "22.99";
+                            document.getElementById("subscriptionTotal").innerText = "$9.99";
                             document.getElementById("subscriptionDesc").innerText = "monthly";
                         }
                     }

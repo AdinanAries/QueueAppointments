@@ -1790,11 +1790,15 @@
                     <br/>
                     <span style='font-size: 14px; color: #636363;'>your customers won't be able to book any appointments</span>
                 </p>
+                <p style="color: #636363; font-weight: bolder; text-align: center; margin-bottom: 30px;">
+                    All subscription plans come with free trial periods. We don't charge you until after your trial period has elapsed.
+                    However, in order for your account to be fully activated, you must subscribe to a plan.
+                </p>
                 <a href='stripe-payment-view.jsp?providerEmail=<%=Email%>&ProviderId=<%=UserID%>' target='_blank'>
                     <p style='padding: 10px; text-align: center; color: white; background-color: darkslateblue; border-radius: 4px; margin: auto; max-width: 400px;'>Click here to subscribe now</p>
                 </a>
-                    <p onclick="document.getElementById('notSubscribedCover').style.display = 'none'" style='cursor: pointer; font-size: 16px; margin-top: 10px; color: crimson; text-align: center;'>
-                        <i style='color: green' class='fa fa-home'></i> go to home screen</p>
+                    <p onclick="document.getElementById('notSubscribedCover').style.display = 'none'" style='cursor: pointer; font-size: 16px; margin-top: 20px; color: crimson; text-align: center;'>
+                        <i style='color: green' class='fa fa-home'></i> Click here to skip this step</p>
             </div>
         </div>
         <script>

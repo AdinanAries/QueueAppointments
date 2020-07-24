@@ -30,8 +30,8 @@ function setSuggestedTime(number){
 	if(ShowThisAppointmentTimeForFinishAppointmentWindow !== null)
 		ShowThisAppointmentTimeForFinishAppointmentWindow.innerHTML = "";
 	
-	SuggestedTimeDivStatus.style.backgroundColor = "green";
-	SuggestedTimeDivStatus.innerHTML = "Appointment time changed to " + FormattedTimeAvalible.innerHTML;
+	//SuggestedTimeDivStatus.style.backgroundColor = "green";
+	SuggestedTimeDivStatus.innerHTML = "<i style='color: green' class='fa fa-check'></i> Appointment time has been set to " + FormattedTimeAvalible.innerHTML;
 	
 	var DivColor = AvailableTimeDiv.style.backgroundColor;
 	

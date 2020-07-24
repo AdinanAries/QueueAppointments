@@ -1925,7 +1925,7 @@
                                         
                                         <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: #365266; padding: 10px 0; cursor: pointer;">Show Suggested Spots For Today <i class="fa fa-caret-down"></i></p>
                                         
-                                        <center><p id="SuggestedTimeDivStatus" style="color: white; background-color: green; text-align: center;"></p></center>
+                                        <center><p id="SuggestedTimeDivStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p></center>
                                    
                                     <center><div id="AllSuggestedTimeDiv" style="display: none;">
                                        
@@ -2040,10 +2040,45 @@
                                         <p> Tax: <span style="color: red; float: right;">$<%=Tax%></span></p>
                                         <p> Total: <span style="color: red; float: right;">$<%=TaxedPrice%></span></p>
                                         <input id="TaxedPrice" type="hidden" name="TotalPrice" value="<%=TaxedPrice%>" />
+                                        
+                                        <script>
+                                                //constructing json obj for appointments data
+                                                var lastAppointment = {
+                                                    ProviderID: '<%=PID%>',
+                                                    CustomerID: '<%=UserID%>',
+                                                    Date: '',
+                                                    Time: '<%=AppointmentTime%>',
+                                                    ServicesList: '<%=SelectedServicesList%>',
+                                                    TotalPrice: '<%=TaxedPrice%>',
+                                                    PaymentMethod: 'notStated',
+                                                    hasCancellation: false,
+                                                    PaymentAmount: 0,
+                                                    Paid: false
+                                                };
+                                                
+                                                /*document.getElementById("displayTime").addEventListener("click", ()=>{
+                                                    alert('changed');
+                                                    lastAppointment.Time = document.getElementById("formsTimeValue").value;
+                                                });
+                                                document.getElementById("formsDateValue").addEventListener("change", ()=>{
+                                                    lastAppointment.Date = document.getElementById("formsDateValue").value;
+                                                });*/
+                                                setInterval(() => {
+                                                    lastAppointment.Time = document.getElementById("formsTimeValue").value;
+                                                    lastAppointment.Date = document.getElementById("formsDateValue").value;
+                                                    localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+                                                }, 1);
+                                        </script>
+                                        
                                         <%
                                             if(hasCancellation){
                                         %>
                                         <p> Cancellation Charge: <span style="color: red; float: right;">$<%=CnclCharge%></span></p>
+                                        <script>
+                                            lastAppointment.PaymentMethod = 'Card';
+                                            lastAppointment.PaymentAmount = '<%=CnclCharge%>';
+                                            lastAppointment.hasCancellation = true;
+                                        </script>
                                         <%}%>
                                         <input id="SendApptPID" type="hidden" name="ProviderID" value="<%=PID%>" />
                                         <input id="SendApptCustID" type="hidden" name="CustomerID" value="<%=UserID%>"/>
@@ -2064,7 +2099,7 @@
                                         <%
                                             if(hasCancellation == true){
                                         %>
-                                        <p style="font-weight: bolder; text-align: center; color: darkblue;"><i style="color: red;" class="fa fa-exclamation-triangle"></i> <%=fullName%> has a cancellation policy.</p>
+                                        <!--p style="padding: 5px; text-align: center; color: darkgrey;"><i class="fa fa-credit-card"></i> <%=fullName.split(" ")[0]%> has a cancellation policy.</p-->
                                         <script>
                                             PaymentAmount = '<%=(CnclCharge * 100)%>';
                                             BallanceToPay = '<%=Double.parseDouble(decformat.format(TaxedPrice - CnclCharge))%>';
@@ -2082,6 +2117,8 @@
                                                $(document).ready(function() {                        
                                                     $('#submitAppointment').click(function(event) {  
                                                         document.getElementById("PageLoader").style.display = "block";
+                                                        lastAppointment.PaymentMethod = 'cash';
+                                                        localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
                                                         var ProviderID = document.getElementById("SendApptPID").value;
                                                         var CustomerID = document.getElementById("SendApptCustID").value;
                                                         var UserIndex = document.getElementById("SendApptUserIndex").value;
@@ -2173,7 +2210,7 @@
                                             <%
                                                 if(hasCancellation){
                                             %>
-                                            <p id='ChargesPercentStatus' style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;"><i style="color: orange;" class="fa fa-info-circle"></i> <%=fullName.split(" ")[0]%> charges <span style=""><%=ChargePercent%>%</span> cancellation fee</p>
+                                            <p id='ChargesPercentStatus' style="color: darkgrey; text-align: center; padding: 5px;"><i style="" class="fa fa-info-circle"></i> <%=fullName.split(" ")[0]%> charges <span style=""><%=ChargePercent%>%</span> cancellation fee</p>
                                             <!--p style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;">cancell at <=CancelElapse%> </p-->
                                             <%}%>
                                             
@@ -2296,6 +2333,7 @@
                                                             //PaymentAmount = '<=(CnclCharge * 100)%>';
                                                             //BallanceToPay = '<=Double.parseDouble(decformat.format(TaxedPrice - CnclCharge))%>';
                                                             PaymentAmount = '<%=(TaxedPrice * 100)%>';
+                                                            lastAppointment.PaymentAmount = '<%=TaxedPrice%>';
                                                             BallanceToPay = '0.00';
                                                             document.getElementById("PaymentSubmit").innerHTML = "Pay $" + (parseInt(PaymentAmount) / 100) + "<span style='color: darkgrey;'> - Balance: $" + BallanceToPay + "</span>";
                                                             document.getElementById("SetPaymentFullBtn").style.display = "none";
@@ -2314,6 +2352,21 @@
                                                 </form>
                                             </div>
                                             <script>
+                                                
+                                                setInterval(()=>{
+                                                    if(document.getElementById("formsDateValue").value === "" ||
+                                                        document.getElementById("formsTimeValue").value === "" ||
+                                                        document.getElementById("formsDateValue").value === " " ||
+                                                        document.getElementById("formsTimeValue").value === " "){
+                                                        document.getElementById("PaymentSubmit").style.backgroundColor = "#eee";
+                                                        document.getElementById("PaymentSubmit").style.color = "darkgrey";
+                                                        document.getElementById("PaymentSubmit").disabled = true;
+                                                    }else{
+                                                        document.getElementById("PaymentSubmit").style.backgroundColor = "darkslateblue";
+                                                        document.getElementById("PaymentSubmit").disabled = false;
+                                                        document.getElementById("PaymentSubmit").style.color = "white";
+                                                    }
+                                                }, 1);
                                                 
                                                 document.getElementById("PaymentSubmit").innerHTML += (parseInt(PaymentAmount) / 100) + "<span style='color: darkgrey;'> - Balance: $" + BallanceToPay + "</span>";
                                                 
@@ -2341,50 +2394,72 @@
                                                   var form = document.getElementById('payment-form');
 
                                                     form.addEventListener('submit', function(ev) {
-                                                      document.getElementById("PageLoader").style.display = "block";
-                                                      ev.preventDefault();
-                                                      //alert('<=StripeAccID%>');
-                                                      //alert(PaymentAmount);
-                                                      $.ajax({
-                                                          type: "GET",
-                                                          url: "./GetStripePaymentIntent",
-                                                          data: "ConnAccID=<%=StripeAccID%>&Charge="+PaymentAmount,
-                                                          success: function(result){
-                                                                //alert(result);
-                                                                if(result === "failed"){
-                                                                    document.getElementById("PageLoader").style.display = "none";
-                                                                    alert("<%=fullName.split(" ")[0]%> account cannot accept payments at this moment");
-                                                                    throw {msg: "server failed to create payment intent"};
-                                                                }
-                                                                let clientSecret = result;
-                                                                stripe.confirmCardPayment(clientSecret, {
-                                                                  payment_method: {
-                                                                    card: card,
-                                                                    billing_details: {
-                                                                      name: '<%=FullName%>'
-                                                                    }
-                                                                  }
-                                                                }).then(function(result) {
-                                                                  if (result.error) {
-                                                                    // Show error to your customer (e.g., insufficient funds)
-                                                                    document.getElementById("PageLoader").style.display = "none";
-                                                                    console.log(result.error.message);
-                                                                  } else {
-                                                                    // The payment has been processed!
-                                                                    if (result.paymentIntent.status === 'succeeded') {
-                                                                        document.getElementById("PageLoader").style.display = "none";
-                                                                        alert("you've Successfully Paid");
-                                                                        isPaymentSuccess = true;
-                                                                        $("#DivForCardPay").slideUp("fast");
-                                                                      // Show a success message to your customer
-                                                                      // There's a risk of the customer closing the window before callback
-                                                                      // execution. Set up a webhook or plugin to listen for the
-                                                                      // payment_intent.succeeded event that handles any business critical
-                                                                      // post-payment actions.
-                                                                    }
-                                                                  }
+                                                        document.getElementById("PageLoader").style.display = "block";
+                                                        ev.preventDefault();
+                                                      
+                                                        let CheckPID = document.getElementById("SendApptPID").value;
+                                                        let CheckCID = document.getElementById("SendApptCustID").value;
+                                                        let CheckApptDate = document.getElementById("formsDateValue").value;
+                                                        let CheckApptTime = document.getElementById("formsTimeValue").value;
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "isAppointmentTimeAvailable",  
+                                                        data: "ProviderID="+CheckPID+"&CustomerID="+CheckCID+"&formsDateValue="+CheckApptDate+"&formsTimeValue="+CheckApptTime,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          if(result === "Success"){
+                                                              
+                                                                $.ajax({
+                                                                    type: "GET",
+                                                                    url: "./GetStripePaymentIntent",
+                                                                    data: "ConnAccID=<%=StripeAccID%>&Charge="+PaymentAmount,
+                                                                    success: function(result){
+                                                                          //alert(result);
+                                                                          if(result === "failed"){
+                                                                              document.getElementById("PageLoader").style.display = "none";
+                                                                              alert("<%=fullName.split(" ")[0]%> account cannot accept payments at this moment");
+                                                                              throw {msg: "server failed to create payment intent"};
+                                                                          }
+                                                                          let clientSecret = result;
+                                                                          stripe.confirmCardPayment(clientSecret, {
+                                                                            payment_method: {
+                                                                              card: card,
+                                                                              billing_details: {
+                                                                                name: '<%=FullName%>'
+                                                                              }
+                                                                            }
+                                                                          }).then(function(result) {
+                                                                            if (result.error) {
+                                                                              // Show error to your customer (e.g., insufficient funds)
+                                                                              document.getElementById("PageLoader").style.display = "none";
+                                                                              console.log(result.error.message);
+                                                                            } else {
+                                                                              // The payment has been processed!
+                                                                              if (result.paymentIntent.status === 'succeeded') {
+                                                                                  document.getElementById("PageLoader").style.display = "none";
+                                                                                  alert("you've Successfully Paid");
+                                                                                  isPaymentSuccess = true;
+                                                                                  $("#DivForCardPay").slideUp("fast");
+                                                                                  lastAppointment.Paid = true;
+                                                                                  lastAppointment.PaymentMethod = 'card';
+                                                                                  localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+                                                                                // Show a success message to your customer
+                                                                                // There's a risk of the customer closing the window before callback
+                                                                                // execution. Set up a webhook or plugin to listen for the
+                                                                                // payment_intent.succeeded event that handles any business critical
+                                                                                // post-payment actions.
+                                                                              }
+                                                                            }
+                                                                          });
+                                                                      }
                                                                 });
-                                                            }
+                                                            }else{
+                                                              alert(result);
+                                                              document.getElementById("PageLoader").style.display = "none";
+                                                          }
+                                                          //document.getElementById("eachClosedDate<>").style.display = "none";
+                                                        }                
                                                       });
                                                     });
                                                   
@@ -2485,6 +2560,7 @@
                                                $(document).ready(function() {                        
                                                     $('#submitPaymentBtn').click(function(event) {  
                                                         document.getElementById("PageLoader").style.display = "block";
+                                                        localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
                                                         var ProviderID = document.getElementById("SendApptPID").value;
                                                         var CustomerID = document.getElementById("SendApptCustID").value;
                                                         var UserIndex = document.getElementById("SendApptUserIndex").value;

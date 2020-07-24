@@ -47,6 +47,8 @@
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
+        <script src="https://js.stripe.com/v3/"></script>
+        
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
@@ -192,15 +194,31 @@
         %>
         
         <%
+            String StripeAccID = "";
+            try{
+                Class.forName(Driver);
+                Connection StripAccIDConn = DriverManager.getConnection(url, User, Password);
+                String StripAccIDSql = "select * from QueueServiceProviders.StripeConnectedAccountIDs where ProvID = ?";
+                PreparedStatement StripAccIDPst = StripAccIDConn.prepareStatement(StripAccIDSql);
+                StripAccIDPst.setString(1, ID);
+                ResultSet StripAccRec = StripAccIDPst.executeQuery();
+                
+                while(StripAccRec.next()){
+                    StripeAccID = StripAccRec.getString("StripeConnectID").trim();
+                }
+            }catch(Exception e){}
+        %>
+        
+        <%
             //getting cancellation policy data
             boolean hasCancellation = false;
-            int CancelElapse = 0;
+            //int CancelElapse = 0;
             int ChargePercent = 0;
             
             try{
                 Class.forName(Driver);
                 Connection CnclPlcyConn = DriverManager.getConnection(url, User, Password);
-                String CnclPlcyString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyTimeElapse%' ";
+                String CnclPlcyString = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyChargeCost%' ";
                 PreparedStatement CnclPlcyPst = CnclPlcyConn.prepareStatement(CnclPlcyString);
                 CnclPlcyPst.setString(1,ID);
                 ResultSet CnclRow = CnclPlcyPst.executeQuery();
@@ -210,9 +228,10 @@
                     if(!CnclRow.getString("CurrentValue").trim().equals("0")){
                         
                         hasCancellation = true;
-                        CancelElapse = Integer.parseInt(CnclRow.getString("CurrentValue").trim());
+                        ChargePercent = Integer.parseInt(CnclRow.getString("CurrentValue").trim());
+                        //CancelElapse = Integer.parseInt(CnclRow.getString("CurrentValue").trim());
                         
-                        try{
+                        /*try{
                             Class.forName(Driver);
                             Connection CnclPlcyConn2 = DriverManager.getConnection(url, User, Password);
                             String CnclPlcyString2 = "Select * from QueueServiceProviders.Settings where If_providerID = ? and Settings like 'CnclPlcyChargeCost%' ";
@@ -227,7 +246,7 @@
                         }
                         catch(Exception e){
                             e.printStackTrace();
-                        }
+                        }*/
                         
                     }
                     //JOptionPane.showMessageDialog(null, ChargePercent);
@@ -264,6 +283,416 @@
         %>
         
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="padding-bottom: 0; background-color: #ccccff;">
+        
+        <div id='LoginAndSignupForms' 
+             style='height: 100vh; width: 100vw; background-color: rgba(0,0,0,0.4); 
+             position: fixed; z-index: 1100; display: flex; flex-direction: column; justify-content: center;
+             '>
+            <div style='height: 90%;'>
+                <div style='width: 90%; max-width: 600px; background-color: #8FC9F0; margin: auto; border-radius: 10px; height: 100%;'>
+                    
+                    <div style='background-color: white !important; padding-bottom: 30px; border-top-right-radius: 10px; border-top-left-radius: 10px;
+                            clip-path: polygon(100% 0, 100% 66%, 91% 73%, 79% 79%, 64% 83%, 50% 86%, 33% 90%, 18% 94%, 0 100%, 0 0);'>
+                        <p style="text-align: center;"><img src="QueueLogo.png" style="margin-top: 20px; width: 80px; height: auto;"/></p>
+                        <p style='color: darkblue; font-weight: bolder; text-align: center; margin-bottom: 20px; margin-top: 10px;'>
+                        <i style='color: red;' class="fa fa-exclamation-triangle"></i> You Login/Signup to continue</p>
+                    </div>
+                    
+                    <div style="height: 60%; display: flex; flex-direction: column; justify-content: center;
+                         padding: 10px 5px; overflow-y: auto;">
+                        <div id='FnshApptLoginForm' style="width: fit-content; margin: auto;">
+                            <p style="font-size: 20px; text-align: center; font-weight: bolder; color: #334d81; margin-bottom: 20px;">Login</p>
+                            <table border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <fieldset class="loginInputFld">
+                                                <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                                <input id="LoginPageUserNameFld" placeholder='Enter username here' type="text" name="username" value="" size="34"/>
+                                            </fieldset>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <fieldset class="loginInputFld">
+                                                <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                                <input class="passwordFld" id="LoginPagePasswordFld" placeholder="Enter password here" type="password" name="password" value="" size="34"/>
+                                                <p style="text-align: right; margin-top: -20px; padding-right: 10px; margin-bottom: 5px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                            </fieldset>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div style="width: fit-content; margin: auto;">
+                                <input class="button" type="reset" value="Reset" name="resetbtn"/>
+                                <input onclick="document.getElementById('PageLoader').style.display = 'block';" id="loginAndBookApptBtn" class="button" type="submit" value="Login" name="submitbtn" />
+                            </div>
+                            
+                        </div>
+                        <div id='FnshApptSignupForm' style="display: none; width: fit-content; margin: auto; padding-top: 320px;">
+                            <p style="font-size: 20px; text-align: center; font-weight: bolder; color: #334d81; margin-bottom: 20px;">Signup</p>
+                            <table border="0">
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">First Name</span></p>
+                                            <input id="SUPfirstName" placeholder='Enter first name here' type="text" name="firstName" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!--fieldset class="loginInputFld">
+                                            <legend>Enter your middle name</legend>
+                                            <span class="fa fa-user"></span-->
+                                            <input id="SUPmiddleName" placeholder='middlename'  type="hidden" name="middleName" value=" " size="34"/>
+                                        <!--/fieldset-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Last Name</span></p>
+                                            <input id="SUPlastName" placeholder='Enter last name here'  type="text" name="lastName" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <fieldset class="loginInputFld">
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i style="font-size: 20px;" class="fa fa-mobile"></i> <span style="margin-left: 10px;">Mobile</span></p>
+                                            <input id="SUPtelephone" placeholder='Enter mobile here'  type="text" name="telNumber" value="" size="34"/>
+                                        </fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p id='CustEmailStatus' style='color: white; display: none; text-align: center; margin: 10px 0;'></p>
+                                        <fieldset class="loginInputFld">
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
+                                            <input onchange='CustSetVerifyFalse();' placeholder='Enter email here' onfocusout='CustCloseEmailVerify();' onfocus='CustShowEmailVerify();' type="text" id="visibleEmail" name="email" value="" size="34" />
+                                        </fieldset>
+                                        <input id="SUPemail" type="hidden" name="email" value="" size="37"/>
+                                        <div id='CustEmailVeriDiv' style='display: none; background-color: #3d6999; padding: 10px; margin: 5px;'>
+                                                <div id='CustsendVerifyDiv'>
+                                                    <center><input id='CustSendverifyEmailBtn' type='button' value='1. Click to send verification code' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
+                                                </div>
+                                                <div id='CustverifyDiv' style='border-top: darkblue 1px solid; margin-top: 10px; padding-top: 5px;'>
+                                                    <p id='CustvCodeStatus' style='padding-left: 5px; color: white; max-width: 250px; margin: 10px 0;'><span style="color: #ffc700; font-weight: bolder;">2.</span> We will be sending a verification code to your email. You should enter the code below</p>
+                                                    <p style='color: #ccc;'><input placeholder="Enter 6-digit code here" id="CustEmailConfirm" type="text" /></p>
+                                                </div>
+                                                <center><input id='CustverifyEmailBtn' onclick="CustVerifyCode();" type='button' value='3. Click to verify entered code ' style='color: white; background-color: #334d81; border: 0; width: 95%; padding: 10px; border-radius: 4px;'/></center>
+                                                <script>
+
+                                                    var CustEmailVerified = false; //main controller for all verification related operations. This flag switches to true or false in order to determine what actions to be taken by the verification algorithm
+                                                    var CustPageJustLoaded = true;
+
+                                                    if(document.getElementById("visibleEmail").value !== ""){
+                                                        //Execute this code when page loads with information from prio page
+                                                        CustPageJustLoaded = false;
+                                                    }
+
+                                                    setInterval(function(){
+
+                                                        if(!CustPageJustLoaded){
+
+                                                            if(CustEmailVerified){
+                                                                document.getElementById("CustEmailStatus").style.display = "block";
+                                                                //document.getElementById("CustEmailStatus").style.backgroundColor = "green";
+                                                                document.getElementById("CustEmailStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> Your email has been verified";
+                                                                document.getElementById("SUPemail").value = document.getElementById("visibleEmail").value;
+                                                                document.getElementById("CustEmailVeriDiv").style.display = "none";
+                                                            }else{
+                                                                document.getElementById("CustEmailStatus").style.display = "block";
+                                                                //document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                                document.getElementById("CustEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please verify your email";
+                                                                document.getElementById("SUPemail").value = "";
+                                                            }
+                                                        }
+
+                                                    }
+                                                    ,1);
+
+                                                    var CustSetVerifyFalse = function(){
+                                                        CustEmailVerified = false;
+                                                        document.getElementById("CustSendverifyEmailBtn").style.display = "block";
+                                                    };
+                                                    var CustShowEmailVerify = function(){
+                                                        document.getElementById("CustEmailVeriDiv").style.display = "block";
+                                                        //document.getElementById("provSignUpBtn").style.display = "none";
+                                                    };
+                                                    var CustCloseEmailVerify = function(){
+                                                        CustPageJustLoaded = false;
+                                                        if(document.getElementById("visibleEmail").value === ""){
+                                                            document.getElementById("CustEmailVeriDiv").style.display = "none";
+                                                            document.getElementById("CustEmailStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please enter a valid email";
+                                                            //document.getElementById("CustEmailStatus").style.backgroundColor = "red";
+                                                            //document.getElementById("provSignUpBtn").style.display = "block";
+                                                        }
+                                                    };
+
+                                                    var CustVeriCode;
+
+                                                    $(document).ready(function(){
+                                                        $("#CustSendverifyEmailBtn").click(function(event){
+                                                            //document.getElementById('PageLoader').style.display = 'block';
+                                                            CustVeriCode = Math.floor(100000 + Math.random() * 900000);
+                                                            CustVeriCode = CustVeriCode + "";
+
+                                                            document.getElementById("CustvCodeStatus").innerHTML = "<i style='color: #58FA58;' class='fa fa-check'></i> Verification Code has been sent to your Email";
+                                                            //document.getElementById("CustvCodeStatus").style.backgroundColor = "green";
+                                                            document.getElementById("CustSendverifyEmailBtn").style.display = "none";
+
+                                                            var to = document.getElementById("visibleEmail").value;
+                                                            var Message = CustVeriCode + ' is your Queue verification code';
+
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "QueueMailer",
+                                                                data: "to="+to+"&subject=Queue%20Email%20Verification&msg="+Message,
+                                                                success: function(result){
+                                                                    //document.getElementById('PageLoader').style.display = 'none';
+                                                                }
+                                                            });
+                                                            //document.getElementById("CustEmailConfirm").value = CustVeriCode;
+                                                        });
+                                                    });
+
+                                                    var CustVerifyCode = function () {
+
+                                                        if(document.getElementById("CustEmailConfirm").value === CustVeriCode){
+                                                            CustEmailVerified = true;
+                                                        }
+                                                        else{
+                                                            document.getElementById("CustvCodeStatus").innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Make sure verification code is entered or is correct";
+                                                            //document.getElementById("CustvCodeStatus").style.backgroundColor = "red";
+                                                        }
+
+                                                    };
+                                                </script>
+                                            </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                            <div>
+                                <h3 style="color: darkblue; margin: 10px 0; text-align: center;">Add your login information</h3>
+
+                                <table border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <fieldset class="loginInputFld">
+                                                <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                                <input onkeyup="setPasswordsZero();" onchange="CustUserNameCheck();" id="SUPuserName" placeholder='Enter username here' type="text" name="username" value="" size="34"/>
+                                            </fieldset>
+                                            <p id="CustUserNameStatus" style="color: black; text-align: center; max-width: 250px; margin: 10px 0;"></p>
+                                        </td>
+                                    </tr>
+
+                                    <script>
+                                        function setPasswordsZero(){
+                                            document.getElementById("SUPconfirm").value = "";
+                                            document.getElementById("SUPpassword").value = "";
+                                        }
+
+                                        function CustUserNameCheck(){
+
+                                            var userName = document.getElementById("SUPuserName").value;
+
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "CheckCustUserNameExists",
+                                                data: "UserName="+userName,
+                                                success: function(result){
+                                                    //alert(result);
+
+                                                    if(document.getElementById("SUPuserName").value === ""){
+
+                                                        document.getElementById("CustUserNameStatus").innerHTML = "";
+
+                                                    }
+                                                    else if(result === "true"){
+
+                                                        document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: red;" class="fa fa-exclamation-triangle"></i> <span style="color: blue;">"' + userName + '"</span> is not available. Choose a different Username';
+                                                        //document.getElementById("CustUserNameStatus").style.backgroundColor = "red";
+                                                        document.getElementById("SUPuserName").value = "";
+
+                                                    }else if(result === "false" && document.getElementById("SUPuserName").value !== ""){
+
+                                                        document.getElementById("CustUserNameStatus").innerHTML = '<i style="color: #58FA58;" class="fa fa-check"></i> <span style="color: blue;">"' + userName + '"</span> is available.';
+                                                        //document.getElementById("CustUserNameStatus").style.backgroundColor = "green";
+
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    </script>
+
+                                    <tr>
+                                        <td>
+                                            <fieldset class="loginInputFld">
+                                                <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                                <input class="passwordFld" id="SUPpassword" placeholder='Enter new password here' type="password" name="password" value="" size="34"/>
+                                                <p style="text-align: right; margin-top: -20px; padding-right: 10px; margin-bottom: 5px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
+                                            </fieldset>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <fieldset class="loginInputFld">
+                                                <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                                <input class="passwordFld" id="SUPconfirm" placeholder='Confirm password here' type="password" name="confirm" value="" size="34"/>
+                                            </fieldset>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                                <p id="SignUpAndBookStatus" style="text-align: center; color: black; margin: 10px 0;"></p>
+
+                            </div>
+                            
+                            <div style="width: fit-content; margin: auto;">
+                                <input class="button" type="reset" value="Reset" name="resetBtn" />
+                                <input id="SignUpAndBookBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Sign Up" name="submitBtn" />
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <p id='showSignupWndwLnk' style='cursor: pointer; font-weight: bolder; text-align: center; color: darkblue; margin-top: 20px;'>Don't have an account? <span style='color: white;'>Signup here</span></p>
+                    <p id='showLoginWndwLnk' style='cursor: pointer; display: none; font-weight: bolder; text-align: center; color: darkblue; margin-top: 20px;'>Already have an account? <span style='color: white;'>Login here</span></p>
+                </div>
+                
+                <script>
+                    function showSignup(){
+                        $("#FnshApptLoginForm").slideUp("fast");
+                        $("#FnshApptSignupForm").slideDown("fast");
+                    }
+                    document.getElementById("showSignupWndwLnk").addEventListener("click", ()=>{
+                        document.getElementById("showSignupWndwLnk").style.display = "none";
+                        document.getElementById("showLoginWndwLnk").style.display = "block";
+                        showSignup();
+                    });
+                    function showLogin(){
+                        $("#FnshApptSignupForm").slideUp("fast");
+                        $("#FnshApptLoginForm").slideDown("fast");
+                    }
+                    document.getElementById("showLoginWndwLnk").addEventListener("click", ()=>{
+                        document.getElementById("showLoginWndwLnk").style.display = "none";
+                        document.getElementById("showSignupWndwLnk").style.display = "block";
+                        showLogin();
+                    });
+                </script>
+                
+            </div>
+        </div>
+        
+        <script>
+            var LoggedIn = false;
+            
+            document.getElementById("loginAndBookApptBtn").addEventListener("click", ()=>{
+                
+                let Username = document.getElementById("LoginPageUserNameFld").value;
+                let Password = document.getElementById("LoginPagePasswordFld").value;
+                
+                if(Username === ""){
+                    alert("please enter your username");
+                    document.getElementById("PageLoader").style.display = "none";
+                }else if(Password === ""){
+                    alert("please enter your password");
+                    document.getElementById("PageLoader").style.display = "none";
+                }else{
+                    $.ajax({
+                        type: "POST",
+                        url: "./LoginBeforeFinishApptControl",
+                        data: "username="+Username+"&password="+Password,
+                        success: function(result){
+                            //console.log(result);
+                            let resObj = JSON.parse(result);
+                            if(resObj.status === "success"){
+                                document.getElementById("PageLoader").style.display = "none";
+                                let UserID = resObj.customerID;
+                                let UserName = resObj.customerName;
+                                let UserIndex = resObj.loginIndex;
+                                /*alert(UserID);
+                                alert(UserName);
+                                alert(UserIndex);*/
+                                document.getElementById("SendApptCustID").value = UserID;
+                                document.getElementById("SendApptUserIndex").value = UserIndex;
+                                document.getElementById("sendApptUser").value = UserName;
+                                
+                                document.getElementById("GenfutureCustID").value = UserID;
+                                document.getElementById("GenFutureUserIndex").value = UserIndex;
+                                document.getElementById("GenFutureUserNameFld").value = UserName;
+                                  
+                                LoggedIn = true;
+                                alert('Login successful!');
+                            }else{
+                                document.getElementById("PageLoader").style.display = "none";
+                                alert("Unable to login. Please check your username and password");
+                            }
+                        }
+                    });
+                }
+                
+            });
+            document.getElementById("SignUpAndBookBtn").addEventListener("click", ()=>{
+                
+                let FirstName = document.getElementById("SUPfirstName").value;
+                let MiddleName = document.getElementById("SUPmiddleName").value;
+                let LastName = document.getElementById("SUPlastName").value;
+                let Email = document.getElementById("SUPemail").value;
+                let Mobile = document.getElementById("SUPtelephone").value;
+                let Username = document.getElementById("SUPuserName").value;
+                let Password = document.getElementById("SUPpassword").value;
+                
+                
+                    $.ajax({
+                        type: "POST",
+                        url: "./SignupBeforeFinishApptControl",
+                        data: "firstName="+FirstName+"&middleName="+MiddleName+"&lastName="+LastName+"&email="+Email+"&phoneNumber="+Mobile+"&userName="+Username+"&firstPassword="+Password,
+                        success: function(result){
+                            //console.log(result);
+                            let resObj = JSON.parse(result);
+                            if(resObj.status === "success"){
+                                document.getElementById("PageLoader").style.display = "none";
+                                let UserID = resObj.customerID;
+                                let UserName = resObj.customerName;
+                                let UserIndex = resObj.loginIndex;
+                                /*alert(UserID);
+                                alert(UserName);
+                                alert(UserIndex);*/
+                                document.getElementById("SendApptCustID").value = UserID;
+                                document.getElementById("SendApptUserIndex").value = UserIndex;
+                                document.getElementById("sendApptUser").value = UserName;
+                                
+                                document.getElementById("GenfutureCustID").value = UserID;
+                                document.getElementById("GenFutureUserIndex").value = UserIndex;
+                                document.getElementById("GenFutureUserNameFld").value = UserName;
+                                  
+                                LoggedIn = true;
+                                alert('Signup successful!');
+                            }else{
+                                document.getElementById("PageLoader").style.display = "none";
+                                alert(resObj.msg);
+                            }
+                        }
+                    });
+            });
+            
+            setInterval(()=>{
+                if(LoggedIn === true){
+                    document.getElementById("LoginAndSignupForms").style.display = "none";
+                }else{
+                    document.getElementById("LoginAndSignupForms").style.display = "flex";
+                }
+            });
+        </script>
+        
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
                 <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="Queue.jsp"><p  
@@ -1281,6 +1710,9 @@
                                         <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to get spots</p>
                                         <input style="border: 1px solid darkgrey; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input type="hidden" name="ProviderID" value="<%=PID%>" />
+                                        <input id='GenFutureUserNameFld' type="hidden" name="User" value="" />
+                                        <input id='GenFutureUserIndex' type="hidden" name="UserIndex" value="" />
+                                        <input id='GenfutureCustID' type="hidden" name="CustID" value="" />
                                         <input type="hidden" name="ServicesList" value="<%=SelectedServicesList%>"/>
                                         <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
 
@@ -1323,7 +1755,7 @@
                                 
                                 </div>
                                 
-                                <form action="FinishAppointmentUnloggedIn.jsp?Message<%=Message%>" method="POST">
+                                <form>
                                     
                                     <input type="hidden" name="ProviderFullName" value="<%=fullName%>" />
                                     <input type="hidden" name="ProviderCompany" value="<%=Company%>" />
@@ -1566,45 +1998,141 @@
                                             <%  }   //end of condition%>
                                             
                                         </p>
-                                        <p style='display: none;'> Payment:<span style="color: red; float: right;">
+                                        <p id='PaymentOptionsP'> Payment:<span style="color: red; float: right;">
                                                 <%
                                                     if(!hasCancellation){ 
                                                 %>
-                                                <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" checked="true" value="Cash" style="background-color: white;"/><label for="Cash" style="margin-right: 5px">Later</label></span>
+                                                <span onclick="toggleHideCardDetailsDiv()"><input id="Cash" type="radio" name="payment" value="Cash" style="background-color: white;"/><label for="Cash" style="margin-right: 5px">Later</label></span>
                                                 /<%}%> <span onclick="toggleShowCardDetailsDivforLogoutPage()"><input onclick="toggleShowCardDetailsDivforLogoutPage()" id="Credit/Debit" type="radio" name="payment" value="DebitCreditCard" style="background-color: white;"/><label for="Credit/Debit">Now</label></span></span></p>
                                                 <p style="clear: both;"></p>
                                         <p> Price: <span style="color: red; float: right;">$<%=TotalPrice%></span></p>
                                         <p> Tax: <span style="color: red; float: right;">$<%=Tax%></span></p>
                                         <p> Total: <span style="color: red; float: right;">$<%=TaxedPrice%></span></p>
+                                        
+                                        <script>
+                                                //constructing json obj for appointments data
+                                                var lastAppointment = {
+                                                    ProviderID: '<%=PID%>',
+                                                    CustomerID: null,
+                                                    Date: '',
+                                                    Time: '<%=AppointmentTime%>',
+                                                    ServicesList: '<%=SelectedServicesList%>',
+                                                    TotalPrice: '<%=TaxedPrice%>',
+                                                    PaymentMethod: 'notStated',
+                                                    hasCancellation: false,
+                                                    PaymentAmount: 0,
+                                                    Paid: false
+                                                };
+                                                
+                                                /*document.getElementById("displayTime").addEventListener("click", ()=>{
+                                                    alert('changed');
+                                                    lastAppointment.Time = document.getElementById("formsTimeValue").value;
+                                                });
+                                                document.getElementById("formsDateValue").addEventListener("change", ()=>{
+                                                    lastAppointment.Date = document.getElementById("formsDateValue").value;
+                                                });*/
+                                                setInterval(() => {
+                                                    lastAppointment.Time = document.getElementById("formsTimeValue").value;
+                                                    lastAppointment.Date = document.getElementById("formsDateValue").value;
+                                                    localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+                                                }, 1);
+                                        </script>
+                                        
                                        <%
                                             if(hasCancellation){
                                         %>
                                         <p> Cancellation Charge: <span style="color: red; float: right;">$<%=CnclCharge%></span></p>
+                                        <script>
+                                            lastAppointment.PaymentMethod = 'Card';
+                                            lastAppointment.PaymentAmount = '<%=CnclCharge%>';
+                                            lastAppointment.hasCancellation = true;
+                                        </script>
                                         <%}%>
                                         <p><input id="TotalToPay" type="hidden" name="TotalToPay" value="<%=TaxedPrice%>" /></p>
-                                        <p><input type="hidden" name="ProviderID" value="<%=PID%>" /></p>
+                                        <p><input id='SendApptPID' type="hidden" name="ProviderID" value="<%=PID%>" /></p>
+                                        <p><input id='SendApptCustID' type="hidden" name="CustomerID" value="" /></p>
+                                        <p><input id='SendApptUserIndex' type="hidden" name="UserIndex" value="" /></p>
+                                        <p><input id='sendApptUser' type="hidden" name="UserName" value="" /></p>
                                         </div>
                                         
                                     </div>
+                                        
+                                        <script>
+                                            var PaymentAmount = '<%=(TaxedPrice * 100)%>';
+                                            var BallanceToPay = '0.00';
+                                        </script>
                                          
                                         <%
                                             if(hasCancellation == true){
                                         %>
-                                        <p style="font-weight: bolder; padding: 5px; text-align: center; color: darkblue;"><i style="color: red" class="fa fa-exclamation-triangle"></i> <%=fullName.split(" ")[0]%> has a cancellation policy.</p>
+                                        <!--p style="padding: 5px; text-align: center; color: darkgrey;"><i class="fa fa-credit-card"></i> <%=fullName.split(" ")[0]%> has a cancellation policy.</p-->
+                                        <script>
+                                            PaymentAmount = '<%=(CnclCharge * 100)%>';
+                                            BallanceToPay = '<%=Double.parseDouble(decformat.format(TaxedPrice - CnclCharge))%>';
+                                        </script>
                                         <%}%>
                                         
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; font-weight: bolder;  color: darkblue; padding: 5px;"></p>
                                     <center><input id="submitAppointment" style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
                                                    padding: 5px;"
-                                                   onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Confirm" /></center>
+                                                   onclick="document.getElementById('PageLoader').style.display = 'block';" type="button" value="Confirm" /></center>
                                         
                                          
                                 </form>
+                                        
+                                        <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#submitAppointment').click(function(event) {  
+                                                        document.getElementById("PageLoader").style.display = "block";
+                                                        localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+                                                        var ProviderID = document.getElementById("SendApptPID").value;
+                                                        var CustomerID = document.getElementById("SendApptCustID").value;
+                                                        var UserIndex = document.getElementById("SendApptUserIndex").value;
+                                                        var NewUserName = document.getElementById("sendApptUser").value;
+                                                        var TotalPrice = document.getElementById("TotalToPay").value;
+                                                        var ApptDate = document.getElementById("formsDateValue").value;
+                                                        var ApptTime = document.getElementById("formsTimeValue").value;
+                                                        var ApptReason = document.getElementById("formsOrderedServices").value;
+                                                        var PayMeth = $("input:radio[name=payment]:checked").val();
+                                                        
+                                                        /*alert("ProviderID: "+ProviderID);
+                                                        alert("CustomerID: "+CustomerID);
+                                                        alert("UserIndex: "+UserIndex);
+                                                        alert("TotalPrice: "+TotalPrice);
+                                                        alert("ApptDate: "+ApptDate);
+                                                        alert("ApptTime: "+ApptTime);
+                                                        alert("ApptReason: "+ApptReason);
+                                                        alert("Payment Method: "+PayMeth);*/
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "SendAppointmentControl",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&TotalPrice="+TotalPrice+"&formsDateValue="+ApptDate+"&formsTimeValue="+ApptTime+"&formsOrderedServices="+ApptReason+"&payment="+PayMeth,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          if(result === "Success"){
+                                                              alert("You've been enqueued successfully!");
+                                                                document.getElementById("PageLoader").style.display = "none";
+                                                                window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              
+                                                          }else{
+                                                              alert(result);
+                                                              document.getElementById("PageLoader").style.display = "none";
+                                                          }
+                                                          //document.getElementById("eachClosedDate<>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
                                 
                                         <center><div id="CreditDebitCardDetails" style="padding: 10px; background-color: #eeeeee;">
-                                            <p style="color: crimson; text-align: center; font-weight: bolder;">Add Your Debit/Credit Card</p>
+                                            <p id='PayBelowThenConfirmStatus' style="color: crimson; font-weight: bolder; text-align: center;">Pay below then confirm here</p>
                                               
-                                            <form name="PaymentForm" action="PayAndSubmitQueue.jsp" method="POST">
+                                            <form name="PaymentForm">
                                                 
                                                 <!--Hidden text inputs here to hold appointment parameters- use javascript
                                                 to collect information from submit appointment form and put them in these
@@ -1634,11 +2162,11 @@
                                             <%
                                                 if(hasCancellation){
                                             %>
-                                            <p style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;"><i style="color: orange;" class="fa fa-info-circle"></i> <%=fullName.split(" ")[0]%> charges <span style=""><%=ChargePercent%>%</span> cancellation fee</p>
+                                            <p id='ChargesPercentStatus' style="color: darkgrey; text-align: center; padding: 5px;"><i style="" class="fa fa-info-circle"></i> <%=fullName.split(" ")[0]%> charges <span style=""><%=ChargePercent%>%</span> cancellation fee</p>
                                             <!--p style="color: darkblue; font-weight: bolder; text-align: center; padding: 5px;">cancell at <=CancelElapse%> </p-->
                                             <%}%>
                                                 
-                                                <table id="paymentDetailsTable">
+                                                <!--table id="paymentDetailsTable">
                                                     <tbody>
                                                     
                                                         <tr><td style="border-radius: 0; padding: 4px;">Card Number: </td><td style="border-radius: 0; padding: 4px;"><input onclick="checkMiddleCardNumber();" onkeydown="checkMiddleCardNumber();" id="cardNumber" style="background-color: #eeeeee;" type="text" name="C/DcardNumber" value="" /></td></tr>
@@ -1726,12 +2254,169 @@
                                                               
                                                             }
                                                          },1);
-                                                </script>
+                                                </script-->
                                             
-                                                <p  style="font-weight: bolder; text-align: center; color: darkblue;"><i style="color: red;" class="fa fa-exclamation-triangle"></i> <span id="paymentBtnStatus"></span></p>
-                                                <input id="submitPaymentBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px;" type="submit" value="Submit Payment" name="paymentBtn" />
+                                                <p  style="font-weight: bolder; text-align: center; color: darkblue;"><span id="paymentBtnStatus"></span></p>
+                                                <input id="submitPaymentBtn" style="color: white; background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px;" type="button" value="Confirm Appointment" name="paymentBtn" />
                                                 
                                             </form>
+                                            
+                                            <script>
+                                                // Set your publishable key: remember to change this to your live publishable key in production
+                                                // See your keys here: https://dashboard.stripe.com/account/apikeys
+                                                var stripe = Stripe('pk_live_8lUzTgKEDL8iLlezPYrQL4so00KOSnuiut');
+                                                var elements = stripe.elements();
+                                            </script>
+                                            <div id='DivForCardPay'>
+                                                <p style='display: block; border-bottom: 1px solid darkgrey;'></p>
+                                                
+                                                <form id="payment-form" style='padding-bottom: 10px;'>
+
+                                                    <p style='text-align: center; font-weight: bolder; padding-bottom: 10px; color: crimson;'>Add your payment card</p>
+                                                    
+                                                    <%
+                                                        if(hasCancellation == true){
+                                                    %>
+                                                    <p id="SetPaymentFullBtn" onclick="SetPaymentFull();" 
+                                                       style="padding: 10px 0; margin-bottom: 10px; background-color: #365266; text-align: center; color: white; cursor: pointer; max-width: 200px; border-radius: 4px;">
+                                                        Set Full Payment <span style="color: darkgrey;"> - <%=TaxedPrice%></span> <i style="color: #fa755a; margin-left: 10px;" class="fa fa-arrow-down"></i></p>
+                                                    <script>
+                                                        function SetPaymentFull(){
+                                                            //PaymentAmount = '<=(CnclCharge * 100)%>';
+                                                            //BallanceToPay = '<=Double.parseDouble(decformat.format(TaxedPrice - CnclCharge))%>';
+                                                            PaymentAmount = '<%=(TaxedPrice * 100)%>';
+                                                            lastAppointment.PaymentAmount = '<%=TaxedPrice%>';
+                                                            BallanceToPay = '0.00';
+                                                            document.getElementById("PaymentSubmit").innerHTML = "Pay $" + (parseInt(PaymentAmount) / 100) + "<span style='color: darkgrey;'> - Balance: $" + BallanceToPay + "</span>";
+                                                            document.getElementById("SetPaymentFullBtn").style.display = "none";
+                                                        }
+                                                    </script>
+                                                    <%}%>
+
+                                                    <div id="card-element">
+                                                          <!-- Elements will create input elements here -->
+                                                    </div>
+
+                                                    <!-- We'll put the error messages in this element -->
+                                                    <div id="card-errors" role="alert"></div>
+
+                                                    <button id="PaymentSubmit" style='padding: 10px 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px; width: 200px; margin-top: 20px;'>Pay $</button>
+                                                </form>
+                                            </div>
+                                            <script>
+                                                
+                                                setInterval(()=>{
+                                                    if(document.getElementById("formsDateValue").value === "" ||
+                                                        document.getElementById("formsTimeValue").value === "" ||
+                                                        document.getElementById("formsDateValue").value === " " ||
+                                                        document.getElementById("formsTimeValue").value === " "){
+                                                        document.getElementById("PaymentSubmit").style.backgroundColor = "#eee";
+                                                        document.getElementById("PaymentSubmit").style.color = "darkgrey";
+                                                        document.getElementById("PaymentSubmit").disabled = true;
+                                                    }else{
+                                                        document.getElementById("PaymentSubmit").style.backgroundColor = "darkslateblue";
+                                                        document.getElementById("PaymentSubmit").disabled = false;
+                                                        document.getElementById("PaymentSubmit").style.color = "white";
+                                                    }
+                                                }, 1);
+                                                
+                                                document.getElementById("PaymentSubmit").innerHTML += (parseInt(PaymentAmount) / 100) + "<span style='color: darkgrey;'> - Balance: $" + BallanceToPay + "</span>";
+                                                
+                                                // Set up Stripe.js and Elements to use in checkout form
+                                                var style = {
+                                                  base: {
+                                                    color: "#32325d",
+                                                  }
+                                                };
+
+                                                var card = elements.create("card", { style: style });
+                                                card.mount("#card-element");
+                                                
+                                                
+                                                card.on('change', ({error}) => {
+                                                    const displayError = document.getElementById('card-errors');
+                                                    if (error) {
+                                                      displayError.textContent = error.message;
+                                                    } else {
+                                                      displayError.textContent = '';
+                                                    }
+                                                  });
+                                                  
+                                                  
+                                                  var form = document.getElementById('payment-form');
+
+                                                    form.addEventListener('submit', function(ev) {
+                                                        document.getElementById("PageLoader").style.display = "block";
+                                                        ev.preventDefault();
+                                                      
+                                                        var CName = document.getElementById("sendApptUser").value;
+                                                        let CheckPID = document.getElementById("SendApptPID").value;
+                                                        let CheckCID = document.getElementById("SendApptCustID").value;
+                                                        let CheckApptDate = document.getElementById("formsDateValue").value;
+                                                        let CheckApptTime = document.getElementById("formsTimeValue").value;
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "isAppointmentTimeAvailable",  
+                                                        data: "ProviderID="+CheckPID+"&CustomerID="+CheckCID+"&formsDateValue="+CheckApptDate+"&formsTimeValue="+CheckApptTime,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          if(result === "Success"){
+                                                              
+                                                                $.ajax({
+                                                                    type: "GET",
+                                                                    url: "./GetStripePaymentIntent",
+                                                                    data: "ConnAccID=<%=StripeAccID%>&Charge="+PaymentAmount,
+                                                                    success: function(result){
+                                                                          //alert(result);
+                                                                          if(result === "failed"){
+                                                                              document.getElementById("PageLoader").style.display = "none";
+                                                                              alert("<%=fullName.split(" ")[0]%> account cannot accept payments at this moment");
+                                                                              throw {msg: "server failed to create payment intent"};
+                                                                          }
+                                                                          let clientSecret = result;
+                                                                          stripe.confirmCardPayment(clientSecret, {
+                                                                            payment_method: {
+                                                                              card: card,
+                                                                              billing_details: {
+                                                                                name: CName
+                                                                              }
+                                                                            }
+                                                                          }).then(function(result) {
+                                                                            if (result.error) {
+                                                                              // Show error to your customer (e.g., insufficient funds)
+                                                                              document.getElementById("PageLoader").style.display = "none";
+                                                                              console.log(result.error.message);
+                                                                            } else {
+                                                                              // The payment has been processed!
+                                                                              if (result.paymentIntent.status === 'succeeded') {
+                                                                                  document.getElementById("PageLoader").style.display = "none";
+                                                                                  alert("you've Successfully Paid");
+                                                                                  isPaymentSuccess = true;
+                                                                                  $("#DivForCardPay").slideUp("fast");
+                                                                                  lastAppointment.Paid = true;
+                                                                                  lastAppointment.PaymentMethod = 'card';
+                                                                                  localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+                                                                                // Show a success message to your customer
+                                                                                // There's a risk of the customer closing the window before callback
+                                                                                // execution. Set up a webhook or plugin to listen for the
+                                                                                // payment_intent.succeeded event that handles any business critical
+                                                                                // post-payment actions.
+                                                                              }
+                                                                            }
+                                                                          });
+                                                                      }
+                                                                });
+                                                            }else{
+                                                              alert(result);
+                                                              document.getElementById("PageLoader").style.display = "none";
+                                                          }
+                                                          //document.getElementById("eachClosedDate<>").style.display = "none";
+                                                        }                
+                                                      });
+                                                    });
+                                                  
+                                            </script>
                                                
                                         <%
                                             if(hasCancellation == true){
@@ -1759,16 +2444,16 @@
                                             
                                             <script>
                                                     
-                                                        var cardNumber = document.getElementById("cardNumber");
+                                                        /*var cardNumber = document.getElementById("cardNumber");
                                                         var cardName = document.getElementById("cardName");
                                                         var cardDate = document.getElementById("cardDate");
-                                                        var cardCVV = document.getElementById("cardCVV");
+                                                        var cardCVV = document.getElementById("cardCVV");*/
                                                         var formsDateValue = document.getElementById("formsDateValue");
                                                         var formsTimeValue = document.getElementById("formsTimeValue");
                                                         var submitPaymentBtn = document.getElementById("submitPaymentBtn");
                                                         var paymentBtnStatus = document.getElementById("paymentBtnStatus");
                                                         
-                                                        function checksubmitPaymentBtn(){
+                                                        /*function checksubmitPaymentBtn(){
                                                             
                                                             if(formsDateValue.value === "" || formsTimeValue.value === "" || formsDateValue.value === " " || formsTimeValue.value === " "
                                                                     || cardNumber.value === "" || cardName.value === "" || cardDate.value === "" || cardCVV.value === ""){
@@ -1780,15 +2465,99 @@
                                                                 submitPaymentBtn.disabled = false;
                                                                 paymentBtnStatus.innerHTML = "";
                                                             }
-                                                                
+                                                             
+                                                            
+                                                        }*/
+    
+                                                        var isPaymentSuccess = false;
+                                                        
+                                                        function checksubmitPaymentBtn(){
+                                                            
+                                                            if(formsDateValue.value === "" || formsTimeValue.value === "" || formsDateValue.value === " " || formsTimeValue.value === " "){
+                                                                submitPaymentBtn.style.backgroundColor = "darkgrey";
+                                                                submitPaymentBtn.disabled = true;
+                                                                paymentBtnStatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please set appointment date or time.";
+                                                            }else if(isPaymentSuccess === false){
+                                                                submitPaymentBtn.style.backgroundColor = "darkgrey";
+                                                                submitPaymentBtn.disabled = true;
+                                                                paymentBtnStatus.innerHTML = "<i style='color: red;' class='fa fa-exclamation-triangle'></i> Please add your card to pay.";
+                                                            }else{
+                                                                submitPaymentBtn.style.backgroundColor = "darkslateblue";
+                                                                submitPaymentBtn.disabled = false;
+                                                                paymentBtnStatus.innerHTML = "<i style='color: green;' class='fa fa-check'></i> OK";
+                                                            }
+                                                             
                                                             
                                                         }
                                                         
+                                                        
                                                         setInterval(checksubmitPaymentBtn, 1);
+                                                        
+                                                        if((parseInt(PaymentAmount) / 100) === 0){
+                                                            //alert("here");
+                                                            document.getElementById("PaymentOptionsP").style.display = "none";
+                                                            if(document.getElementById("Cash"))
+                                                                document.getElementById("Cash").checked = true;
+                                                            isPaymentSuccess = true;
+                                                            $("#DivForCardPay").slideUp("fast");
+                                                            if(document.getElementById("ChargesPercentStatus"))
+                                                                document.getElementById("ChargesPercentStatus").style.display = "none";
+                                                            if(document.getElementById("PayBelowThenConfirmStatus"))
+                                                                document.getElementById("PayBelowThenConfirmStatus").style.display = "none";
+                                                        }
                                                     
                                                 </script>      
                                                 
                                         </div></center>
+                    
+                                        <script>
+                                             
+                                               $(document).ready(function() {                        
+                                                    $('#submitPaymentBtn').click(function(event) {  
+                                                        document.getElementById("PageLoader").style.display = "block";
+                                                        localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+                                                        var ProviderID = document.getElementById("SendApptPID").value;
+                                                        var CustomerID = document.getElementById("SendApptCustID").value;
+                                                        var UserIndex = document.getElementById("SendApptUserIndex").value;
+                                                        var NewUserName = document.getElementById("sendApptUser").value;
+                                                        var TotalPrice = document.getElementById("TotalToPay").value;
+                                                        var ApptDate = document.getElementById("formsDateValue").value;
+                                                        var ApptTime = document.getElementById("formsTimeValue").value;
+                                                        var ApptReason = document.getElementById("formsOrderedServices").value;
+                                                        var PayMeth = $("input:radio[name=payment]:checked").val();
+                                                        
+                                                        /*alert("ProviderID: "+ProviderID);
+                                                        alert("CustomerID: "+CustomerID);
+                                                        alert("UserIndex: "+UserIndex);
+                                                        alert("TotalPrice: "+TotalPrice);
+                                                        alert("ApptDate: "+ApptDate);
+                                                        alert("ApptTime: "+ApptTime);
+                                                        alert("ApptReason: "+ApptReason);
+                                                        alert("Payment Method: "+PayMeth);*/
+                                                        
+                                                        
+                                                        $.ajax({  
+                                                        type: "POST",  
+                                                        url: "SendAppointmentControl",  
+                                                        data: "ProviderID="+ProviderID+"&CustomerID="+CustomerID+"&UserIndex="+UserIndex+"&TotalPrice="+TotalPrice+"&formsDateValue="+ApptDate+"&formsTimeValue="+ApptTime+"&formsOrderedServices="+ApptReason+"&payment="+PayMeth,  
+                                                        success: function(result){  
+                                                          //alert(result);
+                                                          if(result === "Success"){
+                                                              alert("You've been enqueued successfully!");
+                                                                document.getElementById("PageLoader").style.display = "none";
+                                                                window.location.replace("ProviderCustomerPage.jsp?UserIndex="+UserIndex+"&User="+NewUserName);
+                                                              
+                                                          }else{
+                                                              alert(result);
+                                                              document.getElementById("PageLoader").style.display = "none";
+                                                          }
+                                                          //document.getElementById("eachClosedDate<>").style.display = "none";
+                                                        }                
+                                                      });
+                                                        
+                                                    });
+                                                });
+                                            </script>
                             </td> 
                         </tr>
                     </tbody>
@@ -1937,6 +2706,10 @@
         </div>
                             
     </div>
+                            
+        <script>
+            localStorage.setItem('lastAppointment', JSON.stringify(lastAppointment));
+        </script>
                            
     </body>
     
@@ -1945,5 +2718,7 @@
     <script src="scripts/CreditDebitCardBehavior.js"></script>
     <script src="scripts/loginPageBtn.js"></script>
     <script src="scripts/SuggestedTime.js"></script>
+    <script src="scripts/SignUpandSendAppointmentBtn.js"></script>
+    <script src="scripts/loginPageBtn.js"></script>
     
 </html>

@@ -115,6 +115,7 @@ public class LoginControllerMain extends HttpServlet {
                     Flag = 0;
                 }
                 
+                break;
             }
             
             //if query from outer try block was did not return any value(s)
@@ -170,6 +171,7 @@ public class LoginControllerMain extends HttpServlet {
                             Flag = 0;
                         }
                         
+                        break;
                     }
                     
                     //JOptionPane.showMessageDialog(null, SessionID);

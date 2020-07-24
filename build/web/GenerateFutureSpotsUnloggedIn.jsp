@@ -43,6 +43,12 @@
         
     </head>
     
+    <%
+        String User = request.getParameter("User");
+        String UserIndex = request.getParameter("UserIndex");
+        int UserID = Integer.parseInt(request.getParameter("CustID"));
+    %>
+    
     <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important; background-color: white !important; position: absolute; width: 100%;">
         <div id='QShowNews22' style='width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
                  box-shadow: 0 0 5px 1px black;'>
@@ -65,8 +71,6 @@
                         
                 <%
                     
-                    int UserID = 0;
-        
                         String ProviderID = request.getParameter("ProviderID");
                         int CustomerID = UserID;
                         String SpotsDate = request.getParameter("GetDate");
@@ -945,6 +949,9 @@
                                         <input type="hidden" name="AppointmentTime" value="<%=NextAvailableTimeForForm%>" />
                                         <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
                                         <input type="hidden" name="ServicesList" value="<%=ServicesList%>" />
+                                        <input type="hidden" name="User" value="<%=User%>" />
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="CustID" value="<%=UserID%>" />
                                         <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
                                         
                                         <%
@@ -1014,6 +1021,9 @@
                                         <input style="border: 1px solid darkgray; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input type="hidden" name="ProviderID" value="<%=ProviderID%>" />
                                         <input type="hidden" name="ServicesList" value="<%=ServicesList%>" />
+                                        <input type="hidden" name="User" value="<%=User%>" />
+                                        <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
+                                        <input type="hidden" name="CustID" value="<%=UserID%>" />
                                         <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
                                         <input id="GenerateSpotsBtn" style="padding: 5px; border: none; background-color: darkslateblue; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
