@@ -298,7 +298,7 @@
                             clip-path: polygon(100% 0, 100% 66%, 91% 73%, 79% 79%, 64% 83%, 50% 86%, 33% 90%, 18% 94%, 0 100%, 0 0);'>
                         <p style="text-align: center;"><img src="QueueLogo.png" style="margin-top: 20px; width: 80px; height: auto;"/></p>
                         <p style='color: darkblue; font-weight: bolder; text-align: center; margin-bottom: 20px; margin-top: 10px;'>
-                        <i style='color: red;' class="fa fa-exclamation-triangle"></i> You Login/Signup to continue</p>
+                        <i style='color: red;' class="fa fa-exclamation-triangle"></i> You have to login/signup to continue</p>
                     </div>
                     
                     <div style="height: 60%; display: flex; flex-direction: column; justify-content: center;
@@ -1834,7 +1834,7 @@
                                         
                                         <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; background-color: darkslateblue; color: pink; padding: 5px; cursor: pointer;">Show All Suggested Spots</p>
                                         
-                                        <center><p id="SuggestedTimeDivStatus" style="color: white; background-color: green; text-align: center;"></p></center>
+                                        <center><p id="SuggestedTimeDivStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p></center>
                                    
                                     <center><div id="AllSuggestedTimeDiv" style="display: none;">
                                        

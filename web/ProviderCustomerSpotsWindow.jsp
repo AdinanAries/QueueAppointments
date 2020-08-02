@@ -1938,8 +1938,8 @@
     
     <script src="scripts/script.js" defer></script>
     <!--script src="scripts/checkAppointmentDateUpdate.js"></script-->
-    <script src="scripts/updateUserProfile.js" defer></script>
+    <!--script src="scripts/updateUserProfile.js" defer></script-->
     <script src="scripts/customerReviewsAndRatings.js" defer></script>
-    <script src="scripts/SettingsDivBehaviour.js" defer></script>
-    <script src="scripts/ChangeProfileInformationFormDiv.js" defer></script>
+    <!--script src="scripts/SettingsDivBehaviour.js" defer></script-->
+    <!--script src="scripts/ChangeProfileInformationFormDiv.js" defer></script-->
 </html>

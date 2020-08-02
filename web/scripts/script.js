@@ -1,9 +1,3 @@
-/*var datesP = document.getElementById("displayDate");
-//the above code line would break the program where displayDate element doesn't exist
-
-if (document.getElementById("displayDate"))
-  var datesP = document.getElementById("displayDate");
-//only create the date element variable if the displayDate object exists in the DOM*/
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
@@ -14,20 +8,6 @@ if ('serviceWorker' in navigator) {
     console.log('Service worker registration failed, error:', error);
   });
 }
-
-/*if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw2.js')
-  .then(function(registration) {
-    console.log('Registration successful, scope of sw2 is:', registration.scope);
-  })
-  .catch(function(error) {
-    console.log('Service worker registration failed, error:', error);
-  });
-}*/
-
-//document.cookie = "SameSite=None;Secure";
-//document.cookie = "UserID=1;SameSite=None;Secure";
-//alert(document.cookie);
 
 function QueueClock() {
   var date = new Date();
@@ -69,30 +49,6 @@ function QueueClock() {
 
   datesP.innerHTML = clock;
 }
-
-//QueueClock();
-
-//setInterval(QueueClock, 1000);
-
-/*function HideExploreLoader(){
-    document.getElementById("ExploreLoading").style.display = "block";
-}
-
-function HideAccountLoader(){
-    document.getElementById("UserProfileLoading").style.display = "none";
-}
-
-function HideSpotsLoader(){
-    document.getElementById("SpotsLoading").style.display = "none";
-}
-
-function HideSearchLoader(){
-    document.getElementById("SearchLoading").style.display = "none";
-}
-
-function HideFavoritesLoader(){
-    document.getElementById("FavoritesLoading").style.display = "none";
-}*/
 
 function toggleEnableFinalApntmntBtn() {
   var submitAppointment = document.getElementById("submitAppointment");
@@ -671,14 +627,11 @@ function activateFavTab() {
   var FavDiv = document.querySelector(".FavDiv");
 
   HistoryTab.style.color = "darkblue";
-  /*HistoryTab.style.border = "black 1px solid";*/
 
   AppointmentsTab.style.color = "darkblue";
-  /*AppointmentsTab.style.border = "1px solid black";*/
 
   FavoritesTab.style.color = "white";
   FavoritesTab.style.border = "none";
-  /*FavoritesTab.style.borderTop = "1px solid black";*/
 
   AppListDiv.style.display = "none";
   AppHistoryDiv.style.display = "none";
@@ -696,16 +649,12 @@ function activateFavTabMobile() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  //HistoryTab.style.backgroundColor = "cornflowerblue";
   HistoryTab.style.color = "darkgrey";
   HistoryTab.style.border = "none";
 
-  //AppointmentsTab.style.backgroundColor = "cornflowerblue";
   AppointmentsTab.style.color = "darkgrey";
   AppointmentsTab.style.border = "none";
 
-  //FavoritesTab.style.backgroundColor = "#ccccff";
-  //FavoritesTab.style.border = "none";
   FavoritesTab.style.color = "darkblue";
   FavoritesTab.style.borderBottom = "2px solid darkblue";
 
@@ -725,16 +674,12 @@ function activateAppTabMobile() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  //HistoryTab.style.backgroundColor = "cornflowerblue";
   HistoryTab.style.color = "darkgrey";
   HistoryTab.style.border = "none";
 
-  //AppointmentsTab.style.backgroundColor = "#ccccff";
-  //AppointmentsTab.style.border = "none";
   AppointmentsTab.style.color = "darkblue";
   AppointmentsTab.style.borderBottom = "2px solid darkblue";
 
-  //FavoritesTab.style.backgroundColor = "cornflowerblue";
   FavoritesTab.style.color = "darkgrey";
   FavoritesTab.style.border = "none";
 
@@ -754,16 +699,12 @@ function activateHistoryMobile() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  //HistoryTab.style.backgroundColor = "#ccccff";
-  //HistoryTab.style.border = "none";
   HistoryTab.style.color = "darkblue";
   HistoryTab.style.borderBottom = "2px solid darkblue";
 
-  //AppointmentsTab.style.backgroundColor = "cornflowerblue";
   AppointmentsTab.style.color = "darkgrey";
   AppointmentsTab.style.border = "none";
 
-  //FavoritesTab.style.backgroundColor = "cornflowerblue";
   FavoritesTab.style.color = "darkgrey";
   FavoritesTab.style.border = "none";
 
@@ -788,11 +729,9 @@ function activateProvAppointmentsTab() {
   );
 
   ProvHistoryTab.style.color = "#8b8b8b";
-  /*ProvHistoryTab.style.border = "1px solid darkblue";*/
 
   ProvAppointmentsTab.style.color = "darkblue";
   ProvAppointmentsTab.style.border = "none";
-  /*ProvAppointmentsTab.style.borderTop = "1px solid darkblue";*/
 
   CurrentProvAppointmentsDiv.style.display = "block";
   ProviderAppointmentHistoryDiv.style.display = "none";
@@ -810,11 +749,9 @@ function activateProvHistoryTab() {
   );
 
   ProvAppointmentsTab.style.color = "#8b8b8b";
-  /*ProvAppointmentsTab.style.border = "black 1px solid";*/
 
   ProvHistoryTab.style.color = "darkblue";
   ProvHistoryTab.style.border = "none";
-  /*ProvHistoryTab.style.borderTop = "1px solid black";*/
 
   CurrentProvAppointmentsDiv.style.display = "none";
   ProviderAppointmentHistoryDiv.style.display = "block";
@@ -830,16 +767,12 @@ function activateServicesTab() {
   var clientsListDiv = document.getElementById("clientsListDiv");
 
   Clients.style.color = "darkgrey";
-  /*Clients.style.border = "black 1px solid";*/
 
   HoursOpen.style.color = "darkgrey";
   HoursOpen.style.fontWeight = "initial";
-  /*HoursOpen.style.border = "1px solid black";*/
 
   Services.style.color = "black";
   Services.style.fontWeight = "bolder";
-  /*Services.style.border = "none";
-  Services.style.borderTop = "1px solid black";*/
 
   ServiceListDiv.style.display = "block";
   hoursOpenDiv.style.display = "none";
@@ -857,16 +790,12 @@ function activateHourOpenTab() {
 
   Services.style.color = "darkgrey";
   Services.style.fontWeight = "initial";
-  /*Services.style.border = "black 1px solid";*/
 
   Clients.style.color = "darkgrey";
   Clients.style.fontWeight = "initial";
-  /*Clients.style.border = "1px solid black";*/
 
   HoursOpen.style.color = "black";
   HoursOpen.style.fontWeight = "bolder";
-  /*HoursOpen.style.border = "none";
-  HoursOpen.style.borderTop = "1px solid black";*/
 
   ServiceListDiv.style.display = "none";
   hoursOpenDiv.style.display = "block";
@@ -884,16 +813,12 @@ function activateClientsTab() {
 
   HoursOpen.style.color = "darkgrey";
   HoursOpen.style.fontWeight = "initial";
-  /*HoursOpen.style.border = "black 1px solid";*/
 
   Services.style.color = "darkgrey";
   Services.style.fontWeight = "initial";
-  /*Services.style.border = "1px solid black";*/
 
   Clients.style.color = "black";
   Clients.style.fontWeight = "bolder";
-  /*Clients.style.border = "none";
-  Clients.style.borderTop = "1px solid black";*/
 
   ServiceListDiv.style.display = "none";
   hoursOpenDiv.style.display = "none";
@@ -982,20 +907,15 @@ function showCustExtraUsrAcnt2() {
   document.getElementById("Calender2").style.display = "none";
   document.getElementById("ExtrasNotificationDiv2").style.display = "none";
 
-  //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
-  //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
 
   if (
     document.getElementById("ExtrasUserAccountDiv2").style.display === "none"
   ) {
-    //document.getElementById("PermDivUserBtn").style.backgroundColor = "blue";
     $("#Extras2").slideDown("fast");
     $("#ExtrasUserAccountDiv2").slideDown("fast");
   } else {
-    //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
     $("#ExtrasUserAccountDiv2").slideUp("fast");
     $("#Extras2").slideUp("fast");
-    //document.getElementById("News2").style.display = "block";
   }
 }
 
@@ -1004,20 +924,12 @@ function showCustExtraCal2() {
   document.getElementById("ExtrasUserAccountDiv2").style.display = "none";
   document.getElementById("ExtrasNotificationDiv2").style.display = "none";
 
-  //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
-  //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
-
   if (document.getElementById("Calender2").style.display === "none") {
-    //document.getElementById("PermDivCalBtn").style.backgroundColor = "blue";
     $("#Extras2").slideDown("fast");
     $("#Calender2").slideDown("fast");
-    //document.getElementById("Extras2").style.display = "block";
   } else {
-    //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
     $("#Calender2").slideUp("fast");
     $("#Extras2").slideUp("fast");
-    //document.getElementById("Extras2").style.display = "none";
-    //document.getElementById("News2").style.display = "block";
   }
 }
 
@@ -1025,23 +937,14 @@ function showCustExtraNotification2() {
   document.getElementById("News2").style.display = "none";
   document.getElementById("ExtrasUserAccountDiv2").style.display = "none";
   document.getElementById("Calender2").style.display = "none";
-
-  //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
-  //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
-
   if (
     document.getElementById("ExtrasNotificationDiv2").style.display === "none"
   ) {
-    //document.getElementById("Extras2").style.display = "block";
-    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "blue";
     $("#Extras2").slideDown("fast");
     $("#ExtrasNotificationDiv2").slideDown("fast");
   } else {
-    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
     $("#ExtrasNotificationDiv2").slideUp("fast");
     $("#Extras2").slideUp("fast");
-    //document.getElementById("Extras2").style.display = "none";
-    //document.getElementById("News2").style.display = "block";
   }
 }
 
@@ -1050,20 +953,12 @@ function showCustExtraNews() {
   document.getElementById("ExtrasUserAccountDiv2").style.display = "none";
   document.getElementById("Calender2").style.display = "none";
 
-  //document.getElementById("PermDivCalBtn").style.backgroundColor = "#334d81";
-  //document.getElementById("PermDivUserBtn").style.backgroundColor = "#334d81";
-
   if (document.getElementById("News2").style.display === "none") {
-    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "blue";
     $("#Extras2").slideDown("fast");
     $("#News2").slideDown("fast");
-    //document.getElementById("Extras2").style.display = "block";
   } else {
-    //document.getElementById("PermDivNotiBtn").style.backgroundColor = "#334d81";
     $("#News2").slideUp("fast");
     $("#Extras2").slideUp("fast");
-    //document.getElementById("Extras2").style.display = "none";
-    //document.getElementById("News2").style.display = "block";
   }
 }
 
@@ -1152,8 +1047,6 @@ function hideExtraDropDown() {
   document.getElementById("ExtraDropDown").style.display = "none";
 }
 
-//Everything that needs internet always at bottom
-
 $(function() {
   $("#datepicker").datepicker();
 });
@@ -1161,9 +1054,6 @@ $(function() {
 function toggleHideAppointmentsDiv() {
   var appointmentsDiv = document.getElementById("appointmentsDiv");
   var hideAppointments = document.getElementById("hideAppointments");
-
-  //important for just onetime click.
-  //appointmentsDiv.style.display = "block";
 
   if (appointmentsDiv.style.display === "block") {
     $("#appointmentsDiv").fadeOut("fast");
@@ -1195,7 +1085,6 @@ function hideProvApptListAndMkReservForMobile() {
 
     appointmentsDiv.style.display = "none";
     hideAppointments.innerHTML = "Show Spots";
-    //hideAppointments.style.backgroundColor = "red";
     hideAppointments.style.color = "white";
 
     document.getElementById("MakeReservationForm").style.display = "none";
@@ -1235,7 +1124,6 @@ function showPhotoUploadwindow() {
     "_blank",
     "resizable=yes, scrollbars=yes, titlebar=yes, width=600, height=500, top=10, left=10"
   );
-  //"height=500,width=600,status=yes,toolbar=no,menubar=no,location=no");
 }
 if(document.querySelector(".MainMenu")){
     document.querySelector(".MainMenu").style.display = "none";
@@ -1245,32 +1133,9 @@ function ToggleMenuDisplay() {
     var MenuDisplay = document.querySelector(".MainMenu").style.display;
     
     if(MenuDisplay === "none"){
-        
         $(".MainMenu").show("slide", { direction: "left" }, 100);
-        //document.getElementsByTagName("body")[0].style.position = "fixed";
-        /*$("#secondMenuIconBar").fadeOut("fast");
-        
-        $("#firstMenuIconBar").css({'transition' : '0.5s'});
-        document.getElementById("firstMenuIconBar").style.cssText += 'top: 10px;';
-        $("#firstMenuIconBar").css({'transform' : 'translateY(12px)'});
-        $("#firstMenuIconBar").css({'transform' : 'rotate('+ 45 +'deg)'}, 100);
-        
-        $("#thirdMenuIconBar").css({'transition' : '0.5s'});
-        document.getElementById("thirdMenuIconBar").style.cssText += 'top: 10px;';
-        $("#thirdMenuIconBar").css({'transform' : 'translateY(-12px)'});
-        $("#thirdMenuIconBar").css({'transform' : 'rotate('+ -45 +'deg)'}, 100);*/
-        
-        //$(".MainMenu").fadeIn("fast");
     }else{
         $(".MainMenu").hide("slide", { direction: "left" }, 100);
-        //document.getElementsByTagName("body")[0].style.position = "relative";
-        /*$("#secondMenuIconBar").fadeIn("fast");
-        $("#firstMenuIconBar").css({'transition' : '0.5s'});
-        $("#firstMenuIconBar").css({'transform' : 'rotate('+ 0 +'deg)'}, 100);
-        $("#thirdMenuIconBar").css({'transition' : '0.5s'});
-        $("#thirdMenuIconBar").css({'transform' : 'rotate('+ 0 +'deg)'}, 100);*/
-        
-        //$(".MainMenu").fadeOut("fast");
     }
 }
 
@@ -1282,25 +1147,6 @@ $(".MenuIcon").click(function(event){
 $("#MenuGoBackBtn").click(function(event){
     ToggleMenuDisplay();
 });
-
-/*var HeightFirstAttemp = false;
-var pageHeight = 0;
-var pageWidth = 0;
-
-function GetPageHeight(){
-    
-    if(HeightFirstAttemp === false){
-        pageHeight = $("body").height();
-        pageWidth = $("body").width();
-    }
-    
-    HeightFirstAttemp = true;
-    
-    //alert(pageHeight);   
-    //alert(pageWidth);
-}
-
-GetPageHeight();*/
 
 function setBodyToScroll(){
     
@@ -1322,26 +1168,6 @@ function setBodyToScroll(){
 }
 
 setBodyToScroll();
-
-/*var allHrefs = document.getElementsByTagName("a");
-
-$(document).ready(function() {
-    for(k = 0; k < allHrefs.length; k++){
-        function(){
-            $("a")[k].click(function() {
-                alert("clicked");
-              document.getElementById("PageLoader").style.display = "block";
-            });
-        };
-    }
-});*/
-
-/*window.addEventListener("beforeunload", function () {
-  document.body.classList.add("animate-out");
-  //$("body").slideDown("fast");
-    //$("#News2").slideDown("fast");
-});*/
-
 
 function showPassword(){
     
@@ -1371,18 +1197,14 @@ $(".showPassword").click(()=>{
 function collapseAllSettings(){
     if(document.getElementById("UpdateUserAccountForm")){
         $("#UpdateUserAccountForm").slideUp("slow");
-        //document.getElementById("UpdateUserAccountForm").style.display = "none";
     }
     if(document.getElementById("SetUserAddress")){
         $("#SetUserAddress").slideUp("slow");
-        //document.getElementById("SetUserAddress").style.display = "none";
     }
     if(document.getElementById("SendFeedBackForm")){
         $("#SendFeedBackForm").slideUp("slow");
-        //document.getElementById("SendFeedBackForm").style.display = "none";
     }
     if(document.getElementById("SettingsDiv")){
         $("#SettingsDiv").slideUp("slow");
-        //document.getElementById("SettingsDiv").style.display = "none";
     }
 }

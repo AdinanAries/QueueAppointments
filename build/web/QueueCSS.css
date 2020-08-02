@@ -1298,7 +1298,16 @@ input[type="file"] {
   border: none !important;
   border-radius: 4px;
 }
+#ProvMainContentFlex{
+    display: flex; 
+    flex-direction: row-reverse; 
+    justify-content: space-between;
+}
 @media only screen and (max-width: 1000px) {
+    #ProvMainContentFlex{
+        flex-direction: column; 
+        justify-content: space-around;
+    }
     .notShownOnMobile{
         display: none;
     }

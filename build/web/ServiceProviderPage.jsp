@@ -1936,12 +1936,13 @@
             
             <div class="providerHeader" id="ProviderHeader" style="display: none;">
                 <cetnter><p> </p></cetnter>
-                <center><image src="QueueLogo.png" style="margin-top: 5px;"/></center>
+                <center><img src="QueueLogo.png" style="margin-top: 5px;"/></center>
             </div>
                     
             <div>
                 
             </div>
+    <div id='ProvMainContentFlex'>
   <div id="Extras">
             
             <div id='News' style=''>
@@ -2635,12 +2636,12 @@
             </div>
         </div>
   
-            <div class="ProvidersDashboardContent" id="content"  style="" onclick="hideDropDown();">
+            <div class="ProvidersDashboardContent" id="content" style="min-height: 0 !important;"  onclick="hideDropDown();">
                 
             <div id="nav" style='padding: 0;'>
                 
             </div>
-            <div class="ProviderMainDiv" id="main" >
+            <div class="ProviderMainDiv" id="main">
                           
                 <center><div id="QueuLineDiv" style="width: 100%; margin-bottom: 0;">
                                         
@@ -5089,12 +5090,13 @@
                 }
             </script-->
          
-        <div id="newbusiness" style="margin-top: 1px; background-color: #ccccff !important;">
-            <script>
+        <div id="newbusiness" style="margin-top: 1px; min-height: 0; height: auto; position: initial; background-color: #ccccff !important;">
+            <!--script>
                 if($(window).width() > 1000){
-                    document.getElementById("newbusiness").style.minHeight = "100%";
+                    document.getElementById("newbusiness").style.minHeight = "initial";
+                    //document.getElementById("newbusiness").style.position = "";
                 }
-            </script>
+            </script-->
             <!------------------------------------------------------------------------------------------------------------------------------------------->
             
             <!------------------------------------------------------------------------------------------------------------------>
@@ -5546,7 +5548,7 @@
                                 <div style=" height: auto; overflow-y: auto;">
                                         
                                 <div id="ServiceListDiv">
-                                <div class="scrolldiv" id="serviceslist" style="height: 490px;">
+                                <div class="scrolldiv" id="serviceslist" style="min-height: 490px;">
                                     
                                      <!--center><p style="color: tomato; margin: 5px;">Services</p></center-->
                                      
@@ -6131,7 +6133,7 @@
                                         </tbody>
                                     </table>
                                     
-                                <div class="scrolldiv" style="height: 450px; overflow-y: auto;">
+                                <div class="scrolldiv" style="min-height: 450px; overflow-y: auto;">
                                     
                                     <div id="ShowHoursOpenDiv">
                                     
@@ -7355,7 +7357,7 @@
                                     
                                 <div>
                                     
-                                <div class="scrolldiv" style="height: 450px; overflow-y: auto;" id="ProviderClientsDiv">
+                                <div class="scrolldiv" style="min-height: 450px; overflow-y: auto;" id="ProviderClientsDiv">
                                     
                                 <%
                                     for(int c = 0; c < ClientsList.size(); c++){
@@ -7454,7 +7456,7 @@
                             
                             <%}%>
                             </div>
-                            <div class="scrolldiv" style="height: 450px; overflow-y: auto;" id="BlockedPeopleDiv" style="display: none;">
+                            <div class="scrolldiv" style="min-height: 450px; overflow-y: auto; display: none !important;" id="BlockedPeopleDiv">
                                 
                                 <%
                                     boolean isBlockedEmpty = true;
@@ -7620,7 +7622,7 @@
                 
                 </div>
                         
-                                    
+    </div>  
        
         <!--div id="footer">
             <p>AriesLab &copy;2019</p>

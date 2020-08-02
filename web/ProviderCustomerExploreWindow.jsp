@@ -53,7 +53,7 @@
         
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+        <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"-->
         
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
@@ -537,7 +537,7 @@
                 <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
                     <h1 style='color: white; font-size: 19px; font-family: serif; padding-bottom: 20px;'>Popular Services</h1>
                     
-                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
+                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;   padding-left: 10px; padding-right: 10px;">
                         
                     </div>
                     <style>
@@ -747,41 +747,40 @@
                                         </p></center>
 
                     </div>`;
-
             document.getElementById("PopularSvcDiv").innerHTML = 
                     `<a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
                                 </div>
                             </a>
                             <a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
                                 </div>
                             </a>
                             <a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
+                                    <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style='width: 40px; height: 40px;'><p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
                                 </div>
                             </a>
                             <a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
                                 </div>
                             </a>
                             <a class="dontShowMobile" href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
                                 </div>
                             </a>
                             <a class="dontShowMobile" href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('PagePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
                                 </div>
                             </a>`;
@@ -972,6 +971,7 @@
                              %>
                              <p style='color: white;'><i class='fa fa-exclamation-triangle' style='color: yellow;'></i> Oops! We have no recommendations at this time</p>
                              <%}%>`;
+                                 
         });
     </script>
     
@@ -1023,8 +1023,8 @@
     
     <script src="scripts/script.js"></script>
     <!--script src="scripts/checkAppointmentDateUpdate.js"></script-->
-    <script src="scripts/updateUserProfile.js"></script>
-    <script src="scripts/customerReviewsAndRatings.js"></script>
-    <script src="scripts/SettingsDivBehaviour.js"></script>
-    <script src="scripts/ChangeProfileInformationFormDiv.js"></script>
+    <!--script src="scripts/updateUserProfile.js"></script-->
+    <!--script src="scripts/customerReviewsAndRatings.js"></script-->
+    <!--script src="scripts/SettingsDivBehaviour.js"></script-->
+    <!--script src="scripts/ChangeProfileInformationFormDiv.js"></script-->
 </html>

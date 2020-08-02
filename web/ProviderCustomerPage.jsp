@@ -86,14 +86,14 @@
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
         
-        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <!--script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script-->
         
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
         
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+        <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"-->
         
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+        <!--link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" /-->
         
         <link rel="shortcut icon" type="image/png" href="./favicon.png"/>
         
@@ -107,23 +107,43 @@
         
     </head>
     
-    <!--script>
+    <script>
         if($(window).width() > 1000){
             
-            var jQry = document.createElement('script');
-            jQry.setAttribute('src','https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js');
-            document.head.appendChild(jQry);
-            
-            var jQryTmPkr = document.createElement('script');
+            /*var jQryTmPkr = document.createElement('script');
             jQryTmPkr.setAttribute('src','//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js');
-            document.head.appendChild(jQryTmPkr);
+            document.head.appendChild(jQryTmPkr);*/
             
             var SlickCarousel = document.createElement('script');
             SlickCarousel.setAttribute('src','//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
             document.head.appendChild(SlickCarousel);
             
+            var font_awesome_css = document.createElement('link');
+            font_awesome_css.setAttribute('rel','stylesheet');
+            font_awesome_css.setAttribute('type','text/css');
+            font_awesome_css.setAttribute('href','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+            document.head.appendChild(font_awesome_css);
+            
+            var slick_css = document.createElement('link');
+            slick_css.setAttribute('rel','stylesheet');
+            slick_css.setAttribute('type','text/css');
+            slick_css.setAttribute('href','//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
+            document.head.appendChild(slick_css);
+            
+            var slick_theme_css = document.createElement('link');
+            slick_theme_css.setAttribute('rel','stylesheet');
+            slick_theme_css.setAttribute('type','text/css');
+            slick_theme_css.setAttribute('href','//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css');
+            document.head.appendChild(slick_theme_css);
+            
+            /*var jquery_timepicker_css = document.createElement('link');
+            jquery_timepicker_css.setAttribute('rel','stylesheet');
+            jquery_timepicker_css.setAttribute('type','text/css');
+            jquery_timepicker_css.setAttribute('href','//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css');
+            document.head.appendChild(jquery_timepicker_css);*/
+            
         }
-    </script-->
+    </script>
     
     <%
         
@@ -2587,7 +2607,7 @@
                                                         //alert("Menu Loc Disp Stopped");
                                                         clearInterval(MainMenuLocDisplay);
                                                     }
-                                                },1)
+                                                },1);
                                             </script>
                                             </td>
                                             <td>
@@ -2603,6 +2623,29 @@
                         </div>
                         </div>
                     </div>
+                
+                <script>
+                    if(document.querySelector(".MainMenu")){
+                        document.querySelector(".MainMenu").style.display = "none";
+                    }
+                    function ToggleMenuDisplay() {
+                        document.querySelector( "#nav-toggle" ).classList.toggle( "active" );
+                        var MenuDisplay = document.querySelector(".MainMenu").style.display;
+
+                        if(MenuDisplay === "none"){
+                            $(".MainMenu").show("slide", { direction: "left" }, 100);
+                        }else{
+                            $(".MainMenu").hide("slide", { direction: "left" }, 100);
+                        }
+                    }
+                    function hideExtraDropDown() {
+                        document.getElementById("ExtraDropDown").style.display = "none";
+                    }
+                    $(".MenuIcon").click(function(event){
+                        ToggleMenuDisplay();
+                    });
+                    
+                </script>
                     
                     </div>
                         
@@ -5727,7 +5770,7 @@
                 <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
                     <h1 style='color: white; font-size: 19px; font-family: serif; padding-bottom: 20px;'>Popular Services</h1>
                     
-                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
+                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto; padding-left: 10px; padding-right: 10px;">
                         
                     </div>
                     <style>
@@ -5868,7 +5911,7 @@
             if($(window).width() > 1000){
 
                 document.getElementById("main").innerHTML =
-                        `<center><h4 style="margin-bottom: 5px; padding-top: 10px; max-width: 300px"> Search By Category </h4></center>
+                        `<center><h4 style="margin-bottom: 10px; padding-top: 10px; max-width: 300px"> Search By Category </h4></center>
 
                         <div id="firstSetProvIcons">
                         <center><table id="providericons">
@@ -5971,37 +6014,37 @@
                 document.getElementById("PopularSvcDiv").innerHTML =
                         `<a href="QueueSelectMedicalCenterLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
                                     <div class="eachPopularService">
-                                        <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
+                                        <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style='width: 40px; height: 40px;'></p>
                                         <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
                                     </div>
                                 </a>
                                 <a href="QueueSelectBarberBusinessLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
                                     <div class="eachPopularService">
-                                        <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
+                                        <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style='width: 40px; height: 40px;'></p>
                                         <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
                                     </div>
                                 </a>
                                 <a href="QueueSelectNailSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
                                     <div class="eachPopularService">
-                                        <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
+                                        <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style='width: 40px; height: 40px;'><p>
                                         <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
                                     </div>
                                 </a>
                                 <a href="QueueSelectDaySpaLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
                                     <div class="eachPopularService">
-                                        <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
+                                        <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style='width: 40px; height: 40px;'></p>
                                         <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
                                     </div>
                                 </a>
                                 <a href="QueueSelectBeautySalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
                                     <div class="dontShowMobile eachPopularService">
-                                        <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
+                                        <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style='width: 40px; height: 40px;'></p>
                                         <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
                                     </div>
                                 </a>
                                 <a href="QueueSelectHairSalonLoggedIn.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';">
                                     <div class="dontShowMobile eachPopularService">
-                                        <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
+                                        <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style='width: 40px; height: 40px;'></p>
                                         <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
                                     </div>
                                 </a>`;
@@ -6242,53 +6285,88 @@
                                     </tr>
 
                                 </tbody>`;
+    
+                $(document).ready(()=>{
+                    $("#MenuGoBackBtn").click(function(event){
+                        ToggleMenuDisplay();
+                    });
+                });
             }
         });
     </script>
     
     <script>
-        $(document).ready(function(){
-            $('.recommendedProvidersDiv').slick({
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                dots: false,
-                responsive: [
-                {
-                  breakpoint: 1024,
-                  settings: {
+        if($(window).width() > 1000){
+            $(document).ready(function(){
+                $('.recommendedProvidersDiv').slick({
+                    infinite: true,
                     slidesToShow: 3,
                     slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                  }
-                },
-                {
-                  breakpoint: 850,
-                  settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                  }
-                }
-                // You can unslick at a given breakpoint now by adding:
-                // settings: "unslick"
-                // instead of a settings object
-              ]
-              });
-        });
+                    dots: false,
+                    responsive: [
+                    {
+                      breakpoint: 1024,
+                      settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                      }
+                    },
+                    {
+                      breakpoint: 850,
+                      settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                      }
+                    },
+                    {
+                      breakpoint: 480,
+                      settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                      }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                  ]
+                  });
+            });
+        }
     </script>
     
-    <script src="scripts/script.js"></script>
+    <script>
+        
+        if($(window).width() > 1000){
+            
+            var main_script = document.createElement('script');
+            main_script.setAttribute('src','scripts/script.js');
+            document.body.appendChild(main_script);
+            
+            var updateUserProfile = document.createElement('script');
+            updateUserProfile.setAttribute('src','scripts/updateUserProfile.js');
+            document.body.appendChild(updateUserProfile);
+            
+            var customerReviewsAndRatings = document.createElement('script');
+            customerReviewsAndRatings.setAttribute('src','scripts/customerReviewsAndRatings.js');
+            document.body.appendChild(customerReviewsAndRatings);
+            
+            var ChangeProfileInformationFormDiv = document.createElement('script');
+            ChangeProfileInformationFormDiv.setAttribute('src','scripts/ChangeProfileInformationFormDiv.js');
+            document.body.appendChild(ChangeProfileInformationFormDiv);
+            
+            var SettingsDivBehaviour = document.createElement('script');
+            SettingsDivBehaviour.setAttribute('src','scripts/SettingsDivBehaviour.js');
+            document.body.appendChild(SettingsDivBehaviour);
+        }
+        
+    </script>
+    
+    <!script src="scripts/script.js"></script-->
     <!--script src="scripts/checkAppointmentDateUpdate.js"></script-->
-    <script src="scripts/updateUserProfile.js"></script>
+    <!--script src="scripts/updateUserProfile.js"></script>
     <script src="scripts/customerReviewsAndRatings.js"></script>
     <script src="scripts/SettingsDivBehaviour.js"></script>
-    <script src="scripts/ChangeProfileInformationFormDiv.js"></script>
+    <script src="scripts/ChangeProfileInformationFormDiv.js"></script-->
 </html>

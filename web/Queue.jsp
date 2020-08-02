@@ -937,7 +937,7 @@
                 <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
                     <h1 style='color: white; font-size: 19px; font-family: serif; padding: 20px 0;'>Popular Services</h1>
                     
-                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;">
+                    <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;  padding-left: 10px; padding-right: 10px;">
                         
                     </div>
                     <style>
@@ -1287,37 +1287,37 @@
             document.getElementById("PopularSvcDiv").innerHTML = 
                     `<a href="QueueSelectMedicalCenter.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-medical-doctor-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Medical Center</p>
                                 </div>
                             </a>
                             <a href="QueueSelectBarberBusiness.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-barber-pole-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Barber Shop</p>
                                 </div>
                             </a>
                             <a href="QueueSelectNailSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style="width: 50px; height: 50px;"/><p>
+                                    <p style="text-align: center;"><img src="icons/icons8-nails-96.png" style='width: 40px; height: 40px;'><p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Nail Salon</p>
                                 </div>
                             </a>
                             <a href="QueueSelectDaySpa.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-spa-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Day Spa</p>
                                 </div>
                             </a>
                             <a class="dontShowMobile" href="QueueSelectBeautySalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-cosmetic-brush-96.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Beauty Salon</p>
                                 </div>
                             </a>
                             <a class="dontShowMobile" href="QueueSelectHairSalon.jsp" onclick="document.getElementById('HomePageLoader').style.display = 'block';">
                                 <div class="eachPopularService">
-                                    <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style="width: 50px; height: 50px;"/></p>
+                                    <p style="text-align: center;"><img src="icons/icons8-hair-dryer-100.png" style='width: 40px; height: 40px;'></p>
                                     <p style="text-align: center; color: #ccc; font-size: 12px;">Hair Salon</p>
                                 </div>
                             </a>`;
