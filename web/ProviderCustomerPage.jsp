@@ -6363,7 +6363,7 @@
         
     </script>
     
-    <!script src="scripts/script.js"></script-->
+    <!--script src="scripts/script.js"></script-->
     <!--script src="scripts/checkAppointmentDateUpdate.js"></script-->
     <!--script src="scripts/updateUserProfile.js"></script>
     <script src="scripts/customerReviewsAndRatings.js"></script>

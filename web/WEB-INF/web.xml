@@ -525,6 +525,10 @@
         <servlet-name>SignupBeforeFinishApptControl</servlet-name>
         <servlet-class>SignupBeforeFinishApptControl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetApptID</servlet-name>
+        <servlet-class>GetApptID</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -1000,6 +1004,10 @@
     <servlet-mapping>
         <servlet-name>SignupBeforeFinishApptControl</servlet-name>
         <url-pattern>/SignupBeforeFinishApptControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetApptID</servlet-name>
+        <url-pattern>/GetApptID</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
