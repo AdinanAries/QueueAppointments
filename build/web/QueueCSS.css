@@ -587,12 +587,13 @@ select {
   background-color: #d8d8d8;
   background-image: url("view-wallpaper-7.jpg");
   background-size: cover;
+  background-position: center;
   margin-bottom: 2px;
   padding: 0;
   padding-top: 200px;
   height: 80px;
 }
-.propic img {
+.propic .MainPropicContainer {
   border: white solid 5px;
   background-color: #7e7e7e;
   border-radius: 100%;

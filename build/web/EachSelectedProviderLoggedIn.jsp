@@ -1590,7 +1590,9 @@
                             <td>
                             <center>
                             <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                <div class='MainPropicContainer' style='width: 150px; height: 150px; overflow: hidden;'>
+                                    <img style='width: 150px; height: auto;' src="data:image/jpg;base64,<%=base64Image%>" />
+                                </div>
                             </div></center>
                     
                             <div class="proinfo" style="padding-left: 0;">
@@ -1750,15 +1752,15 @@
                                 <%
                                     if(Base64Image == ""){
                                 %> 
-
+                                    
                                     <img style="border-radius: 100%; width: 50px; height: 50px;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
-
+                                    
                                 <%
                                     }else{
                                 %>
-
-                                    <img class="fittedImg" style="border-radius: 100%; margin-left: 5px; width: 50px; height: 50px;" src="data:image/jpg;base64,<%=Base64Image%>"/>
-
+                                    <div style="border-radius: 100%; margin-left: 5px; min-width: 50px; height: 50px; overflow: hidden;">
+                                        <img style="width: 50px; height: auto;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+                                    </div>
                                 <%
                                     }
                                 %>

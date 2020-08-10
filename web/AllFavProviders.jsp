@@ -1045,7 +1045,9 @@
                             <td>
                             <center>    
                             <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                <img class="fittedImg" style="border-radius: 100%;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                <div class='MainPropicContainer' style='width: 150px; height: 150px; overflow: hidden;'>
+                                    <img style='width: 150px; height: auto;' src="data:image/jpg;base64,<%=base64Image%>" />
+                                </div>
                             </div>
                             
                             <div class="proinfo">

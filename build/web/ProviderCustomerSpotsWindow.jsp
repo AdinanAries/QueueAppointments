@@ -751,7 +751,9 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; margin-left: 10px; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                            <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                            </div>
                                         </div></center>
                                     <%
                                         }
@@ -814,7 +816,9 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; margin-left: 10px; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                            <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                            </div>
                                         </div></center>
                                     <%
                                         }
@@ -1291,7 +1295,9 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; margin-bottom: 0; margin-left: 10px; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                                <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                    <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                                </div>
                                             </div></center>
                                         <%
                                             }
@@ -1685,7 +1691,9 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                                <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                    <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                                </div>
                                             </div></center>
                                         <%
                                             }

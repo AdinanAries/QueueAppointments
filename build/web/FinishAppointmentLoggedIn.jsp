@@ -1652,7 +1652,9 @@
                                     <img class="fittedImg" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
                                 </div></center-->
                                 <div>
-                                    <img class="fittedImg" style="width: 50px; height: 50px; border-radius: 100%; margin-left: 10px; margin-top: 5px;" src="data:image/jpg;base64,<%=base64Image%>"/>
+                                    <div style='overflow: hidden; width: 50px; height: 50px; border-radius: 100%; margin-left: 10px; margin-top: 5px;'>
+                                        <img  style="width: 50px; height: auto;" src="data:image/jpg;base64,<%=base64Image%>"/>
+                                    </div>
                                 </div>
                                 <div class="proinfo" style="margin-top: 0; padding-top: 0; margin-left: 10px;">
                                     

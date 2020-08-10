@@ -774,7 +774,9 @@
                                 
                                     <center><div id="WideScreenProfilePic" style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; padding: 5px; margin-left: 5px; margin-right: 5px; margin-bottom: 5px;">
                                         <div style="height: 5px; background-size: cover; margin-left: 5px; margin-right: 5px; margin-bottom: 150px; background-color: #334d81;" >
-                                            <center><img class="fittedImg" style="margin-top: 0; border-radius: 100%; border: 5px solid #334d81; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="150" height="150"/></center>
+                                                <center><div style="border-radius: 100%; border: 5px solid #334d81; margin-left: 10px; min-width: 150px; height: 150px; float: left; overflow: hidden;">
+                                                    <img style="width: 150px; height: auto; margin-top: 0; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>"/>
+                                                </div></center>
                                         </div>
                                         <div style="background-color: #334d81; height: 5px; margin-left: 5px; margin-right: 5px;">
                                         </div>
@@ -788,12 +790,11 @@
                                                 <input placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="Search" name="SearchBtn" />
                                             </form> 
                                         </div></center>
-                                        <!--div style="background-image: url('data:image/jpg;base64,<%=Base64Pic%>'); background-size: cover; height: 100px; margin-bottom: 60px; border-bottom: #3d6999 1px solid">
-                                            <div id="" style="height: 100px; background-color: #6699ff; opacity: 0.7;"></div>        
-                                            <img class="fittedImg" style="position: relative; z-index: 2; margin-top: -50px; margin-left: 6px; border-radius: 100%; border: #3d6999 1px solid; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="100" height="100"/>
-                                            
-                                        </div-->
-                                        <p style="text-align: center;"><img class="fittedImg" style="position: relative; z-index: 2; margin-left: 6px; border-radius: 100%; border: #3d6999 1px solid; margin-bottom: 0; background-color: darkgrey; " src="data:image/jpg;base64,<%=Base64Pic%>" width="70" height="70"/></p>
+                                        <div style="display: flex; justify-content: center;">
+                                            <div style="margin-left: 6px; border-radius: 100%; border: #3d6999 1px solid; margin-bottom: 0; background-color: darkgrey; width: 70px; height: 70px; overflow: hidden;">
+                                                <img style="width: 70px; height: auto; margin-top: 0; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>"/>
+                                            </div> 
+                                        </div>
                                     </div>
                                 
                                 <%
@@ -806,7 +807,7 @@
                                            <div style="text-align: center;"><p style="cursor: pointer; color: black; padding: 5px; width: 98%; max-width: 700px; text-align: center; margin-bottom: 5px;">
                                                <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px;" alt=""/>
                                                <sup>Add Profile Picture</sup>
-                                            <p></div>
+                                            </p></div>
                                        </a>
                                     
                                 <%
@@ -1869,7 +1870,9 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                            <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                            </div>
                                         </div></center>
                                     <%
                                         }
@@ -1932,7 +1935,10 @@
                                         if(Base64ProvPic != ""){
                                     %>
                                     <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                     <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                     <!--img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<=Base64ProvPic%>" width="40" height="40"/-->
+                                            <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                            </div>
                                         </div></center>
                                     <%
                                         }
@@ -2245,13 +2251,15 @@
                                                                     Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
                                     
                                                                                     '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
+                                                                                        '<div class="MainPropicContainer" style="border: 5px solid white; width: 150px; height: 150px; overflow: hidden;">'+
+                                                                                            '<img style="width: 150px; height: auto;" src="data:image/jpg;base64,'+provProPic+'" />'+
+                                                                                        '</div>'+
                                                                                     '</div>' +
 
                                                                                     '<div style="padding-top: 75px;">' +
-                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;"><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>' +
+                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;">' +
                                                                                      provName + '</p></b>' +
-                                                                                    '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
+                                                                                    '<p>' +
                                                                                      provCompany +
                                                                                     '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
@@ -2260,9 +2268,9 @@
 
                                                                                     '<div style="width: 70%;">' +
 
-                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
+                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv2" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: crimson; border-radius: 4px; border: none; color: white; padding: 5px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'PagePageLoader\').style.display = \'block\';" />' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -2273,7 +2281,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style="border: none; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="submit" value="Find a Spot" onclick="document.getElementById(\'PagePageLoader\').style.display = \'block\';" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -2412,7 +2420,9 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                                <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                    <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                                </div>
                                             </div></center>
                                         <%
                                             }
@@ -2726,13 +2736,15 @@
                                                                     Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
                                     
                                                                                     '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
+                                                                                        '<div class="MainPropicContainer" style="border: 5px solid white; width: 150px; height: 150px; overflow: hidden;">'+
+                                                                                            '<img style="width: 150px; height: auto;" src="data:image/jpg;base64,'+provProPic+'" />'+
+                                                                                        '</div>'+
                                                                                     '</div>' +
 
                                                                                     '<div style="padding-top: 75px;">' +
-                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;"><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>' +
+                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;">' +
                                                                                      provName + '</p></b>' +
-                                                                                    '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
+                                                                                    '<p>' +
                                                                                      provCompany +
                                                                                     '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
@@ -2741,9 +2753,9 @@
 
                                                                                     '<div style="width: 70%;">' +
 
-                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
+                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv2" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: crimson; border: none; border-radius: 4px; color: white; padding: 5px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'PagePageLoader\').style.display = \'block\';" />' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -2755,7 +2767,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style="border: none; background-color: darkslateblue; color: white; border-radius: 4px; padding: 5px; border: 0;" type="submit" value="Find a Spot" onclick="document.getElementById(\'PagePageLoader\').style.display = \'block\';" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -2894,7 +2906,9 @@
                                             if(Base64ProvPic != ""){
                                         %>
                                         <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                         <img class="fittedImg" style="border-radius: 100%; margin-left: 10px; margin-bottom: 0; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>" width="40" height="40"/>
+                                                <div style="border-radius: 100%; margin-left: 10px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
+                                                    <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64ProvPic%>"/>
+                                                </div>
                                             </div></center>
                                         <%
                                             }
@@ -3125,13 +3139,15 @@
                                                                     Divv.innerHTML = '<div id="" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">' +
                                     
                                                                                     '<div class="propic" style="background-image: url(\'data:image/jpg;base64,'+provCoverPic+'\');">' +
-                                                                                    '<img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,'+provProPic+'" width="150" height="150"/>' +
+                                                                                        '<div class="MainPropicContainer" style="border: 5px solid white; width: 150px; height: 150px; overflow: hidden;">'+
+                                                                                            '<img style="width: 150px; height: auto;" src="data:image/jpg;base64,'+provProPic+'" />'+
+                                                                                        '</div>'+
                                                                                     '</div>' +
 
                                                                                     '<div style="padding-top: 75px;">' +
-                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;"><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>' +
+                                                                                    '<b><p style="font-size: 20px; margin-top: 15px;">' +
                                                                                      provName + '</p></b>' +
-                                                                                    '<p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>' +
+                                                                                    '<p>' +
                                                                                      provCompany +
                                                                                     '<span style="color: goldenrod; font-size: 18px;">'+
                                                                                      ratingStars +
@@ -3140,9 +3156,9 @@
 
                                                                                     '<div style="width: 70%;">' +
 
-                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv" method="POST" >' +
+                                                                                    '<form style=" display: block;" id="deleteFavProviderForm" class="deleteFavProvider" name="deleteFavProvider" action="RemoveLastFavProv2" method="POST" >' +
 
-                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: red; border: 1px solid black; color: white; padding: 3px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" />' +
+                                                                                    '<p><input id="DeleteFavProvBtn" style="background-color: crimson; border: none; color: white; padding: 5px; border-radius: 4px; cursor: pointer;" name="deleteFavProv" type="submit" value="Delete this Provider from your Favorites" onclick="document.getElementById(\'PagePageLoader\').style.display = \'block\';" />' +
                                                                                     '</span></p>' +
                                                                                     '<input id="ProvID" type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                     '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
@@ -3154,7 +3170,7 @@
                                                                                         '<input type="hidden" name="UserID" value="'+ProviderID+'" />' +
                                                                                         '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                                         '<input type="hidden" name="User" value="'+UserName+'" />' +
-                                                                                        '<input style=" background-color: darkslateblue; border-radius: 4px; padding: 5px; color: white; border: 0;" type="submit" value="Find a Spot" />' +
+                                                                                        '<input style="border: none; background-color: darkslateblue; border-radius: 4px; padding: 5px; color: white; border: 0;" type="submit" value="Find a Spot" onclick="document.getElementById(\'PagePageLoader\').style.display = \'block\';" />' +
                                                                                         '</form></center>' +
                                                                                     '</div>' +
                                                                                     '</div>' +       
@@ -3404,7 +3420,9 @@
                                 <div id="FavoriteProvDiv<%=SString%>" class="EacFavsDiv" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">
                                     
                                     <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
-                                            <img class="fittedImg" style="border: 5px solid white;" src="data:image/jpg;base64,<%=base64Image%>" width="150" height="150"/>
+                                        <div class='MainPropicContainer' style='border: 5px solid white; width: 150px; height: 150px; overflow: hidden;'>
+                                            <img style='width: 150px; height: auto;' src="data:image/jpg;base64,<%=base64Image%>" />
+                                        </div>
                                     </div>
                                     
                                     <div style="padding-top: 75px;">
