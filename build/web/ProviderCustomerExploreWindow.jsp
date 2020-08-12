@@ -920,7 +920,9 @@
                                      display: flex; flex-direction: column; justify-content: space-between;">
                                         <div style='display: flex; flex-direction: row; justify-content: space-between;'>
                                             <div>
-                                               <img src="data:image/jpg;base64,<%=RProPic%>" style="border-bottom-right-radius: 10px; border-top-left-radius: 10px; margin-top: -15px; margin-left: -5px; width: 70px; height: 70px; object-fit: cover;">
+                                                <div style="overflow: hidden; border-bottom-right-radius: 10px; border-top-left-radius: 10px; margin-top: -15px; margin-left: -5px; width: 70px; height: 70px;">
+                                                    <img src="data:image/jpg;base64,<%=RProPic%>" style="width: 70px; height: auto;">
+                                                </div>
                                             </div>
                                             <div>
                                                 <p style="color: #fefde5; font-weight: bolder; font-size: 17px;"><%=RProvName%></p>
