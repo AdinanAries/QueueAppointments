@@ -425,17 +425,13 @@
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
-                                                    <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                        <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                    <!--/div></center-->
+                                                    <div style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; overflow: hidden;">    
+                                                        <img id="" style="background-color: darkgray; width:35px; height: auto;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    </div>
                                                 <%
                                                     }else{
                                                 %>
-
-                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
                                                     <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                                <!--/div></center-->
-
                                                 <%}%>
                                             <!--/div-->
                                             <div>
@@ -765,16 +761,18 @@
                                                      '<tbody>'+
                                                          '<tr style="background-color: #eeeeee;">'+
                                                              '<td>'+
-                                                                 '<div id="ProvMsgBxOne" style="padding-top: 10px;">'+
-                                                                     '<div style="font-weight: bolder;">'+
-                                                                             '<img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,'+eachNews.base64Profile+'"/>'+
-                                                                         '<div>'+
-                                                                             '<p>'+eachNews.ProvFirstName+'</p>'+
-                                                                             '<p style="color: red;">'+eachNews.ProvCompany+'</p>'+
-                                                                         '</div>'+
-                                                                     '</div>'+
-                                                                 '</div>'+
-                                                             '</td>'+
+                                                                '<div id="ProvMsgBxOne" style="padding-top: 10px;">'+
+                                                                    '<div style="font-weight: bolder;">'+
+                                                                        '<div style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; overflow: hidden;">'+   
+                                                                            '<img id="" style="background-color: darkgray; width:35px; height: auto;" src="data:image/jpg;base64,'+eachNews.base64Profile+'"/>'+
+                                                                        '</div>'+
+                                                                        '<div>'+
+                                                                            '<p>'+eachNews.ProvFirstName+'</p>'+
+                                                                            '<p style="color: red;">'+eachNews.ProvCompany+'</p>'+
+                                                                        '</div>'+
+                                                                    '</div>'+
+                                                                '</div>'+
+                                                            '</td>'+
                                                          '</tr>'+
                                                          '<tr style="background-color: #eeeeee;">'+
                                                              '<td style="padding: 0;">'+
