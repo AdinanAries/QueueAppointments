@@ -384,8 +384,10 @@
                     if(Base64Pic != ""){
                 %>
                     <center><div style="width: 100%; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
-                        <img class="fittedImg" id="" style="border-radius: 100%; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>" width="30" height="30"/>
-                    </div></center>
+                            <div style="width: 30px; height: 30px; border-radius: 100%; margin-bottom: 20px; position: absolute; overflow: hidden;">
+                                <img id="" style="width: 30px; height: auto; background-color: darkgray;" src="data:image/jpg;base64,<%=Base64Pic%>"/>
+                            </div>
+                        </div></center>
                 <%
                     }else{
                 %>
