@@ -1396,7 +1396,9 @@
             <%
                 if(Base64Pic != ""){
             %>
-                <img class="fittedImg" style="border-radius: 100%; float: right; background-color: darkgray; width: 36px; height: 36px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;" src="data:image/jpg;base64,<%=Base64Pic%>"/>
+                    <div style="overflow: hidden; border-radius: 100%; float: right; background-color: darkgray; width: 36px; height: 36px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;">
+                        <img style="width: 36px; height: auto;" src="data:image/jpg;base64,<%=Base64Pic%>"/>
+                    </div>
             <%
                 }else{
             %>
