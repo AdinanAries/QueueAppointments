@@ -537,6 +537,10 @@
         <servlet-name>RemoveLastFavProv2</servlet-name>
         <servlet-class>RemoveLastFavProv2</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QRSTPSSWDHNDLA</servlet-name>
+        <servlet-class>QRSTPSSWDHNDLA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControllerMain</servlet-name>
         <url-pattern>/LoginControllerMain</url-pattern>
@@ -1024,6 +1028,10 @@
     <servlet-mapping>
         <servlet-name>RemoveLastFavProv2</servlet-name>
         <url-pattern>/RemoveLastFavProv2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QRSTPSSWDHNDLA</servlet-name>
+        <url-pattern>/QRSTPSSWDHNDLA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

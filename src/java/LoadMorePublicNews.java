@@ -190,6 +190,7 @@ public class LoadMorePublicNews extends HttpServlet {
                     //append each JSON object here
                     //base64Profile, ProvFirstName, ProvCompany, ProvEmail, ProvTel, ProvAddress, Msg, MsgPhoto
                     JSONData += "{"
+                            + "\"ProvID\":"+Integer.parseInt(ProvID)+","
                             + "\"base64Profile\":\""+base64Profile+"\","
                             + "\"ProvFirstName\":\""+ProvFirstName+"\","
                             + "\"ProvCompany\":\""+ProvCompany+"\","
