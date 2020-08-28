@@ -1704,14 +1704,31 @@
                                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                        <P>You were on<span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="<%=ProviderName%>'s"</span><span> line.</p>
-                                        <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                            <span style = "color: blue;"> <input style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" onclick="document.getElementById('PagePageLoader').style.display = 'block';" type="submit" value="<%=ProviderCompany%>"</span></span></p>
-                                        <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                            <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
-                                        <p>on <span style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span style = "color: red;"> <%= TimeToUse%></span></P>
-                                        <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
-                                        <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>"><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
+                                            <p>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i> 
+                                                <span style ="color: red;"> <%= AppointmentFormattedDate%></span>,  
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i> 
+                                                <span style = "color: red;"> <%= TimeToUse%></span>
+                                            </p>
+                                            
+                                            <p style = "color: blue; margin-top: 10px;">
+                                                <input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" style="
+                                                       background: 0; border: 0; color: white; padding: 5px; background-color: darkslateblue; font-weight: bolder; margin: 0; border-radius: 4px;"
+                                                       type="submit" value="<%=ProviderName%> - <%=ProviderCompany%>" />
+                                            </p>
+                                            
+                                            <p style="margin-top: 10px;">
+                                                <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> 
+                                                <%= ProviderEmail %>
+                                            </p>
+                                            
+                                            <p>
+                                                <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
+                                                <%= ProviderTel %>
+                                            </p>
+                                            
+                                            <p style="color: darkgray; text-align: center; margin: 10px 0;">- <%=AppointmentReason%> -</p>
+                                            <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" ><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
                                         
                                         </form>
                                         

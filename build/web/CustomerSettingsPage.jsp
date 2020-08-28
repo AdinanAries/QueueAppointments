@@ -322,15 +322,26 @@
             <img src="icons/Logo.png" alt=""/>
         </div>
         
-        <div id='QShowNews22' style='display: block; width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
-                 box-shadow: 0 0 5px 1px black;'>
-            <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>"><p  
-                    style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
-                        <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-home-50.png" alt="icons8-home-50"/>
-                </p>
-                <p style='font-size: 15px; color: white; margin-top: -5px;'>Home</p>
-            </a></center>
-        </div>
+        <div id="PhoneSettingsHomeBtn"></div>
+                    
+        <script>
+            $(document).ready(()=>{
+                if($(document).width() > 1000){
+                    document.getElementById("PhoneSettingsHomeBtn").innerHTML = `
+                       <div id='QShowNews22' style='display: block; width: fit-content; bottom: 5px; margin-left: 4px; position: fixed; background-color: #3d6999; padding: 5px 9px; border-radius: 50px;
+                                box-shadow: 0 0 5px 1px black;'>
+                           <center><a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>"><p  
+                                   style='color: black; padding-top: 5px; cursor: pointer; margin-bottom: 0; width:'>
+                                       <img style='background-color: white; width: 25px; height: 24px; border-radius: 4px;' src="icons/icons8-home-50.png" alt="icons8-home-50"/>
+                               </p>
+                               <p style='font-size: 15px; color: white; margin-top: -5px;'>Home</p>
+                           </a></center>
+                       </div> 
+                    `;
+                }
+                       
+            });
+        </script>
         
     <center><div id='PhoneSettingsPgNav' style='z-index: 1000; margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #ccc 1px solid; position: fixed; width: 100%; max-height: 33px; border-bottom: 1.3px solid #ccc'>
         <ul>

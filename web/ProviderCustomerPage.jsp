@@ -4991,15 +4991,32 @@
                                             <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                             <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         
-                                        <P>You were on<span style = "color: blue;"> <input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderName%>'s"</span><span> line.</p>
-                                        <p><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                            <span style = "color: blue;"> <input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" style="background: 0; border: 0; color: blue; font-weight: bolder; margin: 0;" type="submit" value="<%=ProviderCompany%>"</span></span></p>
-                                        <p><span> <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                            <%= ProviderEmail %> - <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/><%= ProviderTel %></span></p>
-                                        <p>on <span style ="color: red;"> <%= AppointmentFormattedDate%></span>, at <span style = "color: red;"> <%= TimeToUse%></span></P>
-                                        <p style="color: darkgray; text-align: center;">- <%=AppointmentReason%> -</p>
-                                        <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" ><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
-                                        
+                                            <p>
+                                                <i class="fa fa-calendar" aria-hidden="true"></i> 
+                                                <span style ="color: red;"> <%= AppointmentFormattedDate%></span>,  
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i> 
+                                                <span style = "color: red;"> <%= TimeToUse%></span>
+                                            </p>
+                                            
+                                            <p style = "color: blue; margin-top: 10px;">
+                                                <input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" style="
+                                                       background: 0; border: 0; color: white; padding: 5px; background-color: darkslateblue; font-weight: bolder; margin: 0; border-radius: 4px;"
+                                                       type="submit" value="<%=ProviderName%> - <%=ProviderCompany%>" />
+                                            </p>
+                                            
+                                            <p style="margin-top: 10px;">
+                                                <img style ="padding-bottom: 0; " src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> 
+                                                <%= ProviderEmail %>
+                                            </p>
+                                            
+                                            <p>
+                                                <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> 
+                                                <%= ProviderTel %>
+                                            </p>
+                                            
+                                            <p style="color: darkgray; text-align: center; margin: 10px 0;">- <%=AppointmentReason%> -</p>
+                                            <a href="ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" ><p id="ProviderReview<%=JString%>" style="color: green; text-align: center;"></p></a>
+
                                         </form>
                                         
                                         <form style=" display: none;" id="deleteAppointmentHistoryForm<%=JString%>" class="deleteAppointmentHistoryForm" name="confirmDeleteAppointmentHistory">
@@ -6290,31 +6307,31 @@
                         `<tbody>
                                     <tr>
                                         <td>
-                                            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>'><div style='color: black;'>
+                                            <div id="MobileMenuNewBtn" style='color: black;'>
                                                 <img style='border-radius: 2px;' src="icons/icons8-google-news-50.png" width="25" height="22" alt="icons8-google-news-50"/>
                                                 <p style='margin-top: 0;'>News</p>
-                                            </div></a>
+                                            </div>
                                         </td>
                                         <td>
-                                            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'><div style='color: black;'>
+                                            <div id="MobileSettingsBtn" class='MobileSettingsPageBtn' style='color: black;'>
                                                 <img style='border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="20" alt="icons8-settings-50"/>
                                                 <p style='margin-top: 0;'>Settings</p>
-                                            </div></a>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1'><div style='color: black;'>
+                                            <div id="MobileNotificationBtn" class='MobileSettingsPageBtn' style='color: black;'>
                                                 <img style='border-radius: 2px;' src="icons/icons8-notification-50.png" width="25" height="22" alt="icons8-notification-50"/>
                                                 <sup style='color: white; background-color: red; margin-left: -20px; border-radius: 50px; padding-left: 4px; padding-right: 4px;'><%=notiCounter%></sup>
                                                 <p style='margin-top: 0;'>Notifications</p>
-                                            </div></a>
+                                            </div>
                                         </td>
                                         <td>
-                                           <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2'><div style='color: black;'>
+                                            <div id="MobileCalendarBtn" class='MobileSettingsPageBtn' style='color: black;'>
                                                 <img style='border-radius: 2px;' src="icons/icons8-calendar-50.png" width="22" height="21" alt="icons8-calendar-50"/>
                                                 <p style='margin-top: 0;'>Calender</p>
-                                            </div></a>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -6341,6 +6358,96 @@
                         ToggleMenuDisplay();
                     });
                 });
+                
+                var showMobileNews = ()=>{
+                    ToggleMenuDisplay();
+                   
+                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+                    document.getElementById("ExploreDiv").src = "NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>";
+
+                    document.getElementById("ActiveSpotsIcon").style.display = "none";
+                    document.getElementById("SpotsIcon").style.display = "block";
+
+                    document.getElementById("ActiveUserProfile").style.display = "none";
+                    document.getElementById("SecondFavoritesIcon").style.display = "none";
+                    document.getElementById("RegularUserProfile").style.display = "block";
+
+                    document.getElementById("RegularExploreIcon").style.display = "none";
+                    document.getElementById("FavoritesIcon").style.display = "block";
+                    document.getElementById("ActiveExploreIcon").style.display = "block";
+
+                    document.getElementById("ExploreBtnText").style.color = "darkblue";
+                    document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
+                    document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
+                    document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
+
+                    $("#SpotsIframe").hide("slide", { direction: "right" }, 10);
+                    $(".UserProfileContainer").hide("slide", { direction: "right" }, 10);
+                    $("#ExploreDiv").show("slide", { direction: "left" }, 10);
+                    $("#FavoritesIframe").hide("slide", { direction: "right" }, 10);
+                    $("#SearchIframe").hide("slide", { direction: "right" }, 10);
+                    document.getElementById("ExploreDiv").style.display = "block";
+
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                    
+                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = "none";
+                    
+                };
+                $("#MobileMenuNewBtn").click(function(event){
+                    showMobileNews();
+                });
+                
+                var showMobileSettings = ()=>{
+                    ToggleMenuDisplay();
+                   
+                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+       
+                    document.getElementById("ActiveSpotsIcon").style.display = "none";
+                    document.getElementById("SpotsIcon").style.display = "block";
+
+                    document.getElementById("ActiveUserProfile").style.display = "none";
+                    document.getElementById("SecondFavoritesIcon").style.display = "none";
+                    document.getElementById("RegularUserProfile").style.display = "block";
+
+                    document.getElementById("RegularExploreIcon").style.display = "none";
+                    document.getElementById("FavoritesIcon").style.display = "block";
+                    document.getElementById("ActiveExploreIcon").style.display = "block";
+
+                    document.getElementById("ExploreBtnText").style.color = "darkblue";
+                    document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
+                    document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
+                    document.getElementById("AccountBtnTxt").style.color = "#7e7e7e";
+
+                    $("#SpotsIframe").hide("slide", { direction: "right" }, 10);
+                    $(".UserProfileContainer").hide("slide", { direction: "right" }, 10);
+                    $("#ExploreDiv").show("slide", { direction: "left" }, 10);
+                    $("#FavoritesIframe").hide("slide", { direction: "right" }, 10);
+                    $("#SearchIframe").hide("slide", { direction: "right" }, 10);
+                    document.getElementById("ExploreDiv").style.display = "block";
+
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                    
+                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = "none";
+                    
+                };
+                
+                $(".MobileSettingsPageBtn").click(function(event){
+                    showMobileSettings();
+                });
+                
+                $("#MobileSettingsBtn").click(function(event){
+                    document.getElementById("ExploreDiv").src = "CustomerSettingsPage.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3";
+                });
+                $("#MobileNotificationBtn").click(function(event){
+                    document.getElementById("ExploreDiv").src = "CustomerSettingsPage.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=1";
+                });
+                $("#MobileCalendarBtn").click(function(event){
+                    document.getElementById("ExploreDiv").src = "CustomerSettingsPage.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2";
+                });
+                
+                
             }
         });
     </script>

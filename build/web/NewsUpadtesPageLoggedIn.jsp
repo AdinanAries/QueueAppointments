@@ -165,28 +165,42 @@
             },6000);
         </script-->
         
-        <center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #eeeeee solid 1px;'>
-            <span style="width: fit-content; margin-left: 40px;">
-                <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; margin-top: 5px;" />
-            </span>
+        <center><div id='PhoneSettingsPgNav'>
             
-            <!--p style=''><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
-                <sup>News</sup-->
-            
-            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                    <span style='margin-right: 5px; cursor: pointer; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 3px; border-radius: 3px;'>
-                        <img style='' src="icons/icons8-home-50.png" width="25" height="25" alt="icons8-home-50"/>
-                   
-                    <p style='font-size: 11px; margin-top: -8px; color: black;'>Home</p>
-                    </span>
-            </a>
-            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'>
-                    <span style='margin-right: 5px; cursor: pointer; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 3px; border-radius: 3px;'>
-                        <img style='border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="22" alt="icons8-settings-50"/>
-                        <p style='font-size: 11px; margin-top: -5px; color: black;'>Settings</p>
-                    </span></a>
              
         </div></center>
+    
+        <script>
+            $(document).ready(()=>{
+                if($(document).width() > 1000){
+                    document.getElementById("PhoneSettingsPgNav").innerHTML = `
+                        <div style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: white; padding: 5px; border-bottom: #eeeeee solid 1px;'>
+                            <span style="width: fit-content; margin-left: 40px;">
+                                <img id="" src="QueueLogo.png" style="width: 60px; height: 30px; margin-top: 5px;" />
+                            </span>
+
+                            <!--p style=''><img style='background-color: white;' src="icons/icons8-google-news-50.png" width="28" height="25" alt="icons8-google-news-50"/>
+                            <sup>News</sup-->
+
+                            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ProviderCustomerPage.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                <span style='margin-right: 5px; cursor: pointer; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 3px; border-radius: 3px;'>
+                                <img style='' src="icons/icons8-home-50.png" width="25" height="25" alt="icons8-home-50"/>
+
+                                <p style='font-size: 11px; margin-top: -8px; color: black;'>Home</p>
+                                </span>
+                            </a>
+                            <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='CustomerSettingsPage.jsp?User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=3'>
+                                <span style='margin-right: 5px; cursor: pointer; float: right; margin-right: 10px; width: fit-content; background-color: #eeeeee; padding: 3px; border-radius: 3px;'>
+                                    <img style='border-radius: 2px;' src="icons/icons8-settings-50.png" width="23" height="22" alt="icons8-settings-50"/>
+                                    <p style='font-size: 11px; margin-top: -5px; color: black;'>Settings</p>
+                                </span>
+                            </a>
+                        </div>
+                    `;
+                }
+                       
+            });
+        </script>
         
     <!--center><div id='PhoneSettingsPgNav' style='z-index: 110; width: 99.5%; position: fixed; margin-bottom: 5px; background-color: #000099; padding: 5px; box-shadow: 4px 4px 4px #334d81;'>
        
@@ -243,7 +257,11 @@
             <div id='PhoneNews' style='width: 100%; max-width: 600px; padding-top: 60px; margin: auto;' >
             <div id='News' style=''>
             <center><p style="color: darkblue; font-size: 14px; font-weight: bolder; margin-bottom: 10px;">News updates from your providers</p></center>
-            
+            <script>
+                if($(window).width() < 1000){
+                    document.getElementById("PhoneNews").style.paddingTop = "10px";
+                }
+            </script>
                 <div style="overflow-y: auto;">
                     
                     <%
@@ -434,9 +452,18 @@
                                                     <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <%}%>
                                             <!--/div-->
-                                            <div>
-                                                <p><%=ProvFirstName%></p>
-                                                <p style='color: red;'><%=ProvCompany%></p>
+                                            <div style="margin-top: 5px;">
+                                                <b>
+                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                        <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                            <%=ProvFirstName%> 
+                                                            <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                                go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                            </span>
+                                                        </p>
+                                                    </a>
+                                                </b>
+                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                     </div>      
@@ -634,9 +661,18 @@
 
                                                 <%}%>
                                             <!--/div-->
-                                            <div>
-                                                <p><%=ProvFirstName%></p>
-                                                <p style='color: red;'><%=ProvCompany%></p>
+                                            <div style="margin-top: 5px;">
+                                                <b>
+                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                        <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                            <%=ProvFirstName%> 
+                                                            <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                                go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                            </span>
+                                                        </p>
+                                                    </a>
+                                                </b>
+                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                     </div>      
@@ -767,8 +803,17 @@
                                                                             '<img id="" style="background-color: darkgray; width:35px; height: auto;" src="data:image/jpg;base64,'+eachNews.base64Profile+'"/>'+
                                                                         '</div>'+
                                                                         '<div>'+
-                                                                            '<p>'+eachNews.ProvFirstName+'</p>'+
-                                                                            '<p style="color: red;">'+eachNews.ProvCompany+'</p>'+
+                                                                            '<b>'+
+                                                                                '<a href="EachSelectedProviderLoggedIn.jsp?UserID='+eachNews.ProvID+'&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">'+
+                                                                                    '<p onclick="document.getElementById(\'PageLoader\').style.display = \'block\';" style="color: #3d6999;">'+
+                                                                                        eachNews.ProvFirstName+ 
+                                                                                        '<span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">'+
+                                                                                            'go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>'+
+                                                                                        '</span>'+
+                                                                                    '</p>'+
+                                                                                '</a>'+
+                                                                            '</b>'+
+                                                                            '<p style="color: red; margin-top: 5px;">'+eachNews.ProvCompany+'</p>'+
                                                                         '</div>'+
                                                                     '</div>'+
                                                                 '</div>'+
@@ -823,7 +868,7 @@
            
     </body>
     
-    <script src="scripts/script.js"></script>
-    <script src="scripts/QueueLineDivBehavior.js"></script>
+    <!--script src="scripts/script.js"></script-->
+    <!--script src="scripts/QueueLineDivBehavior.js"></script-->
     
 </html>
