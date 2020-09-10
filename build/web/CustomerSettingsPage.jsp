@@ -589,9 +589,18 @@
                                                     <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <%}%>
                                             <!--/div-->
-                                            <div>
-                                                <p><%=ProvFirstName%></p>
-                                                <p style='color: red;'><%=ProvCompany%></p>
+                                            <div style="margin-top: 5px;">
+                                                <b>
+                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                        <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                            <%=ProvFirstName%> 
+                                                            <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                                go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                            </span>
+                                                        </p>
+                                                    </a>
+                                                </b>
+                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                     </div>      
@@ -784,9 +793,18 @@
                                                     <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <%}%>
                                             <!--/div-->
-                                            <div>
-                                                <p><%=ProvFirstName%></p>
-                                                <p style='color: red;'><%=ProvCompany%></p>
+                                            <div style="margin-top: 5px;">
+                                                <b>
+                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                        <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                            <%=ProvFirstName%> 
+                                                            <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                                go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                            </span>
+                                                        </p>
+                                                    </a>
+                                                </b>
+                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                     </div>      

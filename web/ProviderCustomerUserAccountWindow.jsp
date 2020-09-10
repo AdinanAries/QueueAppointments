@@ -2927,7 +2927,7 @@
                                             </p>
                                             
                                             <p style = "color: blue; margin-top: 10px;">
-                                                <input onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" style="
+                                                <input onclick="document.getElementById('PagePageLoader').style.display = 'block';" style="
                                                        background: 0; border: 0; color: white; padding: 5px; background-color: darkslateblue; font-weight: bolder; margin: 0; border-radius: 4px;"
                                                        type="submit" value="<%=ProviderName%> - <%=ProviderCompany%>" />
                                             </p>
