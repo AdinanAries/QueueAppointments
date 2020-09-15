@@ -1393,6 +1393,7 @@
             </div>
             
             <center><p> </p></center>
+            <div id="showUploadPhotoBtn">
             <%
                 if(Base64Pic != ""){
             %>
@@ -1406,7 +1407,9 @@
             <%
                 }
             %>
+            </div>
             <center><img id="MobileDashboardLogo" src="QueueLogo.png" style="" /></center>
+            
             <p style="clear: both;"></p>
         </div>
                             
@@ -6390,9 +6393,6 @@
 
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
-                    
-                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = "none";
-                    
                 };
                 $("#MobileMenuNewBtn").click(function(event){
                     showMobileNews();
@@ -6428,10 +6428,11 @@
 
                     document.body.scrollTop = 0;
                     document.documentElement.scrollTop = 0;
-                    
-                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = "none";
-                    
                 };
+                
+                document.getElementById("ExploreDiv").addEventListener("load", ()=>{
+                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = "none";
+                });
                 
                 $(".MobileSettingsPageBtn").click(function(event){
                     showMobileSettings();
@@ -6447,6 +6448,44 @@
                     document.getElementById("ExploreDiv").src = "CustomerSettingsPage.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>&Settings=2";
                 });
                 
+                function showUploadPhotoPage(){
+                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';
+       
+                    document.getElementById("ActiveSpotsIcon").style.display = "none";
+                    document.getElementById("SpotsIcon").style.display = "block";
+
+                    document.getElementById("ActiveUserProfile").style.display = "block";
+                    document.getElementById("SecondFavoritesIcon").style.display = "none";
+                    document.getElementById("RegularUserProfile").style.display = "none";
+
+                    document.getElementById("RegularExploreIcon").style.display = "block";
+                    document.getElementById("FavoritesIcon").style.display = "block";
+                    document.getElementById("ActiveExploreIcon").style.display = "none";
+
+                    document.getElementById("ExploreBtnText").style.color = "#7e7e7e";
+                    document.getElementById("SpotsBtnTxt").style.color = "#7e7e7e";
+                    document.getElementById("FavoritesBtnTxt").style.color = "#7e7e7e";
+                    document.getElementById("AccountBtnTxt").style.color = "darkblue";
+
+                    $("#SpotsIframe").hide("slide", { direction: "right" }, 10);
+                    $("#ExploreDiv").hide("slide", { direction: "right" }, 10);
+                    $(".UserProfileContainer").show("slide", { direction: "left" }, 10);
+                    $("#FavoritesIframe").hide("slide", { direction: "right" }, 10);
+                    $("#SearchIframe").hide("slide", { direction: "right" }, 10);
+                    document.getElementById("ExploreDiv").style.display = "none";
+                    document.getElementsByClassName("UserProfileContainer")[0].style.display = "block";
+
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                    
+                    document.getElementsByClassName("UserProfileContainer")[0].src = "UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>";
+                    
+                }
+                
+                document.getElementById("showUploadPhotoBtn").addEventListener("click", showUploadPhotoPage);
+                document.getElementsByClassName("UserProfileContainer")[0].addEventListener("load", ()=>{
+                    document.getElementById('MainProviderCustomerPagePageLoader').style.display = "none";
+                });
                 
             }
         });
