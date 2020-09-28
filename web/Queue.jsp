@@ -493,6 +493,7 @@
             
             <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
                 <%
+                    int newsItems = 0;
                     
                     try{
                         Class.forName(Driver);
@@ -500,7 +501,6 @@
                         String newsQuery = "Select top 10 * from QueueServiceProviders.MessageUpdates where ProvID in "+GlobalIDList+" and VisibleTo like 'Public%' order by MsgID desc";
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         ResultSet newsRec = newsPst.executeQuery();
-                        int newsItems = 0;
                         
                         while(newsRec.next()){
                             
@@ -690,6 +690,17 @@
                 }
             %>
             </div>
+            
+            <%
+                if(newsItems == 0){
+            %>
+
+                <p style="font-weight: bolder; margin-top: 50px; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> No news items found at this time</p>
+
+            <%
+                }
+            %>
+            
             </div>
             
         <div class="DashboardContent" id="QueueJspContent">

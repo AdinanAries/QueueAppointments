@@ -731,11 +731,21 @@
                </div> 
             </div>
         </div>
+                <%
+                    if(newsItems == 0){
+                %>
+
+                <p style="font-weight: bolder; margin-top: 50px; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> No news items found at this time</p>
+
+                <%
+                    }
+                %>
+
                <div id='InfiniteScrollContent'>
                    <p style='font-size: 20px; text-align: center; display: none; font-weight: bolder; padding: 40px;' id='loadingMoreNew'><i class="fa fa-spinner" style='color: #06adad' aria-hidden="true"></i> Loading more</p>
                </div>
         </div>
-               
+           
         <div class='dontShowMobile' style='padding: 0 20px; margin: 10px; height: 850px; margin-top: 80px; background-color: #e6f3f7; max-width: 300px;'>
             <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px; text-align: center;'>We have the best services in your area</h1>
                     <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto;'>

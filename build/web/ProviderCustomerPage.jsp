@@ -1835,6 +1835,17 @@
                 }
             %>
                </div> 
+               
+               <%
+                if(newsItems == 0){
+            %>
+
+                <p style="font-weight: bolder; margin-top: 50px; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> No news items found at this time</p>
+
+            <%
+                }
+            %>
+               
             </div>
             
             <div id='Calender' style='display: none; margin-top: 5px;'>

@@ -1533,30 +1533,28 @@
                             
                             while(cover.next()){
                                 
-                                 try{    
-                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                Blob profilepic = cover.getBlob("GalaryPhoto"); 
-                                InputStream inputStream = profilepic.getBinaryStream();
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[4096];
-                                int bytesRead = -1;
+                                try{    
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob profilepic = cover.getBlob("GalaryPhoto"); 
+                                    InputStream inputStream = profilepic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
 
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                    Base64GalleryPhotos.add(Base64.getEncoder().encodeToString(imageBytes));
+
+
                                 }
-
-                                byte[] imageBytes = outputStream.toByteArray();
-
-                                Base64GalleryPhotos.add(Base64.getEncoder().encodeToString(imageBytes));
-
-
-                            }
-                            catch(Exception e){
-
-                            }
+                                catch(Exception e){}
                                  
-                                 if(Base64GalleryPhotos.size() > 6)
-                                     break;
+                                if(Base64GalleryPhotos.size() > 6)
+                                    break;
                                 
                             }
                             

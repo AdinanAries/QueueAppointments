@@ -166,10 +166,12 @@
                   
                 <%
                     //Using location for querying news for only specific area
+                    int newsItems = 0;
                     String IDList = "(";
                     String PCity = "";
                     String PTown = "";
                     String PZipCode = "";
+                    
                     try{
                         PCity = session.getAttribute("UserCity").toString().trim();
                         PTown = session.getAttribute("UserTown").toString().trim();
@@ -212,7 +214,6 @@
                         String newsQuery = "Select top 10 * from QueueServiceProviders.MessageUpdates where ProvID in "+IDList+" and VisibleTo like 'Public%' order by MsgID desc";
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         ResultSet newsRec = newsPst.executeQuery();
-                        int newsItems = 0;
                         
                         while(newsRec.next()){
                             
@@ -406,6 +407,16 @@
             </div>
             </div>
             </div>
+                <%
+                    if(newsItems == 0){
+                %>
+
+                <p style="font-weight: bolder; margin-top: 50px; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> No news items found at this time</p>
+
+                <%
+                    }
+                %>
+
                <div id='InfiniteScrollContent'>
                    <p style='font-size: 20px; text-align: center; display: none; font-weight: bolder; padding: 40px;' id='loadingMoreNew'><i class="fa fa-spinner" style='color: #06adad' aria-hidden="true"></i> Loading more</p>
                </div>
