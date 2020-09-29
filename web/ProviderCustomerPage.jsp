@@ -3726,17 +3726,17 @@
                                             }
                                             
                                         </script>
-                                        
-                                        <center><table onclick="collapseAllSettings();" id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: #8abde1;">
+                                        <!--background-color: #8abde1;-->
+                                        <center><table onclick="collapseAllSettings();" id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: #6fa0cb;">
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateAppTab()" id="AppointmentsTab" style="padding-top: 20px; text-align: center; color: white; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
                                                         <i class="fa fa-list" aria-hidden="true"></i> Your Spots
                                                     </td>
-                                                    <td onclick="activateHistory()" id="HistoryTab" style="text-align: center; color: darkblue; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
+                                                    <td onclick="activateHistory()" id="HistoryTab" style="text-align: center; color: #496884; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
                                                         <i class="fa fa-history" aria-hidden="true"></i> History
                                                     </td>
-                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="text-align: center; color: darkblue; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
+                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="text-align: center; color: #496884; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
                                                         <i class="fa fa-heart" aria-hidden="true"></i> Favorites
                                                     </td>
                                                 </tr>

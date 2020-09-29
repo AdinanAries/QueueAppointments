@@ -578,10 +578,10 @@ function activateHistory() {
   HistoryTab.style.border = "none";
   /*HistoryTab.style.borderTop = "black 1px solid";*/
 
-  AppointmentsTab.style.color = "darkblue";
+  AppointmentsTab.style.color = "#496884";
   /*AppointmentsTab.style.border = "1px solid black";*/
 
-  FavoritesTab.style.color = "darkblue";
+  FavoritesTab.style.color = "#496884";
   /*FavoritesTab.style.border = "black 1px solid";*/
 
   AppListDiv.style.display = "none";
@@ -600,14 +600,14 @@ function activateAppTab() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  HistoryTab.style.color = "darkblue";
+  HistoryTab.style.color = "#496884";
   /*HistoryTab.style.border = "black 1px solid";*/
 
   AppointmentsTab.style.color = "white";
   AppointmentsTab.style.border = "none";
   /*AppointmentsTab.style.borderTop = "1px solid black";*/
 
-  FavoritesTab.style.color = "darkblue";
+  FavoritesTab.style.color = "#496884";
   /*FavoritesTab.style.border = "black 1px solid";*/
 
   AppListDiv.style.display = "block";
@@ -626,9 +626,9 @@ function activateFavTab() {
   var AppHistoryDiv = document.querySelector(".AppHistoryDiv");
   var FavDiv = document.querySelector(".FavDiv");
 
-  HistoryTab.style.color = "darkblue";
+  HistoryTab.style.color = "#496884";
 
-  AppointmentsTab.style.color = "darkblue";
+  AppointmentsTab.style.color = "#496884";
 
   FavoritesTab.style.color = "white";
   FavoritesTab.style.border = "none";
