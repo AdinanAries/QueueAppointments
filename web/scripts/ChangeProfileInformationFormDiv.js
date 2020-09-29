@@ -60,15 +60,13 @@ function checkAddNewAddressForm(){
 		|| NewAddressTown.value === "" || NewAddressCity.value === ""
 		|| NewAddressCountry.value === "" || NewAddressZipcode.value === ""){
 			
-			NewAddressStatus.innerHTML = "Uncompleted Form";
-			NewAddressStatus.style.backgroundColor = "red";
+			NewAddressStatus.innerHTML = "<i class='fa fa-exclamation-triangle' style='color: yellow;'></i> no address field can be empty";
 			NewAddressBtn.disabled = true;
 			NewAddressBtn.style.backgroundColor = "darkgrey";
 			
 		}
 		else{
-			NewAddressStatus.innerHTML = "OK";
-			NewAddressStatus.style.backgroundColor = "green";
+			NewAddressStatus.innerHTML = "<i class='fa fa-check' style='color: green;'></i> address form is \"OK\" for submission";
 			NewAddressBtn.disabled = false;
 			NewAddressBtn.style.backgroundColor = "darkslateblue";
 		}

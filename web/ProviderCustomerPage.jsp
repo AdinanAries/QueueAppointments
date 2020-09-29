@@ -3114,7 +3114,7 @@
                                                 </tbody>
                                                 </table></center>
                                             
-                                                <p id="NewAddressStatus" style="text-align: center; color: white; margin: 5px 0;"></p>
+                                                <p id="NewAddressStatus" style="text-align: center; color: white; font-size: 14px; margin: 5px 0;"></p>
                                                 <input type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                                 <input type="hidden" name="User" value="<%=NewUserName%>" />
