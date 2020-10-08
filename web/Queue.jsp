@@ -1052,14 +1052,14 @@
                                     }
                             %>
                             <a href='EachSelectedProvider.jsp?UserID=<%=RPID%>' onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                                <div style="height: 120px; background-color: #334d81;
-                                 padding: 15px 5px; border-radius: 10px; margin: 0 5px;
+                                <div style="height: 120px; background-color: #334d81; border-top: 5px solid #ffe96b;
+                                 padding: 15px 5px; border-radius: 5px; margin: 0 5px;
                                  background: linear-gradient(rgba( 0, 0, 0, 0.3), rgba(0,0,0,0.8)), url('data:image/jpg;base64,<%=RCovPic%>'); background-size: cover;
                                  background-position: center;
                                  display: flex; flex-direction: column; justify-content: space-between;">
                                     <div style='display: flex; flex-direction: row; justify-content: space-between;'>
                                         <div>
-                                            <div style="overflow: hidden; border-bottom-right-radius: 10px; border-top-left-radius: 10px; margin-top: -15px; margin-left: -5px; width: 70px; height: 70px;">
+                                            <div style="overflow: hidden; border-bottom-right-radius: 10px; margin-top: -15px; margin-left: -5px; width: 70px; height: 70px;">
                                                 <img src="data:image/jpg;base64,<%=RProPic%>" style="width: 70px; height: auto;">
                                             </div>
                                         </div>
@@ -1100,7 +1100,7 @@
                                         </div>
 
                                     </div>
-                                    <p style='color: white; font-weight: bolder;'><%=RBizName%></p>
+                                    <p style='color: #ffe96b; font-weight: bolder;'><%=RBizName%></p>
                                     <p style="color: #ccc; margin-top: -3px;">- <%=RBizType%> -</p>
                                 </div>
                             </a>
