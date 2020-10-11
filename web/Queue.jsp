@@ -1349,7 +1349,7 @@
             document.getElementById("BkApptOnlnInfoDiv").innerHTML =
                     `<div class='eachCSecFlex'>
                                 <h1>Book your doctor's appointment online</h1>
-                                <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                                <div style='margin: auto; width: 100%; max-width: 400px; height: 300px;
                                      background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
                                      display: flex; justify-content: flex-end; flex-direction: column;'>
                                     <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>

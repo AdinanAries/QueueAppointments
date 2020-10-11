@@ -2344,7 +2344,7 @@
         <div id='ExtrasUserAccountDiv' style='display: none;'>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Account</p></center>
             
-                <table  id="ExtrasTab" style="" cellspacing="0">
+                <table  id="ExtrasTab" style="background: none !important;" cellspacing="0">
                     <tbody>
                         <tr style="">
                             <td>
