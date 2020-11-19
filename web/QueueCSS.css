@@ -1305,6 +1305,9 @@ input[type="file"] {
     justify-content: space-between;
 }
 @media only screen and (max-width: 1000px) {
+    .provQueueLineDiv{
+        margin-top: 65px !important;
+    }
     #ProvMainContentFlex{
         flex-direction: column; 
         justify-content: space-around;

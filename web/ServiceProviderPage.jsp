@@ -1947,47 +1947,47 @@
     <div id='ProvMainContentFlex'>
   <div id="Extras">
             
-            <div id='News' style=''>
+            <div id='News' style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px; background-color: white; padding: 10px 0;'>
             
-                <p style="color: #254386; font-weight: bolder; margin-bottom: 10px; font-size: 16px; text-align: center;">Update your clients on whats new</p>
+                <p style="color: #254386; font-weight: bolder; margin-bottom: 15px; font-size: 16px; text-align: center;">Update your clients on whats new</p>
                 
                 <form method="POST" enctype="multipart/form-data">
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>
-                        <tr style="background-color: #eeeeee">
+                        <tr>
                             <td>
-                                <p style='color: red; font-weight: bolder; margin-bottom: 5px;'>Add News Updates</p>
-                                <textarea onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" style="width: 100%; border: 0;" rows="5">
+                                <textarea style="padding: 10px; width: calc(100% - 20px); border: 0;" onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" rows="5">
                                 </textarea>
                                 
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p style='margin-bottom: 4px;'>Add photo to this message</p>
                                 <div id="MsgPhotoDisplay"></div>
                                 
-                                <input id="NewsPhotoFld" style="width: 95%; border: 0; background-color: #ffffff;" type="file" name="MsgformPhoto" />
-                                
+                                <input id="NewsPhotoFld" style="padding: 10px; margin-left: -10px; display: none;" placeholder="Add a picture" type="file" name="MsgformPhoto" />
+                                <label for="NewsPhotoFld" style="font-weight: bolder; color: white; padding: 10px; border-radius: 4px; background-color: #06adad; cursor: pointer;">
+                                    <i class="fa fa-picture-o" aria-hidden="true" style="margin-right: 5px;"></i> Add Photo
+                                </label>
                             </td>
                         </tr>
-                        <tr style="background-color: #eeeeee;">
+                        <tr>
                             <td>
                                 
-                                <p>Make news visible to: </p>
+                                <p style="margin: 15px 0;">Make news visible to: </p>
                                     <input id="VPublicRd" type="radio" name="NewsVisibility" value="Public" checked="checked" /><label for="VPublicRd">Public</label>
                                     <input id="VCustomersRd" type="radio" name="NewsVisibility" value="Customer" /><label  for="VCustomersRd">Only customers</label>
                                 
-                                <center><input id="SaveNewsBtn" style="border: 0; color: white; padding: 5px; background-color: darkslateblue; border-radius: 4px; width: 95%;" type="button" value="Save" /></center>
+                                <center><input id="SaveNewsBtn" style="border: 0; margin: 15px 0; color: white; padding: 10px; background-color: darkslateblue; border-radius: 4px; width: calc(100% - 30px);" type="button" value="Save" /></center>
                             </td>
                             
                             <script>
                         
-                                document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                document.getElementById("NewsMessageFld").value = "Type what you want to post here";
                                 
                                 function checkEmptyNewTxt(){
                                     if(document.getElementById("NewsMessageFld").value === "")
-                                        document.getElementById("NewsMessageFld").value = "What should your clients know about?";
+                                        document.getElementById("NewsMessageFld").value = "Type what you want to post here";
                                 }
                                 
                                 setInterval(function(){
@@ -2645,7 +2645,7 @@
             </div>
             <div class="ProviderMainDiv" id="main">
                           
-                <center><div id="QueuLineDiv" style="width: 100%; margin-bottom: 0;">
+                <center><div id="QueuLineDiv" class="provQueueLineDiv" style="margin: 5px; margin-top: 10px; border-radius: 4px; overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
                                         
                                     <%
                                         Date currentDate = new Date();//default date constructor returns current date 
@@ -2995,7 +2995,7 @@
                                         
                                     %>
                                     
-                                    <p id="PMargin" style="height: 60px; display: none;"></p>
+                                    <!--p id="PMargin" style="height: 60px; display: none;"></p-->
                                     
                                      <%
                                     if(DailyStartTime.equals("00:00") && DailyClosingTime.equals("00:00")){
@@ -3449,17 +3449,17 @@
                                     </div></center>
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
             
-                <div style=" display: block;" id="appointmentsDiv" style="">
-                <center><div style=" width: 100%; background-color: #d8d8d8;">
+                <div style="display: block;" id="appointmentsDiv" style="">
+                <div style="margin: 5px; background-color: #9bb1d0; padding: 15px 10px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px;">
                                         <h style="color: #000099; font-weight: bolder; text-align: center; padding-top: 20px;">See Your Bookings Below</p>
                                     
-                                        <table cellspacing="0" style="width: 100%; margin-top: 10px; padding: 10px; background-color: #d8d8d8;">
+                                        <table cellspacing="0" style="width: 100%; margin-top: 10px;">
                                             <tbody>
                                                 <tr>
-                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; cursor: pointer; width: 50%; color: darkblue; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
+                                                    <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; cursor: pointer; width: 50%; color: darkblue; font-weight: bolder; text-align: center; padding-top: 10px;">
                                                         <i class="fa fa-list" aria-hidden="true"></i> Current Line
                                                     </td>
-                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; cursor: pointer;  color: #8b8b8b; font-weight: bolder; text-align: center; background-color: #d8d8d8; padding-top: 10px;">
+                                                    <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; cursor: pointer;  color: #8b8b8b; font-weight: bolder; text-align: center;padding-top: 10px;">
                                                         <i class="fa fa-history" aria-hidden="true"></i> History
                                                     </td>
                                                 </tr>
@@ -3467,7 +3467,7 @@
                                         </table>
                                         
                                 
-                    </div></center>
+                    </div>
                     
                     <div class="scrolldiv" style=" height: auto; overflow-y: auto; min-width: 100%; padding-top: 10px;">
                         
@@ -3499,7 +3499,7 @@
                     
                     <div id="CurrentProvAppointmentsDiv">
                 <cetnter><h4 style="margin: 5px;">Next Client</h4></cetnter>
-                <center><table id="ProviderAppointmentList" style="border-spacing: 0 5px; border: 0; width: 100%;">
+                <table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%;">
                         <tbody>
                             
     <%
@@ -3568,7 +3568,8 @@
                        
                             <tr id="ApptRow<%=WString%>">
                                 
-                                <td id="ApptTD<%=WString%>" style = "padding: 5px; background-color: white; margin: 5px; border: 0; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgray;">
+                                <td id="ApptTD<%=WString%>" style = "padding: 10px; background-color: white; margin: 5px; border: 0; border-radius: 4px;
+                                    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
                         
                         <%
                             if(Base64CustPic != ""){
@@ -3919,10 +3920,10 @@
                         <center><p style="color: white; margin-bottom: 30px; margin-top: 30px; max-width: 600px;"><i style="color: yellow;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Current Line</p></center>
                         <%} //end of if block%>
                     </tbody>
-                    </table></center>
+                    </table>
                 
                 <center><h4 style="margin: 10px; max-width: 500px;">Future Line</h4></center>
-                <center><table id="ProviderAppointmentList" style="border-spacing: 0 5px; border: 0; width: 100%;">
+                <center><table id="ProviderAppointmentList" style="border-spacing: 5px; border: 0; width: 100%; margin-bottom: 10px;">
                         <tbody>
                             
     <%
@@ -3988,7 +3989,8 @@
                           
     %>
                         <tr id="futureApptRow<%=WString%>">
-                            <td style = "padding: 5px; background-color: white; margin: 5px; border: 0; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgray;">
+                            <td style = "padding: 10px; background-color: white; margin: 5px; border: 0; border-radius: 4px;
+                                box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
                         <%
                             if(Base64CustPic != ""){
                         %>
@@ -4333,7 +4335,7 @@
                 <div id="ProviderAppointmentHistoryDiv" style= "display: none;">
                 <center><h4 style="margin: 5px;">Your History</h4></center>
                 
-                <center><table id="ProviderAppointmentHistory" style="border-spacing: 0 5px; border: 0; width: 100%;">
+                <center><table id="ProviderAppointmentHistory" style="border-spacing: 5px; border: 0; margin-bottom: 10px; width: 100%;">
                         <tbody>
                             
     <%
@@ -4399,24 +4401,28 @@
                           
     %>
                         <tr id="HistoryApptRow<%=WString%>">
-                            <td style = "padding: 5px; background-color: white; margin: 5px; border: 0; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgray;">
+                            <td style = "padding: 10px; background-color: white; margin: 5px; border: 0; border-radius: 4px;
+                                box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
                         <%
                             if(Base64CustPic != ""){
                         %>
-                             <center><div style="width: 100%; max-width: 600px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;">
-                                    <div style="border-radius: 100%; margin-left: 5px; min-width: 40px; height: 40px; float: left; overflow: hidden;">
-                                       <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>"/>
+                                <div style="display: flex; justify-content: center;">        
+                                    <div style="width: 50px; margin-right: 20px;">
+                                        <div style="border-radius: 100%; margin-left: 5px; width: 40px; height: 40px; overflow: hidden;">
+                                           <img style="width: 40px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>"/>
+                                        </div>
                                     </div>
-                                 </div></center>
                         <%
                             }
                         %>
-                        <center><p><img src="icons/icons8-user-15.png" width="15" height="15" alt="icons8-user-15"/>
-                                <span style="color: red;"><%=Name%></span></p></center>
-                                <center><p><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/> <%=email%>, 
-                                    <img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/> <%=Tel%></p></center>
-                                <center><p>on <span style="color: red;"><%=DateOfAppointment%></span>, at <span style="color: red;"><%=TimeToUse%></span></p></center>
-                                <p style="text-align: center; color: darkgrey;">- <%=AppointmentReason%> -</p>
+                                    <div>        
+                                        <p style="margin: 10px; text-align: center;">
+                                            <span style="color: #334d81; font-weight: bolder;"><%=Name%></span></p>
+                                        <p style="margin-bottom: 5px; text-align: center"><%=email%>, <%=Tel%></p>
+                                        <p style="text-align: center;"><span style="color: red;"><%=DateOfAppointment%></span>, <span style="color: red;"><%=TimeToUse%></span></p>
+                                        <p style="text-align: center; color: darkgrey; margin: 15px 0;">- <%=AppointmentReason%> -</p>
+                                    </div>
+                                </div>
                                 
                                 <form name="BlockThisCustomer" >
                                     <input id="CustIDforBlockCustomer<%=w%>" type="hidden" name="CustomerID" value="<%=CustomerID%>" />
@@ -4637,8 +4643,9 @@
                     </div>
             </div>
                     
-                <div id='ReservationAndFutureSpots' style='overflow-y: auto; background-color: #9bb1d0;'>  
-                    <center><table style="width: 100%; background-color: #3d6999;">
+                <div id='ReservationAndFutureSpots' style='height: auto !important; background-color: #9bb1d0; border-radius: 4px; margin: 5px;
+                     box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);'>  
+                    <table style="width: 100%; background-color: #3d6999; border-top-left-radius: 4px; border-top-right-radius: 4px;">
                         <tbody>
                             <tr>
                                 <td onclick="toggleShowMakeReservationForm();" style="cursor: pointer; width: 33.3%; color: white; padding: 10px 0;">
@@ -4653,7 +4660,7 @@
                             </tr>
                         </tbody>
                         
-                        </table></center>
+                    </table>
                     
                         <div style="">
                             <form style="display: none; padding: 10px 0;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="BlockFutureSpots.jsp">
@@ -4705,8 +4712,8 @@
                                                         const div = document.createElement('div');
 
                                                         div.innerHTML = 
-                                                            '<form id="eachClosedDate'+ClosedID+'" style="margin-bottom: 5px; max-width: 300px; padding: 5px; background-color: white; border-right: 1px solid darkgray; border-bottom: 1px solid darkgray;" name="OpenClosedDay" action="OpenDate" method="POST">'+
-                                                                '<p style="">'+CDate+'</p>'+
+                                                            '<form id="eachClosedDate'+ClosedID+'" style="margin: 5px; padding: 10px; border-radius: 4px; background-color: white; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);" name="OpenClosedDay" action="OpenDate" method="POST">'+
+                                                                '<p style="margin-bottom: 10px; color: #636363;">'+CDate+'</p>'+
                                                                 '<input id="closedID'+ClosedID+'" type="hidden" name="ClosedID" value="'+ClosedID+'" />'+
                                                                 '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />' +
                                                                 '<input name="User" type="hidden" value="'+UserName+'" />' +
@@ -4730,7 +4737,7 @@
                             </script>
                         </form>
                             
-                            <div id="NewClosedDays" class="scrolldiv" style="max-height: 300px; overflow-y: auto; width: 100%; max-width: 500px; padding-bottom: 10px;">
+                            <div id="NewClosedDays" style="margin: auto; max-width: 500px;  padding-top: 15px; margin-bottom: 15px; height: auto !important;">
                             <p style="font-weight: bolder; color: slategrey; padding: 10px;">Days Closed</p>
                             
                         <%
@@ -4754,10 +4761,11 @@
                             
                         %>
                         
-                            <form id="eachClosedDate<%=ij%>" style="margin-bottom: 5px; max-width: 300px; padding: 5px; background-color: white; border-right: 1px solid darkgray; border-bottom: 1px solid darkgray;" name="OpenClosedDay">
-                                <p style=""><%=whatDay%>, <%=eachClosedDate%></p>
+                            <form id="eachClosedDate<%=ij%>" style="box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
+                                  border-radius: 4px; margin: 5px; padding: 10px; background-color: white;" name="OpenClosedDay">
+                                <p style="margin-bottom: 10px; color: #636363;"><%=whatDay%>, <%=eachClosedDate%></p>
                                 <input id="closedID<%=ij%>" type="hidden" name="ClosedID" value="<%=ClosedID%>" />
-                                <input id="openDayBtn<%=ij%>" style="padding: 5px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Open this day" />
+                                <input id="openDayBtn<%=ij%>" style="padding: 10px; border: none; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Open this day" />
                                 <script>
                                              
                                                $(document).ready(function() {                        
@@ -5111,7 +5119,7 @@
                 }
             </script-->
          
-        <div id="newbusiness" style="margin-top: 1px; min-height: 0; height: auto; position: initial; background-color: #ccccff !important;">
+        <div id="newbusiness" style="margin-top: 1px; min-height: 0; height: auto; position: initial; background-color: #e8e8e8 !important;">
             <!--script>
                 if($(window).width() > 1000){
                     document.getElementById("newbusiness").style.minHeight = "initial";
@@ -5149,13 +5157,13 @@
                             %> 
                             
                                 <div stle="text-align: center;">
-                                    <img style="border: #d8d8d8 solid 5px; background-color: #eeeeee;" src="icons/icons8-user-filled-100.png" width="150" height="150" alt="icons8-user-filled-100"/>
+                                    <img style="box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); background-color: #eeeeee;" src="icons/icons8-user-filled-100.png" width="150" height="150" alt="icons8-user-filled-100"/>
                                 </div>
                                     
                             <%
                                 }else{
                             %>
-                                <div class='MainPropicContainer' style='border: #ccccff solid 5px; width: 150px; height: 150px; overflow: hidden;'>
+                                <div class='MainPropicContainer' style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); width: 150px; height: 150px; overflow: hidden;'>
                                     <img style="width: 150px; height: auto;" src="data:image/jpg;base64,<%=base64Image%>" />
                                 </div>
                             <%
@@ -5167,17 +5175,19 @@
                             
                                 <div class="proinfo" style="padding-top:5px; margin-top:5px; padding-bottom: 5px; margin-bottom:5px;">
                             
-                                    <p id="FullNameDetail" style="font-size: 20px; font-weight: bolder; padding-top: 75px; text-align: center;"><%=FullName%></p>
-                                    <p style='margin-bottom: 10px; text-align: center;'><span style='font-weight: bolder;' id="CompanyDetail"><%=Company%></span></p>
+                                    <p id="FullNameDetail" style="font-size: 17px; font-weight: bolder; color: #334d81; padding-top: 95px; text-align: center;"><%=FullName%></p>
+                                    <p style='margin-bottom: 10px; text-align: center;'><span style='font-weight: bolder; color: #636363;' id="CompanyDetail"><%=Company%></span></p>
                                     
                                 </div>
                                         
-                                        <p onclick="toggleShowEditPerInfoDiv();" style="text-align: center; margin: auto; color: white; background-color: darkslateblue; padding: 10px 5px; border-radius: 4px; cursor: pointer; border-radius: 4px; max-width: 300px; margin-bottom: 10px; margin-top: 10px;">
+                                        <p onclick="toggleShowEditPerInfoDiv();" style="box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
+                                           text-align: center; margin: auto; color: white; background-color: darkslateblue; padding: 10px 5px; border-radius: 4px; cursor: pointer; border-radius: 4px; max-width: 300px; margin-bottom: 15px; margin-top: 15px;">
                                                 <i style="color: #4ed164;;" class="fa fa-pencil-square" aria-hidden="true"></i>
                                                 <span style="color: white;">Edit Your Personal Information</span>
                                             </p>
                                         
-                                        <center><div id="EditPerInfoDiv" style="display: none; width: 100%; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; margin-bottom: 10px;">
+                                        <center><div id="EditPerInfoDiv" style="display: none; max-width: 400px; background-color: #9bb1d0; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
+                                                     width: fit-content; padding: 5px; border: #3d6999 1px solid; margin-bottom: 10px;">
                                                 <form name="UpdatePsnalInfor">
                                                 <table>
                                                     <tbody>
@@ -5236,7 +5246,7 @@
                                                     </script>
                                                        
                                                 <input id="ProvIDforPerDetails" type="hidden" name="ProviderID" value="<%=UserID%>"/>
-                                                <input id="UpdateProvPerBtn" style="color: white; padding: 5px; border:0; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdatePerInfoBtn" />
+                                                <input id="UpdateProvPerBtn" style="color: white; padding: 10px; border:0; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdatePerInfoBtn" />
                                                         
                                             </form>
                                                 
@@ -5388,7 +5398,8 @@
                                             
     %>
 
-                                            <center><div style='background-color: black; padding: 1px; padding-bottom: 10px; margin-bottom: 5px; width: 98%; max-width: 452px; margin-left: 0; margin-bottom: 5px;'>
+                                            <div style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); margin: 5px; border-radius: 4px;
+                                                         background-color: #374949; padding: 1px; padding: 15px; margin-bottom: 5px; margin-bottom: 5px;'>
                                                     
                                                     <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
                                                         <span style="color: tomato;">Overall Rating: </span>
@@ -5482,7 +5493,8 @@
                             <%}%>
                                 <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>' onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer; padding-top: 10px;'>See More...</p></a>
                             </div>
-                        </div></center>
+                        </div>
+                                                </div>
 
                         <%}%>
                         
@@ -5498,9 +5510,9 @@
                                             if(firstPic != ""){
                                         %>
                                         
-                                        <center><div style="margin-bottom: 15px; background: #eeeeee; padding: 3px; padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey; max-width: 450px;">
+                                        <div style="margin: 5px; margin-top: 20px; margin-bottom: 20px; background: white; padding: 15px 5px; border-radius: 4px;  box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
                                         
-                                            <p style="text-align: center; color: tomato; padding-bottom: 5px;">Photo Gallery</p>
+                                            <p style="text-align: center; color: #254386; font-weight: bolder; padding-bottom: 20px; padding-top: 5px;">Photo Gallery</p>
                                             
                                         <%
                                             if(seventhPic != ""){
@@ -5509,7 +5521,7 @@
                                             <center><img  class="fittedImg" src="data:image/jpg;base64,<%=seventhPic%>" width="100%" height="300" style="max-width: 350px; margin-bottom: 0;  border-radius: 5px;"/></center>
                                          
                                         <%}%>
-                                            <center><table style=" width: 100%; max-width: 350px; margin-top: 0;">
+                                            <table style="margin: auto; width: 100%; max-width: 350px; margin-top: 0;">
                                                
                                                 <tbody>
                                                 <tr>
@@ -5539,8 +5551,8 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        </table></center>
-                                        </div></center>
+                                        </table>
+                                        </div>
                                                     
                                         <%} else{%>
                                         
@@ -5552,7 +5564,7 @@
                                         
                                         <%}%>
                                       
-                                        <table cellspacing="0" style="width: 100%; padding-bottom: 5px;">
+                                        <table cellspacing="0" style="width: 100%; border: none !important; padding-bottom: 10px;">
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateServicesTab()" id="Services" style="text-align: center; padding: 10px; cursor: pointer; font-weight: bolder;">
@@ -5571,13 +5583,13 @@
                                 <div style=" height: auto; overflow-y: auto;">
                                         
                                 <div id="ServiceListDiv">
-                                <div class="scrolldiv" id="serviceslist" style="min-height: 490px;">
+                                <div class="scrolldiv" id="serviceslist" style="min-height: 490px; border: none !important;">
                                     
                                      <!--center><p style="color: tomato; margin: 5px;">Services</p></center-->
                                      
                                      <div>
                                          
-                                     <center><table style="width: 100%; max-width: 600px;">
+                                     <table style="width: 100%; max-width: 600px; border-spacing: 5px 10px;">
                                      <tbody>
                                              
                                 <%
@@ -5603,14 +5615,15 @@
                                 %>
                                      
                                          <tr id="ServiceRow<%=i%>">
-                                             <td style="background-color: white; margin-bottom: 10px; margin-top: 10px; padding: 5px; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray;">
+                                             <td style="background-color: white; margin: 15px 0; padding: 10px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px;">
                                                  
-                                                 <p style="color: black; margin-bottom: 5px;"><span id="ServiceNameDetail<%=i%>" style="color: blue;"><%=ServiceName%></span><span id="ServPrcDur<%=i%>"> - $<%=ServicePrice%> - <%=ServiceDuration%> mins.</span><span style="float: right;">
+                                                 <p style="color: black; margin: 15px 0;"><span id="ServiceNameDetail<%=i%>" style="color: #254386; font-weight: bolder;"><%=ServiceName%></span>
+                                                     <span id="ServPrcDur<%=i%>"> - $<%=ServicePrice%> - <%=ServiceDuration%> mins.</span><span style="float: right;">
                                                          <img style="cursor: pointer;" onclick = "toggleHideEditService(<%=IString%>)" style="margin-top: 10px;" src="icons/icons8-pencil-20.png" width="20" height="20" alt="icons8-pencil-20"/></span>
                                                  </p>
-                                                 <p id="SvcDescDetail<%=i%>" style="color: darkgray;"><%=ServiceDescription%></p>
+                                                 <p style="margin-bottom: 15px;" id="SvcDescDetail<%=i%>" style="color: darkgray;"><%=ServiceDescription%></p>
                                                  
-                                                <center><form style=" display: none; border-top: 1px solid darkgray; margin-top: 5px; width: 100%; max-width: 600px;" id="changeServiceForm<%=IString%>" class="changeServiceForm" name="EditService">
+                                                <form style=" display: none; margin-top: 20px; width: 100%; max-width: 600px;" id="changeServiceForm<%=IString%>" class="changeServiceForm" name="EditService">
                                                  
                                                 <p style="color: red; margin: 5px;">Change this service</p>
                                                      
@@ -5731,7 +5744,7 @@
                                                     </script>
                                                      
                                                  <input id="ServiceID<%=i%>" type="hidden" name="ServiceID" value="<%=ServiceID%>" />
-                                                 <p style="text-align: center;"><input id="EditServiceBtn<%=i%>" style="background-color: darkslateblue; border: none; color: white; border-radius: 4px; padding: 5px;" type="button" value="change" name="<%=IString%>editService" /></p>
+                                                 <p style="text-align: center;"><input id="EditServiceBtn<%=i%>" style="background-color: darkslateblue; border: none; color: white; border-radius: 4px; padding: 10px;" type="button" value="change" name="<%=IString%>editService" /></p>
                                         </div>
                                                <script>
                                              
@@ -5808,7 +5821,7 @@
                                      
                                                 <form name="DeleteServiceForm" >
                                                     <input id="SVCIDforDelete<%=i%>" type="hidden" name="ServiceID" value="<%=ServiceID%>" />
-                                                    <input id="deleteSVRBtn<%=i%>" style="color: white; border: none; background-color: crimson; border-radius: 4px; padding: 5px;" type="button" value="Delete this service" name="DeleteSVCBtn" />
+                                                    <input id="deleteSVRBtn<%=i%>" style="color: white; border: none; background-color: crimson; border-radius: 4px; padding: 10px;" type="button" value="Delete this service" name="DeleteSVCBtn" />
                                                 
                                             <script>
                                              
@@ -5874,10 +5887,12 @@
                                         </tbody>
                                      </table></center>
                                      
-                                     <center><p onclick = "toggleHideAddServiceDiv()" style="color: white; cursor: pointer; width: fit-content; padding: 5px; background-color: darkslateblue; border-radius: 4px; margin: auto; margin-top: 5px; margin-bottom: 5px;"><img style="background-color: white; border-radius: 4px;" src="icons/icons8-add-new-40.png" width="25" height="25" alt="icons8-add-new-40"/>
-                                             <sup>Add Service</sup></p></center>
+                                     <center><p onclick = "toggleHideAddServiceDiv()" style=" box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
+                                                color: white; cursor: pointer; width: fit-content; padding: 10px; background-color: darkslateblue; border-radius: 4px; margin: auto; margin-top: 5px; margin-bottom: 5px;">
+                                             Add Service</p></center>
                                      
-                                     <center><div style=" display: none; margin-bottom: 5px;" id="addServiceDiv">
+                                    <div style=" display: none; margin: auto !important; padding: 10px; margin-bottom: 15px !important; margin-top: 15px !important; border: none !important; border-radius: 4px;
+                                         box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);" id="addServiceDiv">
                                              
                                      <form name="addServices" style="padding-top: 5px; margin-left: 5px; text-align: center;">
                                          
@@ -5988,7 +6003,7 @@
                                                     <textarea id="ServiceDescForAdd" onfocus="if(this.innerHTML === 'Add service description here')this.innerHTML = '';" name="DescriptionFld" rows="4" cols="40">Add service description here</textarea>
                                                 </p>
                                                 <input id="AddSVCPID" type="hidden" name="ProviderID" value="<%=UserID%>" />
-                                                <input style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 5px; border: none;" id ="addServiceBtn" type="button" value="Add Service" name="addNewService" />
+                                                <input style="background-color: darkslateblue; border-radius: 4px; color: white; padding: 10px; border: none;" id ="addServiceBtn" type="button" value="Add Service" name="addNewService" />
                                             </div>
                                          
                                          <script>
@@ -6044,14 +6059,14 @@
                                                                   
                                                                   var aService = document.createElement('div');
                                                                   
-                                                                  aService.innerHTML = '<div style="background-color: white; padding: 5px; text-align: left; border-right: 1px solid darkgrey; border-bottom: 1px solid darkgrey;">'+
-                                                                          '<p><span style="color: blue;">'+name+'</span> - $'+price+' - '+duration+' mins</p>'+
-                                                                          '<p>Description: <span style="color: darkgrey;">'+description+'</span></p>'+
+                                                                  aService.innerHTML = '<div style="margin: 10px; background-color: white; border-radius: 4px; padding: 10px; text-align: left; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">'+
+                                                                          '<p style="margin: 15px 0;"><span style="color: blue;">'+name+'</span> - $'+price+' - '+duration+' mins</p>'+
+                                                                          '<p style="margin-bottom: 15px;">Description: <span style="color: darkgrey;">'+description+'</span></p>'+
                                                                           '<form method="POST" action="DeleteNewService">'+
                                                                               '<input type="hidden" name="UserIndex" value="'+UserIndex+'" />'+
                                                                               '<input name="User" type="hidden" value="'+UserName+'" />' +
                                                                               '<input type="hidden" name="ServiceID" value="'+ServiceID+'" />'+
-                                                                              '<input type="submit" style="color: white; border: none; padding: 5px; background-color: crimson; border-radius: 4px;" value="Delete this service" />'+
+                                                                              '<input type="submit" style="color: white; border: none; padding: 10px; background-color: crimson; border-radius: 4px;" value="Delete this service" />'+
                                                                            '</form>'+
                                                                           '</div>';
                                                                   
@@ -6083,7 +6098,7 @@
                                              
                                              setInterval(checkAddserviceBtn, 1);
                                          </script>
-                                     </div></center>
+                                     </div>
                                                                   
                                      <div id='newServDiv' style='display: none;'>
                                         <p style='color: darkblue; font-weight: bolder; margin: 10px 5px; text-align: center;'>Recent Added Service(s)</p>
@@ -6581,14 +6596,17 @@
                                     
                                     <div id="ShowOtherSettingsDiv" style="display: none;">
                                     
-                                    <div style="background-color: white; padding: 5px; margin: 5px;">
+                                    <div style="background-color: white; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
+                                         border-radius: 4px; padding: 5px; margin: 5px;">
                                     
-                                    <center><p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee; text-align: left;
-                                               border-radius: 4px; padding-top: 15px; padding-bottom: 15px;"><label for="CnclPlcyChck">Cancellation/Payment <span style="margin-left: 10px;"><i id="CnclPlcyPaymentStatuIcon" class="fa"></i></span></label>
-                                            <span style="float: right;"><input style="background-color: white;" id="CnclPlcyChck" type="radio" name="CancellationPolicyChck" value="ON" />
-                                            <label for="CnclPlcyChck">ON</label>
-                                            <input style="background-color: white;" id="CnclPlcyChckOFF" type="radio" name="CancellationPolicyChck" value="OFF" />
-                                            <label for="CnclPlcyChckOFF">OFF</label></span></p></center>
+                                        <div style="margin: auto;">
+                                            <p style="cursor: pointer; color: tomato; margin: 5px; padding: 5px; background-color: #eeeeee; text-align: left;
+                                                   border-radius: 4px; padding-top: 15px; padding-bottom: 15px;"><label for="CnclPlcyChck">Cancellation/Payment <span style="margin-left: 10px;"><i id="CnclPlcyPaymentStatuIcon" class="fa"></i></span></label>
+                                                <span style="float: right;"><input style="background-color: white;" id="CnclPlcyChck" type="radio" name="CancellationPolicyChck" value="ON" />
+                                                <label for="CnclPlcyChck">ON</label>
+                                                <input style="background-color: white;" id="CnclPlcyChckOFF" type="radio" name="CancellationPolicyChck" value="OFF" />
+                                                <label for="CnclPlcyChckOFF">OFF</label></span></p>
+                                        </div>
                                             <p style="clear: both;"></p>
                                             
                                         <input id="EnabledCnclPlcy" type="hidden" name="CancelationPolicyEnabled" value="<%=isSettingAllowed%>" />
@@ -6669,7 +6687,7 @@
                                 %>
                                     
                                    
-                                    <p style='margin: 10px 5px; border-bottom: 1px solid #334d81; display: block;'></p>
+                                    <p style='margin: 20px 5px; display: block;'></p>
                                     
                                     <p style='color: white; font-weight: bolder; margin: 5px 0; text-align: center;'>Cancellation and No-Show Policy</p>
                                     
@@ -6687,12 +6705,13 @@
                                     </small>
                                    </p>
                                    
-                                   <p style='margin: 10px 5px; border-bottom: 1px solid #334d81; display: block;'></p>
+                                   <p style='margin: 20px 5px; display: block;'></p>
                                    
-                                   <p id="CancelStatusIndicator" style="color: darkblue; font-weight: bolder; text-align: center; margin: 10px 0;"></p>
-                                    <p style='margin-top: 5px; margin-bottom: 10px; color: darkblue; font-weight: bolder;'><i class='fa fa-info-circle' style='color: #fefde5;'></i> Your current cancellation charge is <span id="PercentSpan" style=""><%=ChargePercentValue%> of total cost</span></p>
+                                   <p id="CancelStatusIndicator" style="margin: auto; color: darkblue; font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 10px;"></p>
+                                    <p style='text-align: center; margin: 10px 0; color: darkblue; font-weight: bolder;'><i class='fa fa-info-circle' style='color: #fefde5;'></i> Your current cancellation charge is <span id="PercentSpan" style=""><%=ChargePercentValue%> of total cost</span></p>
                                      
-                                    <center><p onclick="showPolicyForm();" style="cursor: pointer; padding: 5px; background-color: darkslateblue; width: 200px; margin: 5px; border-radius: 4px; color: white;">Change Cancellation Policy</p></center>
+                                    <p onclick="showPolicyForm();" style="cursor: pointer; padding: 10px; background-color: darkslateblue; width: 200px; margin: auto; margin-top: 10px; text-align: center;
+                                       margin-bottom: 10px; border-radius: 4px; color: white;">Change Cancellation Policy</p>
                                        
                                     <form id="CnclPlcyForm" style="display: none; margin-top: 10px; padding: 5px;" name="CancelationPolicyForm">
                                         
@@ -6707,8 +6726,8 @@
                                         
                                         <p style="text-align: center; margin-bottom: 10px; color: white;">Change Cancellation Policy</p>
                                         
-                                        <small style='color: honeydew'>What percentage of the service cost should your customers be charged as cancellation fee.
-                                            <br/> For example, If the customer books for $30.00 service, then 50% means you charge them $15.00 as cancellation fee.</small>
+                                        <p style="text-align: center;"><small style='color: honeydew'>What percentage of the service cost should your customers be charged as cancellation fee.
+                                                <br/><br/> For example, If the customer books for $30.00 service, then 50% means you charge them $15.00 as cancellation fee.</small></p>
                                         <center><p id="percentPar" style="text-align: left; max-width: 500px; padding: 10px;">Charge Percentage: <select style="border: none; background-color: #d9e8e8; padding: 10px; color: black;" id="ChargePercent" name="ChargePercent">
                                                     <option>100%</option>
                                                     <option>90%</option>
@@ -6809,7 +6828,7 @@
                                             <label for="RmvCnclPlcy">I dont want cancellation policy</label>
                                         </p>
                                         
-                                        <center><input id="submitCnclPlcyBtn" style="padding: 5px; color: white; border: none; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
+                                        <center><input id="submitCnclPlcyBtn" style="padding: 10px; color: white; border: none; border-radius: 4px; background-color: darkslateblue;" type="button" value="Update" name="UpdateCnclPlcy" /></center>
                                     </form>
                                     
                                    </div>
@@ -7100,7 +7119,7 @@
                                             </tbody>
                                         </table>
                                         <input id="ProvIDforUpdateBiz" type="hidden" name="ProviderID" value="<%=UserID%>"/>
-                                        <input id="UpdateProvBizBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px; color: white; margin: auto; margin-top: 5px; margin-bottom: 5px;" type="button" value="Update" name="updateBizInfoBtn" />
+                                        <input id="UpdateProvBizBtn" style="background-color: darkslateblue; border: none; padding: 10px; border-radius: 4px; color: white; margin: auto; margin-top: 5px; margin-bottom: 5px;" type="button" value="Update" name="updateBizInfoBtn" />
                                         </form>
                                         
                                         <script>
@@ -7244,7 +7263,7 @@
                                                 <p id="WrongPassStatus" style="background-color: red; color: white; display: none;">Your current password is wrong </p>
                                                <input id="ProviderIDforUpdateLogin" type="hidden" name="ProviderID" value="<%=UserID%>"/>
                                                <input id="UserIndexforUpdateLogin" type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                               <input id="updateUsrAcntBtn" style="background-color: darkslateblue; border: none; padding: 5px; border-radius: 4px; color: white;" type="button" value="Update" />
+                                               <input id="updateUsrAcntBtn" style="background-color: darkslateblue; border: none; padding: 10px; border-radius: 4px; color: white;" type="button" value="Update" />
                                         </form>
                                     </div>
                                     <script>
@@ -7416,40 +7435,35 @@
                                         
                                 %>
                                 
-                                <div id="EachClientRow<%=c%>" style="padding: 5px; background-color: #6699ff; margin-bottom: 5px;">
+                                <div id="EachClientRow<%=c%>" style="padding: 5px; margin: 15px 0; display: flex; flex-direction: row !important; justify-content: space-between;">
+                                    <div style="display: flex; flex-direction: row !important; justify-content: space-between;">
                                     
                             <%
                                 if(Base64CustPic == ""){
                             %> 
                             
-                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
+                                        <img style="border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
 
-                                </center>
                                     
                             <%
                                 }else{
                             %>
-                            <center>
-                                <!--img  class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<=Base64CustPic%>" height="50" width="50" /-->
-                                <div style="border-radius: 100%; margin-left: 5px; min-width: 50px; height: 50px; float: left; overflow: hidden;">
-                                    <img style="width: 50px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>"/>
-                                </div>
-                            </center>    
+                                        <div style="border-radius: 100%; min-width: 50px; height: 50px; float: left; overflow: hidden;">
+                                            <img style="width: 50px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>"/>
+                                        </div>   
                             <%
                                 }
                             %>
-                                    <div style="float: right; width: 83%;">
-                                        <p style="font-weight: bolder;"><%=ClientFullName%></p>
-                                        <p><%=ClientTel%></p>
-                                        <p><%=ClientEmail%></p>
+                                        <div style="margin-left: 15px;">
+                                            <p style="font-weight: bolder; color: #334d81;"><%=ClientFullName%></p>
+                                            <p style="color: #636363;"><%=ClientTel%></p>
+                                            <p style="color: #636363;"><%=ClientEmail%></p>
+                                        </div>
                                     </div>
-                                    
-                                    <p style="clear: both;"></p>
-                                    
                                     <form name="DeleteThisClient">
                                         <input id="PIDDltClnt<%=c%>" type="hidden" name="ProviderID" value="<%=UserID%>" />
                                         <input id="ClientIDDltClnt<%=c%>" type="hidden" name="EachClientID" value="<%=ClientID%>"/>
-                                        <input id="DeleteClientBtn<%=c%>" style="background-color: crimson; border: none; border-radius: 4px; color: white; padding: 5px;" type="button" value="Delete this client" />
+                                        <input id="DeleteClientBtn<%=c%>" style="background-color: crimson; border: none; border-radius: 4px; color: white; padding: 10px;" type="button" value="Delete" />
                                     
                                         <script>
                                              
@@ -7556,40 +7570,36 @@
                                             }
                                 %>
                                 
-                                <div id="ClientsRow<%=eachBlocked%>" style="background-color: #6699ff; padding: 5px;  margin-bottom: 5px;">
-                                            
+                                <div id="ClientsRow<%=eachBlocked%>" style=" padding: 5px; display: flex; flex-direction: row !important; justify-content: space-between;  margin: 15px 0;">
+                                         
+                                    <div style="display: flex; flex-direction: row !important;">
                             <%
                                 if(Base64CustPic == ""){
                             %> 
                             
-                            <center><img style="border-radius: 5px; float: left; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
-
-                                </center>
-                                    
+                                <img style="border-radius: 5px; float: left; border-radius: 100%;" src="icons/icons8-user-filled-50.png" height="50" width="50" alt="icons8-user-filled-50"/>
+    
                             <%
                                 }else{
                             %>
-                            <center>
-                                <div style="border-radius: 100%; margin-left: 5px; min-width: 50px; height: 50px; float: left; overflow: hidden;">
+                            
+                                <div style="border-radius: 100%; min-width: 50px; height: 50px; overflow: hidden;">
                                     <img style="width: 50px; height: auto; margin-bottom: 0;  background-color: darkgray;" src="data:image/jpg;base64,<%=Base64CustPic%>"/>
                                 </div>
-                                <!--img  class="fittedImg" style="border-radius: 5px; float: left; border-radius: 100%;" src="data:image/jpg;base64,<=Base64CustPic%>" height="50" width="50" /-->
-                            </center>
                                     
                             <%
                                 }
                             %>
-                                    <div style="float: right; width: 83%;">
-                                        <p style="font-weight: bolder;"><%=CustFullName%></p>
-                                        <p><%=CustMobile%></p>
-                                        <p><%=CustEmail%></p>
+                                    <div style="margin-left: 15px;">
+                                        <p style="font-weight: bolder; color: #334d81;"><%=CustFullName%></p>
+                                        <p style="color: #636363;"><%=CustMobile%></p>
+                                        <p style="color: #636363;"><%=CustEmail%></p>
                                     </div>
                                     
-                                    <p style="clear: both;"></p>
-                                    
+                                    </div>
                                     <form name="UnblockPerson" >
                                         <input id="BlockedID<%=eachBlocked%>" type="hidden" name="BlockedID" value="<%=BlockedID%>" />
-                                        <input id="UnblockCleintBtn<%=eachBlocked%>" style="background-color: crimson; border: none; border-radius: 4px; color: white; padding: 5px;" type="button" value="Unblock This Person" name="Unblock" />
+                                        <input id="UnblockCleintBtn<%=eachBlocked%>" style="background-color: crimson; border: none; border-radius: 4px; color: white; padding: 10px;" type="button" value="Unblock" name="Unblock" />
                                         <script>
                                              
                                                $(document).ready(function() {                        

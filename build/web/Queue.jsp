@@ -1346,7 +1346,7 @@
                                 </div>
                             </a>`;
 
-            document.getElementById("BkApptOnlnInfoDiv").innerHTML =
+            /*document.getElementById("BkApptOnlnInfoDiv").innerHTML =
                     `<div class='eachCSecFlex'>
                                 <h1>Book your doctor's appointment online</h1>
                                 <div style='margin: auto; width: 100%; max-width: 400px; height: 300px;
@@ -1370,7 +1370,7 @@
                                      display: flex; justify-content: flex-end; flex-direction: column;'>
                                     <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
                                 </div>
-                            </div>`;
+                            </div>`;*/
 
             document.getElementById("RvwGrowingCmntCosmeDiv").innerHTML =
                     `<div class='eachCSecFlex'>
