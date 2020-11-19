@@ -8,12 +8,26 @@
 input[type="text"]:focus{
     outline: none;
 }
+#main_body_flex{
+    display: flex; 
+    flex-direction: row-reverse; 
+}
 #LocSearchDiv form{
     background-color: #9bb1d0 !important;
 }
 #LocSearchDiv input[type="submit"]{
     background-color: #06adad !important;
     padding: 10px 5px !important;
+}
+#LocSearchDiv input[type="text"]{
+    padding: 10px 0;
+}
+.SearchObject input[type="text"]{
+    padding: 10px 0 !important;
+    text-align: center;
+}
+.SearchObject input[type="submit"]{
+    padding: 10px 0 !important;
 }
 #SearchDivNB form{
     background-color: #9bb1d0 !important;
@@ -76,6 +90,7 @@ body {
 }
 #PermanentDiv {
   margin: auto;
+  box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
 }
 #PermanentDiv ul li img {
   background-color: darkgrey !important;
@@ -548,12 +563,13 @@ select {
 #providerdetails {
   width: 100%;
   max-width: 700px;
-  border-spacing: 10px;
+  border-spacing: 5px 10px;
 }
 #providerdetails tbody tr td {
   background-color: white;
-  padding: 2px;
+  padding: 10px 2px;
   border-radius: 4px;
+  box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
   width: auto;
 }
 #ProInfoTable tbody tr td {
@@ -974,10 +990,11 @@ select {
     display: none;
   }
   #NewClosedDays {
+      /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
     max-height: 300px;
   }
   #ReservationAndFutureSpots {
-    min-height: 450px;
+    /*min-height: 450px;*/
   }
   #MakeReservationForm {
     display: block;
@@ -1023,17 +1040,20 @@ select {
   }
   #ExtrasTab {
     background-color: white;
-    width: 100%;
+    margin: 10px 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
   }
   #ExtrasTab tr td {
     margin: 0;
     padding: 5px;
+    
   }
   #Extras {
     padding: 1%;
     padding-top: 15px;
     float: right;
-    height: 615px;
     width: 19%;
     background: none;
   }
@@ -1112,7 +1132,7 @@ select {
     scrollbar-track-color: #6699ff;
   }
   #main {
-    min-height: 100vh !important;
+    
   }
   .ProvidersDashboardContent{
       min-height: 1840px !important;
@@ -1308,6 +1328,9 @@ input[type="file"] {
     justify-content: space-between;
 }
 @media only screen and (max-width: 1000px) {
+    #main_body_flex{
+        flex-direction: column; 
+    }
     .provQueueLineDiv{
         margin-top: 65px !important;
     }
@@ -1508,14 +1531,15 @@ input[type="file"] {
     width: 60%;
   }
   #providerdetails {
-    border-spacing: 0 3px;
+    border-spacing: 5px;
   }
   #providerdetails .propic {
     height: 80px;
     padding-top: 100px;
   }
   #providerdetails tbody tr td {
-    padding: 0;
+    padding: 10px 2px;
+    overflow: hidden;
   }
   #ProInfoTable img {
     margin-left: 2px;

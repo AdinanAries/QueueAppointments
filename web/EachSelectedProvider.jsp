@@ -381,7 +381,7 @@
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from <%=CurrentProvsName%></p></center>
             
-            <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
+            <div style="max-height: 80vh; overflow-y: auto; margin-top: 10px !important; border-top:  #8b8b8b 1px solid; border-bottom: #8b8b8b 1px solid;">
                 <%
                     int newsItems = 0;
                     int CurrentProvID = 0;

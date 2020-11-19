@@ -486,12 +486,12 @@
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p>
             </div>
         </div>
-            
-            <div id="Extras">
+        <div id="main_body_flex">   
+            <div id="Extras" style="float: none;">
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
             
-            <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
+            <div style="max-height: 80vh; overflow-y: auto; margin-top: 10px !important; border-top:  #8b8b8b 1px solid; border-bottom: #8b8b8b 1px solid;">
                 <%
                     int newsItems = 0;
                     
@@ -703,7 +703,7 @@
             
             </div>
             
-        <div class="DashboardContent" id="QueueJspContent">
+        <div class="DashboardContent" style="position: initial;" id="QueueJspContent">
             
             <div id="nav" style='display: block;'>
                 <center>
@@ -724,7 +724,8 @@
                 <div id="LocSearchDiv" style="margin-top: 5px;">
                     
                 <center><form id="DashboardLocationSearchForm" action="ByAddressSearchResult.jsp" method="POST" style="">
-                    <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                    <p style="color: #3d6999; margin: 10px 0;">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
                         Find services at location below</p>
                     <p class="LocSearchP">City: <input id="city4Search" style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p class="LocSearchP">Town: <input id="town4Search" style=" width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
@@ -742,8 +743,8 @@
                                 1000
                         );
                     </script>
-                    <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 5px;'>
+                    <p style='color: #3d6999; margin: 10px;'>Filter search by</p>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='margin-bottom: 10px; width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 10px;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -826,7 +827,7 @@
                 
         </div>
                 
-        <div id="newbusiness" style="">
+        <div id="newbusiness" style="position: initial;">
             
             <p id='addBizTxt' style="text-align: center; font-size: 20px;  margin-bottom: 10px; margin-top: -10px;">
                 <b>Add your business or create customer account</b>
@@ -953,7 +954,7 @@
                 </div></center>
             
                 </div>
-            
+        </div>
             
             <div id="CosmeticsSection" style='padding-top: 0;'>
                 <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">

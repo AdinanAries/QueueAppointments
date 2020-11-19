@@ -442,13 +442,14 @@
                 <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                    <p style="color: #3d6999; margin: 10px;">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
                         Find services at location below</p>
                     <p style="color: #3d6999;">City: <input id="city4Search" style="width: 80%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
                     <p style="color: #3d6999;">Town: <input id="town4Search" style="width: 35%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input id="zcode4Search" style="width: 19%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
                     
-                    <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 3px; padding: 5px;'>
+                    <p style='color: #3d6999; margin: 10px;'>Filter search by</p>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; padding: 10px 0; margin: 10px; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 3px;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>

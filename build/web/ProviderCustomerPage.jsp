@@ -1412,13 +1412,13 @@
             
             <p style="clear: both;"></p>
         </div>
-                            
-        <div id="Extras" style="margin-top: -10px;">
+       <div id="main_body_flex">         
+        <div id="Extras" style="margin-top: -10px; float: none;">
             
             <div id='News' style=''>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News updates from your providers</p></center>
             
-            <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
+            <div style="max-height: 80vh; overflow-y: auto; margin-top: 10px !important; border-top:  #8b8b8b 1px solid; border-bottom: #8b8b8b 1px solid;">
                     
                     <%
                         int newsItems = 0;
@@ -1851,7 +1851,7 @@
             <div id='Calender' style='display: none; margin-top: 5px;'>
                 <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Calender</p></center>
             
-                <table  id="ExtrasTab" cellspacing="0">
+                <table  id="ExtrasTab" cellspacing="0" style="background-color: white; width: 100%;">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
@@ -1871,13 +1871,17 @@
                             </td>
                         </tr>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
-                            <div style='padding: 5px; background-color: white;'>
+                            <div style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px; margin-left: 8px; padding: 5px; background-color: white;'>
                                     <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
                                     <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
                                     <p style='clear: both;'></p>
                                 </div>
                             <td style=''>
-                                
+                                <div style='padding: 5px; background-color: white;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
+                                    <p style='clear: both;'></p>
+                                </div>
                                 <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
@@ -2344,7 +2348,7 @@
         <div id='ExtrasUserAccountDiv' style='display: none;'>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Account</p></center>
             
-                <table  id="ExtrasTab" style="background: none !important;" cellspacing="0">
+                <table  id="ExtrasTab" style="background-color: white;" cellspacing="0">
                     <tbody>
                         <tr style="">
                             <td>
@@ -2902,13 +2906,14 @@
                         
                 </div></center>
                 
-                <h4 style="padding: 5px;">Search By Location</h4>
+                <h4 style="padding: 10px 0;">Search By Location</h4>
                         
-                <div id="LocSearchDiv" style="margin-top: 5px;">
+                <div id="LocSearchDiv" style="margin: 5px;">
                 <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <p style="color: #3d6999;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
+                    <p style="color: #3d6999; padding: 10px 0;">
+                        <i class="fa fa-map-marker"></i>
                         Find services at location below</p>
                     <p class="LocSearchP">City: <input id="city4Search" style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p class="LocSearchP">Town: <input id="town4Search" style="width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
@@ -2928,8 +2933,8 @@
                         );
                 
                     </script>
-                    <p style='color: white; margin-top: 5px;'>Filter Search by:</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 5px;'>
+                    <p style='color: #3d6999; margin: 10px 0;'>Filter search by</p>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='margin-bottom: 10px; padding: 10px; width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -3000,7 +3005,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input type="submit" style="font-weight: bolder; background-color: #626b9e; color: white; padding: 7px; border-radius: 3px; width: 95%;" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></p>
+                    <p><input type="submit" style="font-weight: bolder; background-color: #626b9e; color: white; padding: 10px; border-radius: 3px; width: 95%;" value="Search" onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                     
@@ -3012,7 +3017,7 @@
           </div>    
         </div>
                 
-        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0; margin-top: 0;">
+        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0; margin-top: 0; position: initial;">
             
             <script>
                 if($(window).width() > 1000){
@@ -5662,6 +5667,8 @@
                 </form> 
                 
                 </div>
+                    
+        </div>
                 
                 <div id="IframesDiv">
                     
