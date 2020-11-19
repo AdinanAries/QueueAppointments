@@ -826,7 +826,7 @@
                 
         </div>
                 
-        <div id="newbusiness" style="height: 600px;">
+        <div id="newbusiness" style="">
             
             <p id='addBizTxt' style="text-align: center; font-size: 20px;  margin-bottom: 10px; margin-top: -10px;">
                 <b>Add your business or create customer account</b>
@@ -848,7 +848,7 @@
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">First Name</span></p>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 10px; padding-bottom: 10px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">First Name</span></p>
                                         <input id="signUpFirtNameFld" placeholder="Enter first name here" type="text" name="firstName" value="" size="30"/>
                                     </fieldset>
                                 </td>
@@ -856,7 +856,7 @@
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Last Name</span></p>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 10px; padding-bottom: 10px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Last Name</span></p>
                                         <input id="sigUpLastNameFld" placeholder="Enter last name here" type="text" name="lastName" value="" size="30"/>
                                     </fieldset>
                                 </td>
@@ -864,7 +864,7 @@
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i style="font-size: 20px;" class="fa fa-mobile"></i> <span style="margin-left: 10px;">Mobile</span></p>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 10px; padding-bottom: 10px;"><i style="font-size: 20px;" class="fa fa-mobile"></i> <span style="margin-left: 10px;">Mobile</span></p>
                                         <input onclick="checkMiddleNumber();" onkeydown="checkMiddleNumber();" id="signUpTelFld" placeholder="Enter mobile here" type="text" name="telNumber" value="" size="30"/>
                                     </fieldset>
                                 </td>
@@ -872,7 +872,7 @@
                             <tr>
                                 <td>
                                     <fieldset class="loginInputFld">
-                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
+                                        <p style="border-bottom: #ccc 1px solid; margin-bottom: 10px; padding-bottom: 10px;"><i class="fa fa-envelope"></i> <span style="margin-left: 10px;">Email</span></p>
                                         <input id="signUpEmailFld" placeholder="Enter email here" type="text" name="email" value="" size="30"/>
                                     </fieldset>
                                 </td>
@@ -929,7 +929,7 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 10px; padding-bottom: 10px;"><i class="fa fa-user"></i> <span style="margin-left: 10px;">Username</span></p>
                                             <input id="LoginPageUserNameFld" placeholder="enter username here" type="text" name="username" value="" size="30"/>
                                         </fieldset>
                                     </td>
@@ -937,7 +937,7 @@
                                 <tr>
                                     <td>
                                         <fieldset class="loginInputFld">
-                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 5px; padding-bottom: 5px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
+                                            <p style="border-bottom: #ccc 1px solid; margin-bottom: 10px; padding-bottom: 10px;"><i class="fa fa-key"></i> <span style="margin-left: 10px;">Password</span></p>
                                             <input class="passwordFld" id="LoginPagePasswordFld" placeholder="enter password here" type="password" name="password" value="" size="20"/>
                                             <p style="text-align: right; margin-top: -20px; padding-right: 10px; margin-bottom: 5px;"><i class="fa fa-eye showPassword" aria-hidden="true"></i></p>
                                         </fieldset>
