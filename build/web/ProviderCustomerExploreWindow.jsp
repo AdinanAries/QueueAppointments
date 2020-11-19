@@ -449,7 +449,7 @@
                     <p style="color: #3d6999;">Town: <input id="town4Search" style="width: 35%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input id="zcode4Search" style="width: 19%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
                     
                     <p style='color: #3d6999; margin: 10px;'>Filter search by</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='width: 95%; padding: 10px 0; margin: 10px; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 3px;'>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='margin: auto; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 10px 0;  width: 95%;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>

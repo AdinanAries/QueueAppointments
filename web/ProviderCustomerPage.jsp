@@ -2934,7 +2934,7 @@
                 
                     </script>
                     <p style='color: #3d6999; margin: 10px 0;'>Filter search by</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='margin-bottom: 10px; padding: 10px; width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px;'>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='margin: auto; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 10px 5px;  width: 95%;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -3017,7 +3017,7 @@
           </div>    
         </div>
                 
-        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding-top: 0; margin-top: 0; position: initial;">
+        <div onclick='hideExtraDropDown();' class="DesktopUserAccount" id="newbusiness" style="padding: 0 !important; margin: 0; position: initial;">
             
             <script>
                 if($(window).width() > 1000){
@@ -3025,7 +3025,7 @@
                 }
             </script>
                 
-                <div id="Customerprofile" style="padding-top: 0;">
+                <div id="Customerprofile" style="padding-top: 0; margin-top: 10px;">
                     
                 <table id="CustomerprofileTable" style="border-spacing: 0; width: 100%; max-width: 700px;">
                     
@@ -3034,14 +3034,14 @@
                             <td>
                             <center>
                                     
-                               <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: #3d6999; border: 1px solid black; color: white; padding: 5px; margin-bottom: 5px;">
+                               <center><p id="ShowProInfo" onclick="toggleProInfoDivDisplay()" style="cursor: pointer; color: black; background-color: #3d6999; border: 1px solid black; color: white; padding: 5px;">
                                        <img style='background-color: white;' src="icons/icons8-user-15.png" width="20" height="20" alt="icons8-user-15"/>
                                        Show Your Profile Details</p></center>
                                
-                               <div id="ProInfoDiv" class="proinfo" style="border-top: 0; text-align: left; padding-bottom: 10px; margin-top: 0; background-color: #8abde1;">
+                               <div id="ProInfoDiv" class="proinfo" style="overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px; border-top: 0; text-align: left;  margin: 5px; margin-bottom: 0; background-color: #8abde1;">
                                 
                                    
-                                <div style="display: flex; flex-direction: row; padding: 5px; margin: auto; width: fit-content;">   
+                                <div style="display: flex; flex-direction: row; padding: 5px; margin: auto; width: fit-content;  padding: 15px 0;">   
                                 <%
                                     if(Base64Pic != ""){
                                 %> 
@@ -3712,6 +3712,22 @@
                                         
                                         %>
                                        
+                                        <center><table onclick="collapseAllSettings();" id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: #6fa0cb; margin-top: 15px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding-top: 20px; text-align: center; color: white; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
+                                                        <i class="fa fa-list" aria-hidden="true"></i> Your Spots
+                                                    </td>
+                                                    <td onclick="activateHistory()" id="HistoryTab" style="text-align: center; color: #496884; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
+                                                        <i class="fa fa-history" aria-hidden="true"></i> History
+                                                    </td>
+                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="text-align: center; color: #496884; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
+                                                        <i class="fa fa-heart" aria-hidden="true"></i> Favorites
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table></center>
+                                        
                                 </div>
                                         
                                         <script>
@@ -3732,23 +3748,9 @@
                                             
                                         </script>
                                         <!--background-color: #8abde1;-->
-                                        <center><table onclick="collapseAllSettings();" id="selectCustSpttabs" cellspacing="0" style="width: 100%; padding: 10px 0; background-color: #6fa0cb;">
-                                            <tbody>
-                                                <tr>
-                                                    <td onclick="activateAppTab()" id="AppointmentsTab" style="padding-top: 20px; text-align: center; color: white; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
-                                                        <i class="fa fa-list" aria-hidden="true"></i> Your Spots
-                                                    </td>
-                                                    <td onclick="activateHistory()" id="HistoryTab" style="text-align: center; color: #496884; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
-                                                        <i class="fa fa-history" aria-hidden="true"></i> History
-                                                    </td>
-                                                    <td onclick="activateFavTab()" id="FavoritesTab" style="text-align: center; color: #496884; font-weight: bolder; padding: 5px; cursor: pointer; width: 33.3%;">
-                                                        <i class="fa fa-heart" aria-hidden="true"></i> Favorites
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table></center>
                                         
-                                <div class="scrolldiv" style=" height: 577px; overflow-y: auto; background-color: #8abde1a0 !important;">
+                                        
+                                <div class="scrolldiv" style=" height: 640px; overflow-y: auto; background: none !important; padding-top: 15px;">
                                    
                                    <script>
                                         function showselectCustSpttabs(){
@@ -3952,7 +3954,7 @@
                                             
                                     %>
                                     
-                                    <div style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
+                                    <div style="overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); margin: 5px; margin-bottom: 10px; padding: 10px; background-color: white; border-radius: 5px; max-width: 700px;">
                                      
                                     <%
                                         if(Base64ProvPic != ""){
@@ -4017,7 +4019,7 @@
                                             }
                                     %>
                                     
-                                    <div id="AppointmentDiv<%=JString%>" style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
+                                    <div id="AppointmentDiv<%=JString%>" style="overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); margin: 5px; margin-bottom: 10px; padding: 10px; background-color: white; border-radius: 5px; max-width: 700px;">
                                     
                                     <%
                                         if(Base64ProvPic != ""){
@@ -4502,7 +4504,7 @@
                                         
                                     %>
                                     
-                                    <div id="FutureAppointmentDiv<%=QString%>" style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
+                                    <div id="FutureAppointmentDiv<%=QString%>" style="overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); margin: 5px; margin-bottom: 10px; padding: 10px; background-color: white; border-radius: 5px; max-width: 700px;">
                                     
                                         <%
                                             if(Base64ProvPic != ""){
@@ -4990,7 +4992,7 @@
                                         
                                     %>
                                     
-                                    <div id="HistoryAppointmentDiv<%=JString%>" style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
+                                    <div id="HistoryAppointmentDiv<%=JString%>" style="overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); margin: 5px; margin-bottom: 10px; padding: 10px; background-color: white; border-radius: 5px; max-width: 700px;s">
                                     
                                         <%
                                             if(Base64ProvPic != ""){
@@ -5531,7 +5533,7 @@
                     %>
                     
                                 
-                                <div id="FavoriteProvDiv<%=SString%>" class="EacFavsDiv" style="background-color: white; border-right: darkgray 1px solid; border-bottom: darkgrey 1px solid; margin-bottom: 5px; padding: 2px;">
+                                <div id="FavoriteProvDiv<%=SString%>" class="EacFavsDiv" style="overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); margin: 5px; margin-bottom: 10px; padding-bottom: 10px; background-color: white; border-radius: 5px; max-width: 700px;">
                                     
                                     <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
                                         <div class='MainPropicContainer' style='border: 5px solid white; width: 150px; height: 150px; overflow: hidden;'>

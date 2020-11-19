@@ -12,6 +12,12 @@ input[type="text"]:focus{
     display: flex; 
     flex-direction: row-reverse; 
 }
+#miniNav form input{
+    padding: 10px 0 !important;
+}
+#miniNav form input[type="submit"]{
+    padding: 10px 5px !important;
+}
 #LocSearchDiv form{
     background-color: #9bb1d0 !important;
 }

@@ -1952,7 +1952,7 @@
                 <p style="color: #254386; font-weight: bolder; margin-bottom: 15px; font-size: 16px; text-align: center;">Update your clients on whats new</p>
                 
                 <form method="POST" enctype="multipart/form-data">
-                <table  id="ExtrasTab" cellspacing="0">
+                <table  id="ExtrasTab" style="box-shadow: none;" cellspacing="0">
                     <tbody>
                         <tr>
                             <td>
@@ -3411,7 +3411,7 @@
                                         Taken </span> <span style="color: green; border: 1px solid green; padding-right: 3px;"><img src="icons/icons8-standing-man-filled-50 (2).png" width="30" height="25" alt="icons8-standing-man-filled-50 (2)"/>
                                         Blocked Spot </span> </p>
                                     
-                                        <form style=" margin-top: 10px; padding: 5px; background-color: #d8d8d8; padding-bottom: 10px;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
+                                        <form style=" margin-top: 10px; padding: 5px; padding-bottom: 10px;" name="SpotsIntervalForm" action="SetSpotsIntervalController" method="POST">
                                             <p style="text-align: center; color: #000099; margin: 10px 0; font-weight: bolder;">Change Your Spots Intervals Below</p>
                                             
                                             <div style="display: flex; flex-direction: row; justify-content: center;">
@@ -3450,17 +3450,17 @@
                 <!------------------------------------------------------------------------------------------------------------------------------------------------------------>
             
                 <div style="display: block;" id="appointmentsDiv" style="">
-                <div style="margin: 5px; background-color: #9bb1d0; padding: 15px 10px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px;">
-                                        <h style="color: #000099; font-weight: bolder; text-align: center; padding-top: 20px;">See Your Bookings Below</p>
+                <div style="margin: 5px; background-color: white; padding: 15px 10px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px;">
+                                        <h style="color: #44484a; font-weight: bolder; text-align: center; padding-top: 20px;">See Your Bookings Below</p>
                                     
                                         <table cellspacing="0" style="width: 100%; margin-top: 10px;">
                                             <tbody>
                                                 <tr>
                                                     <td onclick="activateProvAppointmentsTab()" id="ProvAppointmentsTab" style="padding: 5px; cursor: pointer; width: 50%; color: darkblue; font-weight: bolder; text-align: center; padding-top: 10px;">
-                                                        <i class="fa fa-list" aria-hidden="true"></i> Current Line
+                                                        <i style="margin-right: 5px;" class="fa fa-list" aria-hidden="true"></i> Current Line
                                                     </td>
                                                     <td onclick="activateProvHistoryTab()" id="ProvHistoryTab" style="padding: 5px; cursor: pointer;  color: #8b8b8b; font-weight: bolder; text-align: center;padding-top: 10px;">
-                                                        <i class="fa fa-history" aria-hidden="true"></i> History
+                                                        <i style="margin-right: 5px;" class="fa fa-history" aria-hidden="true"></i> History
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -5119,7 +5119,7 @@
                 }
             </script-->
          
-        <div id="newbusiness" style="margin-top: 1px; min-height: 0; height: auto; position: initial; background-color: #e8e8e8 !important;">
+        <div id="newbusiness" style="margin-top: 1px; min-height: 0; height: auto; position: initial; overflow-x: hidden; background-color: #e8e8e8 !important;">
             <!--script>
                 if($(window).width() > 1000){
                     document.getElementById("newbusiness").style.minHeight = "initial";
@@ -5133,7 +5133,7 @@
             
             <center><div id="Providerprofile" style="width: 100%; max-width: 700px;">
                  <!--p id="ProviderYourBusinessTxt"-->
-                    <p style="font-weight: bolder; color: darkblue; background: rgba(255, 255, 255, 0.50); position: relative; z-index: 1; margin-bottom: -35px; padding: 5px;">Your Business Profile</p>
+                    <p style="font-weight: bolder; color: #444; background: rgba(255, 255, 255, 0.7); position: relative; z-index: 1; margin-bottom: -35px; padding: 5px;">Your Business Profile</p>
                 
                 <table id="ProviderprofileTable" style="border-spacing: 0; width: 100%; max-width: 600px;">
                     
@@ -5143,7 +5143,7 @@
                                 
                                 <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
                                     
-                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>'); background-color: #eeeeee;">
+                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>'); background-color: #eeeeee; margin-right: -10px; margin-left: -5px;">
                                         
                                     <%if(base64Cover == ""){%>
                                         <p style="background-color: #eeeeee; text-align: center; margin-top: -70px; margin-bottom: 30px; color: black;">

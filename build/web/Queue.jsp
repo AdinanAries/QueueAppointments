@@ -744,7 +744,7 @@
                         );
                     </script>
                     <p style='color: #3d6999; margin: 10px;'>Filter search by</p>
-                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='margin-bottom: 10px; width: 95%; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 10px;'>
+                    <div id="DashboardLocationSearchFilter" class='scrolldiv' style='margin: auto; overflow-x: auto; color: #ccc; background-color: #3d6999; border-radius: 4px; padding: 10px 0;  width: 95%;'>
                         <table style='width: 2500px;'>
                             <tbody>
                                 <tr>
@@ -815,7 +815,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><input onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" style="font-weight: bolder; background-color: #626b9e; color: white; padding: 7px; border-radius: 3px; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
+                    <p><input onclick="document.getElementById('HomePageLoader').style.display = 'block';" type="submit" style="font-weight: bolder; background-color: #626b9e; color: white; padding: 10px; border-radius: 4px; width: 95%;" value="Search" onclick="document.getElementById('HomePageLoader').style.display = 'block';"/></p>
                     </form></center>
                 </div>
                 
@@ -1347,7 +1347,7 @@
                                 </div>
                             </a>`;
 
-            /*document.getElementById("BkApptOnlnInfoDiv").innerHTML =
+            document.getElementById("BkApptOnlnInfoDiv").innerHTML =
                     `<div class='eachCSecFlex'>
                                 <h1>Book your doctor's appointment online</h1>
                                 <div style='margin: auto; width: 100%; max-width: 400px; height: 300px;
@@ -1371,7 +1371,7 @@
                                      display: flex; justify-content: flex-end; flex-direction: column;'>
                                     <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
                                 </div>
-                            </div>`;*/
+                            </div>`;
 
             document.getElementById("RvwGrowingCmntCosmeDiv").innerHTML =
                     `<div class='eachCSecFlex'>
