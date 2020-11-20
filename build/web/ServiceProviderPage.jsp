@@ -1945,17 +1945,18 @@
                 
             </div>
     <div id='ProvMainContentFlex'>
-  <div id="Extras">
+        
+        <div id="Extras" style="margin-right: 10px; margin-top: 10px;">
             
-            <div id='News' style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px; background-color: white; padding: 10px 0;'>
+            <div id='News' style='border-radius: 4px; padding: 0;'>
             
                 <p style="color: #254386; font-weight: bolder; margin-bottom: 15px; font-size: 16px; text-align: center;">Update your clients on whats new</p>
                 
                 <form method="POST" enctype="multipart/form-data">
-                <table  id="ExtrasTab" style="box-shadow: none;" cellspacing="0">
+                <table  id="ExtrasTab" style="box-shadow: none; height: 100%;" cellspacing="0">
                     <tbody>
                         <tr>
-                            <td>
+                            <td style="padding-bottom: 10px;">
                                 <textarea style="padding: 10px; width: calc(100% - 20px); border: 0;" onfocusout="checkEmptyNewTxt();" id="NewsMessageFld" name="TellCustomersMsgBx" rows="5">
                                 </textarea>
                                 
@@ -2638,7 +2639,7 @@
             </div>
         </div>
   
-            <div class="ProvidersDashboardContent" id="content" style="min-height: 0 !important;"  onclick="hideDropDown();">
+        <div class="ProvidersDashboardContent" id="content" style="min-height: 0 !important; padding-right: 0 !important;"  onclick="hideDropDown();">
                 
             <div id="nav" style='padding: 0;'>
                 
@@ -5119,7 +5120,7 @@
                 }
             </script-->
          
-        <div id="newbusiness" style="margin-top: 1px; min-height: 0; height: auto; position: initial; overflow-x: hidden; background-color: #e8e8e8 !important;">
+        <div id="newbusiness" style="margin-top: 1px; min-height: 0; height: auto; position: initial; overflow-x: hidden; background: none !important;">
             <!--script>
                 if($(window).width() > 1000){
                     document.getElementById("newbusiness").style.minHeight = "initial";
@@ -5143,7 +5144,7 @@
                                 
                                 <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
                                     
-                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>'); background-color: #eeeeee; margin-right: -10px; margin-left: -5px;">
+                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>'); margin-left: -5px; margin-right: -10px; background-color: #eeeeee; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
                                         
                                     <%if(base64Cover == ""){%>
                                         <p style="background-color: #eeeeee; text-align: center; margin-top: -70px; margin-bottom: 30px; color: black;">
