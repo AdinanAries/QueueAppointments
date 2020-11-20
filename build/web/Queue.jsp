@@ -719,13 +719,13 @@
                     </div>
                 </center>
                 
-                <h4 style="padding: 5px 0;">Search By Location</h4>
+                <!--h4 style="padding: 5px 0;">Search By Location</h4-->
                 
-                <div id="LocSearchDiv" style="margin-top: 5px;">
+                <div id="LocSearchDiv" style="margin-top: 10px; margin-bottom: 5px;">
                     
-                <center><form id="DashboardLocationSearchForm" action="ByAddressSearchResult.jsp" method="POST" style="">
-                    <p style="color: #3d6999; margin: 10px 0;">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <center><form id="DashboardLocationSearchForm" action="ByAddressSearchResult.jsp" method="POST" style="padding-bottom: 10px">
+                    <p style="font-weight: bolder; color: #3d6999; margin-top: 10px; margin-bottom: 20px;">
+                        <i style="margin-right: 5px;" class="fa fa-map-marker" aria-hidden="true"></i>
                         Find services at location below</p>
                     <p class="LocSearchP">City: <input id="city4Search" style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p class="LocSearchP">Town: <input id="town4Search" style=" width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
@@ -1208,7 +1208,7 @@
     <script defer>
         $(document).ready(()=>{
             document.getElementById("main").innerHTML = 
-                    `<h4 style="padding: 5px 0; margin-bottom: 5px; margin-top: 5px;">Search By Category</h4>
+                    `<h4 style="padding: 5px 0; margin-bottom: 5px; color: #3d6999; margin-top: 5px;">Search By Category</h4>
 
                      <div id="firstSetProvIcons">
                     <center><table id="providericons">

@@ -436,14 +436,14 @@
                 
                 <h4><a href="" style=" color: black;"></a></h4>
                 
-                <h4 style="color: darkblue; padding: 5px;">Search By Location</h4>
+                <!--h4 style="color: darkblue; padding: 5px;">Search By Location</h4-->
                 
                 <div id="LocSearchDiv" style="margin-top: 5px;">
-                <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
+                <center><form id="DashboardLocationSearchForm" style="padding-bottom: 10px;" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <p style="color: #3d6999; margin: 10px;">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <p style="margin-right: bolder; color: #3d6999; margin-top: 10px; margin-bottom: 20px;">
+                        <i style="margin-left: 5px" class="fa fa-map-marker" aria-hidden="true"></i>
                         Find services at location below</p>
                     <p style="color: #3d6999;">City: <input id="city4Search" style="width: 80%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
                     <p style="color: #3d6999;">Town: <input id="town4Search" style="width: 35%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input id="zcode4Search" style="width: 19%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
@@ -526,7 +526,7 @@
             </div>
                  
             <div id="main" class="Main" style="padding-bottom: 0 !important;">
-                <center><h4 style="color: darkblue; margin-bottom: 5px; padding-top: 5px; max-width: 300px"> Search By Category </h4></center>
+                <center><h4 style="color: #3d6999; margin-bottom: 10px; padding-top: 20px; max-width: 300px"> Search By Category </h4></center>
                  
                 <div id="CategoriesIcons">
                 

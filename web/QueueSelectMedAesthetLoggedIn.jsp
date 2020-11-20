@@ -2088,11 +2088,12 @@
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="ServiceType" value="Medical Aesthetician" />
-                    <p style="color: #000099; margin: 4px;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                        Find aestheticians at location below</p>
+                    <p style="color: #334d81; margin-top: 10px; margin-bottom: 20px;">
+                        <i style="margin-right: 5px;" class="fa fa-map-marker" aria-hidden="true"></i>
+                        Find services at location below</p>
                     <p>City: <input style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
                     <p>Town: <input style="background-color: #d9e8e8; width: 40%;" type="text" name="town4Search" value="<%=PTown%>"/> Zip: <input style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="<%=PZipCode%>" /></p>
-                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: #626b9e; color: white; padding: 7px; border-radius: 4px; width: 95%;" value="Search" /></p>
+                    <p><input onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" style="background-color: #626b9e; color: white; padding: 10px; margin-top: 10px; border-radius: 4px; width: 95%;" value="Search" /></p>
                     </form></center>
                 </div>
                 

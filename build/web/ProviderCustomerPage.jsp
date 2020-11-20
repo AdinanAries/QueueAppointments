@@ -2906,14 +2906,14 @@
                         
                 </div></center>
                 
-                <h4 style="padding: 10px 0;">Search By Location</h4>
+                <!--h4 style="padding: 10px 0;">Search By Location</h4-->
                         
-                <div id="LocSearchDiv" style="margin: 5px;">
-                <center><form id="DashboardLocationSearchForm" style="" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
+                <div id="LocSearchDiv" style="margin: 5px; margin-top: 10px;">
+                <center><form id="DashboardLocationSearchForm" style="padding-bottom: 10px;" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <p style="color: #3d6999; padding: 10px 0;">
-                        <i class="fa fa-map-marker"></i>
+                    <p style="color: #3d6999; margin-top: 10px; margin-bottom: 20px; font-weight: bolder;">
+                        <i style="margin-right: 5px;" class="fa fa-map-marker" aria-hidden="true"></i>
                         Find services at location below</p>
                     <p class="LocSearchP">City: <input id="city4Search" style="width: 80%; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value=""/></p> 
                     <p class="LocSearchP">Town: <input id="town4Search" style="width: 35%; background-color: #d9e8e8;" type="text" name="town4Search" value=""/> Zip Code: <input id="zcode4Search" style="width: 19%; background-color: #d9e8e8;" type="text" name="zcode4Search" value="" /></p>
@@ -5999,7 +5999,7 @@
             if($(window).width() > 1000){
 
                 document.getElementById("main").innerHTML =
-                        `<center><h4 style="margin-bottom: 10px; padding-top: 10px; max-width: 300px"> Search By Category </h4></center>
+                        `<center><h4 style="margin-bottom: 10px; padding-top: 10px; color: #3d6999; max-width: 300px"> Search By Category </h4></center>
 
                         <div id="firstSetProvIcons">
                         <center><table id="providericons">
