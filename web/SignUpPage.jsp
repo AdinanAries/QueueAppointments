@@ -349,7 +349,9 @@
             
         </div>
          
-        <div id="Extras">
+        <div id="main_body_flex">
+            
+            <div id="Extras">
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
             
@@ -545,7 +547,7 @@
             </div>
             </div>
                
-        <div id="content">
+            <div id="content">
             
             <div id="nav">
                 
@@ -1288,7 +1290,7 @@
             
         </div>
                 
-        <div id="newbusiness" style=" height: 73%;">
+            <div id="newbusiness" style=" height: 73%;">
             
         <center><div id ="logindetailsSignUP" style="padding-top: 60px;">
                 <center><h1 style='color: darkblue; margin-bottom: 40px;'>Already have an account</h1></center>
@@ -1331,6 +1333,9 @@
                 </div></center>
             
             </div>
+                                        
+        </div>
+                                        
         </div>
                 
         <div id="footer">

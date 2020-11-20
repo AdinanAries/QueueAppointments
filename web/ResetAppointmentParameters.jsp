@@ -449,6 +449,8 @@
             
         </div>
             
+        <div id="main_body_flex">
+            
             <div id="Extras">
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from your providers</p></center>
@@ -868,7 +870,7 @@
                </div>
             </div>
             
-        <div id="content">
+            <div id="content">
             
             <div id="nav">
                 
@@ -2017,7 +2019,7 @@
                     
         </div>
                     
-        <div id="newbusiness">
+            <div id="newbusiness">
             
             <div id="ExtraproviderIcons" style="padding-top: 10px;"> 
              
@@ -2134,6 +2136,8 @@
                 </div>
             </div>
             
+        </div>
+                                
         </div>
                     
         <div id="footer">

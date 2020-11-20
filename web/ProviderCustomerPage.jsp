@@ -1412,13 +1412,13 @@
             
             <p style="clear: both;"></p>
         </div>
-       <div id="main_body_flex">         
-        <div id="Extras" style="margin-top: -10px; float: none;">
+       <div id="main_body_flex">  
+           
+        <div id="Extras" style="float: none;">
             
-            <div id='News' style=''>
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News updates from your providers</p></center>
-            
-            <div style="max-height: 80vh; overflow-y: auto; margin-top: 10px !important; border-top:  #8b8b8b 1px solid; border-bottom: #8b8b8b 1px solid;">
+            <div id='News'>
+                
+            <div id="ExtrasInnerContainer">
                     
                     <%
                         int newsItems = 0;
@@ -1848,10 +1848,8 @@
                
             </div>
             
-            <div id='Calender' style='display: none; margin-top: 5px;'>
-                <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Calender</p></center>
-            
-                <table  id="ExtrasTab" cellspacing="0" style="background-color: white; width: 100%;">
+            <div id='Calender' style='display: none;'>
+                <table  id="ExtrasTab" cellspacing="0" style="width: 100%;">
                     <tbody>
                         <tr style="background-color: #eeeeee">
                             <td>
@@ -1871,11 +1869,11 @@
                             </td>
                         </tr>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
-                            <div style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px; margin-left: 8px; padding: 5px; background-color: white;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
+                            <div style='background-color: white; padding: 10px; border-radius: 4px;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 40%; float: right;'>Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #ccc; width: 45%; float: left;'>Appointments</div>
                                     <p style='clear: both;'></p>
-                                </div>
+                            </div>
                             <td style=''>
                                 <div style='padding: 5px; background-color: white;'>
                                     <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
@@ -2346,9 +2344,8 @@
             </div>
                              
         <div id='ExtrasUserAccountDiv' style='display: none;'>
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Your Account</p></center>
             
-                <table  id="ExtrasTab" style="background-color: white;" cellspacing="0">
+                <table  id="ExtrasTab" style="width: 100%;" cellspacing="0">
                     <tbody>
                         <tr style="">
                             <td>
@@ -2575,9 +2572,8 @@
             </div>
                                 
             <div id='ExtrasNotificationDiv' style='display: none;'>
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Notifications</p></center>
             
-            <div style=' height: 630px; overflow-y: auto;'>
+            <div>
                 <table  id="ExtrasTab" cellspacing="0">
                     <tbody>
                         

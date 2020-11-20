@@ -175,6 +175,8 @@
             <center><h3 style="color: #000099;">Find A Line Spot Now!</h3></center-->
         </div>
             
+        <div id="main_body_flex">
+            
             <div id="Extras">
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
@@ -380,7 +382,7 @@
             </div>
             </div>
             
-        <div id="content">
+            <div id="content">
             
             <div id="nav">
                 
@@ -576,7 +578,7 @@
                 
         </div>
                 
-        <div id="newbusiness" style="height: 525px;">
+            <div id="newbusiness" style="height: 525px;">
             
             <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up to add your business or to find a spot</h2></center>
             
@@ -656,6 +658,8 @@
             </div>
             
             </div>
+                        
+        </div>
                 
         <div id="footer">
             <p>AriesLab &copy;2019</p>

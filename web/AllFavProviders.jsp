@@ -465,7 +465,7 @@
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
-            
+        <div id="main_body_flex">
             <div id="Extras">
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News updates from your providers</p></center>
@@ -2252,6 +2252,7 @@
                 </div>
             </div>
             
+        </div>
         </div>
                             
         <div id="footer">

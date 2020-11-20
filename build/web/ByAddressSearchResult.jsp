@@ -545,6 +545,8 @@
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
             
         </div>
+          
+        <div id="main_body_flex">
             
             <div id="Extras">
             
@@ -751,7 +753,7 @@
             </div>
             
             
-        <div id="content">
+            <div id="content">
             
             <div id="nav">
                 
@@ -2215,7 +2217,7 @@
                             
         </div>
                             
-        <div id="newbusiness" style="height: 600px;">
+            <div id="newbusiness">
             
             
             
@@ -2343,6 +2345,8 @@
                 </div></center>
             
                 </div>
+                            
+        </div>
                             
         <div id="footer">
             <p>AriesLab &copy;2019</p>

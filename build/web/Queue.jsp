@@ -488,10 +488,7 @@
         </div>
         <div id="main_body_flex">   
             <div id="Extras" style="float: none;">
-            
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
-            
-            <div style="max-height: 80vh; overflow-y: auto; margin-top: 10px !important; border-top:  #8b8b8b 1px solid; border-bottom: #8b8b8b 1px solid;">
+            <div id="ExtrasInnerContainer">
                 <%
                     int newsItems = 0;
                     
@@ -606,7 +603,7 @@
                                 }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
+                <table  id="ExtrasTab" cellspacing="0 10px">
                         <tbody>
                             <tr style="background-color: #eeeeee;">
                                 <td>
@@ -635,7 +632,7 @@
                                                         </p>
                                                     </a>
                                                 </b>
-                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
+                                                <p style='color: red; margin: 10px;'><%=ProvCompany%></p>
                                             </div>
                                         </div>
                                     </div>      

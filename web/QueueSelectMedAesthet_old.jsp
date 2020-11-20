@@ -259,7 +259,9 @@
             <p id="LogoBelowTxt" style="font-size: 20px; margin: 0;"><b>Find medical & beauty places</b></p></div>
         </div>
             
-        <div id="Extras">
+        <div id="main_body_flex">
+            
+            <div id="Extras">
             
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
             
@@ -461,7 +463,7 @@
             </div>
             </div>
             
-        <div id="content">
+            <div id="content">
           
             <div id="nav">
                 
@@ -1668,7 +1670,7 @@
                             
         </div>
                             
-        <div id="newbusiness">
+            <div id="newbusiness">
             
             <center><h2 style="padding-top: 30px; margin-bottom: 20px; color: #000099">Sign-up with Queue to add your business or to book appointment</h2></center>
             
@@ -1760,6 +1762,8 @@
                 </div></center>
                     
                 </div>
+                
+        </div>
                             
         <div id="footer">
             <p>AriesLab &copy;2019</p>
