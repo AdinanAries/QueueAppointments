@@ -571,9 +571,7 @@
             
             <div id="Extras">
             
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">News Updates from <%=NewsProvName%></p></center>
-            
-                <div style="max-height: 87vh; overflow-y: auto; background-color: #b5cece;">
+                <div id="ExtrasInnerContainer">
                     
                     <%
                         int newsItems = 0;
