@@ -353,9 +353,7 @@
             
             <div id="Extras">
             
-            <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 5px;">Updates from service providers</p></center>
-            
-            <div style="max-height: 87vh; overflow-y: auto;">
+            <div id="ExtrasInnerContainer">
                 <%
                     
                     try{
@@ -369,7 +367,6 @@
                         while(newsRec.next()){
                             
                             String base64Profile = "";
-                            
                             newsItems++;
                             
                             String ProvID = newsRec.getString("ProvID");
@@ -437,10 +434,8 @@
                                             base64Profile = Base64.getEncoder().encodeToString(imageBytes);
 
 
-                                        }
-                                        catch(Exception e){
-
-                                        }
+                                        }catch(Exception e){}
+                                        
                                     }
                                     
                                 }catch(Exception e){
@@ -470,72 +465,84 @@
                                 }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 3px;">
-                    <tbody>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <div id="ProvMsgBxOne">
-                                    <div style='font-weight: bolder; margin-bottom: 4px;'>
-                                        <!--div style="float: right; width: 65px;" -->
-                                            <%
-                                                if(base64Profile != ""){
-                                            %>
-                                                <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                    <img class="fittedImg" id="" style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                <!--/div></center-->
-                                            <%
-                                                }else{
-                                            %>
-
-                                            <!--center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 3px; margin-bottom: 0; padding-bottom: 0;"-->
-                                                <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                            <!--/div></center-->
-
-                                            <%}%>
-                                        <!--/div-->
-                                        <div>
-                                            <p><%=ProvFirstName%></p>
-                                            <p style='color: red;'><%=ProvCompany%></p>
+                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
+                        <tbody>
+                            <tr style="background-color: #eeeeee;">
+                                <td>
+                                    <div id="ProvMsgBxOne">
+                                        
+                                        <div style='font-weight: bolder;'>
+                                            <!--div style="float: right; width: 65px;" -->
+                                                <%
+                                                    if(base64Profile != ""){
+                                                %>
+                                                    <div style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; overflow: hidden;">    
+                                                        <img id="" style="background-color: darkgray; width:35px; height: auto;" src="data:image/jpg;base64,<%=base64Profile%>"/>
+                                                    </div>
+                                                <%
+                                                    }else{
+                                                %>
+                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
+                                                <%}%>
+                                            <!--/div-->
+                                            <div>
+                                                <b>
+                                                    <a href="EachSelectedProvider.jsp?UserID=<%=ProvID%>">
+                                                        <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
+                                                            <%=ProvFirstName%> 
+                                                            <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
+                                                                go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
+                                                            </span>
+                                                        </p>
+                                                    </a>
+                                                </b>
+                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
+                                            </div>
                                         </div>
+                                    </div>      
+                                </td>
+                            </tr>
+                            <tr style="background-color: #eeeeee;">
+                                <td style="padding: 0;">
+                                    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="mailto:<%=ProvEmail%>">
+                                                <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
+                                            </a>  
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="tel:<%=ProvTel%>">
+                                                <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
+                                            </a>
+                                        </p>
+                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
+                                            <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
+                                                <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
+                                            </a>
+                                        </p>
                                     </div>
-                                    
-                                    <%if(MsgPhoto.equals("")){%>
-                                    <div style="text-align: center;"><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></div>
-                                    <%} else{ %>
-                                    <div style="text-align: center;"><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></div>
-                                    <%}%>
-                                    
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-new-post-15.png" width="15" height="15" alt="icons8-new-post-15"/>
-                                    <%=ProvEmail%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-phone-15.png" width="15" height="15" alt="icons8-phone-15"/>
-                                    <%=ProvTel%></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p style="color: seagreen;"><img src="icons/icons8-business-15.png" width="15" height="15" alt="icons8-business-15"/>
-                                    <%=ProvCompany%></p>
-                                <p style="color: seagreen;"><img src="icons/icons8-marker-filled-30.png" width="15" height="15" alt="icons8-marker-filled-30"/>
-                                    <%=ProvAddress%></p>
-                            </td>
-                        </tr>
-                        <tr style="background-color: #eeeeee;">
-                            <td>
-                                <!--p><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Previous'><input style='border: 1px solid black; background-color: pink; width: 45%;' type='button' value='Next' /></p-->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;">
+                                    <div>
+                                        <%if(MsgPhoto.equals("")){%>
+                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
+                                        <%} else{ %>
+                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
+                                        <%}%>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                                        
             <%
                         if(newsItems > 10)
                             break;
@@ -592,10 +599,28 @@
                 
                 <center><h3 style="color: white; margin-bottom: 15px; background-color: red;"></h3></center>
                 
+                <style>
+                    form input, form select{
+                        padding: 10px !important;
+                    }
+                    
+                    form table{
+                        box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);
+                        background-color: #9bb1d0; 
+                        border-radius: 4px; 
+                        width: fit-content; 
+                        padding: 20px; 
+                        min-height: 300px; 
+                        max-width: 300px;
+                    }
+                    form tr td p{
+                        margin: 10px 0;
+                    }
+                </style>
+                
                 <form style="display: none;" name="customerForm" id="customerForm" action="CustomoerSignUpController" method="POST">
-                    <p style="color: white; font-size: 20px;">Add Customer Account<p>
-                    <center><h2 style="margin-bottom: 20px;">Provide your information below</h2></center>
-                    <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; min-height: 300px; border: #3d6999 1px solid; max-width: 300px;">
+                    <p style="color: darkblue; margin: 15px 0; font-weight: bolder;">Add Customer Account<p>
+                    <table border="0">
                             <tbody>
                                 <tr>
                                     <td><p>First Name</p><input type="text" id="firstName" name="firstName" value="<%=fName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
@@ -761,9 +786,9 @@
                         //setInterval(checkMiddleNumber, 1000);
                     </script>
                     
-                    <h2 style="margin: 5px; margin-top: 30px; ">Add login information</h2>
+                    <h2 style="margin: 15px 0; margin-top: 30px; ">Add login information</h2>
                     
-                        <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px;">
+                        <table border="0">
                             <tbody>
                                 <tr>
                                     <td style="padding-top: 10px;"><p>User Name</p><input onkeyup="setPasswordsZero();" onfocusout="checkIsUsernameEmpty('userName','CustUserNameStatus');"
@@ -780,8 +805,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="passwordStatus"></p></center>
-                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="formStatus"></p></center>
+                        <center><p style="margin: 15px 0; width: 180px; color: #334d81;" id="passwordStatus"></p></center>
+                        <center><p style="margin: 15px 0; width: 180px; color: #334d81;" id="formStatus"></p></center>
                     
                         <input class="button" type="reset" value="Reset" name="resetbtn"/>
                         <input class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" id="AddUserSignUpBtn" type="submit" value="Signup" name="submitbtn" />
@@ -829,10 +854,8 @@
                     
                     <form style="overflow-x: hidden; display: none;" name="businessForm" id="businessForm" action="ProviderSignUpController" method="POST">
                     
-                    <p style="color: white; font-size: 20px;">Add Business Account<p>
-                    <center><h2 style="margin-bottom: 20px;">Provide your personal information below</h2></center>
-                        
-                    <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; min-height: 300px; border: #3d6999 1px solid; max-width: 300px;">
+                    <p style="color: darkblue; font-weight: bolder; margin: 15px 0;">Add Business Account<p>
+                    <table border="0">
                             <tbody>
                                 <tr>
                                     <td><p>First Name</p><input id="firstProvName" type="text" name="firstProvName" value="<%=fName%>" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
@@ -999,9 +1022,9 @@
                         //setInterval(checkMiddleNumber, 1000);
                     </script>
                     
-                    <center><h2 style="margin: 5px; margin-top: 30px;">Add your business information below</h2></center>
+                    <center><h2 style="margin: 15px 0; margin-top: 30px;">Add your business information below</h2></center>
                         
-                    <center><table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; min-height: 300px; border: #3d6999 1px solid; max-width: 300px;">
+                    <center><table border="0" style="">
                             <tbody>
                                 <tr>
                                     <td style="padding-bottom: 10px;"><p>Business Name</p><input id="businessName" type="text" name="businessName" value="" size="30" style="background-color: #d9e8e8; border-radius: 4px;"/></td>
@@ -1016,7 +1039,7 @@
                                         
                                         <h3 style="text-align: center; color: #000099;">Enter your address below</h3>      
                                         
-                                        <table>
+                                        <table style="background: none; box-shadow: none;">
                                             <tbody>
                                             <tr> 
                                                 <td>House</td>
@@ -1043,7 +1066,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p><i class='fa fa-exclamation-triangle' id='AddrStatusIcon'></i> <input id="businessLocation" type="text" name="businessLocation" value="" readonly style="background: none; border: none; font-size: 9px; width: 85%;"/></p>
+                                        <p><i class='fa fa-exclamation-triangle' id='AddrStatusIcon'></i> <input id="businessLocation" type="text" name="businessLocation" value="" readonly style="background: none; border: none; font-size: 9px; width: 85%; margin: auto;"/></p>
                                        </td>
                                 </tr>
                                 
@@ -1201,9 +1224,9 @@
                         //setInterval(checkMiddleNumber, 1000);
                     </script>
 
-                    <h2 style="margin: 5px; margin-top: 30px; ">Add login information</h2>
+                    <h2 style="margin: 15px 0; margin-top: 30px;">Add login information</h2>
                     
-                        <table border="0" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px;">
+                        <table border="0">
                             <tbody>
                                 <tr>
                                     <td style="padding-top: 10px;"><p>User Name</p><input onkeyup="setProvPasswordsZero();" onfocusout="checkIsUsernameEmpty('provUserName','provUserNameStatus');"
@@ -1219,8 +1242,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="provPasswordStatus"></p></center>
-                        <center><p style="margin-top: 5px; width: 180px; color: white;" id="provFormStatus"></p></center>
+                        <center><p style="margin: 15px 0; width: 180px; color: #334d81;" id="provPasswordStatus"></p></center>
+                        <center><p style="margin: 15px 0; width: 180px; color: #334d81;" id="provFormStatus"></p></center>
                         
                         <p style='min-width: 350px;'><input class="button" type="reset" value="Reset" name="resetbtn"/>
                             <input id="provSignUpBtn" class="button" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Sign up" name="provSignUpBtn" /></p>
@@ -1302,7 +1325,8 @@
                   
                 <center><h2 style="margin-bottom: 20px;">Login here</h2></center>
                 
-                <form name="login" action="LoginControllerMain" method="POST"><table border="0"> 
+                <form name="login" action="LoginControllerMain" method="POST">
+                    <table border="0" style="background: none; box-shadow: none;"> 
                         
                             <tbody>
                                 <tr>
