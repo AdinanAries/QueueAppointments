@@ -1685,7 +1685,7 @@
                                         
                                     %>
                                     
-                                    <div id="HistoryAppointmentDiv<%=JString%>" style="margin-top: 5px; margin-bottom: 5px; padding-top: 5px; padding-bottom: 5px; background-color: white; border-bottom: 1px solid darkgray; border-right: 1px solid darkgray; max-width: 700px;">
+                                    <div id="HistoryAppointmentDiv<%=JString%>" style="overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); margin: 5px; margin-bottom: 10px; padding: 10px; background-color: white; border-radius: 5px; max-width: 700px;">
                                     
                                         <%
                                             if(Base64ProvPic != ""){

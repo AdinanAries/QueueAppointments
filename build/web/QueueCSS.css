@@ -9,6 +9,9 @@
     background: none !important;
     padding-top: 5px !important;
 }
+#CosmeticsSection{
+    
+}
 input[type="text"]:focus{
     outline: none;
 }
@@ -686,7 +689,7 @@ select {
     min-height: 100vh;
     background: rgb(255,255,255);
     padding-top: 10px;
-    padding-bottom: 40px;
+    padding-bottom: 40px !important;
 }
 
 #CosmeticsSection h1{

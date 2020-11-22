@@ -1211,29 +1211,27 @@
                             while(cover.next()){
                                 
                                  try{    
-                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                Blob profilepic = cover.getBlob("GalaryPhoto"); 
-                                InputStream inputStream = profilepic.getBinaryStream();
-                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                byte[] buffer = new byte[4096];
-                                int bytesRead = -1;
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob profilepic = cover.getBlob("GalaryPhoto"); 
+                                    InputStream inputStream = profilepic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
 
-                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                    outputStream.write(buffer, 0, bytesRead);
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                    Base64GalleryPhotos.add(Base64.getEncoder().encodeToString(imageBytes));
+
+
                                 }
+                                catch(Exception e){
 
-                                byte[] imageBytes = outputStream.toByteArray();
-
-                                Base64GalleryPhotos.add(Base64.getEncoder().encodeToString(imageBytes));
-
-
-                            }
-                            catch(Exception e){
-
-                            }
-                                 
-                                 if(Base64GalleryPhotos.size() > 6)
-                                     break;
+                                }
+                                break;
                                 
                             }
                             
@@ -1242,24 +1240,11 @@
                         }
                         
                           
-                        String firstPic = "";
-                        String secondPic = "";
-                        String thirdPic = "";
-                        String fourthPic = "";
-                        String fithPic = "";
-                        String sixthPic = "";
+                        
                         String seventhPic = "";
                         
                         try{
-                            //put seventh photo second because it may be skipped if there isn't any
-                            //second photo as try block will skip to catch clause
-                            firstPic = Base64GalleryPhotos.get(1);
                             seventhPic = Base64GalleryPhotos.get(0);
-                            secondPic = Base64GalleryPhotos.get(2);
-                            thirdPic = Base64GalleryPhotos.get(3);  
-                            fourthPic = Base64GalleryPhotos.get(4);
-                            fithPic = Base64GalleryPhotos.get(5);
-                            sixthPic = Base64GalleryPhotos.get(6);
                             
                         }catch(Exception e){}
 
@@ -1267,12 +1252,12 @@
                     
                     <tbody>
                         <tr>
-                            <td>
+                            <td  style="padding: 0 !important; overflow: hidden;">
                                 
                                 <center>
                                 <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');">
                                     <div class='MainPropicContainer' style='width: 150px; height: 150px; overflow: hidden;'>
-                                        <img style='width: 150px; height: auto;' src="data:image/jpg;base64,<%=base64Image%>" />
+                                        <img style='width: 150px; height: auto; min-height: 150px;' src="data:image/jpg;base64,<%=base64Image%>" />
                                     </div>
                                 </div></center>
                     
@@ -1429,9 +1414,9 @@
 
                         %>
 
-                                         <center><div style='background-color: black; padding: 1px; margin-top: 5px; padding-bottom: 10px; margin-bottom: 1px; width: 99%; margin-left: 0;'>
-
-                                          <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
+                                         <center><div style='padding: 1px; margin-top: 5px; padding-bottom: 10px; margin-bottom: 1px; width: 99%; margin-left: 0;'>
+                    
+                            <p style="font-size: 20px; color: #37a0f5; font-weight: bolder; text-align: center; margin-bottom: 10px;">
                                                         <span style="color: tomato;">Overall Rating: </span>
                                                         <span style="font-size: 20px; margin-left: 10px;">
                                                         <%
@@ -1439,94 +1424,93 @@
 
                                                         %> 
                                                         ★★★★★ 
-                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Recommended</span></i>
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #334d81; font-size: 10px;"> Recommended</span></i>
                                                         <%
                                                              }else if(ratings == 4){
                                                         %>
                                                         ★★★★☆ 
-                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Recommended</span></i>
+                                                        <i class="fa fa-check" style="color: #4ed164; font-size: 18px; margin-left: 20px;"><span style="color: #334d81; font-size: 10px;"> Recommended</span></i>
                                                         <%
                                                              }else if(ratings == 3){
                                                         %>
                                                         ★★★☆☆ 
-                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Average</span></i>
+                                                        <i class="fa fa-thumbs-up" style="color: yellow; font-size: 16px; margin-left: 20px;"><span style="color: #334d81; font-size: 10px;"> Average</span></i>
                                                         <%
                                                              }else if(ratings == 2){
                                                         %>
                                                         ★★☆☆☆ 
-                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Bad rating</span></i>
+                                                        <i class="fa fa-exclamation-triangle" style="color: red; font-size: 17px; margin-left: 20px;"><span style="color: #334d81; font-size: 10px;"> Bad rating</span></i>
                                                         <%
                                                              }else if(ratings == 1){
                                                         %>
                                                         ★☆☆☆☆   
-                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #eeeeee; font-size: 10px;"> Worst rating</span></i>
+                                                        <i class="fa fa-thumbs-down" aria-hidden="true" style="color: red; font-size: 16px; margin-left: 20px;"><span style="color: #334d81; font-size: 10px;"> Worst rating</span></i>
                                                         <%}%>
                                                         </span>
                                                         
                                                     </p>
-                                                 
-                                           <p style="text-align: center; color: #8b8b8b; margin: 10px; margin-top: 20px;">Last Review</p>
-                                           
-                                           <div style="display: flex; flex-direction: row; justify-content: center;">   
-                                            <%
-                                                if(Base64Image == ""){
-                                            %> 
+                                                    
+                                 
+                            <p style="text-align: center; color: #8b8b8b; margin: 10px; margin-top: 20px;">Last Review (<%=ReviewStringDate%>)</p>
+                            <div style="display: flex; flex-direction: row; justify-content: center;">
+                                
+                                <%
+                                    if(Base64Image == ""){
+                                %> 
+                                    
+                                    <img style="border-radius: 100%; width: 50px; height: 50px;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
+                                    
+                                <%
+                                    }else{
+                                %>
+                                    <div style="border-radius: 100%; margin-left: 5px; min-width: 50px; height: 50px; overflow: hidden;">
+                                        <img style="width: 50px; height: auto;" src="data:image/jpg;base64,<%=Base64Image%>"/>
+                                    </div>
+                                <%
+                                    }
+                                %>
+                                <div style='margin-left: 10px;'>                 
+                                    <p style='color: #334d81; text-align: left; margin-top: 10px; margin-bottom: 5px; margin-left: 0; font-weight: bolder;'><%=CustomerFullName%></p>
 
-                                                <img style="border-radius: 100%; margin-left: 5px; width: 50px; height: 50px;" src="icons/icons8-user-filled-50.png" alt="icons8-user-filled-50"/>
+                                    <!--p style='color: darkgray; text-align: left; margin: 0;'><span style="color: #334d81; font-size: 18px;">
+                                                    
+                                
+                                        <%
+                                            if(CustomerRating == 5){
+                                        
+                                        %> 
+                                        ★★★★★
+                                        <%
+                                             }else if(CustomerRating == 4){
+                                        %>
+                                        ★★★★☆
+                                        <%
+                                             }else if(CustomerRating == 3){
+                                        %>
+                                        ★★★☆☆
+                                        <%
+                                             }else if(CustomerRating == 2){
+                                        %>
+                                        ★★☆☆☆
+                                        <%
+                                             }else if(CustomerRating == 1){
+                                        %>
+                                        ★☆☆☆☆
+                                        <%}%>
+                                        </span>
+                                    </p-->
 
-                                            <%
-                                                }else{
-                                            %>
-                                                <div style="border-radius: 100%; margin-left: 5px; min-width: 50px; height: 50px; overflow: hidden;">
-                                                    <img style="width: 50px; height: auto;" src="data:image/jpg;base64,<%=Base64Image%>"/>
-                                                </div>
-                                            <%
-                                                }
-                                            %>
-                            <div style='margin-left: 10px;'>                 
-                                <p style='color: white; text-align: left; margin: 0; font-weight: bolder;'><%=CustomerFullName%></p>
+                        <%
+                            if(!ReviewMessage.equals("")){
+                        %>
+                                    <p style='color: darkgray; text-align: left; margin: 0;'><span style='color: #626b9e;'><%=ReviewMessage%></span></p>
 
-                                <p style='color: darkgray; text-align: left; margin: 0;'>Rated: <span style="color: gold; font-size: 18px;">
+                        <%}%>
+                                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>'><p style='clear: both; text-align: center; color: #334d81; cursor: pointer; padding-top: 20px;'>See More...</p></a>
+                        </div>
+                    </div>
+        </div></center>
 
-
-                                                        <%
-                                                            if(CustomerRating == 5){
-
-                                                        %> 
-                                                        ★★★★★
-                                                        <%
-                                                             }else if(CustomerRating == 4){
-                                                        %>
-                                                        ★★★★☆
-                                                        <%
-                                                             }else if(CustomerRating == 3){
-                                                        %>
-                                                        ★★★☆☆
-                                                        <%
-                                                             }else if(CustomerRating == 2){
-                                                        %>
-                                                        ★★☆☆☆
-                                                        <%
-                                                             }else if(CustomerRating == 1){
-                                                        %>
-                                                        ★☆☆☆☆
-                                                        <%}%>
-                                                        </span>
-                                    </p>
-
-                            <%
-                                if(!ReviewMessage.equals("")){
-                            %>
-                                    <p style='color: darkgray; text-align: left; margin: 0;'>Says: <span style='color: white;'><%=ReviewMessage%></span></p>
-
-                                    <p style='color: silver; float: right; margin: 0; margin-right: 5px;'><%=ReviewStringDate%></p>
-                            <%}%>
-                            
-
-                                    <a onclick="document.getElementById('PageLoader').style.display = 'block';" href='ViewSelectedProviderReviews.jsp?Provider=<%=ProviderID%>'><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer; padding-top: 10px;'>See More...</p></a>
-                                </div>
-                            </div>
-                        </div></center>
 
                         <%}%>
 
@@ -1536,93 +1520,67 @@
                                 </table>
                                         
                                         <%
-                                            if(firstPic != ""){
+                                            if(seventhPic != ""){
                                         %>
                                          
-                                        <div id="GalleryThumnail" style="margin-bottom: 15px; background: #eeeeee; padding: 3px; padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid darkgrey; border-top: 1px solid darkgrey;">
+                                        <div id="GalleryThumnail" style="margin: 0 10px; margin-bottom: 20px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); border-radius: 4px; overflow: hidden;">
                                         
-                                            <p style="text-align: center; color: tomato; padding-bottom: 5px;">Photo Gallery</p>
-                                            
                                         <%
                                             if(seventhPic != ""){
                                         %>
-                                            
-                                            <center><img src="data:image/jpg;base64,<%=seventhPic%>" width="100%" height="300" style="max-width: 350px; margin-bottom: 0;  border-radius: 5px;"/></center>
-                                         
+                                            <div style="background-image: url('data:image/jpg;base64,<%=seventhPic%>'); background-size: cover; background-position: center; background-repeat: no-repeat;
+                                                 background-repeat: no-repeat; padding: 0 10px; height: 200px; cursor: pointer; display: flex; flex-direction: column; justify-content: center;">
+                                                <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ViewProviderPhotos.jsp?Provider=<%=ProviderID%>">
+                                                    <p style="color: white; text-align: center; background-color: #626b9e; padding: 10px; border-radius: 4px; margin: auto; width: fit-content;">
+                                                        <i style="margin-right: 5px;" class="fa fa-picture-o" aria-hidden="true"></i>
+                                                        <% String aName = fullName.split(" ")[0];%>
+                                                        click here to see <span style='font-weight: bolder;'><%=aName%></span>'s photos
+                                                    </p>
+                                                </a>
+                                            </div>
                                         <%}%>
-                                            <center><table style=" width: 100%; max-width: 350px; margin-top: 0;">
-                                               
-                                                <tbody>
-                                                <tr>
-                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=firstPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
-                                                        
-                                                    </td>
-                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=secondPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
-                                                        
-                                                    </td>
-                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=thirdPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
-                                                        
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=fourthPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
-                                                        
-                                                    </td>
-                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=fithPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
-                                                        
-                                                    </td>
-                                                    <td style="width: 100px; height: 110px; background-image: url('data:image/jpg;base64,<%=sixthPic%>'); background-size: cover; box-shadow: 0 0 0 0; border-radius: 0; border-radius: 5px;">
-                                                        <div style="background-color: black; opacity: 0.7; width: 96%; height: 96%; cursor: pointer; margin-left: 2px;">
-                                                            <a onclick="document.getElementById('PageLoader').style.display = 'block';" href="ViewProviderPhotos.jsp?Provider=<%=ProviderID%>"><p style="color: white; text-align: center; padding-top: 20px;"><img src="icons/icons8-photo-gallery-20 (1).png" width="20" height="20" alt="icons8-photo-gallery-20 (1)"/>
-                                                            </p>
-                                                            <p style="color: white; text-align: center;">View Photos</p></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table></center>
                                         </div>
                                              
                                         <%}%>
                                 </div>
                                 
-                                <div id="serviceslist" style="padding-bottom: 5px; border: 0;">
+                                <div id="serviceslist" style="border: 0; padding-bottom: 20px;">
                                     
-                                    <center><p style="color: tomato; text-align: center;">Hours Open</p>
+                                    <p style="color: #254386; font-weight: bolder; text-align: center; padding: 20px 0;">Hours Open</p>
                                     <table id="hoursTable" style="border-spacing: 0; box-shadow: 0; margin-left: 0;  width: 100%;">
                                         <tbody>
                                         <tr>
-                                            <td style="padding: 0; background-color: #eeeeee;">
-                                                <p id="SunTime" style="color: blue;">Sunday: </p><%= SundayTime%>
+                                            <td style="padding: 10px; text-align: center;">
+                                                <p id="SunTime" style="color: #334d81; text-align: center;">Sunday: </p><%= SundayTime%>
                                             </td>
-                                            <td style="padding: 0; background-color: #eeeeee;">
-                                                <p id="ThuTime" style="color: blue;">Thursday: </p><%= ThursdayTime%>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="">
-                                                <p id="MonTime" style="color: blue;">Monday: </p><%= MondayTime%>
-                                            </td>
-                                            <td style="">
-                                                <p id="FriTime" style="color: blue;">Friday: </p><%= FridayTime%>
+                                            <td style="padding: 10px; text-align: center;">
+                                                <p id="ThuTime" style="color: #334d81; text-align: center;">Thursday: </p><%= ThursdayTime%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="background-color: #eeeeee;">
-                                                <p id="TueTime" style="color: blue;">Tuesday: </p><%= TuesdayTime%>
+                                            <td style="padding: 10px; text-align: center;">
+                                                <p id="MonTime" style="color: #334d81; text-align: center;">Monday: </p><%= MondayTime%>
                                             </td>
-                                            <td style="background-color: #eeeeee;">
-                                                <p id="SatTime" style="color: blue;">Saturday: </p><%= SaturdayTime%>
+                                            <td style="padding: 10px; text-align: center;">
+                                                <p id="FriTime" style="color: #334d81; text-align: center;">Friday: </p><%= FridayTime%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="">
-                                                <p id="WedTime" style="color: blue;">Wednesday: </p><%= WednessdayTime%>
+                                            <td style="padding: 10px; text-align: center;">
+                                                <p id="TueTime" style="color: #334d81; text-align: center;">Tuesday: </p><%= TuesdayTime%>
+                                            </td>
+                                            <td style="padding: 10px; text-align: center;">
+                                                <p id="SatTime" style="color: #334d81; text-align: center;">Saturday: </p><%= SaturdayTime%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px; text-align: center;">
+                                                <p id="WedTime" style="color: #334d81; text-align: center;">Wednesday: </p><%= WednessdayTime%>
                                             </td>
                                             <td style="">
                                             </td>
                                         </tr>
-                                        </tbody></center>
+                                        </tbody>
                                     </table>
                                             
                                     <script>
@@ -1661,10 +1619,12 @@
                                         
                                 </div> 
                                         
-                                     <div id="serviceslist" class="servicesList">
+                                     <div id="serviceslist" style='border: none; background: none;' class="servicesList">
                                          
                                         <form action="FinishAppointment.jsp" method="POST">
-                                        <p style="color: tomato; text-align: center;">Select service(s) to continue<%=For%><%=FormattedAppointmentTime%></p>
+                                        <p style="color: #334d81; font-weight: bolder; padding: 15px 0; text-align: center;">
+                                            Select service(s) to continue<%=For%><%=FormattedAppointmentTime%>
+                                        </p>
                                      
                                         <% 
                                             
@@ -1689,13 +1649,23 @@
                                         
                                         %>
                                         
-                                            <p style="border-radius: 4px; text-align: center; background-color: bisque; padding: 5px;
-                                               display: flex; flex-direction: row; justify-content: space-between;">
-                                                <input style="min-width: 17px;" onclick="enableBkAppBtn(<%=Number%>)" type="checkbox" id="<%=CheckboxName%>" name="<%=CheckboxName%>" value="Checked" />
-                                                <label for="<%=CheckboxName%>"> <%=ServiceAndPrice%> - <span style="color: #000099;"> <%=Description%></span></label>
-                                                <label for="<%=CheckboxName%>"><i id="AddonPlus<%=Number%>" style="font-size: 30px; color: darkslateblue; margin-left: 10px;" class="fa fa-plus-square" aria-hidden="true"></i>
-                                                    <i id="AddonMinus<%=Number%>" style="font-size: 30px; color: red; margin-left: 10px; display: none;" class="fa fa-minus-square" aria-hidden="true"></i></label>
-                                            </p>
+                                            <div style="border-radius: 4px; padding: 10px; display: flex; flex-direction: row; justify-content: space-between;">
+                                                <div style='display: flex;'>
+                                                    <input style="min-width: 17px;" onclick="enableBkAppBtn(<%=Number%>)" type="checkbox" id="<%=CheckboxName%>" name="<%=CheckboxName%>" value="Checked" />
+                                                    <p><label for="<%=CheckboxName%>" style='color: #334d81;'> 
+                                                            <span style='font-weight: bolder;'><%=ServiceAndPrice%></span> - <%=Description%>
+                                                        </label>
+                                                    <p>
+                                                </div>
+                                                <p>
+                                                    <label for="<%=CheckboxName%>">
+                                                        <i id="AddonPlus<%=Number%>" style="font-size: 30px; color: darkslateblue; margin-left: 10px;" class="fa fa-plus-square" aria-hidden="true"></i>
+                                                        <i id="AddonMinus<%=Number%>" style="font-size: 30px; color: red; margin-left: 10px; display: none;" class="fa fa-minus-square" aria-hidden="true"></i>
+                                                    </label>
+                                                </p>
+                                            </div>
+                                            
+                                            
                                             <input type="hidden" name="<%=NameOfService%>" value="<%=providersList.get(i).SVCPRC.getService(j).trim()%>" />
                                             <input type="hidden" name="<%=PriceOfService%>" value="<%=providersList.get(i).SVCPRC.getPrice(j)%>" />
                                             
@@ -1713,13 +1683,13 @@
                                         
                                         <%}%>
                                            
-                                        <p id="SVCSelectStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
+                                        <p id="SVCSelectStatus" style="color: darkblue; font-weight: bolder; margin: 15px 0 !important; text-align: center"></p>
                                         
                                             <input type="hidden" id="totallist" name="totallist" value="<%=listcounter%>" />
                                             <input type="hidden" name="UserID" value="<%=PID%>" />
                                             <input type="hidden" name="AppointmentTime" value="<%=AppointmentTime%>" />
-                                            <center><input style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
-                                                   padding: 5px;" id="BookAppointmentBtn"
+                                            <center><input style="border: none; background-color: darkslateblue; border-radius: 4px; color: white; margin-top: 10px;
+                                                   padding: 10px;" id="BookAppointmentBtn"
                                                   onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Continue" name="BookAppointmentBtn" /></center>
                                             </form>
                                     </div>

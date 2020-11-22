@@ -706,7 +706,7 @@
                 <center>
                     <div class =" SearchObject" style="margin-bottom: 15px; margin-top: 20px; padding-top: 10px; background: none !important;">
                         
-                        <p style="text-align: center; margin: 10px 0; font-weight: bolder;">Search By Name</p>
+                        <p style="color: #3d6999; text-align: center; margin: 10px 0; font-weight: bolder;">Search By Name</p>
                         
                         <form style="background-color: #9bb1d0;" name="searchForm" action="QueueSelectBusinessSearchResult.jsp" method="POST">
                             <input style="border-top-left-radius: 4px !important; border-bottom-left-radius: 4px !important; background-color: #d9e8e8 !important;" placeholder='Search Service Provider' class="searchfld" value="" type="text" name="SearchFld" size="" /><input class="searchbtn" style="border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important; background-color: #06adad !important;
@@ -954,7 +954,7 @@
         </div>
             
             <div id="CosmeticsSection" style='padding-top: 0;'>
-                <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 10px;">
+                <div style="background-color: #212c2c; padding: 0 10px; margin-bottom: 40px; padding-top: 5px; padding-bottom: 30px;">
                     <h1 style='color: white; font-size: 19px; font-family: serif; padding: 20px 0;'>Popular Services</h1>
                     
                     <div id="PopularSvcDiv" style="display: flex; flex-direction: row; justify-content: space-between; max-width: 700px; margin: auto;  padding-left: 10px; padding-right: 10px;">
@@ -1050,15 +1050,14 @@
                                     }
                             %>
                             <a href='EachSelectedProvider.jsp?UserID=<%=RPID%>' onclick="document.getElementById('HomePageLoader').style.display = 'block';">
-                                <div style="height: 120px; background-color: #334d81; border-top: 5px solid #ffe96b;
-                                 padding: 15px 5px; border-radius: 5px; margin: 0 5px;
-                                 background: linear-gradient(rgba( 0, 0, 0, 0.3), rgba(0,0,0,0.8)), url('data:image/jpg;base64,<%=RCovPic%>'); background-size: cover;
-                                 background-position: center;
-                                 display: flex; flex-direction: column; justify-content: space-between;">
+                                <div style="min-height: 120px; background-color: #334d81; border-top: 10px solid #ffe96b; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.5), 0px 0px 2.9px rgba(0, 0, 0, 0.5);
+                                 border-radius: 5px; margin: 5px; text-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.5), 0px 0px 2.9px rgba(0, 0, 0, 0.5);
+                                 background: linear-gradient(rgba( 0, 0, 0, 0.3), rgba(116,115,15,0.8)), url('data:image/jpg;base64,<%=RCovPic%>'); background-size: cover;
+                                 background-position: center; padding: 30px 10px; display: flex; flex-direction: column; justify-content: space-between;">
                                     <div style='display: flex; flex-direction: row; justify-content: space-between;'>
                                         <div>
-                                            <div style="overflow: hidden; border-bottom-right-radius: 10px; margin-top: -15px; margin-left: -5px; width: 70px; height: 70px;">
-                                                <img src="data:image/jpg;base64,<%=RProPic%>" style="width: 70px; height: auto;">
+                                            <div style="overflow: hidden; border-radius: 100%; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.5), 0px 0px 2.9px rgba(0, 0, 0, 0.5); width: 70px; height: 70px;">
+                                                <img src="data:image/jpg;base64,<%=RProPic%>" style="width: 70px; height: auto; min-height: 70px;">
                                             </div>
                                         </div>
                                         <div>
