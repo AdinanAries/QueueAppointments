@@ -84,7 +84,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         
-        <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
         
         <!--script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script-->
         
@@ -135,6 +136,16 @@
             slick_theme_css.setAttribute('type','text/css');
             slick_theme_css.setAttribute('href','//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css');
             document.head.appendChild(slick_theme_css);
+            
+            var chart_js = document.createElement('script');
+            chart_js.setAttribute('src','https://pagecdn.io/lib/chart/2.9.3/Chart.min.js');
+            document.head.appendChild(chart_js);
+            
+            var chart_css = document.createElement('link');
+            chart_css.setAttribute('rel','stylesheet');
+            chart_css.setAttribute('type','text/css');
+            chart_css.setAttribute('href','https://pagecdn.io/lib/chart/2.9.3/Chart.min.css');
+            document.head.appendChild(chart_css);
             
             /*var jquery_timepicker_css = document.createElement('link');
             jquery_timepicker_css.setAttribute('rel','stylesheet');
@@ -1416,338 +1427,130 @@
            
         <div id="Extras" style="float: none;">
             
-            <div id='News'>
-                
+            <div id="News">
+            
             <div id="ExtrasInnerContainer">
+                <%
+                    int newsItems = 0;
                     
-                    <%
-                        int newsItems = 0;
-                        String newsQuery = "";
+                    try{
+                        Class.forName(Driver);
+                        Connection newsConn = DriverManager.getConnection(Url, user, password);
+                        String newsQuery = "Select top 1 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                        PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
+                        ResultSet newsRec = newsPst.executeQuery();
                         
-                       // while(newsItems < 10){
+                        while(newsRec.next()){
                             
-                            try{
-                                Class.forName(Driver);
-                                Connection CustConn = DriverManager.getConnection(Url, user, password);
-                                String CustQuery = "select top 10 * from ProviderCustomers.ProvNewsForClients where CustID = ? order by ID desc";
-                                PreparedStatement CustPst = CustConn.prepareStatement(CustQuery);
-                                CustPst.setInt(1, UserID);
-                                ResultSet CustRec = CustPst.executeQuery();
-                                
-                                while(CustRec.next()){
+                            String base64Profile = "";
+                            newsItems++;
+                            
+                            String ProvID = newsRec.getString("ProvID");
+                            String ProvFirstName = "";
+                            String ProvCompany = "";
+                            String ProvAddress = "";
+                            String ProvTel = "";
+                            String ProvEmail = "";
+                            String ServiceType = "";
+                            
+                            String Msg = newsRec.getString("Msg").trim();
+                            String MsgPhoto = "";
+                            
+                            try{    
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                    InputStream inputStream = Pic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
+
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                }
+                                catch(Exception e){
+
+                                }
+                            
+
+                                try{
+                                    Class.forName(Driver);
+                                    Connection ProvConn = DriverManager.getConnection(Url, user, password);
+                                    String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                                    PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
+                                    ProvPst.setString(1, ProvID);
                                     
-                                    String MessageID = CustRec.getString("MessageID").trim();
+                                    ResultSet ProvRec = ProvPst.executeQuery();
                                     
-                                    try{
-                                        Class.forName(Driver);
-                                        Connection newsConn = DriverManager.getConnection(Url, user, password);
-                                        newsQuery = "Select * from QueueServiceProviders.MessageUpdates where MsgID = ?";
-                                        PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
-                                        newsPst.setString(1, MessageID);
-                                        ResultSet newsRec = newsPst.executeQuery();
-
-                                        while(newsRec.next()){
-                                            
-                                            String base64Profile = "";
-                                            newsItems++;
-                                            
-                                            String ProvID = newsRec.getString("ProvID");
-                                            String ProvFirstName = "";
-                                            String ProvCompany = "";
-                                            String ProvAddress = "";
-                                            String ProvTel = "";
-                                            String ProvEmail = "";
-
-                                            String Msg = newsRec.getString("Msg").trim();
-                                            String MsgPhoto = "";
-
-                                            try{    
-                                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                                Blob Pic = newsRec.getBlob("MsgPhoto"); 
-                                                InputStream inputStream = Pic.getBinaryStream();
-                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                byte[] buffer = new byte[4096];
-                                                int bytesRead = -1;
-
-                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                    outputStream.write(buffer, 0, bytesRead);
-                                                }
-
-                                                byte[] imageBytes = outputStream.toByteArray();
-
-                                                MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                            }catch(Exception e){}
-
-
-                                                try{
-                                                    Class.forName(Driver);
-                                                    Connection ProvConn = DriverManager.getConnection(Url, user, password);
-                                                    String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
-                                                    PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
-                                                    ProvPst.setString(1, ProvID);
-
-                                                    ResultSet ProvRec = ProvPst.executeQuery();
-
-                                                    while(ProvRec.next()){
-                                                        ProvFirstName = ProvRec.getString("First_Name").trim();
-                                                        ProvCompany = ProvRec.getString("Company").trim();
-                                                        ProvTel = ProvRec.getString("Phone_Number").trim();
-                                                        ProvEmail = ProvRec.getString("Email").trim();
-                                                        
-                                                        try{    
-                                                            //put this in a try catch block for incase getProfilePicture returns nothing
-                                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
-                                                            InputStream inputStream = Pic.getBinaryStream();
-                                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                            byte[] buffer = new byte[4096];
-                                                            int bytesRead = -1;
-
-                                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                                outputStream.write(buffer, 0, bytesRead);
-                                                            }
-
-                                                            byte[] imageBytes = outputStream.toByteArray();
-
-                                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                                        }
-                                                        catch(Exception e){
-
-                                                        }
-                                                    }
-
-                                                }catch(Exception e){
-                                                    e.printStackTrace();
-                                                }
-
-                                                try{
-                                                    Class.forName(Driver);
-                                                    Connection ProvLocConn = DriverManager.getConnection(Url, user, password);
-                                                    String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
-                                                    PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
-                                                    ProvLocPst.setString(1, ProvID);
-
-                                                    ResultSet ProvLocRec = ProvLocPst.executeQuery();
-
-                                                    while(ProvLocRec.next()){
-                                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
-                                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
-                                                        String NTown = ProvLocRec.getString("Town").trim();
-                                                        String NCity = ProvLocRec.getString("City").trim();
-                                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
-
-                                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
-                                                    }
-                                                }catch(Exception e){
-                                                    e.printStackTrace();
-                                                }
-                    %>
-
-                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
-                        <tbody>
-                            <tr style="background-color: #eeeeee;">
-                                <td>
-                                    <div id="ProvMsgBxOne">
+                                    while(ProvRec.next()){
                                         
-                                        <div style='font-weight: bolder;'>
-                                                <%
-                                                    if(base64Profile != ""){
-                                                %>
-                                                    <div style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; overflow: hidden;">    
-                                                        <img id="" style="background-color: darkgray; width:35px; height: auto;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                    </div>
-                                                <%
-                                                    }else{
-                                                %>
-                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                                <%}%>
-                                            <div>
-                                                <b>
-                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                                                        <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
-                                                            <%=ProvFirstName%> 
-                                                            <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
-                                                                go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
-                                                            </span>
-                                                        </p>
-                                                    </a>
-                                                </b>
-                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
-                                            </div>
-                                        </div>
-                                    </div>      
-                                </td>
-                            </tr>
-                            <tr style="background-color: #eeeeee;">
-                                <td style="padding: 0;">
-                                    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">
-                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
-                                            <a style="color: white;" href="mailto:<%=ProvEmail%>">
-                                                <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
-                                            </a>  
-                                        </p>
-                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
-                                            <a style="color: white;" href="tel:<%=ProvTel%>">
-                                                <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
-                                            </a>
-                                        </p>
-                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
-                                            <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
-                                                <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
-                                            </a>
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 0;">
-                                    <div>
-                                        <%if(MsgPhoto.equals("")){%>
-                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
-                                        <%} else{ %>
-                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
-                                        <%}%>
+                                        ServiceType = ProvRec.getString("Service_Type").trim();
+                                            
+                                        ProvFirstName = ProvRec.getString("First_Name").trim();
+                                        ProvCompany = ProvRec.getString("Company").trim();
+                                        ProvTel = ProvRec.getString("Phone_Number").trim();
+                                        ProvEmail = ProvRec.getString("Email").trim();
+                                        
+                                        try{    
+                                            //put this in a try catch block for incase getProfilePicture returns nothing
+                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                            InputStream inputStream = Pic.getBinaryStream();
+                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                            byte[] buffer = new byte[4096];
+                                            int bytesRead = -1;
 
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                <%  
-                                        if(newsItems > 10)
-                                            break;
+                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                outputStream.write(buffer, 0, bytesRead);
+                                            }
+
+                                            byte[] imageBytes = outputStream.toByteArray();
+
+                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+
+                                        }catch(Exception e){}
+                                    }
+                                    
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                                
+                                try{
+                                    Class.forName(Driver);
+                                    Connection ProvLocConn = DriverManager.getConnection(Url, user, password);
+                                    String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
+                                    PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
+                                    ProvLocPst.setString(1, ProvID);
+                                    
+                                    ResultSet ProvLocRec = ProvLocPst.executeQuery();
+                                    
+                                    while(ProvLocRec.next()){
+                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
+                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
+                                        String NTown = ProvLocRec.getString("Town").trim();
+                                        String NCity = ProvLocRec.getString("City").trim();
+                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
+                                        
+                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
                                     }
                                 }catch(Exception e){
                                     e.printStackTrace();
                                 }
-
-                            }
-
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                    //}
-                
-                    if(newsItems < 10){
-               
-                        try{
-                            Class.forName(Driver);
-                            Connection newsConn = DriverManager.getConnection(Url, user, password);
-                            String newsQuery2 = "Select top 10 * from QueueServiceProviders.MessageUpdates where ProvID in "+GlobalIDList+" and VisibleTo like 'Public%' order by MsgID desc";
-                            PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
-                            ResultSet newsRec = newsPst.executeQuery();
-
-                            while(newsRec.next()){
-
-                                String base64Profile = "";
-                                newsItems++;
-
-                                String ProvID = newsRec.getString("ProvID");
-                                String ProvFirstName = "";
-                                String ProvCompany = "";
-                                String ProvAddress = "";
-                                String ProvTel = "";
-                                String ProvEmail = "";
-
-                                String Msg = newsRec.getString("Msg").trim();
-                                String MsgPhoto = "";
-
-                                try{    
-                                        //put this in a try catch block for incase getProfilePicture returns nothing
-                                        Blob Pic = newsRec.getBlob("MsgPhoto"); 
-                                        InputStream inputStream = Pic.getBinaryStream();
-                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                        byte[] buffer = new byte[4096];
-                                        int bytesRead = -1;
-
-                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                            outputStream.write(buffer, 0, bytesRead);
-                                        }
-
-                                        byte[] imageBytes = outputStream.toByteArray();
-
-                                        MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                    }
-                                    catch(Exception e){
-
-                                    }
-
-
-                                    try{
-                                        Class.forName(Driver);
-                                        Connection ProvConn = DriverManager.getConnection(Url, user, password);
-                                        String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
-                                        PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
-                                        ProvPst.setString(1, ProvID);
-
-                                        ResultSet ProvRec = ProvPst.executeQuery();
-
-                                        while(ProvRec.next()){
-                                            ProvFirstName = ProvRec.getString("First_Name").trim();
-                                            ProvCompany = ProvRec.getString("Company").trim();
-                                            ProvTel = ProvRec.getString("Phone_Number").trim();
-                                            ProvEmail = ProvRec.getString("Email").trim();
-
-                                            try{
-
-                                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                                Blob Pic = ProvRec.getBlob("Profile_Pic"); 
-                                                InputStream inputStream = Pic.getBinaryStream();
-                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                byte[] buffer = new byte[4096];
-                                                int bytesRead = -1;
-
-                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                    outputStream.write(buffer, 0, bytesRead);
-                                                }
-
-                                                byte[] imageBytes = outputStream.toByteArray();
-
-                                                base64Profile = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                            }
-                                            catch(Exception e){
-
-                                            }
-                                        }
-
-                                    }catch(Exception e){
-                                        e.printStackTrace();
-                                    }
-
-                                    try{
-                                        Class.forName(Driver);
-                                        Connection ProvLocConn = DriverManager.getConnection(Url, user, password);
-                                        String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
-                                        PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
-                                        ProvLocPst.setString(1, ProvID);
-
-                                        ResultSet ProvLocRec = ProvLocPst.executeQuery();
-
-                                        while(ProvLocRec.next()){
-                                            String NHouseNumber = ProvLocRec.getString("House_Number").trim();
-                                            String NStreet = ProvLocRec.getString("Street_Name").trim();
-                                            String NTown = ProvLocRec.getString("Town").trim();
-                                            String NCity = ProvLocRec.getString("City").trim();
-                                            String NZipCode = ProvLocRec.getString("Zipcode").trim();
-
-                                            ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
-                                        }
-                                    }catch(Exception e){
-                                        e.printStackTrace();
-                                    }
+                                
                 %>
+                
+                <a href="./NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>">
+                    <p style="padding: 10px 0; color: #44484a; font-weight: bolder; margin: auto; width: fit-content;">
+                        <i style="margin-right: 5px;" class="fa fa-newspaper-o"></i>
+                        Click here to see more ads
+                    </p>
+                </a>
+                
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
                         <tbody>
@@ -1756,6 +1559,7 @@
                                     <div id="ProvMsgBxOne">
                                         
                                         <div style='font-weight: bolder;'>
+                                            <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
                                                 %>
@@ -1767,9 +1571,10 @@
                                                 %>
                                                     <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
                                                 <%}%>
+                                            <!--/div-->
                                             <div>
                                                 <b>
-                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                    <a href="EachSelectedProvider.jsp?UserID=<%=ProvID%>">
                                                         <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
                                                             <%=ProvFirstName%> 
                                                             <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
@@ -1825,18 +1630,17 @@
                         </tbody>
                     </table>
             <%
-                            if(newsItems > 10)
-                                break;
-                        }
-                    }catch(Exception e){
-                        e.printStackTrace();
+                        if(newsItems > 10)
+                            break;
                     }
-            
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
             %>
-               </div> 
-               
-               <%
+            
+            </div>
+            
+            <%
                 if(newsItems == 0){
             %>
 
@@ -1845,7 +1649,16 @@
             <%
                 }
             %>
-               
+            
+                <div class='eachCSecFlex marginUp20' style='width: 100%; margin-top: 10px;'>
+                    <h1>Our businesses keep you posted</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding-top: 20px;
+                           display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                        <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular ads to keep you informed</p>
+                    </div>
+                </div>
+            
             </div>
             
             <div id='Calender' style='display: none;'>
@@ -1854,10 +1667,11 @@
                         <tr style="background-color: #eeeeee">
                             <td>
                                 <div id="DateChooserDiv" style=''>
-                                    <p style='margin-bottom: 5px; color: #ff3333;'>Pick a date below</p>
+                                    <p style='margin: 10px 0; color: #3d6999; font-weight: bolder;'>
+                                    <i style='margin-right: 5px; color: #334d81;' class="fa fa-calendar" aria-hidden="true"></i>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
                                     <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 0; background-color: #ccc; padding: 5px;' type="button" name="CalDateVal" 
+                                                                        border: #3d6999 1px solid;  font-weight: bolder; background-color: #06adad; color: white; padding: 10px 5px;' type="button" name="CalDateVal" 
                                                                           value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
@@ -1869,18 +1683,17 @@
                             </td>
                         </tr>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
-                            <div style='background-color: white; padding: 10px; border-radius: 4px;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 40%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #ccc; width: 45%; float: left;'>Appointments</div>
+                            <div style='padding: 10px; border-radius: 4px;'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; 
+                                         font-weight: bolder; border: 0; padding: 5px; color: black; width: 40%; float: right;'>
+                                        Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='color: darkgrey; font-weight: bolder;
+                                         cursor: pointer; border-radius: 4px; border: 0; padding: 5px; width: 45%; float: left;'>
+                                        Appointments</div>
                                     <p style='clear: both;'></p>
                             </div>
                             <td style=''>
-                                <div style='padding: 5px; background-color: white;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; border: 0; padding: 5px; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
-                                    <p style='clear: both;'></p>
-                                </div>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Appointments</p>
+                                <p style='margin-bottom: 5px; color: #626b9e; font-weight: bolder;'><i class='fa fa-calendar-check-o' style="margin-right: 5px; color: #334d81; "aria-hidden='true'></i>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
@@ -1894,14 +1707,23 @@
                                             int AptID = AppointmentListExtra.get(aptNum).getAppointmentID();
                                             String ProvName = AppointmentListExtra.get(aptNum).getProviderName();
                                             String ProvComp = AppointmentListExtra.get(aptNum).getProviderCompany();
-                                            if(ProvComp.length() > 13)
-                                                ProvComp = ProvComp.substring(0, 12) + "...";
+                                            /*if(ProvComp.length() > 13)
+                                                ProvComp = ProvComp.substring(0, 12) + "...";*/
                                             String AptTime = AppointmentListExtra.get(aptNum).getTimeOfAppointment();
                                             if(AptTime.length() > 5)
                                                 AptTime = AptTime.substring(0,5);
                                     %>
                                     
-                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: darkblue; font-weight: bolder;"><%=ProvComp%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
+                                    <p style="margin-top: 10px; margin-bottom: 5px; color: #334d81; font-weight: bolder; width: 100%;">
+                                        <%=ProvName%>
+                                        <span style="color: #888; text-align: right;">
+                                            <i class='fa fa-clock-o' style='margin-right: 5px; margin-left: 10px; color: #06adad;'></i>
+                                            <%=AptTime%>
+                                        </span>
+                                    </p>
+                                    <p style="color: #888; margin-bottom: 20px;"><%=ProvComp%></p>
+                                    
+                                        
                                     
                                     <%
                                             count++;
@@ -1931,18 +1753,22 @@
                                                         
                                                         for(i in ApptData.Data){
                                                             
-                                                            var number = parseInt(i, 10) + 1;
-                                                            
                                                             var name = ApptData.Data[i].ProvName;
                                                             var comp = ApptData.Data[i].ProvComp;
-                                                            if(comp.length > 13)
-                                                                comp = comp.substring(0,12) + "...";
                                                             
-                                                            var time = ApptData.Data[i].ApptTime;
+                                                            var time = "" + ApptData.Data[i].ApptTime;
                                                             
-                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: darkblue; font-weight: bolder;">'+comp+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
+                                                            aDiv.innerHTML += 
+                                                                '<p style="margin-top: 10px; margin-bottom: 5px; color: #334d81; font-weight: bolder; width: 100%;">'
+                                                                    +name+
+                                                                    '<span style="color: #888; text-align: right;">' +
+                                                                    '<i class="fa fa-clock-o" style="margin-right: 5px; margin-left: 10px; color: #06adad;"></i>'
+                                                                    +time+
+                                                                    '</span>'+
+                                                                '</p>'+
+                                                                '<p style="color: #888; margin-bottom: 20px;">'+comp+'</p>';
                                                             
-                                                        }
+                                                        };
                                                         
                                                         document.getElementById("CalApptListDiv").innerHTML = aDiv.innerHTML;
                                                         
@@ -1974,10 +1800,13 @@
                                                             
                                                             bDiv.innerHTML += '<div id="Cupdt'+updtCounter+'" ' +
                                                                     'onclick=\'updateEvent("'+ID+'", "'+Title+'","'+Desc+'", "'+Date+'","' +Time+'", "Cupdt'+updtCounter+'");\' ' +
-                                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
-
-                                                                    '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Date+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Time+'</span></p>'+
-                                                                    '<P style="color: #334d81;">'+Desc+'</p>'+
+                                                                    'style="cursor: pointer; margin: 10px 0; padding: 2px;">' +
+                                                                    '<p><span style="font-weight: bolder; color: #334d81; font-size: 15px;">'+Title+'</p>' +
+                                                                    '<p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>' +
+                                                                        '<span style="color: darkblue;font-size: 11px;">'+Date+'</span>' +
+                                                                        '<i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>' +
+                                                                        '<span style="color: darkblue; font-size: 11px;">'+Time+'</span></p>' +
+                                                                    '<p style="color: #888; margin-top: 5px;">'+Desc+'</p>' +
                                                                 '</div>';
                                                             
                                                         }
@@ -1997,7 +1826,7 @@
                         <tr id='EventsTr' style="background-color: #eeeeee;">
                             <td style=''>
                                 
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Events</p>
+                                <p style='margin-bottom: 5px; color: #626b9e; font-weight: bolder;'><i class='fa fa-calendar-check-o' style="margin-right: 5px; color: #334d81; "aria-hidden='true'></i>Events</p>
                                 
                                 <div id='EventsListDiv' style='height: 244px; overflow-y: auto;'>
                                     <%
@@ -2039,10 +1868,14 @@
                                     
                                                 <div id="PgLdupdt<%=counter%>"
                                                     onclick='updateEvent("<%=EventID%>", "<%=EventTitle%>", "<%=EventDesc%>", "<%=EventDate%>", "<%=EventTime%>", "PgLdupdt<%=counter%>");' 
-                                                    style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">
+                                                    style="cursor: pointer; margin: 10px 0; padding: 2px;">
                                                     
-                                                    <p><span style="font-weight: bolder; color: white;"><%=EventTitle%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventDate%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventTime%></span></p>
-                                                    <P style="color: #334d81;"><%=EventDesc%></p>
+                                                    <p><span style="font-weight: bolder; color: #334d81; font-size: 15px;"><%=EventTitle%></p>
+                                                    <p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>
+                                                        <span style="color: darkblue;font-size: 11px;"><%=EventDate%></span>
+                                                        <i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>
+                                                        <span style="color: darkblue; font-size: 11px;"><%=EventTime%></span></p>
+                                                    <p style="color: #888; margin-top: 5px;"><%=EventDesc%></p>
                                                 </div>
                                     
                                     <%
@@ -2057,11 +1890,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333;'>Add/Change Event</p>
+                                <p style='margin: 10px 0; color: #3d6999; font-weight: bolder;'>
+                                    <i style='margin-right: 5px; color: #334d81;' class="fa fa-calendar-plus-o" aria-hidden="true"></i>Add/Change Event</p>
                                 <div style="height: auto; overflow-y: auto;">
-                                    <p><input placeholder="add event time" id="DisplayedAddEvntTime" style='cursor: pointer; background-color: white; width: 92%;' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                    <p><input placeholder="time" id="DisplayedAddEvntTime" style='padding: 10px 0; border: 1px solid darkgrey; cursor: pointer; background-color: white; width: 92%;' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                     <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
-                                    <p><input placeholder="add event date" id='EvntDatePicker' style='cursor: pointer; background-color: white; width: 92%;' type="text" name="EvntDate" value="" /></p>
+                                    <p><input placeholder="date" id='EvntDatePicker' style='padding: 10px 0; cursor: pointer;  border: 1px solid darkgrey; background-color: white; width: 92%;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -2069,19 +1903,23 @@
                                         });
                                       });
                                     </script>
-                                    <p><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
-                                    <p><textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
+                                    <p><input placeholder="title" id="AddEvntTtle" style=' border: 1px solid darkgrey; padding: 10px 0; background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
+                                    <p style="margin-top: 10px; margin-bottom: 5px; color: #334d81; font-weight: bolder;">
+                                        Description
+                                    </p>
+                                    <p>
+                                        <textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
                                         </textarea></p>
                                 </div>
                             </td>
                             
                             <script>
                         
-                                document.getElementById("AddEvntDesc").value = "Add event description here...";
+                                document.getElementById("AddEvntDesc").value = "";
                                 
                                 function checkEmptyEvntDesc(){
-                                    if(document.getElementById("AddEvntDesc").value === "")
-                                        document.getElementById("AddEvntDesc").value = "Add event description here...";
+                                    /*if(document.getElementById("AddEvntDesc").value === "")
+                                        document.getElementById("AddEvntDesc").value = "Add event description here...";*/
                                 }
                                 
                                 function SetTimetoHiddenEventInput(){
@@ -2175,9 +2013,9 @@
                         <tr style="background-color: #eeeeee;">
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
-                                <input id="CalSaveEvntBtn" style='cursor: pointer; float: left; border: 0; color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; width: 95%;' type='button' value='Save' /></center>
-                                <input onclick="" id="CalDltEvntBtn" style='cursor: pointer; float: right; display: none; border: 0; color: white; background-color: darkslateblue; padding: 5px; border-radius: 4px; width: 47%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='cursor: pointer; display: none; border: 0; color: white; padding: 5px; background-color: darkslateblue; width: 47%;' type='button' value='Change' />
+                                <input id="CalSaveEvntBtn" style='cursor: pointer; float: left; border: 0; color: white; background-color: darkslateblue; padding: 10px 5px; border-radius: 4px; width: 95%;' type='button' value='Save' /></center>
+                                <input onclick="" id="CalDltEvntBtn" style='cursor: pointer; float: right; display: none; border: 0; color: white; background-color: darkslateblue; padding: 10px 5px; border-radius: 4px; width: 47%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='cursor: pointer; display: none; border: 0; color: white; padding: 10px 5px; background-color: darkslateblue; border-radius: 4px; width: 47%;' type='button' value='Change' />
                             </td>
                         </tr>
                         
@@ -2262,11 +2100,14 @@
                                                 updateCounter = parseInt(updateCounter, 10) + 1;
                                                 document.getElementById("EventsListDiv").innerHTML += '<div id="updt'+updateCounter+'" ' +
                                                     'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' +
-                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
-                                                    
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
-                                                    '<P style="color: #334d81;">'+EvntDesc+'</p>'+
-                                                '</div>';
+                                                        'style="cursor: pointer; margin: 10px 0; padding: 2px;">' +
+                                                            '<p><span style="font-weight: bolder; color: #334d81; font-size: 15px;">'+EvntTtle+'</p>' +
+                                                            '<p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>' +
+                                                                '<span style="color: darkblue;font-size: 11px;">'+EvntDate+'</span>' +
+                                                                '<i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>' +
+                                                                '<span style="color: darkblue; font-size: 11px;">'+EvntTime+'</span></p>' +
+                                                            '<p style="color: #888; margin-top: 5px;">'+EvntDesc+'</p>' +
+                                                    '</div>';
                                         
                                             }
                                         }
@@ -2320,10 +2161,13 @@
                                                 updateCounter = parseInt(updateCounter, 10) + 1;
                                                 document.getElementById("EventsListDiv").innerHTML += '<div id="updt'+updateCounter+'" ' +
                                                     'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' +
-                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
-                                                    
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
-                                                    '<P style="color: #334d81;">'+EvntDesc+'</p>'+
+                                                    'style="cursor: pointer; margin: 10px 0; padding: 2px;">' +
+                                                        '<p><span style="font-weight: bolder; color: #334d81; font-size: 15px;">'+EvntTtle+'</p>' +
+                                                        '<p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>' +
+                                                            '<span style="color: darkblue;font-size: 11px;">'+EvntDate+'</span>' +
+                                                            '<i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>' +
+                                                            '<span style="color: darkblue; font-size: 11px;">'+EvntTime+'</span></p>' +
+                                                        '<p style="color: #888; margin-top: 5px;">'+EvntDesc+'</p>' +
                                                 '</div>';
                                             }
                                         }
@@ -2349,16 +2193,15 @@
                     <tbody>
                         <tr style="">
                             <td>
-                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 15px 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
                                 <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
-                                <p style='margin-bottom: 5px; color: white;'>Edit Your Personal Info</p>
-                                <p style='color: #d9e8e8; font-size: 11px;'>change your first, middle and last name below</p>
-                                <p>First: <input id='fNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle: <input id='mNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last: <input id='lNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input id='EmailExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: white;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input id='UpdtPerInfExtraBtn' style='background-color: darkslateblue; border-radius: 4px; border:0; padding: 5px; color: white; width: 95%;' type="submit" value="Change" /></center>
+                                <p style='margin-bottom: 10px; color: #334d81; font-weight: bolder;'>Edit Your Personal Info</p>
+                                <p>First: <input id='fNameExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                <p>Middle: <input id='mNameExtraFld' style='background-color: #9bb1d0; border: 0; padding: 10px 0; text-align: left; color: white;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                <p>Last: <input id='lNameExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                <p>Email: <input id='EmailExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                <center><input id='UpdtPerInfExtraBtn' style='background-color: darkslateblue; border-radius: 4px; border:0; padding: 10px; min-width: 150px; color: white; width: 95%;' type="submit" value="Change" /></center>
                                 </div>
                             </td>
                             
@@ -2425,12 +2268,13 @@
                         </tr>
                         <tr>
                             <td>
-                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
-                                    <p style='margin-bottom: 5px; color: white;'>Send Feedback</p>
+                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 15px 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                    <p style='margin-bottom: 10px; color: #334d81; font-weight: bolder;'>Send Feedback</p>
                                     <form id="ExtrasFeedBackForm" style="width: 99%;" >
-                                            <center><div id='ExtLastReviewMessageDiv' style='display: none; background-color: white; width: 100%;'>
-                                                <p id='ExtLasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
-                                                <p id="ExtFeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
+                                        <center><div id='ExtLastReviewMessageDiv' style='display: none; padding: 10px; border-radius: 4px; border: #626b9e 1px solid; background-color: white; max-width: 400px; margin-bottom: 10px;'>
+                                                    <p style="font-weight: bolder; color: #334d81; margin-bottom: 15px; text-align: center;">Thanks for your feedback!</p>
+                                                    <p id='ExtLasReviewMessageP' style='text-align: left; padding: 10px 5px; color: darkgray; font-size: 13px;'></p>
+                                                    <p id="ExtFeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
                                                 </div></center>
                                             <center><table>
                                                 <tbody>
@@ -2442,7 +2286,7 @@
                                                 </table></center>
                                                 
                                                 <input id='ExtFeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="ExtSendFeedBackBtn" style="width: 98%; border: 0;padding: 5px; border-radius: 4px; background-color: darkslateblue; color: white;" type="button" value="Send" /></center>
+                                                <center><input id="ExtSendFeedBackBtn" style="width: 98%; border: 0;padding: 10px; border-radius: 4px; min-width: 150px; background-color: darkslateblue; color: white;" type="button" value="Send" /></center>
                                                 <script>
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn').click(function(event) {  
@@ -2484,15 +2328,23 @@
                         </tr>
                         <tr style=''>
                             <td>
-                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
-                                <p style='margin-bottom: 5px; color: white;'>Update Your Login</p>
-                                <P>User:<input id="ExtraUpdateLoginNameFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
-                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
-                                <P><input id="ExtraNewPasswordFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
-                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #d9e8e8; text-align: left; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
-                                <center><input id="ExtraLoginFormBtn" style='background-color: darkslateblue; padding: 5px; border-radius: 4px; color: white; border: 0; width: 95%;' type="submit" value="Change" /></center>
-                                <p id="ExtraWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
-                                <p id='ExtrachangeUserAccountStatus' style='text-align: center; color: white;'></p>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 10px 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                <p style='margin-bottom: 15px; color: #334d81; font-weight: bolder;'>Update Your Login</p>
+                                <P>User:
+                                    <input id="ExtraUpdateLoginNameFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
+                                <P>
+                                    <input id="ExtraCurrentPasswordFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P>
+                                    <input id="ExtraNewPasswordFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P>
+                                    <input id="ExtraConfirmPasswordFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtraLoginFormBtn" style='background-color: darkslateblue; padding: 5px; border-radius: 4px; color: white; border: 0; width: 95%; padding: 10px;' type="submit" value="Change" /></center>
+                                <p id="ExtraWrongPassStatus" style="padding: 10px 0; display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
+                                <p id='ExtrachangeUserAccountStatus' style='padding: 10px 0; text-align: center; color: white;'></p>
                                 </div>
                             </td>
                             <input type='hidden' id='ExtraThisPass' value='' />
@@ -3095,22 +2947,28 @@
                                             <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td>House Number: </td><td><input id="NewAddressHNumber" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="houseNumberFld" value="" /></td>
+                                                    <td>House Number: </td>
+                                                    <td><input id="NewAddressHNumber" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="houseNumberFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Street: </td><td><input id="NewAddressStreet" placeholder="Some St./Ave." style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="streetAddressFld" value="" /></td>
+                                                    <td>Street: </td>
+                                                    <td><input id="NewAddressStreet" placeholder="Some St./Ave." style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="streetAddressFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Town: </td><td><input id="NewAddressTown" placeholder="Some Town" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="townFld" value="" /></td>
+                                                    <td>Town: </td>
+                                                    <td><input id="NewAddressTown" placeholder="Some Town" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="townFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>City: </td><td><input id="NewAddressCity" placeholder="Some City " style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="cityFld" value="" /></td>
+                                                    <td>City: </td>
+                                                    <td><input id="NewAddressCity" placeholder="Some City " style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="cityFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Country: </td><td><input id="NewAddressCountry" placeholder="Some Country" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="countryFld" value="" /></td>
+                                                    <td>Country: </td>
+                                                    <td><input id="NewAddressCountry" placeholder="Some Country" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="countryFld" value="" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Zip Code: </td><td><input id="NewAddressZipcode" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="zipCodeFld" value="" /></td>
+                                                    <td>Zip Code: </td>
+                                                    <td><input id="NewAddressZipcode" placeholder="1234" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="zipCodeFld" value="" /></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
@@ -3152,28 +3010,30 @@
                                         
                                         <form id="UpdateUserAccountForm" style="border-top: 0; margin-top: 5px; display: none;
                                               padding-top: 5px;" >
-                                            <center><p style="color: white; margin: 5px;">Change profile information</p></center>
+                                            <center><p style="color: white; margin: 5px; font-weight: bolder;">Change profile information</p></center>
                                             
                                             <center><a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href="UploadPhotoWindow.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                                                    <p style="cursor: pointer; color: black; padding: 5px; border-radius: 4px; text-align: center; width: 300px;"><img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px; border-radius: 0; background: none; border: none;" alt=""/>
+                                                    <p style="cursor: pointer; color: #334d81; font-weight: bolder; padding: 15px 5px; border-radius: 4px; text-align: center; width: 300px;"><img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px; border-radius: 0; background: none; border: none;" alt=""/>
                                                         <sup>Change Profile Picture</sup></p>
                                                 </a></center>
-                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
+                                            <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 10px 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td>First Name: </td><td><input id="ChangeProfileFirstName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="firstNameFld" value="<%=FirstName%>" /></td>
+                                                    <td>First Name: </td><td><input id="ChangeProfileFirstName" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="firstNameFld" value="<%=FirstName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Middle Name: </td><td><input id="ChangeProfileMiddleName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="middleNameFld" value="<%=MiddleName%>" /></td>
+                                                    <td>Middle Name: </td><td><input id="ChangeProfileMiddleName" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="middleNameFld" value="<%=MiddleName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Last Name: </td><td><input id="ChangeProfileLastName" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="lastNameFld" value="<%=LastName%>" /></td>
+                                                    <td>Last Name: </td><td><input id="ChangeProfileLastName" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="lastNameFld" value="<%=LastName%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Phone Number: </td><td><input onclick="checkMiddlePhoneNumberEdit();" onkeydown="checkMiddlePhoneNumberEdit();" id="ChangeProfilePhoneNumber" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="phoneNumberFld" value="<%=PhoneNumber%>" /></td>
+                                                    <td>Phone Number: </td>
+                                                    <td><input onclick="checkMiddlePhoneNumberEdit();" onkeydown="checkMiddlePhoneNumberEdit();" id="ChangeProfilePhoneNumber" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="phoneNumberFld" value="<%=PhoneNumber%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Email: </td><td><input id="ChangeProfileEmail" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="emailFld" value="<%=Email%>" /></td>
+                                                    <td>Email: </td>
+                                                    <td><input id="ChangeProfileEmail" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="emailFld" value="<%=Email%>" /></td>
                                                 </tr>
                                                 </tbody>
                                                 </table>
@@ -3208,27 +3068,33 @@
 
                                                         //setInterval(checkMiddleNumber, 1000);
                                                     </script>
-                                                    <p style="padding-top: 10px; color: #ffffff;">Address Info Below</p>
-                                                    <table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
+                                                    <p style="padding: 15px 0; font-weight: bolder; color: #ffffff;">Address Info Below</p>
+                                                    <table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 15px 5px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                     <tbody>
                                                 
                                                 <tr>
-                                                    <td>House Number: </td><td><input onclick="checkMiddleHouseNumberEdit();" onkeydown="checkMiddleHouseNumberEdit();" id="ChangeProfileHouseNumber" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="houseNumberFld" value="<%=H_Number%>" /></td>
+                                                    <td>House Number: </td>
+                                                    <td><input onclick="checkMiddleHouseNumberEdit();" onkeydown="checkMiddleHouseNumberEdit();" id="ChangeProfileHouseNumber" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="houseNumberFld" value="<%=H_Number%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Street: </td><td><input id="ChangeProfileStreet" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="streetAddressFld" value="<%=Street%>" /></td>
+                                                    <td>Street: </td>
+                                                    <td><input id="ChangeProfileStreet" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="streetAddressFld" value="<%=Street%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Town: </td><td><input id="ChangeProfileTown" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="townFld" value="<%=Town%>" /></td>
+                                                    <td>Town: </td>
+                                                    <td><input id="ChangeProfileTown" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="townFld" value="<%=Town%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>City: </td><td><input id="ChangeProfileCity" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="cityFld" value="<%=City%>" /></td>
+                                                    <td>City: </td>
+                                                    <td><input id="ChangeProfileCity" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="cityFld" value="<%=City%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Country: </td><td><input id="ChangeProfileCountry" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="countryFld" value="<%=Country%>" /></td>
+                                                    <td>Country: </td>
+                                                    <td><input id="ChangeProfileCountry" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="countryFld" value="<%=Country%>" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Zip Code: </td><td><input onclick="checkMiddleZipCodeEdit();" onkeydown="checkMiddleZipCodeEdit();" id="ChangeProfileZipCode" style="background-color: #d9e8e8; border-radius: 4px;" type="text" name="zipCodeFld" value="<%=ZipCode%>" /></td>
+                                                    <td>Zip Code: </td>
+                                                    <td><input onclick="checkMiddleZipCodeEdit();" onkeydown="checkMiddleZipCodeEdit();" id="ChangeProfileZipCode" style="background-color: #d9e8e8; border-radius: 4px; padding: 10px 5px;" type="text" name="zipCodeFld" value="<%=ZipCode%>" /></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
@@ -3299,8 +3165,8 @@
                                             
                                                 <input id="CustomerIDforUpdateInfo" type="hidden" name="CustomerID" value="<%=UserID%>" />
                                                 <input id="UserIndexforUpdateInfo" type='hidden' name='UserIndex' value='<%=UserIndex%>'/>
-                                                <center><p id="userProfileFormStatus" style="color: white; text-align: center;"></p></center>
-                                                <center><input id="ChangeProfileUpdateBtn" style="color: white; margin-top: 10px; border: 0; padding: 10px; background-color: pink; border-radius: 4px;" type="button" value="Update" /></center>
+                                                <center><p id="userProfileFormStatus" style="background: none !important; color: #334d81; font-weight: bolder; text-align: center; padding: 10px 0;"></p></center>
+                                                <center><input id="ChangeProfileUpdateBtn" style="color: white; margin-top: 10px; border: 0; padding: 10px; min-width: 150px; border-radius: 4px;" type="button" value="Update" /></center>
                                             
                                                 <script>
                                                     $(document).ready(function(){
@@ -3385,14 +3251,15 @@
                                                 
                                         <form id="SendFeedBackForm" style="border-top: 0; margin-top: 5px; display: none;
                                               padding-top: 5px;" >
-                                            <center><div id='LastReviewMessageDiv' style='display: none; background-color: white; width: 100%; max-width: 400px; margin-bottom: 5px;'>
-                                                <p id='LasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
-                                                <p id="FeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
+                                            <center><div id='LastReviewMessageDiv' style='display: none; padding: 10px; border-radius: 4px; border: #626b9e 1px solid; background-color: white; width: 100%; max-width: 400px; margin-bottom: 10px;'>
+                                                    <p style="font-weight: bolder; color: #334d81; margin-bottom: 15px; text-align: center;">Thanks for your feedback!</p>
+                                                    <p id='LasReviewMessageP' style='text-align: left; padding: 10px 5px; color: darkgray; font-size: 13px;'></p>
+                                                    <p id="FeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
                                                 </div></center>
                                             <center><table style='background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 20px; border: #3d6999 1px solid; max-width: 300px; margin: auto;'>
                                                 <tbody>
                                                 <tr>
-                                                    <td style="color: white; text-align: center;">Send Your Feedback</td>
+                                                    <td style="color: #334d81; font-weight: bolder; text-align: center; padding-bottom: 15px">Send Your Feedback</td>
                                                 </tr>
                                                 <tr>
                                                     <td><textarea id="FeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" cols="35">
@@ -3402,7 +3269,7 @@
                                                 </table></center>
                                                 
                                                 <input id='FeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="SendFeedBackBtn" style="color: white; padding: 5px; margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; border-radius: 4px;" type="button" value="Send" /></center>
+                                                <center><input id="SendFeedBackBtn" style="color: white; padding: 5px; margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; border-radius: 4px; min-width: 150px;" type="button" value="Send" /></center>
                                             
                                         </form>
                                                 <script>
@@ -3490,32 +3357,36 @@
                                                 </p>
                                             </div>
                                         </div>
-                                                
-                                        <div id="SettingsDiv" style= "display: none;">
+                                        <style>
+                                            #SettingsDiv form p input{
+                                                padding: 10px 5px !important;
+                                            }
+                                        </style>
+                                        <div id="SettingsDiv" style= "display: none; margin-top: 10px;">
                                             <ul style="color: white;">
                                                 <li>
                                                     
-                                                    <p style="cursor: pointer;" onclick="showLoginFormsDiv()"><img src="icons/icons8-admin-settings-male-20 (1).png" width="20" height="20" alt="icons8-admin-settings-male-20 (1)"/>
+                                                    <p style="cursor: pointer; padding: 10px 0;" onclick="showLoginFormsDiv()"><img src="icons/icons8-admin-settings-male-20 (1).png" width="20" height="20" alt="icons8-admin-settings-male-20 (1)"/>
                                                     Account Settings</p>
-                                                    <form  id="UserAcountLoginForm" style="margin: auto; margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;
-                                                           background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; max-width: 300px;" name="userAccountForm">
-                                                        <p>Change your login information:</p>
-                                                        <p style="color: darkblue; margin-top: 10px;">User Name:</p>
+                                                    <form  id="UserAcountLoginForm" style="margin: auto; margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 15px 5px;
+                                                           background-color: #9bb1d0; border-radius: 4px; width: fit-content; border: #3d6999 1px solid; max-width: 300px;" name="userAccountForm">
+                                                        <p>Change your login here</p>
+                                                        <p style="color: #334d81; margin-top: 15px; margin-bottom: 5px;">User Name:</p>
                                                         <center><p><input id="UpdateLoginNameFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px; color: darkblue;" placeholder="Enter New User Name Here" type="text" name="userName" value="<%=thisUserName%>" size="35" /></p></center>
                                                         
-                                                        <p style="color: darkblue; margin-top: 10px;">Password:</p>
+                                                        <p style="color: #334d81; margin-top: 15px; margin-bottom: 5px;">Password:</p>
                                                         <center><p><input class="passwordFld" id="CurrentPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter Current Password" type="password" name="currentPassword" value="" size="36" /></p>
-                                                            <p style="text-align: right; margin-top: -25px; margin-bottom: 10px; padding-right: 10px;"><i class="fa fa-eye showPassword" style="color: red;" aria-hidden="true"></i></p>
+                                                            <p style="text-align: right; margin-top: -32px; margin-bottom: 15px; padding-right: 15px;"><i class="fa fa-eye showPassword" style="color: #626b9e;" aria-hidden="true"></i></p>
                                                         
                                                             <p><input class="passwordFld" id="NewPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Enter New Password" type="password" name="newPassword" value="" size="36" /></p>
                                                         
                                                             <p><input class="passwordFld" id="ConfirmPasswordFld" style="padding: 3px; background-color: #d9e8e8; border-radius: 4px;" placeholder="Confirm New Password" type="password" name="confirmNewPassword" value="" size="36" /></p>
-                                                        <p id="changeUserAccountStatus"></p>
-                                                        <p id="WrongPassStatus" style="color: white; background-color: red; display: none;">Enter your current password correctly</p>
+                                                        <p id="changeUserAccountStatus" style="margin: 10px 0;"></p>
+                                                        <p id="WrongPassStatus" style="color: #334d81; font-weight: bolder; margin: 10px 0; display: none;"><i style="margin-right: 5px; color: orange;" class="fa fa-exclamation-triangle" aria-hidden="true"></i>Enter your current password correctly</p>
                                                         <input id='UserIDforLoginUpdate' name="CustomerID" type="hidden" value="<%=UserID%>" />
                                                         <input id="ThisPass" type="hidden" name="ThisPass" value="" />
                                                         <input id='UserIndexforLoginUpdate' type='hidden' name='UserIndex' value='<%=UserIndex%>'/>
-                                                        <input id="LoginFormBtn" style="margin-top: 10px; border: 0; padding: 10px; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Update" /></center>
+                                                        <input id="LoginFormBtn" style="margin-top: 10px; border: 0; padding: 10px; min-width: 150px; background-color: darkslateblue; color: white; border-radius: 4px;" type="button" value="Update" /></center>
                                                     </form>
                                                     <script>
                                                         $(document).ready(function(){
@@ -3577,18 +3448,20 @@
                                                     
                                                 </li>
                                                 <li>
-                                                    <p style="cursor: pointer;" onclick="showContactUsDiv()"><img src="icons/icons8-telephone-20.png" width="20" height="20" alt="icons8-telephone-20"/>
+                                                    <p style="cursor: pointer; padding: 10px 0;" onclick="showContactUsDiv()">
+                                                        <img src="icons/icons8-telephone-20.png" width="20" height="20" alt="icons8-telephone-20"/>
                                                         Contact Us<p>
-                                                    <div id="ContactUsDiv" style="margin-top: 5px; display: none; border-top: darkblue solid 1px; padding: 5px;">
-                                                        <p style="margin-bottom: 5px; ">Our contact information:</p>
-                                                        <p style="color: black;"><img src="icons/icons8-phone-32.png" width="20" height="20" alt="icons8-phone-32"/>
+                                                    <div id="ContactUsDiv" style="margin-top: 5px; display: none; padding: 10px 5px;">
+                                                        <p style="color: #44484a; margin-bottom: 5px;">
+                                                          <i style="margin-right: 5px;" class="fa fa-phone"></i>
                                                           +1 (732) 799-9546</p>
-                                                        <p style="color: black;"><img src="icons/icons8-secured-letter-32.png" width="20" height="20" alt="icons8-secured-letter-32"/>
-                                                            tech.arieslab@outlook.com</p>
+                                                        <p style="color: #44484a;">
+                                                            <i style="margin-right: 5px;" class="fa fa-envelope"></i>
+                                                            support@theomotech.com</p>
                                                     </div>
                                                 </li>
                                                 <li style='display: none;'> 
-                                                    <p style="cursor: pointer;" onclick="showPaymentsForm()"><img src="icons/icons8-mastercard-credit-card-20 (1).png" width="20" height="20" alt="icons8-mastercard-credit-card-20 (1)"/>
+                                                    <p style="cursor: pointer; padding: 10px 0;" onclick="showPaymentsForm()"><img src="icons/icons8-mastercard-credit-card-20 (1).png" width="20" height="20" alt="icons8-mastercard-credit-card-20 (1)"/>
                                                         Payments</p>
                                                     
                                                     <div style=''>
@@ -3698,7 +3571,9 @@
                                             </div>
                                                 </li>
                                                 <li>
-                                                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='ViewCustomerReviews.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>'><p style="cursor: pointer; color: white;"><img src="icons/icons8-popular-20 (1).png" width="20" height="20" alt="icons8-popular-20 (1)"/>
+                                                    <a onclick="document.getElementById('MainProviderCustomerPagePageLoader').style.display = 'block';" href='ViewCustomerReviews.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>'>
+                                                        <p style="cursor: pointer; color: white;  padding: 10px 0;">
+                                                            <img src="icons/icons8-popular-20 (1).png" width="20" height="20" alt="icons8-popular-20 (1)"/>
                                                             Your Reviews</p></a>
                                                 </li>
                                             </ul>
@@ -3756,7 +3631,7 @@
                                         
                                 <div id="serviceslist" style="padding-bottom: 0; border-top: 0;" class="AppListDiv">
                                     
-                                    <p style="color: black; margin-top: 10px;">Today's Spots</p>
+                                    <p style="color: black; margin: 15px 0; color: #334d81; font-weight: bolder;">Today's Spots</p>
                                    
                                     <script>
                                     
@@ -4434,7 +4309,7 @@
                                     
                                     <!--------------------------------------------------------------------------------------------------------------------------------------------->
                                     
-                                    <p style="color: black; margin-top: 10px; width: 100%; max-width: 500px;">Future Spots</p>
+                                    <p style="color: #334d81; font-weight: bolder; margin: 15px 0; width: 100%;">Future Spots</p>
                                     
                                     <%
                                         
@@ -5877,6 +5752,16 @@
                     <div id="SuggestedPlcsDiv" style="max-width: 1000px; margin: auto; text-align: center;">
                         
                     </div>
+                    
+                    <p style='margin: auto; margin-bottom: 20px; margin-top: 30px; display: block;'></p>
+                    <h1 id="PlacesInYourAreaP" style='color: white; font-size: 19px; font-family: serif; padding: 10px 0;'></h1>
+                    <script>
+                        document.getElementById("PlacesInYourAreaP").innerText = "Places found in " + (GoogleReturnedTown ? GoogleReturnedTown : " your town");
+                    </script>
+                    <div style="max-width: 1000px; margin: auto; text-align: center;">
+                        <canvas style="width: 100%; height: 100%; min-height: 250px;" id="line-chart"></canvas>
+                    </div>
+                    
                 </div>
                 <div>
                     <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
@@ -6570,6 +6455,10 @@
             var SettingsDivBehaviour = document.createElement('script');
             SettingsDivBehaviour.setAttribute('src','scripts/SettingsDivBehaviour.js');
             document.body.appendChild(SettingsDivBehaviour);
+            
+            var data_chart_local_script = document.createElement('script');
+            data_chart_local_script.setAttribute('src','scripts/data_charts.js');
+            document.body.appendChild(data_chart_local_script);
         }
         
     </script>

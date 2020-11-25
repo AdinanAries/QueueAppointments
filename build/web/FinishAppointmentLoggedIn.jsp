@@ -611,340 +611,128 @@
             
             <div id="Extras">
             
-                <div id="ExtrasInnerContainer"s>
+            <div id="ExtrasInnerContainer">
+                <%
+                    int newsItems = 0;
                     
-                    <%
-                        int newsItems = 0;
-                        String newsQuery = "";
+                    try{
+                        Class.forName(Driver);
+                        Connection newsConn = DriverManager.getConnection(url, User, Password);
+                        String newsQuery = "Select top 1 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                        PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
+                        ResultSet newsRec = newsPst.executeQuery();
                         
-                       // while(newsItems < 10){
+                        while(newsRec.next()){
                             
-                            try{
-                                Class.forName(Driver);
-                                Connection CustConn = DriverManager.getConnection(url, User, Password);
-                                String CustQuery = "select top 10 * from ProviderCustomers.ProvNewsForClients where CustID = ? order by ID desc";
-                                PreparedStatement CustPst = CustConn.prepareStatement(CustQuery);
-                                CustPst.setInt(1, UserID);
-                                ResultSet CustRec = CustPst.executeQuery();
-                                
-                                while(CustRec.next()){
+                            String base64Profile = "";
+                            newsItems++;
+                            
+                            String ProvID = newsRec.getString("ProvID");
+                            String ProvFirstName = "";
+                            String ProvCompany = "";
+                            String ProvAddress = "";
+                            String ProvTel = "";
+                            String ProvEmail = "";
+                            String NServiceType = "";
+                            
+                            String Msg = newsRec.getString("Msg").trim();
+                            String MsgPhoto = "";
+                            
+                            try{    
+                                    //put this in a try catch block for incase getProfilePicture returns nothing
+                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
+                                    InputStream inputStream = Pic.getBinaryStream();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                    byte[] buffer = new byte[4096];
+                                    int bytesRead = -1;
+
+                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                        outputStream.write(buffer, 0, bytesRead);
+                                    }
+
+                                    byte[] imageBytes = outputStream.toByteArray();
+
+                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
+
+
+                                }
+                                catch(Exception e){
+
+                                }
+                            
+
+                                try{
+                                    Class.forName(Driver);
+                                    Connection ProvConn = DriverManager.getConnection(url, User, Password);
+                                    String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
+                                    PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
+                                    ProvPst.setString(1, ProvID);
                                     
-                                    String MessageID = CustRec.getString("MessageID").trim();
+                                    ResultSet ProvRec = ProvPst.executeQuery();
                                     
-                                    try{
-                                        Class.forName(Driver);
-                                        Connection newsConn = DriverManager.getConnection(url, User, Password);
-                                        newsQuery = "Select * from QueueServiceProviders.MessageUpdates where MsgID = ?";
-                                        PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
-                                        newsPst.setString(1, MessageID);
-                                        ResultSet newsRec = newsPst.executeQuery();
-
-                                        while(newsRec.next()){
-
-                                            String base64Profile = "";
-                                            newsItems++;
-                                            
-                                            String ProvID = newsRec.getString("ProvID");
-                                            String ProvFirstName = "";
-                                            String ProvCompany = "";
-                                            String ProvAddress = "";
-                                            String ProvTel = "";
-                                            String ProvEmail = "";
-
-                                            String Msg = newsRec.getString("Msg").trim();
-                                            String MsgPhoto = "";
-
-                                            try{    
-                                                    //put this in a try catch block for incase getProfilePicture returns nothing
-                                                    Blob Pic = newsRec.getBlob("MsgPhoto"); 
-                                                    InputStream inputStream = Pic.getBinaryStream();
-                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                    byte[] buffer = new byte[4096];
-                                                    int bytesRead = -1;
-
-                                                    while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                        outputStream.write(buffer, 0, bytesRead);
-                                                    }
-
-                                                    byte[] imageBytes = outputStream.toByteArray();
-
-                                                    MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                                }
-                                                catch(Exception e){
-
-                                                }
-
-
-                                                try{
-                                                    Class.forName(Driver);
-                                                    Connection ProvConn = DriverManager.getConnection(url, User, Password);
-                                                    String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
-                                                    PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
-                                                    ProvPst.setString(1, ProvID);
-
-                                                    ResultSet ProvRec = ProvPst.executeQuery();
-
-                                                    while(ProvRec.next()){
-                                                        ProvFirstName = ProvRec.getString("First_Name").trim();
-                                                        ProvCompany = ProvRec.getString("Company").trim();
-                                                        ProvTel = ProvRec.getString("Phone_Number").trim();
-                                                        ProvEmail = ProvRec.getString("Email").trim();
-                                                        
-                                                        try{    
-                                                            //put this in a try catch block for incase getProfilePicture returns nothing
-                                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
-                                                            InputStream inputStream = Pic.getBinaryStream();
-                                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                            byte[] buffer = new byte[4096];
-                                                            int bytesRead = -1;
-
-                                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                                outputStream.write(buffer, 0, bytesRead);
-                                                            }
-
-                                                            byte[] imageBytes = outputStream.toByteArray();
-
-                                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                                        }
-                                                        catch(Exception e){
-
-                                                        }
-                                                    }
-
-                                                }catch(Exception e){
-                                                    e.printStackTrace();
-                                                }
-
-                                                try{
-                                                    Class.forName(Driver);
-                                                    Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
-                                                    String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
-                                                    PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
-                                                    ProvLocPst.setString(1, ProvID);
-
-                                                    ResultSet ProvLocRec = ProvLocPst.executeQuery();
-
-                                                    while(ProvLocRec.next()){
-                                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
-                                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
-                                                        String NTown = ProvLocRec.getString("Town").trim();
-                                                        String NCity = ProvLocRec.getString("City").trim();
-                                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
-
-                                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
-                                                    }
-                                                }catch(Exception e){
-                                                    e.printStackTrace();
-                                                }
-                    %>
-
-                    <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
-                        <tbody>
-                            <tr style="background-color: #eeeeee;">
-                                <td>
-                                    <div id="ProvMsgBxOne">
+                                    while(ProvRec.next()){
                                         
-                                        <div style='font-weight: bolder;'>
-                                            <!--div style="float: right; width: 65px;" -->
-                                                <%
-                                                    if(base64Profile != ""){
-                                                %>
-                                                    <div style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; overflow: hidden;">    
-                                                        <img id="" style="background-color: darkgray; width:35px; height: auto;" src="data:image/jpg;base64,<%=base64Profile%>"/>
-                                                    </div>
-                                                <%
-                                                    }else{
-                                                %>
-                                                    <img style='margin: 4px; width:35px; height: 35px; background-color: beige; border-radius: 100%; float: left;' src="icons/icons8-user-filled-100.png" alt="icons8-user-filled-100"/>
-                                                <%}%>
-                                            <!--/div-->
-                                            <div>
-                                                <b>
-                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
-                                                        <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
-                                                            <%=ProvFirstName%> 
-                                                            <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
-                                                                go to profile <i style="color: #ff6b6b; font-weight: initial;" class="fa fa-chevron-right"></i>
-                                                            </span>
-                                                        </p>
-                                                    </a>
-                                                </b>
-                                                <p style='color: red; margin-top: 5px;'><%=ProvCompany%></p>
-                                            </div>
-                                        </div>
-                                    </div>      
-                                </td>
-                            </tr>
-                            <tr style="background-color: #eeeeee;">
-                                <td style="padding: 0;">
-                                    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 5px; padding-top: 0;">
-                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
-                                            <a style="color: white;" href="mailto:<%=ProvEmail%>">
-                                                <i style="font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> Mail
-                                            </a>  
-                                        </p>
-                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
-                                            <a style="color: white;" href="tel:<%=ProvTel%>">
-                                                <i style="font-size: 20px;" class="fa fa-mobile" aria-hidden="true"></i> Call
-                                            </a>
-                                        </p>
-                                        <p style="background-color: #06adad; padding: 5px; border-radius: 4px; width: 28%; text-align: center;">
-                                            <a style="color: white;" href="https://maps.google.com/?q=<%=ProvAddress%>" target="_blank">
-                                                <i style="font-size: 20px;" class="fa fa-location-arrow" aria-hidden="true"></i> Map
-                                            </a>
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p style='font-family: helvetica; text-align: justify; padding: 3px;'><%=Msg%></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 0;">
-                                    <div>
-                                        <%if(MsgPhoto.equals("")){%>
-                                        <center><img src="view-wallpaper-7.jpg" width="100%" alt="view-wallpaper-7"/></center>
-                                        <%} else{ %>
-                                        <center><img src="data:image/jpg;base64,<%=MsgPhoto%>" width="100%" alt="NewsImage"/></center>
-                                        <%}%>
+                                        NServiceType = ProvRec.getString("Service_Type").trim();
+                                            
+                                        ProvFirstName = ProvRec.getString("First_Name").trim();
+                                        ProvCompany = ProvRec.getString("Company").trim();
+                                        ProvTel = ProvRec.getString("Phone_Number").trim();
+                                        ProvEmail = ProvRec.getString("Email").trim();
+                                        
+                                        try{    
+                                            //put this in a try catch block for incase getProfilePicture returns nothing
+                                            Blob Pic = ProvRec.getBlob("Profile_Pic"); 
+                                            InputStream inputStream = Pic.getBinaryStream();
+                                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                            byte[] buffer = new byte[4096];
+                                            int bytesRead = -1;
 
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                <%  
-                                        if(newsItems > 10)
-                                            break;
+                                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                                outputStream.write(buffer, 0, bytesRead);
+                                            }
+
+                                            byte[] imageBytes = outputStream.toByteArray();
+
+                                            base64Profile = Base64.getEncoder().encodeToString(imageBytes);
+
+                                        }catch(Exception e){}
+                                    }
+                                    
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                                
+                                try{
+                                    Class.forName(Driver);
+                                    Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
+                                    String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
+                                    PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
+                                    ProvLocPst.setString(1, ProvID);
+                                    
+                                    ResultSet ProvLocRec = ProvLocPst.executeQuery();
+                                    
+                                    while(ProvLocRec.next()){
+                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
+                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
+                                        String NTown = ProvLocRec.getString("Town").trim();
+                                        String NCity = ProvLocRec.getString("City").trim();
+                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
+                                        
+                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
                                     }
                                 }catch(Exception e){
                                     e.printStackTrace();
                                 }
-
-                            }
-
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                    //}
-                
-                    if(newsItems < 10){
-               
-                        try{
-                            Class.forName(Driver);
-                            Connection newsConn = DriverManager.getConnection(url, User, Password);
-                            String newsQuery2 = "Select top 10 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
-                            PreparedStatement newsPst = newsConn.prepareStatement(newsQuery2);
-                            ResultSet newsRec = newsPst.executeQuery();
-
-                            while(newsRec.next()){
-
-                                String base64Profile = "";
-                                newsItems++;
-
-                                String ProvID = newsRec.getString("ProvID");
-                                String ProvFirstName = "";
-                                String ProvCompany = "";
-                                String ProvAddress = "";
-                                String ProvTel = "";
-                                String ProvEmail = "";
-
-                                String Msg = newsRec.getString("Msg").trim();
-                                String MsgPhoto = "";
-
-                                try{    
-                                        //put this in a try catch block for incase getProfilePicture returns nothing
-                                        Blob Pic = newsRec.getBlob("MsgPhoto"); 
-                                        InputStream inputStream = Pic.getBinaryStream();
-                                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                        byte[] buffer = new byte[4096];
-                                        int bytesRead = -1;
-
-                                        while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                            outputStream.write(buffer, 0, bytesRead);
-                                        }
-
-                                        byte[] imageBytes = outputStream.toByteArray();
-
-                                        MsgPhoto = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                    }
-                                    catch(Exception e){
-
-                                    }
-
-
-                                    try{
-                                        Class.forName(Driver);
-                                        Connection ProvConn = DriverManager.getConnection(url, User, Password);
-                                        String ProvQuery = "Select * from QueueServiceProviders.ProviderInfo where Provider_ID = ?";
-                                        PreparedStatement ProvPst = ProvConn.prepareStatement(ProvQuery);
-                                        ProvPst.setString(1, ProvID);
-
-                                        ResultSet ProvRec = ProvPst.executeQuery();
-
-                                        while(ProvRec.next()){
-                                            ProvFirstName = ProvRec.getString("First_Name").trim();
-                                            ProvCompany = ProvRec.getString("Company").trim();
-                                            ProvTel = ProvRec.getString("Phone_Number").trim();
-                                            ProvEmail = ProvRec.getString("Email").trim();
-
-                                            try{    
-                                                //put this in a try catch block for incase getProfilePicture returns nothing
-                                                Blob Pic = ProvRec.getBlob("Profile_Pic"); 
-                                                InputStream inputStream = Pic.getBinaryStream();
-                                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                                                byte[] buffer = new byte[4096];
-                                                int bytesRead = -1;
-
-                                                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                                                    outputStream.write(buffer, 0, bytesRead);
-                                                }
-
-                                                byte[] imageBytes = outputStream.toByteArray();
-
-                                                base64Profile = Base64.getEncoder().encodeToString(imageBytes);
-
-
-                                            }
-                                            catch(Exception e){
-
-                                            }
-                                        }
-
-                                    }catch(Exception e){
-                                        e.printStackTrace();
-                                    }
-
-                                    try{
-                                        Class.forName(Driver);
-                                        Connection ProvLocConn = DriverManager.getConnection(url, User, Password);
-                                        String ProvLocQuery = "select * from QueueObjects.ProvidersAddress where ProviderID = ?";
-                                        PreparedStatement ProvLocPst = ProvLocConn.prepareStatement(ProvLocQuery);
-                                        ProvLocPst.setString(1, ProvID);
-
-                                        ResultSet ProvLocRec = ProvLocPst.executeQuery();
-
-                                        while(ProvLocRec.next()){
-                                            String NHouseNumber = ProvLocRec.getString("House_Number").trim();
-                                            String NStreet = ProvLocRec.getString("Street_Name").trim();
-                                            String NTown = ProvLocRec.getString("Town").trim();
-                                            String NCity = ProvLocRec.getString("City").trim();
-                                            String NZipCode = ProvLocRec.getString("Zipcode").trim();
-
-                                            ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
-                                        }
-                                    }catch(Exception e){
-                                        e.printStackTrace();
-                                    }
+                                
                 %>
+                
+                <a href="./NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>">
+                    <p style="padding: 10px; color: #44484a; font-weight: bolder; margin: auto; width: fit-content;">
+                        <i style="margin-right: 5px;" class="fa fa-newspaper-o"></i>
+                        Click here to see more ads
+                    </p>
+                </a>
+                
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
                         <tbody>
@@ -968,7 +756,7 @@
                                             <!--/div-->
                                             <div>
                                                 <b>
-                                                    <a href="EachSelectedProviderLoggedIn.jsp?UserID=<%=ProvID%>&UserIndex=<%=UserIndex%>&User=<%=NewUserName%>">
+                                                    <a href="EachSelectedProvider.jsp?UserID=<%=ProvID%>">
                                                         <p onclick="document.getElementById('PageLoader').style.display = 'block';" style="color: #3d6999;">
                                                             <%=ProvFirstName%> 
                                                             <span style="border-radius: 4px; color: white; background-color: #3d6999; padding: 5px; font-size: 12px; font-weight: initial; margin-left: 10px;">
@@ -1024,16 +812,35 @@
                         </tbody>
                     </table>
             <%
-                            if(newsItems > 10)
-                                break;
-                        }
-                    }catch(Exception e){
-                        e.printStackTrace();
+                        if(newsItems > 10)
+                            break;
                     }
-            
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
             %>
-               </div>
+            
+            </div>
+            
+            <%
+                if(newsItems == 0){
+            %>
+
+                <p style="font-weight: bolder; margin-top: 50px; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> No news items found at this time</p>
+
+            <%
+                }
+            %>
+            
+                <div class='eachCSecFlex marginUp20' style='width: 100%; margin-top: 10px;'>
+                    <h1>Our businesses keep you posted</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px;padding-top: 20px;
+                           display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                        <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular ads to keep you informed</p>
+                    </div>
+                </div>
+            
             </div>
         
             <div id="content">
@@ -1060,6 +867,7 @@
                 
                 <cetnter><p> </p></cetnter>
                 <center><div id="providerlist">
+                        
                 <h4 style="color: black; padding: 10px 0;">Finish Here</h4>
                 
                 <center><table id="providerdetails" style="">
@@ -1755,22 +1563,22 @@
                                 
                                 </div>
                                 </div>
-                                <div style="background-color: #eeeeee; padding: 2px; border-top: 1px solid darkgray;">
-                                    <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="text-align: center; border: 0; border-radius: 4px; color: white; background-color: #365266; padding: 10px 0; cursor: pointer;">Find Future Spots <i class="fa fa-caret-down"></i></p>
+                                <div style="padding-bottom: 15px;">
+                                    <p id="showFutureSpotsBtn" onclick="ShowFutureSpotsForm()" style="border: 0; border-radius: 4px; font-weight: bolder; color: #365266; cursor: pointer;">Find Future Spots <i style='margin-left: 5px;' class="fa fa-caret-down"></i></p>
                                     
-                                    <center><div>
+                                <div>
                                     <form style="display: none;" id="BlockFutureSpotsForm" name="BlockFutureSpots" action="GenerateFutureSpots.jsp">
-                                        <p style="text-align: center; color: #000099; margin-top: 5px;">Choose date to get spots</p>
-                                        <input style="border: 1px solid darkgrey; background-color: white; padding: 2px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
+                                        <p style="color: #334d81; font-weight: bolder; margin-top: 15px;">Choose date to get spots</p>
+                                        <input style="border: 1px solid darkgrey; background-color: white; padding: 10px;" id="Fdatepicker" type="text" name="GetDate" value="" readonly/><br/>
                                         <input type="hidden" name="ProviderID" value="<%=PID%>" />
                                         <input type="hidden" name="User" value="<%=NewUserName%>" />
                                         <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
                                         <input type="hidden" name="ServicesList" value="<%=SelectedServicesList%>"/>
                                         <input type="hidden" name="TaxedPrice" value="<%=TaxedPrice%>" />
                                         
-                                        <input id="GenerateSpotsBtn" style="padding: 5px; color: white; border: 0; background-color: darkslateblue; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
+                                        <input id="GenerateSpotsBtn" style="padding: 10px; margin-top: 10px; color: white; border: 0; background-color: darkslateblue; border-radius: 4px;" onclick="document.getElementById('PageLoader').style.display = 'block';" type="submit" value="Generate Spots" name="GenerateSpots" />
                                     </form>
-                                </div></center>
+                                </div>
                                         
                                 
                                 <script>
@@ -1817,26 +1625,26 @@
                                     
                                     <%//}%>
                                     
-                                    <div style="background-color: #eeeeee; padding: 5px 0;">
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border: 0; color: white; border-radius: 4px; background-color: #365266; padding: 10px 0; cursor: pointer;">Customize Your Spot <i class="fa fa-caret-down"></i></p>
+                                    <div style=" padding: 0;">
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="border: 0; font-weight: bolder; border-radius: 4px; cursor: pointer; color: #365266;">Customize Your Spot <i style='margin-left: 5px;' class="fa fa-caret-down"></i></p>
                                     
-                                    <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
+                                    <div id="customizeAppointmentTime" style="">
                                         
-                                    <div id="serviceslist">
+                                    <div id="serviceslist" style='border: none;'>
                                         
-                                       <p style="color: tomato;">Select Date</p>
+                                       <p style="color: #365266; font-weight: bolder;">Select Date</p>
                                        <p>Click on date field below to set date</p>
                                        
-                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid darkgray; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="click here to choose date" readonly></p>
-                                       <p id="datepickerStatus" style="text-align: center; color: darkblue; font-weight: bolder;"></p>
-                                       <p id="DateStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
+                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid darkgray; padding: 10px;" type="text" id="datepicker" name="chooseDate" value="click here to choose date" readonly></p>
+                                       <p id="datepickerStatus" style="text-align: center; padding-bottom: 10px; color: darkblue; font-weight: bolder;"></p>
+                                       <p id="DateStatus" style="color: darkblue; font-weight: bolder; padding-bottom: 10px; text-align: center;"></p>
                                     </div> 
                                         
-                                    <div id="serviceslist" style="border-bottom: 1px solid darkgray;">
+                                    <div id="serviceslist" style="border: none; background: none;">
                                         
-                                        <p style="color: tomato;">Select Time</p>
+                                        <p style="color: #365266; font-weight: bolder;">Select Time</p>
                                     
-                                        <center><p><span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick ="showTime()" id="HHSelector" name="hourOptions" 
+                                        <center><p><span><select style="width: 50px; background-color: white; padding: 10px; border: 1px solid darkgrey; color: black;" onclick ="showTime()" id="HHSelector" name="hourOptions" 
                                                                         >
                                                                  <option>HH</option>
                                                                  <option>01</option>
@@ -1852,7 +1660,7 @@
                                                                  <option>11</option>
                                                                  <option>12</option>
                                                                  </select> : </span>
-                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="MMSelector" name="minuteOptions" 
+                                                <span><select style="width: 50px; background-color: white; padding: 10px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="MMSelector" name="minuteOptions" 
                                                                         >
                                                                  <option>MM</option>
                                                                  <option>01</option>
@@ -1917,32 +1725,34 @@
                                                                  <option>00</option>
                                                                  <option></option>
                                                                  </select></span>
-                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="AmPmSelector" name="AmPmOptions" 
+                                                <span><select style="width: 50px; background-color: white; padding: 10px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="AmPmSelector" name="AmPmOptions" 
                                                                         >
                                                                  <option>am</option>
                                                                  <option>pm</option>
                                                                  </select></span>
                                                                  
                                             </p></center>
-                                        <p id="timeStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
-                                        <p id="HideSuggestedTimeDivStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
+                                        <p id="timeStatus" style="color: darkblue; padding-bottom: 10px; font-weight: bolder; text-align: center;"></p>
+                                        <p id="HideSuggestedTimeDivStatus" style="color: darkblue; padding-bottom: 10px; font-weight: bolder; text-align: center;"></p>
                                     
                                     </div>
                                         
                                     </div>
                                     </div>
                                     
-                                    <div id="QueuLineDiv" style="padding-bottom: 5px; border-bottom: 1px solid darkgrey;">
+                                    <div id="QueuLineDiv" style="border: none; background: none;">
                                         
-                                        <p style="color: tomato;">Suggested Spots For Today Listed Below</p> 
-                                      
-                                        <center><p>You may also choose a spot from suggested list below</p></center>
+                                        <center><p style='margin-bottom: 5px;'>You may also choose a spot from suggested list below</p></center>
                                         
-                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; border-radius: 4px; color: white; background-color: #365266; padding: 10px 0; cursor: pointer;">Show Suggested Spots For Today <i class="fa fa-caret-down"></i></p>
+                                        <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="border-radius: 4px; font-weight: bolder; color: #365266; cursor: pointer;">Show Suggested Spots For Today <i style='margin-left: 5px;' class="fa fa-caret-down"></i></p>
                                         
-                                        <center><p id="SuggestedTimeDivStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p></center>
+                                        <center><p id="SuggestedTimeDivStatus" style="color: darkblue; padding-bottom: 10px; font-weight: bolder; text-align: center;"></p></center>
                                    
                                     <center><div id="AllSuggestedTimeDiv" style="display: none;">
+                                            
+                                            
+                                        <p style="color: #365266; font-weight: bolder; margin-bottom: 10px;">Suggested Spots For Today</p> 
+                                      
                                        
                                     <%
                                         String FormattedAvailableTime = "";
@@ -1977,8 +1787,8 @@
                                     %>
                                    
                                         <div class="SuggestedTime" onclick="setSuggestedTime(<%=q%>)" id="AvailableTimeDiv<%=q%>" style="cursor: pointer; margin: 2px; margin-bottom: 10px; padding-left: 1px; padding-right: 1px; width: 70px; border: 1px solid black; float: left;">
-                                            <p id="FormattedTimeAvalible<%=q%>" style="color: blue; font-size: 13px; font-weight: bold; text-align: center;"><%=FormattedAvailableTime%></p>
-                                            <p id="TimeAvailable<%=q%>" style="display: none;"><%=AllAvailableTimeList.get(q)%></p>
+                                            <p id="FormattedTimeAvalible<%=q%>" style="padding: 10px 0; color: blue; font-size: 13px; font-weight: bold; text-align: center;"><%=FormattedAvailableTime%></p>
+                                            <p id="TimeAvailable<%=q%>" style="display: none; padding: 10px 0;"><%=AllAvailableTimeList.get(q)%></p>
                                             <center><img src="icons/icons8-schedule-50.png" width="50" height="50" alt="icons8-schedule-50"/></center>
                                         </div>
                                               
@@ -2123,7 +1933,7 @@
                                         
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; font-weight: bolder; color: darkblue; padding: 5px;"></p>
                                         <input id="submitAppointment" style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
-                                                   padding: 5px;"
+                                                   padding: 10px;"
                                                    type="button" value="Confirm" />
                                     </center>
                                         

@@ -58,6 +58,9 @@
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
         
+        <script src="https://pagecdn.io/lib/chart/2.9.3/Chart.min.js" crossorigin="anonymous"  ></script>
+        <link href="https://pagecdn.io/lib/chart/2.9.3/Chart.min.css" rel="stylesheet" crossorigin="anonymous"  >
+        
         <link rel="apple-touch-icon" href="./HomeIcons/Icon3.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon1.png" />
         <link rel="apple-touch-icon" href="./HomeIcons/Icon2.png" />
@@ -442,7 +445,7 @@
                 <center><form id="DashboardLocationSearchForm" style="padding-bottom: 10px;" action="ByAddressSearchResultLoggedIn.jsp" method="POST">
                     <input type="hidden" name="User" value="<%=NewUserName%>" />
                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                    <p style="margin-right: bolder; color: #3d6999; margin-top: 10px; margin-bottom: 20px;">
+                    <p style="font-weight: bolder; color: #3d6999; margin-top: 10px; margin-bottom: 20px;">
                         <i style="margin-left: 5px" class="fa fa-map-marker" aria-hidden="true"></i>
                         Find services at location below</p>
                     <p style="color: #3d6999;">City: <input id="city4Search" style="width: 80%; border-radius: 3px; border: 1px solid #3d6999; color: #3d6999; background-color: #d9e8e8;" type="text" name="city4Search" placeholder="" value="<%=PCity%>"/></p> 
@@ -561,6 +564,14 @@
                     <div id="SuggestedPlcsDiv" style="max-width: 1000px; margin: auto; text-align: center;">
                         
                     </div>
+                    
+                    <p style='margin: auto; margin-bottom: 20px; margin-top: 30px; display: block;'></p>
+                    <h1 id="PlacesInYourAreaP" style='color: white; font-size: 19px; font-family: serif; padding: 10px 0;'>Places found in <%=PTown%></h1>
+                    
+                    <div style="max-width: 1000px; margin: auto; text-align: center;">
+                        <canvas style="width: 100%; height: 100%; min-height: 250px;" id="line-chart"></canvas>
+                    </div>
+                    
                 </div>
                 <div>
                     <h1 style='color: orange; font-size: 22px; font-family: serif;'>What is Queue Appointments</h1>
@@ -1024,6 +1035,7 @@
     </script>
     
     <script src="scripts/script.js"></script>
+    <script src="scripts/data_charts.js"></script>
     <!--script src="scripts/checkAppointmentDateUpdate.js"></script-->
     <!--script src="scripts/updateUserProfile.js"></script-->
     <!--script src="scripts/customerReviewsAndRatings.js"></script-->

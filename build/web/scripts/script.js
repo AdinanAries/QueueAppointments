@@ -766,9 +766,9 @@ function activateServicesTab() {
   var hoursOpenDiv = document.getElementById("hoursOpenDiv");
   var clientsListDiv = document.getElementById("clientsListDiv");
 
-  Clients.style.color = "darkgrey";
+  Clients.style.color = "#636363";
 
-  HoursOpen.style.color = "darkgrey";
+  HoursOpen.style.color = "#636363";
   HoursOpen.style.fontWeight = "initial";
 
   Services.style.color = "black";
@@ -788,10 +788,10 @@ function activateHourOpenTab() {
   var hoursOpenDiv = document.getElementById("hoursOpenDiv");
   var clientsListDiv = document.getElementById("clientsListDiv");
 
-  Services.style.color = "darkgrey";
+  Services.style.color = "#636363";
   Services.style.fontWeight = "initial";
 
-  Clients.style.color = "darkgrey";
+  Clients.style.color = "#636363";
   Clients.style.fontWeight = "initial";
 
   HoursOpen.style.color = "black";
@@ -811,10 +811,10 @@ function activateClientsTab() {
   var hoursOpenDiv = document.getElementById("hoursOpenDiv");
   var clientsListDiv = document.getElementById("clientsListDiv");
 
-  HoursOpen.style.color = "darkgrey";
+  HoursOpen.style.color = "#636363";
   HoursOpen.style.fontWeight = "initial";
 
-  Services.style.color = "darkgrey";
+  Services.style.color = "#636363";
   Services.style.fontWeight = "initial";
 
   Clients.style.color = "black";
@@ -965,15 +965,14 @@ function showCustExtraNews() {
 //----------------------------------------------
 
 function showAppointmentsTr() {
-  document.getElementById("AppointmentsTrBtn").style.backgroundColor =
-    "#eeeeee";
-  document.getElementById("EventsTrBtn").style.backgroundColor = "#ccc";
+  document.getElementById("AppointmentsTrBtn").style.color = "black";
+  document.getElementById("EventsTrBtn").style.color = "darkgrey";
   document.getElementById("EventsTr").style.display = "none";
   document.getElementById("AppointmentsTr").style.display = "block";
 }
 function showEventsTr() {
-  document.getElementById("EventsTrBtn").style.backgroundColor = "#eeeeee";
-  document.getElementById("AppointmentsTrBtn").style.backgroundColor = "#ccc";
+  document.getElementById("EventsTrBtn").style.color = "black";
+  document.getElementById("AppointmentsTrBtn").style.color = "darkgrey";
   document.getElementById("AppointmentsTr").style.display = "none";
   document.getElementById("EventsTr").style.display = "block";
 }

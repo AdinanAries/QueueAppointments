@@ -24,16 +24,14 @@ function checkChangeProfileInfoForm(){
 		|| ChangeProfileTown.value === "" || ChangeProfileCity.value === ""
 		|| ChangeProfileCountry.value === "" || ChangeProfileZipCode.value === ""){
 			
-			userProfileFormStatus.innerHTML = "Uncompleted Form";
-			userProfileFormStatus.style.backgroundColor = "red";
+			userProfileFormStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i> Uncompleted Form";
 			ChangeProfileUpdateBtn.disabled = true;
 			ChangeProfileUpdateBtn.style.backgroundColor = "darkgrey";
 			
 		}
 		else{
 			
-			userProfileFormStatus.innerHTML = "OK";
-			userProfileFormStatus.style.backgroundColor = "green";
+			userProfileFormStatus.innerHTML = "<i style='margin-right: 5px; color: green;' aria-hidden='true' class='fa fa-check'></i> OK";
 			ChangeProfileUpdateBtn.disabled = false;
 			ChangeProfileUpdateBtn.style.backgroundColor = "darkslateblue";
 			

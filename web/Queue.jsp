@@ -47,6 +47,10 @@
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
         
+        <script src="https://pagecdn.io/lib/chart/2.9.3/Chart.min.js" crossorigin="anonymous"  ></script>
+        <link href="https://pagecdn.io/lib/chart/2.9.3/Chart.min.css" rel="stylesheet" crossorigin="anonymous"  >
+
+        
         <title>Queue</title>
         
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
@@ -487,6 +491,7 @@
             </div>
         </div>
         <div id="main_body_flex">   
+            
             <div id="Extras" style="float: none;">
             <div id="ExtrasInnerContainer">
                 <%
@@ -495,7 +500,7 @@
                     try{
                         Class.forName(Driver);
                         Connection newsConn = DriverManager.getConnection(url, User, Password);
-                        String newsQuery = "Select top 10 * from QueueServiceProviders.MessageUpdates where ProvID in "+GlobalIDList+" and VisibleTo like 'Public%' order by MsgID desc";
+                        String newsQuery = "Select top 1 * from QueueServiceProviders.MessageUpdates where ProvID in "+GlobalIDList+" and VisibleTo like 'Public%' order by MsgID desc";
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         ResultSet newsRec = newsPst.executeQuery();
                         
@@ -603,6 +608,13 @@
                                 }
                 %>
                 
+                <a href="./NewsUpadtesPage.jsp">
+                    <p style="padding: 10px; color: #44484a; font-weight: bolder; margin: auto; width: fit-content;">
+                        <i style="margin-right: 5px;" class="fa fa-newspaper-o"></i>
+                        Click here to see more ads
+                    </p>
+                </a>
+                
                 <table  id="ExtrasTab" cellspacing="0 10px">
                         <tbody>
                             <tr style="background-color: #eeeeee;">
@@ -697,6 +709,15 @@
             <%
                 }
             %>
+            
+                <div class='eachCSecFlex marginUp20' style='margin-left: -10px; width: 100%; margin-top: 10px;'>
+                    <h1>Our businesses keep you posted</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                           display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                        <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular ads to keep you informed</p>
+                    </div>
+                </div>
             
             </div>
             
@@ -1111,6 +1132,15 @@
                           <% }
                           %>
                     </div>
+                    
+                    <p style='margin: auto; margin-bottom: 20px; margin-top: 30px; display: block;'></p>
+                    <h1 id="PlacesInYourAreaP" style='color: white; font-size: 19px; font-family: serif; padding: 10px 0;'></h1>
+                    <script>
+                        document.getElementById("PlacesInYourAreaP").innerText = "Places found in " + (GoogleReturnedTown ? GoogleReturnedTown : " your town");
+                    </script>
+                    <div style="max-width: 1000px; margin: auto; text-align: center;">
+                        <canvas style="width: 100%; height: 100%; min-height: 250px;" id="line-chart"></canvas>
+                    </div>
                 </div>
                 
                 <div>
@@ -1134,6 +1164,7 @@
                         
                     </div>
                 </div>
+                    
             </div>
                 
             <div style='background-color: #212c2c; display: block;' id="footer">
@@ -1435,5 +1466,6 @@
     
     <script src="scripts/script.js"></script>
     <script src="scripts/loginPageBtn.js"></script>
+    <script src="scripts/data_charts.js"></script>
     
 </html>

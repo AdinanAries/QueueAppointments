@@ -69,8 +69,7 @@ function checkLogInFormFieldsStatus() {
     ConfirmPasswordFld.value === "" ||
     UpdateLoginNameFld.value === ""
   ) {
-    changeUserAccountStatus.innerHTML = "Uncompleted Form";
-    changeUserAccountStatus.style.backgroundColor = "green";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>Uncompleted Form";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else if (
@@ -85,18 +84,15 @@ function checkLogInFormFieldsStatus() {
     NewPasswordFld.value !== ConfirmPasswordFld.value ||
     (NewPasswordFld.value === "" && ConfirmPasswordFld.value === "")
   ) {
-    changeUserAccountStatus.innerHTML = "New Passwords don't match";
-    changeUserAccountStatus.style.backgroundColor = "red";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>New Passwords don't match";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else if (NewPasswordFld.value.length < 8) {
-    changeUserAccountStatus.innerHTML = "New password too short";
-    changeUserAccountStatus.style.backgroundColor = "red";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>New password too short";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else {
-    changeUserAccountStatus.innerHTML = "OK";
-    changeUserAccountStatus.style.backgroundColor = "green";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: green;' aria-hidden='true' class='fa fa-check'></i>OK";
     LoginFormBtn.disabled = false;
     LoginFormBtn.style.backgroundColor = "darkslateblue";
   }
@@ -125,8 +121,7 @@ function checkExtraLogInFormFieldsStatus() {
     ConfirmPasswordFld.value === "" ||
     UpdateLoginNameFld.value === ""
   ) {
-    changeUserAccountStatus.innerHTML = "Uncompleted Form";
-    changeUserAccountStatus.style.backgroundColor = "green";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>Uncompleted Form";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else if (
@@ -141,18 +136,15 @@ function checkExtraLogInFormFieldsStatus() {
     NewPasswordFld.value !== ConfirmPasswordFld.value ||
     (NewPasswordFld.value === "" && ConfirmPasswordFld.value === "")
   ) {
-    changeUserAccountStatus.innerHTML = "New Passwords don't match";
-    changeUserAccountStatus.style.backgroundColor = "red";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>New Passwords don't match";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else if (NewPasswordFld.value.length < 8) {
-    changeUserAccountStatus.innerHTML = "New password too short";
-    changeUserAccountStatus.style.backgroundColor = "red";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>New password too short";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else {
-    changeUserAccountStatus.innerHTML = "OK";
-    changeUserAccountStatus.style.backgroundColor = "green";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: green;' aria-hidden='true' class='fa fa-check'></i>OK";
     LoginFormBtn.disabled = false;
     LoginFormBtn.style.backgroundColor = "darkslateblue";
   }
@@ -181,8 +173,7 @@ function checkExtraLogInFormFieldsStatus2() {
     ConfirmPasswordFld.value === "" ||
     UpdateLoginNameFld.value === ""
   ) {
-    changeUserAccountStatus.innerHTML = "Uncompleted Form";
-    changeUserAccountStatus.style.backgroundColor = "green";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>Uncompleted Form";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else if (
@@ -197,18 +188,15 @@ function checkExtraLogInFormFieldsStatus2() {
     NewPasswordFld.value !== ConfirmPasswordFld.value ||
     (NewPasswordFld.value === "" && ConfirmPasswordFld.value === "")
   ) {
-    changeUserAccountStatus.innerHTML = "New Passwords don't match";
-    changeUserAccountStatus.style.backgroundColor = "red";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>New Passwords don't match";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else if (NewPasswordFld.value.length < 8) {
-    changeUserAccountStatus.innerHTML = "New password too short";
-    changeUserAccountStatus.style.backgroundColor = "red";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>New password too short";
     LoginFormBtn.disabled = true;
     LoginFormBtn.style.backgroundColor = "darkgrey";
   } else {
-    changeUserAccountStatus.innerHTML = "OK";
-    changeUserAccountStatus.style.backgroundColor = "green";
+    changeUserAccountStatus.innerHTML = "<i style='margin-right: 5px; color: green;' aria-hidden='true' class='fa fa-check'></i>OK";
     LoginFormBtn.disabled = false;
     LoginFormBtn.style.backgroundColor = "darkslateblue";
   }
@@ -231,13 +219,11 @@ function PaymentsFormCheckInputs() {
     ExpDateFld.value === "" ||
     SecCodeFld.value === ""
   ) {
-    PaymentFormStatus.innerHTML = "Uncompleted Form";
-    PaymentFormStatus.style.backgroundColor = "red";
+    PaymentFormStatus.innerHTML = "<i style='margin-right: 5px; color: orange;' aria-hidden='true' class='fa fa-exclamation-triangle'></i>Uncompleted Form";
     PaymentsUpdateBtn.disabled = true;
     PaymentsUpdateBtn.style.backgroundColor = "darkgrey";
   } else {
-    PaymentFormStatus.innerHTML = "OK";
-    PaymentFormStatus.style.backgroundColor = "green";
+    PaymentFormStatus.innerHTML = "<i style='margin-right: 5px; color: green;' aria-hidden='true' class='fa fa-check'></i>OK";
     PaymentsUpdateBtn.disabled = false;
     PaymentsUpdateBtn.style.backgroundColor = "darkslateblue";
   }

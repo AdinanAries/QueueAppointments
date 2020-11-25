@@ -1863,7 +1863,7 @@
                 %>
                     <center><div style="width: 100%; max-width: 360px; text-align: left; padding-top: 5px; margin-bottom: 0; padding-bottom: 0;">
                         <div style="border-radius: 100%; margin-left: 5px; min-width: 30px; height: 30px; overflow: hidden; position: absolute;">
-                            <img id="" style="width: 30px; height: auto; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>"/>
+                            <img id="" style="width: 30px; min-height: 30px; height: auto; margin-bottom: 20px; position: absolute; background-color: darkgray;" src="data:image/jpg;base64,<%=base64Image%>"/>
                         </div>
                     </div></center>
                 <%
@@ -5132,7 +5132,7 @@
             <!------------------------------------------------------------------------------------------------------------------>
         
             
-            <center><div id="Providerprofile" style="width: 100%; max-width: 700px;">
+            <center><div id="Providerprofile" class="ProviderWidthEnforcement" style="width: 100%; max-width: 700px;">
                  <!--p id="ProviderYourBusinessTxt"-->
                     <p style="font-weight: bolder; color: #444; background: rgba(255, 255, 255, 0.7); position: relative; z-index: 1; margin-bottom: -35px; padding: 5px;">Your Business Profile</p>
                 
@@ -5144,32 +5144,33 @@
                                 
                                 <a href="UploadProviderProfilePhoto.jsp?UserIndex=<%=UserIndex%>&User=<%=NewUserName%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
                                     
-                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>'); margin-left: -5px; margin-right: -10px; background-color: #eeeeee; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
+                                    <div class="propic" style="background-image: url('data:image/jpg;base64,<%=base64Cover%>');  background-color: #eeeeee; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33);">
                                         
                                     <%if(base64Cover == ""){%>
-                                        <p style="background-color: #eeeeee; text-align: center; margin-top: -70px; margin-bottom: 30px; color: black;">
-                                            <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px; border-radius: 0; background: none; border: none;" alt=""/>
-                                            <sup>Click here to add Cover Photo</sup>
+                                        <p style="text-align: center; margin-top: -75px; margin-bottom: 60px; color: #636363;">
+                                            <i style="font-size: 19px;" aria-hidden="true" class="fa fa-picture-o"></i>
+                                            Click here to add Cover Photo
                                         </p>
                                     <%}%>
                                     
-                            <%
-                                if(base64Image == ""){
-                            %> 
-                            
-                                <div stle="text-align: center;">
-                                    <img style="box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); background-color: #eeeeee;" src="icons/icons8-user-filled-100.png" width="150" height="150" alt="icons8-user-filled-100"/>
-                                </div>
-                                    
-                            <%
-                                }else{
-                            %>
-                                <div class='MainPropicContainer' style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); width: 150px; height: 150px; overflow: hidden;'>
-                                    <img style="width: 150px; height: auto;" src="data:image/jpg;base64,<%=base64Image%>" />
-                                </div>
-                            <%
-                                }
-                            %>
+                                    <%
+                                        if(base64Image == ""){
+                                    %> 
+
+                                        <div style="width: 150px; height: 150px; border-radius: 100%; display: flex; flex-direction: column; justify-content: center;
+                                             box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); background-color: #eeeeee; text-align: center;">
+                                            <i class="fa fa-user" aria-hidden="true" style="font-size: 130px; color: #ccc;"></i>
+                                        </div>
+
+                                    <%
+                                        }else{
+                                    %>
+                                        <div class='MainPropicContainer' style='box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33); width: 150px; height: 150px; overflow: hidden;'>
+                                            <img style="width: 150px; height: auto; min-height: 150px;" src="data:image/jpg;base64,<%=base64Image%>" />
+                                        </div>
+                                    <%
+                                        }
+                                    %>
                                 </div></a>
                                 
                             </center>
@@ -5495,7 +5496,7 @@
                                 <a href='ViewSelectedProviderReviews.jsp?UserIndex=<%=UserIndex%>&Provider=<%=UserID%>&User=<%=NewUserName%>' onclick="document.getElementById('ProviderPageLoader').style.display = 'block';"><p style='clear: both; text-align: center; color: greenyellow; cursor: pointer; padding-top: 10px;'>See More...</p></a>
                             </div>
                         </div>
-                                                </div>
+                    </div>
 
                         <%}%>
                         
@@ -5503,7 +5504,7 @@
                             if(ReviewsList.size() == 0){
                         %>
 
-                        <center><p style="color: #636363; text-align: center; margin: 10px; max-width: 600px;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> You don't have any customer reviews</p></center>
+                        <!--center><p style="color: #636363; text-align: center; margin: 30px 0; max-width: 600px;"><i style="color: orange;" class="fa fa-exclamation-triangle"></i> You don't have any customer reviews</p></center-->
                         
                         <%}%>
                                         
@@ -5558,7 +5559,7 @@
                                         <%} else{%>
                                         
                                         <a href="UploadGalleryPhotoWindow.jsp?UserIndex=<%=UserIndex%>" onclick="document.getElementById('ProviderPageLoader').style.display = 'block';">
-                                            <p style="background-color: #ccccff; padding: 5px; margin: 5px; border-radius: 4px; color: #000099; cursor: pointer; text-align: center;">
+                                            <p style="padding: 30px 5px; margin: 5px; border-radius: 4px; color: #636363; cursor: pointer; text-align: center;">
                                                 <img src="icons/AddPhotoImg.png" style="width: 30px; height: 30px;" alt=""/>
                                                 <sup>Create Photo Gallery</sup>
                                             </p></a>
@@ -5571,10 +5572,10 @@
                                                     <td onclick="activateServicesTab()" id="Services" style="text-align: center; padding: 10px; cursor: pointer; font-weight: bolder;">
                                                         <i class="fa fa-bars" aria-hidden="true"></i> Services
                                                     </td>
-                                                    <td onclick="activateHourOpenTab()" id="HoursOpen" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
+                                                    <td onclick="activateHourOpenTab()" id="HoursOpen" style="text-align: center; padding: 10px; cursor: pointer; color: #636363;">
                                                         <i class="fa fa-sliders" aria-hidden="true"></i> Settings
                                                     </td>
-                                                    <td onclick="activateClientsTab()" id="Clients" style="text-align: center; padding: 10px; cursor: pointer; color: darkgray;">
+                                                    <td onclick="activateClientsTab()" id="Clients" style="text-align: center; padding: 10px; cursor: pointer; color: #636363;">
                                                         <i class="fa fa-address-card" aria-hidden="true"></i> Clients
                                                     </td>
                                                 </tr>
@@ -5590,7 +5591,7 @@
                                      
                                      <div>
                                          
-                                     <table style="width: 100%; max-width: 600px; border-spacing: 5px 10px;">
+                                     <table style="width: 100%; border-spacing: 5px 10px;">
                                      <tbody>
                                              
                                 <%
@@ -5856,9 +5857,9 @@
 
                                 %>
                                 
-                                <p id='noServStatus1' style="padding: 10px 5px; color: darkblue;">
+                                <p id='noServStatus1' style="padding: 20px 5px; color: #334d81; text-align: center; font-weight: bolder;">
                                     <i style="color: red; font-weight: bolder;" class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
-                                    Customers cannot book appointment with you if you don't have any service(s) they can book for</p>
+                                    Customers cannot book appointment if you don't have any service(s)</p>
                                 <p id='noServStatus2' style="padding: 10px;"></p>
                                 
                                 

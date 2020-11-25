@@ -355,14 +355,14 @@
             
             <div id="ExtrasInnerContainer">
                 <%
+                    int newsItems = 0;
                     
                     try{
                         Class.forName(Driver);
                         Connection newsConn = DriverManager.getConnection(url, User, Password);
-                        String newsQuery = "Select * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                        String newsQuery = "Select top 1 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         ResultSet newsRec = newsPst.executeQuery();
-                        int newsItems = 0;
                         
                         while(newsRec.next()){
                             
@@ -375,6 +375,7 @@
                             String ProvAddress = "";
                             String ProvTel = "";
                             String ProvEmail = "";
+                            String ServiceType = "";
                             
                             String Msg = newsRec.getString("Msg").trim();
                             String MsgPhoto = "";
@@ -412,6 +413,9 @@
                                     ResultSet ProvRec = ProvPst.executeQuery();
                                     
                                     while(ProvRec.next()){
+                                        
+                                        ServiceType = ProvRec.getString("Service_Type").trim();
+                                            
                                         ProvFirstName = ProvRec.getString("First_Name").trim();
                                         ProvCompany = ProvRec.getString("Company").trim();
                                         ProvTel = ProvRec.getString("Phone_Number").trim();
@@ -433,9 +437,7 @@
 
                                             base64Profile = Base64.getEncoder().encodeToString(imageBytes);
 
-
                                         }catch(Exception e){}
-                                        
                                     }
                                     
                                 }catch(Exception e){
@@ -463,7 +465,16 @@
                                 }catch(Exception e){
                                     e.printStackTrace();
                                 }
+                                
                 %>
+                
+                <a href="./NewsUpadtesPage.jsp">
+                    <p style="padding: 10px; color: #44484a; font-weight: bolder; margin: auto; width: fit-content;">
+                        <i style="margin-right: 5px;" class="fa fa-newspaper-o"></i>
+                        Click here to see more ads
+                    </p>
+                </a>
+                
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
                         <tbody>
@@ -542,7 +553,6 @@
                             </tr>
                         </tbody>
                     </table>
-                                        
             <%
                         if(newsItems > 10)
                             break;
@@ -551,7 +561,28 @@
                     e.printStackTrace();
                 }
             %>
+            
             </div>
+            
+            <%
+                if(newsItems == 0){
+            %>
+
+                <p style="font-weight: bolder; margin-top: 50px; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> No news items found at this time</p>
+
+            <%
+                }
+            %>
+            
+                <div class='eachCSecFlex marginUp20' style='margin-left: -10px; width: 100%; margin-top: 10px;'>
+                    <h1>Our businesses keep you posted</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                           display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                        <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular ads to keep you informed</p>
+                    </div>
+                </div>
+            
             </div>
                
             <div id="content">

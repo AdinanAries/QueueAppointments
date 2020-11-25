@@ -800,14 +800,14 @@
             
             <div id="ExtrasInnerContainer">
                 <%
+                    int newsItems = 0;
                     
                     try{
                         Class.forName(Driver);
                         Connection newsConn = DriverManager.getConnection(url, User, Password);
-                        String newsQuery = "Select top 10 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
+                        String newsQuery = "Select top 1 * from QueueServiceProviders.MessageUpdates where VisibleTo like 'Public%' order by MsgID desc";
                         PreparedStatement newsPst = newsConn.prepareStatement(newsQuery);
                         ResultSet newsRec = newsPst.executeQuery();
-                        int newsItems = 0;
                         
                         while(newsRec.next()){
                             
@@ -820,6 +820,7 @@
                             String ProvAddress = "";
                             String ProvTel = "";
                             String ProvEmail = "";
+                            String ServiceType = "";
                             
                             String Msg = newsRec.getString("Msg").trim();
                             String MsgPhoto = "";
@@ -857,6 +858,9 @@
                                     ResultSet ProvRec = ProvPst.executeQuery();
                                     
                                     while(ProvRec.next()){
+                                        
+                                        ServiceType = ProvRec.getString("Service_Type").trim();
+                                            
                                         ProvFirstName = ProvRec.getString("First_Name").trim();
                                         ProvCompany = ProvRec.getString("Company").trim();
                                         ProvTel = ProvRec.getString("Phone_Number").trim();
@@ -878,11 +882,7 @@
 
                                             base64Profile = Base64.getEncoder().encodeToString(imageBytes);
 
-
-                                        }
-                                        catch(Exception e){
-
-                                        }
+                                        }catch(Exception e){}
                                     }
                                     
                                 }catch(Exception e){
@@ -899,18 +899,27 @@
                                     ResultSet ProvLocRec = ProvLocPst.executeQuery();
                                     
                                     while(ProvLocRec.next()){
-                                        String NHouseNumber = ProvLocRec.getString("House_Number").trim();
-                                        String NStreet = ProvLocRec.getString("Street_Name").trim();
-                                        String NTown = ProvLocRec.getString("Town").trim();
-                                        String NCity = ProvLocRec.getString("City").trim();
-                                        String NZipCode = ProvLocRec.getString("Zipcode").trim();
+                                        String HouseNumber = ProvLocRec.getString("House_Number").trim();
+                                        String Street = ProvLocRec.getString("Street_Name").trim();
+                                        String Town = ProvLocRec.getString("Town").trim();
+                                        String City = ProvLocRec.getString("City").trim();
+                                        String ZipCode = ProvLocRec.getString("Zipcode").trim();
                                         
-                                        ProvAddress = NHouseNumber + " " + NStreet + ", " + NTown + ", " + NCity + " " + NZipCode;
+                                        ProvAddress = HouseNumber + " " + Street + ", " + Town + ", " + City + " " + ZipCode;
                                     }
                                 }catch(Exception e){
                                     e.printStackTrace();
                                 }
+                                
                 %>
+                
+                <a href="./NewsUpadtesPage.jsp">
+                    <p style="padding: 10px; color: #44484a; font-weight: bolder; margin: auto; width: fit-content;">
+                        <i style="margin-right: 5px;" class="fa fa-newspaper-o"></i>
+                        Click here to see more ads
+                    </p>
+                </a>
+                
                 
                 <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
                         <tbody>
@@ -997,7 +1006,28 @@
                     e.printStackTrace();
                 }
             %>
+            
             </div>
+            
+            <%
+                if(newsItems == 0){
+            %>
+
+                <p style="font-weight: bolder; margin-top: 50px; text-align: center;"><i class="fa fa-exclamation-triangle" style="color: orange;"></i> No news items found at this time</p>
+
+            <%
+                }
+            %>
+            
+                <div class='eachCSecFlex marginUp20' style='margin-left: -10px; width: 100%; margin-top: 10px;'>
+                    <h1>Our businesses keep you posted</h1>
+                    <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
+                           display: flex; justify-content: flex-end; flex-direction: column;'>
+                        <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
+                        <p style='color: #37a0f5; padding: 5px;'>Our integrated news feed feature lets businesses post regular ads to keep you informed</p>
+                    </div>
+                </div>
+            
             </div>
             
             <div id="content">
@@ -1714,30 +1744,28 @@
                                             
                                     %>
                                     
-                                    <p id="ShowThisAppointmentTimeForFinishAppointmentWindow" style="color: red;">This line spot is for <%=FutureDate%> at <%=FormattedAppointmentTime%></p>
+                                    <!--p id="ShowThisAppointmentTimeForFinishAppointmentWindow" style="color: red;">This line spot is for <%=FutureDate%> at <%=FormattedAppointmentTime%></p-->
                                     
                                     <%}%>
                                     
-                                    <div style="background-color: #eeeeee; padding: 5px; border-top: 1px solid darkgrey;">
-                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="text-align: center; border-radius: 4px; background-color: #365266; color: white; padding: 10px 0; cursor: pointer;">Customize Your Spot <i class="fa fa-caret-down"></i></p>
+                                    <div>
+                                    <p id="showCustomizeTimeBtn" onclick="showCustomizeDate()" style="font-weight: bolder; color: #365266; cursor: pointer;">Customize Your Spot <i style="margin-left: 5px;" class="fa fa-caret-down"></i></p>
                                     
-                                    <div id="customizeAppointmentTime" style="background-color: #eeeeee;">
+                                    <div id="customizeAppointmentTime">
                                         
-                                        <div id="serviceslist" style="border-top: none;">
+                                        <div id="serviceslist" style="border: none; background: none; padding: 0;">
                                         
-                                       <p style="color: tomato;">Select Date</p>
-                                       <p>Click on date field below to set date</p>
-                                       
-                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid darkgrey; padding: 5px;" type="text" id="datepicker" name="chooseDate" value="<%=FutureDate%>" readonly></p>
-                                       <p id="datepickerStatus" style="text-align: center; color: darkblue; font-weight: bolder;"></p>
-                                       <p id="DateStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
+                                       <p style="color: #334d81; font-weight: bolder">Select Date</p>
+                                       <p><input onclick="initializeDate()" style = "background-color: white; border: 1px solid darkgrey; padding: 10px;" type="text" id="datepicker" name="chooseDate" value="<%=FutureDate%>" readonly></p>
+                                       <p id="datepickerStatus" style="padding-bottom: 10px; text-align: center; color: darkblue; font-weight: bolder;"></p>
+                                       <p id="DateStatus" style="padding-bottom: 10px; color: darkblue; font-weight: bolder; text-align: center;"></p>
                                     </div> 
                                         
-                                    <div id="serviceslist">
+                                    <div id="serviceslist" style="background: none; border: none;">
                                         
-                                        <p style="color: tomato;">Select Time</p>
+                                        <p style="color: #334d81; font-weight: bolder;">Select Time</p>
                                     
-                                        <center><p><span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick ="showTime()" id="HHSelector" name="hourOptions" 
+                                        <center><p><span><select style="width: 50px; background-color: white; padding: 10px; border: 1px solid darkgrey; color: black;" onclick ="showTime()" id="HHSelector" name="hourOptions" 
                                                                          >
                                                                  <option>HH</option>
                                                                  <option>01</option>
@@ -1753,7 +1781,7 @@
                                                                  <option>11</option>
                                                                  <option>12</option>
                                                                  </select> : </span>
-                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="MMSelector" name="minuteOptions" 
+                                                <span><select style="width: 50px; background-color: white; padding: 10px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="MMSelector" name="minuteOptions" 
                                                                         >
                                                                  <option>MM</option>
                                                                  <option>01</option>
@@ -1818,30 +1846,30 @@
                                                                  <option>00</option>
                                                                  <option></option>
                                                                  </select></span>
-                                                <span><select style="width: 50px; background-color: white; padding: 5px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="AmPmSelector" name="AmPmOptions" 
+                                                <span><select style="width: 50px; background-color: white; padding: 10px; border: 1px solid darkgrey; color: black;" onclick="showTime()" id="AmPmSelector" name="AmPmOptions" 
                                                                          >
                                                                  <option>am</option>
                                                                  <option>pm</option>
                                                                  </select></span>
                                                                  
                                             </p></center>
-                                        <p id="timeStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
-                                        <p id="HideSuggestedTimeDivStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p>
+                                        <p id="timeStatus" style="color: darkblue; padding-bottom: 10px; font-weight: bolder; text-align: center;"></p>
+                                        <p id="HideSuggestedTimeDivStatus" style="padding-bottom: 10px; color: darkblue; font-weight: bolder; text-align: center;"></p>
                                     
                                     </div>
                                         
                                     </div>
                                     </div>
                                     
-                                    <div id="QueuLineDiv" style="padding-bottom: 5px; border-top: 1px solid darkgrey; border-bottom: 1px solid darkgrey;">
+                                    <div id="QueuLineDiv" style="border: none; background: none;">
                                         
-                                        <p style="color: tomato;">Suggested Spots Listed Below</p> 
+                                        <p style="color: #334d81; font-weight: bolder; margin-bottom: 5px;">Suggested Spots Listed Below</p> 
                                       
-                                        <center><p>You may also choose a spot from suggested list below</p></center>
+                                        <p style="margin-bottom: 0;">You may also choose a spot from suggested list below</p>
                                         
                                         <p id="showAllSuggestedTimeBtn" onclick="showSuggestedTime()" style="text-align: center; background-color: darkslateblue; color: pink; padding: 5px; cursor: pointer;">Show All Suggested Spots</p>
                                         
-                                        <center><p id="SuggestedTimeDivStatus" style="color: darkblue; font-weight: bolder; text-align: center;"></p></center>
+                                        <center><p id="SuggestedTimeDivStatus" style="padding: 10px 0; color: darkblue; font-weight: bolder; text-align: center;"></p></center>
                                    
                                     <center><div id="AllSuggestedTimeDiv" style="display: none;">
                                        
@@ -2022,7 +2050,7 @@
                                         
                                         <p id="ConfirmAppointmentStatusTxt" style="text-align: center; color: darkblue; font-weight: bolder;"></p>
                                         <input id="submitAppointment" style="border: none; background-color: darkslateblue; border-radius: 5px; color: white;
-                                                   padding: 5px;"
+                                                   padding: 10px;"
                                                   onclick="document.getElementById('PageLoader').style.display = 'block';"  type="button" value="Confirm" />
                                     </center>
                                         
