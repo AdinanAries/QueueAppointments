@@ -356,7 +356,7 @@
                             String ProvAddress = "";
                             String ProvTel = "";
                             String ProvEmail = "";
-                            String ServiceType = "";
+                            String NServiceType = "";
                             
                             String Msg = newsRec.getString("Msg").trim();
                             String MsgPhoto = "";
@@ -395,7 +395,7 @@
                                     
                                     while(ProvRec.next()){
                                         
-                                        ServiceType = ProvRec.getString("Service_Type").trim();
+                                        NServiceType = ProvRec.getString("Service_Type").trim();
                                             
                                         ProvFirstName = ProvRec.getString("First_Name").trim();
                                         ProvCompany = ProvRec.getString("Company").trim();

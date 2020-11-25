@@ -1786,10 +1786,9 @@
                                         
                                     %>
                                    
-                                        <div class="SuggestedTime" onclick="setSuggestedTime(<%=q%>)" id="AvailableTimeDiv<%=q%>" style="cursor: pointer; margin: 2px; margin-bottom: 10px; padding-left: 1px; padding-right: 1px; width: 70px; border: 1px solid black; float: left;">
-                                            <p id="FormattedTimeAvalible<%=q%>" style="padding: 10px 0; color: blue; font-size: 13px; font-weight: bold; text-align: center;"><%=FormattedAvailableTime%></p>
+                                        <div class="SuggestedTime" onclick="setSuggestedTime(<%=q%>)" id="AvailableTimeDiv<%=q%>" style="cursor: pointer; margin: 2px; margin-bottom: 10px; padding-left: 1px; padding-right: 1px; width: 70px; border: 1px solid darkgray; border-radius: 4px; float: left;">
+                                            <p id="FormattedTimeAvalible<%=q%>" style="color: blue; font-size: 13px; font-weight: bold; text-align: center;"><%=FormattedAvailableTime%></p>
                                             <p id="TimeAvailable<%=q%>" style="display: none; padding: 10px 0;"><%=AllAvailableTimeList.get(q)%></p>
-                                            <center><img src="icons/icons8-schedule-50.png" width="50" height="50" alt="icons8-schedule-50"/></center>
                                         </div>
                                               
                                     <%}%> 
