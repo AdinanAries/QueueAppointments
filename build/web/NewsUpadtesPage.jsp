@@ -119,9 +119,10 @@
         
     <div style='display: flex; flex-direction: row; justify-content: center; width: 100vw;'>
         
-            <div class='dontShowMobile' style='padding: 0 20px; margin: 10px; margin-top: 80px; background-color: #e6f3f7; height: 1200px; max-width: 300px;'>
+            <div class='dontShowMobile' style='padding: 0 20px; margin: 10px; margin-top: 80px; background-color: #e6f3f7; height: 1350px; border-radius: 4px; 
+             box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important; max-width: 300px;'>
             
-            <h1 style='color: orange; font-size: 22px; font-family: serif; text-align: center; margin-top: 40px;'>What is Queue Appointments</h1>
+            <h1 style='color: orange; font-size: 22px; font-family: serif; text-align: center; margin-top: 40px; margin-bottom: 20px;'>What is Queue Appointments</h1>
                     <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto;'>
                         Queue Appointments is a website and app that lets you find medical and beauty places near your location to book appointments.
                         It also provides features for the businesses to post news updates with pictures to keep you informed about their services
@@ -130,24 +131,24 @@
             
             <div class='CosmeSectFlex' style='flex-direction: column;'>
                         <div class='eachCSecFlex' style='width: 100%;'>
-                            <h1>Book your doctor's appointment online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                            <h1 style="margin-top: 20px; margin-bottom: 20px; color: #3d6999;">Book your doctor's appointment online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; border-radius: 4px; overflow: hidden;
                                  background-image: url("./DocAppt.jpg"); background-size: cover; background-position: right;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
                                 <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>It's a fully automated platform for booking appointments. Your doctor's appointment has never been easier.</p>
                             </div>
                         </div>
                         <div class='eachCSecFlex marginUp20' style='width: 100%;'>
-                            <h1>Find barber shops near you</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                            <h1 style="margin-top: 20px; margin-bottom: 20px; color: #3d6999;">Find barber shops near you</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; border-radius: 4px; overflow: hidden;
                                  background-image: url("./BarberAppt.jpg"); background-size: cover; background-position: right;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
                                 <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>Our recommendations algorithms make it easier for you to find the best barber shops in town</p>
                             </div>
                         </div>
                         <div class='eachCSecFlex marginUp20' style='width: 100%;'>
-                            <h1>Find your beauty time online</h1>
-                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; 
+                            <h1 style="margin-top: 20px; margin-bottom: 20px; color: #3d6999;">Find your beauty time online</h1>
+                            <div style='margin: auto; width: 100%; max-width: 400px; height: 300px; border-radius: 4px; overflow: hidden;
                                  background-image: url("./SpaAppt.jpg"); background-size: cover; background-position: right;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
                                 <p style='background-color: rgba(0,0,0, 0.3); color: #ffe96b; padding: 5px;'>No more waiting on a line. Your service provider has a queue. Find your spot here.</p>
@@ -318,11 +319,11 @@
                                 }
                 %>
                 
-                <table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">
+                <table  id="ExtrasTab" cellspacing="0" style="overflow: hidden; background-color: #eeeeee; margin: 5px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important;">
                         <tbody>
                             <tr style="background-color: #eeeeee;">
                                 <td>
-                                    <div id="ProvMsgBxOne" style="padding-top: 10px;">
+                                    <div id="ProvMsgBxOne" style="padding: 10px 0;">
                                         
                                         <div style='font-weight: bolder;'>
                                             <!--div style="float: right; width: 65px;" -->
@@ -422,8 +423,9 @@
                </div>
         </div>
                
-        <div class='dontShowMobile' style='padding: 0 20px; margin: 10px; height: 850px; margin-top: 80px; background-color: #e6f3f7; max-width: 300px;'>
-            <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px; text-align: center;'>We have the best services in your area</h1>
+        <div class='dontShowMobile' style='padding: 0 20px; margin: 10px; height: 910px; border-radius: 4px; 
+             box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important; margin-top: 80px; background-color: #e6f3f7; max-width: 300px;'>
+            <h1 style='color: orange; font-size: 22px; font-family: serif; margin-top: 40px; margin-bottom: 20px; text-align: center;'>We have the best services in your area</h1>
                     <p style='margin: 10px; text-align: center; max-width: 400px; margin: auto;'>
                         Your ratings, reviews and feedbacks mean a lot to us. We are constantly watching how well businesses serve their customers in order to ensure that only the best medical and beauty places operate on 
                         our platform. Queue Appointments will eventually disassociate with badly rated businesses.
@@ -431,7 +433,7 @@
                     
                     <div class='CosmeSectFlex' style='margin: auto; margin-top: 20px; max-width: 1000px; flex-direction: column;'>
                         <div class='eachCSecFlex' style='width: 100%;'>
-                            <h1>Your reviews make a difference</h1>
+                            <h1 style="margin-top: 20px; color: #3d6999;">Your reviews make a difference</h1>
                             <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
                                 <p style='text-align: center;'><img src='ReviewIcon.png'  style='width: 80px; height: 80px'/></p>
@@ -439,7 +441,7 @@
                             </div>
                         </div>
                         <div class='eachCSecFlex marginUp20' style='width: 100%;'>
-                            <h1>Fast growing community</h1>
+                            <h1 style="margin-top: 20px; color: #3d6999;">Fast growing community</h1>
                             <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
                                  display: flex; flex-direction: column;'>
                                 <p style='text-align: center;'><img src='BizGroup.png'  style='width: 80px; height: 80px'/></p>
@@ -447,7 +449,7 @@
                             </div>
                         </div>
                         <div class='eachCSecFlex marginUp20' style='width: 100%;'>
-                            <h1>Our businesses keep you posted</h1>
+                            <h1 style="margin-top: 20px; color: #3d6999;">Our businesses keep you posted</h1>
                             <div style='margin: auto; width: 100%; max-width: 300px; padding: 10px; padding-top: 20px;
                                  display: flex; justify-content: flex-end; flex-direction: column;'>
                                 <p style='text-align: center;'><img src='NewsPic.png'  style='width: 80px; height: 80px'/></p>
@@ -480,11 +482,11 @@
                                            newsRec.forEach((eachNews)=>{
                                                 let news = document.createElement("div");
                                                 news.innerHTML = 
-                                                '<table  id="ExtrasTab" cellspacing="0" style="margin-bottom: 5px;">'+
+                                                '<table  id="ExtrasTab" cellspacing="0" style="overflow: hidden; background-color: #eeeeee; margin: 5px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important;">'+
                                                      '<tbody>'+
                                                          '<tr style="background-color: #eeeeee;">'+
                                                              '<td>'+
-                                                                '<div id="ProvMsgBxOne" style="padding-top: 10px;">'+
+                                                                '<div id="ProvMsgBxOne" style="padding: 10px 0;">'+
                                                                     '<div style="font-weight: bolder;">'+
                                                                         '<div style="margin: 4px; width:35px; height: 35px; border-radius: 100%; float: left; overflow: hidden;">'+   
                                                                             '<img id="" style="background-color: darkgray; width:35px; height: auto;" src="data:image/jpg;base64,'+eachNews.base64Profile+'"/>'+

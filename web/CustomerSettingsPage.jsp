@@ -315,7 +315,7 @@
      //----------------------------------------------------------------------------------------------------------------------   
     %>
     
-    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: none !important;">
+    <body onload="document.getElementById('PageLoader').style.display = 'none';" style="background: white !important;">
         
         <div id="PageLoader" class="QueueLoader" style="display: block;">
             <div class="QueueLoaderSpinner"></div>
@@ -437,6 +437,13 @@
                     document.getElementById("PhoneNews").style.display = "none";
                 </script>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Updates from your providers</p></center>
+            
+                <a href="./NewsUpadtesPageLoggedIn.jsp?CustomerID=<%=UserID%>&User=<%=NewUserName%>&UserIndex=<%=UserIndex%>">
+                    <p style="padding: 10px; color: #44484a; font-weight: bolder; margin: auto; width: fit-content;">
+                        <i style="margin-right: 5px;" class="fa fa-newspaper-o"></i>
+                        Click here to see more ads
+                    </p>
+                </a>
             
                <div style="max-height: 100%; overflow-y: auto;">
                     
@@ -569,13 +576,13 @@
                                                 }
                     %>
 
-                    <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 5px; padding: 4px; width: 100%; background-color: #f2f2f2; max-width: 600px;">
+                    <table  id="PhoneExtrasTab" cellspacing="0" style="overflow: hidden; background-color: #eeeeee; margin: 5px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important; max-width: 600px;">
                         <tbody>
-                            <tr style="background-color: #eeeeee;">
+                            <tr style="">
                                 <td>
                                     <div id="ProvMsgBxOne">
                                         
-                                        <div style='font-weight: bolder;'>
+                                        <div style='font-weight: bolder; padding: 10px 0;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
@@ -773,13 +780,13 @@
                                     }
                 %>
                 
-                <table  id="PhoneExtrasTab" cellspacing="0" style="margin-bottom: 5px; padding: 4px; width: 100%; background-color: #f2f2f2; max-width: 600px;">
+                <table  id="PhoneExtrasTab" cellspacing="0" style="overflow: hidden; background-color: #eeeeee; margin: 5px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important; max-width: 600px;">
                     <tbody>
-                            <tr style="background-color: #eeeeee;">
+                            <tr style="">
                                 <td>
                                     <div id="ProvMsgBxOne">
                                         
-                                        <div style='font-weight: bolder;'>
+                                        <div style='font-weight: bolder; padding: 10px 0;'>
                                             <!--div style="float: right; width: 65px;" -->
                                                 <%
                                                     if(base64Profile != ""){
@@ -863,41 +870,46 @@
                </div>
             </div>
             
-            <div id='PhoneCalender' style='display: none; margin-top: 5px; width: 100%;'>
+            <div id='PhoneCalender' style='max-width: 600px; padding: 15px 0; margin: auto; background-color: #eee; display: none; margin: 5px; overflow: hidden; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important;'>
                 <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Your Calender</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; background-color: white; max-width: 600px;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='padding: 4px; width: 100%; border-spacing: 5px; max-width: 600px;' cellspacing="0">
                     <tbody>
                         <tr>
-                            <td style="border-bottom: 1px solid #eee;">
-                                <div id="DateChooserDiv" style=' margin: 10px;'>
-                                    <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Pick a date below</p>
+                            <td>
+                                
+                                <div id="DateChooserDiv" style=''>
+                                    <p style='margin: 10px 0; color: #3d6999; font-weight: bolder;'>
+                                    <i style='margin-right: 5px; color: #334d81;' class="fa fa-calendar" aria-hidden="true"></i>Pick a date below</p>
                                     <% SimpleDateFormat CalDateFormat = new SimpleDateFormat("MMMMMMMMMMMMMMMMMMMMMMM dd, yyyy");%>
-                                    <p style='text-align: center;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
-                                                                          font-weight: bolder; border: 0; background-color: darkslateblue; color: white; padding: 5px;' type="text" name="CalDateVal" 
-                                                                          value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" onkeydown="return false"/></p>
+                                    <p style='text-align: center; margin-bottom: 5px;'><input id="CalDatePicker" style='cursor: pointer; width: 90%; 
+                                                                        border: #3d6999 1px solid;  font-weight: bolder; background-color: #06adad; color: white; padding: 10px 5px;' type="button" name="CalDateVal" 
+                                                                          value="<%= new Date().toString().substring(0,3) + ", " +CalDateFormat.format(new Date())%>" readonly onkeydown="return false"/></p>
                                     <script>
                                     $(function() {
                                         $("#CalDatePicker").datepicker();
                                       });
                                     </script>
                                 </div>
-                                    
                             </td>
                         </tr>
-                        <div style='padding: 5px; background-color: white; max-width: 590px;'>
-                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; padding: 5px; background-color: #eeeeee; width: 46%; float: right;'>Events</div>
-                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='cursor: pointer; border-radius: 4px; padding: 5px; background-color: #ccc; width: 46%; float: left;'>Appointments</div>
+                            <div style='padding: 10px; border-radius: 4px; max-width: 590px'>
+                                    <div onclick="showEventsTr();" id='EventsTrBtn' style='cursor: pointer; border-radius: 4px; 
+                                         font-weight: bolder; border: 0; padding: 5px; color: black; width: 40%; float: right;'>
+                                        Events</div>
+                                    <div onclick="showAppointmentsTr();" id='AppointmentsTrBtn' style='color: darkgrey; font-weight: bolder;
+                                         cursor: pointer; border-radius: 4px; border: 0; padding: 5px; width: 45%; float: left;'>
+                                        Appointments</div>
                                     <p style='clear: both;'></p>
-                                </div>
+                            </div>
                         <tr id='AppointmentsTr' style='display: none; background-color: #eeeeee;'>
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Appointments</p>
+                                <p style='margin-bottom: 5px; color: #626b9e; font-weight: bolder;'><i class='fa fa-calendar-check-o' style="margin-right: 5px; color: #334d81; "aria-hidden='true'></i>Appointments</p>
                                 
                                 <input type="hidden" id="CalApptUserID" value="<%=UserID%>" />
                                 
-                                <div id='CalApptListDiv' style='height: 290px; overflow-y: auto;'>
-                                    
+                                <div id='CalApptListDiv' style='height: 244px; overflow-y: auto;'>
+                                
                                     <%
                                         int count = 1;
                                         
@@ -915,7 +927,14 @@
                                                 AptTime = AptTime.substring(0,5);
                                     %>
                                     
-                                    <p style="background-color: #ffc700; margin-bottom: 2px;"><%=count%>. <span style="color: white; font-weight: bolder;"><%=ProvName%></span> of <span style="color: darkblue; font-weight: bolder;"><%=ProvComp%></span> at <span style="color: darkblue; font-weight: bolder;"><%=AptTime%></span></p>
+                                    <p style="margin-top: 10px; margin-bottom: 5px; color: #334d81; font-weight: bolder; width: 100%;">
+                                        <%=ProvName%>
+                                        <span style="color: #888; text-align: right;">
+                                            <i class='fa fa-clock-o' style='margin-right: 5px; margin-left: 10px; color: #06adad;'></i>
+                                            <%=AptTime%>
+                                        </span>
+                                    </p>
+                                    <p style="color: #888; margin-bottom: 20px;"><%=ProvComp%></p>
                                     
                                     <%
                                             count++;
@@ -958,8 +977,15 @@
                                                             
                                                             var time = ApptData.Data[i].ApptTime;
                                                             
-                                                            aDiv.innerHTML += '<p style="background-color: #ffc700; margin-bottom: 2px;">'+number+'. <span style="color: white; font-weight: bolder;">'+name+'</span> of <span style="color: darkblue; font-weight: bolder;">'+comp+'</span> at <span style="color: darkblue; font-weight: bolder;">'+time+'<span></p>';
-                                                            
+                                                            aDiv.innerHTML += 
+                                                                '<p style="margin-top: 10px; margin-bottom: 5px; color: #334d81; font-weight: bolder; width: 100%;">'
+                                                                    +name+
+                                                                    '<span style="color: #888; text-align: right;">' +
+                                                                    '<i class="fa fa-clock-o" style="margin-right: 5px; margin-left: 10px; color: #06adad;"></i>'
+                                                                    +time+
+                                                                    '</span>'+
+                                                                '</p>'+
+                                                                '<p style="color: #888; margin-bottom: 20px;">'+comp+'</p>'
                                                         }
                                                         
                                                         document.getElementById("CalApptListDiv").innerHTML = aDiv.innerHTML;
@@ -993,10 +1019,13 @@
                                                             
                                                             bDiv.innerHTML += '<div id="Cupdt'+updtCounter+'" ' +
                                                                     'onclick=\'updateEvent("'+ID+'", "'+Title+'","'+Desc+'", "'+Date+'","' +Time+'", "Cupdt'+updtCounter+'");\' ' +
-                                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
-
-                                                                    '<p><span style="font-weight: bolder; color: white;">'+Title+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Date+'</span> - <span style="color: darkblue; font-weight: bolder;">'+Time+'</span></p>'+
-                                                                    '<P style="color: #334d81;">'+Desc+'</p>'+
+                                                                    'style="cursor: pointer; margin: 10px 0; padding: 2px;">' +
+                                                                    '<p><span style="font-weight: bolder; color: #334d81; font-size: 15px;">'+Title+'</p>' +
+                                                                    '<p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>' +
+                                                                        '<span style="color: darkblue;font-size: 11px;">'+Date+'</span>' +
+                                                                        '<i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>' +
+                                                                        '<span style="color: darkblue; font-size: 11px;">'+Time+'</span></p>' +
+                                                                    '<p style="color: #888; margin-top: 5px;">'+Desc+'</p>' +
                                                                 '</div>';
                                                             
                                                         }
@@ -1013,10 +1042,10 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr id='EventsTr' style="background-color: #eeeeee;">
+                        <tr id='EventsTr'>
                             <td>
                                 
-                                <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Events</p>
+                                <p style='margin-bottom: 5px; color: #626b9e; font-weight: bolder;'><i class='fa fa-calendar-check-o' style="margin-right: 5px; color: #334d81; "aria-hidden='true'></i>Events</p>
                                 
                                 <div id='EventsListDiv' style='height: 290px; overflow-y: auto;'>
                                     
@@ -1059,10 +1088,14 @@
                                     
                                                 <div id="PgLdupdt<%=counter%>"
                                                     onclick='updateEvent("<%=EventID%>", "<%=EventTitle%>", "<%=EventDesc%>", "<%=EventDate%>", "<%=EventTime%>", "PgLdupdt<%=counter%>");' 
-                                                    style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">
+                                                    style="cursor: pointer; margin: 10px 0; padding: 2px;">
                                                     
-                                                    <p><span style="font-weight: bolder; color: white;"><%=EventTitle%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventDate%></span> - <span style="color: darkblue; font-weight: bolder;"><%=EventTime%></span></p>
-                                                    <P style="color: #334d81;"><%=EventDesc%></p>
+                                                    <p><span style="font-weight: bolder; color: #334d81; font-size: 15px;"><%=EventTitle%></p>
+                                                    <p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>
+                                                        <span style="color: darkblue;font-size: 11px;"><%=EventDate%></span>
+                                                        <i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>
+                                                        <span style="color: darkblue; font-size: 11px;"><%=EventTime%></span></p>
+                                                    <p style="color: #888; margin-top: 5px;"><%=EventDesc%></p>
                                                 </div>
                                     
                                     <%
@@ -1077,13 +1110,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <p style='margin-bottom: 5px; color: #ff3333; margin: 10px;'>Add/Change Event</p>
-                                <div>
-                                    <small style="margin: 10px; color: #ffc700;">Event Time:</small>
-                                    <p style="text-align: center;"><input placeholder="add event time" id="DisplayedAddEvntTime" style='background-color: white; width: 92%' type="text" name="" value="" readonly onkeydown="return false"/></p>
+                                <p style='margin: 10px 0; color: #3d6999; font-weight: bolder;'>
+                                    <i style='margin-right: 5px; color: #334d81;' class="fa fa-calendar-plus-o" aria-hidden="true"></i>Add/Change Event</p>
+                                <div style="height: auto; overflow-y: auto;">
+                                    <p><input placeholder="time" id="DisplayedAddEvntTime" style='padding: 10px 0; border: 1px solid darkgrey; cursor: pointer; background-color: white; width: 92%;' type="text" name="" value="" readonly onkeydown="return false"/></p>
                                     <input id="AddEvntTime" style='background-color: white;' type="hidden" name="EvntTime" value="" />
-                                    <small style="margin: 10px; color: #ffc700;">Event Date:</small>
-                                    <p style="text-align: center;"><input placeholder='add event date' id='EvntDatePicker' style='background-color: white; width: 92%' type="text" name="EvntDate" value="" /></p>
+                                    <p><input placeholder="date" id='EvntDatePicker' style='padding: 10px 0; cursor: pointer;  border: 1px solid darkgrey; background-color: white; width: 92%;' type="text" name="EvntDate" value="" /></p>
                                     <script>
                                     $(function() {
                                         $("#EvntDatePicker").datepicker({
@@ -1091,14 +1123,15 @@
                                         });
                                       });
                                     </script>
-                                    <small style="margin: 10px; color: #ffc700;">Event Title: </small>
-                                    <p style="text-align: center;"><input placeholder="add event title" id="AddEvntTtle" style='background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
-                                    <small style="margin: 10px; color: #ffc700;">Event Description: </small>
-                                    <p style="text-align: center;"><textarea  onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 95%; padding: 5px; border: #d9e8e8 1px solid; border-radius: 4px; margin: auto;'>
+                                    <p><input placeholder="title" id="AddEvntTtle" style=' border: 1px solid darkgrey; padding: 10px 0; background-color: white; width: 92%;' type="text" name="EvntTitle" value="" /></p>
+                                    <p style="margin-top: 10px; margin-bottom: 5px; color: #334d81; font-weight: bolder;">
+                                        Description
+                                    </p>
+                                    <p>
+                                        <textarea onfocusout="checkEmptyEvntDesc();" id="AddEvntDesc" name="EvntDesc" rows="7" style='width: 98%;'>
                                         </textarea></p>
                                 </div>
                             </td>
-                            
                     <script>
                         
                         document.getElementById("AddEvntDesc").value = "Add event description here...";
@@ -1199,9 +1232,9 @@
                         <tr>
                             <td>
                                 <input type="hidden" id="EvntIDFld" value=""/>
-                                <center><input id="CalSaveEvntBtn" style='border: 0; background-color: darkslateblue; padding: 5px; color: white; border-radius: 4px; width: 95%;' type='button' value='Save' /></center>
-                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 0; padding: 5px; color: white; background-color: darkslateblue; width: 44%;' type='button' value='Delete' />
-                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 0; padding: 5px; color: white; background-color: darkslateblue; width: 44%;' type='button' value='Change' /></center>
+                                <center><input id="CalSaveEvntBtn" style='border: 0; background-color: darkslateblue; padding: 10px 5px; color: white; border-radius: 4px; width: 95%;' type='button' value='Save' /></center>
+                                <center><input onclick="" id="CalDltEvntBtn" style='float: right; display: none; border: 0; padding: 10px 5px; color: white; background-color: darkslateblue; width: 44%;' type='button' value='Delete' />
+                                    <input onclick="SendEvntUpdate();" id="CalUpdateEvntBtn" style='float: left; display: none; border: 0; padding: 10px 5px; color: white; background-color: darkslateblue; width: 44%;' type='button' value='Change' /></center>
                             </td>
                         </tr>
                         
@@ -1289,10 +1322,13 @@
                                                 updateCounter = parseInt(updateCounter, 10) + 1;
                                                 document.getElementById("EventsListDiv").innerHTML += '<div id="updt'+updateCounter+'" ' +
                                                     'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' +
-                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
-                                                    
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
-                                                    '<P style="color: #334d81;">'+EvntDesc+'</p>'+
+                                                    'style="cursor: pointer; margin: 10px 0; padding: 2px;">' +
+                                                            '<p><span style="font-weight: bolder; color: #334d81; font-size: 15px;">'+EvntTtle+'</p>' +
+                                                            '<p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>' +
+                                                                '<span style="color: darkblue;font-size: 11px;">'+EvntDate+'</span>' +
+                                                                '<i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>' +
+                                                                '<span style="color: darkblue; font-size: 11px;">'+EvntTime+'</span></p>' +
+                                                            '<p style="color: #888; margin-top: 5px;">'+EvntDesc+'</p>' +
                                                 '</div>';
                                         
                                             }
@@ -1352,10 +1388,13 @@
                                                 updateCounter = parseInt(updateCounter, 10) + 1;
                                                 document.getElementById("EventsListDiv").innerHTML += '<div id="updt'+updateCounter+'" ' +
                                                     'onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle.replace("'","")+'","'+EvntDesc.replace("'","")+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' +
-                                                    'style="cursor: pointer; background-color: orange; margin-bottom: 2px; padding: 2px;">' +
-                                                    
-                                                    '<p><span style="font-weight: bolder; color: white;">'+EvntTtle+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntDate+'</span> - <span style="color: darkblue; font-weight: bolder;">'+EvntTime+'</span></p>'+
-                                                    '<P style="color: #334d81;">'+EvntDesc+'</p>'+
+                                                    'style="cursor: pointer; margin: 10px 0; padding: 2px;">' +
+                                                        '<p><span style="font-weight: bolder; color: #334d81; font-size: 15px;">'+EvntTtle+'</p>' +
+                                                        '<p style="font-size: 11px;"><i class="fa fa-calendar" style="color: #06adad; margin-right: 5px;" aria-hidden="true"></i>' +
+                                                            '<span style="color: darkblue;font-size: 11px;">'+EvntDate+'</span>' +
+                                                            '<i class="fa fa-clock-o" style="color: #06adad; margin-right: 5px; margin-left: 10px;" aria-hidden="true"></i>' +
+                                                            '<span style="color: darkblue; font-size: 11px;">'+EvntTime+'</span></p>' +
+                                                        '<p style="color: #888; margin-top: 5px;">'+EvntDesc+'</p>' +
                                                 '</div>';
                                         //alert('onclick=\'updateEvent("'+Evnt.EvntID+'", "'+EvntTtle+'","'+EvntDesc+'", "'+EvntDate+'","' +EvntTime+'", "updt'+updateCounter+'");\' ' );
                                         
@@ -1377,23 +1416,23 @@
                 </table>
             </div>
                              
-        <div id='PhoneExtrasUserAccountDiv' style='width: 100%; display: none;'>
+        <div id='PhoneExtrasUserAccountDiv' style='display: none; max-width: 600px; margin: auto;'>
             <center><p style="color: #254386; font-size: 16px; font-weight: bolder; margin-bottom: 10px;">Account Settings</p></center>
             
-                <table  id="PhoneExtrasTab" style='padding: 4px; width: 90%;' cellspacing="0">
+                <table  id="PhoneExtrasTab" style='width: 90%;' cellspacing="0">
                     <tbody>
                         <tr style="">
                             <td>
-                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 300px; margin: auto; margin-bottom: 5px;">
-                                <p id='UpdateStatusMsg' style='color: white; background-color: green; text-align: center;'></p>
-                                <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
-                                <p style='margin-bottom: 5px; color: white;'>Edit Your Personal Info</p>
-                                <p>First Name: <input id='fNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
-                                <p>Middle Name: <input id='mNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
-                                <p>Last Name: <input id='lNameExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
-                                <p>Email: <input id='EmailExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
-                                <p>Phone: <input id='PhoneExtraFld' style='background-color: #9bb1d0; border: 0; text-align: left; color: #eeeeee;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
-                                <center><input id='UpdtPerInfExtraBtn' style='border-radius: 4px; width: 95%; background-color: darkslateblue; padding: 5px 0;' type="submit" value="Change" /></center>
+                                <div style="background-color: #9bb1d0; border-radius: 4px; padding: 15px; border: none; margin: auto; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important; margin-bottom: 10px;">
+                                    <p id='UpdateStatusMsg' style='color: white; background-color: green; text-align: center;'></p>
+                                    <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
+                                    <p style='margin-bottom: 10px; color: #334d81; font-weight: bolder;'>Edit Your Personal Info</p>
+                                    <p>First: <input id='fNameExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
+                                    <p>Middle: <input id='mNameExtraFld' style='background-color: #9bb1d0; border: 0; padding: 10px 0; text-align: left; color: white;' type="text" name="ExtmName" value="<%=MiddleName%>" /></p>
+                                    <p>Last: <input id='lNameExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="ExtlName" value="<%=LastName%>" /></p>
+                                    <p>Email: <input id='EmailExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="ExtEmail" value="<%=Email%>" /></p>
+                                    <p>Phone: <input id='PhoneExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="EvntTime" value="<%=PhoneNumber%>" /></p>
+                                    <center><input id='UpdtPerInfExtraBtn' style='background-color: darkslateblue; border-radius: 4px; border:0; padding: 10px; min-width: 150px; color: white; width: 95%;' type="submit" value="Change" /></center>
                                 </div>
                             </td>
                             
@@ -1463,24 +1502,26 @@
                         </tr>
                         <tr>
                             <td>
-                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 300px; margin: auto; margin-bottom: 5px;">
-                                    <p style='margin-bottom: 5px; color: white;'>Send Feedback</p>
-                                    <form id="ExtrasFeedBackForm" style="width: 95%;" >
-                                            <center><div id='ExtLastReviewMessageDiv' style='display: none; background-color: white; width: 100%;'>
-                                                <p id='ExtLasReviewMessageP' style='text-align: left; padding: 5px; color: darkgray; font-size: 13px;'></p>
-                                                <p id="ExtFeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
+                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; padding: 15px; border: none; margin: auto;box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important; margin-bottom: 10px;">
+                                    <p style='margin-bottom: 10px; color: #334d81; font-weight: bolder;'>Send Feedback</p>
+                                    <form id="ExtrasFeedBackForm" style="width: 99%;" >
+                                        <center><div id='ExtLastReviewMessageDiv' style='display: none; padding: 10px; border-radius: 4px; border: #626b9e 1px solid; background-color: white; max-width: 400px; margin-bottom: 10px;'>
+                                                    <p style="font-weight: bolder; color: #334d81; margin-bottom: 15px; text-align: center;">Thanks for your feedback!</p>
+                                                    <p id='ExtLasReviewMessageP' style='text-align: left; padding: 10px 5px; color: darkgray; font-size: 13px;'></p>
+                                                    <p id="ExtFeedBackDate" style="text-align: left; margin-right: 5px; text-align: right; color: darkgrey; font-size: 13px;"></p>
                                                 </div></center>
                                             <center><table>
                                                 <tbody>
                                                 <tr>
-                                                    <td><textarea id="ExtFeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" style='width: 270px;'>Compose Feedback Message Here...
+                                                    <td><textarea id="ExtFeedBackTxtFld" onfocus="if(this.innerHTML === 'Add your message here...')this.innerHTML = ''" name="FeedBackMessage" rows="4" style='width: 200px; border-radius: 5px; background-color: #d9e8e8;'>Compose Feedback Message Here...
                                                         </textarea></td>
                                                 </tr>
                                                 </tbody>
                                                 </table></center>
                                                 
                                                 <input id='ExtFeedBackUserID' type="hidden" name="CustomerID" value="<%=UserID%>" />
-                                                <center><input id="ExtSendFeedBackBtn" style="width: 100%; background-color: darkslateblue; padding: 5px 0; color: white; border-radius: 4px;" type="button" value="Send" /></center>
+                                                <center><input id="ExtSendFeedBackBtn" style="width: 98%; border: 0;padding: 10px; border-radius: 4px; min-width: 150px; background-color: darkslateblue; color: white;" type="button" value="Send" /></center>
+                                    
                                                 <script>
                                                     $(document).ready(function() {                        
                                                          $('#ExtSendFeedBackBtn').click(function(event) {
@@ -1523,16 +1564,25 @@
                         </tr>
                         <tr style="">
                             <td>
-                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 5px; border: #3d6999 1px solid; width: 300px; margin: auto; margin-bottom: 5px;">
-                                <p style='margin-bottom: 5px; color: white;'>Update Your Login</p>
-                                <P>User Name: <input id="ExtraUpdateLoginNameFld" style='background-color: #d9e8e8; border-radius: 4px; text-align: left; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
-                                <P><input id="ExtraCurrentPasswordFld" style='background-color: #d9e8e8; border-radius: 4px; text-align: left; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
-                                <P><input id="ExtraNewPasswordFld" style='background-color: #d9e8e8; border-radius: 4px; color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
-                                <P><input id="ExtraConfirmPasswordFld" style='background-color: #d9e8e8; text-align: left; border-radius: 4px; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
-                                <center><input id="ExtraLoginFormBtn" style='background-color: darkslateblue; width: 95%; padding: 5px 0;' type="submit" value="Change" /></center>
-                                <p id="ExtraWrongPassStatus" style="display: none; background-color: red; color: white; text-align: center;">You have entered wrong current password</p>
-                                <p id='ExtrachangeUserAccountStatus' style='text-align: center; color: white;'></p>
-                            
+                                <div style="background-color: #9bb1d0; border-radius: 4px; padding: 15px; border: none; margin: auto; box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.3), 0px 0px 2.9px rgba(0, 0, 0, 0.33) !important;">
+                                <p style='margin-bottom: 15px; color: #334d81; font-weight: bolder;'>Update Your Login</p>
+                                <P>User:
+                                    <input id="ExtraUpdateLoginNameFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; text-align: center;' type='text' name='ExtUserName' value='<%=thisUserName%>'/></p>
+                                <P>
+                                    <input id="ExtraCurrentPasswordFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter Current Password' type='password' name='ExtOldPass' value=''/></p>
+                                <P>
+                                    <input id="ExtraNewPasswordFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Enter New Password' type='password' name='ExtNewPass' value=''/></p>
+                                <P>
+                                    <input id="ExtraConfirmPasswordFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
+                                           color: cadetblue; font-weight: bolder; width: 95%; text-align: center;' placeholder='Confirm New Password' type='password' name='ExtConfirmPass' value=''/></p>
+                                <center><input id="ExtraLoginFormBtn" style='background-color: darkslateblue; padding: 5px; border-radius: 4px; color: white; border: 0; width: 95%; padding: 10px;' type="submit" value="Change" /></center>
+                                <p id="ExtraWrongPassStatus" style="padding: 10px 0; display: none; color: darkblue; text-align: center; font-weight: bolder;">You have entered wrong current password</p>
+                                <p id='ExtrachangeUserAccountStatus' style='padding: 10px 0; text-align: center; color: darkblue; font-weight: bolder;'></p>
+                                </div>
+                            </td>
                             <input type='hidden' id='ExtraThisPass' value='' />
                             <input type="hidden" id="ExtraUserIDforLoginUpdate" value="<%=UserID%>" />
                             <input type="hidden" id="ExtraUserIndexforLoginUpdate" value="<%=UserIndex%>" />
@@ -1556,8 +1606,7 @@
                                       ConfirmPasswordFld.value === "" ||
                                       UpdateLoginNameFld.value === ""
                                     ) {
-                                      changeUserAccountStatus.innerHTML = "Uncompleted Form";
-                                      changeUserAccountStatus.style.backgroundColor = "green";
+                                      changeUserAccountStatus.innerHTML = "<i aria-hidden='true' style='margin-right: 5px; color: orange;' class='fa fa-exclamation-triangle'></i>Uncompleted Form";
                                       LoginFormBtn.disabled = true;
                                       LoginFormBtn.style.backgroundColor = "darkgrey";
                                     } else if (
@@ -1572,18 +1621,15 @@
                                       NewPasswordFld.value !== ConfirmPasswordFld.value ||
                                       (NewPasswordFld.value === "" && ConfirmPasswordFld.value === "")
                                     ) {
-                                      changeUserAccountStatus.innerHTML = "New Passwords don't match";
-                                      changeUserAccountStatus.style.backgroundColor = "red";
+                                      changeUserAccountStatus.innerHTML = "<i aria-hidden='true' style='margin-right: 5px; color: orange;' class='fa fa-exclamation-triangle'></i>New Passwords don't match";
                                       LoginFormBtn.disabled = true;
                                       LoginFormBtn.style.backgroundColor = "darkgrey";
                                     } else if (NewPasswordFld.value.length < 8) {
-                                      changeUserAccountStatus.innerHTML = "New password too short";
-                                      changeUserAccountStatus.style.backgroundColor = "red";
+                                      changeUserAccountStatus.innerHTML = "<i aria-hidden='true' style='margin-right: 5px; color: orange;' class='fa fa-exclamation-triangle'></i>New password too short";
                                       LoginFormBtn.disabled = true;
                                       LoginFormBtn.style.backgroundColor = "darkgrey";
                                     } else {
-                                      changeUserAccountStatus.innerHTML = "OK";
-                                      changeUserAccountStatus.style.backgroundColor = "green";
+                                      changeUserAccountStatus.innerHTML = "<i aria-hidden='true' style='margin-right: 5px; color: green;' class='fa fa-check'></i>OK";
                                       LoginFormBtn.disabled = false;
                                       LoginFormBtn.style.backgroundColor = "darkslateblue";
                                     }
@@ -1655,9 +1701,7 @@
                                                                 
                                     });
                                 });
-                            </script>
-                                </div>
-                           </td>                    
+                            </script>                 
                         </tr>
                         <tr>
                             <td>
@@ -1672,8 +1716,12 @@
                                 
                                 <form style="margin-top: 10px;" action="LogoutController" name="LogoutForm" method="POST"> 
                                     <input type="hidden" name="UserIndex" value="<%=UserIndex%>" />
-                                    <center><input onclick="LogoutMethod();" style='width: 100%; max-width: 300px; margin: auto; background-color: darkslateblue; color: white; border: 0; padding: 4px; border-radius: 4px; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
+                                    <center><input id="mobile_settings_logout_btn" onclick="LogoutMethod();" style='width: 100%; max-width: 300px; margin: auto; background-color: darkslateblue; color: white; padding: 10px 0; border: 0; border-radius: 4px; margin-left: 0;' type="submit" value="Logout" class="button" /></center>
                                 </form>
+                                    <script>
+                                        if($(window).width() < 1000)
+                                            document.getElementById("mobile_settings_logout_btn").style.display = "none";
+                                    </script>
                             </td>
                         </tr>
                     </tbody>
@@ -1698,7 +1746,7 @@
                     
                         <tr style="background-color: #eeeeee">
                             <td>
-                                <p style='text-align: left; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
+                                <p style='text-align: left; padding: 15px 10px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         
@@ -1712,7 +1760,7 @@
                     
                         <tr>
                             <td>
-                                <p style='text-align: left; padding: 3px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
+                                <p style='text-align: left; padding: 15px 10px; font-family: helvetica; color: darkblue;'><%=Notifications.get(notify)%></p>
                             </td>
                         </tr>
                         

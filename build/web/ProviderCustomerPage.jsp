@@ -2193,7 +2193,7 @@
                     <tbody>
                         <tr style="">
                             <td>
-                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 15px 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                <div style="background-color: #9bb1d0; border-radius: 4px; padding: 15px 10px; border: #3d6999 1px solid; margin: auto;">
                                 <input type='hidden' id='ExtraUpdPerUserID' value='<%=UserID%>' />
                                 <p style='margin-bottom: 10px; color: #334d81; font-weight: bolder;'>Edit Your Personal Info</p>
                                 <p>First: <input id='fNameExtraFld' style='background-color: #9bb1d0; padding: 10px 0; border: 0; text-align: left; color: white;' type="text" name="ExtfName" value="<%=FirstName%>" /></p>
@@ -2268,7 +2268,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 15px 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                <div id="ExtrasFeedbackDiv" style="background-color: #9bb1d0; border-radius: 4px; padding: 15px 10px; border: #3d6999 1px solid; margin: auto;">
                                     <p style='margin-bottom: 10px; color: #334d81; font-weight: bolder;'>Send Feedback</p>
                                     <form id="ExtrasFeedBackForm" style="width: 99%;" >
                                         <center><div id='ExtLastReviewMessageDiv' style='display: none; padding: 10px; border-radius: 4px; border: #626b9e 1px solid; background-color: white; max-width: 400px; margin-bottom: 10px;'>
@@ -2328,7 +2328,7 @@
                         </tr>
                         <tr style=''>
                             <td>
-                                <div style="background-color: #9bb1d0; border-radius: 4px; width: fit-content; padding: 10px 5px; border: #3d6999 1px solid; width: 96%; margin: auto;">
+                                <div style="background-color: #9bb1d0; border-radius: 4px; padding: 15px 10px; border: #3d6999 1px solid; margin: auto;">
                                 <p style='margin-bottom: 15px; color: #334d81; font-weight: bolder;'>Update Your Login</p>
                                 <P>User:
                                     <input id="ExtraUpdateLoginNameFld" style='background-color: #d9e8e8; text-align: left; padding: 10px 0;
